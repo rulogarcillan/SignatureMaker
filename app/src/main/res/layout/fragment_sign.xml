@@ -5,6 +5,60 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity$PlaceholderFragment">
 
+    <android.gesture.GestureOverlayView
+        android:id="@+id/signaturePad"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="2dp"
+        android:layout_weight="5"
+        android:background="@color/fulltrans"
+        android:eventsInterceptionEnabled="true"
+        android:fadeEnabled="false"
+        android:fadeOffset="500000000"
+        android:gestureColor="@color/boligrafo"
+        android:gestureStrokeLengthThreshold="0.5"
+        android:gestureStrokeType="multiple"
+        android:gestureStrokeWidth="1"
+        android:orientation="vertical"
+        android:uncertainGestureColor="@color/boligrafo"></android.gesture.GestureOverlayView>
+
+    <TextView
+        android:id="@+id/txtMnsVacio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:text="@string/firmeAqui"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:typeface="sans" />
+
+    <LinearLayout
+        android:id="@+id/layoutSeek"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+
+
+        android:visibility="invisible"
+        android:background="@drawable/back"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp">
+        <SeekBar
+            android:id="@+id/trazo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:max="15"
+            android:progress="3"
+            android:layout_above="@+id/Fab1" />
+
+        </LinearLayout>
+
+
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/Fab2"
@@ -14,8 +68,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_gravity="right|bottom"
-        android:layout_margin="16dp"
-        fab:fab_addButtonColorNormal="@color/primary_dark"
+        android:layout_margin="8dp"
+        fab:fab_addButtonColorNormal="@color/primary2"
         fab:fab_addButtonColorPressed="@color/primary_light"
         fab:fab_expandDirection="left" >
 
@@ -23,7 +77,7 @@
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/primary"
+            fab:fab_colorNormal="@color/primary3"
             fab:fab_size="mini"
             fab:fab_title="Label on the right"
             fab:fab_icon="@drawable/ic_save"
@@ -32,7 +86,7 @@
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/primary"
+            fab:fab_colorNormal="@color/primary3"
             fab:fab_size="mini"
             fab:fab_title="Another one on the right"
             fab:fab_icon="@drawable/ic_list"
@@ -51,8 +105,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_gravity="right|bottom"
-        android:layout_margin="16dp"
-        fab:fab_addButtonColorNormal="@color/primary_dark"
+        android:layout_margin="8dp"
+        fab:fab_addButtonColorNormal="@color/primary2"
         fab:fab_addButtonColorPressed="@color/primary_light"
 
         fab:fab_expandDirection="up"
@@ -62,7 +116,7 @@
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/primary"
+            fab:fab_colorNormal="@color/primary1"
             fab:fab_size="mini"
             fab:fab_icon="@drawable/ic_color"
             fab:fab_title="Label on the right"
@@ -72,8 +126,9 @@
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/primary"
+            fab:fab_colorNormal="@color/primary1"
             fab:fab_size="mini"
+            android:id="@+id/btrazo"
             fab:fab_title="Another one on the right"
             fab:fab_icon="@drawable/ic_stroke"
             fab:fab_colorPressed="@color/primary_light"/>
@@ -81,7 +136,8 @@
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/primary"
+            android:id="@+id/blimpiar"
+            fab:fab_colorNormal="@color/primary1"
             fab:fab_size="mini"
             fab:fab_title="Another one on the right"
             fab:fab_icon="@drawable/ic_clean"

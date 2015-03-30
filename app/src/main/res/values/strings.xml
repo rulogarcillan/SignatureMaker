@@ -9,6 +9,9 @@
     <string name="puntuar">Rate this app</string>
 
 
+    <!--       Pantalla de firma       -->
+    <string name="firmeAqui">Sign here</string>
+
     <string name="hello_world" translatable="false">Hello world!</string>
 
 
@@ -16,4 +19,7 @@
     <string name="escrita">Application Written By Raúl R.C</string>
     <string name="aboutLibraries_description_showIcon" translatable="false">true</string>
     <string name="aboutLibraries_description_showVersion" translatable="false">true</string>
+
+
+
 </resources>
