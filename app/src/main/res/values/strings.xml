@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name" translatable="false">Signature Maker</string>
+
+    <!--       Action bar menu pciones       -->
+    <string name="license">License</string>
+    <string name="more">Others app</string>
+    <string name="action_settings">Options</string>
+    <string name="changelog" translatable="false">Changelog</string>
+    <string name="puntuar">Rate this app</string>
+
+
+    <string name="hello_world" translatable="false">Hello world!</string>
+
+
+    <!--      About libraries     -->
+    <string name="escrita">Application Written By Raúl R.C</string>
+    <string name="aboutLibraries_description_showIcon" translatable="false">true</string>
+    <string name="aboutLibraries_description_showVersion" translatable="false">true</string>
+</resources>

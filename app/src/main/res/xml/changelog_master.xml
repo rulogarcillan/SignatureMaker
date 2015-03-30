@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<changelog>
+
+	<release version="2.0" versioncode="200">
+    <change>Reescrito todo el código de la aplicación</change>
+	</release>
+    <release version="1.03" versioncode="103">
+        <change>Some material design</change>
+        <change>New color picker</change>
+        <change>New icon</change>
+        <change>New menu others app</change>
+    </release>
+    <release version="1.02" versioncode="102">
+        <change>Change default file Path</change>
+        <change>Minor bug fix</change>
+    </release>
+    <release version="1.01" versioncode="101">
+        <change>Minor bug fix</change>
+    </release>
+    <release version="1.0" versioncode="10">
+        <change>First release</change>
+    </release>
+     
+</changelog>
+
+

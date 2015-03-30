@@ -1,0 +1,8 @@
+<resources>
+    <string name="more">Otras app</string>
+    <string name="puntuar">Valorar aplicación</string>
+    <string name="license">Licencias</string>
+    <string name="hello_world"></string>
+    <string name="action_settings">Opciones</string>
+    <string name="escrita">Aplicación escrita por Raúl R.C</string>
+</resources>
