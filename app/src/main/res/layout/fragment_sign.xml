@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity$PlaceholderFragment">
@@ -15,7 +16,6 @@
         android:eventsInterceptionEnabled="true"
         android:fadeEnabled="false"
         android:fadeOffset="500000000"
-        android:gestureColor="@color/boligrafo"
         android:gestureStrokeLengthThreshold="0.5"
         android:gestureStrokeType="multiple"
         android:gestureStrokeWidth="1"
@@ -39,25 +39,53 @@
         android:id="@+id/layoutSeek"
         android:layout_width="match_parent"
         android:orientation="horizontal"
-
-
         android:visibility="invisible"
         android:background="@drawable/back"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp">
-        <SeekBar
+
+
+        <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
             android:id="@+id/trazo"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:max="15"
-            android:progress="3"
-            android:layout_above="@+id/Fab1" />
+            android:layout_above="@+id/Fab1"
+            app:dsb_min="1"
+            app:dsb_max="20"
+            app:dsb_progressColor="@color/primary"
+            app:dsb_rippleColor="@color/primary"
+            app:dsb_indicatorColor="@color/primary2" />
 
-        </LinearLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutColor"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:visibility="invisible"
+        android:background="@drawable/back"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp">
+
+        <com.larswerkman.holocolorpicker.ColorPicker
+            android:layout_weight="1"
+            android:id="@+id/picker"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <com.larswerkman.holocolorpicker.SVBar
+            android:id="@+id/svbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
@@ -71,7 +99,7 @@
         android:layout_margin="8dp"
         fab:fab_addButtonColorNormal="@color/primary2"
         fab:fab_addButtonColorPressed="@color/primary_light"
-        fab:fab_expandDirection="left" >
+        fab:fab_expandDirection="left">
 
 
         <com.getbase.floatingactionbutton.FloatingActionButton
@@ -81,7 +109,7 @@
             fab:fab_size="mini"
             fab:fab_title="Label on the right"
             fab:fab_icon="@drawable/ic_save"
-            fab:fab_colorPressed="@color/primary_light"/>
+            fab:fab_colorPressed="@color/primary_light" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
@@ -90,8 +118,7 @@
             fab:fab_size="mini"
             fab:fab_title="Another one on the right"
             fab:fab_icon="@drawable/ic_list"
-            fab:fab_colorPressed="@color/primary_light"/>
-
+            fab:fab_colorPressed="@color/primary_light" />
 
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
@@ -118,10 +145,11 @@
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/primary1"
             fab:fab_size="mini"
+            android:id="@+id/bcolor"
             fab:fab_icon="@drawable/ic_color"
             fab:fab_title="Label on the right"
 
-            fab:fab_colorPressed="@color/primary_light"/>
+            fab:fab_colorPressed="@color/primary_light" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
@@ -131,7 +159,7 @@
             android:id="@+id/btrazo"
             fab:fab_title="Another one on the right"
             fab:fab_icon="@drawable/ic_stroke"
-            fab:fab_colorPressed="@color/primary_light"/>
+            fab:fab_colorPressed="@color/primary_light" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
@@ -141,9 +169,9 @@
             fab:fab_size="mini"
             fab:fab_title="Another one on the right"
             fab:fab_icon="@drawable/ic_clean"
-            fab:fab_colorPressed="@color/primary_light"/>
+            fab:fab_colorPressed="@color/primary_light" />
 
 
-  </com.getbase.floatingactionbutton.FloatingActionsMenu>
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 </RelativeLayout>
