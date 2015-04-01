@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:background="?android:selectableItemBackground"
+    android:clickable="true"
+    android:id="@+id/files"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/imgFirma"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:src="@color/boligrafo"
+        android:scaleType="centerInside" />
+
+    <TextView
+        android:id="@+id/textName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/primary_text"
+        android:layout_toRightOf="@id/imgFirma"
+        android:layout_marginLeft="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Signature.png" />
+
+    <TextView
+        android:id="@+id/textDate"
+        android:maxLines="1"
+        android:text="21/09/2013"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/secondary_text"
+        android:layout_below="@+id/textName"
+        android:layout_alignLeft="@+id/textName"
+        android:layout_gravity="bottom" />
+
+    <TextView
+        android:id="@+id/textTam"
+        android:maxLines="1"
+        android:text="357KB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/secondary_text"
+        android:layout_alignBottom="@+id/textDate"
+        android:layout_alignParentRight="true" />
+
+</RelativeLayout>
+
+

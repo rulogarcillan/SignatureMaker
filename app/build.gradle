@@ -39,6 +39,8 @@ dependencies {
 
     compile 'com.larswerkman:HoloColorPicker:1.5'
 
+    compile 'com.squareup.picasso:picasso:2.5.2'
+
     compile project(':discreteSeekBar');
 
 //    compile 'com.android.support:cardview-v7:21.0.+'

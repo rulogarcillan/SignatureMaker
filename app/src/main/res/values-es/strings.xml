@@ -6,4 +6,23 @@
     <string name="action_settings">Opciones</string>
     <string name="escrita">Aplicación escrita por Raúl R.C</string>
     <string name="firmeAqui">Firme aquí</string>
+
+
+    <string name="selectcolor">Color</string>
+    <string name="stroke">Trazo</string>
+    <string name="guardar">Guardar</string>
+    <string name="enviar">Guardar y enviar</string>
+    <string name="enviarsolo">Enviar</string>
+    <string name="listado">Listar</string>
+    <string name="limpiar">Limpiar</string>
+    <string name="guardado">Guardado</string>
+    <string name="noguardado">Fallo al guardar</string>
+    <string name="importante">¡Atención!</string>
+    <string name="confborrado">¿Estás seguro de eliminar el archivo?</string>
+    <string name="vacioFiles">No hay archivos</string>
+    <string name="help_d">Deslice para eliminar</string>
+    <string name="help_s">Deslice para compartir</string>
+    <string name="help">Ayuda</string>
+    <string name="eliminado">eliminado</string>
+    <string name="deshacer">Deshacer</string>
 </resources>

@@ -4,7 +4,7 @@
     <!--       Action bar menu pciones       -->
     <string name="license">License</string>
     <string name="more">Others app</string>
-    <string name="action_settings">Options</string>
+    <string name="action_settings">Settings</string>
     <string name="changelog" translatable="false">Changelog</string>
     <string name="puntuar">Rate this app</string>
 
@@ -12,14 +12,34 @@
     <!--       Pantalla de firma       -->
     <string name="firmeAqui">Sign here</string>
 
+    <!--       Pantalla de listado       -->
+    <string name="vacioFiles">No files</string>
+    <string name="help_d">Swipe rigth to delete</string>
+    <string name="help_s">Swipe left to share</string>
+    <string name="help">Help</string>
+    <string name="eliminado">delete</string>
+    <string name="deshacer">Undo</string>
+
+
     <string name="hello_world" translatable="false">Hello world!</string>
+
+    <string name="selectcolor">Color</string>
+    <string name="stroke">Stroke</string>
+    <string name="guardar">Save</string>
+    <string name="enviar">Save and send</string>
+    <string name="enviarsolo">Send</string>
+    <string name="listado">List</string>
+    <string name="limpiar">Clean</string>
+    <string name="guardado">Save</string>
+    <string name="noguardado">Failed</string>
+    <string name="importante">Attention!</string>
+    <string name="confborrado">Are you sure to delete this file?</string>
 
 
     <!--      About libraries     -->
     <string name="escrita">Application Written By Raúl R.C</string>
     <string name="aboutLibraries_description_showIcon" translatable="false">true</string>
     <string name="aboutLibraries_description_showVersion" translatable="false">true</string>
-
 
 
 </resources>

@@ -290,8 +290,8 @@ public class SwipeableRecyclerViewTouchListener implements RecyclerView.OnItemTo
     }
 
     private void performDismiss(final View dismissView, final int dismissPosition) {
-        // Animate the dismissed list item to zero-height and fire the dismiss callback when
-        // all dismissed list item animations have completed. This triggers layout on each animation
+        // Animate the dismissed list item_explore_l to zero-height and fire the dismiss callback when
+        // all dismissed list item_explore_l animations have completed. This triggers layout on each animation
         // frame; in the future we may want to do something smarter and more performant.
 
         final ViewGroup.LayoutParams lp = dismissView.getLayoutParams();
@@ -367,7 +367,7 @@ public class SwipeableRecyclerViewTouchListener implements RecyclerView.OnItemTo
 
     /**
      * The callback interface used by {@link SwipeableRecyclerViewTouchListener} to inform its client
-     * about a swipe of one or more list item positions.
+     * about a swipe of one or more list item_explore_l positions.
      */
     public interface SwipeListener {
         /**
@@ -376,7 +376,7 @@ public class SwipeableRecyclerViewTouchListener implements RecyclerView.OnItemTo
         boolean canSwipe(int position);
 
         /**
-         * Called when the item has been dismissed by swiping to the left.
+         * Called when the item_explore_l has been dismissed by swiping to the left.
          *
          * @param recyclerView           The originating {@link android.support.v7.widget.RecyclerView}.
          * @param reverseSortedPositions An array of positions to dismiss, sorted in descending
@@ -385,7 +385,7 @@ public class SwipeableRecyclerViewTouchListener implements RecyclerView.OnItemTo
         void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions);
 
         /**
-         * Called when the item has been dismissed by swiping to the right.
+         * Called when the item_explore_l has been dismissed by swiping to the right.
          *
          * @param recyclerView           The originating {@link android.support.v7.widget.RecyclerView}.
          * @param reverseSortedPositions An array of positions to dismiss, sorted in descending
