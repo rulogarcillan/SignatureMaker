@@ -41,20 +41,9 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {
-
-        android.support.v4.app.Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.container);
-        String tag = (String) fragment.getTag();
-        if (tag == "LISTADO" && fListado.volver()) {
-
-        } else {
-
-            super.onBackPressed();
-        }
 
 
-    }
+
 
 
 }

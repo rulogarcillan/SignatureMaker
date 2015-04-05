@@ -1,5 +1,4 @@
 <RelativeLayout
-
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -61,27 +60,5 @@
         </RelativeLayout>
 
     </LinearLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="invisible"
-        android:background="@color/gerytrans"
-        android:id="@+id/frame"
-        android:padding="1dip">
-
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginTop="100dp"
-            android:layout_gravity="center"
-            android:background="@color/icons"
-            android:adjustViewBounds="true" />
-
-    </FrameLayout>
 
 </RelativeLayout>

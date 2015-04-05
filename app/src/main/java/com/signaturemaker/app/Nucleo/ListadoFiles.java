@@ -1,10 +1,8 @@
 package com.signaturemaker.app.Nucleo;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,11 +16,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
 import com.nispok.snackbar.listeners.ActionClickListener;
@@ -50,9 +48,9 @@ public class ListadoFiles extends Fragment {
     private TextView mensajeVacio, path;
     private AdapterFicheros adapter;
     private Boolean eliminar = true;
-    private FrameLayout frame;
+
     private ImageView image;
-    private Boolean fVolver = true;
+
 
     public ListadoFiles() {
     }
@@ -66,8 +64,8 @@ public class ListadoFiles extends Fragment {
 
         path = (TextView) rootView.findViewById(R.id.path);
         mensajeVacio = (TextView) rootView.findViewById(R.id.txtMnsVacio);
-        frame = (FrameLayout) rootView.findViewById(R.id.frame);
-        image = (ImageView) rootView.findViewById(R.id.image);
+
+
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
         adapter = new AdapterFicheros(getActivity(), items, 0); //Agregamos los items al adapter
@@ -177,12 +175,18 @@ public class ListadoFiles extends Fragment {
             @Override
             public void onItemClick(View view, int i) {
 
-                if (frame.getVisibility() == View.INVISIBLE) {
-                    fVolver = true;
-                    frame.setVisibility(View.VISIBLE);
-                    Picasso.with(getActivity()).load("file:///" + pathFiles + "/" + items.get(i).getNombre()).placeholder(R.drawable.ic_png)
-                            .error(R.drawable.ic_png).into(image);
-                }
+
+                MaterialDialog dia = new MaterialDialog.Builder(getActivity())
+
+                        .customView(R.layout.imagen_dialog, false)
+                        .show();
+
+                image = (ImageView) dia.getCustomView().findViewById(R.id.image);
+
+                Picasso.with(getActivity()).load("file:///" + pathFiles + "/" + items.get(i).getNombre()).placeholder(R.drawable.ic_png)
+                        .error(R.drawable.ic_png).into(image);
+
+
             }
         });
     }
@@ -272,32 +276,11 @@ public class ListadoFiles extends Fragment {
                 .getLayoutInflater().inflate(R.layout.help, null);
         dialog.setContentView(contentView);
 
-        ImageView image = (ImageView) contentView.findViewById(R.id.helpDelete);
-        final AnimationDrawable animation = (AnimationDrawable) image.getDrawable();
 
-        ImageView image2 = (ImageView) contentView.findViewById(R.id.helpSend);
-        final AnimationDrawable animation2 = (AnimationDrawable) image2.getDrawable();
-        dialog.setCancelable(true);
 
-        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialog) {
-                animation.start();
-                animation2.start();
-            }
-        });
+
         dialog.show();
 
-    }
-
-    public Boolean volver() {
-
-        if (fVolver) {
-            frame.setVisibility(View.INVISIBLE);
-            fVolver = false;
-            return true;
-        }
-        return false;
     }
 
 }
