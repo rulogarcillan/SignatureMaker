@@ -2,7 +2,9 @@ package com.signaturemaker.app.Nucleo;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.PreferenceManager;
@@ -12,6 +14,8 @@ import android.view.View;
 import com.signaturemaker.app.Constantes.PreferencesCons;
 import com.signaturemaker.app.Ficheros.Ficheros;
 import com.signaturemaker.app.R;
+
+import java.io.File;
 
 import src.chooser.ChooseFolder;
 
@@ -103,7 +107,9 @@ public class PreferenceFrag extends android.preference.PreferenceFragment {
                     Ficheros.nomediaRemove();
                 }
 
+                getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(PreferencesCons.pathFiles + ".nomedia"))));
                 break;
+
             case "opcion4":
 
                 editor.putBoolean(PreferencesCons.OP4, pref4.isChecked());

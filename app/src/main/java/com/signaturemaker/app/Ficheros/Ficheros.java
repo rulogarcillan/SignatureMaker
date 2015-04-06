@@ -19,6 +19,7 @@ import java.util.Date;
 
 import static com.signaturemaker.app.Constantes.PreferencesCons.pathFiles;
 import static com.signaturemaker.app.Nucleo.LogUtils.LOGE;
+import static com.signaturemaker.app.Nucleo.LogUtils.TRAZA;
 
 public final class Ficheros {
 
@@ -205,6 +206,7 @@ public final class Ficheros {
                     FileOutputStream noMediaOutStream = new FileOutputStream(noMedia);
                     noMediaOutStream.write(0);
                     noMediaOutStream.close();
+                    TRAZA("siii");
                 } catch (Exception e) {
 
                     return false;
@@ -232,6 +234,7 @@ public final class Ficheros {
                     if (noMedia.exists()) {
 
                         noMedia.delete();
+                        TRAZA("siiidel");
                         return true;
                     }
 
