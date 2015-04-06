@@ -93,9 +93,16 @@ public class PreferenceFrag extends android.preference.PreferenceFragment {
                 break;
 
             case "opcion3":
-                Ficheros.nomedia();
+
                 editor.putBoolean(PreferencesCons.OP3, pref3.isChecked());
                 editor.commit();
+
+                if (pref3.isChecked()) {
+                    Ficheros.nomedia();
+                } else {
+                    Ficheros.nomediaRemove();
+                }
+
                 break;
             case "opcion4":
 

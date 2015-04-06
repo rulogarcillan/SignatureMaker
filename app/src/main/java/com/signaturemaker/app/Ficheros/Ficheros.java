@@ -195,7 +195,7 @@ public final class Ficheros {
 
             if (Environment.MEDIA_MOUNTED.equals(storageState)) {
                 try {
-                    File noMedia = new File(pathFiles + "/", ".nomedia");
+                    File noMedia = new File(pathFiles , ".nomedia");
 
                     if (noMedia.exists()) {
 
@@ -205,6 +205,36 @@ public final class Ficheros {
                     FileOutputStream noMediaOutStream = new FileOutputStream(noMedia);
                     noMediaOutStream.write(0);
                     noMediaOutStream.close();
+                } catch (Exception e) {
+
+                    return false;
+                }
+            } else {
+
+                return false;
+            }
+
+            return true;
+
+        }
+    }
+
+
+    public static Boolean nomediaRemove() {
+        {
+            String storageState = Environment.getExternalStorageState();
+
+            if (Environment.MEDIA_MOUNTED.equals(storageState)) {
+                try {
+
+                    File noMedia = new File(pathFiles , ".nomedia");
+
+                    if (noMedia.exists()) {
+
+                        noMedia.delete();
+                        return true;
+                    }
+
                 } catch (Exception e) {
 
                     return false;
