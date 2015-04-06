@@ -26,7 +26,8 @@ public class MainActivity extends BaseActivity {
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, fgestos)
+                    .replace(R.id.container, fgestos, "GESTOS")
+
                     .commit();
         }
         fgestos.SetOnItemClickListener(new GestureSignature.OnListadoClickListener() {
@@ -40,10 +41,5 @@ public class MainActivity extends BaseActivity {
         });
 
     }
-
-
-
-
-
 
 }

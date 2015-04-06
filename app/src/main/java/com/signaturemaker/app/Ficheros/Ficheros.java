@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Environment;
 
 import com.signaturemaker.app.Nucleo.ItemFile;
 import com.signaturemaker.app.R;
@@ -70,7 +71,7 @@ public final class Ficheros {
                 String tam = Long.toString(file.length() / 1024) + " KB";
                 String name = file.getName();
 
-                if (name.contains(".png") || name.contains(".PNG") || name.substring(0, 1).contains("SM")) {
+                if ((name.contains(".png") || name.contains(".PNG")) && name.substring(0, 2).equals("SM")) {
                     ItemFile item = new ItemFile(name, dateFormat.format(myDate), tam);
                     arrayItems.add(item);
                 }
@@ -82,8 +83,9 @@ public final class Ficheros {
     public static void removeFile(String nombre) {
         File archivo;
         archivo = new File(pathFiles + nombre);
-        if (archivo.exists())
+        if (archivo.exists()) {
             archivo.delete();
+        }
     }
 
     public static File getFile(String nombre) {
@@ -187,4 +189,33 @@ public final class Ficheros {
 
     }
 
+    public static Boolean nomedia() {
+        {
+            String storageState = Environment.getExternalStorageState();
+
+            if (Environment.MEDIA_MOUNTED.equals(storageState)) {
+                try {
+                    File noMedia = new File(pathFiles + "/", ".nomedia");
+
+                    if (noMedia.exists()) {
+
+                        return true;
+                    }
+
+                    FileOutputStream noMediaOutStream = new FileOutputStream(noMedia);
+                    noMediaOutStream.write(0);
+                    noMediaOutStream.close();
+                } catch (Exception e) {
+
+                    return false;
+                }
+            } else {
+
+                return false;
+            }
+
+            return true;
+
+        }
+    }
 }

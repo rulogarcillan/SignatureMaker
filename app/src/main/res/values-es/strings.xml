@@ -25,4 +25,19 @@
     <string name="help">Ayuda</string>
     <string name="eliminado">eliminado</string>
     <string name="deshacer">Deshacer</string>
+    <string name="archivos">Archivos</string>
+    <string name="firma">Firma</string>
+    <string name="prefColor">Mantener último color utilizado por defecto</string>
+    <string name="prefDel">Eliminar todas las firmas al salir de la aplicación</string>
+    <string name="prefStroke">Mantener el último tamaño de trazo utilizado por defecto</string>
+    <string name="prefPath">Ruta de las firmas exportadas</string>
+    <string name="prefGal">Ocultar firmas de la galería del teléfono</string>
+    <string name="prefColor_a">Color por defecto</string>
+    <string name="prefDel_a">Eliminar firmas</string>
+    <string name="prefStroke_a">Trazo por defecto</string>
+    <string name="prefPath_a">Ruta de las firmas exportadas</string>
+    <string name="prefGal_a">Ocultar firmas</string>
+    <string name="settings">Ajustes</string>
+    <string name="prefDef">Restablecer todos los valores por defecto</string>
+    <string name="prefDef_a">Valores por defecto</string>
 </resources>

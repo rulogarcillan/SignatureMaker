@@ -229,20 +229,31 @@ public class ListadoFiles extends Fragment {
                     @Override
                     public void onDismiss(Snackbar snackbar) {
 
-                        if (eliminar) Ficheros.removeFile(item.getNombre());
+                        if (eliminar) {
+
+                            Ficheros.removeFile(item.getNombre());
+                            getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(pathFiles + "/" + item.getNombre()))));
+
+                        }
 
 
                     }
 
                     @Override
                     public void onDismissByReplace(Snackbar snackbar) {
-                        if (eliminar) Ficheros.removeFile(item.getNombre());
+                        if (eliminar) {
+                            Ficheros.removeFile(item.getNombre());
+                            getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(pathFiles + "/" + item.getNombre()))));
+                        }
 
                     }
 
                     @Override
                     public void onDismissed(Snackbar snackbar) {
-                        if (eliminar) Ficheros.removeFile(item.getNombre());
+                        if (eliminar) {
+                            Ficheros.removeFile(item.getNombre());
+                            getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(pathFiles + "/" + item.getNombre()))));
+                        }
 
                     }
                 }), getActivity());
@@ -275,8 +286,6 @@ public class ListadoFiles extends Fragment {
         LinearLayout contentView = (LinearLayout) ((getActivity()))
                 .getLayoutInflater().inflate(R.layout.help, null);
         dialog.setContentView(contentView);
-
-
 
 
         dialog.show();

@@ -8,6 +8,16 @@ import android.os.Environment;
  */
 public final class PreferencesCons {
 
+
+    public static final String OP1 = "OP1";
+    public static final String OP2 = "OP2";
+    public static final String OP3 = "OP3";
+    public static final String OP4 = "OP4";
+    public static final String OP5 = "OP5";
+    public static final String STROKE = "STROKE";
+    public static final String COLOR = "COLOR";
+
+
     public static final String ROOT = Environment.getExternalStorageDirectory().getAbsolutePath();
 
     public static final int TRAZO_GROSOR_ORIGINAL = 3;

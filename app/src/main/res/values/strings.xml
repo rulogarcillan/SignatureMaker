@@ -20,6 +20,22 @@
     <string name="eliminado">delete</string>
     <string name="deshacer">Undo</string>
 
+    <!--       Pantalla de opciones       -->
+    <string name="settings">Settings</string>
+    <string name="archivos">Files</string>
+    <string name="prefPath">Exported signatures path</string>
+    <string name="prefDel">Delete all signatures on exit</string>
+    <string name="prefGal">Do not display signatures in the phone gallery</string>
+    <string name="firma">Signature</string>
+    <string name="prefStroke">Keep last stroke used by default</string>
+    <string name="prefColor">Keep last color used by default</string>
+    <string name="prefColor_a">Default color</string>
+    <string name="prefDel_a">Delete signatures</string>
+    <string name="prefStroke_a">Default stroke</string>
+    <string name="prefPath_a">Exported signatures path</string>
+    <string name="prefGal_a">Hide signatures</string>
+    <string name="prefDef_a">Default values</string>
+    <string name="prefDef">Reset all defaults</string>
 
     <string name="hello_world" translatable="false">Hello world!</string>
 

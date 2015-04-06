@@ -1,9 +1,13 @@
 package com.signaturemaker.app.Nucleo;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.gesture.GestureOverlayView;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -20,10 +24,13 @@ import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.larswerkman.holocolorpicker.ColorPicker;
 import com.larswerkman.holocolorpicker.SVBar;
 import com.nineoldandroids.animation.Animator;
+import com.signaturemaker.app.Constantes.PreferencesCons;
 import com.signaturemaker.app.Ficheros.Ficheros;
 import com.signaturemaker.app.R;
 
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
+
+import java.io.File;
 
 import static com.signaturemaker.app.Constantes.PreferencesCons.colorTrazo;
 import static com.signaturemaker.app.Constantes.PreferencesCons.strokeTrazo;
@@ -43,6 +50,10 @@ public class GestureSignature extends Fragment {
     private View rootView;
     private ColorPicker picker;
     private SVBar svBar;
+    private SharedPreferences prefs;
+    private Boolean prefColor, prefStroke;
+    private SharedPreferences.Editor editor;
+
 
     OnListadoClickListener mItemClickListener;
 
@@ -204,8 +215,13 @@ public class GestureSignature extends Fragment {
         trazo.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
             @Override
             public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
-                gestos.setGestureStrokeWidth(value);
+                strokeTrazo = value;
+                gestos.setGestureStrokeWidth(strokeTrazo);
                 gestos.invalidate();
+                if (prefStroke) {
+                    editor.putInt(PreferencesCons.STROKE, strokeTrazo);
+                    editor.commit();
+                }
             }
 
             @Override
@@ -224,6 +240,11 @@ public class GestureSignature extends Fragment {
             public void onColorChanged(int i) {
 
                 colorTrazo = i;
+                if (prefColor) {
+
+                    editor.putInt(PreferencesCons.COLOR, colorTrazo);
+                    editor.commit();
+                }
 
             }
         });
@@ -342,6 +363,8 @@ public class GestureSignature extends Fragment {
     //Carga los valores inicales en el lapiz como el color y el grosor.
     public void cargarPref() {
 
+        recuperaPref();
+
         gestos.setGestureStrokeWidth(strokeTrazo);
         trazo.setProgress(strokeTrazo);
         picker.setColor(colorTrazo);
@@ -403,6 +426,10 @@ public class GestureSignature extends Fragment {
             Toast.makeText(getActivity(), R.string.guardado, Toast.LENGTH_SHORT).show();
             if (flagShare)
                 Ficheros.sendFirma(getActivity(), name);
+
+            getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(PreferencesCons.pathFiles + "/" + name))));
+
+
             /*if (findViewById(R.id.fragment1) != null)
                 Fragment.cargaViews();*/
 
@@ -413,6 +440,23 @@ public class GestureSignature extends Fragment {
 
     }
 
+    public void recuperaPref() {
+        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        editor = prefs.edit();
+        prefColor = prefs.getBoolean(PreferencesCons.OP4, false);
+        prefStroke = prefs.getBoolean(PreferencesCons.OP5, false);
+
+        //
+        strokeTrazo = prefs.getInt(PreferencesCons.STROKE, strokeTrazo);
+        colorTrazo = prefs.getInt(PreferencesCons.COLOR, colorTrazo);
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        recuperaPref();
+    }
 
     //Cuando se gira la pantalla.
     @Override

@@ -17,7 +17,7 @@ import de.cketti.library.changelog.ChangeLog;
 /**
  * Created by raul.rodriguezconcep on 20/02/15.
  */
-public class BaseActivity  extends ActionBarActivity {
+public class BaseActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -31,6 +31,12 @@ public class BaseActivity  extends ActionBarActivity {
 
         switch (menuItem.getItemId()) {
 
+
+            case R.id.settings:
+
+                Intent intent = new Intent(this, PreferencesAct.class);
+                startActivity(intent);
+                break;
             case R.id.action_settings:
                 break;
             case R.id.puntuar:
@@ -77,7 +83,7 @@ public class BaseActivity  extends ActionBarActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse("market://details?id=com.signaturemaker.app"));
         startActivity(intent);
-        overridePendingTransition(R.anim.fadein,R.anim.fadeout);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 
 
@@ -85,7 +91,7 @@ public class BaseActivity  extends ActionBarActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pub:Raúl R."));
 
         startActivity(intent);
-        overridePendingTransition(R.anim.fadein,R.anim.fadeout);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 
 
