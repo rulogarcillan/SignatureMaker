@@ -75,6 +75,8 @@ public class SplashFragment extends Fragment {
         switch (pos) {
             case 1:
                 image.setImageResource(R.mipmap.ic_launcher);
+              //  Picasso.with(getActivity()).load(R.drawable.splash1).into(image);
+
                 text.setText("11111");
                 break;
             case 2:
