@@ -71,7 +71,7 @@
         android:background="@drawable/back"
         android:orientation="vertical"
         android:visibility="invisible"
-        android:layout_centerHorizontal="true">
+        android:layout_centerVertical="true">
 
         <com.larswerkman.holocolorpicker.ColorPicker
             android:id="@+id/picker"

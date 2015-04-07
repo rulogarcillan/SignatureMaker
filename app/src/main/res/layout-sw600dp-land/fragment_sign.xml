@@ -107,6 +107,7 @@
             android:id="@+id/bList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="invisible"
             fab:fab_colorNormal="@color/primary3"
             fab:fab_colorPressed="@color/primary_light"
             fab:fab_icon="@drawable/ic_list"

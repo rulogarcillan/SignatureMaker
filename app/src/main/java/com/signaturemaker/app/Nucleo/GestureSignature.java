@@ -66,7 +66,7 @@ public class GestureSignature extends Fragment {
     }
 
     public interface OnListadoClickListener {
-        public void onItemClick(View view);
+        public void onItemClick(View view, String tag);
     }
 
     public void SetOnItemClickListener(final OnListadoClickListener mItemClickListener) {
@@ -105,6 +105,9 @@ public class GestureSignature extends Fragment {
             @Override
             public void onClick(View v) {
                 SalvaImagenShare(gestos, false);
+                if (mItemClickListener != null) {
+                    mItemClickListener.onItemClick(v, "SAVE");
+                }
             }
         });
 
@@ -113,6 +116,9 @@ public class GestureSignature extends Fragment {
             @Override
             public void onClick(View v) {
                 SalvaImagenShare(gestos, true);
+                if (mItemClickListener != null) {
+                    mItemClickListener.onItemClick(v, "SAVE");
+                }
             }
         });
 
@@ -120,10 +126,12 @@ public class GestureSignature extends Fragment {
             @Override
             public void onClick(View v) {
                 if (mItemClickListener != null) {
-                    mItemClickListener.onItemClick(v);
+                    mItemClickListener.onItemClick(v, "LISTADO");
                 }
             }
         });
+
+
 
 
         gestos.addOnGestureListener(new GestureOverlayView.OnGestureListener() {
