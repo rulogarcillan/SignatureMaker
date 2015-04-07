@@ -467,7 +467,7 @@ public class GestureSignature extends Fragment {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        colapsarBotones();
+        // colapsarBotones();
         clearScreen();
     }
 
