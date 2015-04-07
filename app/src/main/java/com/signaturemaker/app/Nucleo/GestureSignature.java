@@ -125,6 +125,7 @@ public class GestureSignature extends Fragment {
             }
         });
 
+
         gestos.addOnGestureListener(new GestureOverlayView.OnGestureListener() {
             @Override
             public void onGestureStarted(GestureOverlayView overlay, MotionEvent event) {
@@ -234,6 +235,7 @@ public class GestureSignature extends Fragment {
 
             }
         });
+
 
         picker.setOnColorChangedListener(new ColorPicker.OnColorChangedListener() {
             @Override
@@ -465,7 +467,7 @@ public class GestureSignature extends Fragment {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-
+        colapsarBotones();
         clearScreen();
     }
 
