@@ -441,14 +441,17 @@ public class GestureSignature extends Fragment {
     }
 
     public void recuperaPref() {
+
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         editor = prefs.edit();
         prefColor = prefs.getBoolean(PreferencesCons.OP4, false);
         prefStroke = prefs.getBoolean(PreferencesCons.OP5, false);
 
         //
-        strokeTrazo = prefs.getInt(PreferencesCons.STROKE, strokeTrazo);
-        colorTrazo = prefs.getInt(PreferencesCons.COLOR, colorTrazo);
+        if (prefStroke)
+            strokeTrazo = prefs.getInt(PreferencesCons.STROKE, strokeTrazo);
+        if (prefColor)
+            colorTrazo = prefs.getInt(PreferencesCons.COLOR, colorTrazo);
     }
 
 

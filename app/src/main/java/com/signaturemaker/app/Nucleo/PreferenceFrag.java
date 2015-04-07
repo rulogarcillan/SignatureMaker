@@ -74,13 +74,13 @@ public class PreferenceFrag extends android.preference.PreferenceFragment {
 
                     public void onClick(DialogInterface dialog, int id) {
 
-
-                        PreferencesCons.pathFiles = chos.getPath();
+                        String oldPath = PreferencesCons.pathFiles;
+                        PreferencesCons.pathFiles = chos.getPath() + "/";
 
                         editor.putString(PreferencesCons.OP1, PreferencesCons.pathFiles);
                         editor.commit();
-
                         preference.setSummary(PreferencesCons.pathFiles.replace(PreferencesCons.ROOT, "/sdcard"));
+                        Ficheros.moveFiles(oldPath, getActivity());
 
                     }
                 });
@@ -113,14 +113,27 @@ public class PreferenceFrag extends android.preference.PreferenceFragment {
             case "opcion4":
 
                 editor.putBoolean(PreferencesCons.OP4, pref4.isChecked());
+                if (!pref4.isChecked()) {
+                    editor.putInt(PreferencesCons.COLOR, PreferencesCons.TRAZO_COLOR_ORIGINAL);
+                } else {
+                    editor.putInt(PreferencesCons.COLOR, PreferencesCons.colorTrazo);
+                }
+
                 editor.commit();
                 break;
             case "opcion5":
 
                 editor.putBoolean(PreferencesCons.OP5, pref5.isChecked());
+                if (!pref5.isChecked()) {
+                    editor.putInt(PreferencesCons.STROKE, PreferencesCons.TRAZO_GROSOR_ORIGINAL);
+                } else {
+                    editor.putInt(PreferencesCons.STROKE, PreferencesCons.strokeTrazo);
+                }
                 editor.commit();
                 break;
             case "opcion6":
+
+                String oldPath = PreferencesCons.pathFiles;
 
                 editor.putBoolean(PreferencesCons.OP2, false);
                 editor.putBoolean(PreferencesCons.OP3, true);
@@ -132,11 +145,15 @@ public class PreferenceFrag extends android.preference.PreferenceFragment {
 
                 pref2.setChecked(false);
                 pref3.setChecked(true);
+                Ficheros.nomedia();
+                getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(PreferencesCons.pathFiles + ".nomedia"))));
                 pref4.setChecked(false);
                 pref5.setChecked(false);
 
                 editor.putString(PreferencesCons.OP1, PreferencesCons.PATH_SAVE_ORIGINAL);
                 pref1.setSummary(PreferencesCons.PATH_SAVE_ORIGINAL.replace(PreferencesCons.ROOT, "/sdcard"));
+                PreferencesCons.pathFiles = PreferencesCons.PATH_SAVE_ORIGINAL;
+                Ficheros.moveFiles(oldPath, getActivity());
                 editor.commit();
 
                 break;

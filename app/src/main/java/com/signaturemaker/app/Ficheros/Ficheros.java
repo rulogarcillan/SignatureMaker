@@ -17,6 +17,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static com.signaturemaker.app.Constantes.PreferencesCons.PATH_OLDER_VERSION;
+import static com.signaturemaker.app.Constantes.PreferencesCons.PATH_SAVE_ORIGINAL;
 import static com.signaturemaker.app.Constantes.PreferencesCons.pathFiles;
 import static com.signaturemaker.app.Nucleo.LogUtils.LOGE;
 import static com.signaturemaker.app.Nucleo.LogUtils.TRAZA;
@@ -83,7 +85,7 @@ public final class Ficheros {
 
     public static void removeFile(String nombre) {
         File archivo;
-        archivo = new File(pathFiles + nombre);
+        archivo = new File(pathFiles + "/" + nombre);
         if (archivo.exists()) {
             archivo.delete();
         }
@@ -112,6 +114,11 @@ public final class Ficheros {
 
         Bitmap bm = cropBitmapToBoundingBox(bm2, Color.TRANSPARENT);
 
+        if (bm == null) {
+            TRAZA("Imagen totalmente trasparente, lanza mensaje error");
+            return false;
+        }
+
         file = new File(pathFiles + "/" + name);
 
         try {
@@ -122,7 +129,6 @@ public final class Ficheros {
             os.close();
 
         } catch (Exception e) {
-
             LOGE("ficheros.guardar", e.getMessage());
             e.printStackTrace();
             return false;
@@ -135,11 +141,15 @@ public final class Ficheros {
     //thanks to user grubFX for the code
     //http://stackoverflow.com/questions/6717433/bitmap-conversion-creating-bitmap-that-excludes-transparent-sides-from-transpar
     public static Bitmap cropBitmapToBoundingBox(Bitmap picToCrop, int unusedSpaceColor) {
+
+        Bitmap retorno = null;
+
         int[] pixels = new int[picToCrop.getHeight() * picToCrop.getWidth()];
         int marginTop = 0, marginBottom = 0, marginLeft = 0, marginRight = 0, i;
         picToCrop.getPixels(pixels, 0, picToCrop.getWidth(), 0, 0,
                 picToCrop.getWidth(), picToCrop.getHeight());
 
+        TRAZA("PIXELES1 " + marginLeft + " " + marginRight + " " + marginBottom + " " + marginTop);
         for (i = 0; i < pixels.length; i++) {
             if (pixels[i] != unusedSpaceColor) {
                 marginTop = i / picToCrop.getWidth();
@@ -147,6 +157,11 @@ public final class Ficheros {
             }
         }
 
+
+        if (marginTop == 0) { //bitmap totalmente vacio
+            return null;
+        }
+        TRAZA("PIXELES2 " + marginLeft + " " + marginRight + " " + marginBottom + " " + marginTop);
         outerLoop1:
         for (i = 0; i < picToCrop.getWidth(); i++) {
             for (int j = i; j < pixels.length; j += picToCrop.getWidth()) {
@@ -156,14 +171,14 @@ public final class Ficheros {
                 }
             }
         }
-
+        TRAZA("PIXELES3 " + marginLeft + " " + marginRight + " " + marginBottom + " " + marginTop);
         for (i = pixels.length - 1; i >= 0; i--) {
             if (pixels[i] != unusedSpaceColor) {
                 marginBottom = (pixels.length - i) / picToCrop.getWidth();
                 break;
             }
         }
-
+        TRAZA("PIXELES4 " + marginLeft + " " + marginRight + " " + marginBottom + " " + marginTop);
         outerLoop2:
         for (i = pixels.length - 1; i >= 0; i--) {
             for (int j = i; j >= 0; j -= picToCrop.getWidth()) {
@@ -175,9 +190,14 @@ public final class Ficheros {
             }
         }
 
-        return Bitmap.createBitmap(picToCrop, marginLeft, marginTop,
+        TRAZA("PIXELES5 " + marginLeft + " " + marginRight + " " + marginBottom + " " + marginTop);
+
+
+        retorno = Bitmap.createBitmap(picToCrop, marginLeft, marginTop,
                 picToCrop.getWidth() - marginLeft - marginRight,
                 picToCrop.getHeight() - marginTop - marginBottom);
+
+        return retorno;
     }
 
     public static void sendFirma(Activity activity, String name) {
@@ -196,8 +216,8 @@ public final class Ficheros {
 
             if (Environment.MEDIA_MOUNTED.equals(storageState)) {
                 try {
-                    File noMedia = new File(pathFiles , ".nomedia");
-
+                    File noMedia = new File(pathFiles + "/", ".nomedia");
+                    TRAZA("URI " + Uri.fromFile(noMedia));
                     if (noMedia.exists()) {
 
                         return true;
@@ -206,7 +226,7 @@ public final class Ficheros {
                     FileOutputStream noMediaOutStream = new FileOutputStream(noMedia);
                     noMediaOutStream.write(0);
                     noMediaOutStream.close();
-                    TRAZA("siii");
+                    TRAZA("Creamos nomedia");
                 } catch (Exception e) {
 
                     return false;
@@ -229,12 +249,12 @@ public final class Ficheros {
             if (Environment.MEDIA_MOUNTED.equals(storageState)) {
                 try {
 
-                    File noMedia = new File(pathFiles , ".nomedia");
-
+                    File noMedia = new File(pathFiles + "/", ".nomedia");
+                    TRAZA("URI " + Uri.fromFile(noMedia));
                     if (noMedia.exists()) {
 
                         noMedia.delete();
-                        TRAZA("siiidel");
+                        TRAZA("Eliminamos nomedia");
                         return true;
                     }
 
@@ -251,4 +271,85 @@ public final class Ficheros {
 
         }
     }
+
+
+    public static void deleteAllFiles(Activity activity) {
+
+        File archivos[];
+        File carpeta;
+
+        carpeta = new File(pathFiles);
+        if (carpeta.exists()) {
+            archivos = carpeta.listFiles();
+            for (File file : archivos) {
+
+                String name = file.getName();
+
+                if ((name.contains(".png") || name.contains(".PNG")) && name.substring(0, 2).equals("SM")) {
+                    file.delete();
+                    activity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file)));
+                    TRAZA("URI " + Uri.fromFile(file));
+                    TRAZA("Eliminamos " + name);
+                }
+            }
+        }
+    }
+
+    public static void moveFiles(String oldPaht, Activity activity) {
+
+        if (!oldPaht.equals(pathFiles)) {
+
+            TRAZA("Ruta antigua" + oldPaht);
+            TRAZA("Ruta nueva" + pathFiles);
+
+            File archivos[];
+            File carpeta;
+
+            carpeta = new File(oldPaht);
+            if (carpeta.exists()) {
+                archivos = carpeta.listFiles();
+                for (File file : archivos) {
+
+                    String name = file.getName();
+
+                    if (((name.contains(".png") || name.contains(".PNG")) && name.substring(0, 2).equals("SM")) || name.equals(".nomedia")) {
+                        file.renameTo(new File(pathFiles + "/" + name));
+                        TRAZA("Movemos el fichero" + name);
+                        TRAZA("URI " + Uri.fromFile(new File(pathFiles + "/" + name)));
+                        activity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file))); //antigua
+                        activity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(pathFiles + "/" + name)))); //nueva
+                    }
+                }
+            }
+        }
+    }
+
+
+    public static void moveFilesVersionAntigua(Activity activity) {
+
+        TRAZA("Ruta version antigua" + PATH_OLDER_VERSION);
+        TRAZA("Ruta version nueva" + PATH_SAVE_ORIGINAL);
+
+        File archivos[];
+        File carpeta;
+
+        carpeta = new File(PATH_OLDER_VERSION);
+        if (carpeta.exists()) {
+            archivos = carpeta.listFiles();
+            for (File file : archivos) {
+
+                String name = file.getName();
+
+                if (name.contains(".png") || name.contains(".PNG")) {
+                    file.renameTo(new File(PATH_SAVE_ORIGINAL + "/" + "SM_" + name));
+                    TRAZA("Movemos el fichero" + name);
+                    TRAZA("URI " + Uri.fromFile(new File(PATH_SAVE_ORIGINAL + "/" + name)));
+                    activity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file))); //antigua
+                    activity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(PATH_SAVE_ORIGINAL + "/" + "SM_" + name)))); //nueva
+                }
+            }
+            carpeta.delete();
+        }
+    }
+
 }

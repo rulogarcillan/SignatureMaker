@@ -58,4 +58,33 @@
     <string name="aboutLibraries_description_showVersion" translatable="false">true</string>
 
 
+    <!-- If you include it in your own library use this pattern: define_* -->
+    <!-- If it should be included in the AboutLibraries lib use this pattern: define_int_* -->
+    <string name="define_int_DiscreteSeekBar" translatable="false"></string>
+    <string name="library_DiscreteSeekBar_author" translatable="false">AnderWeb</string>
+    <string name="library_DiscreteSeekBar_libraryName" translatable="false">DiscreteSeekBar</string>
+    <string name="library_DiscreteSeekBar_libraryDescription" translatable="false">DiscreteSeekbar is my poor attempt to develop an android implementation of the Discrete Slider component from the Google Material Design Guidelines.</string>
+    <string name="library_DiscreteSeekBar_libraryVersion" translatable="false">Unknown</string>
+    <string name="library_DiscreteSeekBar_libraryWebsite" translatable="false">https://github.com/AnderWeb/discreteSeekBar</string>
+    <!-- Possible values right now: apache_2_0, mit, bsd_2, bsd_3 -->
+    <string name="library_DiscreteSeekBar_licenseId" translatable="false">apache_2_0</string>
+    <!-- you still can define the license within your library definition, but it is recommend to use the id -->
+    <!-- possible fields for a custom license: *_licenseVersion, *_licenseLink, *_licenseContent -->
+    <string name="library_DiscreteSeekBar_isOpenSource" translatable="false">true</string>
+    <string name="library_DiscreteSeekBar_repositoryLink" translatable="false">https://github.com/AnderWeb/discreteSeekBar</string>
+
+
+    <string name="define_int_CircleIndicator" translatable="false"></string>
+    <string name="library_CircleIndicator_author" translatable="false">Relex Ongakuer</string>
+    <string name="library_CircleIndicator_libraryName" translatable="false">CircleIndicator</string>
+    <string name="library_CircleIndicator_libraryDescription" translatable="false">A lightweight viewpager indicator like in nexus 5 launcher.</string>
+    <string name="library_CircleIndicator_libraryVersion" translatable="false">1.1.2</string>
+    <string name="library_CircleIndicator_libraryWebsite" translatable="false">https://github.com/ongakuer/CircleIndicator</string>
+    <!-- Possible values right now: apache_2_0, mit, bsd_2, bsd_3 -->
+    <string name="library_CircleIndicator_licenseId" translatable="false">apache_2_0</string>
+    <!-- you still can define the license within your library definition, but it is recommend to use the id -->
+    <!-- possible fields for a custom license: *_licenseVersion, *_licenseLink, *_licenseContent -->
+    <string name="library_CircleIndicator_isOpenSource" translatable="false">true</string>
+    <string name="library_CircleIndicator_repositoryLink" translatable="false">https://github.com/ongakuer/CircleIndicator</string>
+
 </resources>

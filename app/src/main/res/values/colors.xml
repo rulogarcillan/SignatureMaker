@@ -2,6 +2,9 @@
 <resources>
 
     <color name="color_nuevo">#7a94af</color>
+    <color name="color_db">#f44336</color>
+    <color name="color_hb">#D32f2f</color>
+
 
     <color name="primary">#3e82f7</color>
     <color name="primary_dark">#01579b</color>
