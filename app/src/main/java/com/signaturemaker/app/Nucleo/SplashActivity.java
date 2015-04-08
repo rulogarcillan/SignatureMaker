@@ -64,16 +64,12 @@ public class SplashActivity extends FragmentActivity {
 
         Ficheros.CreaPath();
 
-
+        //no es la primera vez
         if (!prefs.getBoolean("first_time", true)) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             finish();
-        } else {
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putBoolean("first_time", false);
-            editor.commit();
         }
 
         //gestión de ficheros antiguos de la version 1.0

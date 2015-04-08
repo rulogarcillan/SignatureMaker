@@ -1,7 +1,9 @@
 package com.signaturemaker.app.Nucleo;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,13 +26,8 @@ public class SplashFragment extends Fragment {
     Animation animation;
 
 
-    public static SplashFragment newInstance() {
-        SplashFragment fragment = new SplashFragment();
-        return fragment;
-    }
 
-    public SplashFragment() {
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,15 +74,15 @@ public class SplashFragment extends Fragment {
                 image.setImageResource(R.drawable.frame11);
                 //  Picasso.with(getActivity()).load(R.drawable.splash1).into(image);
 
-                text.setText("Cree calendarios para controlar una zona dolorosa de su cuerpo");
+                text.setText(R.string.splash1);
                 break;
             case 2:
                 image.setImageResource(R.drawable.frame22);
-                text.setText("Cree calendarios para controlar una zona dolorosa de su cuerpo");
+                text.setText(R.string.splash2);
                 break;
             case 3:
-                image.setImageResource(R.mipmap.ic_launcher);
-                text.setText("Cree calendarios para controlar una zona dolorosa de su cuerpo");
+                image.setImageResource(R.drawable.frame33);
+                text.setText(R.string.splash3);
                 break;
             case 4:
 
@@ -94,11 +91,15 @@ public class SplashFragment extends Fragment {
 
 
                 image.setImageResource(R.mipmap.ic_launcher);
-                boton.setText("444444");
+                boton.setText(R.string.start);
 
                 boton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putBoolean("first_time", false);
+                        editor.commit();
                         Intent intent = new Intent(getActivity(), MainActivity.class);
                         getActivity().startActivity(intent);
                         getActivity().finish();

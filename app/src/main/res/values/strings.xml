@@ -51,6 +51,11 @@
     <string name="importante">Attention!</string>
     <string name="confborrado">Are you sure to delete this file?</string>
 
+    <!--      Splash     -->
+    <string name="start">Start</string>
+    <string name="splash1">Digitalice su firma de una forma fácil y sencilla</string>
+    <string name="splash2">Guarde y envie su firma donde usted quiera</string>
+    <string name="splash3">Adjunte la imagen con la firma a su documento</string>
 
     <!--      About libraries     -->
     <string name="escrita">Application Written By Raúl R.C</string>
