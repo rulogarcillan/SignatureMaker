@@ -74,18 +74,18 @@ public class SplashFragment extends Fragment {
 
         switch (pos) {
             case 1:
-                image.setImageResource(R.mipmap.ic_launcher);
-              //  Picasso.with(getActivity()).load(R.drawable.splash1).into(image);
+                image.setImageResource(R.drawable.frame11);
+                //  Picasso.with(getActivity()).load(R.drawable.splash1).into(image);
 
-                text.setText("11111");
+                text.setText("Cree calendarios para controlar una zona dolorosa de su cuerpo");
                 break;
             case 2:
-                image.setImageResource(R.mipmap.ic_launcher);
-                text.setText("222222");
+                image.setImageResource(R.drawable.frame22);
+                text.setText("Cree calendarios para controlar una zona dolorosa de su cuerpo");
                 break;
             case 3:
                 image.setImageResource(R.mipmap.ic_launcher);
-                text.setText("333333");
+                text.setText("Cree calendarios para controlar una zona dolorosa de su cuerpo");
                 break;
             case 4:
 
