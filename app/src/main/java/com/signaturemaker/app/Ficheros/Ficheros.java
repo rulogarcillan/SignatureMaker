@@ -145,7 +145,7 @@ public final class Ficheros {
         Bitmap retorno = null;
 
         int[] pixels = new int[picToCrop.getHeight() * picToCrop.getWidth()];
-        int marginTop = 0, marginBottom = 0, marginLeft = 0, marginRight = 0, i;
+        int marginTop = -1, marginBottom = -1, marginLeft = -1, marginRight = -1, i;
         picToCrop.getPixels(pixels, 0, picToCrop.getWidth(), 0, 0,
                 picToCrop.getWidth(), picToCrop.getHeight());
 
@@ -158,7 +158,7 @@ public final class Ficheros {
         }
 
 
-        if (marginTop == 0) { //bitmap totalmente vacio
+        if (marginTop < 0) { //bitmap totalmente vacio
             return null;
         }
         TRAZA("PIXELES2 " + marginLeft + " " + marginRight + " " + marginBottom + " " + marginTop);

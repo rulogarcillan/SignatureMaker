@@ -75,7 +75,7 @@ public class PreferenceFrag extends android.preference.PreferenceFragment {
                     public void onClick(DialogInterface dialog, int id) {
 
                         String oldPath = PreferencesCons.pathFiles;
-                        PreferencesCons.pathFiles = chos.getPath() + "/";
+                        PreferencesCons.pathFiles = chos.getPath();
 
                         editor.putString(PreferencesCons.OP1, PreferencesCons.pathFiles);
                         editor.commit();

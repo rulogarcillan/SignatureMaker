@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -139,6 +140,27 @@ public class ListadoFiles extends Fragment {
 
         path.setText(pathFiles.replace(ROOT, "/sdcard"));
 
+
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+                        if (SnackbarManager.getCurrentSnackbar() != null && SnackbarManager.getCurrentSnackbar().isShowing()) {
+                            SnackbarManager.getCurrentSnackbar().dismiss();
+                            return true;
+                        } else
+                            return false;
+                    }
+                }
+                return false;
+            }
+        });
+
     }
 
 
@@ -193,6 +215,7 @@ public class ListadoFiles extends Fragment {
 
 
     private void undo(final ItemFile item, final int pos) {
+
 
         SnackbarManager.show(
                 Snackbar.with(getActivity()).text(item.getNombre() + " " + getResources().getString(R.string.eliminado)).actionLabel(R.string.deshacer).actionLabelTypeface(Typeface.DEFAULT_BOLD).actionColorResource(R.color.primary).actionListener(new ActionClickListener() {
