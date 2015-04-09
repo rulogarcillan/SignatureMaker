@@ -102,6 +102,4 @@ Signature Makerp es una aplicación de código abierto totalmente gratuita aloja
 
 Si estás interesado en el proyecto puedes visitar el siguiente enlace:
 
-[Pain log] (https://github.com/rulogarcillan/SignatureMaker)
-
-
+[Signature Maker] (https://github.com/rulogarcillan/SignatureMaker)
