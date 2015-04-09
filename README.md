@@ -20,6 +20,12 @@
 
 Digitize your signature.
 
+<p align="justify">Here we have the new versión of the best app about signatures: SIGNATURE MAKER!
+It has a completely new design.
+We have taken into account your suggestions and we have introduced some options that you told us. 
+The application source  is now free with licence GNU 2.0
+What are you waiting for donwloading the new version? Signature maker has not got publicity, it is clean and totally free.</p>
+
 <p align="justify"> The hard work of printing the document,signing and scaning it has finished.You just have to download Signature Maker.</p>
 
 ■  Choose the colour.
@@ -76,12 +82,13 @@ Se acabó el engorroso trabajo de imprimir el documento, firmarlo y escanearlo. 
 
 ■ Guarda y envía tu firma digitalizada a cualquier parte (Drive, Dropbox, Telegram, Whatsapp, Gmail, Hangouts etc...)
 
-¡LISTO!
+                           ¡¡¡Listo!!!!
 <p align="justify"> 
 Ahora solo tendrás que descargar la firma digital y adjuntarla a tu documento (Pdf, Word etc...)
 Signature Maker es un completo creador y gestor de firmas, recoge el trazado de tu rubrica y lo guarda en una imagen trasparente preparada para ser estampada en cualquier documento digital.</p>
 
 MANUAL PARA CREAR TU PROPIO STILUS
+
 Material:
 
 ■ Lápiz
