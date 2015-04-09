@@ -14,6 +14,7 @@ public final class PreferencesCons {
     public static final String OP3 = "OP3";
     public static final String OP4 = "OP4";
     public static final String OP5 = "OP5";
+    public static final String FRAG = "FRAG";
     public static final String STROKE = "STROKE";
     public static final String COLOR = "COLOR";
 

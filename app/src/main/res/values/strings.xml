@@ -37,7 +37,6 @@
     <string name="prefDef_a">Default values</string>
     <string name="prefDef">Reset all defaults</string>
 
-    <string name="hello_world" translatable="false">Hello world!</string>
 
     <string name="selectcolor">Color</string>
     <string name="stroke">Stroke</string>
