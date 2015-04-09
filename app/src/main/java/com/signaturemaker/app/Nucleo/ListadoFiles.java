@@ -36,6 +36,7 @@ import java.util.ArrayList;
 
 import static com.signaturemaker.app.Constantes.PreferencesCons.ROOT;
 import static com.signaturemaker.app.Constantes.PreferencesCons.pathFiles;
+import static com.signaturemaker.app.Nucleo.LogUtils.TRAZA;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -216,6 +217,8 @@ public class ListadoFiles extends Fragment {
 
     private void undo(final ItemFile item, final int pos) {
 
+        if (SnackbarManager.getCurrentSnackbar() != null && SnackbarManager.getCurrentSnackbar().isShowing())
+            SnackbarManager.getCurrentSnackbar().dismiss();
 
         SnackbarManager.show(
                 Snackbar.with(getActivity()).text(item.getNombre() + " " + getResources().getString(R.string.eliminado)).actionLabel(R.string.deshacer).actionLabelTypeface(Typeface.DEFAULT_BOLD).actionColorResource(R.color.primary).actionListener(new ActionClickListener() {
@@ -255,6 +258,7 @@ public class ListadoFiles extends Fragment {
                         if (eliminar) {
 
                             Ficheros.removeFile(item.getNombre());
+                            TRAZA(Uri.fromFile(new File(pathFiles + "/" + item.getNombre())) + "");
                             getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(pathFiles + "/" + item.getNombre()))));
 
                         }
@@ -315,4 +319,9 @@ public class ListadoFiles extends Fragment {
 
     }
 
+    @Override
+    public void onDestroy() {
+        eliminar=false;
+        super.onDestroy();
+    }
 }

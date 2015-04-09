@@ -23,7 +23,7 @@ Digitize your signature.
 <p align="justify">Here we have the new versión of the best app about signatures: SIGNATURE MAKER!
 It has a completely new design.
 We have taken into account your suggestions and we have introduced some options that you told us. 
-The application source  is now free with licence GNU 2.0
+The application source  is now free with licence [GNU GPL V3.0] (LICENSE.md)
 What are you waiting for donwloading the new version? Signature maker has not got publicity, it is clean and totally free.</p>
 
 <p align="justify"> The hard work of printing the document,signing and scaning it has finished.You just have to download Signature Maker.</p>
@@ -70,7 +70,7 @@ If you are interested in the project, you can visit this link:
 
 Digitaliza tu firma
 <p align="justify"> 
-Ya está aquí la nueva versión de la mejor aplicación de firmas Signature Maker con un diseño completamente nuevo. Hemos escuchado vuestras críticas y hemos implementado algunas opciones que nos habéis solicitado, además el código de la aplicación pasa a ser libre con licencia GNU 2.0, ¿a qué esperas para descargar la nueva versión? Signature Maker no tiene publicidad, es limpia y totalmente gratuita.</p>
+Ya está aquí la nueva versión de la mejor aplicación de firmas Signature Maker con un diseño completamente nuevo. Hemos escuchado vuestras críticas y hemos implementado algunas opciones que nos habéis solicitado, además el código de la aplicación pasa a ser libre con licencia [GNU GPL V3.0] (LICENSE.md), ¿a qué esperas para descargar la nueva versión? Signature Maker no tiene publicidad, es limpia y totalmente gratuita.</p>
 
 
 Se acabó el engorroso trabajo de imprimir el documento, firmarlo y escanearlo. Ahora solo necesitas descargarte Signature Maker.
@@ -99,7 +99,7 @@ Envuelve el lapicero con una capa de papel de plata para que haga contacto tu de
 
 #Licencia es-ES
 
-Signature Makerp es una aplicación de código abierto totalmente gratuita alojada en github bajo licencia  [GNU GPL V3.0] (LICENSE.md) 
+Signature Maker es una aplicación de código abierto totalmente gratuita alojada en github bajo licencia  [GNU GPL V3.0] (LICENSE.md)
 
 Si estás interesado en el proyecto puedes visitar el siguiente enlace:
 

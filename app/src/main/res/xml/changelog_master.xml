@@ -2,8 +2,21 @@
 <changelog>
 
 	<release version="2.0" versioncode="200">
-    <change>Reescrito todo el código de la aplicación</change>
-	</release>
+    <change>New UI</change>
+    <change>New options</change>
+    <change>Selectable path files</change>
+    <change>Save last stroke</change>
+    <change>Save last color</change>
+    <change>Delete signatrue on exit</change>
+    <change>Toggle view signatures in gallery</change>
+    <change>Mode landscape more efficient</change>
+    <change>Change icon</change>
+    <change>More material desing</change>
+    <change>Add initial splash</change>
+    <change>Add license</change>
+    <change>Open source and free</change>
+    <change>Minor bug fix</change>
+    </release>
     <release version="1.03" versioncode="103">
         <change>Some material design</change>
         <change>New color picker</change>

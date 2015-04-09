@@ -1,7 +1,6 @@
 package com.signaturemaker.app.Nucleo;
 
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -36,6 +35,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         load();
     }
 
@@ -54,14 +54,15 @@ public class MainActivity extends BaseActivity {
         }
 
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, fgestos, "GESTOS")
-                .commit();
-        if (container2 != null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container2, fListado, "LISTADO")
+                    .replace(R.id.container, fgestos, "GESTOS")
                     .commit();
-        }
+            if (container2 != null) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container2, fListado, "LISTADO")
+                        .commit();
+            }
+
 
 
         fgestos.SetOnItemClickListener(new GestureSignature.OnListadoClickListener() {
@@ -84,10 +85,6 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        load();
-    }
+
 
 }
