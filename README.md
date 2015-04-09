@@ -1,19 +1,19 @@
 # Pain Log 1.2.1
 
 
-<img src="app/src/main/logogrande.png" width="50%">
+<img src="LOGO/logogrande.png" width="40%">
 
 <a href="https://play.google.com/store/apps/details?id=com.pain.log.painlog">
-<img src="app/src/main/getapp.png" width="20%"> </a>
+<img src="LOGO/getapp.png" width="20%"> </a>
 # Index
 
- • [Description en-EN](https://github.com/rulogarcillan/PainLog/blob/master/README.md#description-en-en)
+ • [Description en-EN](https://github.com/rulogarcillan/SignatureMaker/blob/master/README.md#description-en-en)
  
- • [License-en-En](https://github.com/rulogarcillan/PainLog#license-en-en)
+ • [License-en-En](https://github.com/rulogarcillan/SignatureMaker#license-en-en)
  
- • [Descripción es-ES](https://github.com/rulogarcillan/PainLog/blob/master/README.md#descripci%C3%B3n-es-es)
+ • [Descripción es-ES](https://github.com/rulogarcillan/SignatureMaker/blob/master/README.md#descripci%C3%B3n-es-es)
  
- • [Licencia-es-ES](https://github.com/rulogarcillan/PainLog#licencia-es-es)
+ • [Licencia-es-ES](https://github.com/rulogarcillan/SignatureMaker#licencia-es-es)
 
 
 #Description en-EN
