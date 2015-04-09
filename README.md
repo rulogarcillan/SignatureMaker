@@ -1,9 +1,9 @@
 # Signature Maker 2.0
 
 
-<img src="LOGO/logogrande.png" width="40%">
+<img src="LOGO/logogrande.png" width="50%">
 
-<a href="https://play.google.com/store/apps/details?id=com.pain.log.painlog">
+<a href="https://play.google.com/store/apps/details?id=com.signaturemaker.app">
 <img src="LOGO/getapp.png" width="20%"> </a>
 # Index
 
@@ -45,24 +45,30 @@ If you are interested in the project, you can visit this link:
 
 
 #Descripción es-ES
-Signature Maker es una aplicación muy básica para crear registros y control de los dolores del cuerpo que uno sufre.
 
-<p align="justify"> 
-Recopilar información acerca de tus dolores de cabeza en una libreta de notas puede ayudarte a encontrar sus desencadenantes. El estrés, la depresión, la falta de sueño pueden provocar un dolor de cabeza. Además, llevar un registro de estos dolores puede ayudar a tu médico a identificar el tipo de dolor de cabeza que padeces, ya que puede ser tensional o migrañoso. Brindar indicios a tu médico puede ayudarte a obtener un tratamiento eficaz y, quizás, a eliminar la causa del dolor.</p>
+Digitaliza tu firma
 
-Ahora puedes hacer un registro fácil con Pain Log siguiendo estos sencillos pasos:
+Se acabó el engorroso trabajo de imprimir el documento, firmarlo y escanearlo. Ahora solo necesitas descargarte Signature Maker.
 
- Crea un calendario. Ejemplo: Dolor de cabeza.
+■ Elige un color.
 
-• Anota las fechas, la intensidad del dolor y una breve descripción o nota en que se producen los dolores de cabeza a lo largo de un periodo de tiempo.
+■ Elige un trazo.
 
-• Exporta las anotaciones con un simple click a una tabla excel.
+■ Firma con tu dedo o stylus.
 
-• Visita tu médico.
+■ Guarda y envía tu firma digitalizada a cualquier parte (Drive, Dropbox, Telegram, Whatsapp, Gmail, Hangouts etc...)
 
-<br/>
+¡LISTO!
+Ahora solo tendrás que descargar la firma digital y adjuntarla a tu documento (Pdf, Word etc...)
+Signature Maker es un completo creador y gestor de firmas, recoge el trazado de tu rubrica y lo guarda en una imagen trasparente preparada para ser estampada en cualquier documento digital.
 
-Fácil y sencillo.
+MANUAL PARA CREAR TU PROPIO STILUS
+Material:
+
+■ Lápiz
+
+■ Papel de plata.
+Envuelve el lapicero con una capa de papel de plata para que haga contacto tu dedo, el papel y la pantalla.
 
 #Licencia es-ES
 
