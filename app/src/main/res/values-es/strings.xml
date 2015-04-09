@@ -40,4 +40,10 @@
     <string name="settings">Ajustes</string>
     <string name="prefDef">Restablecer todos los valores por defecto</string>
     <string name="prefDef_a">Valores por defecto</string>
+
+    <!--      Splash     -->
+    <string name="start">Empezar</string>
+    <string name="splash1">Digitalice su firma de una forma fácil y sencilla</string>
+    <string name="splash2">Guarde y envíe su firma donde usted quiera</string>
+    <string name="splash3">Adjunte la imagen con la firma a su documento</string>
 </resources>

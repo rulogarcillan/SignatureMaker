@@ -53,9 +53,9 @@
 
     <!--      Splash     -->
     <string name="start">Start</string>
-    <string name="splash1">Digitalice su firma de una forma fácil y sencilla</string>
-    <string name="splash2">Guarde y envíe su firma donde usted quiera</string>
-    <string name="splash3">Adjunte la imagen con la firma a su documento</string>
+    <string name="splash1">Digitalize your sign with an easy and simple procedure</string>
+    <string name="splash2">Save and send you sign wherever you want</string>
+    <string name="splash3">Attach an image with your sign to your documents</string>
 
     <!--      About libraries     -->
     <string name="escrita">Application Written By Raúl R.C</string>
