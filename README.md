@@ -59,8 +59,9 @@ Se acabó el engorroso trabajo de imprimir el documento, firmarlo y escanearlo. 
 ■ Guarda y envía tu firma digitalizada a cualquier parte (Drive, Dropbox, Telegram, Whatsapp, Gmail, Hangouts etc...)
 
 ¡LISTO!
+<p align="justify"> 
 Ahora solo tendrás que descargar la firma digital y adjuntarla a tu documento (Pdf, Word etc...)
-Signature Maker es un completo creador y gestor de firmas, recoge el trazado de tu rubrica y lo guarda en una imagen trasparente preparada para ser estampada en cualquier documento digital.
+Signature Maker es un completo creador y gestor de firmas, recoge el trazado de tu rubrica y lo guarda en una imagen trasparente preparada para ser estampada en cualquier documento digital.</p>
 
 MANUAL PARA CREAR TU PROPIO STILUS
 Material:
