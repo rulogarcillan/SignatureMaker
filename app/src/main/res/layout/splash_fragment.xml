@@ -1,25 +1,23 @@
-
-
-
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_nuevo"
     android:orientation="vertical">
-        <TextView
-            android:id="@+id/textplash"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="Cree calendarios para controlar una zona dolorosa de su cuerpo"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/icons"
-            android:textStyle="bold"
-            android:layout_below="@+id/imageSplash"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="32dp" />
+
+    <TextView
+        android:id="@+id/textplash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Cree calendarios para controlar una zona dolorosa de su cuerpo"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/icons"
+        android:textStyle="bold"
+        android:layout_below="@+id/imageSplash"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp" />
 
     <ImageView
         android:id="@+id/imageSplash"
@@ -30,7 +28,7 @@
         android:scaleType="fitEnd"
         android:src="@drawable/frame11"
         android:layout_gravity="center_horizontal"
-        android:layout_alignParentRight="true"
+
         android:layout_centerHorizontal="true" />
 
-    </RelativeLayout>
+</RelativeLayout>

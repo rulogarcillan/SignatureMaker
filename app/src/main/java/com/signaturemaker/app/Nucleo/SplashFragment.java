@@ -90,7 +90,7 @@ public class SplashFragment extends Fragment {
                 boton.startAnimation(animation);
 
 
-                image.setImageResource(R.mipmap.ic_launcher);
+                image.setImageResource(R.drawable.frame44);
                 boton.setText(R.string.start);
 
                 boton.setOnClickListener(new View.OnClickListener() {
