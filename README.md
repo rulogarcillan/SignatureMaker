@@ -48,6 +48,7 @@ INSTRUCTIONS TO MAKE YOUR OWN STYLUS
 Materials:
 
 ■  A pencil.
+
 ■  Aluminum foil.
 
 Procedure:
