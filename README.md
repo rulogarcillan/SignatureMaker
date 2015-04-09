@@ -47,6 +47,9 @@ If you are interested in the project, you can visit this link:
 #Descripción es-ES
 
 Digitaliza tu firma
+<p align="justify"> 
+Ya está aquí la nueva versión de la mejor aplicación de firmas Signature Maker con un diseño completamente nuevo. Hemos escuchado vuestras críticas y hemos implementado algunas opciones que nos habéis solicitado, además el código de la aplicación pasa a ser libre con licencia GNU 2.0, ¿a qué esperas para descargar la nueva versión? Signature Maker no tiene publicidad, es limpia y totalmente gratuita.</p>
+
 
 Se acabó el engorroso trabajo de imprimir el documento, firmarlo y escanearlo. Ahora solo necesitas descargarte Signature Maker.
 
