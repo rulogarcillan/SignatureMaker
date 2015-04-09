@@ -17,23 +17,38 @@
 
 
 #Description en-EN
-<p align="justify"> 
-Collecting information about your headaches on a notebook can help you to get the deseases. Stress, depression or not sleeping properly can cause a headache. Moreover, having these pains registered could help your doctor to identify the kind of headache that you have, because it can be migraines or tension headaches. In this way, your doctor will help you to find a correct solution to your problem and probably to eliminate it.
-</p>
 
-Now you can do easily a register by using <b>Pain log</b>. You just have to follow these stages:
+Digitize your signature.
 
-• Create a calendar. For example: headache.
+<p align="justify"> The hard work of printing the document,signing and scaning it has finished.You just have to download Signature Maker.</p>
 
-• Write the dates down, a short description and the intensity of your headaches for a period of time.
+■  Choose the colour.
 
-• By clicking you could transfer your information to an excel chart.
+■  Choose the stroke.
 
-• Talk to your doctor.
+■  Sign with your finger or stylus.
 
-<br/>
+■  Save and send it to anywhere (Drive, Dropbox,Telegram, Whatsapp, Gmail, Hangouts etc.)
 
-Simple and really easy.
+
+                           NOW, IT'S DONE!!!
+
+You just need to download your digital signature and attach it to the file (Pdf, Word etc...)
+
+<p align="justify"> Signature Maker is a complete signature creator and manager, it takes your signature and save it in a transparent image ready to add it to any digital file.</p>
+
+INSTRUCTIONS TO MAKE YOUR OWN STYLUS
+
+Materials:
+
+■  A pencil.
+■  Aluminum foil.
+
+Procedure:
+
+Cover the pencil with aluminum foil in order to create contact between the finger, the pencil and the screen.
+
+
 
 #License en-EN
 
