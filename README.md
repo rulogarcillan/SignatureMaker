@@ -37,15 +37,15 @@ Simple and really easy.
 
 #License en-EN
 
-Pain log is an open-source application totally free, which is located un github with licence  [GNU GPL V3.0] (LICENSE.md)
+Signature Maker is an open-source application totally free, which is located un github with licence  [GNU GPL V3.0] (LICENSE.md)
 
 If you are interested in the project, you can visit this link:
 
-[Pain log] (https://github.com/rulogarcillan/PainLog)
+[Signature Maker] (https://github.com/rulogarcillan/SignatureMaker)
 
 
 #Descripción es-ES
-Pain Log es una aplicación muy básica para crear registros y control de los dolores del cuerpo que uno sufre.
+Signature Maker es una aplicación muy básica para crear registros y control de los dolores del cuerpo que uno sufre.
 
 <p align="justify"> 
 Recopilar información acerca de tus dolores de cabeza en una libreta de notas puede ayudarte a encontrar sus desencadenantes. El estrés, la depresión, la falta de sueño pueden provocar un dolor de cabeza. Además, llevar un registro de estos dolores puede ayudar a tu médico a identificar el tipo de dolor de cabeza que padeces, ya que puede ser tensional o migrañoso. Brindar indicios a tu médico puede ayudarte a obtener un tratamiento eficaz y, quizás, a eliminar la causa del dolor.</p>
@@ -66,10 +66,10 @@ Fácil y sencillo.
 
 #Licencia es-ES
 
-Pain Log es una aplicación de código abierto totalmente gratuita alojada en github bajo licencia  [GNU GPL V3.0] (LICENSE.md) 
+Signature Makerp es una aplicación de código abierto totalmente gratuita alojada en github bajo licencia  [GNU GPL V3.0] (LICENSE.md) 
 
 Si estás interesado en el proyecto puedes visitar el siguiente enlace:
 
-[Pain log] (https://github.com/rulogarcillan/PainLog)
+[Pain log] (https://github.com/rulogarcillan/SignatureMaker)
 
 
