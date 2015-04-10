@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
 
-	<release version="2.0" versioncode="200">
+    <release
+        version="2.01"
+        versioncode="2001">
+        <change>información de botones con pulsación larga</change>
+    </release>
+    <release
+        version="2.0"
+        versioncode="2000">
         <change>Nueva interface</change>
         <change>Añadidas opciones</change>
         <change>Posibilidad de elegir ruta de archivos por defecto</change>
@@ -17,24 +24,32 @@
         <change>Liberado código de la aplicación</change>
         <change>Corregido errores</change>
         <change>Por favor reporta errores en innovation.4.apps@gmail.com</change>
-	</release>
-    <release version="1.03" versioncode="103">
+    </release>
+    <release
+        version="1.03"
+        versioncode="103">
         <change>Diseño material desing</change>
         <change>Nuevo selector de color</change>
         <change>Nuevo icono</change>
         <change>Nuevo menu otras app</change>
     </release>
-    <release version="1.02" versioncode="102">
+    <release
+        version="1.02"
+        versioncode="102">
         <change>Cambio de ruta por defecto</change>
         <change>Corrección de pequeños errores</change>
     </release>
-    <release version="1.01" versioncode="101">
+    <release
+        version="1.01"
+        versioncode="101">
         <change>Corrección de pequeños errores</change>
     </release>
-    <release version="1.0" versioncode="10">
+    <release
+        version="1.0"
+        versioncode="10">
         <change>Versión inicial</change>
     </release>
-     
+
 </changelog>
 
 

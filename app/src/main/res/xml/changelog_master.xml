@@ -1,40 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
 
-	<release version="2.0" versioncode="200">
-    <change>New UI</change>
-    <change>New options</change>
-    <change>Selectable path files</change>
-    <change>Save last stroke</change>
-    <change>Save last color</change>
-    <change>Delete signatrue on exit</change>
-    <change>Toggle view signatures in gallery</change>
-    <change>Mode landscape more efficient</change>
-    <change>Change icon</change>
-    <change>More material desing</change>
-    <change>Add initial splash</change>
-    <change>Add license</change>
-    <change>Open source and free</change>
-    <change>Minor bug fix</change>
-    <change>Please report bugs in innovation.4.apps@gmail.com</change>
+    <release
+        version="2.01"
+        versioncode="2001">
+        <change>Info button on long press</change>
     </release>
-    <release version="1.03" versioncode="103">
+    <release
+        version="2.0"
+        versioncode="2000">
+        <change>New UI</change>
+        <change>New options</change>
+        <change>Selectable path files</change>
+        <change>Save last stroke</change>
+        <change>Save last color</change>
+        <change>Delete signatrue on exit</change>
+        <change>Toggle view signatures in gallery</change>
+        <change>Mode landscape more efficient</change>
+        <change>Change icon</change>
+        <change>More material desing</change>
+        <change>Add initial splash</change>
+        <change>Add license</change>
+        <change>Open source and free</change>
+        <change>Minor bug fix</change>
+        <change>Please report bugs in innovation.4.apps@gmail.com</change>
+    </release>
+    <release
+        version="1.03"
+        versioncode="103">
         <change>Some material design</change>
         <change>New color picker</change>
         <change>New icon</change>
         <change>New menu others app</change>
     </release>
-    <release version="1.02" versioncode="102">
+    <release
+        version="1.02"
+        versioncode="102">
         <change>Change default file Path</change>
         <change>Minor bug fix</change>
     </release>
-    <release version="1.01" versioncode="101">
+    <release
+        version="1.01"
+        versioncode="101">
         <change>Minor bug fix</change>
     </release>
-    <release version="1.0" versioncode="10">
+    <release
+        version="1.0"
+        versioncode="10">
         <change>First release</change>
     </release>
-     
+
 </changelog>
 
 

@@ -100,6 +100,50 @@ public class GestureSignature extends Fragment {
 
         cargarPref();
 
+
+        blimpiar.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(getActivity(), getResources().getString(R.string.limpiar), Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+        btrazo.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(getActivity(), getResources().getString(R.string.stroke), Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+        bcolor.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(getActivity(), getResources().getString(R.string.selectcolor), Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+        bList.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(getActivity(), getResources().getString(R.string.listado), Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+        bSave.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(getActivity(), getResources().getString(R.string.guardar), Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+        bSaveSend.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(getActivity(), getResources().getString(R.string.enviar), Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+
         //salvar firma
         bSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,8 +174,6 @@ public class GestureSignature extends Fragment {
                 }
             }
         });
-
-
 
 
         gestos.addOnGestureListener(new GestureOverlayView.OnGestureListener() {
