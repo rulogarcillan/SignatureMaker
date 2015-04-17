@@ -41,7 +41,7 @@ dependencies {
 
     compile 'com.squareup.picasso:picasso:2.5.2'
 
-    compile 'com.afollestad:material-dialogs:0.6.7.2'
+    compile 'com.afollestad:material-dialogs:0.7.2.2'
 
     compile project(':discreteSeekBar');
     compile project(':chooser');

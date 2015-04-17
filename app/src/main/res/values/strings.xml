@@ -11,6 +11,8 @@
 
     <!--       Pantalla de firma       -->
     <string name="firmeAqui">Sign here</string>
+    <string name="selectname">Select name</string>
+    <string name="trimname">Empty name or character wrong</string>
 
     <!--       Pantalla de listado       -->
     <string name="vacioFiles">No files</string>
@@ -36,6 +38,8 @@
     <string name="prefGal_a">Hide signatures</string>
     <string name="prefDef_a">Default values</string>
     <string name="prefDef">Reset all defaults</string>
+    <string name="prefNam_a">File name</string>
+    <string name="prefNam">Choose file name when saving</string>
 
 
     <string name="selectcolor">Color</string>

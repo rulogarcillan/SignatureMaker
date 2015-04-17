@@ -118,7 +118,7 @@ public class AdapterFicheros extends RecyclerView.Adapter<AdapterFicheros.ViewHo
 
         if (viewType == ItemFile.TYPE_LARGE) {
 
-            viewHolder.textName.setText(items.get(i).getNombre());
+            viewHolder.textName.setText(items.get(i).getNombre().substring(3));
             viewHolder.textDate.setText(items.get(i).getFecha());
             viewHolder.textTam.setText(items.get(i).getTamaño());
             Picasso.with(activity).load("file:///" + pathFiles + "/" + items.get(i).getNombre()).placeholder(R.drawable.ic_png)
