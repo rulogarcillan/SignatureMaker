@@ -11,9 +11,15 @@
             android:summary="@string/prefDel" />
         <CheckBoxPreference
             android:key="opcion3"
-            android:defaultValue="True"
+            android:defaultValue="true"
             android:title="@string/prefGal_a"
             android:summary="@string/prefGal" />
+
+        <CheckBoxPreference
+            android:key="opcion7"
+            android:defaultValue="false"
+            android:title="@string/prefNam_a"
+            android:summary="@string/prefNam" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/firma">
         <CheckBoxPreference

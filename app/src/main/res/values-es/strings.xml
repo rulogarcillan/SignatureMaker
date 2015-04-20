@@ -45,4 +45,10 @@
     <string name="splash1">Digitalice su firma de una forma fácil y sencilla</string>
     <string name="splash2">Guarde y envíe su firma donde usted quiera</string>
     <string name="splash3">Adjunte la imagen con la firma a su documento</string>
+
+    <string name="trimname">Nombre vacío o caractér erroneo</string>
+    <string name="prefNam_a">Nombre del archivo</string>
+    <string name="prefNam">Elegir nombre del archivo al guardar</string>
+    <string name="url1">Este proyecto es de código abierto, ¡visítenos!</string>
+    <string name="hinttext">Introduce un nombre</string>
 </resources>

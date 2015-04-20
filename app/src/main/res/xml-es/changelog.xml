@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
 
+
+    <release
+        version="2.02"
+        versioncode="2002">
+        <change>Opción de elegir el nombre del archivo al guardar (Se activa desde las opciones)
+        </change>
+        <change>Añadida Url del proyecto en el splash inicial</change>
+    </release>
     <release
         version="2.01"
         versioncode="2001">
-        <change>información de botones con pulsación larga</change>
+        <change>Información de botones con pulsación larga</change>
     </release>
     <release
         version="2.0"

@@ -8,8 +8,8 @@ android {
         applicationId "com.signaturemaker.app"
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 2001
-        versionName "2.01"
+        versionCode 2002
+        versionName "2.02"
     }
     buildTypes {
         release {
@@ -41,7 +41,7 @@ dependencies {
 
     compile 'com.squareup.picasso:picasso:2.5.2'
 
-    compile 'com.afollestad:material-dialogs:0.6.7.2'
+    compile 'com.afollestad:material-dialogs:0.7.2.2'
 
     compile project(':discreteSeekBar');
     compile project(':chooser');

@@ -28,8 +28,26 @@ public final class Ficheros {
 
     public static String generaNombre() {
 
-        String name = "SM_" + HoraSistema() + ".png";
+        String name = HoraSistema();
         return name;
+    }
+
+    public static String addEXTNombre(String name) {
+
+        name = "SM_" + name + ".png";
+        return name;
+    }
+
+    public static String limpiaName(String name) {
+
+        String original = " áàäéèëíìïóòöúùuñÁÀÄÉÈËÍÌÏÓÒÖÚÙÜÑçÇ.\\/:?*\"<>|";
+        String ascii = "_aaaeeeiiiooouuunAAAEEEIIIOOOUUUNcC          ";
+        String output = name;
+        for (int i = 0; i < original.length(); i++) {
+
+            output = output.replace(original.charAt(i), ascii.charAt(i)).toLowerCase().trim();
+        }
+        return output;
     }
 
 
@@ -74,7 +92,7 @@ public final class Ficheros {
                 String tam = Long.toString(file.length() / 1024) + " KB";
                 String name = file.getName();
 
-                if ((name.contains(".png") || name.contains(".PNG")) && name.substring(0, 2).equals("SM")) {
+                if ((name.contains(".png") || name.contains(".PNG")) && name.substring(0, 3).equals("SM_")) {
                     ItemFile item = new ItemFile(name, dateFormat.format(myDate), tam);
                     arrayItems.add(item);
                 }

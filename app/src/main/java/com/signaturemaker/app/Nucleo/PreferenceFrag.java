@@ -23,7 +23,7 @@ public class PreferenceFrag extends android.preference.PreferenceFragment {
 
     private ChooseFolder chos;
     SharedPreferences prefs;
-    CheckBoxPreference pref2, pref3, pref4, pref5;
+    CheckBoxPreference pref2, pref3, pref4, pref5, pref7;
     android.preference.Preference pref1, pref6;
 
     @Override
@@ -38,6 +38,7 @@ public class PreferenceFrag extends android.preference.PreferenceFragment {
         pref3 = (CheckBoxPreference) findPreference("opcion3");
         pref4 = (CheckBoxPreference) findPreference("opcion4");
         pref5 = (CheckBoxPreference) findPreference("opcion5");
+        pref7 = (CheckBoxPreference) findPreference("opcion7");
         pref6 = findPreference("opcion6");
 
         PreferencesCons.pathFiles = prefs.getString(PreferencesCons.OP1, PreferencesCons.pathFiles);
@@ -45,6 +46,7 @@ public class PreferenceFrag extends android.preference.PreferenceFragment {
         pref3.setChecked(prefs.getBoolean(PreferencesCons.OP3, true));
         pref4.setChecked(prefs.getBoolean(PreferencesCons.OP4, false));
         pref5.setChecked(prefs.getBoolean(PreferencesCons.OP5, false));
+        pref7.setChecked(prefs.getBoolean(PreferencesCons.OP7, false));
 
         pref1.setSummary(PreferencesCons.pathFiles.replace(PreferencesCons.ROOT, "/sdcard"));
 
@@ -62,7 +64,6 @@ public class PreferenceFrag extends android.preference.PreferenceFragment {
 
 
             case "opcion1":
-
 
                 final View view = getActivity().getLayoutInflater().inflate(R.layout.chooser, null);
                 AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
@@ -131,6 +132,13 @@ public class PreferenceFrag extends android.preference.PreferenceFragment {
                 }
                 editor.commit();
                 break;
+
+            case "opcion7":
+
+                editor.putBoolean(PreferencesCons.OP7, pref7.isChecked());
+                editor.commit();
+                break;
+
             case "opcion6":
 
                 String oldPath = PreferencesCons.pathFiles;
@@ -139,6 +147,8 @@ public class PreferenceFrag extends android.preference.PreferenceFragment {
                 editor.putBoolean(PreferencesCons.OP3, true);
                 editor.putBoolean(PreferencesCons.OP4, false);
                 editor.putBoolean(PreferencesCons.OP5, false);
+                editor.putBoolean(PreferencesCons.OP7, false);
+
 
                 editor.putInt(PreferencesCons.STROKE, PreferencesCons.TRAZO_GROSOR_ORIGINAL);
                 editor.putInt(PreferencesCons.COLOR, PreferencesCons.TRAZO_COLOR_ORIGINAL);
@@ -149,6 +159,7 @@ public class PreferenceFrag extends android.preference.PreferenceFragment {
                 getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(PreferencesCons.pathFiles + ".nomedia"))));
                 pref4.setChecked(false);
                 pref5.setChecked(false);
+                pref7.setChecked(false);
 
                 editor.putString(PreferencesCons.OP1, PreferencesCons.PATH_SAVE_ORIGINAL);
                 pref1.setSummary(PreferencesCons.PATH_SAVE_ORIGINAL.replace(PreferencesCons.ROOT, "/sdcard"));

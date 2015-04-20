@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.getbase.floatingactionbutton.FloatingActionButton;
@@ -51,7 +52,7 @@ public class GestureSignature extends Fragment {
     private ColorPicker picker;
     private SVBar svBar;
     private SharedPreferences prefs;
-    private Boolean prefColor, prefStroke;
+    private Boolean prefColor, prefStroke, prefName;
     private SharedPreferences.Editor editor;
 
 
@@ -147,10 +148,56 @@ public class GestureSignature extends Fragment {
         //salvar firma
         bSave.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                SalvaImagenShare(gestos, false);
-                if (mItemClickListener != null) {
-                    mItemClickListener.onItemClick(v, "SAVE");
+            public void onClick(final View v) {
+
+                String name = Ficheros.generaNombre();
+                if (prefName) {
+                    MaterialDialog dia = new MaterialDialog.Builder(getActivity())
+                            .customView(R.layout.name, false)
+                            .neutralText(R.string.limpiar)
+                            .positiveText(android.R.string.ok)
+                            .autoDismiss(false)
+                            .title(R.string.prefNam_a)
+                            .negativeText(android.R.string.cancel)
+                            .show();
+
+                    final TextView nametext = (TextView) dia.getCustomView().findViewById(R.id.nametext);
+                    nametext.setHint(getResources().getString(R.string.hinttext));
+
+                    dia.getBuilder().callback(new MaterialDialog.ButtonCallback() {
+                        @Override
+                        public void onPositive(MaterialDialog dialog) {
+                            super.onPositive(dialog);
+                            String nameFinal = Ficheros.limpiaName(nametext.getText().toString());
+                            if (nameFinal.length() == 0) {
+                                Toast.makeText(getActivity(), getResources().getString(R.string.trimname), Toast.LENGTH_SHORT).show();
+                            } else {
+                                dialog.dismiss();
+                                SalvaImagenShare(gestos, false, Ficheros.addEXTNombre(nameFinal));
+                                if (mItemClickListener != null) {
+                                    mItemClickListener.onItemClick(v, "SAVE");
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onNeutral(MaterialDialog dialog) {
+                            super.onNeutral(dialog);
+                            nametext.setText("");
+
+                        }
+
+                        @Override
+                        public void onNegative(MaterialDialog dialog) {
+                            super.onNegative(dialog);
+                            dialog.dismiss();
+                        }
+                    });
+                } else {
+                    SalvaImagenShare(gestos, false, Ficheros.addEXTNombre(name));
+                    if (mItemClickListener != null) {
+                        mItemClickListener.onItemClick(v, "SAVE");
+                    }
                 }
             }
         });
@@ -158,10 +205,55 @@ public class GestureSignature extends Fragment {
         //salvar firma y enviar
         bSaveSend.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                SalvaImagenShare(gestos, true);
-                if (mItemClickListener != null) {
-                    mItemClickListener.onItemClick(v, "SAVE");
+            public void onClick(final View v) {
+                String name = Ficheros.generaNombre();
+                if (prefName) {
+                    MaterialDialog dia = new MaterialDialog.Builder(getActivity())
+                            .customView(R.layout.name, false)
+                            .neutralText(R.string.limpiar)
+                            .positiveText(android.R.string.ok)
+                            .autoDismiss(false)
+                            .title(R.string.prefNam_a)
+                            .negativeText(android.R.string.cancel)
+                            .show();
+
+                    final TextView nametext = (TextView) dia.getCustomView().findViewById(R.id.nametext);
+                    nametext.setHint(getResources().getString(R.string.hinttext));
+
+                    dia.getBuilder().callback(new MaterialDialog.ButtonCallback() {
+                        @Override
+                        public void onPositive(MaterialDialog dialog) {
+                            super.onPositive(dialog);
+                            String nameFinal = Ficheros.limpiaName(nametext.getText().toString());
+                            if (nameFinal.length() == 0) {
+                                Toast.makeText(getActivity(), getResources().getString(R.string.trimname), Toast.LENGTH_SHORT).show();
+                            } else {
+                                dialog.dismiss();
+                                SalvaImagenShare(gestos, true, Ficheros.addEXTNombre(nameFinal));
+                                if (mItemClickListener != null) {
+                                    mItemClickListener.onItemClick(v, "SAVE");
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onNeutral(MaterialDialog dialog) {
+                            super.onNeutral(dialog);
+                            nametext.setText("");
+
+                        }
+
+                        @Override
+                        public void onNegative(MaterialDialog dialog) {
+                            super.onNegative(dialog);
+                            dialog.dismiss();
+                        }
+                    });
+                } else {
+                    SalvaImagenShare(gestos, false, Ficheros.addEXTNombre(name));
+                    if (mItemClickListener != null) {
+                        mItemClickListener.onItemClick(v, "SAVE");
+                    }
                 }
             }
         });
@@ -468,11 +560,10 @@ public class GestureSignature extends Fragment {
     }
 
 
-    public void SalvaImagenShare(GestureOverlayView gestos, Boolean flagShare) {
+    public void SalvaImagenShare(GestureOverlayView gestos, Boolean flagShare, String name) {
 
         gestos.setDrawingCacheEnabled(true);
         Bitmap bm = Bitmap.createBitmap(gestos.getDrawingCache());
-        String name = Ficheros.generaNombre();
 
         if (Ficheros.guardar(bm, name)) {
             Toast.makeText(getActivity(), R.string.guardado, Toast.LENGTH_SHORT).show();
@@ -498,6 +589,7 @@ public class GestureSignature extends Fragment {
         editor = prefs.edit();
         prefColor = prefs.getBoolean(PreferencesCons.OP4, false);
         prefStroke = prefs.getBoolean(PreferencesCons.OP5, false);
+        prefName = prefs.getBoolean(PreferencesCons.OP7, false);
 
         //
         if (prefStroke)
