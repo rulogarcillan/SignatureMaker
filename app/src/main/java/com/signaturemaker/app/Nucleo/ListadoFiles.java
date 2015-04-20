@@ -221,7 +221,7 @@ public class ListadoFiles extends Fragment {
             SnackbarManager.getCurrentSnackbar().dismiss();
 
         SnackbarManager.show(
-                Snackbar.with(getActivity()).text(item.getNombre() + " " + getResources().getString(R.string.eliminado)).actionLabel(R.string.deshacer).actionLabelTypeface(Typeface.DEFAULT_BOLD).actionColorResource(R.color.primary).actionListener(new ActionClickListener() {
+                Snackbar.with(getActivity()).text(item.getNombre().substring(3) + " " + getResources().getString(R.string.eliminado)).actionLabel(R.string.deshacer).actionLabelTypeface(Typeface.DEFAULT_BOLD).actionColorResource(R.color.primary).actionListener(new ActionClickListener() {
                     @Override
                     public void onActionClicked(Snackbar snackbar) {
 
@@ -321,7 +321,7 @@ public class ListadoFiles extends Fragment {
 
     @Override
     public void onDestroy() {
-        eliminar=false;
+        eliminar = false;
         super.onDestroy();
     }
 }

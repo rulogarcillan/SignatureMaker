@@ -2,9 +2,11 @@ package com.signaturemaker.app.Nucleo;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,11 +24,8 @@ public class SplashFragment extends Fragment {
     private int pos;
     ImageView image;
     Button boton;
-    TextView text;
+    TextView text, textUrl;
     Animation animation;
-
-
-
 
 
     @Override
@@ -64,6 +63,7 @@ public class SplashFragment extends Fragment {
         if (pos == 4) {
             rootView = inflater.inflate(R.layout.splash_fragment2, container, false);
             boton = (Button) rootView.findViewById(R.id.textplash);
+            textUrl = (TextView) rootView.findViewById(R.id.url);
         }
 
         image = (ImageView) rootView.findViewById(R.id.imageSplash);
@@ -88,10 +88,22 @@ public class SplashFragment extends Fragment {
 
 
                 boton.startAnimation(animation);
-
+                textUrl.setText(Html.fromHtml(getResources().getString(R.string.url1) + "<br>" + " " + "<font color='#01579b'><a href=\"https://github.com/rulogarcillan/SignatureMaker\">" + getResources().getString(R.string.url2) + "</a></font>"));
 
                 image.setImageResource(R.drawable.frame44);
                 boton.setText(R.string.start);
+
+
+                textUrl.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String url = getResources().getString(R.string.url2);
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(url));
+                        startActivity(i);
+                    }
+                });
+
 
                 boton.setOnClickListener(new View.OnClickListener() {
                     @Override

@@ -157,12 +157,12 @@ public class GestureSignature extends Fragment {
                             .neutralText(R.string.limpiar)
                             .positiveText(android.R.string.ok)
                             .autoDismiss(false)
-                            .title(R.string.selectname)
+                            .title(R.string.prefNam_a)
                             .negativeText(android.R.string.cancel)
                             .show();
 
                     final TextView nametext = (TextView) dia.getCustomView().findViewById(R.id.nametext);
-                    nametext.setText(name);
+                    nametext.setHint(getResources().getString(R.string.hinttext));
 
                     dia.getBuilder().callback(new MaterialDialog.ButtonCallback() {
                         @Override
@@ -213,12 +213,12 @@ public class GestureSignature extends Fragment {
                             .neutralText(R.string.limpiar)
                             .positiveText(android.R.string.ok)
                             .autoDismiss(false)
-                            .title(R.string.selectname)
+                            .title(R.string.prefNam_a)
                             .negativeText(android.R.string.cancel)
                             .show();
 
                     final TextView nametext = (TextView) dia.getCustomView().findViewById(R.id.nametext);
-                    nametext.setText(name);
+                    nametext.setHint(getResources().getString(R.string.hinttext));
 
                     dia.getBuilder().callback(new MaterialDialog.ButtonCallback() {
                         @Override
