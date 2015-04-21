@@ -32,4 +32,16 @@
         android:layout_margin="80dp"
         android:layout_centerHorizontal="true" />
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/icons"
+        android:clickable="true"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Smallsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss Text"
+        android:id="@+id/url"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_above="@+id/textplash"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
