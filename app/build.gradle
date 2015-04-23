@@ -8,8 +8,8 @@ android {
         applicationId "com.signaturemaker.app"
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 2003
-        versionName "2.021"
+        versionCode 2004
+        versionName "2.022"
     }
     buildTypes {
         release {

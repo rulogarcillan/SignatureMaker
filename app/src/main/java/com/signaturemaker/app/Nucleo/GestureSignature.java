@@ -251,7 +251,7 @@ public class GestureSignature extends Fragment {
                         }
                     });
                 } else {
-                    SalvaImagenShare(gestos, false, Ficheros.addEXTNombre(name));
+                    SalvaImagenShare(gestos, true, Ficheros.addEXTNombre(name));
                     if (mItemClickListener != null) {
                         mItemClickListener.onItemClick(v, "SAVE");
                     }

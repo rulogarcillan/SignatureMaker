@@ -2,6 +2,12 @@
 <changelog>
 
     <release
+        version="2.022"
+        versioncode="2004">
+        <change>Se adapta más material desing para versiones pre-lollipop</change>
+        <change>Corregido bug en salvar y enviar</change>
+    </release>
+    <release
         version="2.021"
         versioncode="2003">
         <change>Corregido error en splash inicial en pantallas garndes (perdón por el inconveniente)</change>

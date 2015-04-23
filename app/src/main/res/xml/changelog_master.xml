@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
 
+
+    <release
+        version="2.022"
+        versioncode="2004">
+        <change>Add some material desing to pre-lollipop</change>
+        <change>Fixed bug in save and send</change>
+    </release>
     <release
         version="2.021"
         versioncode="2003">
