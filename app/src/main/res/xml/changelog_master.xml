@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
 
-
+    <release
+        version="2.023"
+        versioncode="2005">
+        <change>New icon clean</change>
+        <change>Minor bug fix</change>
+    </release>
     <release
         version="2.022"
         versioncode="2004">
