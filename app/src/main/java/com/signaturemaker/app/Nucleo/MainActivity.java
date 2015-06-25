@@ -1,5 +1,6 @@
 package com.signaturemaker.app.Nucleo;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -7,10 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.signaturemaker.app.Constantes.PreferencesCons;
 import com.signaturemaker.app.Ficheros.Ficheros;
@@ -42,6 +41,14 @@ public class MainActivity extends BaseActivity {
         super.onDestroy();
     }
 
+    public void onRestart() {
+        super.onRestart();
+        Intent intent = new Intent();
+        intent.setClass(this, this.getClass());
+        finish();
+        this.startActivity(intent);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -49,7 +56,7 @@ public class MainActivity extends BaseActivity {
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         prefPub = prefs.getBoolean(PreferencesCons.OPPUB, false);
 
-        mAdView = (AdView) findViewById(R.id.adView);
+        //mAdView = (AdView) findViewById(R.id.adView);
 
         if (prefPub) {
             if (mAdView != null)
@@ -57,25 +64,11 @@ public class MainActivity extends BaseActivity {
 
         } else {
             if (mAdView == null) {
-                Toast.makeText(this, "A", Toast.LENGTH_SHORT).show();
-
-                RelativeLayout.LayoutParams rLParams =
-                        new RelativeLayout.LayoutParams(
-                                RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                rLParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 1);
-
-                mAdView = new AdView(this);
-                mAdView.setAdSize(AdSize.BANNER);
-                mAdView.setAdUnitId(getResources().getString(R.string.banner_ad_unit_id));
-
-                AdRequest adRequest = new AdRequest.Builder().build();
-                mAdView.loadAd(adRequest);
-
-
-                a.addView(mAdView, rLParams);
 
             }
 
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
 
         }
 
