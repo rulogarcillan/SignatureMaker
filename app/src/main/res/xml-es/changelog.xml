@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
 
+    <release
+        version="2.024"
+        versioncode="2006">
+        <change>Se añade publicidad</change>
+        <change>Desactivar/Activar publicidad desde los ajustes de la aplicación</change>
+        <change>La publicidad puede desactivarse y funcionar como hasta ahora, si te gusta la aplicación clickea un banner para invitarme a una cerveza de vez en cuando, gracias.</change>
+    </release>
 
     <release
         version="2.023"

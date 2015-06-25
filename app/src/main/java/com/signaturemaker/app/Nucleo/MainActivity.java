@@ -23,9 +23,9 @@ public class MainActivity extends BaseActivity {
     GestureSignature fgestos;
     ListadoFiles fListado;
     FrameLayout container2;
-    AdView mAdView, mAdView2;
+    AdView mAdView;
     ViewGroup a;
-    private Boolean prefPub;
+    private Boolean prefPub, prefAnt;
     private SharedPreferences prefs;
 
 
@@ -43,44 +43,40 @@ public class MainActivity extends BaseActivity {
 
     public void onRestart() {
         super.onRestart();
-        Intent intent = new Intent();
-        intent.setClass(this, this.getClass());
-        finish();
-        this.startActivity(intent);
+        prefPub = prefs.getBoolean(PreferencesCons.OPPUB, false);
+        if ((prefPub != prefAnt) && (prefPub == false)){
+            Intent intent = new Intent();
+            intent.setClass(this, this.getClass());
+            finish();
+            this.startActivity(intent);
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
         prefPub = prefs.getBoolean(PreferencesCons.OPPUB, false);
+        prefAnt = prefPub;
 
         //mAdView = (AdView) findViewById(R.id.adView);
 
-        if (prefPub) {
-            if (mAdView != null)
+        if ((prefPub) && (mAdView != null))
                 a.removeView(mAdView);
 
-        } else {
-            if (mAdView == null) {
 
-            }
-
-            AdRequest adRequest = new AdRequest.Builder().build();
-            mAdView.loadAd(adRequest);
-
-        }
 
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
         load();
         a = (RelativeLayout) findViewById(R.id.lay);
         mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
     }
 

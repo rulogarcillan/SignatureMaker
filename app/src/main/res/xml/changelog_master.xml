@@ -2,6 +2,13 @@
 <changelog>
 
     <release
+        version="2.024"
+        versioncode="2006">
+        <change>Add advertising</change>
+        <change>Disable/Enable ads from settings</change>
+        <change>Disable ads if it bothers you. Anyway you can invite me for a beer if you collaborate with the author by clicking on banner. Thank you</change>
+    </release>
+    <release
         version="2.023"
         versioncode="2005">
         <change>New icon clean</change>

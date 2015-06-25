@@ -52,4 +52,8 @@
     <string name="url1">Este proyecto es de código abierto, ¡visítenos!</string>
     <string name="hinttext">Introduce un nombre</string>
     <string name="publi1">Publicidad</string>
+    <string name="pubTitle">No mostrar publicidad</string>
+    <string name="disPub">Desactive la publicidad si le resulta molesta, no obstante colabore haciendo click en los banner para ayudar al autor, gracias</string>
+
+
 </resources>

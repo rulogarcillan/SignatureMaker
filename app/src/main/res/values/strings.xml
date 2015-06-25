@@ -41,6 +41,9 @@
     <string name="prefDef">Reset all defaults</string>
     <string name="prefNam_a">File name</string>
     <string name="prefNam">Choose file name when saving</string>
+    <string name="pubTitle">Disable ads</string>
+    <string name="disPub">Disable ads if it bothers you. Anyway you can invite me for a beer if you collaborate with the author by clicking on banner. Thank you</string>
+
 
 
     <string name="selectcolor">Color</string>

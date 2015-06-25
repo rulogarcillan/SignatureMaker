@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.text.Html;
 import android.view.View;
 
 import com.signaturemaker.app.Constantes.PreferencesCons;
@@ -52,6 +53,8 @@ public class PreferenceFrag extends android.preference.PreferenceFragment {
 
         pref1.setSummary(PreferencesCons.pathFiles.replace(PreferencesCons.ROOT, "/sdcard"));
 
+
+        prefPub.setSummary(Html.fromHtml("<font color='red'>" + getResources().getString(R.string.disPub) + "</font>" ));
 
         //  pref3.setSummary(Html.fromHtml( "<font color='red'>" +  getResources().getString(R.string.prefcautionRed) +"</font>" + " " + getResources().getString(R.string.prefcaution)));
 
