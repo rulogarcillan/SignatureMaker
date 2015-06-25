@@ -24,7 +24,7 @@ Digitize your signature.
 It has a completely new design.
 We have taken into account your suggestions and we have introduced some options that you told us. 
 The application source  is now free with licence [GNU GPL V3.0] (LICENSE.md)
-What are you waiting for donwloading the new version? Signature maker has not got publicity, it is clean and totally free.</p>
+What are you waiting for donwloading the new version? Signature maker is clean and totally free.</p>
 
 <p align="justify"> The hard work of printing the document,signing and scaning it has finished.You just have to download Signature Maker.</p>
 
@@ -70,7 +70,7 @@ If you are interested in the project, you can visit this link:
 
 Digitaliza tu firma
 <p align="justify"> 
-Ya está aquí la nueva versión de la mejor aplicación de firmas Signature Maker con un diseño completamente nuevo. Hemos escuchado vuestras críticas y hemos implementado algunas opciones que nos habéis solicitado, además el código de la aplicación pasa a ser libre con licencia [GNU GPL V3.0] (LICENSE.md), ¿a qué esperas para descargar la nueva versión? Signature Maker no tiene publicidad, es limpia y totalmente gratuita.</p>
+Ya está aquí la nueva versión de la mejor aplicación de firmas Signature Maker con un diseño completamente nuevo. Hemos escuchado vuestras críticas y hemos implementado algunas opciones que nos habéis solicitado, además el código de la aplicación pasa a ser libre con licencia [GNU GPL V3.0] (LICENSE.md), ¿a qué esperas para descargar la nueva versión? Signature Maker es limpia y totalmente gratuita.</p>
 
 
 Se acabó el engorroso trabajo de imprimir el documento, firmarlo y escanearlo. Ahora solo necesitas descargarte Signature Maker.
