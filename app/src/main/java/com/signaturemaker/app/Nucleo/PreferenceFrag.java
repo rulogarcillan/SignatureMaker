@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.text.Html;
 import android.view.View;
 
 import com.signaturemaker.app.Constantes.PreferencesCons;
@@ -23,7 +24,7 @@ public class PreferenceFrag extends android.preference.PreferenceFragment {
 
     private ChooseFolder chos;
     SharedPreferences prefs;
-    CheckBoxPreference pref2, pref3, pref4, pref5, pref7;
+    CheckBoxPreference pref2, pref3, pref4, pref5, pref7, prefPub;
     android.preference.Preference pref1, pref6;
 
     @Override
@@ -39,6 +40,7 @@ public class PreferenceFrag extends android.preference.PreferenceFragment {
         pref4 = (CheckBoxPreference) findPreference("opcion4");
         pref5 = (CheckBoxPreference) findPreference("opcion5");
         pref7 = (CheckBoxPreference) findPreference("opcion7");
+        prefPub = (CheckBoxPreference) findPreference("opcionPub");
         pref6 = findPreference("opcion6");
 
         PreferencesCons.pathFiles = prefs.getString(PreferencesCons.OP1, PreferencesCons.pathFiles);
@@ -47,9 +49,12 @@ public class PreferenceFrag extends android.preference.PreferenceFragment {
         pref4.setChecked(prefs.getBoolean(PreferencesCons.OP4, false));
         pref5.setChecked(prefs.getBoolean(PreferencesCons.OP5, false));
         pref7.setChecked(prefs.getBoolean(PreferencesCons.OP7, false));
+        prefPub.setChecked(prefs.getBoolean(PreferencesCons.OPPUB, false));
 
         pref1.setSummary(PreferencesCons.pathFiles.replace(PreferencesCons.ROOT, "/sdcard"));
 
+
+        prefPub.setSummary(Html.fromHtml("<font color='red'>" + getResources().getString(R.string.disPub) + "</font>" ));
 
         //  pref3.setSummary(Html.fromHtml( "<font color='red'>" +  getResources().getString(R.string.prefcautionRed) +"</font>" + " " + getResources().getString(R.string.prefcaution)));
 
@@ -62,6 +67,11 @@ public class PreferenceFrag extends android.preference.PreferenceFragment {
 
         switch (preference.getKey()) {
 
+            case "opcionPub":
+
+                editor.putBoolean(PreferencesCons.OPPUB, prefPub.isChecked());
+                editor.commit();
+                break;
 
             case "opcion1":
 
@@ -148,6 +158,7 @@ public class PreferenceFrag extends android.preference.PreferenceFragment {
                 editor.putBoolean(PreferencesCons.OP4, false);
                 editor.putBoolean(PreferencesCons.OP5, false);
                 editor.putBoolean(PreferencesCons.OP7, false);
+                editor.putBoolean(PreferencesCons.OPPUB, false);
 
 
                 editor.putInt(PreferencesCons.STROKE, PreferencesCons.TRAZO_GROSOR_ORIGINAL);
@@ -160,6 +171,7 @@ public class PreferenceFrag extends android.preference.PreferenceFragment {
                 pref4.setChecked(false);
                 pref5.setChecked(false);
                 pref7.setChecked(false);
+                prefPub.setChecked(false);
 
                 editor.putString(PreferencesCons.OP1, PreferencesCons.PATH_SAVE_ORIGINAL);
                 pref1.setSummary(PreferencesCons.PATH_SAVE_ORIGINAL.replace(PreferencesCons.ROOT, "/sdcard"));
