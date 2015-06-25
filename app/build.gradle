@@ -8,8 +8,8 @@ android {
         applicationId "com.signaturemaker.app"
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 2005
-        versionName "2.023"
+        versionCode 2006
+        versionName "2.024"
     }
     buildTypes {
         release {
@@ -23,7 +23,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.1.0'
 
-
+    compile 'com.google.android.gms:play-services-ads:7.5.0'
     compile 'de.cketti.library.changelog:ckchangelog:1.2.2'
 
 

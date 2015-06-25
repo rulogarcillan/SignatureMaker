@@ -41,6 +41,8 @@ public final class LogUtils {
     public static void TRAZA(String message) {
         if (BuildConfig.DEBUG) {
             Log.e(TAG, message);
+
+            String a = "adsasd";
         }
     }
 

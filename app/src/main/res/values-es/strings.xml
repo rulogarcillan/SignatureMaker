@@ -51,4 +51,5 @@
     <string name="prefNam">Elegir nombre del archivo al guardar</string>
     <string name="url1">Este proyecto es de código abierto, ¡visítenos!</string>
     <string name="hinttext">Introduce un nombre</string>
+    <string name="publi1">Publicidad</string>
 </resources>
