@@ -2,7 +2,7 @@
 <changelog>
 
     <release
-        version="2.024"
+        version="2.0.24"
         versioncode="2006">
         <change>Se añade publicidad</change>
         <change>Desactivar/Activar publicidad desde los ajustes de la aplicación</change>
@@ -10,36 +10,36 @@
     </release>
 
     <release
-        version="2.023"
+        version="2.0.23"
         versioncode="2005">
         <change>Nuevo icono limpiar</change>
         <change>Corregido pequeño error</change>
     </release>
     <release
-        version="2.022"
+        version="2.0.22"
         versioncode="2004">
         <change>Se adapta más material desing para versiones pre-lollipop</change>
         <change>Corregido bug en salvar y enviar</change>
     </release>
     <release
-        version="2.021"
+        version="2.0.21"
         versioncode="2003">
         <change>Corregido error en splash inicial en pantallas garndes (perdón por el inconveniente)</change>
     </release>
     <release
-        version="2.02"
+        version="2.0.2"
         versioncode="2002">
         <change>Opción de elegir el nombre del archivo al guardar (Se activa desde las opciones)
         </change>
         <change>Añadida Url del proyecto en el splash inicial</change>
     </release>
     <release
-        version="2.01"
+        version="2.0.1"
         versioncode="2001">
         <change>Información de botones con pulsación larga</change>
     </release>
     <release
-        version="2.0"
+        version="2.0.0"
         versioncode="2000">
         <change>Nueva interface</change>
         <change>Añadidas opciones</change>
@@ -58,7 +58,7 @@
         <change>Por favor reporta errores en innovation.4.apps@gmail.com</change>
     </release>
     <release
-        version="1.03"
+        version="1.0.3"
         versioncode="103">
         <change>Diseño material desing</change>
         <change>Nuevo selector de color</change>
@@ -66,18 +66,18 @@
         <change>Nuevo menu otras app</change>
     </release>
     <release
-        version="1.02"
+        version="1.0.2"
         versioncode="102">
         <change>Cambio de ruta por defecto</change>
         <change>Corrección de pequeños errores</change>
     </release>
     <release
-        version="1.01"
+        version="1.0.1"
         versioncode="101">
         <change>Corrección de pequeños errores</change>
     </release>
     <release
-        version="1.0"
+        version="1.0.0"
         versioncode="10">
         <change>Versión inicial</change>
     </release>

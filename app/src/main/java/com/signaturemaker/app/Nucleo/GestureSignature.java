@@ -15,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,14 +24,14 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
+
 import com.larswerkman.holocolorpicker.ColorPicker;
 import com.larswerkman.holocolorpicker.SVBar;
 import com.nineoldandroids.animation.Animator;
+import com.rey.material.widget.Slider;
 import com.signaturemaker.app.Constantes.PreferencesCons;
 import com.signaturemaker.app.Ficheros.Ficheros;
 import com.signaturemaker.app.R;
-
-import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
 
 import java.io.File;
 
@@ -44,9 +45,10 @@ public class GestureSignature extends Fragment {
 
     private FloatingActionsMenu fab1, fab2;
     private FloatingActionButton blimpiar, btrazo, bcolor, bList, bSave, bSaveSend;
+    private FloatingActionButton fondo;
     private GestureOverlayView gestos;
     private TextView txtMnsVacio;
-    private DiscreteSeekBar trazo;
+    private Slider trazo;
     private LinearLayout layoutSeek;
     private LinearLayout layoutColor;
     private View rootView;
@@ -55,6 +57,8 @@ public class GestureSignature extends Fragment {
     private SharedPreferences prefs;
     private Boolean prefColor, prefStroke, prefName;
     private SharedPreferences.Editor editor;
+    private int fondoType = 1;
+    private RelativeLayout relaFondo;
 
 
     OnListadoClickListener mItemClickListener;
@@ -83,12 +87,15 @@ public class GestureSignature extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_sign, container, false);
         fab1 = (FloatingActionsMenu) rootView.findViewById(R.id.Fab1);
         fab2 = (FloatingActionsMenu) rootView.findViewById(R.id.Fab2);
+        fondo = (FloatingActionButton) rootView.findViewById(R.id.fondo);
+        fondo.setSize(1);
+        relaFondo = (RelativeLayout) rootView.findViewById(R.id.relaFondo);
         blimpiar = (FloatingActionButton) rootView.findViewById(R.id.blimpiar);
         btrazo = (FloatingActionButton) rootView.findViewById(R.id.btrazo);
         bcolor = (FloatingActionButton) rootView.findViewById(R.id.bcolor);
         gestos = (GestureOverlayView) rootView.findViewById(R.id.signaturePad);
         txtMnsVacio = (TextView) rootView.findViewById(R.id.txtMnsVacio);
-        trazo = (DiscreteSeekBar) rootView.findViewById(R.id.trazo);
+        trazo = (Slider) rootView.findViewById(R.id.trazo);
         layoutSeek = (LinearLayout) rootView.findViewById(R.id.layoutSeek);
         layoutColor = (LinearLayout) rootView.findViewById(R.id.layoutColor);
         picker = (ColorPicker) rootView.findViewById(R.id.picker);
@@ -143,6 +150,45 @@ public class GestureSignature extends Fragment {
             public boolean onLongClick(View v) {
                 Toast.makeText(getActivity(), getResources().getString(R.string.enviar), Toast.LENGTH_SHORT).show();
                 return true;
+            }
+        });
+
+        fondo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                fondoType++;
+                if (fondoType == 6) {
+                    fondoType = 1;
+                }
+                final int sdk = android.os.Build.VERSION.SDK_INT;
+                switch (fondoType) {
+                    case 1:
+                        if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                            relaFondo.setBackgroundDrawable(getResources().getDrawable(R.drawable.fondotrans1));
+                        } else {
+                            relaFondo.setBackground(getResources().getDrawable(R.drawable.fondotrans2));
+                        }
+                        break;
+                    case 2:
+
+                        if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                            relaFondo.setBackgroundDrawable(getResources().getDrawable(R.drawable.fondotrans2));
+                        } else {
+                            relaFondo.setBackground(getResources().getDrawable(R.drawable.fondotrans1));
+                        }
+                        break;
+                    case 3:
+                        relaFondo.setBackgroundColor(getResources().getColor(android.R.color.white));
+                        break;
+                    case 4:
+                        relaFondo.setBackgroundColor(getResources().getColor(android.R.color.black));
+                        break;
+                    case 5:
+                        relaFondo.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
+                        break;
+                }
+
             }
         });
 
@@ -355,11 +401,10 @@ public class GestureSignature extends Fragment {
             }
         });
 
-        // cambio de trazo
-        trazo.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
+        trazo.setOnPositionChangeListener(new Slider.OnPositionChangeListener() {
             @Override
-            public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
-                strokeTrazo = value;
+            public void onPositionChanged(Slider view, boolean fromUser, float oldPos, float newPos, int oldValue, int newValue) {
+                strokeTrazo = newValue;
                 gestos.setGestureStrokeWidth(strokeTrazo);
                 gestos.invalidate();
                 if (prefStroke) {
@@ -367,18 +412,7 @@ public class GestureSignature extends Fragment {
                     editor.commit();
                 }
             }
-
-            @Override
-            public void onStartTrackingTouch(DiscreteSeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
-
-            }
         });
-
 
         picker.setOnColorChangedListener(new ColorPicker.OnColorChangedListener() {
             @Override
@@ -511,7 +545,7 @@ public class GestureSignature extends Fragment {
         recuperaPref();
 
         gestos.setGestureStrokeWidth(strokeTrazo);
-        trazo.setProgress(strokeTrazo);
+        trazo.setValue(strokeTrazo, true);
         picker.setColor(colorTrazo);
         picker.setOldCenterColor(colorTrazo);
         bcolor.setColorNormal(colorTrazo);

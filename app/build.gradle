@@ -1,15 +1,56 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion "21.1.1"
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+
+    def Properties versionProps = new Properties()
+    def versionPropsFile = file('version.properties')
+
+    //Creates the version file if it doesn't exist
+    if (versionPropsFile.exists())
+        versionProps.load(new FileInputStream(versionPropsFile))
+
+    def name1 = (versionProps['NAME1_CODE']).toInteger()
+    def name2 = (versionProps['NAME2_CODE']).toInteger()
+    def name3 = (versionProps['NAME3_CODE']).toInteger()
+    def contador = (versionProps['VERSION_CODETOT']).toInteger()
+    def code = (versionProps['VERSION_CODE']).toInteger()
+
+
+    if (contador >= 9) {
+        versionProps['VERSION_CODE'] = (code + 1).toString()
+        versionProps['VERSION_CODETOT'] = 0.toString()
+
+    } else {
+        versionProps['VERSION_CODE'] = (code).toString()
+        versionProps['VERSION_CODETOT'] = (contador + 1).toString()
+    }
+
+    if (name3 >= 250) {
+        versionProps['NAME3_CODE'] = 0.toString()
+        if (name2 >= 9) {
+            versionProps['NAME1_CODE'] = (name1 + 1).toString()
+            versionProps['NAME2_CODE'] = 0.toString()
+        } else {
+            versionProps['NAME1_CODE'] = (name1).toString()
+            versionProps['NAME2_CODE'] = (name2 + 1).toString()
+        }
+    } else {
+        versionProps['NAME3_CODE'] = (name3 + 1).toString()
+        versionProps['NAME1_CODE'] = (name1).toString()
+        versionProps['NAME2_CODE'] = (name2).toString()
+    }
+
+    versionProps.store(versionPropsFile.newWriter(), null)
 
     defaultConfig {
         applicationId "com.signaturemaker.app"
         minSdkVersion 15
-        targetSdkVersion 21
-        versionCode 2006
-        versionName "2.024"
+        targetSdkVersion 23
+        versionCode code
+        versionName name1 + "." + name2 + "." + name3
     }
     buildTypes {
         release {
@@ -18,34 +59,41 @@ android {
         }
     }
 }
+repositories {
+    jcenter()
+    maven { url "https://jitpack.io" }
+
+}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:22.1.0'
-
-    compile 'com.google.android.gms:play-services-ads:7.5.0'
-    compile 'de.cketti.library.changelog:ckchangelog:1.2.2'
 
 
-    compile 'com.nispok:snackbar:2.10.2'
-    compile 'me.relex:circleindicator:1.1.2@aar'
-    compile 'com.getbase:floatingactionbutton:1.9.0'
+
     compile('com.mikepenz.aboutlibraries:library:4.5.7@aar') {
         transitive = true
     }
-    compile 'com.nineoldandroids:library:2.4.0'
-    compile 'com.daimajia.easing:library:1.0.1@aar'
-    compile 'com.daimajia.androidanimations:library:1.1.3@aar'
 
-    compile 'com.larswerkman:HoloColorPicker:1.5'
-
-    compile 'com.squareup.picasso:picasso:2.5.2'
-
-    compile 'com.afollestad:material-dialogs:0.7.2.2'
-
-    compile project(':discreteSeekBar');
     compile project(':chooser');
 //    compile 'com.android.support:cardview-v7:21.0.+'
 //    compile 'com.android.support:support-v4:21.0.+'
+
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:design:23.1.1'
+    compile 'com.google.android.gms:play-services-ads:8.4.0'
+    compile 'de.cketti.library.changelog:ckchangelog:1.2.2'
+    compile 'com.nispok:snackbar:2.10.2'
+    compile 'me.relex:circleindicator:1.1.2@aar'
+    compile 'com.getbase:floatingactionbutton:1.9.0'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.daimajia.easing:library:1.0.1@aar'
+    compile 'com.daimajia.androidanimations:library:1.1.3@aar'
+    compile 'com.larswerkman:HoloColorPicker:1.5'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile('com.github.afollestad.material-dialogs:core:0.8.5.3@aar') {
+        transitive = true
+    }
+    compile 'com.github.rey5137:material:1.2.2'
+
 
 }

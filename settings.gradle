@@ -1,1 +1,1 @@
-include ':app', ':discreteSeekBar', ':chooser'
+include ':app', ':chooser'
