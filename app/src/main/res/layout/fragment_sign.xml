@@ -66,8 +66,6 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/Fab1"
             android:layout_weight="1"
-
-            android:background="@color/primary_dark"
             app:sl_value="20"/>
 
 
