@@ -152,6 +152,13 @@ public class GestureSignature extends Fragment {
                 return true;
             }
         });
+        fondo.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(getActivity(), getResources().getString(R.string.fondo), Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
 
         fondo.setOnClickListener(new View.OnClickListener() {
             @Override
