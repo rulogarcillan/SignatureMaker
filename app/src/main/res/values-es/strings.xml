@@ -6,7 +6,7 @@
     <string name="escrita">Aplicación escrita por Raúl R.C</string>
     <string name="firmeAqui">Firme aquí</string>
 
-
+    <string name="fondo">Tipo de fondo</string>
     <string name="selectcolor">Color</string>
     <string name="stroke">Trazo</string>
     <string name="guardar">Guardar</string>
