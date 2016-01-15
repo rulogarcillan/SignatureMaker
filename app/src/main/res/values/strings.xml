@@ -45,7 +45,7 @@
     <string name="disPub">Disable ads if it bothers you. Anyway you can invite me for a beer if you collaborate with the author by clicking on banner. Thank you</string>
 
 
-
+    <string name="fondo">Type of background</string>
     <string name="selectcolor">Color</string>
     <string name="stroke">Stroke</string>
     <string name="guardar">Save</string>
