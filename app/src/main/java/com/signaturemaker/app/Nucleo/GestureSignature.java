@@ -24,7 +24,6 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
-
 import com.larswerkman.holocolorpicker.ColorPicker;
 import com.larswerkman.holocolorpicker.SVBar;
 import com.nineoldandroids.animation.Animator;
@@ -36,6 +35,7 @@ import com.signaturemaker.app.R;
 import java.io.File;
 
 import static com.signaturemaker.app.Constantes.PreferencesCons.colorTrazo;
+import static com.signaturemaker.app.Constantes.PreferencesCons.fondoType;
 import static com.signaturemaker.app.Constantes.PreferencesCons.strokeTrazo;
 
 /**
@@ -57,7 +57,7 @@ public class GestureSignature extends Fragment {
     private SharedPreferences prefs;
     private Boolean prefColor, prefStroke, prefName;
     private SharedPreferences.Editor editor;
-    private int fondoType = 1;
+
     private RelativeLayout relaFondo;
 
 
@@ -88,7 +88,7 @@ public class GestureSignature extends Fragment {
         fab1 = (FloatingActionsMenu) rootView.findViewById(R.id.Fab1);
         fab2 = (FloatingActionsMenu) rootView.findViewById(R.id.Fab2);
         fondo = (FloatingActionButton) rootView.findViewById(R.id.fondo);
-        fondo.setSize(1);
+
         relaFondo = (RelativeLayout) rootView.findViewById(R.id.relaFondo);
         blimpiar = (FloatingActionButton) rootView.findViewById(R.id.blimpiar);
         btrazo = (FloatingActionButton) rootView.findViewById(R.id.btrazo);
@@ -163,35 +163,13 @@ public class GestureSignature extends Fragment {
         fondo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 fondoType++;
                 if (fondoType == 5) {
                     fondoType = 1;
                 }
-                final int sdk = android.os.Build.VERSION.SDK_INT;
-                switch (fondoType) {
-                    case 1:
-                        if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                            relaFondo.setBackgroundDrawable(getResources().getDrawable(R.drawable.fondotrans1));
-                        } else {
-                            relaFondo.setBackground(getResources().getDrawable(R.drawable.fondotrans2));
-                        }
-                        break;
-                    case 2:
-
-                        if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                            relaFondo.setBackgroundDrawable(getResources().getDrawable(R.drawable.fondotrans2));
-                        } else {
-                            relaFondo.setBackground(getResources().getDrawable(R.drawable.fondotrans1));
-                        }
-                        break;
-                    case 3:
-                        relaFondo.setBackgroundColor(getResources().getColor(android.R.color.white));
-                        break;
-                    case 4:
-                        relaFondo.setBackgroundColor(getResources().getColor(android.R.color.black));
-                        break;
-                }
+                editor.putInt(PreferencesCons.OP8, fondoType);
+                editor.commit();
+                seleccionaFondo();
 
             }
         });
@@ -558,6 +536,7 @@ public class GestureSignature extends Fragment {
         gestos.removeOnGesturePerformedListener(null);
         gestos.addOnGesturePerformedListener(null);
         gestos.invalidate();
+        seleccionaFondo();
 
     }
 
@@ -629,6 +608,7 @@ public class GestureSignature extends Fragment {
         prefColor = prefs.getBoolean(PreferencesCons.OP4, false);
         prefStroke = prefs.getBoolean(PreferencesCons.OP5, false);
         prefName = prefs.getBoolean(PreferencesCons.OP7, false);
+        fondoType = prefs.getInt(PreferencesCons.OP8, fondoType);
 
         //
         if (prefStroke)
@@ -642,6 +622,7 @@ public class GestureSignature extends Fragment {
     public void onResume() {
         super.onResume();
         recuperaPref();
+        seleccionaFondo();
     }
 
     //Cuando se gira la pantalla.
@@ -650,6 +631,40 @@ public class GestureSignature extends Fragment {
         super.onConfigurationChanged(newConfig);
         // colapsarBotones();
         clearScreen();
+
+    }
+
+    private void seleccionaFondo() {
+
+        final int sdk = android.os.Build.VERSION.SDK_INT;
+        switch (fondoType) {
+            case 1:
+                txtMnsVacio.setTextColor(getResources().getColor(android.R.color.black));
+                if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                    relaFondo.setBackgroundDrawable(getResources().getDrawable(R.drawable.fondotrans1));
+                } else {
+                    relaFondo.setBackground(getResources().getDrawable(R.drawable.fondotrans1));
+                }
+                break;
+            case 2:
+                txtMnsVacio.setTextColor(getResources().getColor(android.R.color.white));
+                if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                    relaFondo.setBackgroundDrawable(getResources().getDrawable(R.drawable.fondotrans2));
+                } else {
+                    relaFondo.setBackground(getResources().getDrawable(R.drawable.fondotrans2));
+                }
+                break;
+            case 3:
+                txtMnsVacio.setTextColor(getResources().getColor(android.R.color.black));
+                relaFondo.setBackgroundColor(getResources().getColor(android.R.color.white));
+                break;
+            case 4:
+                txtMnsVacio.setTextColor(getResources().getColor(android.R.color.white));
+                relaFondo.setBackgroundColor(getResources().getColor(android.R.color.black));
+                break;
+        }
+
+
     }
 
 

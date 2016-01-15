@@ -15,6 +15,7 @@ public final class PreferencesCons {
     public static final String OP4 = "OP4";
     public static final String OP5 = "OP5";
     public static final String OP7 = "OP7";
+    public static final String OP8 = "OP8";
     public static final String OPPUB = "OPPUB";
     public static final String FRAG = "FRAG";
     public static final String STROKE = "STROKE";
@@ -24,6 +25,7 @@ public final class PreferencesCons {
     public static final String ROOT = Environment.getExternalStorageDirectory().getAbsolutePath();
 
     public static final int TRAZO_GROSOR_ORIGINAL = 3;
+    public static final int FONDO_ORIGINAL = 3;
 
     public static final int TRAZO_COLOR_ORIGINAL = Color.parseColor("#200BB2");
 
@@ -32,6 +34,7 @@ public final class PreferencesCons {
 
     public static int strokeTrazo = TRAZO_GROSOR_ORIGINAL;
     public static int colorTrazo = TRAZO_COLOR_ORIGINAL;
+    public static int fondoType = FONDO_ORIGINAL;
     public static String pathFiles = PATH_SAVE_ORIGINAL;
 
 
@@ -40,6 +43,7 @@ public final class PreferencesCons {
         strokeTrazo = TRAZO_GROSOR_ORIGINAL;
         colorTrazo = TRAZO_COLOR_ORIGINAL;
         pathFiles = PATH_SAVE_ORIGINAL;
+        fondoType = FONDO_ORIGINAL;
 
     }
 

@@ -6,7 +6,7 @@
     <string name="escrita">Aplicación escrita por Raúl R.C</string>
     <string name="firmeAqui">Firme aquí</string>
 
-    <string name="fondo">Tipo de fondo</string>
+
     <string name="selectcolor">Color</string>
     <string name="stroke">Trazo</string>
     <string name="guardar">Guardar</string>
@@ -54,6 +54,8 @@
     <string name="publi1">Publicidad</string>
     <string name="pubTitle">No mostrar publicidad</string>
     <string name="disPub">Desactive la publicidad si le resulta molesta, no obstante colabore haciendo click en los banner para ayudar al autor, gracias</string>
+    <string name="fondo">Tipo de fondo</string>
+    <string name="permisos">La app no puede funcionar sin el permiso</string>
 
 
 </resources>

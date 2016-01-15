@@ -1,11 +1,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity$PlaceholderFragment">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:fab="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:background="@drawable/fondotrans2"
+                android:id="@+id/relaFondo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".MainActivity$PlaceholderFragment">
 
     <android.gesture.GestureOverlayView
         android:id="@+id/signaturePad"
@@ -22,13 +23,15 @@
         android:gestureStrokeWidth="1"
         android:orientation="vertical"
         android:uncertainGestureColor="@color/boligrafo"></android.gesture.GestureOverlayView>
+
     <com.getbase.floatingactionbutton.FloatingActionButton
         android:id="@+id/fondo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
         fab:fab_icon="@drawable/ic_wall"
-        fab:fab_size="mini"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        fab:fab_size="mini"/>
+
     <TextView
         android:id="@+id/txtMnsVacio"
         android:layout_width="match_parent"
@@ -40,7 +43,7 @@
         android:gravity="center"
         android:text="@string/firmeAqui"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:typeface="sans" />
+        android:typeface="sans"/>
 
     <LinearLayout
         android:id="@+id/layoutSeek"
@@ -52,7 +55,6 @@
         android:background="@drawable/back"
         android:orientation="horizontal"
         android:visibility="invisible">
-
 
 
         <com.rey.material.widget.Slider
@@ -69,25 +71,25 @@
         android:id="@+id/layoutColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:layout_margin="32dp"
         android:layout_weight="1"
         android:background="@drawable/back"
         android:orientation="vertical"
-        android:visibility="invisible"
-        android:layout_centerVertical="true">
+        android:visibility="invisible">
 
         <com.larswerkman.holocolorpicker.ColorPicker
             android:id="@+id/picker"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"/>
 
         <com.larswerkman.holocolorpicker.SVBar
             android:id="@+id/svbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"/>
 
     </LinearLayout>
 
@@ -113,7 +115,7 @@
             fab:fab_colorNormal="@color/primary3"
             fab:fab_colorPressed="@color/primary_light"
             fab:fab_icon="@drawable/ic_list"
-            fab:fab_size="mini" />
+            fab:fab_size="mini"/>
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/bSave"
@@ -122,7 +124,7 @@
             fab:fab_colorNormal="@color/primary3"
             fab:fab_colorPressed="@color/primary_light"
             fab:fab_icon="@drawable/ic_save_only"
-            fab:fab_size="mini" />
+            fab:fab_size="mini"/>
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/bSaveSend"
@@ -131,7 +133,7 @@
             fab:fab_colorNormal="@color/primary3"
             fab:fab_colorPressed="@color/primary_light"
             fab:fab_icon="@drawable/ic_save"
-            fab:fab_size="mini" />
+            fab:fab_size="mini"/>
 
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
@@ -171,7 +173,7 @@
             fab:fab_colorNormal="@color/primary1"
             fab:fab_colorPressed="@color/primary_light"
             fab:fab_icon="@drawable/ic_stroke"
-            fab:fab_size="mini" />
+            fab:fab_size="mini"/>
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/blimpiar"
@@ -180,7 +182,7 @@
             fab:fab_colorNormal="@color/primary1"
             fab:fab_colorPressed="@color/primary_light"
             fab:fab_icon="@drawable/ic_clean"
-            fab:fab_size="mini" />
+            fab:fab_size="mini"/>
 
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>

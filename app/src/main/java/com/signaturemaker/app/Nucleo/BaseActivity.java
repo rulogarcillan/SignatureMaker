@@ -63,7 +63,7 @@ public class BaseActivity extends ActionBarActivity {
                         .withVersionShown(true)
                         .withLicenseShown(true)
                         .withAutoDetect(true)
-                        .withLibraries("DiscreteSeekBar", "CircleIndicator")
+                        .withLibraries("CircleIndicator")
                         .withActivityTitle(getResources().getString(R.string.license))
                         .withAboutDescription(getResources().getString(R.string.escrita) + "<br/><br/><b>License GNU GPL V3.0</b><br/><br/><a href=\"https://github.com/rulogarcillan/SignatureMaker\">Project in Github</a>")
                         .withActivityTheme(R.style.AppTheme)

@@ -1,13 +1,18 @@
 package com.signaturemaker.app.Nucleo;
 
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.widget.Toast;
 
 import com.signaturemaker.app.Ficheros.Ficheros;
 import com.signaturemaker.app.R;
@@ -37,6 +42,41 @@ public class SplashActivity extends FragmentActivity {
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         this.setContentView(R.layout.splash);
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!Settings.System.canWrite(this)) {
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE}, 2909);
+            } else {
+                load();
+            }
+        } else {
+            load();
+        }
+
+
+
+
+
+
+
+
+
+    }
+
+    @Override
+    public void onBackPressed() {
+
+
+        if (this.pager.getCurrentItem() == 0)
+            super.onBackPressed();
+        else
+            this.pager.setCurrentItem(this.pager.getCurrentItem() - 1);
+
+    }
+
+    private void load(){
 
         CircleIndicator defaultIndicator = (CircleIndicator) findViewById(R.id.indicator_default);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -94,18 +134,21 @@ public class SplashActivity extends FragmentActivity {
 
         this.pager.setAdapter(pagerAdapter);
         defaultIndicator.setViewPager(pager);
-
     }
 
     @Override
-    public void onBackPressed() {
-
-
-        if (this.pager.getCurrentItem() == 0)
-            super.onBackPressed();
-        else
-            this.pager.setCurrentItem(this.pager.getCurrentItem() - 1);
-
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case 2909: {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    load();
+                } else {
+                    Toast.makeText(this,getString(R.string.permisos),Toast.LENGTH_LONG).show();
+                    this.finish();
+                }
+                return;
+            }
+        }
     }
 
 }

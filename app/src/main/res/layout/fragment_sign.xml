@@ -1,6 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:fab="http://schemas.android.com/apk/res-auto"
-                xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:background="@drawable/fondotrans2"
@@ -18,7 +17,6 @@
         android:layout_marginBottom="2dp"
         android:layout_weight="5"
         android:background="@color/fulltrans"
-
         android:eventsInterceptionEnabled="true"
         android:fadeEnabled="false"
         android:fadeOffset="500000000"
@@ -30,11 +28,11 @@
 
     <com.getbase.floatingactionbutton.FloatingActionButton
         android:id="@+id/fondo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
         fab:fab_icon="@drawable/ic_wall"
-        fab:fab_size="mini"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        fab:fab_size="mini"/>
 
     <TextView
         android:id="@+id/txtMnsVacio"

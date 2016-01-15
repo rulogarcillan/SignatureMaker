@@ -104,4 +104,5 @@
 
 
     <string name="banner_ad_unit_id" translatable="false">ca-app-pub-9438738341601496/1496642762</string>
+    <string name="permisos">The app cannot work without permission</string>
 </resources>
