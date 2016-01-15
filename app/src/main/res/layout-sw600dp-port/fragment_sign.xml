@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondotrans2"
+                android:id="@+id/relaFondo"
     tools:context=".MainActivity$PlaceholderFragment">
 
     <android.gesture.GestureOverlayView
@@ -58,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/Fab1"
             android:layout_weight="1"
-            android:background="@color/primary_dark"
+           
             app:sl_value="20"/>
 
 
