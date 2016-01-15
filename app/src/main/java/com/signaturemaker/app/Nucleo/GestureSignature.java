@@ -158,7 +158,7 @@ public class GestureSignature extends Fragment {
             public void onClick(View v) {
 
                 fondoType++;
-                if (fondoType == 6) {
+                if (fondoType == 5) {
                     fondoType = 1;
                 }
                 final int sdk = android.os.Build.VERSION.SDK_INT;
@@ -183,9 +183,6 @@ public class GestureSignature extends Fragment {
                         break;
                     case 4:
                         relaFondo.setBackgroundColor(getResources().getColor(android.R.color.black));
-                        break;
-                    case 5:
-                        relaFondo.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
                         break;
                 }
 
