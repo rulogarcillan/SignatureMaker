@@ -41,9 +41,7 @@ public class SplashActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
-        this.setContentView(R.layout.splash);
-
-
+        
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!Settings.System.canWrite(this)) {
                 requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -54,29 +52,20 @@ public class SplashActivity extends FragmentActivity {
         } else {
             load();
         }
-
-
-
-
-
-
-
-
-
     }
 
     @Override
     public void onBackPressed() {
 
-
         if (this.pager.getCurrentItem() == 0)
             super.onBackPressed();
         else
             this.pager.setCurrentItem(this.pager.getCurrentItem() - 1);
-
     }
 
     private void load(){
+        
+        this.setContentView(R.layout.splash);
 
         CircleIndicator defaultIndicator = (CircleIndicator) findViewById(R.id.indicator_default);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
