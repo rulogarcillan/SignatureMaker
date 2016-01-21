@@ -16,6 +16,7 @@ public final class PreferencesCons {
     public static final String OP5 = "OP5";
     public static final String OP7 = "OP7";
     public static final String OP8 = "OP8";
+    public static final String OP9 = "OP9";
     public static final String OPPUB = "OPPUB";
     public static final String FRAG = "FRAG";
     public static final String STROKE = "STROKE";
@@ -26,12 +27,14 @@ public final class PreferencesCons {
 
     public static final int TRAZO_GROSOR_ORIGINAL = 3;
     public static final int FONDO_ORIGINAL = 3;
+    public static final int SORT_ORIGINAL = -1;
 
     public static final int TRAZO_COLOR_ORIGINAL = Color.parseColor("#200BB2");
 
     public static final String PATH_SAVE_ORIGINAL = ROOT + "/Signature maker/";
     public static final String PATH_OLDER_VERSION = ROOT + "/Signature maker/.images/";
 
+    public static int sort = SORT_ORIGINAL;
     public static int strokeTrazo = TRAZO_GROSOR_ORIGINAL;
     public static int colorTrazo = TRAZO_COLOR_ORIGINAL;
     public static int fondoType = FONDO_ORIGINAL;
@@ -40,6 +43,7 @@ public final class PreferencesCons {
 
     public static void valoresPorDefecto() {
 
+        sort = SORT_ORIGINAL;
         strokeTrazo = TRAZO_GROSOR_ORIGINAL;
         colorTrazo = TRAZO_COLOR_ORIGINAL;
         pathFiles = PATH_SAVE_ORIGINAL;

@@ -64,7 +64,7 @@ public class SplashActivity extends FragmentActivity {
     }
 
     private void load(){
-        
+
         this.setContentView(R.layout.splash);
 
         CircleIndicator defaultIndicator = (CircleIndicator) findViewById(R.id.indicator_default);

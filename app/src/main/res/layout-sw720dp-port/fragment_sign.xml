@@ -57,12 +57,15 @@
         android:visibility="invisible">
 
         <com.rey.material.widget.Slider
+            style="@style/Material.Widget.Slider"
             android:id="@+id/trazo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/Fab1"
             android:layout_weight="1"
-            app:sl_value="20"/>
+            app:sl_minValue="1"
+            app:sl_maxValue="20"
+            />
 
 
     </LinearLayout>

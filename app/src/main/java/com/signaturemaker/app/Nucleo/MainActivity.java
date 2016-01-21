@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.signaturemaker.app.Constantes.PreferencesCons;
@@ -75,8 +76,15 @@ public class MainActivity extends BaseActivity {
         load();
         a = (RelativeLayout) findViewById(R.id.lay);
         mAdView = (AdView) findViewById(R.id.adView);
+        mAdView.setVisibility(View.GONE);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                mAdView.setVisibility(View.VISIBLE);
+            }
+        });
 
     }
 

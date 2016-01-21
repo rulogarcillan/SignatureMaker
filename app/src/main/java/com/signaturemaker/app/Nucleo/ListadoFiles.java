@@ -2,9 +2,12 @@ package com.signaturemaker.app.Nucleo;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
@@ -20,24 +23,32 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
 import com.nispok.snackbar.listeners.ActionClickListener;
 import com.nispok.snackbar.listeners.EventListener;
+import com.signaturemaker.app.Constantes.PreferencesCons;
 import com.signaturemaker.app.Ficheros.Ficheros;
 import com.signaturemaker.app.R;
 import com.signaturemaker.app.SwipeRecycler.SwipeableRecyclerViewTouchListener;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 
+import static com.signaturemaker.app.Constantes.PreferencesCons.OP9;
 import static com.signaturemaker.app.Constantes.PreferencesCons.ROOT;
 import static com.signaturemaker.app.Constantes.PreferencesCons.pathFiles;
+import static com.signaturemaker.app.Constantes.PreferencesCons.sort;
 import static com.signaturemaker.app.Nucleo.LogUtils.TRAZA;
-
 /**
  * A placeholder fragment containing a simple view.
  */
@@ -53,16 +64,29 @@ public class ListadoFiles extends Fragment {
 
     private ImageView image;
 
+    private SharedPreferences prefs;
+    private int prefSort;
+    private SharedPreferences.Editor editor;
+
 
     public ListadoFiles() {
     }
 
+
+    public void recuperaPref() {
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        editor = prefs.edit();
+        sort = prefs.getInt(OP9, sort);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_list, container, false);
+
+        recuperaPref();
 
         path = (TextView) rootView.findViewById(R.id.path);
         mensajeVacio = (TextView) rootView.findViewById(R.id.txtMnsVacio);
@@ -71,6 +95,8 @@ public class ListadoFiles extends Fragment {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
         adapter = new AdapterFicheros(getActivity(), items, 0); //Agregamos los items al adapter
+
+
         carga();
         //definimos el recycler y agregamos el adaptaer
         recyclerView.setHasFixedSize(true);
@@ -136,6 +162,7 @@ public class ListadoFiles extends Fragment {
         super.onResume();
 
         carga();
+        recuperaPref();
         if (!items.isEmpty())
             mensajeVacio.setVisibility(View.INVISIBLE);
 
@@ -161,13 +188,15 @@ public class ListadoFiles extends Fragment {
                 return false;
             }
         });
-
+        ordena(items, sort);
+        recyclerView.getAdapter().notifyDataSetChanged();
     }
 
 
     public void carga() {
 
         items = Ficheros.cargaItems();
+        ordena(items,sort);
 
         adapter.setItems(items);
         adapter.notifyDataSetChanged();
@@ -178,150 +207,219 @@ public class ListadoFiles extends Fragment {
 
     }
 
-    private void export(ItemFile item) {
-
-        File file = Ficheros.getFile(item.getNombre());
-
-        Intent shareIntent = new Intent();
-        shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
-        shareIntent.setType("image/*");
-        getActivity().startActivity(Intent.createChooser(shareIntent, getActivity().getText(R.string.enviarsolo)));
-    }
-
-
-    private void clickItem() {
-
-
-        adapter.SetOnItemClickListener(new AdapterFicheros.OnItemClickListener() {
-
+    private void ordena(ArrayList<ItemFile> lista, final int tipo) {
+        Collections.sort(lista, new Comparator<ItemFile>() {
             @Override
-            public void onItemClick(View view, int i) {
+            public int compare(ItemFile lhs, ItemFile rhs) {
+
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                String date1 = lhs.getFecha();
+                String date2 = rhs.getFecha();
+                Date ddate = null;
+                Date ddate2 = null;
+                try {
+
+                    ddate = formatter.parse(date1);
+                    ddate2 = formatter.parse(date2);
 
 
-                MaterialDialog dia = new MaterialDialog.Builder(getActivity())
-
-                        .customView(R.layout.imagen_dialog, false)
-                        .show();
-
-                image = (ImageView) dia.getCustomView().findViewById(R.id.image);
-
-                Picasso.with(getActivity()).load("file:///" + pathFiles + "/" + items.get(i).getNombre()).placeholder(R.drawable.ic_png)
-                        .error(R.drawable.ic_png).into(image);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
 
 
+                return ddate.compareTo(ddate2) * tipo;
             }
         });
     }
 
 
-    private void undo(final ItemFile item, final int pos) {
 
-        if (SnackbarManager.getCurrentSnackbar() != null && SnackbarManager.getCurrentSnackbar().isShowing())
-            SnackbarManager.getCurrentSnackbar().dismiss();
+            private void export(ItemFile item) {
 
-        SnackbarManager.show(
-                Snackbar.with(getActivity()).text(item.getNombre().substring(3) + " " + getResources().getString(R.string.eliminado)).actionLabel(R.string.deshacer).actionLabelTypeface(Typeface.DEFAULT_BOLD).actionColorResource(R.color.primary).actionListener(new ActionClickListener() {
+                File file = Ficheros.getFile(item.getNombre());
+
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+                shareIntent.setType("image/*");
+                getActivity().startActivity(Intent.createChooser(shareIntent, getActivity().getText(R.string.enviarsolo)));
+            }
+
+
+            private void clickItem() {
+
+
+                adapter.SetOnItemClickListener(new AdapterFicheros.OnItemClickListener() {
+
                     @Override
-                    public void onActionClicked(Snackbar snackbar) {
+                    public void onItemClick(View view, int i) {
 
-                        eliminar = false;
-                        items.add(pos, item);
-                        adapter.notifyItemInserted(pos);
-                        adapter.notifyDataSetChanged();
-                        if (!items.isEmpty())
-                            mensajeVacio.setVisibility(View.INVISIBLE);
-                        else
-                            mensajeVacio.setVisibility(View.VISIBLE);
+
+                        MaterialDialog dia = new MaterialDialog.Builder(getActivity())
+
+                                .customView(R.layout.imagen_dialog, false)
+                                .show();
+
+                        image = (ImageView) dia.getCustomView().findViewById(R.id.image);
+
+                        Picasso.with(getActivity()).load("file:///" + pathFiles + "/" + items.get(i).getNombre()).placeholder(R.drawable.ic_png)
+                                .error(R.drawable.ic_png).into(image);
 
 
                     }
-                }).eventListener(new EventListener() {
-                    @Override
-                    public void onShow(Snackbar snackbar) {
-
-                    }
-
-                    @Override
-                    public void onShowByReplace(Snackbar snackbar) {
-
-                    }
-
-                    @Override
-                    public void onShown(Snackbar snackbar) {
-
-                    }
-
-                    @Override
-                    public void onDismiss(Snackbar snackbar) {
-
-                        if (eliminar) {
-
-                            Ficheros.removeFile(item.getNombre());
-                            TRAZA(Uri.fromFile(new File(pathFiles + "/" + item.getNombre())) + "");
-                            getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(pathFiles + "/" + item.getNombre()))));
-
-                        }
+                });
+            }
 
 
-                    }
+            private void undo(final ItemFile item, final int pos) {
 
-                    @Override
-                    public void onDismissByReplace(Snackbar snackbar) {
-                        if (eliminar) {
-                            Ficheros.removeFile(item.getNombre());
-                            getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(pathFiles + "/" + item.getNombre()))));
-                        }
+                if (SnackbarManager.getCurrentSnackbar() != null && SnackbarManager.getCurrentSnackbar().isShowing())
+                    SnackbarManager.getCurrentSnackbar().dismiss();
 
-                    }
+                SnackbarManager.show(
+                        Snackbar.with(getActivity()).text(item.getNombre().substring(3) + " " + getResources().getString(R.string.eliminado)).actionLabel(R.string.deshacer).actionLabelTypeface(Typeface.DEFAULT_BOLD).actionColorResource(R.color.primary).actionListener(new ActionClickListener() {
+                            @Override
+                            public void onActionClicked(Snackbar snackbar) {
 
-                    @Override
-                    public void onDismissed(Snackbar snackbar) {
-                        if (eliminar) {
-                            Ficheros.removeFile(item.getNombre());
-                            getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(pathFiles + "/" + item.getNombre()))));
-                        }
-
-                    }
-                }), getActivity());
-    }
+                                eliminar = false;
+                                items.add(pos, item);
+                                adapter.notifyItemInserted(pos);
+                                adapter.notifyDataSetChanged();
+                                if (!items.isEmpty())
+                                    mensajeVacio.setVisibility(View.INVISIBLE);
+                                else
+                                    mensajeVacio.setVisibility(View.VISIBLE);
 
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.help_menu, menu);
-        MenuItem item = menu.findItem(R.id.action_help);
+                            }
+                        }).eventListener(new EventListener() {
+                            @Override
+                            public void onShow(Snackbar snackbar) {
 
-        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                            }
+
+                            @Override
+                            public void onShowByReplace(Snackbar snackbar) {
+
+                            }
+
+                            @Override
+                            public void onShown(Snackbar snackbar) {
+
+                            }
+
+                            @Override
+                            public void onDismiss(Snackbar snackbar) {
+
+                                if (eliminar) {
+
+                                    Ficheros.removeFile(item.getNombre());
+                                    TRAZA(Uri.fromFile(new File(pathFiles + "/" + item.getNombre())) + "");
+                                    getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(pathFiles + "/" + item.getNombre()))));
+
+                                }
+
+
+                            }
+
+                            @Override
+                            public void onDismissByReplace(Snackbar snackbar) {
+                                if (eliminar) {
+                                    Ficheros.removeFile(item.getNombre());
+                                    getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(pathFiles + "/" + item.getNombre()))));
+                                }
+
+                            }
+
+                            @Override
+                            public void onDismissed(Snackbar snackbar) {
+                                if (eliminar) {
+                                    Ficheros.removeFile(item.getNombre());
+                                    getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(pathFiles + "/" + item.getNombre()))));
+                                }
+
+                            }
+                        }), getActivity());
+            }
+
 
             @Override
-            public boolean onMenuItemClick(MenuItem item) {
+            public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+                inflater.inflate(R.menu.help_menu, menu);
+                MenuItem item = menu.findItem(R.id.action_help);
+                MenuItem itemS = menu.findItem(R.id.action_sort);
 
-                dialogAyuda();
-                return true;
+                item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()){
+                            case R.id.action_help:
+                                dialogAyuda();
+                                break;
+
+                        }
+
+                        return true;
+                    }
+                });
+
+                itemS.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()){
+
+                            case R.id.action_sort:
+                                sort=sort*-1;
+                                editor.putInt(PreferencesCons.OP9, sort);
+                                editor.commit();
+                                ordena(items, sort);
+                                recyclerView.getAdapter().notifyDataSetChanged();
+
+                                break;
+                        }
+
+                        return true;
+                    }
+                });
+
+                super.onCreateOptionsMenu(menu, inflater);
             }
-        });
-
-        super.onCreateOptionsMenu(menu, inflater);
-    }
 
 
-    private void dialogAyuda() {
+            private void dialogAyuda() {
 
-        Dialog dialog = new Dialog(getActivity());
-        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        LinearLayout contentView = (LinearLayout) ((getActivity()))
-                .getLayoutInflater().inflate(R.layout.help, null);
-        dialog.setContentView(contentView);
+                Dialog dialog = new Dialog(getActivity());
+                dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+                LinearLayout contentView = (LinearLayout) ((getActivity()))
+                        .getLayoutInflater().inflate(R.layout.help, null);
+                dialog.setContentView(contentView);
 
 
-        dialog.show();
+                dialog.show();
 
-    }
+            }
 
-    @Override
-    public void onDestroy() {
-        eliminar = false;
-        super.onDestroy();
-    }
-}
+            @Override
+            public void onDestroy() {
+                eliminar = false;
+                super.onDestroy();
+            }
+
+            @Override
+            public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+                switch (requestCode) {
+                    case 2909: {
+                        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                        } else {
+                            Toast.makeText(getActivity(), getActivity().getString(R.string.permisos), Toast.LENGTH_LONG).show();
+                            getActivity().finish();
+                        }
+                        return;
+                    }
+                }
+            }
+        }

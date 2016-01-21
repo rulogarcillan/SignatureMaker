@@ -164,6 +164,7 @@ public class PreferenceFrag extends android.preference.PreferenceFragment {
                 editor.putInt(PreferencesCons.STROKE, PreferencesCons.TRAZO_GROSOR_ORIGINAL);
                 editor.putInt(PreferencesCons.COLOR, PreferencesCons.TRAZO_COLOR_ORIGINAL);
                 editor.putInt(PreferencesCons.OP8, PreferencesCons.FONDO_ORIGINAL);
+                editor.putInt(PreferencesCons.OP9, PreferencesCons.SORT_ORIGINAL);
 
                 pref2.setChecked(false);
                 pref3.setChecked(true);
