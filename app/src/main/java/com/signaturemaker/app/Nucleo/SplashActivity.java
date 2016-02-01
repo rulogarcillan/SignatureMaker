@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 
 import com.signaturemaker.app.Ficheros.Ficheros;
+import com.signaturemaker.app.R;
 
 
 import java.io.File;

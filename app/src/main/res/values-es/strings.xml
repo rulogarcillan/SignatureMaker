@@ -56,7 +56,7 @@
     <string name="disPub">Desactive la publicidad si le resulta molesta, no obstante colabore haciendo click en los banner para ayudar al autor, gracias</string>
     <string name="fondo">Tipo de fondo</string>
     <string name="permisos">La app no puede funcionar sin el permiso</string>
-    <string name="sort">Ordenar</string>
+    <string name="sort">Ordenar por fecha</string>
 
 
 </resources>
