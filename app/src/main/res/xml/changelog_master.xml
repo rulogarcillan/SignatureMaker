@@ -2,7 +2,7 @@
 <changelog>
     <release
         version="2.1.16"
-        versioncode="2007">
+        versioncode="2031">
         <change>Button to sort files by date (ascending / descending )</change>
         <change>New visual backgrounds to the canvas (the signature is always saved with transparent background)</change>
         <change>New support email</change>
