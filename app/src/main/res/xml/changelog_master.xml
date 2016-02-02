@@ -6,6 +6,7 @@
         <change>Button to sort files by date (ascending / descending )</change>
         <change>New visual backgrounds to the canvas (the signature is always saved with transparent background)</change>
         <change>Correction texts and translations</change>
+        <change>New support email</change>
     </release>
     <release
         version="2.0.24"
