@@ -5,8 +5,9 @@
         versioncode="2007">
         <change>Botón para ordenar archivos por fecha ascendente/descendente</change>
         <change>Nuevos fondos visuales para el lienzo (la firma siempre se guardará con fondo transparente)</change>
-        <change>Corrección de textos y traducciones</change>
         <change>Nuevo correo de sugerencias</change>
+        <change>Corrección en la seekbar (rompía la app)</change>
+        <change>Corrección de textos y traducciones</change>
     </release>
     <release
         version="2.0.24"
