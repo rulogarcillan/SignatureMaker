@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
-
+    <release
+        version="2.1.16"
+        versioncode="2007">
+        <change>Button to sort files by date (ascending / descending )</change>
+        <change>New visual backgrounds to the canvas (the signature is always saved with transparent background)</change>
+        <change>Correction texts and translations</change>
+    </release>
     <release
         version="2.024"
         versioncode="2006">
         <change>Add advertising</change>
         <change>Disable/Enable ads from settings</change>
-        <change>Disable ads if it bothers you. Anyway you can invite me for a beer if you collaborate with the author by clicking on banner. Thank you</change>
+        <change>Disable ads if it bothers you.</change>
     </release>
     <release
         version="2.023"
