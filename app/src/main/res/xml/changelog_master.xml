@@ -5,8 +5,9 @@
         versioncode="2007">
         <change>Button to sort files by date (ascending / descending )</change>
         <change>New visual backgrounds to the canvas (the signature is always saved with transparent background)</change>
-        <change>Correction texts and translations</change>
         <change>New support email</change>
+        <change>Fix seekbar (crash app)</change>
+        <change>Correction texts and translations</change>
     </release>
     <release
         version="2.0.24"
