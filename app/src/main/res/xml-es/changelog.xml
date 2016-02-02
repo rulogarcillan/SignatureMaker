@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
-
+    <release
+        version="2.1.16"
+        versioncode="2007">
+        <change>Botón para ordenar archivos por fecha ascendente/descentente</change>
+        <change>Nuevos fondos visuales para el lienzo (la firma siempre se guardará con fondo transparente)</change>
+        <change>Corrección de textos y traducciones</change>
+    </release>
     <release
         version="2.0.24"
         versioncode="2006">
         <change>Se añade publicidad</change>
         <change>Desactivar/Activar publicidad desde los ajustes de la aplicación</change>
-        <change>La publicidad puede desactivarse y funcionar como hasta ahora, si te gusta la aplicación clickea un banner para invitarme a una cerveza de vez en cuando, gracias.</change>
+        <change>La publicidad puede desactivarse y funcionar como hasta ahora.</change>
     </release>
 
     <release
