@@ -230,7 +230,7 @@ public class ListadoFiles extends Fragment {
             @Override
             public int compare(ItemFile lhs, ItemFile rhs) {
 
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                 String date1 = lhs.getFecha();
                 String date2 = rhs.getFecha();
                 Date ddate = null;
