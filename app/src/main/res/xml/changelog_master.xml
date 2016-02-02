@@ -8,42 +8,42 @@
         <change>Correction texts and translations</change>
     </release>
     <release
-        version="2.024"
+        version="2.0.24"
         versioncode="2006">
         <change>Add advertising</change>
         <change>Disable/Enable ads from settings</change>
         <change>Disable ads if it bothers you.</change>
     </release>
     <release
-        version="2.023"
+        version="2.0.23"
         versioncode="2005">
         <change>New icon clean</change>
         <change>Minor bug fix</change>
     </release>
     <release
-        version="2.022"
+        version="2.0.22"
         versioncode="2004">
         <change>Add some material desing to pre-lollipop</change>
         <change>Fixed bug in save and send</change>
     </release>
     <release
-        version="2.021"
+        version="2.0.21"
         versioncode="2003">
         <change>Fixed bug in splash for large screens (sorry for the inconvenience)</change>
     </release>
     <release
-        version="2.02"
+        version="2.0.2"
         versioncode="2002">
         <change>Option to choose the file name when saving (Enabled / disabled in options)</change>
         <change>Add Url project in the initial splash</change>
     </release>
     <release
-        version="2.01"
+        version="2.0.1"
         versioncode="2001">
         <change>Info button on long press</change>
     </release>
     <release
-        version="2.0"
+        version="2.0.0"
         versioncode="2000">
         <change>New UI</change>
         <change>New options</change>
@@ -62,7 +62,7 @@
         <change>Please report bugs in innovation.4.apps@gmail.com</change>
     </release>
     <release
-        version="1.03"
+        version="1.0.3"
         versioncode="103">
         <change>Some material design</change>
         <change>New color picker</change>
@@ -70,18 +70,18 @@
         <change>New menu others app</change>
     </release>
     <release
-        version="1.02"
+        version="1.0.2"
         versioncode="102">
         <change>Change default file Path</change>
         <change>Minor bug fix</change>
     </release>
     <release
-        version="1.01"
+        version="1.0.1"
         versioncode="101">
         <change>Minor bug fix</change>
     </release>
     <release
-        version="1.0"
+        version="1.0.0"
         versioncode="10">
         <change>First release</change>
     </release>
