@@ -53,7 +53,7 @@
     <string name="hinttext">Introduce un nombre</string>
     <string name="publi1">Publicidad</string>
     <string name="pubTitle">No mostrar publicidad</string>
-    <string name="disPub">Desactive la publicidad si le resulta molesta, no obstante colabore haciendo click en los banner para ayudar al autor, gracias</string>
+    <string name="disPub">Desactive la publicidad si le resulta molesta</string>
     <string name="fondo">Tipo de fondo</string>
     <string name="permisos">La app no puede funcionar sin el permiso</string>
     <string name="sort">Ordenar por fecha</string>
