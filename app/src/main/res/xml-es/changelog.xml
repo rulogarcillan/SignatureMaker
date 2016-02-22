@@ -4,7 +4,7 @@
         version="2.1.18"
         versioncode="2033">
         <change>Se corrige error al salvar firmas con un nombre personalizado. (gracias por los reportes)</change>
-        <change>[Off Topic] Si te gustan mis desarrollos por favor colabora y prueba mi nueva App. <a href="https://play.google.com/store/apps/details?id=com.r.raul.tools">Descargar!!!</a></change>
+        <change>[Off Topic] Si te gustan mis desarrollos, por favor, colabora y prueba mi nueva App. <![CDATA[<a href="https://play.google.com/store/apps/details?id=com.r.raul.tools">Descargar!!!</a>]]></change>
       </release>
     <release
         version="2.1.16"
