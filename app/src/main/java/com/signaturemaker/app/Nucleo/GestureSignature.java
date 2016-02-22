@@ -246,7 +246,7 @@ public class GestureSignature extends Fragment {
                             .negativeText(android.R.string.cancel)
                             .show();
 
-                    final AppCompatEditText nametext = (AppCompatEditText) dia.getCustomView().findViewById(R.id.nametext);
+                    final EditText nametext = (EditText) dia.getCustomView().findViewById(R.id.nametext);
                     nametext.setHint(getResources().getString(R.string.hinttext));
 
                     dia.getBuilder().callback(new MaterialDialog.ButtonCallback() {
