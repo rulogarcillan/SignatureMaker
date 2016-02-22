@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.AppCompatEditText;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -190,7 +189,7 @@ public class GestureSignature extends Fragment {
                             .negativeText(android.R.string.cancel)
                             .show();
 
-                    final AppCompatEditText nametext = (AppCompatEditText) dia.getCustomView().findViewById(R.id.nametext);
+                    final EditText nametext = (EditText) dia.getCustomView().findViewById(R.id.nametext);
                     nametext.setHint(getResources().getString(R.string.hinttext));
 
                     dia.getBuilder().callback(new MaterialDialog.ButtonCallback() {
