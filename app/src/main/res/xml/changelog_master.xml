@@ -4,7 +4,7 @@
         version="2.1.18"
         versioncode="2033">
         <change>Fix bug when save signature with custom name in android pre-lollipop (thanks for reports)</change>
-        <change>[Off Topic] Si te gustan mis desarrollos por favor colabora y prueba mi nueva App. <a href="https://play.google.com/store/apps/details?id=com.r.raul.tools">Descargar!!!</a></change>
+        <change>[Off Topic] If you like my developments, collaborate and try my new app, please. <a href="https://play.google.com/store/apps/details?id=com.r.raul.tools">Donwload!!!</a></change>
     </release>
     <release
         version="2.1.16"
