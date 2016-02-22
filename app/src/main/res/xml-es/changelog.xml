@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
     <release
-        version="2.1.27"
-        versioncode="2032">
+        version="2.1.18"
+        versioncode="2033">
+        <change>Se corrige error al salvar firmas con un nombre personalizado. (gracias por los reportes)</change>
+        <change>[Off Topic] Si te gustan mis desarrollos, por favor, colabora y prueba mi nueva App. <![CDATA[<a href="https://play.google.com/store/apps/details?id=com.r.raul.tools">Descargar!!!</a>]]></change>
+      </release>
+    <release
+        version="2.1.16"
+        versioncode="2031">
         <change>Botón para ordenar archivos por fecha ascendente/descendente</change>
         <change>Nuevos fondos visuales para el lienzo (la firma siempre se guardará con fondo transparente)</change>
         <change>Nuevo correo de sugerencias</change>
