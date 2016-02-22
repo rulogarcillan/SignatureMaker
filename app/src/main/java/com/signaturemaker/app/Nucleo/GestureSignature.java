@@ -1,11 +1,13 @@
 package com.signaturemaker.app.Nucleo;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.gesture.GestureOverlayView;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -634,6 +636,7 @@ public class GestureSignature extends Fragment {
 
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void seleccionaFondo() {
 
         final int sdk = android.os.Build.VERSION.SDK_INT;

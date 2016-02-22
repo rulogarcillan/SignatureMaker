@@ -365,7 +365,7 @@ public class ListadoFiles extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.help_menu, menu);
         MenuItem item = menu.findItem(R.id.action_help);
-        MenuItem itemS = menu.findItem(R.id.action_sort);
+        final MenuItem itemS = menu.findItem(R.id.action_sort);
 
         item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 
@@ -392,7 +392,10 @@ public class ListadoFiles extends Fragment {
                         sort = sort * -1;
                         editor.putInt(PreferencesCons.OP9, sort);
                         editor.commit();
-                        ordena(items, sort);
+                        synchronized (items) {
+                            ordena(items, sort);
+                        }
+
                         recyclerView.getAdapter().notifyDataSetChanged();
 
                         break;
