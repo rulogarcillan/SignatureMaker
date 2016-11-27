@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Signature Maker</string>
+    <string name="app_name">Signature Maker</string>
 
     <!--       Action bar menu pciones       -->
     <string name="license">License</string>

@@ -57,6 +57,7 @@
     <string name="fondo">Tipo de fondo</string>
     <string name="permisos">La app no puede funcionar sin el permiso</string>
     <string name="sort">Ordenar por fecha</string>
+    <string name="app_name">Firma Digital</string>
 
 
 </resources>

@@ -71,7 +71,7 @@ dependencies {
         transitive = true
     }
 
-    compile 'com.google.android.gms:play-services-ads:7.5.0'
+    compile 'com.google.android.gms:play-services-ads:10.0.0'
     compile 'de.cketti.library.changelog:ckchangelog:1.2.2'
     compile 'com.nispok:snackbar:2.10.2'
     compile 'me.relex:circleindicator:1.1.2@aar'
