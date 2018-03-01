@@ -19,9 +19,7 @@ public class PreferencesAct extends PreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         prepareLayout();
-
     }
 
     private void prepareLayout() {
@@ -33,17 +31,13 @@ public class PreferencesAct extends PreferenceActivity {
         toolbarContainer.addView(content);
         root.addView(toolbarContainer);
 
-
         mToolBar = (Toolbar) toolbarContainer.findViewById(R.id.toolbar);
         container = (FrameLayout) toolbarContainer.findViewById(R.id.container);
-
 
         getFragmentManager().beginTransaction()
                 .replace(container.getId(), new PreferenceFrag())
                 .commit();
-
         mToolBar.setTitle(R.string.settings);
-        mToolBar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

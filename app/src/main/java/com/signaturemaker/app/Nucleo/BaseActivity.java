@@ -3,12 +3,12 @@ package com.signaturemaker.app.Nucleo;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.mikepenz.aboutlibraries.Libs;
+import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.signaturemaker.app.R;
 
 import de.cketti.library.changelog.ChangeLog;
@@ -17,7 +17,7 @@ import de.cketti.library.changelog.ChangeLog;
 /**
  * Created by raul.rodriguezconcep on 20/02/15.
  */
-public class BaseActivity extends ActionBarActivity {
+public class BaseActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -57,7 +57,7 @@ public class BaseActivity extends ActionBarActivity {
             case R.id.license:
                 //Create an intent with context and the Activity class
 
-                new Libs.Builder()
+                new LibsBuilder()
                         //Pass the fields of your application to the lib so it can find all external lib information
                         .withFields(R.string.class.getFields())
                         .withVersionShown(true)

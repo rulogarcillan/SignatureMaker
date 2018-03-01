@@ -39,23 +39,6 @@ public class SplashActivity extends FragmentActivity {
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         load();
-     /*   if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_CONTACTS)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.READ_CONTACTS)) {
-
-
-
-            } else {
-
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                Manifest.permission.READ_EXTERNAL_STORAGE}, 5);
-            }
-        }*/
-
     }
 
     @Override
@@ -70,7 +53,6 @@ public class SplashActivity extends FragmentActivity {
     private void load(){
 
         this.setContentView(R.layout.splash);
-
         CircleIndicator defaultIndicator = (CircleIndicator) findViewById(R.id.indicator_default);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -105,7 +87,7 @@ public class SplashActivity extends FragmentActivity {
             finish();
         }else{
             //gestión de ficheros antiguos de la version 1.0
-            Ficheros.moveFilesVersionAntigua(this);
+            //Ficheros.moveFilesVersionAntigua(this);
 
             // Instantiate a ViewPager
             this.pager = (ViewPager) this.findViewById(R.id.viewpager);
@@ -131,19 +113,5 @@ public class SplashActivity extends FragmentActivity {
 
     }
 
-  /*  @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case 5: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    load();
-                } else {
-                    Toast.makeText(this,getString(R.string.permisos),Toast.LENGTH_LONG).show();
-                    this.finish();
-                }
-                return;
-            }
-        }
-    }*/
 
 }
