@@ -1,0 +1,40 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.signaturemaker.app"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 3000
+        versionName "3.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'com.android.support:appcompat-v7:26.+'
+
+    //my dependencies
+    //---------------
+
+    //dependencies injection
+    compile 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+    //permisions
+    implementation 'com.karumi:dexter:4.2.0'
+
+    //about libraries
+    implementation('com.mikepenz:aboutlibraries:6.0.6@aar') {
+        transitive = true
+    }
+
+}

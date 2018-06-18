@@ -1,0 +1,25 @@
+<resources>
+    <string name="title_setting">Settings</string>
+    <string name="title_home">Home</string>
+    <string name="title_tasks">Tasks</string>
+    <string name="title_sounds">Sounds</string>
+    <string name="title_global_sound">Signature Maker</string>
+    <string name="title_favorites">Favorites</string>
+
+    <string name="title_changelog">Changelog</string>
+    <string name="title_rate">Rate it</string>
+    <string name="title_license">Licenses</string>
+    <string name="title_more">More apps</string>
+
+    <string name="title_start">Start</string>
+    <string name="title_stop">Stop</string>
+
+
+    <string name="app_written">Application Written By Raúl R.C</string>
+
+
+    <string name="body_permissions">Necesitas aceptar los permisos para un correcto funcionamiento de la app</string>
+    <string name="title_request_audio">Solicitud de permisos de grabación</string>
+    <string name="body_request_audio">Para poder usar la aplicación correctamente es necesario tener acceso a ciertos permisos del sistema. Acepte los permisos o la aplicación no funcionará.</string>
+
+</resources>

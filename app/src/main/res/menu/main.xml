@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:menu="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_action_settings"
+        android:orderInCategory="100"
+        android:title="@string/title_setting"
+        menu:showAsAction="never|always"></item>
+
+   <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/ic_action_navigation"
+        android:orderInCategory="200"
+        android:title="@string/title_setting"
+        menu:showAsAction="never|always">
+       <menu>
+
+           <item
+               android:id="@+id/changelog"
+               android:layout_width="wrap_content"
+               android:icon="@drawable/ic_action_changelog"
+               android:title="@string/title_changelog"
+               menu:showAsAction="ifRoom" />
+
+           <item
+               android:id="@+id/license"
+               android:icon="@drawable/ic_action_license"
+               android:title="@string/title_license"
+               menu:showAsAction="ifRoom" />
+
+           <item
+               android:id="@+id/puntuar"
+               android:icon="@drawable/ic_action_rating"
+               android:title="@string/title_rate"
+               menu:showAsAction="ifRoom" />
+
+           <item
+               android:id="@+id/more"
+               android:icon="@drawable/ic_action_shop"
+               android:title="@string/title_more"
+               menu:showAsAction="ifRoom" />
+       </menu>
+    </item>
+
+
+</menu>
