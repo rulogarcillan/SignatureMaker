@@ -10,6 +10,17 @@ android {
         versionName "3.0"
     }
     buildTypes {
+
+        debug {
+            debuggable true
+            applicationIdSuffix ".debug"
+        }
+        pre {
+            debuggable true
+            applicationIdSuffix ".test"
+            //resValue "string", "title_app", "Signature Maker test"
+            //buildConfigField "String", "fooVar", '"blablabla"'
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

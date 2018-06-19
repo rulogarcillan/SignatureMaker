@@ -1,9 +1,9 @@
 <resources>
+    <string name="title_app">Signature Maker</string>
     <string name="title_setting">Settings</string>
     <string name="title_home">Home</string>
     <string name="title_tasks">Tasks</string>
     <string name="title_sounds">Sounds</string>
-    <string name="title_app">Signature Maker</string>
     <string name="title_favorites">Favorites</string>
 
     <string name="title_changelog">Changelog</string>
