@@ -58,6 +58,9 @@ public class MainActivityFragment extends Fragment {
        // mSignaturePad.setVelocityFilterWeight(10);
        // mSignaturePad.setMaxWidth(1);
 
+        mSignaturePad.setMaxWidth(4);
+        mSignaturePad.setMinWidth(1);
+
         mSignaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
 
             @Override
