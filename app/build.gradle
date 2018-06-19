@@ -52,4 +52,8 @@ dependencies {
     implementation ('com.mikepenz:aboutlibraries:6.0.9@aar') {
         transitive = true
     }
+
+    compile ('com.github.gcacace:signature-pad:1.2.1'){
+        exclude module: 'support-v4'
+    }
 }
