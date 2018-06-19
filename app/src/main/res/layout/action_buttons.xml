@@ -1,0 +1,93 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/Fab2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
+        fab:fab_addButtonColorNormal="@color/colorAccent"
+        fab:fab_addButtonColorPressed="@color/colorPrimaryLight"
+        fab:fab_expandDirection="left">
+
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/bList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/buttonBlue"
+            fab:fab_colorPressed="@color/colorPrimaryLight"
+            fab:fab_icon="@drawable/ic_action_settings"
+            fab:fab_size="mini" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/bSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/buttonBlue"
+            fab:fab_colorPressed="@color/colorPrimaryLight"
+            fab:fab_icon="@drawable/ic_action_settings"
+            fab:fab_size="mini" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/bSaveSend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/buttonBlue"
+            fab:fab_colorPressed="@color/colorPrimaryLight"
+            fab:fab_icon="@drawable/ic_action_settings"
+            fab:fab_size="mini" />
+
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/Fab1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
+        fab:fab_addButtonColorNormal="@color/colorAccent"
+        fab:fab_addButtonColorPressed="@color/colorPrimaryLight"
+        fab:fab_expandDirection="up"
+        fab:fab_labelsPosition="right">
+
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/bcolor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/buttonOrange"
+            fab:fab_colorPressed="@color/colorPrimaryLight"
+            fab:fab_icon="@drawable/ic_action_settings"
+            fab:fab_size="mini"
+
+            />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btrazo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/buttonOrange"
+            fab:fab_colorPressed="@color/colorPrimaryLight"
+            fab:fab_icon="@drawable/ic_action_settings"
+            fab:fab_size="mini" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/blimpiar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/buttonOrange"
+            fab:fab_colorPressed="@color/colorPrimaryLight"
+            fab:fab_icon="@drawable/ic_action_settings"
+            fab:fab_size="mini" />
+
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+</FrameLayout>

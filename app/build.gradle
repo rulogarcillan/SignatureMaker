@@ -53,7 +53,13 @@ dependencies {
         transitive = true
     }
 
-    compile ('com.github.gcacace:signature-pad:1.2.1'){
+    //gesture drawer
+    implementation ('com.github.gcacace:signature-pad:1.2.1'){
         exclude module: 'support-v4'
     }
+    //floating buttons
+    compile 'com.getbase:floatingactionbutton:1.10.1'
+
+
+
 }
