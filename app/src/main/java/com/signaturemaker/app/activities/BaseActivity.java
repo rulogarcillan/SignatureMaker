@@ -6,7 +6,7 @@ _\ \ | (_| | | | | (_| | |_| |_| | | |  __/ / /\/\ \ (_| |   <  __/ |
 \__/_|\__, |_| |_|\__,_|\__|\__,_|_|  \___| \/    \/\__,_|_|\_\___|_|
       |___/
 
-Copyright (C) 2018  Raúl Rodríguez Concepción
+Copyright (C) 2018  Raúl Rodríguez Concepción www.wepica.com
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -32,8 +32,6 @@ import android.view.MenuItem;
 import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.signaturemaker.app.R;
-import com.signaturemaker.app.comun.Constants;
-
 
 import static com.signaturemaker.app.comun.Utils.getAppTimeStamp;
 
@@ -55,7 +53,7 @@ public class BaseActivity extends AppCompatActivity {
                 break;
             case R.id.action_settings:
                 break;
-            case R.id.puntuar:
+            case R.id.rate:
                 startRate();
                 break;
             case R.id.more:
@@ -78,7 +76,7 @@ public class BaseActivity extends AppCompatActivity {
      */
     private void startRate() {
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("market://details?id=com.wepica.sounddreams"));
+        intent.setData(Uri.parse("market://details?id=com.signaturemaker.app"));
         startActivity(intent);
     }
 
@@ -90,11 +88,12 @@ public class BaseActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-
+    /**
+     * Start licenses
+     */
     private void startLicense() {
 
-        String fechaCompilacion = getAppTimeStamp(getApplicationContext());
+        String dateCompilation = getAppTimeStamp(getApplicationContext());
         new LibsBuilder()
                 .withFields(R.string.class.getFields())
                 .withAutoDetect(true)
@@ -102,11 +101,11 @@ public class BaseActivity extends AppCompatActivity {
                 .withLicenseShown(true)
                 .withAboutIconShown(true)
                 .withAboutVersionShown(true)
-                .withAboutDescription(getResources().getString(R.string.app_written) + "&emsp;<a href='https://www.linkedin.com/in/raul-rodriguez-concepcion/'>Linkedin</a>" + "<br/><i>" + fechaCompilacion + "</i></b>" + "<br/><br/><b>License GNU GPL V3.0</b><br/><br/><a href=\"https://github.com/rulogarcillan/Sound-Dreams\">Project in Github</a>")
+                .withAboutDescription(getResources().getString(R.string.app_written) + "&emsp;<a href='https://www.linkedin.com/in/raul-rodriguez-concepcion/'>Linkedin</a>" + "<br/><i>" + dateCompilation + "</i></b>" + "<br/><br/><b>License GNU GPL V3.0</b><br/><br/><a href=\"https://github.com/rulogarcillan/signaturemaker\">Project in Github</a>")
                 .withAboutAppName(getString(R.string.app_name))
-                .withActivityTitle(getResources().getString(R.string.title_license))
+                .withActivityTitle(getResources().getString(R.string.title_app))
                 .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
-                .start(this);
+                .start(BaseActivity.this);
     }
 }
 

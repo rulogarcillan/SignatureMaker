@@ -31,7 +31,7 @@
                menu:showAsAction="ifRoom" />
 
            <item
-               android:id="@+id/puntuar"
+               android:id="@+id/rate"
                android:icon="@drawable/ic_action_rating"
                android:title="@string/title_rate"
                menu:showAsAction="ifRoom" />
@@ -43,6 +43,5 @@
                menu:showAsAction="ifRoom" />
        </menu>
     </item>
-
 
 </menu>
