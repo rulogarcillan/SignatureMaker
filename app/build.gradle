@@ -58,8 +58,5 @@ dependencies {
         exclude module: 'support-v4'
     }
     //floating buttons
-    compile 'com.getbase:floatingactionbutton:1.10.1'
-
-
-
+    implementation 'com.getbase:floatingactionbutton:1.10.1'
 }

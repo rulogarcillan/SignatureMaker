@@ -4,12 +4,12 @@
     android:layout_height="match_parent">
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/Fab2"
+        android:id="@+id/FabLeft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginBottom="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         fab:fab_addButtonColorNormal="@color/colorAccent"
         fab:fab_addButtonColorPressed="@color/colorPrimaryLight"
         fab:fab_expandDirection="left">
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/buttonBlue"
             fab:fab_colorPressed="@color/colorPrimaryLight"
-            fab:fab_icon="@drawable/ic_action_settings"
+            fab:fab_icon="@drawable/ic_action_list"
             fab:fab_size="mini" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/buttonBlue"
             fab:fab_colorPressed="@color/colorPrimaryLight"
-            fab:fab_icon="@drawable/ic_action_settings"
+            fab:fab_icon="@drawable/ic_action_save"
             fab:fab_size="mini" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/buttonBlue"
             fab:fab_colorPressed="@color/colorPrimaryLight"
-            fab:fab_icon="@drawable/ic_action_settings"
+            fab:fab_icon="@drawable/ic_action_upload"
             fab:fab_size="mini" />
 
 
@@ -47,12 +47,12 @@
 
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/Fab1"
+        android:id="@+id/FabUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginBottom="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         fab:fab_addButtonColorNormal="@color/colorAccent"
         fab:fab_addButtonColorPressed="@color/colorPrimaryLight"
         fab:fab_expandDirection="up"
@@ -60,32 +60,30 @@
 
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/bcolor"
+            android:id="@+id/bColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/buttonOrange"
             fab:fab_colorPressed="@color/colorPrimaryLight"
-            fab:fab_icon="@drawable/ic_action_settings"
-            fab:fab_size="mini"
-
-            />
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btrazo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/buttonOrange"
-            fab:fab_colorPressed="@color/colorPrimaryLight"
-            fab:fab_icon="@drawable/ic_action_settings"
+            fab:fab_icon="@drawable/ic_action_palette"
             fab:fab_size="mini" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/blimpiar"
+            android:id="@+id/bStroke"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/buttonOrange"
             fab:fab_colorPressed="@color/colorPrimaryLight"
-            fab:fab_icon="@drawable/ic_action_settings"
+            fab:fab_icon="@drawable/ic_action_stroke"
+            fab:fab_size="mini" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/bRubber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/buttonOrange"
+            fab:fab_colorPressed="@color/colorPrimaryLight"
+            fab:fab_icon="@drawable/ic_action_rubber"
             fab:fab_size="mini" />
 
 
