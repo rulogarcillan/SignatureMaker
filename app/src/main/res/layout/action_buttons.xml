@@ -22,7 +22,8 @@
             fab:fab_colorNormal="@color/buttonBlue"
             fab:fab_colorPressed="@color/colorPrimaryLight"
             fab:fab_icon="@drawable/ic_action_list"
-            fab:fab_size="mini" />
+            fab:fab_size="mini"
+            android:tooltipText="@string/title_bList" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/bSave"
@@ -31,7 +32,8 @@
             fab:fab_colorNormal="@color/buttonBlue"
             fab:fab_colorPressed="@color/colorPrimaryLight"
             fab:fab_icon="@drawable/ic_action_save"
-            fab:fab_size="mini" />
+            fab:fab_size="mini"
+            android:tooltipText="@string/title_bSave" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/bSaveSend"
@@ -40,7 +42,8 @@
             fab:fab_colorNormal="@color/buttonBlue"
             fab:fab_colorPressed="@color/colorPrimaryLight"
             fab:fab_icon="@drawable/ic_action_upload"
-            fab:fab_size="mini" />
+            fab:fab_size="mini"
+            android:tooltipText="@string/title_bSaveSend" />
 
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
@@ -66,7 +69,8 @@
             fab:fab_colorNormal="@color/buttonOrange"
             fab:fab_colorPressed="@color/colorPrimaryLight"
             fab:fab_icon="@drawable/ic_action_palette"
-            fab:fab_size="mini" />
+            fab:fab_size="mini"
+            android:tooltipText="@string/title_bColor"/>
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/bStroke"
@@ -75,7 +79,8 @@
             fab:fab_colorNormal="@color/buttonOrange"
             fab:fab_colorPressed="@color/colorPrimaryLight"
             fab:fab_icon="@drawable/ic_action_stroke"
-            fab:fab_size="mini" />
+            fab:fab_size="mini"
+            android:tooltipText="@string/title_bStroke"/>
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/bRubber"
@@ -84,7 +89,8 @@
             fab:fab_colorNormal="@color/buttonOrange"
             fab:fab_colorPressed="@color/colorPrimaryLight"
             fab:fab_icon="@drawable/ic_action_rubber"
-            fab:fab_size="mini" />
+            fab:fab_size="mini"
+            android:tooltipText="@string/title_bRubber"/>
 
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>

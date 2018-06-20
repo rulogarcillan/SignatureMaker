@@ -2,8 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment"
-    android:name="com.signaturemaker.app.fragments.MainActivityFragment"
+    android:name="com.signaturemaker.app.fragments.SingBoardFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:layout="@layout/fragment_main" />
+    tools:layout="@layout/sing_board_fragment" />

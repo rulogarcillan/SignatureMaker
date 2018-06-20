@@ -26,6 +26,7 @@ package com.signaturemaker.app.comun;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -53,5 +54,25 @@ public final class Utils {
             Log.e(Constants.TAG, e.getMessage());
         }
         return timeStamp;
+    }
+
+    /**
+     * Show toats
+     * @param mContext
+     * @param msg
+     * @param duration
+     */
+    public static void showToast(Context mContext, String msg, int duration) {
+        Toast.makeText(mContext, msg, duration).show();
+    }
+
+    /**
+     * Show toats, default short duration
+     * @param mContext
+     * @param msg
+     *
+     */
+    public static void showToast(Context mContext, String msg) {
+        showToast(mContext, msg, Toast.LENGTH_SHORT);
     }
 }

@@ -4,18 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.MainActivityFragment"
+    tools:context=".fragments.SingBoardFragment"
     tools:showIn="@layout/activity_main">
 
 
     <com.github.gcacace.signaturepad.views.SignaturePad
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/signature_pad"
+        android:id="@+id/singBoard"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:penColor="@android:color/black"
         />
 
+    <include layout="@layout/action_buttons" />
 
 </android.support.constraint.ConstraintLayout>

@@ -15,6 +15,13 @@
     <string name="title_stop">Stop</string>
 
 
+    <string name="title_bSave">Save</string>
+    <string name="title_bList">List</string>
+    <string name="title_bSaveSend">Save and Send</string>
+    <string name="title_bColor">Color</string>
+    <string name="title_bStroke">Stroke</string>
+    <string name="title_bRubber">Clean</string>
+
     <string name="app_written">Application Written By Raúl R.C</string>
 
 
