@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:menu="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/changelog"
+        android:layout_width="wrap_content"
+        android:icon="@drawable/ic_save_dark"
+        android:title="@string/title_save_png"
+        menu:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/license"
+        android:icon="@drawable/ic_save_dark"
+        android:title="@string/title_save_png_wh"
+        menu:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/rate"
+        android:icon="@drawable/ic_save_dark"
+        android:title="@string/title_save_svg"
+        menu:showAsAction="ifRoom" />
+
+    ic_png
+</menu>
+

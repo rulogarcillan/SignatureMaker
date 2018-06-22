@@ -24,18 +24,18 @@ package com.signaturemaker.app.fragments;
 
 import android.animation.Animator;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.view.ViewCompat;
-import android.text.Layout;
-import android.util.Log;
+import android.support.v7.view.menu.MenuBuilder;
+import android.support.v7.view.menu.MenuPopupHelper;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.appyvet.materialrangebar.RangeBar;
 import com.daimajia.androidanimations.library.Techniques;
@@ -45,7 +45,10 @@ import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.github.gcacace.signaturepad.views.SignaturePad;
 import com.larswerkman.holocolorpicker.ColorPicker;
 import com.signaturemaker.app.R;
-import com.signaturemaker.app.comun.Constants;
+import com.signaturemaker.app.comun.PermissionsUtils;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,7 +56,6 @@ import butterknife.OnClick;
 import butterknife.OnLongClick;
 import butterknife.Optional;
 
-import static com.signaturemaker.app.comun.Constants.TAG;
 import static com.signaturemaker.app.comun.Utils.showToast;
 
 /**
@@ -223,12 +225,13 @@ public class SingBoardFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bList:
+               PermissionsUtils.getInstance().callRequestPermissions(getActivity(), PermissionsUtils.permissionsReadWrite);
                 break;
             case R.id.bSave:
-
+                savePopUpOptions();
                 break;
             case R.id.bSaveSend:
-
+                sharePopUpOptions();
                 break;
             case R.id.bColor:
                 showColorPicker();
@@ -243,6 +246,50 @@ public class SingBoardFragment extends Fragment {
                 break;
         }
     }
+
+    /**
+     * Show popup menu with save options
+     */
+    private void savePopUpOptions() {
+        PopupMenu popupMenu = new PopupMenu(getContext(), bSave);
+        popupMenu.getMenuInflater().inflate(R.menu.save_menu, popupMenu.getMenu());
+
+        try {
+            Field field = popupMenu.getClass().getDeclaredField("mPopup");
+            field.setAccessible(true);
+            Object menuPopupHelper = field.get(popupMenu);
+            Class<?> cls = Class.forName("com.android.internal.view.menu.MenuPopupHelper");
+            Method method = cls.getDeclaredMethod("setForceShowIcon", new Class[]{boolean.class});
+            method.setAccessible(true);
+            method.invoke(menuPopupHelper, new Object[]{true});
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        popupMenu.show();
+    }
+
+
+    /**
+     * Show popup menu with share options
+     */
+    private void sharePopUpOptions() {
+        PopupMenu popupMenu = new PopupMenu(getContext(), bSave);
+        popupMenu.getMenuInflater().inflate(R.menu.share_menu, popupMenu.getMenu());
+
+        try {
+            Field field = popupMenu.getClass().getDeclaredField("mPopup");
+            field.setAccessible(true);
+            Object menuPopupHelper = field.get(popupMenu);
+            Class<?> cls = Class.forName("com.android.internal.view.menu.MenuPopupHelper");
+            Method method = cls.getDeclaredMethod("setForceShowIcon", new Class[]{boolean.class});
+            method.setAccessible(true);
+            method.invoke(menuPopupHelper, new Object[]{true});
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        popupMenu.show();
+    }
+
 
 
     /**

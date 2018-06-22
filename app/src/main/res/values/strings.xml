@@ -24,14 +24,16 @@
 
 
     <string name="title_SingHere">Sign here</string>
-
+    <string name="title_save_png">PNG (Transparent BG)</string>
+    <string name="title_save_png_wh">PNG (White BG)</string>
+    <string name="title_save_svg">SVG (Transparent BG)</string>
 
     <string name="app_written">Application Written By Raúl R.C</string>
 
 
     <string name="body_permissions">Necesitas aceptar los permisos para un correcto funcionamiento de la app</string>
-    <string name="title_request_audio">Solicitud de permisos de grabación</string>
-    <string name="body_request_audio">Para poder usar la aplicación correctamente es necesario tener acceso a ciertos permisos del sistema. Acepte los permisos o la aplicación no funcionará.</string>
+    <string name="title_request_permision">Solicitud de permisos de lectura y escritura</string>
+    <string name="body_request_permision">Para poder usar la aplicación correctamente es necesario tener acceso a ciertos permisos del sistema. Acepte los permisos o la aplicación no funcionará.</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="action_settings">Settings</string>
 

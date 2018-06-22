@@ -54,7 +54,7 @@ import java.util.List;
 
 public class PermissionsUtils {
 
-    public static final List<String> permissionsRecWrite = Arrays.asList( Manifest.permission.RECORD_AUDIO,Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    public static final List<String> permissionsReadWrite = Arrays.asList( Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
     private static PermissionsUtils INSTANCE = null;
 
@@ -79,7 +79,7 @@ public class PermissionsUtils {
      * @param mActivity
      */
     public void callRequestPermissionrecordAudio(final Activity mActivity) {
-        callRequestPermissionrecordAudio(mActivity, new BasePermissionListener());
+        callRequestPermissionWrite(mActivity, new BasePermissionListener());
     }
 
     /**
@@ -95,7 +95,7 @@ public class PermissionsUtils {
      * @param mActivity
      * @param myPermissionListener
      */
-    public void callRequestPermissionrecordAudio(final Activity mActivity, final PermissionListener myPermissionListener) {
+    public void callRequestPermissionWrite(final Activity mActivity, final PermissionListener myPermissionListener) {
 
         //This listener only call when permission is denied
         PermissionListener snackbarPermissionListener = SnackbarOnDeniedPermissionListener.Builder.
@@ -164,8 +164,8 @@ public class PermissionsUtils {
      */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     private void shoDialogInformation(final PermissionToken token, Activity mActivity) {
-        new AlertDialog.Builder(mActivity).setTitle(R.string.title_request_audio)
-                .setMessage(R.string.body_request_audio)
+        new AlertDialog.Builder(mActivity).setTitle(R.string.title_request_permision)
+                .setMessage(R.string.body_request_permision)
                 .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
