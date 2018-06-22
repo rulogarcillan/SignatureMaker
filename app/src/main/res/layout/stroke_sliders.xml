@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layoutSeek"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/custom_background"
+    android:orientation="vertical">
+
+    <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+        android:id="@+id/rangeSeekbar1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:corner_radius="10"
+        app:min_value="0"
+        app:max_value="10"
+        app:steps="1"
+        app:bar_color="@color/colorPrimary"
+        app:bar_highlight_color="@color/colorAccent"
+        app:data_type="_integer"     />
+       <!-- app:left_thumb_image="@drawable/left_thumb_image_stroke"
+        app:right_thumb_image="@drawable/ic_action_stroke"
+        app:left_thumb_image_pressed="@drawable/ic_action_stroke"
+        app:right_thumb_image_pressed="@drawable/ic_action_stroke"-->
+
+
+
+</LinearLayout>

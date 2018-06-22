@@ -102,8 +102,8 @@ public class BaseActivity extends AppCompatActivity {
                 .withAboutIconShown(true)
                 .withAboutVersionShown(true)
                 .withAboutDescription(getResources().getString(R.string.app_written) + "&emsp;<a href='https://www.linkedin.com/in/raul-rodriguez-concepcion/'>Linkedin</a>" + "<br/><i>" + dateCompilation + "</i></b>" + "<br/><br/><b>License GNU GPL V3.0</b><br/><br/><a href=\"https://github.com/rulogarcillan/signaturemaker\">Project in Github</a>")
-                .withAboutAppName(getString(R.string.title_app))
-                .withActivityTitle(getResources().getString(R.string.title_app))
+                .withAboutAppName(getString(R.string.title_appName))
+                .withActivityTitle(getResources().getString(R.string.title_appName))
                 .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
                 .start(BaseActivity.this);
     }
