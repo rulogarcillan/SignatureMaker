@@ -32,6 +32,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
@@ -81,6 +82,9 @@ public class SingBoardFragment extends Fragment {
     View rootView;
     YoYo.YoYoString runningAnimation;
 
+    @BindView(R.id.txtSingHere)
+    TextView txtSingHere;
+
     public SingBoardFragment() {
     }
 
@@ -102,9 +106,6 @@ public class SingBoardFragment extends Fragment {
                 collapseFabs();
             }
         });
-        // mSignaturePad = (SignaturePad) rootView.findViewById(R.id.signature_pad);
-        // mSignaturePad.setVelocityFilterWeight(10);
-        // mSignaturePad.setMaxWidth(1);
 
         mSingBoard.setMaxWidth(4);
         mSingBoard.setMinWidth(1);
@@ -113,7 +114,7 @@ public class SingBoardFragment extends Fragment {
 
             @Override
             public void onStartSigning() {
-                //Event triggered when the pad is touched
+                goneTxtSingHere();
             }
 
             @Override
@@ -123,7 +124,7 @@ public class SingBoardFragment extends Fragment {
 
             @Override
             public void onClear() {
-                //Event triggered when the pad is cleared
+                visibleTxtSingHere();
             }
         });
         return rootView;
@@ -239,5 +240,12 @@ public class SingBoardFragment extends Fragment {
     private void expandFabs() {
         fabUp.expand();
         fabLeft.expand();
+    }
+
+    private void goneTxtSingHere(){
+        txtSingHere.setVisibility(View.GONE);
+    }
+    private void visibleTxtSingHere(){
+        txtSingHere.setVisibility(View.VISIBLE);
     }
 }
