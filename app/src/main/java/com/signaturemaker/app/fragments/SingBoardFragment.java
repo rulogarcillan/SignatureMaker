@@ -28,18 +28,22 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.appyvet.materialrangebar.RangeBar;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.github.gcacace.signaturepad.views.SignaturePad;
+import com.larswerkman.holocolorpicker.ColorPicker;
 import com.signaturemaker.app.R;
 import com.signaturemaker.app.comun.Constants;
 
@@ -80,10 +84,24 @@ public class SingBoardFragment extends Fragment {
     FloatingActionButton bRubber;
 
     View rootView;
+    YoYo.YoYoString runningAnimationSeek;
+    YoYo.YoYoString runningAnimationColor;
     YoYo.YoYoString runningAnimation;
 
     @BindView(R.id.txtSingHere)
     TextView txtSingHere;
+    @BindView(R.id.rangeBar)
+    RangeBar rangeBar;
+
+    @BindView(R.id.rangeSeekBarLayout)
+    LinearLayout rangeSeekBarLayout;
+
+    @BindView(R.id.coloPicker)
+    LinearLayout coloPicker;
+
+    @BindView(R.id.picker)
+    ColorPicker picker;
+
 
     public SingBoardFragment() {
     }
@@ -107,14 +125,13 @@ public class SingBoardFragment extends Fragment {
             }
         });
 
-        mSingBoard.setMaxWidth(4);
-        mSingBoard.setMinWidth(1);
-
         mSingBoard.setOnSignedListener(new SignaturePad.OnSignedListener() {
 
             @Override
             public void onStartSigning() {
                 goneTxtSingHere();
+                hideColorPicker();
+                hideSeekbarStroke();
             }
 
             @Override
@@ -127,15 +144,43 @@ public class SingBoardFragment extends Fragment {
                 visibleTxtSingHere();
             }
         });
+
+
+        rangeBar.setOnRangeBarChangeListener(new RangeBar.OnRangeBarChangeListener() {
+            @Override
+            public void onRangeChangeListener(RangeBar rangeBar, int leftPinIndex,
+                                              int rightPinIndex, String leftPinValue, String rightPinValue) {
+
+                mSingBoard.setMinWidth(leftPinIndex);
+                mSingBoard.setMaxWidth(rightPinIndex);
+            }
+
+        });
+
+        picker.setOnColorChangedListener(new ColorPicker.OnColorChangedListener() {
+            @Override
+            public void onColorChanged(int i) {
+                bColor.setColorNormal(i);
+                mSingBoard.setPenColor(i);
+            }
+        });
+
+
         return rootView;
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        initSeekBar();
     }
 
-
+    /**
+     * Method for all long click buttons
+     *
+     * @param view
+     * @return
+     */
     @Optional
     @OnLongClick({R.id.bSave, R.id.bList, R.id.bSaveSend, R.id.bColor, R.id.bStroke, R.id.bRubber})
     public boolean onLongClick(View view) {
@@ -167,7 +212,12 @@ public class SingBoardFragment extends Fragment {
         return false;
     }
 
-
+    /**
+     * Method for all click buttons
+     *
+     * @param view
+     * @return
+     */
     @Optional
     @OnClick({R.id.bSave, R.id.bList, R.id.bSaveSend, R.id.bColor, R.id.bStroke, R.id.bRubber})
     public void onClick(View view) {
@@ -181,10 +231,10 @@ public class SingBoardFragment extends Fragment {
 
                 break;
             case R.id.bColor:
-
+                showColorPicker();
                 break;
             case R.id.bStroke:
-
+                showSeekbarStroke();
                 break;
             case R.id.bRubber:
                 cleanBoard();
@@ -194,6 +244,10 @@ public class SingBoardFragment extends Fragment {
         }
     }
 
+
+    /**
+     * Method for clear board sign
+     */
     private void cleanBoard() {
 
 
@@ -232,20 +286,170 @@ public class SingBoardFragment extends Fragment {
         }
     }
 
+    /**
+     * Method for collapse the fabs buttons
+     */
     private void collapseFabs() {
         fabUp.collapse();
         fabLeft.collapse();
+        hideSeekbarStroke();
+        hideColorPicker();
     }
 
+    /**
+     * Method for expand the fabs buttons
+     */
     private void expandFabs() {
         fabUp.expand();
         fabLeft.expand();
     }
 
-    private void goneTxtSingHere(){
+    /**
+     * Method for change the visibility of textview to gone
+     */
+    private void goneTxtSingHere() {
         txtSingHere.setVisibility(View.GONE);
     }
-    private void visibleTxtSingHere(){
+
+    /**
+     * Method for change the visibility of textview to visible
+     */
+    private void visibleTxtSingHere() {
         txtSingHere.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * Method for init the seekbar
+     */
+    private void initSeekBar() {
+        rangeBar.setRangePinsByValue(1, 4);
+    }
+
+    /**
+     * Method for hide seekbar stroke
+     */
+    private void hideSeekbarStroke() {
+        YoYo.AnimationComposer animation = YoYo.with(Techniques.TakingOff)
+                .duration(400).withListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        // collapseFabs();
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+
+                        rangeSeekBarLayout.setVisibility(View.INVISIBLE);
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+                    }
+                });
+        if (runningAnimationSeek == null || !runningAnimationSeek.isRunning()) {
+            runningAnimationSeek = animation.playOn(rangeSeekBarLayout);
+        }
+    }
+
+    /**
+     * Method for show seekbar stroke
+     */
+    private void showSeekbarStroke() {
+        if (rangeSeekBarLayout.getVisibility() == View.VISIBLE) {
+            hideSeekbarStroke();
+        } else {
+            YoYo.AnimationComposer animation = YoYo.with(Techniques.DropOut)
+                    .duration(700).withListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                            hideColorPicker();
+                            rangeSeekBarLayout.setVisibility(View.VISIBLE);
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animator animation) {
+                        }
+                    });
+            if (runningAnimationSeek == null || !runningAnimationSeek.isRunning()) {
+                runningAnimationSeek = animation.playOn(rangeSeekBarLayout);
+            }
+        }
+    }
+
+
+    /**
+     * Method for hide color picker
+     */
+    private void hideColorPicker() {
+        YoYo.AnimationComposer animation = YoYo.with(Techniques.TakingOff)
+                .duration(400).withListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        // collapseFabs();
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        coloPicker.setVisibility(View.INVISIBLE);
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+                    }
+                });
+        if (runningAnimationColor == null || !runningAnimationColor.isRunning()) {
+            runningAnimationColor = animation.playOn(coloPicker);
+        }
+    }
+
+    /**
+     * Method for show color picker
+     */
+    private void showColorPicker() {
+        if (coloPicker.getVisibility() == View.VISIBLE) {
+            hideColorPicker();
+        } else {
+            YoYo.AnimationComposer animation = YoYo.with(Techniques.DropOut)
+                    .duration(700).withListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                            hideSeekbarStroke();
+                            coloPicker.setVisibility(View.VISIBLE);
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animator animation) {
+                        }
+                    });
+            if (runningAnimationColor == null || !runningAnimationColor.isRunning()) {
+                runningAnimationColor = animation.playOn(coloPicker);
+            }
+        }
     }
 }

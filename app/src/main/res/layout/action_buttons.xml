@@ -66,7 +66,7 @@
             android:id="@+id/bColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/buttonOrange"
+            fab:fab_colorNormal="@color/colorPenDefault"
             fab:fab_colorPressed="@color/colorPrimaryLight"
             fab:fab_icon="@drawable/ic_action_palette"
             fab:fab_size="mini"

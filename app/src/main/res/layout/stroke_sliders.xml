@@ -1,27 +1,62 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layoutSeek"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rangeSeekBarLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
     android:background="@drawable/custom_background"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="20dp"
+    android:visibility="invisible">
 
-    <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
-        android:id="@+id/rangeSeekbar1"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:corner_radius="10"
-        app:min_value="0"
-        app:max_value="10"
-        app:steps="1"
-        app:bar_color="@color/colorPrimary"
-        app:bar_highlight_color="@color/colorAccent"
-        app:data_type="_integer"     />
-       <!-- app:left_thumb_image="@drawable/left_thumb_image_stroke"
-        app:right_thumb_image="@drawable/ic_action_stroke"
-        app:left_thumb_image_pressed="@drawable/ic_action_stroke"
-        app:right_thumb_image_pressed="@drawable/ic_action_stroke"-->
 
+        android:orientation="horizontal"
+        android:paddingTop="12dp">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="Min."
+            app:layout_constraintStart_toStartOf="@+id/rangeBar"
+            tools:layout_editor_absoluteY="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="Max."
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="16dp" />
+    </LinearLayout>
+
+    <com.appyvet.materialrangebar.RangeBar
+        android:id="@+id/rangeBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:mrb_connectingLineColor="@color/colorPrimaryDark"
+        app:mrb_pinColor="@color/colorAccent"
+        app:mrb_pinMaxFont="10sp"
+        app:mrb_pinTextColor="@android:color/white"
+        app:mrb_rangeBarColor="@color/colorPrimary"
+        app:mrb_rangeBarPaddingBottom="12dp"
+        app:mrb_selectorBoundarySize="2dp"
+        app:mrb_selectorColor="@color/colorPrimaryDark"
+        app:mrb_selectorSize="10dp"
+        app:mrb_temporaryPins="true"
+        app:mrb_tickEnd="10"
+        app:mrb_tickInterval="1"
+        app:mrb_tickStart="0"
+        tools:layout_editor_absoluteY="8dp" />
 
 </LinearLayout>
