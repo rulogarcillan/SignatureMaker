@@ -24,13 +24,9 @@ package com.signaturemaker.app.fragments;
 
 import android.animation.Animator;
 import android.os.Build;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v7.view.menu.MenuBuilder;
-import android.support.v7.view.menu.MenuPopupHelper;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -44,6 +40,7 @@ import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.github.gcacace.signaturepad.views.SignaturePad;
 import com.larswerkman.holocolorpicker.ColorPicker;
+import com.larswerkman.holocolorpicker.SVBar;
 import com.signaturemaker.app.R;
 import com.signaturemaker.app.comun.PermissionsUtils;
 
@@ -62,7 +59,6 @@ import static com.signaturemaker.app.comun.Utils.showToast;
  * A placeholder fragment containing a simple view.
  */
 public class SingBoardFragment extends Fragment {
-
 
     @BindView(R.id.singBoard)
     SignaturePad mSingBoard;
@@ -98,11 +94,13 @@ public class SingBoardFragment extends Fragment {
     @BindView(R.id.rangeSeekBarLayout)
     LinearLayout rangeSeekBarLayout;
 
-    @BindView(R.id.coloPicker)
-    LinearLayout coloPicker;
+    @BindView(R.id.coloPickerLayout)
+    LinearLayout coloPickerLayout;
 
     @BindView(R.id.picker)
     ColorPicker picker;
+    @BindView(R.id.svbar)
+    SVBar svbar;
 
 
     public SingBoardFragment() {
@@ -115,6 +113,10 @@ public class SingBoardFragment extends Fragment {
         rootView = inflater.inflate(R.layout.sing_board_fragment, container, false);
         ButterKnife.bind(this, rootView);
 
+        //add bar to picker
+        picker.addSVBar(svbar);
+
+        //listener floating actions buttons
         fabUp.setOnFloatingActionsMenuUpdateListener(new FloatingActionsMenu.OnFloatingActionsMenuUpdateListener() {
             @Override
             public void onMenuExpanded() {
@@ -127,6 +129,7 @@ public class SingBoardFragment extends Fragment {
             }
         });
 
+        //listener board
         mSingBoard.setOnSignedListener(new SignaturePad.OnSignedListener() {
 
             @Override
@@ -147,7 +150,7 @@ public class SingBoardFragment extends Fragment {
             }
         });
 
-
+        //listener rangebar
         rangeBar.setOnRangeBarChangeListener(new RangeBar.OnRangeBarChangeListener() {
             @Override
             public void onRangeChangeListener(RangeBar rangeBar, int leftPinIndex,
@@ -159,6 +162,7 @@ public class SingBoardFragment extends Fragment {
 
         });
 
+        //listerner picker
         picker.setOnColorChangedListener(new ColorPicker.OnColorChangedListener() {
             @Override
             public void onColorChanged(int i) {
@@ -225,7 +229,7 @@ public class SingBoardFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bList:
-               PermissionsUtils.getInstance().callRequestPermissions(getActivity(), PermissionsUtils.permissionsReadWrite);
+                PermissionsUtils.getInstance().callRequestPermissions(getActivity(), PermissionsUtils.permissionsReadWrite);
                 break;
             case R.id.bSave:
                 savePopUpOptions();
@@ -234,10 +238,14 @@ public class SingBoardFragment extends Fragment {
                 sharePopUpOptions();
                 break;
             case R.id.bColor:
+
                 showColorPicker();
+
                 break;
             case R.id.bStroke:
+
                 showSeekbarStroke();
+
                 break;
             case R.id.bRubber:
                 cleanBoard();
@@ -289,7 +297,6 @@ public class SingBoardFragment extends Fragment {
         }
         popupMenu.show();
     }
-
 
 
     /**
@@ -385,7 +392,6 @@ public class SingBoardFragment extends Fragment {
 
                     @Override
                     public void onAnimationEnd(Animator animation) {
-
                         rangeSeekBarLayout.setVisibility(View.INVISIBLE);
                     }
 
@@ -409,12 +415,13 @@ public class SingBoardFragment extends Fragment {
         if (rangeSeekBarLayout.getVisibility() == View.VISIBLE) {
             hideSeekbarStroke();
         } else {
+
             YoYo.AnimationComposer animation = YoYo.with(Techniques.DropOut)
                     .duration(700).withListener(new Animator.AnimatorListener() {
                         @Override
                         public void onAnimationStart(Animator animation) {
-                            hideColorPicker();
                             rangeSeekBarLayout.setVisibility(View.VISIBLE);
+                            hideColorPicker();
                         }
 
                         @Override
@@ -430,7 +437,8 @@ public class SingBoardFragment extends Fragment {
                         public void onAnimationRepeat(Animator animation) {
                         }
                     });
-            if (runningAnimationSeek == null || !runningAnimationSeek.isRunning()) {
+            if ((runningAnimationSeek == null || !runningAnimationSeek.isRunning()) && (runningAnimationColor == null || !runningAnimationColor.isRunning())) {
+
                 runningAnimationSeek = animation.playOn(rangeSeekBarLayout);
             }
         }
@@ -450,7 +458,7 @@ public class SingBoardFragment extends Fragment {
 
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        coloPicker.setVisibility(View.INVISIBLE);
+                        coloPickerLayout.setVisibility(View.INVISIBLE);
                     }
 
                     @Override
@@ -462,7 +470,7 @@ public class SingBoardFragment extends Fragment {
                     }
                 });
         if (runningAnimationColor == null || !runningAnimationColor.isRunning()) {
-            runningAnimationColor = animation.playOn(coloPicker);
+            runningAnimationColor = animation.playOn(coloPickerLayout);
         }
     }
 
@@ -470,15 +478,15 @@ public class SingBoardFragment extends Fragment {
      * Method for show color picker
      */
     private void showColorPicker() {
-        if (coloPicker.getVisibility() == View.VISIBLE) {
+        if (coloPickerLayout.getVisibility() == View.VISIBLE) {
             hideColorPicker();
         } else {
             YoYo.AnimationComposer animation = YoYo.with(Techniques.DropOut)
                     .duration(700).withListener(new Animator.AnimatorListener() {
                         @Override
                         public void onAnimationStart(Animator animation) {
+                            coloPickerLayout.setVisibility(View.VISIBLE);
                             hideSeekbarStroke();
-                            coloPicker.setVisibility(View.VISIBLE);
                         }
 
                         @Override
@@ -494,8 +502,9 @@ public class SingBoardFragment extends Fragment {
                         public void onAnimationRepeat(Animator animation) {
                         }
                     });
-            if (runningAnimationColor == null || !runningAnimationColor.isRunning()) {
-                runningAnimationColor = animation.playOn(coloPicker);
+            if ((runningAnimationSeek == null || !runningAnimationSeek.isRunning()) && (runningAnimationColor == null || !runningAnimationColor.isRunning())) {
+                runningAnimationColor = animation.playOn(coloPickerLayout);
+
             }
         }
     }

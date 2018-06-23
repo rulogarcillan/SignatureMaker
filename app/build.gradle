@@ -40,13 +40,14 @@ dependencies {
     implementation "com.android.support:support-annotations:28.0.0-alpha1"
     implementation "com.android.support:cardview-v7:28.0.0-alpha1"
     // implementation 'com.android.support:design:28.0.0-alpha3'
-
+    //implementation 'androidx.legacy:legacy-support-v4:1.0.0-alpha1'
     //my dependencies
     //---------------
 
     //dependencies injection
     implementation 'com.jakewharton:butterknife:8.8.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
     //permisions
