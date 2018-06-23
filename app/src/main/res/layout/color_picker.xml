@@ -7,7 +7,8 @@
     android:background="@drawable/custom_background"
     android:orientation="vertical"
     android:visibility="invisible"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.larswerkman.holocolorpicker.ColorPicker
         android:id="@+id/picker"

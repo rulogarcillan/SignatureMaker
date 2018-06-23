@@ -26,6 +26,7 @@ import android.animation.Animator;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,10 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.github.gcacace.signaturepad.views.SignaturePad;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.larswerkman.holocolorpicker.ColorPicker;
 import com.larswerkman.holocolorpicker.SVBar;
 import com.signaturemaker.app.R;
@@ -46,6 +51,7 @@ import com.signaturemaker.app.comun.PermissionsUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -171,6 +177,8 @@ public class SingBoardFragment extends Fragment {
             }
         });
 
+        initSeekBar();
+        initColor();
 
         return rootView;
     }
@@ -178,7 +186,15 @@ public class SingBoardFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        initSeekBar();
+
+    }
+
+    /**
+     *   Method for init color in picker color selector
+     */
+    private void initColor() {
+        picker.setColor(getResources().getColor(R.color.colorPenDefault));
+        picker.setOldCenterColor(getResources().getColor(R.color.colorPenDefault));
     }
 
     /**
@@ -229,7 +245,7 @@ public class SingBoardFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bList:
-                PermissionsUtils.getInstance().callRequestPermissions(getActivity(), PermissionsUtils.permissionsReadWrite);
+                openListFilesFragment();
                 break;
             case R.id.bSave:
                 savePopUpOptions();
@@ -507,5 +523,27 @@ public class SingBoardFragment extends Fragment {
 
             }
         }
+    }
+
+
+    private void openListFilesFragment() {
+
+
+        PermissionsUtils.getInstance().callRequestPermissions(getActivity(), PermissionsUtils.permissionsReadWrite, new MultiplePermissionsListener() {
+            @Override
+            public void onPermissionsChecked(MultiplePermissionsReport report) {
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.container, new ListFilesFragment());
+                ft.addToBackStack(SingBoardFragment.class.getSimpleName());
+                ft.commit();
+
+            }
+
+            @Override
+            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+
+            }
+        });
+
     }
 }
