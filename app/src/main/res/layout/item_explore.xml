@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="vertical">
+
+<RelativeLayout
+    android:id="@+id/view_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent">
+
+    <ImageView
+        android:id="@+id/delete_icon"
+        android:layout_width="30dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/ic_action_rubber" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@id/delete_icon"
+        android:text="@string/delete"
+        android:textColor="#fff"
+        android:textSize="13dp" />
+
+</RelativeLayout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?android:attr/listPreferredItemHeight"
+        android:background="@android:color/white"
+        android:foreground="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:id="@+id/view_foreground"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/imgSign"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:src="@color/colorPenDefault"
+ />
+
+        <TextView
+            android:id="@+id/textName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/primary_text"
+            android:layout_toRightOf="@id/imgSign"
+            android:layout_marginLeft="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Signature.png" />
+
+        <TextView
+            android:id="@+id/textDate"
+            android:maxLines="1"
+            android:text="21/09/2013"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/secondary_text"
+            android:layout_below="@+id/textName"
+            android:layout_alignLeft="@+id/textName"
+            android:layout_gravity="bottom" />
+
+        <TextView
+            android:id="@+id/textSize"
+            android:maxLines="1"
+            android:text="357KB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/secondary_text"
+            android:layout_alignBottom="@+id/textDate"
+            android:layout_alignParentRight="true" />
+
+    </RelativeLayout>
+
+
+
+</FrameLayout>

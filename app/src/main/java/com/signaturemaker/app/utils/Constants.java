@@ -20,7 +20,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
-package com.signaturemaker.app.comun;
+package com.signaturemaker.app.utils;
 
 
 import android.graphics.Color;
@@ -47,14 +47,14 @@ public final class Constants {
 
     public static final String ROOT = Environment.getExternalStorageDirectory().getAbsolutePath();
 
-    public static final int DEFAULT_SHORT_ORDER = -1;
+    public static final int DEFAULT_SORT_ORDER = -1;
     public static final int DEFAULT_MAX_STROKE = 4;
     public static final int DEFAULT_MINS_TROKE = 1;
     public static final int DEFAULT_PEN_COLOR = Color.parseColor("#200BB2");
     public static final int DEFAULT_WALLPAPER = 3;
     public static final String DEFAULT_PATH = ROOT + "/Signature/";
 
-    public static int shortOrder = DEFAULT_SHORT_ORDER;
+    public static int sortOrder = DEFAULT_SORT_ORDER;
     public static int maxStroke = DEFAULT_MAX_STROKE;
     public static int minStroke = DEFAULT_MINS_TROKE;
     public static int penColor = DEFAULT_PEN_COLOR;
@@ -62,7 +62,7 @@ public final class Constants {
     public static String path = DEFAULT_PATH;
 
     public static void defaultValues() {
-        shortOrder = DEFAULT_SHORT_ORDER;
+        sortOrder = DEFAULT_SORT_ORDER;
         maxStroke = DEFAULT_MAX_STROKE;
         minStroke = DEFAULT_MINS_TROKE;
         penColor = DEFAULT_PEN_COLOR;

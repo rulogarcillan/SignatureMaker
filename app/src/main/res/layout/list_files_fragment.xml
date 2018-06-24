@@ -7,10 +7,30 @@
     android:orientation="vertical"
     tools:layout_width="match_parent">
 
-    <Button
-        android:id="@+id/button"
+    <include layout="@layout/pathbar"></include>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:text="Button" />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
+
+        <TextView
+            android:id="@+id/txtMnsNoFiles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:gravity="center"
+            android:text="@string/title_no_files"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:typeface="sans" />
+
+    </RelativeLayout>
 </LinearLayout>

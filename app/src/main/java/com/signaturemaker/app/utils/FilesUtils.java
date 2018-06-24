@@ -1,6 +1,8 @@
-package com.signaturemaker.app.comun;
+package com.signaturemaker.app.utils;
 
 import android.graphics.Bitmap;
+
+import com.signaturemaker.app.models.ItemFile;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,9 +11,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-public final class Files {
+public final class FilesUtils {
 
 
     public static String generateName() {
@@ -113,6 +117,34 @@ public final class Files {
     }
 
 
+    public static List loadItemsFiles() {
+
+        File files[];
+        File folder;
+
+        List<ItemFile> arrayItems = new ArrayList<>();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        folder = new File(Constants.path);
+        if (folder.exists()) {
+            files = folder.listFiles();
+
+            for (File file : files) {
+                java.util.Date myDate = new java.util.Date(file.lastModified());
+                String tam = Long.toString(file.length() / 1024) + " KB";
+                String name = file.getName();
+
+                if ((name.contains(".png") || name.contains(".PNG") || name.contains(".svg") || name.contains(".SVG")) && name.substring(0, 3).equals("SM_")) {
+                    ItemFile item = new ItemFile(name, dateFormat.format(myDate), tam);
+                    arrayItems.add(item);
+                }
+            }
+        }
+        Utils.sort(arrayItems, Constants.sortOrder);
+        return arrayItems;
+    }
+
+
 
 
     /*
@@ -120,36 +152,7 @@ public final class Files {
      * Realiza la carga del arrayItems (recoge todos los datos necesario de los
      * ficheros)
      *//*
-    public static ArrayList cargaItems() {
 
-        File archivos[];
-        File carpeta;
-
-        ArrayList<ItemFile> arrayItems = new ArrayList<>();
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-
-
-        carpeta = new File(pathFiles);
-        if (carpeta.exists()) {
-            archivos = carpeta.listFiles();
-
-            for (File file : archivos) {
-
-                java.util.Date myDate = new java.util.Date(file.lastModified());
-                String tam = Long.toString(file.length() / 1024) + " KB";
-                String name = file.getName();
-
-                if ((name.contains(".png") || name.contains(".PNG")) && name.substring(0, 3).equals("SM_")) {
-                    ItemFile item = new ItemFile(name, dateFormat.format(myDate), tam);
-                    arrayItems.add(item);
-                }
-            }
-        }
-
-
-        return arrayItems;
-    }
 
     public static void removeFile(String nombre) {
         File archivo;

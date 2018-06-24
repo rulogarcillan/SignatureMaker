@@ -20,7 +20,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
-package com.signaturemaker.app.comun;
+package com.signaturemaker.app.utils;
 
 
 import android.content.Context;
@@ -28,8 +28,16 @@ import android.content.pm.ApplicationInfo;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.signaturemaker.app.models.ItemFile;
+
 import java.io.File;
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
 
 public final class Utils {
 
@@ -58,6 +66,7 @@ public final class Utils {
 
     /**
      * Show toats
+     *
      * @param mContext
      * @param msg
      * @param duration
@@ -68,11 +77,33 @@ public final class Utils {
 
     /**
      * Show toats, default short duration
+     *
      * @param mContext
      * @param msg
-     *
      */
     public static void showToast(Context mContext, String msg) {
         showToast(mContext, msg, Toast.LENGTH_SHORT);
+    }
+
+
+    public static void sort(List<ItemFile> lista, final int type) {
+        Collections.sort(lista, new Comparator<ItemFile>() {
+            @Override
+            public int compare(ItemFile lhs, ItemFile rhs) {
+
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                String date1 = lhs.getDate();
+                String date2 = rhs.getDate();
+                Date ddate = null;
+                Date ddate2 = null;
+                try {
+                    ddate = formatter.parse(date1);
+                    ddate2 = formatter.parse(date2);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                return ddate.compareTo(ddate2) * type;
+            }
+        });
     }
 }

@@ -23,7 +23,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 package com.signaturemaker.app.fragments;
 
 import android.animation.Animator;
-import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -35,7 +34,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.appyvet.materialrangebar.RangeBar;
 import com.daimajia.androidanimations.library.Techniques;
@@ -50,9 +48,9 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.larswerkman.holocolorpicker.ColorPicker;
 import com.larswerkman.holocolorpicker.SVBar;
 import com.signaturemaker.app.R;
-import com.signaturemaker.app.comun.Constants;
-import com.signaturemaker.app.comun.Files;
-import com.signaturemaker.app.comun.PermissionsUtils;
+import com.signaturemaker.app.utils.Constants;
+import com.signaturemaker.app.utils.FilesUtils;
+import com.signaturemaker.app.utils.PermissionsUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -64,7 +62,7 @@ import butterknife.OnClick;
 import butterknife.OnLongClick;
 import butterknife.Optional;
 
-import static com.signaturemaker.app.comun.Utils.showToast;
+import static com.signaturemaker.app.utils.Utils.showToast;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -585,13 +583,13 @@ public class SingBoardFragment extends Fragment {
         Boolean status = false;
         switch (idMenu) {
             case R.id.savePngTrans:
-                status = Files.saveBitmapFile(mSingBoard.getTransparentSignatureBitmap(true), Files.addExtensionNamePng(Files.generateName()));
+                status = FilesUtils.saveBitmapFile(mSingBoard.getTransparentSignatureBitmap(true), FilesUtils.addExtensionNamePng(FilesUtils.generateName()));
                 break;
             case R.id.savePngWhite:
-                status = Files.saveBitmapFile(mSingBoard.getSignatureBitmap(), Files.addExtensionNamePng(Files.generateName()));
+                status = FilesUtils.saveBitmapFile(mSingBoard.getSignatureBitmap(), FilesUtils.addExtensionNamePng(FilesUtils.generateName()));
                 break;
             case R.id.saveSvg:
-                status = Files.saveSvgFile(mSingBoard.getSignatureSvg(), Files.addExtensionNameSvg(Files.generateName()));
+                status = FilesUtils.saveSvgFile(mSingBoard.getSignatureSvg(), FilesUtils.addExtensionNameSvg(FilesUtils.generateName()));
                 break;
             default:
                 break;

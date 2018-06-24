@@ -33,7 +33,7 @@ import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.signaturemaker.app.R;
 
-import static com.signaturemaker.app.comun.Utils.getAppTimeStamp;
+import static com.signaturemaker.app.utils.Utils.getAppTimeStamp;
 
 
 public class BaseActivity extends AppCompatActivity {

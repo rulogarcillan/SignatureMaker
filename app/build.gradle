@@ -29,48 +29,41 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     //implementation "com.android.support:appcompat-v7:28.0.0-alpha3"
     implementation 'com.android.support:appcompat-v7:28.0.0-alpha1'
     implementation 'com.android.support:design:28.0.0-alpha1'
-
-
-    implementation "com.android.support:recyclerview-v7:28.0.0-alpha1"
-    implementation "com.android.support:support-annotations:28.0.0-alpha1"
-    implementation "com.android.support:cardview-v7:28.0.0-alpha1"
+    implementation 'com.android.support:recyclerview-v7:28.0.0-alpha1'
+    implementation 'com.android.support:support-annotations:28.0.0-alpha1'
+    implementation 'com.android.support:cardview-v7:28.0.0-alpha1'
     // implementation 'com.android.support:design:28.0.0-alpha3'
     //implementation 'androidx.legacy:legacy-support-v4:1.0.0-alpha1'
     //my dependencies
     //---------------
-
     //dependencies injection
     implementation 'com.jakewharton:butterknife:8.8.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
-
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-
     //permisions
     implementation 'com.karumi:dexter:4.2.0'
-
     //about libraries
     implementation('com.mikepenz:aboutlibraries:6.0.9@aar') {
         transitive = true
     }
-
     //gesture drawer
     implementation('com.github.gcacace:signature-pad:1.2.1') {
         exclude module: 'support-v4'
     }
     //floating buttons
     implementation 'com.getbase:floatingactionbutton:1.10.1'
-
     //animations
     implementation 'com.daimajia.easing:library:2.0@aar'
     implementation 'com.daimajia.androidanimations:library:2.3@aar'
-
     //range sneekbar
     implementation 'com.appyvet:materialrangebar:1.4.2'
     //color picker
     implementation 'com.larswerkman:HoloColorPicker:1.5'
+    implementation project(':chooser')
+    //picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
