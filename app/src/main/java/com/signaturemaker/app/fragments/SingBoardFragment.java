@@ -23,16 +23,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 package com.signaturemaker.app.fragments;
 
 import android.animation.Animator;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.appyvet.materialrangebar.RangeBar;
 import com.daimajia.androidanimations.library.Techniques;
@@ -47,6 +50,8 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.larswerkman.holocolorpicker.ColorPicker;
 import com.larswerkman.holocolorpicker.SVBar;
 import com.signaturemaker.app.R;
+import com.signaturemaker.app.comun.Constants;
+import com.signaturemaker.app.comun.Files;
 import com.signaturemaker.app.comun.PermissionsUtils;
 
 import java.lang.reflect.Field;
@@ -190,11 +195,11 @@ public class SingBoardFragment extends Fragment {
     }
 
     /**
-     *   Method for init color in picker color selector
+     * Method for init color in picker color selector
      */
     private void initColor() {
-        picker.setColor(getResources().getColor(R.color.colorPenDefault));
-        picker.setOldCenterColor(getResources().getColor(R.color.colorPenDefault));
+        picker.setColor(Constants.penColor);
+        picker.setOldCenterColor(Constants.penColor);
     }
 
     /**
@@ -254,14 +259,10 @@ public class SingBoardFragment extends Fragment {
                 sharePopUpOptions();
                 break;
             case R.id.bColor:
-
                 showColorPicker();
-
                 break;
             case R.id.bStroke:
-
                 showSeekbarStroke();
-
                 break;
             case R.id.bRubber:
                 cleanBoard();
@@ -289,6 +290,25 @@ public class SingBoardFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(final MenuItem menuItem) {
+
+                PermissionsUtils.getInstance().callRequestPermissions(getActivity(), PermissionsUtils.permissionsReadWrite, new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        saveFiles(menuItem.getItemId());
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                    }
+                });
+                return false;
+            }
+        });
+
         popupMenu.show();
     }
 
@@ -311,6 +331,24 @@ public class SingBoardFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(final MenuItem menuItem) {
+                PermissionsUtils.getInstance().callRequestPermissions(getActivity(), PermissionsUtils.permissionsReadWrite, new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        shareFiles(menuItem.getItemId());
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                    }
+                });
+                return false;
+            }
+        });
+
         popupMenu.show();
     }
 
@@ -392,7 +430,7 @@ public class SingBoardFragment extends Fragment {
      * Method for init the seekbar
      */
     private void initSeekBar() {
-        rangeBar.setRangePinsByValue(1, 4);
+        rangeBar.setRangePinsByValue(Constants.minStroke, Constants.maxStroke);
     }
 
     /**
@@ -527,8 +565,6 @@ public class SingBoardFragment extends Fragment {
 
 
     private void openListFilesFragment() {
-
-
         PermissionsUtils.getInstance().callRequestPermissions(getActivity(), PermissionsUtils.permissionsReadWrite, new MultiplePermissionsListener() {
             @Override
             public void onPermissionsChecked(MultiplePermissionsReport report) {
@@ -536,14 +572,56 @@ public class SingBoardFragment extends Fragment {
                 ft.replace(R.id.container, new ListFilesFragment());
                 ft.addToBackStack(SingBoardFragment.class.getSimpleName());
                 ft.commit();
-
             }
 
             @Override
             public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
-
             }
         });
+    }
+
+
+    private void saveFiles(int idMenu) {
+        Boolean status = false;
+        switch (idMenu) {
+            case R.id.savePngTrans:
+                status = Files.saveBitmapFile(mSingBoard.getTransparentSignatureBitmap(true), Files.addExtensionNamePng(Files.generateName()));
+                break;
+            case R.id.savePngWhite:
+                status = Files.saveBitmapFile(mSingBoard.getSignatureBitmap(), Files.addExtensionNamePng(Files.generateName()));
+                break;
+            case R.id.saveSvg:
+                status = Files.saveSvgFile(mSingBoard.getSignatureSvg(), Files.addExtensionNameSvg(Files.generateName()));
+                break;
+            default:
+                break;
+        }
+
+        if (status) {
+            showToast(getActivity(), getResources().getString(R.string.title_save_ok));
+        } else {
+            showToast(getActivity(), getResources().getString(R.string.title_save_ko));
+        }
+    }
+
+    private void shareFiles(int idMenu) {
+
+        saveFiles(idMenu);
+
+        switch (idMenu) {
+            case R.id.savePngTrans:
+
+                break;
+            case R.id.savePngWhite:
+
+                break;
+            case R.id.saveSvg:
+
+                break;
+            default:
+                break;
+        }
+
 
     }
 }

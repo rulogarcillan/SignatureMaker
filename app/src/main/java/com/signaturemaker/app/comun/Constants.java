@@ -23,8 +23,50 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 package com.signaturemaker.app.comun;
 
 
+import android.graphics.Color;
+import android.os.Environment;
+
 public final class Constants {
 
     public static final String TAG = "RULO";
 
+
+    public static final String OP1 = "OP1";
+    public static final String OP2 = "OP2";
+    public static final String OP3 = "OP3";
+    public static final String OP4 = "OP4";
+    public static final String OP5 = "OP5";
+    public static final String OP7 = "OP7";
+    public static final String OP8 = "OP8";
+    public static final String OP9 = "OP9";
+    public static final String OPPUB = "OPPUB";
+    public static final String FRAG = "FRAG";
+    public static final String STROKE = "STROKE";
+    public static final String COLOR = "COLOR";
+
+
+    public static final String ROOT = Environment.getExternalStorageDirectory().getAbsolutePath();
+
+    public static final int DEFAULT_SHORT_ORDER = -1;
+    public static final int DEFAULT_MAX_STROKE = 4;
+    public static final int DEFAULT_MINS_TROKE = 1;
+    public static final int DEFAULT_PEN_COLOR = Color.parseColor("#200BB2");
+    public static final int DEFAULT_WALLPAPER = 3;
+    public static final String DEFAULT_PATH = ROOT + "/Signature/";
+
+    public static int shortOrder = DEFAULT_SHORT_ORDER;
+    public static int maxStroke = DEFAULT_MAX_STROKE;
+    public static int minStroke = DEFAULT_MINS_TROKE;
+    public static int penColor = DEFAULT_PEN_COLOR;
+    public static int wallpaper = DEFAULT_WALLPAPER;
+    public static String path = DEFAULT_PATH;
+
+    public static void defaultValues() {
+        shortOrder = DEFAULT_SHORT_ORDER;
+        maxStroke = DEFAULT_MAX_STROKE;
+        minStroke = DEFAULT_MINS_TROKE;
+        penColor = DEFAULT_PEN_COLOR;
+        wallpaper = DEFAULT_WALLPAPER;
+        path = DEFAULT_PATH;
+    }
 }

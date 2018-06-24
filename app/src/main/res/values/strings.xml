@@ -30,6 +30,8 @@
 
     <string name="app_written">Application Written By Raúl R.C</string>
 
+    <string name="title_save_ok">File saved correctly</string>
+    <string name="title_save_ko">Error saving</string>
 
     <string name="body_permissions">Necesitas aceptar los permisos para un correcto funcionamiento de la app</string>
     <string name="title_request_permision">Solicitud de permisos de lectura y escritura</string>
