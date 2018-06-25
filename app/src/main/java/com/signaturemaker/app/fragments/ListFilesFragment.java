@@ -22,14 +22,9 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 package com.signaturemaker.app.fragments;
 
+
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -44,27 +39,29 @@ import com.signaturemaker.app.models.ItemFile;
 import com.signaturemaker.app.utils.Constants;
 import com.signaturemaker.app.utils.FilesUtils;
 import com.signaturemaker.app.utils.RecyclerItemTouchHelper;
-import com.signaturemaker.app.utils.SwipeableRecyclerViewTouchListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-
-public class ListFilesFragment extends Fragment  {
+public class ListFilesFragment extends Fragment {
 
 
     private OnFragmentInteractionListener mListener;
     private View rootView;
     private List<ItemFile> items = new ArrayList<>();
 
-    @BindView(R.id.path)
+    // @BindView(R.id.path)
     TextView path;
-    @BindView(R.id.recycler_view)
+    //@BindView(R.id.recycler_view)
     RecyclerView recyclerView;
-    @BindView(R.id.txtMnsNoFiles)
+    //@BindView(R.id.txtMnsNoFiles)
     TextView txtMnsNoFiles;
     AdapterFiles adapter;
 
@@ -84,7 +81,11 @@ public class ListFilesFragment extends Fragment  {
                              Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.list_files_fragment, container, false);
-        ButterKnife.bind(this, rootView);
+        //ButterKnife.bind(this, rootView);
+
+        path = rootView.findViewById(R.id.path);
+        recyclerView = rootView.findViewById(R.id.recycler_view);
+        txtMnsNoFiles = rootView.findViewById(R.id.txtMnsNoFiles);
         setHasOptionsMenu(true);
 
         loadItemsFiles();
@@ -109,14 +110,6 @@ public class ListFilesFragment extends Fragment  {
             }
         });
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
-
-
-
-
-
-
-
-
 
 
         return rootView;
@@ -167,13 +160,12 @@ public class ListFilesFragment extends Fragment  {
 
     private void loadItemsFiles() {
         items = FilesUtils.loadItemsFiles();
-        if (items.size()>0){
+        if (items.size() > 0) {
             txtMnsNoFiles.setVisibility(View.GONE);
-        }else{
+        } else {
             txtMnsNoFiles.setVisibility(View.VISIBLE);
         }
     }
-
 
 
 }

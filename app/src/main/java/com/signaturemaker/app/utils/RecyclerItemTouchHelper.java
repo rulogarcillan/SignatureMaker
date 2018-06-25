@@ -2,11 +2,12 @@ package com.signaturemaker.app.utils;
 
 
 import android.graphics.Canvas;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
 import com.signaturemaker.app.adapters.AdapterFiles;
+
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by ravi on 29/09/17.

@@ -28,7 +28,6 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Build;
-import android.support.v7.app.AlertDialog;
 import android.view.ViewGroup;
 
 import com.karumi.dexter.Dexter;
@@ -50,6 +49,8 @@ import com.signaturemaker.app.R;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+
+import androidx.appcompat.app.AlertDialog;
 
 
 public class PermissionsUtils {

@@ -25,13 +25,15 @@ package com.signaturemaker.app.activities;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
+import android.preference.PreferenceActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.signaturemaker.app.R;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import static com.signaturemaker.app.utils.Utils.getAppTimeStamp;
 
@@ -50,6 +52,10 @@ public class BaseActivity extends AppCompatActivity {
         switch (menuItem.getItemId()) {
 
             case R.id.settings:
+                Intent intent = new Intent(this, SettingsActivity.class);
+                intent.putExtra( PreferenceActivity.EXTRA_SHOW_FRAGMENT, SettingsActivity.GeneralPreferenceFragment.class.getName() );
+                intent.putExtra( PreferenceActivity.EXTRA_NO_HEADERS, true );
+                startActivity(intent);
                 break;
             case R.id.action_settings:
                 break;

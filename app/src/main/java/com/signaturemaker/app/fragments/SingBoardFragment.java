@@ -25,8 +25,6 @@ package com.signaturemaker.app.fragments;
 import android.animation.Animator;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -56,38 +54,35 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.OnLongClick;
-import butterknife.Optional;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import static com.signaturemaker.app.utils.Utils.showToast;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class SingBoardFragment extends Fragment {
+public class SingBoardFragment extends Fragment implements View.OnClickListener, View.OnLongClickListener {
 
-    @BindView(R.id.singBoard)
+    //@BindView(R.id.singBoard)
     SignaturePad mSingBoard;
 
-    @BindView(R.id.FabLeft)
+    //@BindView(R.id.FabLeft)
     FloatingActionsMenu fabLeft;
-    @BindView(R.id.FabUp)
+    //@BindView(R.id.FabUp)
     FloatingActionsMenu fabUp;
 
-    @BindView(R.id.bSave)
+    //@BindView(R.id.bSave)
     FloatingActionButton bSave;
-    @BindView(R.id.bList)
+    //@BindView(R.id.bList)
     FloatingActionButton bList;
-    @BindView(R.id.bSaveSend)
+    //@BindView(R.id.bSaveSend)
     FloatingActionButton bSaveSend;
-    @BindView(R.id.bColor)
+    //@BindView(R.id.bColor)
     FloatingActionButton bColor;
-    @BindView(R.id.bStroke)
+    //@BindView(R.id.bStroke)
     FloatingActionButton bStroke;
-    @BindView(R.id.bRubber)
+    //@BindView(R.id.bRubber)
     FloatingActionButton bRubber;
 
     View rootView;
@@ -95,20 +90,20 @@ public class SingBoardFragment extends Fragment {
     YoYo.YoYoString runningAnimationColor;
     YoYo.YoYoString runningAnimation;
 
-    @BindView(R.id.txtSingHere)
+    //@BindView(R.id.txtSingHere)
     TextView txtSingHere;
-    @BindView(R.id.rangeBar)
+    //@BindView(R.id.rangeBar)
     RangeBar rangeBar;
 
-    @BindView(R.id.rangeSeekBarLayout)
+    //@BindView(R.id.rangeSeekBarLayout)
     LinearLayout rangeSeekBarLayout;
 
-    @BindView(R.id.coloPickerLayout)
+    //@BindView(R.id.coloPickerLayout)
     LinearLayout coloPickerLayout;
 
-    @BindView(R.id.picker)
+    //@BindView(R.id.picker)
     ColorPicker picker;
-    @BindView(R.id.svbar)
+    //@BindView(R.id.svbar)
     SVBar svbar;
 
 
@@ -120,7 +115,37 @@ public class SingBoardFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.sing_board_fragment, container, false);
-        ButterKnife.bind(this, rootView);
+        //ButterKnife.bind(this, rootView);
+
+        mSingBoard = rootView.findViewById(R.id.singBoard);
+        fabLeft = rootView.findViewById(R.id.FabLeft);
+        fabUp = rootView.findViewById(R.id.FabUp);
+        bSave = rootView.findViewById(R.id.bSave);
+        bList = rootView.findViewById(R.id.bList);
+        bSaveSend = rootView.findViewById(R.id.bSaveSend);
+        bColor = rootView.findViewById(R.id.bColor);
+        bStroke = rootView.findViewById(R.id.bStroke);
+        bRubber = rootView.findViewById(R.id.bRubber);
+        txtSingHere = rootView.findViewById(R.id.txtSingHere);
+        rangeBar = rootView.findViewById(R.id.rangeBar);
+        rangeSeekBarLayout = rootView.findViewById(R.id.rangeSeekBarLayout);
+        coloPickerLayout = rootView.findViewById(R.id.coloPickerLayout);
+        picker = rootView.findViewById(R.id.picker);
+        svbar = rootView.findViewById(R.id.svbar);
+
+        bList                 .setOnClickListener(this);
+        bSave                 .setOnClickListener(this);
+        bSaveSend             .setOnClickListener(this);
+        bColor                .setOnClickListener(this);
+        bStroke               .setOnClickListener(this);
+        bRubber               .setOnClickListener(this);
+
+        bList                 .setOnLongClickListener(this);
+        bSave                 .setOnLongClickListener(this);
+        bSaveSend             .setOnLongClickListener(this);
+        bColor                .setOnLongClickListener(this);
+        bStroke               .setOnLongClickListener(this);
+        bRubber               .setOnLongClickListener(this);
 
         //add bar to picker
         picker.addSVBar(svbar);
@@ -200,75 +225,6 @@ public class SingBoardFragment extends Fragment {
         picker.setOldCenterColor(Constants.penColor);
     }
 
-    /**
-     * Method for all long click buttons
-     *
-     * @param view
-     * @return
-     */
-    @Optional
-    @OnLongClick({R.id.bSave, R.id.bList, R.id.bSaveSend, R.id.bColor, R.id.bStroke, R.id.bRubber})
-    public boolean onLongClick(View view) {
-        // since > api 26 insert tooltip in layout.xml
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-            switch (view.getId()) {
-                case R.id.bList:
-                    showToast(getContext(), getString(R.string.title_bList));
-                    break;
-                case R.id.bSave:
-                    showToast(getContext(), getString(R.string.title_bSave));
-                    break;
-                case R.id.bSaveSend:
-                    showToast(getContext(), getString(R.string.title_bSaveSend));
-                    break;
-                case R.id.bColor:
-                    showToast(getContext(), getString(R.string.title_bColor));
-                    break;
-                case R.id.bStroke:
-                    showToast(getContext(), getString(R.string.title_bStroke));
-                    break;
-                case R.id.bRubber:
-                    showToast(getContext(), getString(R.string.title_bRubber));
-                    break;
-                default:
-                    break;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Method for all click buttons
-     *
-     * @param view
-     * @return
-     */
-    @Optional
-    @OnClick({R.id.bSave, R.id.bList, R.id.bSaveSend, R.id.bColor, R.id.bStroke, R.id.bRubber})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.bList:
-                openListFilesFragment();
-                break;
-            case R.id.bSave:
-                savePopUpOptions();
-                break;
-            case R.id.bSaveSend:
-                sharePopUpOptions();
-                break;
-            case R.id.bColor:
-                showColorPicker();
-                break;
-            case R.id.bStroke:
-                showSeekbarStroke();
-                break;
-            case R.id.bRubber:
-                cleanBoard();
-                break;
-            default:
-                break;
-        }
-    }
 
     /**
      * Show popup menu with save options
@@ -619,7 +575,133 @@ public class SingBoardFragment extends Fragment {
             default:
                 break;
         }
+    }
 
 
+    /**
+     * Method for all click buttons
+     *
+     * @param view
+     * @return
+     */
+    /*@Optional
+    @OnClick({R.id.bSave, R.id.bList, R.id.bSaveSend, R.id.bColor, R.id.bStroke, R.id.bRubber})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.bList:
+                openListFilesFragment();
+                break;
+            case R.id.bSave:
+                savePopUpOptions();
+                break;
+            case R.id.bSaveSend:
+                sharePopUpOptions();
+                break;
+            case R.id.bColor:
+                showColorPicker();
+                break;
+            case R.id.bStroke:
+                showSeekbarStroke();
+                break;
+            case R.id.bRubber:
+                cleanBoard();
+                break;
+            default:
+                break;
+        }
+    }
+*/
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()) {
+            case R.id.bList:
+                openListFilesFragment();
+                break;
+            case R.id.bSave:
+                savePopUpOptions();
+                break;
+            case R.id.bSaveSend:
+                sharePopUpOptions();
+                break;
+            case R.id.bColor:
+                showColorPicker();
+                break;
+            case R.id.bStroke:
+                showSeekbarStroke();
+                break;
+            case R.id.bRubber:
+                cleanBoard();
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    /**
+     * Method for all long click buttons
+     *
+     * @param view
+     * @return
+     */
+/*    @Optional
+    @OnLongClick({R.id.bSave, R.id.bList, R.id.bSaveSend, R.id.bColor, R.id.bStroke, R.id.bRubber})
+    public boolean onLongClick(View view) {
+        // since > api 26 insert tooltip in layout.xml
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            switch (view.getId()) {
+                case R.id.bList:
+                    showToast(getContext(), getString(R.string.title_bList));
+                    break;
+                case R.id.bSave:
+                    showToast(getContext(), getString(R.string.title_bSave));
+                    break;
+                case R.id.bSaveSend:
+                    showToast(getContext(), getString(R.string.title_bSaveSend));
+                    break;
+                case R.id.bColor:
+                    showToast(getContext(), getString(R.string.title_bColor));
+                    break;
+                case R.id.bStroke:
+                    showToast(getContext(), getString(R.string.title_bStroke));
+                    break;
+                case R.id.bRubber:
+                    showToast(getContext(), getString(R.string.title_bRubber));
+                    break;
+                default:
+                    break;
+            }
+        }
+        return false;
+    }
+*/
+    @Override
+    public boolean onLongClick(View view) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            switch (view.getId()) {
+                case R.id.bList:
+                    showToast(getContext(), getString(R.string.title_bList));
+                    break;
+                case R.id.bSave:
+                    showToast(getContext(), getString(R.string.title_bSave));
+                    break;
+                case R.id.bSaveSend:
+                    showToast(getContext(), getString(R.string.title_bSaveSend));
+                    break;
+                case R.id.bColor:
+                    showToast(getContext(), getString(R.string.title_bColor));
+                    break;
+                case R.id.bStroke:
+                    showToast(getContext(), getString(R.string.title_bStroke));
+                    break;
+                case R.id.bRubber:
+                    showToast(getContext(), getString(R.string.title_bRubber));
+                    break;
+                default:
+                    break;
+            }
+        }
+        return false;
     }
 }

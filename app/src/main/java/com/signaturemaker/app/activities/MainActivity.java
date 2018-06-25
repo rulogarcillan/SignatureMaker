@@ -23,12 +23,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 package com.signaturemaker.app.activities;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 
 import com.signaturemaker.app.R;
 import com.signaturemaker.app.fragments.SingBoardFragment;
 
-import butterknife.ButterKnife;
+import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends BaseActivity {
 
@@ -37,7 +36,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        //ButterKnife.bind(this);
 
 
 
