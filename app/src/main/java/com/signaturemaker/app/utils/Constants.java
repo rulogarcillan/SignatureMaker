@@ -30,15 +30,15 @@ public final class Constants {
 
     public static final String TAG = "RULO";
 
+    public static final String ID_PREF_ADVERTISING = "id_pref_advertising";
+    public static final String ID_PREF_PATH = "id_pref_path";
+    public static final String ID_PREF_DELETE = "id_pref_delete";
+    public static final String ID_PREF_GALLERY = "id_pref_gallery";
+    public static final String ID_PREF_NAME = "id_pref_name";
+    public static final String ID_PREF_COLOR = "id_pref_color";
+    public static final String ID_PREF_STROKE = "id_pref_stroke";
+    public static final String ID_PREF_RESET = "id_pref_reset";
 
-    public static final String OP1 = "OP1";
-    public static final String OP2 = "OP2";
-    public static final String OP3 = "OP3";
-    public static final String OP4 = "OP4";
-    public static final String OP5 = "OP5";
-    public static final String OP7 = "OP7";
-    public static final String OP8 = "OP8";
-    public static final String OP9 = "OP9";
     public static final String OPPUB = "OPPUB";
     public static final String FRAG = "FRAG";
     public static final String STROKE = "STROKE";

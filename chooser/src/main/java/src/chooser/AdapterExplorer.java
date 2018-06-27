@@ -88,7 +88,7 @@ public class AdapterExplorer extends RecyclerView.Adapter<AdapterExplorer.ViewHo
 
     @Override
     public AdapterExplorer.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_explore, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_explorer_path, parent, false);
         ViewHolder vhItem = new ViewHolder(v, viewType);
         return vhItem;
     }

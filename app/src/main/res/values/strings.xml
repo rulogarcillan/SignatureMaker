@@ -1,19 +1,11 @@
 <resources>
     <string name="title_appName">Signature Maker</string>
     <string name="title_setting">Settings</string>
-    <string name="title_home">Home</string>
-    <string name="title_tasks">Tasks</string>
-    <string name="title_sounds">Sounds</string>
-    <string name="title_favorites">Favorites</string>
-
+    <string name="title_activity_settings">Settings</string>
     <string name="title_changelog">Changelog</string>
     <string name="title_rate">Rate it</string>
     <string name="title_license">Licenses</string>
     <string name="title_more">More apps</string>
-
-    <string name="title_start">Start</string>
-    <string name="title_stop">Stop</string>
-
 
     <string name="title_bSave">Save</string>
     <string name="title_bList">List</string>
@@ -21,13 +13,10 @@
     <string name="title_bColor">Color</string>
     <string name="title_bStroke">Stroke</string>
     <string name="title_bRubber">Clean</string>
-
-
     <string name="title_SingHere">Sign here</string>
     <string name="title_save_png">PNG (Transparent BG)</string>
     <string name="title_save_png_wh">PNG (White BG)</string>
     <string name="title_save_svg">SVG (Transparent BG)</string>
-
     <string name="app_written">Application Written By Raúl R.C</string>
 
     <string name="title_save_ok">File saved correctly</string>
@@ -38,87 +27,32 @@
     <string name="help_l">Swipe left to share</string>
     <string name="help">Help</string>
 
-
     <string name="body_permissions">Necesitas aceptar los permisos para un correcto funcionamiento de la app</string>
     <string name="title_request_permision">Solicitud de permisos de lectura y escritura</string>
     <string name="body_request_permision">Para poder usar la aplicación correctamente es necesario tener acceso a ciertos permisos del sistema. Acepte los permisos o la aplicación no funcionará.</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="action_settings">Settings</string>
-
     <string name="title_no_files">No files</string>
     <string name="delete">Delete</string>
-    <string name="title_activity_settings">Settings</string>
 
-    <!-- Strings related to Settings -->
-
-    <!-- Example General settings -->
-    <string name="pref_header_general">General</string>
-
-    <string name="pref_title_social_recommendations">Enable social recommendations</string>
-    <string name="pref_description_social_recommendations">Recommendations for people to contact
-        based on your message history
-    </string>
-
-    <string name="pref_title_display_name">Display name</string>
-    <string name="pref_default_display_name">John Smith</string>
-
-    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
-    <string-array name="pref_example_list_titles">
-        <item>Always</item>
-        <item>When possible</item>
-        <item>Never</item>
-    </string-array>
-    <string-array name="pref_example_list_values">
-        <item>1</item>
-        <item>0</item>
-        <item>-1</item>
-    </string-array>
-
-    <!-- Example settings for Data & Sync -->
-    <string name="pref_header_data_sync">Data &amp; sync</string>
-
-    <string name="pref_title_sync_frequency">Sync frequency</string>
-    <string-array name="pref_sync_frequency_titles">
-        <item>15 minutes</item>
-        <item>30 minutes</item>
-        <item>1 hour</item>
-        <item>3 hours</item>
-        <item>6 hours</item>
-        <item>Never</item>
-    </string-array>
-    <string-array name="pref_sync_frequency_values">
-        <item>15</item>
-        <item>30</item>
-        <item>60</item>
-        <item>180</item>
-        <item>360</item>
-        <item>-1</item>
-    </string-array>
-
-    <string-array name="list_preference_entries">
-        <item>Entry 1</item>
-        <item>Entry 2</item>
-        <item>Entry 3</item>
-    </string-array>
-
-    <string-array name="list_preference_entry_values">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
-
-    <string-array name="multi_select_list_preference_default_value" />
-
-    <string name="pref_title_system_sync_settings">System sync settings</string>
-
-    <!-- Example settings for Notifications -->
-    <string name="pref_header_notifications">Notifications</string>
-
-    <string name="pref_title_new_message_notifications">New message notifications</string>
-
-    <string name="pref_title_ringtone">Ringtone</string>
-    <string name="pref_ringtone_silent">Silent</string>
-
-    <string name="pref_title_vibrate">Vibrate</string>
+    <!--       Preferences      -->
+    <string name="title_pref_advertising_t">Advertising</string>
+    <string name="title_pref_advertising">Disable ads</string>
+    <string name="title_pref_advertising_sum">Disable ads if it bothers you.</string>
+    <string name="title_pref_files">Files</string>
+    <string name="title_pref_path">Exported signatures path</string>
+    <string name="title_pref_delete_sum">Delete all signatures on exit</string>
+    <string name="title_pref_delete">Delete signatures</string>
+    <string name="title_pref_gallery">Hide signatures</string>
+    <string name="title_pref_gallery_sum">Do not display signatures in the phone gallery</string>
+    <string name="title_pref_name">File name</string>
+    <string name="title_pref_name_sum">Choose file name when saving</string>
+    <string name="title_pref_siganture">Signature</string>
+    <string name="title_pref_stroke">Default stroke</string>
+    <string name="title_pref_stroke_sum">Keep last stroke used by default</string>
+    <string name="title_pref_color">Default color</string>
+    <string name="title_pref_color_sum">Keep last color used by default</string>
+    <string name="title_pref_reset">Default values</string>
+    <string name="title_pref_reset_sum">Reset all defaults</string>
 
 </resources>

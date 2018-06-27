@@ -43,11 +43,9 @@ public final class Files {
         if (folder.exists()) {
             files = folder.listFiles();
             Arrays.sort(files);
-
             for (File file : files) {
                 if (file.isDirectory()) {
                     arrayItems.add(file.getName());
-
                 }
             }
         }

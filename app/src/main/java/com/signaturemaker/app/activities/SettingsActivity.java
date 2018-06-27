@@ -1,24 +1,32 @@
 package com.signaturemaker.app.activities;
 
-import android.annotation.TargetApi;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.preference.RingtonePreference;
-import android.text.TextUtils;
+import android.preference.PreferenceScreen;
+import android.text.Html;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.signaturemaker.app.R;
+import com.signaturemaker.app.utils.Constants;
+import com.signaturemaker.app.utils.PermissionsUtils;
+
+import java.util.List;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import src.chooser.ChooseFolder;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -54,28 +62,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                                 ? listPreference.getEntries()[index]
                                 : null);
 
-            } else if (preference instanceof RingtonePreference) {
-                // For ringtone preferences, look up the correct display value
-                // using RingtoneManager.
-                if (TextUtils.isEmpty(stringValue)) {
-                    // Empty values correspond to 'silent' (no ringtone).
-                    preference.setSummary(R.string.pref_ringtone_silent);
-
-                } else {
-                    Ringtone ringtone = RingtoneManager.getRingtone(
-                            preference.getContext(), Uri.parse(stringValue));
-
-                    if (ringtone == null) {
-                        // Clear the summary if there was a lookup error.
-                        preference.setSummary(null);
-                    } else {
-                        // Set the summary to reflect the new ringtone display
-                        // name.
-                        String name = ringtone.getTitle(preference.getContext());
-                        preference.setSummary(name);
-                    }
-                }
-
             } else {
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
@@ -84,7 +70,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             return true;
         }
     };
-
 
 
     /**
@@ -105,7 +90,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
                 PreferenceManager
                         .getDefaultSharedPreferences(preference.getContext())
-                        .getString(preference.getKey(), ""));
+                        .getString(preference.getKey(), Constants.path.replace(Constants.ROOT, "/sdcard")));
     }
 
     @Override
@@ -124,6 +109,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
     }
+
     /**
      * This method stops fragment injection in malicious applications.
      * Make sure to deny any unknown fragments here.
@@ -133,11 +119,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 || GeneralPreferenceFragment.class.getName().equals(fragmentName);
     }
 
-    /**
-     * This fragment shows general preferences only. It is used when the
-     * activity is showing a two-pane settings UI.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+
     public static class GeneralPreferenceFragment extends PreferenceFragment {
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -149,8 +131,37 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
-            bindPreferenceSummaryToValue(findPreference("example_text"));
-            bindPreferenceSummaryToValue(findPreference("example_list"));
+            bindPreferenceSummaryToValue(findPreference(Constants.ID_PREF_PATH));
+            //  bindPreferenceSummaryToValue(findPreference("example_list"));
+
+            CheckBoxPreference prefAds = (CheckBoxPreference) findPreference(Constants.ID_PREF_ADVERTISING);
+            prefAds.setSummary(Html.fromHtml("<font color='red'>" + getResources().getString(R.string.title_pref_advertising_sum) + "</font>"));
+        }
+
+        @Override
+        public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+
+            switch (preference.getKey()) {
+
+                case Constants.ID_PREF_PATH:
+
+                    PermissionsUtils.getInstance().callRequestPermissions(getActivity(), PermissionsUtils.permissionsReadWrite, new MultiplePermissionsListener() {
+                        @Override
+                        public void onPermissionsChecked(MultiplePermissionsReport report) {
+                            showDialogPath();
+                        }
+
+                        @Override
+                        public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        }
+                    });
+
+
+                    break;
+                default:
+                    break;
+            }
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
 
         @Override
@@ -161,6 +172,33 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 return true;
             }
             return super.onOptionsItemSelected(item);
+        }
+
+
+        private void showDialogPath() {
+            View view = getActivity().getLayoutInflater().inflate(R.layout.chooser_path, null);
+            AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+            final ChooseFolder chos = (ChooseFolder) view.findViewById(R.id.chooserview);
+            chos.setPath(Constants.path);
+
+            dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+
+                public void onClick(DialogInterface dialog, int id) {
+                    String oldPath = Constants.path;
+                    Constants.path = chos.getPath();
+
+                    //editor.putString(PreferencesCons.OP1, Constants.path);
+                    // editor.commit();
+                    // preference.setSummary(PreferencesCons.pathFiles.replace(PreferencesCons.ROOT, "/sdcard"));
+                    //  Ficheros.moveFiles(oldPath, getActivity());
+
+                }
+            });
+
+            dialog.setView(view);
+            dialog.show();
+
+
         }
     }
 

@@ -49,8 +49,7 @@ android:orientation="vertical">
             android:layout_centerVertical="true"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:src="@color/colorPenDefault"
- />
+            android:src="@color/colorPenDefault" />
 
         <TextView
             android:id="@+id/textName"
@@ -86,9 +85,5 @@ android:orientation="vertical">
             android:textColor="@color/secondary_text"
             android:layout_alignBottom="@+id/textDate"
             android:layout_alignParentRight="true" />
-
     </RelativeLayout>
-
-
-
 </FrameLayout>
