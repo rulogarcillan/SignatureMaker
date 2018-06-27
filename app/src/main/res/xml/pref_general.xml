@@ -34,6 +34,12 @@
             android:summary="@string/title_pref_stroke_sum"
             android:title="@string/title_pref_stroke" />
     </PreferenceCategory>
+    <PreferenceCategory android:title="@string/title_pref_advertising_t">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="id_pref_advertising"
+            android:title="@string/title_pref_advertising" />
+    </PreferenceCategory>
     <PreferenceCategory android:title="@string/title_setting">
         <Preference
             android:key="id_pref_reset"
@@ -41,10 +47,5 @@
             android:title="@string/title_pref_reset" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/title_pref_advertising_t">
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="id_pref_advertising"
-            android:title="@string/title_pref_advertising" />
-    </PreferenceCategory>
+
 </PreferenceScreen>

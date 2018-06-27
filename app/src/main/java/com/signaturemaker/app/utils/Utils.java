@@ -45,10 +45,10 @@ public final class Utils {
 
     private Utils() {
     }
-    
+
     public static int sortOrder = Constants.DEFAULT_SORT_ORDER;
     public static int maxStroke = Constants.DEFAULT_MAX_STROKE;
-    public static int minStroke = Constants.DEFAULT_MINS_TROKE;
+    public static int minStroke = Constants.DEFAULT_MIN_TROKE;
     public static int penColor = Constants.DEFAULT_PEN_COLOR;
     public static int wallpaper = Constants.DEFAULT_WALLPAPER;
     public static String path = Constants.DEFAULT_PATH;
@@ -56,7 +56,7 @@ public final class Utils {
     public static void defaultValues() {
         sortOrder = Constants.DEFAULT_SORT_ORDER;
         maxStroke = Constants.DEFAULT_MAX_STROKE;
-        minStroke = Constants.DEFAULT_MINS_TROKE;
+        minStroke = Constants.DEFAULT_MIN_TROKE;
         penColor = Constants.DEFAULT_PEN_COLOR;
         wallpaper = Constants.DEFAULT_WALLPAPER;
         path = Constants.DEFAULT_PATH;
@@ -65,6 +65,45 @@ public final class Utils {
     public static void defaultPath() {
         path = Constants.DEFAULT_PATH;
     }
+
+    public static void defaultColor() {
+        penColor = Constants.DEFAULT_PEN_COLOR;
+    }
+
+    public static void defaultStroke() {
+        maxStroke = Constants.DEFAULT_MAX_STROKE;
+        minStroke = Constants.DEFAULT_MIN_TROKE;
+    }
+
+
+    public static void loadAllPreferences(Context mContext) {
+
+        if (Utils.loadPreference(mContext, Constants.ID_PREF_COLOR, false)) {
+            Utils.penColor = loadPreference(mContext, Constants.PREF_COLOR, Constants.DEFAULT_PEN_COLOR);
+        } else {
+            Utils.defaultColor();
+        }
+
+        if (Utils.loadPreference(mContext, Constants.ID_PREF_STROKE, false)) {
+            Utils.minStroke = loadPreference(mContext, Constants.PREF_MIN_TROKE, Constants.DEFAULT_MIN_TROKE);
+            Utils.maxStroke = loadPreference(mContext, Constants.PREF_MAX_TROKE, Constants.DEFAULT_MAX_STROKE);
+        } else {
+            Utils.defaultStroke();
+        }
+    }
+
+
+    public static void saveAllPreferences(Context mContext) {
+        if (Utils.loadPreference(mContext, Constants.ID_PREF_COLOR, false)) {
+            savePreference(mContext, Constants.PREF_COLOR, Utils.penColor);
+        }
+
+        if (Utils.loadPreference(mContext, Constants.ID_PREF_STROKE, false)) {
+            savePreference(mContext, Constants.PREF_MIN_TROKE, Utils.minStroke);
+            savePreference(mContext, Constants.PREF_MAX_TROKE, Utils.maxStroke);
+        }
+    }
+
 
     /**
      * Get last time compilation app

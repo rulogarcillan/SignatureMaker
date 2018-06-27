@@ -41,15 +41,15 @@ public final class Constants {
 
     public static final String OPPUB = "OPPUB";
     public static final String FRAG = "FRAG";
-    public static final String STROKE = "STROKE";
-    public static final String COLOR = "COLOR";
-
+    public static final String PREF_MAX_TROKE = "MAX_STROKE";
+    public static final String PREF_MIN_TROKE = "MIN_STROKE";
+    public static final String PREF_COLOR = "COLOR";
 
     public static final String ROOT = Environment.getExternalStorageDirectory().getAbsolutePath();
 
     public static final int DEFAULT_SORT_ORDER = -1;
     public static final int DEFAULT_MAX_STROKE = 4;
-    public static final int DEFAULT_MINS_TROKE = 1;
+    public static final int DEFAULT_MIN_TROKE = 1;
     public static final int DEFAULT_PEN_COLOR = Color.parseColor("#200BB2");
     public static final int DEFAULT_WALLPAPER = 3;
     public static final String DEFAULT_PATH = ROOT + "/Signature/";

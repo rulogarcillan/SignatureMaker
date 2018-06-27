@@ -26,8 +26,10 @@ import android.os.Bundle;
 
 import com.signaturemaker.app.R;
 import com.signaturemaker.app.fragments.SingBoardFragment;
+import com.signaturemaker.app.utils.Utils;
 
 import androidx.fragment.app.FragmentTransaction;
+import okhttp3.internal.Util;
 
 public class MainActivity extends BaseActivity {
 
@@ -38,7 +40,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         //ButterKnife.bind(this);
 
-
+        Utils.loadAllPreferences(this);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.container, new SingBoardFragment(), SingBoardFragment.class.getSimpleName());

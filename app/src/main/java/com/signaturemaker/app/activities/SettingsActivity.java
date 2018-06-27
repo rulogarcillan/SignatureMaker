@@ -201,11 +201,23 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         }
 
         private void setDefaultPreferences() {
-            // findPreference(Constants.ID_PREF_PATH).setDefaultValue(Constants.DEFAULT_PATH);
-            // Utils.defaultPath();
-            // findPreference(Constants.ID_PREF_DELETE).setDefaultValue(false);
-            Utils.savePreference(findPreference(Constants.ID_PREF_DELETE).getContext(), Constants.ID_PREF_DELETE, false);
-           // addPreferencesFromResource(R.xml.pref_general);
+
+            findPreference(Constants.ID_PREF_PATH).setDefaultValue(Constants.DEFAULT_PATH);
+            String oldPath = Utils.path;
+            Utils.defaultPath();
+            Utils.savePreference(findPreference(Constants.ID_PREF_PATH).getContext(), Constants.ID_PREF_PATH, Utils.path);
+            bindPreferenceSummaryToValue(findPreference(Constants.ID_PREF_PATH));
+            FilesUtils.moveFiles(oldPath, getActivity());
+
+            ((CheckBoxPreference) findPreference(Constants.ID_PREF_DELETE)).setChecked(false);
+            ((CheckBoxPreference) findPreference(Constants.ID_PREF_GALLERY)).setChecked(true);
+            ((CheckBoxPreference) findPreference(Constants.ID_PREF_NAME)).setChecked(false);
+            ((CheckBoxPreference) findPreference(Constants.ID_PREF_COLOR)).setChecked(false);
+            ((CheckBoxPreference) findPreference(Constants.ID_PREF_STROKE)).setChecked(false);
+            ((CheckBoxPreference) findPreference(Constants.ID_PREF_ADVERTISING)).setChecked(false);
+            Utils.saveAllPreferences(getActivity());
+            Utils.defaultValues();
+
 
         }
     }

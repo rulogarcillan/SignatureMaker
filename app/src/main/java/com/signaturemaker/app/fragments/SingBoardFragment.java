@@ -46,10 +46,10 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.larswerkman.holocolorpicker.ColorPicker;
 import com.larswerkman.holocolorpicker.SVBar;
 import com.signaturemaker.app.R;
-import com.signaturemaker.app.utils.Constants;
 import com.signaturemaker.app.utils.FilesUtils;
 import com.signaturemaker.app.utils.PermissionsUtils;
 import com.signaturemaker.app.utils.Utils;
+
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -134,19 +134,19 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
         picker = rootView.findViewById(R.id.picker);
         svbar = rootView.findViewById(R.id.svbar);
 
-        bList                 .setOnClickListener(this);
-        bSave                 .setOnClickListener(this);
-        bSaveSend             .setOnClickListener(this);
-        bColor                .setOnClickListener(this);
-        bStroke               .setOnClickListener(this);
-        bRubber               .setOnClickListener(this);
+        bList.setOnClickListener(this);
+        bSave.setOnClickListener(this);
+        bSaveSend.setOnClickListener(this);
+        bColor.setOnClickListener(this);
+        bStroke.setOnClickListener(this);
+        bRubber.setOnClickListener(this);
 
-        bList                 .setOnLongClickListener(this);
-        bSave                 .setOnLongClickListener(this);
-        bSaveSend             .setOnLongClickListener(this);
-        bColor                .setOnLongClickListener(this);
-        bStroke               .setOnLongClickListener(this);
-        bRubber               .setOnLongClickListener(this);
+        bList.setOnLongClickListener(this);
+        bSave.setOnLongClickListener(this);
+        bSaveSend.setOnLongClickListener(this);
+        bColor.setOnLongClickListener(this);
+        bStroke.setOnLongClickListener(this);
+        bRubber.setOnLongClickListener(this);
 
         //add bar to picker
         picker.addSVBar(svbar);
@@ -190,9 +190,11 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
             @Override
             public void onRangeChangeListener(RangeBar rangeBar, int leftPinIndex,
                                               int rightPinIndex, String leftPinValue, String rightPinValue) {
-
-                mSingBoard.setMinWidth(leftPinIndex);
-                mSingBoard.setMaxWidth(rightPinIndex);
+                Utils.minStroke = leftPinIndex;
+                Utils.maxStroke = rightPinIndex;
+                mSingBoard.setMinWidth(Utils.minStroke);
+                mSingBoard.setMaxWidth(Utils.maxStroke);
+                Utils.saveAllPreferences(getActivity());
             }
 
         });
@@ -201,29 +203,43 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
         picker.setOnColorChangedListener(new ColorPicker.OnColorChangedListener() {
             @Override
             public void onColorChanged(int i) {
-                bColor.setColorNormal(i);
-                mSingBoard.setPenColor(i);
+                Utils.penColor=i;
+                bColor.setColorNormal(Utils.penColor);
+                mSingBoard.setPenColor(Utils.penColor);
+                Utils.saveAllPreferences(getActivity());
             }
         });
 
-        initSeekBar();
-        initColor();
+
+
 
         return rootView;
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-
+    public void onResume() {
+        super.onResume();
+        setSeekBarRange();
+        setColor();
     }
 
     /**
-     * Method for init color in picker color selector
+     * Method for set color in picker color selector
      */
-    private void initColor() {
+    private void setColor() {
         picker.setColor(Utils.penColor);
         picker.setOldCenterColor(Utils.penColor);
+        bColor.setColorNormal(Utils.penColor);
+        mSingBoard.setPenColor(Utils.penColor);
+    }
+
+    /**
+     * Method for set the seekbar
+     */
+    private void setSeekBarRange() {
+        rangeBar.setRangePinsByValue(Utils.minStroke, Utils.maxStroke);
+        mSingBoard.setMinWidth(Utils.minStroke);
+        mSingBoard.setMaxWidth(Utils.maxStroke);
     }
 
 
@@ -381,12 +397,6 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
         txtSingHere.setVisibility(View.VISIBLE);
     }
 
-    /**
-     * Method for init the seekbar
-     */
-    private void initSeekBar() {
-        rangeBar.setRangePinsByValue(Utils.minStroke, Utils.maxStroke);
-    }
 
     /**
      * Method for hide seekbar stroke
