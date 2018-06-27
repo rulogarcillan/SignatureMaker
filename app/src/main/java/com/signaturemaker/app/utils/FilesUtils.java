@@ -1,6 +1,9 @@
 package com.signaturemaker.app.utils;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 
 import com.signaturemaker.app.models.ItemFile;
 
@@ -66,8 +69,8 @@ public final class FilesUtils {
     public static boolean saveBitmapFile(Bitmap bitmap, String name) {
 
         File file;
-        createFolder(Constants.path);
-        file = new File(Constants.path + name);
+        createFolder(Utils.path);
+        file = new File(Utils.path + name);
 
         try {
             file.createNewFile();
@@ -84,8 +87,8 @@ public final class FilesUtils {
     public static boolean saveSvgFile(String content, String name) {
 
         File file;
-        createFolder(Constants.path);
-        file = new File(Constants.path + name);
+        createFolder(Utils.path);
+        file = new File(Utils.path + name);
 
         try {
             // file.createNewFile();
@@ -125,7 +128,7 @@ public final class FilesUtils {
         List<ItemFile> arrayItems = new ArrayList<>();
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        folder = new File(Constants.path);
+        folder = new File(Utils.path);
         if (folder.exists()) {
             files = folder.listFiles();
 
@@ -140,8 +143,32 @@ public final class FilesUtils {
                 }
             }
         }
-        Utils.sort(arrayItems, Constants.sortOrder);
+        Utils.sort(arrayItems, Utils.sortOrder);
         return arrayItems;
+    }
+
+
+    public static void moveFiles(String oldPaht, Activity mActivity) {
+
+        if (!oldPaht.equals(Utils.path)) {
+            File files[];
+            File folder;
+
+            folder = new File(oldPaht);
+            if (folder.exists()) {
+                files = folder.listFiles();
+                for (File file : files) {
+
+                    String name = file.getName();
+
+                    if (((name.contains(".png") || name.contains(".PNG") || name.contains(".svg") || name.contains(".SVG")) && name.substring(0, 2).equals("SM")) || name.equals(".nomedia")) {
+                        file.renameTo(new File(Utils.path + "/" + name));
+                        mActivity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file))); //antigua
+                        mActivity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(Utils.path + "/" + name)))); //nueva
+                    }
+                }
+            }
+        }
     }
 
 
@@ -264,31 +291,7 @@ public final class FilesUtils {
         }
     }
 
-    public static void moveFiles(String oldPaht, Activity activity) {
 
-        if (!oldPaht.equals(pathFiles)) {
-
-
-            File archivos[];
-            File carpeta;
-
-            carpeta = new File(oldPaht);
-            if (carpeta.exists()) {
-                archivos = carpeta.listFiles();
-                for (File file : archivos) {
-
-                    String name = file.getName();
-
-                    if (((name.contains(".png") || name.contains(".PNG")) && name.substring(0, 2).equals("SM")) || name.equals(".nomedia")) {
-                        file.renameTo(new File(pathFiles + "/" + name));
-
-                        activity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file))); //antigua
-                        activity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(pathFiles + "/" + name)))); //nueva
-                    }
-                }
-            }
-        }
-    }
 
 */
 }

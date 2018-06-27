@@ -1,5 +1,6 @@
 package com.signaturemaker.app.activities;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +21,9 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.signaturemaker.app.R;
 import com.signaturemaker.app.utils.Constants;
+import com.signaturemaker.app.utils.FilesUtils;
 import com.signaturemaker.app.utils.PermissionsUtils;
+import com.signaturemaker.app.utils.Utils;
 
 import java.util.List;
 
@@ -88,9 +91,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         // Trigger the listener immediately with the preference's
         // current value.
         sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
-                PreferenceManager
+                (String) (PreferenceManager
                         .getDefaultSharedPreferences(preference.getContext())
-                        .getString(preference.getKey(), Constants.path.replace(Constants.ROOT, "/sdcard")));
+                        .getString(preference.getKey(), Utils.path)).replace(Constants.ROOT, "/sdcard"));
     }
 
     @Override
@@ -121,6 +124,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
 
     public static class GeneralPreferenceFragment extends PreferenceFragment {
+
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -155,9 +159,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                         public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
                         }
                     });
-
-
                     break;
+                case Constants.ID_PREF_RESET:
+                    setDefaultPreferences();
                 default:
                     break;
             }
@@ -179,28 +183,31 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             View view = getActivity().getLayoutInflater().inflate(R.layout.chooser_path, null);
             AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
             final ChooseFolder chos = (ChooseFolder) view.findViewById(R.id.chooserview);
-            chos.setPath(Constants.path);
+            chos.setPath(Utils.path);
 
             dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
 
                 public void onClick(DialogInterface dialog, int id) {
-                    String oldPath = Constants.path;
-                    Constants.path = chos.getPath();
-
-                    //editor.putString(PreferencesCons.OP1, Constants.path);
-                    // editor.commit();
-                    // preference.setSummary(PreferencesCons.pathFiles.replace(PreferencesCons.ROOT, "/sdcard"));
-                    //  Ficheros.moveFiles(oldPath, getActivity());
-
+                    String oldPath = Utils.path;
+                    Utils.path = chos.getPath();
+                    Utils.savePreference(findPreference(Constants.ID_PREF_PATH).getContext(), Constants.ID_PREF_PATH, Utils.path);
+                    bindPreferenceSummaryToValue(findPreference(Constants.ID_PREF_PATH));
+                    FilesUtils.moveFiles(oldPath, getActivity());
                 }
             });
 
             dialog.setView(view);
             dialog.show();
+        }
 
+        private void setDefaultPreferences() {
+            // findPreference(Constants.ID_PREF_PATH).setDefaultValue(Constants.DEFAULT_PATH);
+            // Utils.defaultPath();
+            // findPreference(Constants.ID_PREF_DELETE).setDefaultValue(false);
+            Utils.savePreference(findPreference(Constants.ID_PREF_DELETE).getContext(), Constants.ID_PREF_DELETE, false);
+           // addPreferencesFromResource(R.xml.pref_general);
 
         }
     }
-
 
 }

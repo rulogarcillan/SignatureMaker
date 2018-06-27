@@ -49,6 +49,7 @@ import com.signaturemaker.app.R;
 import com.signaturemaker.app.utils.Constants;
 import com.signaturemaker.app.utils.FilesUtils;
 import com.signaturemaker.app.utils.PermissionsUtils;
+import com.signaturemaker.app.utils.Utils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -221,8 +222,8 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
      * Method for init color in picker color selector
      */
     private void initColor() {
-        picker.setColor(Constants.penColor);
-        picker.setOldCenterColor(Constants.penColor);
+        picker.setColor(Utils.penColor);
+        picker.setOldCenterColor(Utils.penColor);
     }
 
 
@@ -384,7 +385,7 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
      * Method for init the seekbar
      */
     private void initSeekBar() {
-        rangeBar.setRangePinsByValue(Constants.minStroke, Constants.maxStroke);
+        rangeBar.setRangePinsByValue(Utils.minStroke, Utils.maxStroke);
     }
 
     /**

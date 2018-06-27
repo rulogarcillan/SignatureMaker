@@ -39,6 +39,7 @@ import com.signaturemaker.app.models.ItemFile;
 import com.signaturemaker.app.utils.Constants;
 import com.signaturemaker.app.utils.FilesUtils;
 import com.signaturemaker.app.utils.RecyclerItemTouchHelper;
+import com.signaturemaker.app.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -120,7 +121,7 @@ public class ListFilesFragment extends Fragment {
         super.onResume();
         adapter.setItems(items);
         adapter.notifyDataSetChanged();
-        path.setText(Constants.path.replace(Constants.ROOT, "/sdcard"));
+        path.setText(Utils.path.replace(Constants.ROOT, "/sdcard"));
     }
 
     public interface OnFragmentInteractionListener {

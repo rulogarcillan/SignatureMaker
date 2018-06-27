@@ -54,19 +54,5 @@ public final class Constants {
     public static final int DEFAULT_WALLPAPER = 3;
     public static final String DEFAULT_PATH = ROOT + "/Signature/";
 
-    public static int sortOrder = DEFAULT_SORT_ORDER;
-    public static int maxStroke = DEFAULT_MAX_STROKE;
-    public static int minStroke = DEFAULT_MINS_TROKE;
-    public static int penColor = DEFAULT_PEN_COLOR;
-    public static int wallpaper = DEFAULT_WALLPAPER;
-    public static String path = DEFAULT_PATH;
 
-    public static void defaultValues() {
-        sortOrder = DEFAULT_SORT_ORDER;
-        maxStroke = DEFAULT_MAX_STROKE;
-        minStroke = DEFAULT_MINS_TROKE;
-        penColor = DEFAULT_PEN_COLOR;
-        wallpaper = DEFAULT_WALLPAPER;
-        path = DEFAULT_PATH;
-    }
 }

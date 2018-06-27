@@ -24,7 +24,9 @@ package com.signaturemaker.app.utils;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -42,6 +44,26 @@ import java.util.List;
 public final class Utils {
 
     private Utils() {
+    }
+    
+    public static int sortOrder = Constants.DEFAULT_SORT_ORDER;
+    public static int maxStroke = Constants.DEFAULT_MAX_STROKE;
+    public static int minStroke = Constants.DEFAULT_MINS_TROKE;
+    public static int penColor = Constants.DEFAULT_PEN_COLOR;
+    public static int wallpaper = Constants.DEFAULT_WALLPAPER;
+    public static String path = Constants.DEFAULT_PATH;
+
+    public static void defaultValues() {
+        sortOrder = Constants.DEFAULT_SORT_ORDER;
+        maxStroke = Constants.DEFAULT_MAX_STROKE;
+        minStroke = Constants.DEFAULT_MINS_TROKE;
+        penColor = Constants.DEFAULT_PEN_COLOR;
+        wallpaper = Constants.DEFAULT_WALLPAPER;
+        path = Constants.DEFAULT_PATH;
+    }
+
+    public static void defaultPath() {
+        path = Constants.DEFAULT_PATH;
     }
 
     /**
@@ -105,5 +127,53 @@ public final class Utils {
                 return ddate.compareTo(ddate2) * type;
             }
         });
+    }
+
+
+    public static void savePreference(Context mContext, String key, String value) {
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(key, value);
+        editor.commit();
+
+    }
+
+    public static void savePreference(Context mContext, String key, int value) {
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(key, value);
+        editor.commit();
+
+    }
+
+    public static void savePreference(Context mContext, String key, Boolean value) {
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(key, value);
+        editor.commit();
+    }
+
+    public static String loadPreference(Context mContext, String key, String value) {
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        return sharedPreferences.getString(key, value);
+
+    }
+
+    public static int loadPreference(Context mContext, String key, int value) {
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        return sharedPreferences.getInt(key, value);
+
+    }
+
+    public static Boolean loadPreference(Context mContext, String key, Boolean value) {
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        return sharedPreferences.getBoolean(key, value);
+
     }
 }
