@@ -48,11 +48,9 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.larswerkman.holocolorpicker.ColorPicker;
 import com.larswerkman.holocolorpicker.SVBar;
 import com.signaturemaker.app.R;
-import com.signaturemaker.app.utils.Constants;
 import com.signaturemaker.app.utils.FilesUtils;
 import com.signaturemaker.app.utils.PermissionsUtils;
 import com.signaturemaker.app.utils.Utils;
-
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -62,7 +60,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import static com.signaturemaker.app.utils.Utils.loadPreference;
 import static com.signaturemaker.app.utils.Utils.showToast;
 
 /**
