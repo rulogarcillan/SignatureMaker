@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -15,8 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.MainActivity"
-            android:theme="@style/AppTheme">
+            android:name=".activities.IntroActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,6 +28,11 @@
             android:name=".activities.SettingsActivity"
             android:theme="@style/AppThemePrefs"
             android:label="@string/title_activity_settings"></activity>
+
+        <activity
+            android:name=".activities.MainActivity"
+            android:label="@string/title_appName"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

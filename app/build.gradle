@@ -74,7 +74,8 @@ dependencies {
     implementation('com.larswerkman:HoloColorPicker:1.5')
     //picasso
     implementation('com.squareup.picasso:picasso:2.71828')
-
+    //apptinro
+    implementation 'com.github.apl-devs:appintro:v4.2.3'
 
     implementation project(':chooser')
 }

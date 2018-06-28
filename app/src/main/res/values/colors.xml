@@ -10,7 +10,7 @@
     <color name="buttonOrange">#FFA000</color>
 
 
-
+    <color name="colorWhite">#ffffff</color>
     <color name="colorFulltrans">#00000000</color>
     <color name="colorPenDefault">#200bb2</color>
     <color name="colorWhitetrans">#CCE8E8E8</color>
@@ -20,6 +20,6 @@
 
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#727272</color>
-
+    <color name="background_sliders">#1773b1</color>
 
 </resources>
