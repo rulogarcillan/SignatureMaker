@@ -23,12 +23,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 package com.signaturemaker.app.fragments;
 
 import android.animation.Animator;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -46,6 +48,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.larswerkman.holocolorpicker.ColorPicker;
 import com.larswerkman.holocolorpicker.SVBar;
 import com.signaturemaker.app.R;
+import com.signaturemaker.app.utils.Constants;
 import com.signaturemaker.app.utils.FilesUtils;
 import com.signaturemaker.app.utils.PermissionsUtils;
 import com.signaturemaker.app.utils.Utils;
@@ -55,9 +58,11 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import static com.signaturemaker.app.utils.Utils.loadPreference;
 import static com.signaturemaker.app.utils.Utils.showToast;
 
 /**
@@ -203,14 +208,12 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
         picker.setOnColorChangedListener(new ColorPicker.OnColorChangedListener() {
             @Override
             public void onColorChanged(int i) {
-                Utils.penColor=i;
+                Utils.penColor = i;
                 bColor.setColorNormal(Utils.penColor);
                 mSingBoard.setPenColor(Utils.penColor);
                 Utils.saveAllPreferences(getActivity());
             }
         });
-
-
 
 
         return rootView;
@@ -269,7 +272,7 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
                 PermissionsUtils.getInstance().callRequestPermissions(getActivity(), PermissionsUtils.permissionsReadWrite, new MultiplePermissionsListener() {
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
-                        saveFiles(menuItem.getItemId());
+                        saveFileAndSend(menuItem.getItemId(), false);
                     }
 
                     @Override
@@ -309,7 +312,7 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
                 PermissionsUtils.getInstance().callRequestPermissions(getActivity(), PermissionsUtils.permissionsReadWrite, new MultiplePermissionsListener() {
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
-                        shareFiles(menuItem.getItemId());
+                        saveFileAndSend(menuItem.getItemId(), true);
                     }
 
                     @Override
@@ -546,46 +549,94 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
     }
 
 
-    private void saveFiles(int idMenu) {
-        Boolean status = false;
-        switch (idMenu) {
-            case R.id.savePngTrans:
-                status = FilesUtils.saveBitmapFile(mSingBoard.getTransparentSignatureBitmap(true), FilesUtils.addExtensionNamePng(FilesUtils.generateName()));
-                break;
-            case R.id.savePngWhite:
-                status = FilesUtils.saveBitmapFile(mSingBoard.getSignatureBitmap(), FilesUtils.addExtensionNamePng(FilesUtils.generateName()));
-                break;
-            case R.id.saveSvg:
-                status = FilesUtils.saveSvgFile(mSingBoard.getSignatureSvg(), FilesUtils.addExtensionNameSvg(FilesUtils.generateName()));
-                break;
-            default:
-                break;
-        }
+    private void saveFileAndSend(final int idMenu, final Boolean share) {
+        if (Utils.nameSave) {
+            selectName(new TextDialog() {
+                Boolean statusParticular = false;
 
-        if (status) {
-            showToast(getActivity(), getResources().getString(R.string.title_save_ok));
+                @Override
+                public void onGetTextDialog(String theName) {
+                    String name = "";
+                    if (idMenu == R.id.savePngTrans) {
+                        name = FilesUtils.addExtensionNamePng(theName);
+                        statusParticular = FilesUtils.saveBitmapFile(mSingBoard.getTransparentSignatureBitmap(true), name);
+                    } else if (idMenu == R.id.savePngWhite) {
+                        name = FilesUtils.addExtensionNamePng(theName);
+                        statusParticular = FilesUtils.saveBitmapFile(mSingBoard.getSignatureBitmap(), name);
+                    } else if (idMenu == R.id.saveSvg) {
+                        name = FilesUtils.addExtensionNameSvg(theName);
+                        statusParticular = FilesUtils.saveSvgFile(mSingBoard.getSignatureSvg(), name);
+                    }
+                    if (statusParticular) {
+                        if (share) {
+                            Utils.shareSign(getActivity(), name);
+                        }
+                        showToast(getActivity(), getResources().getString(R.string.title_save_ok));
+                    } else {
+                        showToast(getActivity(), getResources().getString(R.string.title_save_ko));
+                    }
+                }
+            });
         } else {
-            showToast(getActivity(), getResources().getString(R.string.title_save_ko));
+            Boolean status = false;
+            String name = "";
+            if (idMenu == R.id.savePngTrans) {
+                name = FilesUtils.addExtensionNamePng(FilesUtils.generateName());
+                status = FilesUtils.saveBitmapFile(mSingBoard.getTransparentSignatureBitmap(true), name);
+            } else if (idMenu == R.id.savePngWhite) {
+                name = FilesUtils.addExtensionNamePng(FilesUtils.generateName());
+                status = FilesUtils.saveBitmapFile(mSingBoard.getSignatureBitmap(), name);
+            } else if (idMenu == R.id.saveSvg) {
+                name = FilesUtils.addExtensionNameSvg(FilesUtils.generateName());
+                status = FilesUtils.saveSvgFile(mSingBoard.getSignatureSvg(), name);
+            }
+            if (status) {
+                if (share) {
+                    Utils.shareSign(getActivity(), name);
+                }
+                showToast(getActivity(), getResources().getString(R.string.title_save_ok));
+            } else {
+                showToast(getActivity(), getResources().getString(R.string.title_save_ko));
+            }
         }
     }
 
-    private void shareFiles(int idMenu) {
 
-        saveFiles(idMenu);
+    private void selectName(final TextDialog callBack) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+        alertDialog.setTitle(R.string.tittle_name_of_the_file);
+        View view = getActivity().getLayoutInflater().inflate(R.layout.name_selector, null);
 
-        switch (idMenu) {
-            case R.id.savePngTrans:
+        final EditText input = view.findViewById(R.id.txtName);
+        alertDialog.setCancelable(false);
 
-                break;
-            case R.id.savePngWhite:
+        alertDialog.setPositiveButton(android.R.string.ok,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (input.getText().toString().equalsIgnoreCase("")) {
+                            callBack.onGetTextDialog(FilesUtils.cleanName("no_name"));
+                        } else {
+                            callBack.onGetTextDialog(FilesUtils.cleanName(input.getText().toString()));
+                        }
+                    }
+                });
 
-                break;
-            case R.id.saveSvg:
+        alertDialog.setNegativeButton(android.R.string.cancel,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
 
-                break;
-            default:
-                break;
-        }
+        alertDialog.setNeutralButton(R.string.tittle_clean, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                //    input.setText("");
+            }
+        });
+        alertDialog.setView(view);
+        alertDialog.show();
     }
 
 
@@ -715,4 +766,11 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
         }
         return false;
     }
+
+
+    private interface TextDialog {
+        public void onGetTextDialog(String name);
+    }
+
+
 }

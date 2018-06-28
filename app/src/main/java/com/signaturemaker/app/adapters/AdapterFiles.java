@@ -32,7 +32,6 @@ import android.widget.TextView;
 
 import com.signaturemaker.app.R;
 import com.signaturemaker.app.models.ItemFile;
-import com.signaturemaker.app.utils.Constants;
 import com.signaturemaker.app.utils.Utils;
 import com.squareup.picasso.Picasso;
 
@@ -129,8 +128,8 @@ public class AdapterFiles extends RecyclerView.Adapter<AdapterFiles.ViewHolder> 
         viewHolder.textDate.setText(items.get(i).getDate());
         viewHolder.textTam.setText(items.get(i).getSize());
         if (items.get(i).getName().endsWith("png") || items.get(i).getName().endsWith("PNG")){
-            Picasso.get().load("file:///" + Utils.path + "/" + items.get(i).getName()).placeholder(R.drawable.ic_png)
-                    .error(R.drawable.ic_png).into(viewHolder.iconFile);
+            Picasso.get().load("file:///" + Utils.path + "/" + items.get(i).getName()).placeholder(R.drawable.ic_png_icon)
+                    .error(R.drawable.ic_png_icon).into(viewHolder.iconFile);
         }
         if (items.get(i).getName().endsWith("svg") || items.get(i).getName().endsWith("SVG")){
             Picasso.get().load("file:///" + Utils.path + "/" + items.get(i).getName()).placeholder(R.drawable.ic_svg_icon)

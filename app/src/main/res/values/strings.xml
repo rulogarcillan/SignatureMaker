@@ -21,6 +21,8 @@
 
     <string name="title_save_ok">File saved correctly</string>
     <string name="title_save_ko">Error saving</string>
+    <string name="tittle_clean">Clean</string>
+
 
     <string name="sort">Sort by date</string>
     <string name="help_r">Swipe rigth to delete</string>
@@ -30,10 +32,11 @@
     <string name="body_permissions">Necesitas aceptar los permisos para un correcto funcionamiento de la app</string>
     <string name="title_request_permision">Solicitud de permisos de lectura y escritura</string>
     <string name="body_request_permision">Para poder usar la aplicación correctamente es necesario tener acceso a ciertos permisos del sistema. Acepte los permisos o la aplicación no funcionará.</string>
-    <string name="title_activity_main">MainActivity</string>
+
     <string name="action_settings">Settings</string>
     <string name="title_no_files">No files</string>
     <string name="delete">Delete</string>
+    <string name="tittle_send">Send</string>
 
     <!--       Preferences      -->
     <string name="title_pref_advertising_t">Advertising</string>
@@ -54,5 +57,6 @@
     <string name="title_pref_color_sum">Keep last color used by default</string>
     <string name="title_pref_reset">Default values</string>
     <string name="title_pref_reset_sum">Reset all defaults</string>
+    <string name="tittle_name_of_the_file">Name of the file</string>
 
 </resources>

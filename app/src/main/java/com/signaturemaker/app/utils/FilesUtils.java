@@ -127,7 +127,7 @@ public final class FilesUtils {
 
         List<ItemFile> arrayItems = new ArrayList<>();
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         folder = new File(Utils.path);
         if (folder.exists()) {
             files = folder.listFiles();
@@ -218,15 +218,7 @@ public final class FilesUtils {
 
 
 /*
-    public static void sendFirma(Activity activity, String name) {
 
-        Intent shareIntent = new Intent();
-        shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(pathFiles + "/" + name)));
-        shareIntent.setType("image/*");
-        activity.startActivity(Intent.createChooser(shareIntent, activity.getText(R.string.enviarsolo)));
-
-    }
 
     public static Boolean nomedia() {
         {

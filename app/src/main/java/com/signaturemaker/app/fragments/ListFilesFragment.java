@@ -25,6 +25,7 @@ package com.signaturemaker.app.fragments;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -155,7 +156,15 @@ public class ListFilesFragment extends Fragment {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
-
+                    case R.id.action_sort:
+                        Utils.sortOrder = Utils.sortOrder * -1;
+                        synchronized (items) {
+                            Utils.sort(items, Utils.sortOrder);
+                        }
+                        recyclerView.getAdapter().notifyDataSetChanged();
+                        break;
+                    default:
+                        break;
                 }
                 return true;
             }
@@ -163,6 +172,7 @@ public class ListFilesFragment extends Fragment {
 
         super.onCreateOptionsMenu(menu, inflater);
     }
+
 
     private void loadItemsFiles() {
 

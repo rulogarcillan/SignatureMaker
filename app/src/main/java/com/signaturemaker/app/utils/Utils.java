@@ -23,13 +23,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 package com.signaturemaker.app.utils;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
+import android.net.Uri;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.signaturemaker.app.R;
 import com.signaturemaker.app.models.ItemFile;
 
 import java.io.File;
@@ -178,12 +183,11 @@ public final class Utils {
     }
 
 
-    public static void sort(List<ItemFile> lista, final int type) {
-        Collections.sort(lista, new Comparator<ItemFile>() {
+    public static void sort(List<ItemFile> list, final int type) {
+        Collections.sort(list, new Comparator<ItemFile>() {
             @Override
             public int compare(ItemFile lhs, ItemFile rhs) {
-
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                 String date1 = lhs.getDate();
                 String date2 = rhs.getDate();
                 Date ddate = null;
@@ -197,6 +201,12 @@ public final class Utils {
                 return ddate.compareTo(ddate2) * type;
             }
         });
+       /* Collections.sort(lista, new Comparator<ItemFile>() {
+            @Override
+            public int compare(ItemFile left, ItemFile right) {
+                return left.getName().compareTo(right.getName()) * type;
+            }
+        });*/
     }
 
 
@@ -244,6 +254,23 @@ public final class Utils {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         return sharedPreferences.getBoolean(key, value);
+
+    }
+
+    public static void shareSign(Activity mActivity, String name) {
+
+        Uri imageUri;
+        if (Build.VERSION.SDK_INT >=  Build.VERSION_CODES.N) {
+            imageUri =  Uri.parse(String.valueOf(new File(Utils.path + "/" + name)));
+        } else{
+            imageUri =  Uri.fromFile(new File(Utils.path + "/" + name));
+        }
+
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_STREAM,imageUri);
+        shareIntent.setType("image/*");
+        mActivity.startActivity(Intent.createChooser(shareIntent, mActivity.getText(R.string.tittle_send)));
 
     }
 }
