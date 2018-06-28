@@ -39,14 +39,18 @@ public final class Constants {
     public static final String ID_PREF_STROKE = "id_pref_stroke";
     public static final String ID_PREF_RESET = "id_pref_reset";
 
-    public static final String OPPUB = "OPPUB";
-    public static final String FRAG = "FRAG";
+    public static final String PREF_ADS = "ADS";
+    //public static final String FRAG = "FRAG";
     public static final String PREF_MAX_TROKE = "MAX_STROKE";
     public static final String PREF_MIN_TROKE = "MIN_STROKE";
     public static final String PREF_COLOR = "COLOR";
 
-    public static final String ROOT = Environment.getExternalStorageDirectory().getAbsolutePath();
+    public static final String FIRST_TIME = "first_time";
 
+    public static final String ROOT = Environment.getExternalStorageDirectory().getAbsolutePath();
+    public static final Boolean DEFAULT_NAME_SAVE = false;
+    public static final Boolean DEFAULT_DELETE_EXIT = false;
+    public static final Boolean DEFAULT_DISABLE_ADS = false;
     public static final int DEFAULT_SORT_ORDER = -1;
     public static final int DEFAULT_MAX_STROKE = 4;
     public static final int DEFAULT_MIN_TROKE = 1;

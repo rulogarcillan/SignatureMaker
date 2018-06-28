@@ -52,14 +52,32 @@ public final class Utils {
     public static int penColor = Constants.DEFAULT_PEN_COLOR;
     public static int wallpaper = Constants.DEFAULT_WALLPAPER;
     public static String path = Constants.DEFAULT_PATH;
+    public static Boolean disableAds = Constants.DEFAULT_DISABLE_ADS;
+    public static Boolean nameSave = Constants.DEFAULT_NAME_SAVE;
+    public static Boolean deleteExit = Constants.DEFAULT_DELETE_EXIT;
 
     public static void defaultValues() {
+        nameSave = Constants.DEFAULT_NAME_SAVE;
+        disableAds = Constants.DEFAULT_DISABLE_ADS;
         sortOrder = Constants.DEFAULT_SORT_ORDER;
         maxStroke = Constants.DEFAULT_MAX_STROKE;
         minStroke = Constants.DEFAULT_MIN_TROKE;
         penColor = Constants.DEFAULT_PEN_COLOR;
         wallpaper = Constants.DEFAULT_WALLPAPER;
         path = Constants.DEFAULT_PATH;
+        deleteExit = Constants.DEFAULT_DELETE_EXIT;
+    }
+
+    public static void defaultDisableAds() {
+        disableAds = Constants.DEFAULT_DISABLE_ADS;
+    }
+
+    public static void defaultNameSave() {
+        nameSave = Constants.DEFAULT_NAME_SAVE;
+    }
+
+    public static void defaultDeleteExit() {
+        deleteExit = Constants.DEFAULT_DELETE_EXIT;
     }
 
     public static void defaultPath() {
@@ -83,12 +101,26 @@ public final class Utils {
         } else {
             Utils.defaultColor();
         }
-
         if (Utils.loadPreference(mContext, Constants.ID_PREF_STROKE, false)) {
             Utils.minStroke = loadPreference(mContext, Constants.PREF_MIN_TROKE, Constants.DEFAULT_MIN_TROKE);
             Utils.maxStroke = loadPreference(mContext, Constants.PREF_MAX_TROKE, Constants.DEFAULT_MAX_STROKE);
         } else {
             Utils.defaultStroke();
+        }
+        if (Utils.loadPreference(mContext, Constants.ID_PREF_ADVERTISING, false)) {
+            Utils.disableAds = true;
+        } else {
+            Utils.defaultDisableAds();
+        }
+        if (Utils.loadPreference(mContext, Constants.ID_PREF_NAME, false)) {
+            Utils.nameSave = true;
+        } else {
+            Utils.defaultNameSave();
+        }
+        if (Utils.loadPreference(mContext, Constants.ID_PREF_DELETE, false)) {
+            Utils.deleteExit = true;
+        } else {
+            Utils.defaultDeleteExit();
         }
     }
 
@@ -97,7 +129,6 @@ public final class Utils {
         if (Utils.loadPreference(mContext, Constants.ID_PREF_COLOR, false)) {
             savePreference(mContext, Constants.PREF_COLOR, Utils.penColor);
         }
-
         if (Utils.loadPreference(mContext, Constants.ID_PREF_STROKE, false)) {
             savePreference(mContext, Constants.PREF_MIN_TROKE, Utils.minStroke);
             savePreference(mContext, Constants.PREF_MAX_TROKE, Utils.maxStroke);

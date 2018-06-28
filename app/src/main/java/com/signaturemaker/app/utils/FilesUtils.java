@@ -171,6 +171,26 @@ public final class FilesUtils {
         }
     }
 
+    /**
+     * Remove all files
+     * @param activity
+     */
+    public static void deleteAllFiles(Activity activity) {
+        File files[];
+        File folder;
+        folder = new File(Utils.path);
+        if (folder.exists()) {
+            files = folder.listFiles();
+            for (File file : files) {
+                String name = file.getName();
+                if ((name.contains(".png") || name.contains(".PNG") || name.contains(".svg") || name.contains(".SVG")) && name.substring(0, 2).equals("SM")) {
+                    file.delete();
+                    activity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file)));
+                }
+            }
+        }
+    }
+
 
 
 
@@ -271,25 +291,7 @@ public final class FilesUtils {
     }
 
 
-    public static void deleteAllFiles(Activity activity) {
 
-        File files[];
-        File folder;
-
-        folder = new File(pathFiles);
-        if (folder.exists()) {
-            files = folder.listFiles();
-            for (File file : files) {
-
-                String name = file.getName();
-
-                if ((name.contains(".png") || name.contains(".PNG") || name.contains(".svg") || name.contains(".SCG")) && name.substring(0, 2).equals("SM")) {
-                    file.delete();
-                    activity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file)));
-                }
-            }
-        }
-    }
 
 
 

@@ -26,7 +26,9 @@ package com.signaturemaker.app.utils;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.view.ViewGroup;
 
@@ -51,11 +53,12 @@ import java.util.Collection;
 import java.util.List;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 
 
 public class PermissionsUtils {
 
-    public static final List<String> permissionsReadWrite = Arrays.asList( Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    public static final List<String> permissionsReadWrite = Arrays.asList(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
     private static PermissionsUtils INSTANCE = null;
 
@@ -77,6 +80,7 @@ public class PermissionsUtils {
 
     /**
      * Request permission for record audio without listener
+     *
      * @param mActivity
      */
     public void callRequestPermissionrecordAudio(final Activity mActivity) {
@@ -85,6 +89,7 @@ public class PermissionsUtils {
 
     /**
      * Request permission for multiple permission without listener
+     *
      * @param mActivity
      */
     public void callRequestPermissions(final Activity mActivity, Collection<String> permissions) {
@@ -93,6 +98,7 @@ public class PermissionsUtils {
 
     /**
      * Request permission for record audio
+     *
      * @param mActivity
      * @param myPermissionListener
      */
@@ -100,7 +106,7 @@ public class PermissionsUtils {
 
         //This listener only call when permission is denied
         PermissionListener snackbarPermissionListener = SnackbarOnDeniedPermissionListener.Builder.
-                 with((ViewGroup) mActivity.getWindow().getDecorView().getRootView(), R.string.body_permissions)
+                with((ViewGroup) mActivity.getWindow().getDecorView().getRootView(), R.string.body_permissions)
                 .withOpenSettingsButton(R.string.title_setting)
                 .build();
 
@@ -115,6 +121,7 @@ public class PermissionsUtils {
             public void onPermissionDenied(PermissionDeniedResponse response) {
                 myPermissionListener.onPermissionDenied(response);
             }
+
             @Override
             public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
                 shoDialogInformation(token, mActivity);
@@ -160,6 +167,7 @@ public class PermissionsUtils {
 
     /**
      * Show a dialog with informations of permission
+     *
      * @param token
      * @param mActivity
      */
@@ -188,5 +196,17 @@ public class PermissionsUtils {
                     }
                 })
                 .show();
+    }
+
+
+    /**
+     * @param mContext
+     * @return Is permission acepted
+     */
+    public static boolean hasPermissionWriteRead(Context mContext) {
+        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            return false;
+        }
+        return true;
     }
 }

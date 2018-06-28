@@ -33,11 +33,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.signaturemaker.app.R;
 import com.signaturemaker.app.adapters.AdapterFiles;
 import com.signaturemaker.app.models.ItemFile;
 import com.signaturemaker.app.utils.Constants;
 import com.signaturemaker.app.utils.FilesUtils;
+import com.signaturemaker.app.utils.PermissionsUtils;
 import com.signaturemaker.app.utils.RecyclerItemTouchHelper;
 import com.signaturemaker.app.utils.Utils;
 
@@ -160,12 +165,24 @@ public class ListFilesFragment extends Fragment {
     }
 
     private void loadItemsFiles() {
-        items = FilesUtils.loadItemsFiles();
-        if (items.size() > 0) {
-            txtMnsNoFiles.setVisibility(View.GONE);
-        } else {
-            txtMnsNoFiles.setVisibility(View.VISIBLE);
-        }
+
+        PermissionsUtils.getInstance().callRequestPermissions(getActivity(), PermissionsUtils.permissionsReadWrite, new MultiplePermissionsListener() {
+            @Override
+            public void onPermissionsChecked(MultiplePermissionsReport report) {
+                items = FilesUtils.loadItemsFiles();
+                if (items.size() > 0) {
+                    txtMnsNoFiles.setVisibility(View.GONE);
+                } else {
+                    txtMnsNoFiles.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+            }
+        });
+
+
     }
 
 

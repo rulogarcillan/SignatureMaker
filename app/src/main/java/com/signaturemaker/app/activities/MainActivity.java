@@ -24,9 +24,17 @@ package com.signaturemaker.app.activities;
 
 import android.os.Bundle;
 
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.signaturemaker.app.R;
 import com.signaturemaker.app.fragments.SingBoardFragment;
+import com.signaturemaker.app.utils.FilesUtils;
+import com.signaturemaker.app.utils.PermissionsUtils;
 import com.signaturemaker.app.utils.Utils;
+
+import java.util.List;
 
 import androidx.fragment.app.FragmentTransaction;
 import okhttp3.internal.Util;
@@ -39,15 +47,38 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //ButterKnife.bind(this);
-
         Utils.loadAllPreferences(this);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.container, new SingBoardFragment(), SingBoardFragment.class.getSimpleName());
         ft.commit();
+    }
 
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (Utils.deleteExit) {
+            PermissionsUtils.getInstance().callRequestPermissions(this, PermissionsUtils.permissionsReadWrite, new MultiplePermissionsListener() {
+                @Override
+                public void onPermissionsChecked(MultiplePermissionsReport report) {
+
+                }
+
+                @Override
+                public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                }
+            });
+        }
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (Utils.deleteExit && PermissionsUtils.hasPermissionWriteRead(this)) {
+            FilesUtils.deleteAllFiles(this);
+
+        }
+    }
 }

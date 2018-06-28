@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.github.paolorotolo.appintro.AppIntro2;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 import com.signaturemaker.app.R;
+import com.signaturemaker.app.utils.Constants;
 import com.signaturemaker.app.utils.Utils;
 
 import androidx.annotation.Nullable;
@@ -16,8 +17,8 @@ public class IntroActivity extends AppIntro2 {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (Utils.loadPreference(this, "loadIntro", true)) {
-        //    Utils.savePreference(this, "loadIntro", false);
+        if (Utils.loadPreference(this, Constants.FIRST_TIME, true)) {
+            Utils.savePreference(this, Constants.FIRST_TIME, false);
         } else {
             launchActivityMain();
         }
@@ -35,17 +36,10 @@ public class IntroActivity extends AppIntro2 {
         addSlide(f3);
         addSlide(f4);
 
-        // OPTIONAL METHODS
-        // Override bar/separator color.
-        //setBarColor(Color.parseColor("#3F51B5"));
 
-
-        // Hide Skip/Done button.
         showSkipButton(false);
         setProgressButtonEnabled(true);
 
-        // Turn vibration on and set intensity.
-        // NOTE: you will probably need to ask VIBRATE permission in Manifest.
         setVibrate(true);
         setVibrateIntensity(30);
     }

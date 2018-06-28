@@ -162,6 +162,12 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     break;
                 case Constants.ID_PREF_RESET:
                     setDefaultPreferences();
+
+                case Constants.ID_PREF_DELETE:
+                case Constants.ID_PREF_NAME:
+                case Constants.ID_PREF_ADVERTISING:
+                    Utils.loadAllPreferences(getActivity());
+                    break;
                 default:
                     break;
             }
