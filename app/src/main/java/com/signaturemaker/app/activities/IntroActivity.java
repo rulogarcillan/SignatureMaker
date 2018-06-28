@@ -17,7 +17,7 @@ public class IntroActivity extends AppIntro2 {
         super.onCreate(savedInstanceState);
 
         if (Utils.loadPreference(this, "loadIntro", true)) {
-            //Utils.savePreference(this, "loadIntro", false);
+        //    Utils.savePreference(this, "loadIntro", false);
         } else {
             launchActivityMain();
         }
@@ -29,7 +29,7 @@ public class IntroActivity extends AppIntro2 {
         Fragment f3 = AppIntroFragment.newInstance("Adjunta", "Roboto", "Adjunte la imagen con la firma en su documento", "normal",
                 R.drawable.ic_sign_icon, getResources().getColor(R.color.background_sliders), getResources().getColor(R.color.colorWhite), getResources().getColor(R.color.colorWhite));
         Fragment f4 = AppIntroFragment.newInstance("Listo", "Roboto", "¿Estás preparado?", "normal",
-                R.drawable.ic_heart_icon, getResources().getColor(R.color.background_sliders), getResources().getColor(R.color.colorWhite), getResources().getColor(R.color.colorWhite));
+                R.drawable.ic_check_icon, getResources().getColor(R.color.background_sliders), getResources().getColor(R.color.colorWhite), getResources().getColor(R.color.colorWhite));
         addSlide(f1);
         addSlide(f2);
         addSlide(f3);
@@ -60,6 +60,7 @@ public class IntroActivity extends AppIntro2 {
     @Override
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
+        launchActivityMain();
 
     }
 

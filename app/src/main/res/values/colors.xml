@@ -20,6 +20,7 @@
 
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#727272</color>
-    <color name="background_sliders">#1773b1</color>
+    <color name="background_sliders">#01579b</color>
+    <color name="background_sliders2">#7a94af</color>
 
 </resources>

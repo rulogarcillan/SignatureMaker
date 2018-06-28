@@ -133,8 +133,8 @@ public class AdapterFiles extends RecyclerView.Adapter<AdapterFiles.ViewHolder> 
                     .error(R.drawable.ic_png).into(viewHolder.iconFile);
         }
         if (items.get(i).getName().endsWith("svg") || items.get(i).getName().endsWith("SVG")){
-            Picasso.get().load("file:///" + Utils.path + "/" + items.get(i).getName()).placeholder(R.drawable.ic_svg)
-                    .error(R.drawable.ic_svg).into(viewHolder.iconFile);
+            Picasso.get().load("file:///" + Utils.path + "/" + items.get(i).getName()).placeholder(R.drawable.ic_svg_icon)
+                    .error(R.drawable.ic_svg_icon).into(viewHolder.iconFile);
         }
 
     }
