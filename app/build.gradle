@@ -77,5 +77,13 @@ dependencies {
     //apptinro
     implementation 'com.github.apl-devs:appintro:v4.2.3'
 
+    //changelog
+    implementation 'de.cketti.library.changelog:ckchangelog:1.2.2'
+
+    //swipleable recycler
+    implementation ('co.dift.ui.swipetoaction:library:1.1'){
+        transitive=true
+    }
+
     implementation project(':chooser')
 }

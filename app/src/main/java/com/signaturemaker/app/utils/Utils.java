@@ -32,8 +32,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.signaturemaker.app.R;
 import com.signaturemaker.app.models.ItemFile;
 
@@ -260,17 +262,52 @@ public final class Utils {
     public static void shareSign(Activity mActivity, String name) {
 
         Uri imageUri;
-        if (Build.VERSION.SDK_INT >=  Build.VERSION_CODES.N) {
-            imageUri =  Uri.parse(String.valueOf(new File(Utils.path + "/" + name)));
-        } else{
-            imageUri =  Uri.fromFile(new File(Utils.path + "/" + name));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            imageUri = Uri.parse(String.valueOf(new File(Utils.path + "/" + name)));
+        } else {
+            imageUri = Uri.fromFile(new File(Utils.path + "/" + name));
         }
 
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.putExtra(Intent.EXTRA_STREAM,imageUri);
+        shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
         shareIntent.setType("image/*");
         mActivity.startActivity(Intent.createChooser(shareIntent, mActivity.getText(R.string.tittle_send)));
 
     }
+
+    /**
+     * Show Snackbar
+     *
+     * @param mActivity
+     * @param msg
+     * @param actionMsg
+     */
+    public static void displaySnackbar(Activity mActivity, String msg, String actionMsg, final View.OnClickListener OnClickListener, final Snackbar.Callback callback) {
+        Snackbar.make(mActivity.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG)
+                .setAction(actionMsg, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        OnClickListener.onClick(view);
+                    }
+                })
+                .setActionTextColor(mActivity.getResources().getColor(R.color.colorAccent))
+                .addCallback(new Snackbar.Callback() {
+                    @Override
+                    public void onShown(Snackbar sb) {
+                        super.onShown(sb);
+                        callback.onShown(sb);
+                    }
+
+                    @Override
+                    public void onDismissed(Snackbar transientBottomBar, int event) {
+                        super.onDismissed(transientBottomBar, event);
+                        callback.onDismissed(transientBottomBar, event);
+                    }
+                })
+                .show();
+
+
+    }
+
 }

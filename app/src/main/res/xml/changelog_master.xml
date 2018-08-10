@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<changelog>
+    <release
+        version="3.0.0"
+        versioncode="3000">
+        <change>Rewritten all the source code</change>
+        <change>Compatible with android 9.0 Pie</change>
+        <change>Update all libraries to the latest version</change>
+        <change>New welcome slider</change>
+        <change>New icons</change>
+        <change><![CDATA[<font color="red">[Off Topic]</font>]]> If you like my developments, collaborate and try my apps and games, please. <![CDATA[<a href="market://search?q=pub:Raúl R.">Descargar!!!</a>]]></change>
+    </release>
+    <release
+        version="2.1.54"
+        versioncode="2035">
+        <change>Fix traslates</change>
+    </release>
+    <release
+        version="2.1.31"
+        versioncode="2033">
+        <change>Fix bug when save signature with custom name. (thanks for reports)</change>
+    </release>
+    <release
+        version="2.1.16"
+        versioncode="2031">
+        <change>Button to sort files by date (ascending / descending )</change>
+        <change>New visual backgrounds to the canvas (the signature is always saved with transparent background)</change>
+        <change>New support email</change>
+        <change>Fix seekbar (crash app)</change>
+        <change>Correction texts and translations</change>
+    </release>
+    <release
+        version="2.0.24"
+        versioncode="2006">
+        <change>Add advertising</change>
+        <change>Disable/Enable ads from settings</change>
+        <change>Disable ads if it bothers you.</change>
+    </release>
+    <release
+        version="2.0.23"
+        versioncode="2005">
+        <change>New icon clean</change>
+        <change>Minor bug fix</change>
+    </release>
+    <release
+        version="2.0.22"
+        versioncode="2004">
+        <change>Add some material desing to pre-lollipop</change>
+        <change>Fixed bug in save and send</change>
+    </release>
+    <release
+        version="2.0.21"
+        versioncode="2003">
+        <change>Fixed bug in splash for large screens (sorry for the inconvenience)</change>
+    </release>
+    <release
+        version="2.0.2"
+        versioncode="2002">
+        <change>Option to choose the file name when saving (Enabled / disabled in options)</change>
+        <change>Add Url project in the initial splash</change>
+    </release>
+    <release
+        version="2.0.1"
+        versioncode="2001">
+        <change>Info button on long press</change>
+    </release>
+    <release
+        version="2.0.0"
+        versioncode="2000">
+        <change>New UI</change>
+        <change>New options</change>
+        <change>Selectable path files</change>
+        <change>Save last stroke</change>
+        <change>Save last color</change>
+        <change>Delete signatrue on exit</change>
+        <change>Toggle view signatures in gallery</change>
+        <change>Mode landscape more efficient</change>
+        <change>Change icon</change>
+        <change>More material desing</change>
+        <change>Add initial splash</change>
+        <change>Add license</change>
+        <change>Open source and free</change>
+        <change>Minor bug fix</change>
+        <change>Please report bugs in innovation.4.apps@gmail.com</change>
+    </release>
+    <release
+        version="1.0.3"
+        versioncode="103">
+        <change>Some material design</change>
+        <change>New color picker</change>
+        <change>New icon</change>
+        <change>New menu others app</change>
+    </release>
+    <release
+        version="1.0.2"
+        versioncode="102">
+        <change>Change default file Path</change>
+        <change>Minor bug fix</change>
+    </release>
+    <release
+        version="1.0.1"
+        versioncode="101">
+        <change>Minor bug fix</change>
+    </release>
+    <release
+        version="1.0.0"
+        versioncode="10">
+        <change>First release</change>
+    </release>
+
+</changelog>
+
+

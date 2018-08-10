@@ -23,9 +23,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 
 package com.signaturemaker.app.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.preference.PreferenceActivity;
+import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -34,6 +36,7 @@ import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.signaturemaker.app.R;
 
 import androidx.appcompat.app.AppCompatActivity;
+import de.cketti.library.changelog.ChangeLog;
 
 import static com.signaturemaker.app.utils.Utils.getAppTimeStamp;
 
@@ -53,8 +56,8 @@ public class BaseActivity extends AppCompatActivity {
 
             case R.id.settings:
                 Intent intent = new Intent(this, SettingsActivity.class);
-                intent.putExtra( PreferenceActivity.EXTRA_SHOW_FRAGMENT, SettingsActivity.GeneralPreferenceFragment.class.getName() );
-                intent.putExtra( PreferenceActivity.EXTRA_NO_HEADERS, true );
+                intent.putExtra(PreferenceActivity.EXTRA_SHOW_FRAGMENT, SettingsActivity.GeneralPreferenceFragment.class.getName());
+                intent.putExtra(PreferenceActivity.EXTRA_NO_HEADERS, true);
                 startActivity(intent);
                 break;
             case R.id.action_settings:
@@ -66,7 +69,7 @@ public class BaseActivity extends AppCompatActivity {
                 startMoreApps();
                 break;
             case R.id.changelog:
-                //new LanzaChangelog(BaseActivity.this).getFullLogDialog().show();
+                startChangelog(true);
                 break;
             case R.id.license:
                 startLicense();
@@ -112,6 +115,39 @@ public class BaseActivity extends AppCompatActivity {
                 .withActivityTitle(getResources().getString(R.string.title_appName))
                 .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
                 .start(BaseActivity.this);
+    }
+
+    /**
+     * Start changelog
+     *
+     * @param forceStart force start, if params is false only start the firts time
+     */
+    protected void startChangelog(Boolean forceStart) {
+
+        myChangeLog cl = new myChangeLog(this);
+        if (cl.isFirstRun()) {
+            cl.getLogDialog().show();
+        } else if (forceStart) {
+            cl.getFullLogDialog().show();
+        }
+
+
+    }
+
+
+    public static class myChangeLog extends ChangeLog {
+
+
+        public static final String DEFAULT_CSS =
+
+                "body {                                                           " + "	font-family: Verdana, Helvetica, Arial, sans-serif;   " + "	font-size: 11px;                                      " + "	color: #000000;                                       " + "	background-color: #ffffff;                            " + "	margin: 0px;                                          " + "	padding: 0px;                                         " + "}                                                        "
+                        + "h1 {                                                     " + "	font-size: 14px;                                      " + "	font-weight: bold;                                    " + "	text-transform: uppercase;                            " + "	color: #000000;                                       " + "	margin: 0px;                                          " + "	padding: 10px 0px 0px 8px;                            " + "}                                                        "
+                        + "h2 {                                                     " + "	font-size: 10px;                                      " + "	color: #999999;                                       " + "	font-weight: normal;                                  " + "	margin: 0px 0px 0px 8px;                              " + "	padding: 0px;                                         " + "}                                                        " + "ul {                                                     "
+                        + "	margin: 0px 0px 10px 15px;                            " + "	padding-left: 15px;                                " + "	padding-top: 8px;                                     " + "	list-style-type: square;                              " + "	color: #999999;                                       " + "}";
+
+        public myChangeLog(Context context) {
+            super(new ContextThemeWrapper(context, R.style.AppTheme), DEFAULT_CSS);
+        }
     }
 }
 

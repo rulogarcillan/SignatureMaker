@@ -37,7 +37,6 @@ import com.signaturemaker.app.utils.Utils;
 import java.util.List;
 
 import androidx.fragment.app.FragmentTransaction;
-import okhttp3.internal.Util;
 
 public class MainActivity extends BaseActivity {
 
@@ -52,6 +51,8 @@ public class MainActivity extends BaseActivity {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.container, new SingBoardFragment(), SingBoardFragment.class.getSimpleName());
         ft.commit();
+
+        startChangelog(false);
     }
 
 
@@ -78,7 +79,6 @@ public class MainActivity extends BaseActivity {
         super.onDestroy();
         if (Utils.deleteExit && PermissionsUtils.hasPermissionWriteRead(this)) {
             FilesUtils.deleteAllFiles(this);
-
         }
     }
 }

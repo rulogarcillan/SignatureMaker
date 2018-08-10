@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<changelog>
+    <release
+        version="3.0.0"
+        versioncode="3000">
+        <change>Se ha reescrito todo el código desde 0</change>
+        <change>Compatible con android 9.0 Pie</change>
+        <change>Actualización de todas las librerías a la última versión</change>
+        <change>Nuevo slider de bienvenida</change>
+        <change>Nuevos iconos</change>
+        <change><![CDATA[<font color="red">[Off Topic]</font>]]> Si te gustan mis desarrollos, por favor, colabora y prueba mis Apps y juegos. <![CDATA[<a href="market://search?q=pub:Raúl R.">Descargar!!!</a>]]></change>
+    </release>
+    <release
+        version="2.1.54"
+        versioncode="2035">
+        <change>Corrección de traducciones</change>
+    </release>
+    <release
+        version="2.1.31"
+        versioncode="2033">
+        <change>Se corrige error al salvar firmas con un nombre personalizado. (gracias por los reportes)</change>
+      </release>
+    <release
+        version="2.1.16"
+        versioncode="2031">
+        <change>Botón para ordenar archivos por fecha ascendente/descendente</change>
+        <change>Nuevos fondos visuales para el lienzo (la firma siempre se guardará con fondo transparente)</change>
+        <change>Nuevo correo de sugerencias</change>
+        <change>Corrección en la seekbar (rompía la app)</change>
+        <change>Corrección de textos y traducciones</change>
+    </release>
+    <release
+        version="2.0.24"
+        versioncode="2006">
+        <change>Se añade publicidad</change>
+        <change>Desactivar/Activar publicidad desde los ajustes de la aplicación</change>
+        <change>La publicidad puede desactivarse y funcionar como hasta ahora.</change>
+    </release>
+
+    <release
+        version="2.0.23"
+        versioncode="2005">
+        <change>Nuevo icono limpiar</change>
+        <change>Corregido pequeño error</change>
+    </release>
+    <release
+        version="2.0.22"
+        versioncode="2004">
+        <change>Se adapta más material desing para versiones pre-lollipop</change>
+        <change>Corregido bug en salvar y enviar</change>
+    </release>
+    <release
+        version="2.0.21"
+        versioncode="2003">
+        <change>Corregido error en splash inicial en pantallas garndes (perdón por el inconveniente)</change>
+    </release>
+    <release
+        version="2.0.2"
+        versioncode="2002">
+        <change>Opción de elegir el nombre del archivo al guardar (Se activa desde las opciones)
+        </change>
+        <change>Añadida Url del proyecto en el splash inicial</change>
+    </release>
+    <release
+        version="2.0.1"
+        versioncode="2001">
+        <change>Información de botones con pulsación larga</change>
+    </release>
+    <release
+        version="2.0.0"
+        versioncode="2000">
+        <change>Nueva interface</change>
+        <change>Añadidas opciones</change>
+        <change>Posibilidad de elegir ruta de archivos por defecto</change>
+        <change>Salvar último grosor de lápiz</change>
+        <change>Salvar último color de lápiz</change>
+        <change>Posiblidad de eliminar firmas al salir</change>
+        <change>Posibilidad de ver firmas en la galeria</change>
+        <change>Modo apaisado más eficiente</change>
+        <change>Cambio de icono de la app</change>
+        <change>Más material desing</change>
+        <change>Añadido splash inicial</change>
+        <change>Añadido licencias</change>
+        <change>Liberado código de la aplicación</change>
+        <change>Corregido errores</change>
+        <change>Por favor reporta errores en innovation.4.apps@gmail.com</change>
+    </release>
+    <release
+        version="1.0.3"
+        versioncode="103">
+        <change>Diseño material desing</change>
+        <change>Nuevo selector de color</change>
+        <change>Nuevo icono</change>
+        <change>Nuevo menu otras app</change>
+    </release>
+    <release
+        version="1.0.2"
+        versioncode="102">
+        <change>Cambio de ruta por defecto</change>
+        <change>Corrección de pequeños errores</change>
+    </release>
+    <release
+        version="1.0.1"
+        versioncode="101">
+        <change>Corrección de pequeños errores</change>
+    </release>
+    <release
+        version="1.0.0"
+        versioncode="10">
+        <change>Versión inicial</change>
+    </release>
+
+</changelog>
+
+

@@ -23,6 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 package com.signaturemaker.app.fragments;
 
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -33,6 +34,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
@@ -43,18 +45,20 @@ import com.signaturemaker.app.models.ItemFile;
 import com.signaturemaker.app.utils.Constants;
 import com.signaturemaker.app.utils.FilesUtils;
 import com.signaturemaker.app.utils.PermissionsUtils;
-import com.signaturemaker.app.utils.RecyclerItemTouchHelper;
 import com.signaturemaker.app.utils.Utils;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import co.dift.ui.SwipeToAction;
+
+import static com.signaturemaker.app.utils.Utils.displaySnackbar;
 
 public class ListFilesFragment extends Fragment {
 
@@ -70,6 +74,7 @@ public class ListFilesFragment extends Fragment {
     //@BindView(R.id.txtMnsNoFiles)
     TextView txtMnsNoFiles;
     AdapterFiles adapter;
+    Boolean flagDelete = true;
 
     public ListFilesFragment() {
         // Required empty public constructor
@@ -109,14 +114,49 @@ public class ListFilesFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
 
-        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, new RecyclerItemTouchHelper.RecyclerItemTouchHelperListener() {
+        SwipeToAction swipeToAction = new SwipeToAction(recyclerView, new SwipeToAction.SwipeListener<ItemFile>() {
+
             @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+            public boolean swipeLeft(final ItemFile itemData) {
+                displaySnackbar(getActivity(), itemData.getName(), "deshacer", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        adapter.notifyDataSetChanged();
+                        flagDelete = false;
+                    }
+                }, new Snackbar.Callback() {
+                    @Override
+                    public void onShown(Snackbar sb) {
+                        flagDelete = true;
+                    }
+
+                    @Override
+                    public void onDismissed(Snackbar transientBottomBar, int event) {
+                        super.onDismissed(transientBottomBar, event);
+                        if (flagDelete) {
+                            final int pos = removeFile(itemData);
+                        }
+                    }
+                });
+                return false;
+            }
+
+            @Override
+            public boolean swipeRight(ItemFile itemData) {
+                shareFile(itemData);
+                return true;
+            }
+
+            @Override
+            public void onClick(ItemFile itemData) {
+
+            }
+
+            @Override
+            public void onLongClick(ItemFile itemData) {
 
             }
         });
-        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
-
 
         return rootView;
     }
@@ -192,6 +232,22 @@ public class ListFilesFragment extends Fragment {
         });
 
 
+    }
+
+    private int removeFile(ItemFile item) {
+        int pos = adapter.getItems().indexOf(item);
+        adapter.getItems().remove(item);
+        adapter.notifyItemRemoved(pos);
+        return pos;
+    }
+
+    private void shareFile(ItemFile item) {
+        File file = FilesUtils.getFile(item.getName());
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+        shareIntent.setType("image/*");
+        getActivity().getParent().startActivity(Intent.createChooser(shareIntent, getActivity().getText(R.string.tittle_send)));
     }
 
 

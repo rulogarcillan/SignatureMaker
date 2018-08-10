@@ -173,6 +173,7 @@ public final class FilesUtils {
 
     /**
      * Remove all files
+     *
      * @param activity
      */
     public static void deleteAllFiles(Activity activity) {
@@ -189,6 +190,10 @@ public final class FilesUtils {
                 }
             }
         }
+    }
+
+    public static File getFile(String name) {
+        return new File(Utils.path + name);
     }
 
 
