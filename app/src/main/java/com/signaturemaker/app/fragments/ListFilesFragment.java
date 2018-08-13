@@ -23,9 +23,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 package com.signaturemaker.app.fragments;
 
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -47,7 +47,6 @@ import com.signaturemaker.app.utils.FilesUtils;
 import com.signaturemaker.app.utils.PermissionsUtils;
 import com.signaturemaker.app.utils.Utils;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,36 +113,53 @@ public class ListFilesFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
 
-        SwipeToAction swipeToAction = new SwipeToAction(recyclerView, new SwipeToAction.SwipeListener<ItemFile>() {
+        final SwipeToAction swipeToAction = new SwipeToAction(recyclerView, new SwipeToAction.SwipeListener<ItemFile>() {
 
             @Override
             public boolean swipeLeft(final ItemFile itemData) {
-                displaySnackbar(getActivity(), itemData.getName(), "deshacer", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        adapter.notifyDataSetChanged();
-                        flagDelete = false;
-                    }
-                }, new Snackbar.Callback() {
+
+                final int pos = adapter.getItems().indexOf(itemData);
+                if (pos == -1) {
+                    return true;
+                }
+                removeItemAdapter(itemData);
+
+                Log.d(Constants.TAG, pos + "");
+                displaySnackbar(getActivity(), itemData.getName(), getResources().getString(R.string.tittle_undo), new Snackbar.Callback() {
                     @Override
                     public void onShown(Snackbar sb) {
-                        flagDelete = true;
+                        super.onShown(sb);
                     }
 
                     @Override
                     public void onDismissed(Snackbar transientBottomBar, int event) {
-                        super.onDismissed(transientBottomBar, event);
-                        if (flagDelete) {
-                            final int pos = removeFile(itemData);
+                        if (event != 1) {
+                            FilesUtils.removeFile(itemData.getName());
+                            if (items.size() > 0) {
+                                txtMnsNoFiles.setVisibility(View.GONE);
+                            } else {
+                                txtMnsNoFiles.setVisibility(View.VISIBLE);
+                            }
+                            loadItemsFiles();
+                            Utils.sort(items, Utils.sortOrder);
+
+                        } else {
+                            addItemAdapter(pos, itemData);
+                            loadItemsFiles();
+                            Utils.sort(items, Utils.sortOrder);
+                           // adapter.setItems(items);
+                            //adapter.notifyDataSetChanged();
+
                         }
+                        super.onDismissed(transientBottomBar, event);
                     }
                 });
-                return false;
+                return true;
             }
 
             @Override
             public boolean swipeRight(ItemFile itemData) {
-                shareFile(itemData);
+                Utils.shareSign(getActivity(), itemData.getName());
                 return true;
             }
 
@@ -234,20 +250,18 @@ public class ListFilesFragment extends Fragment {
 
     }
 
-    private int removeFile(ItemFile item) {
+    private int removeItemAdapter(final ItemFile item) {
         int pos = adapter.getItems().indexOf(item);
+        Log.d(Constants.TAG, item.getName());
+
         adapter.getItems().remove(item);
         adapter.notifyItemRemoved(pos);
         return pos;
     }
 
-    private void shareFile(ItemFile item) {
-        File file = FilesUtils.getFile(item.getName());
-        Intent shareIntent = new Intent();
-        shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
-        shareIntent.setType("image/*");
-        getActivity().getParent().startActivity(Intent.createChooser(shareIntent, getActivity().getText(R.string.tittle_send)));
+    private void addItemAdapter(int pos, final ItemFile item) {
+        adapter.getItems().add(pos, item);
+        adapter.notifyItemInserted(pos);
     }
 
 

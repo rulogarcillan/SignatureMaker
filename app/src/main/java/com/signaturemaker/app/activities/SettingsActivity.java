@@ -22,6 +22,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 package com.signaturemaker.app.activities;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.text.Html;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -65,6 +67,7 @@ import src.chooser.ChooseFolder;
  */
 public class SettingsActivity extends AppCompatPreferenceActivity {
 
+
     /**
      * A preference value change listener that updates the preference's summary
      * to reflect its new value.
@@ -86,11 +89,27 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                                 ? listPreference.getEntries()[index]
                                 : null);
 
+
             } else {
+                Log.d(Constants.TAG, preference.getKey());
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
                 preference.setSummary(stringValue);
             }
+            return true;
+        }
+    };
+
+    private static Preference.OnPreferenceChangeListener sBindPreferenceGalleryListener = new Preference.OnPreferenceChangeListener() {
+        @Override
+        public boolean onPreferenceChange(Preference preference, Object o) {
+            if ((Boolean)o == true) {
+                FilesUtils.noMedia();
+            } else {
+                FilesUtils.noMediaRemove();
+            }
+
+            FilesUtils.reScan((Activity)preference.getContext());
             return true;
         }
     };
@@ -106,15 +125,21 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
      * @see #sBindPreferenceSummaryToValueListener
      */
     private static void bindPreferenceSummaryToValue(Preference preference) {
-        // Set the listener to watch for value changes.
-        preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
 
-        // Trigger the listener immediately with the preference's
-        // current value.
-        sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
-                (String) (PreferenceManager
-                        .getDefaultSharedPreferences(preference.getContext())
-                        .getString(preference.getKey(), Utils.path)).replace(Constants.ROOT, "/sdcard"));
+        if (preference.getKey().equalsIgnoreCase(Constants.ID_PREF_PATH)) {
+
+            // Set the listener to watch for value changes.
+            preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
+
+            // Trigger the listener immediately with the preference's
+            // current value.
+            sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
+                    (String) (PreferenceManager
+                            .getDefaultSharedPreferences(preference.getContext())
+                            .getString(preference.getKey(), Utils.path)).replace(Constants.ROOT, "/sdcard"));
+        } else if (preference.getKey().equalsIgnoreCase(Constants.ID_PREF_GALLERY)) {
+            preference.setOnPreferenceChangeListener(sBindPreferenceGalleryListener);
+        }
     }
 
     @Override
@@ -157,7 +182,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             // updated to reflect the new value, per the Android Design
             // guidelines.
             bindPreferenceSummaryToValue(findPreference(Constants.ID_PREF_PATH));
-            //  bindPreferenceSummaryToValue(findPreference("example_list"));
+            bindPreferenceSummaryToValue(findPreference(Constants.ID_PREF_GALLERY));
 
             CheckBoxPreference prefAds = (CheckBoxPreference) findPreference(Constants.ID_PREF_ADVERTISING);
             prefAds.setSummary(Html.fromHtml("<font color='red'>" + getResources().getString(R.string.title_pref_advertising_sum) + "</font>"));
@@ -235,9 +260,11 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             Utils.savePreference(findPreference(Constants.ID_PREF_PATH).getContext(), Constants.ID_PREF_PATH, Utils.path);
             bindPreferenceSummaryToValue(findPreference(Constants.ID_PREF_PATH));
             FilesUtils.moveFiles(oldPath, getActivity());
+            FilesUtils.reScan(getActivity());
 
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_DELETE)).setChecked(false);
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_GALLERY)).setChecked(true);
+            FilesUtils.noMedia();
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_NAME)).setChecked(false);
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_COLOR)).setChecked(false);
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_STROKE)).setChecked(false);

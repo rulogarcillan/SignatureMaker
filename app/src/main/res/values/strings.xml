@@ -37,7 +37,7 @@
     <string name="title_no_files">No files</string>
     <string name="delete">Delete</string>
     <string name="tittle_send">Send</string>
-
+    <string name="tittle_undo">Undo</string>
     <!--       Preferences      -->
     <string name="title_pref_advertising_t">Advertising</string>
     <string name="title_pref_advertising">Disable ads</string>

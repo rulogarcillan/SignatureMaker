@@ -283,22 +283,21 @@ public final class Utils {
      * @param msg
      * @param actionMsg
      */
-    public static void displaySnackbar(Activity mActivity, String msg, String actionMsg, final View.OnClickListener OnClickListener, final Snackbar.Callback callback) {
-        Snackbar.make(mActivity.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG)
+    public static void displaySnackbar(Activity mActivity, String msg, String actionMsg, final Snackbar.Callback callback) {
+        Snackbar.make(mActivity.findViewById(android.R.id.content), msg, Snackbar.LENGTH_SHORT)
                 .setAction(actionMsg, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        OnClickListener.onClick(view);
                     }
                 })
                 .setActionTextColor(mActivity.getResources().getColor(R.color.colorAccent))
                 .addCallback(new Snackbar.Callback() {
+
                     @Override
                     public void onShown(Snackbar sb) {
                         super.onShown(sb);
                         callback.onShown(sb);
                     }
-
                     @Override
                     public void onDismissed(Snackbar transientBottomBar, int event) {
                         super.onDismissed(transientBottomBar, event);
