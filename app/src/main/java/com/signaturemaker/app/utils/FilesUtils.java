@@ -1,11 +1,12 @@
 package com.signaturemaker.app.utils;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Environment;
+import android.provider.MediaStore;
 
 import com.signaturemaker.app.models.ItemFile;
 
@@ -79,6 +80,7 @@ public final class FilesUtils {
             FileOutputStream os = new FileOutputStream(file);
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, os);
             os.close();
+
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -120,7 +122,6 @@ public final class FilesUtils {
             file.mkdirs();
         }
     }
-
 
 
     public static List loadItemsFiles() {
@@ -165,10 +166,14 @@ public final class FilesUtils {
                     String name = file.getName();
 
                     if (((name.contains(".png") || name.contains(".PNG") || name.contains(".svg") || name.contains(".SVG")) && name.substring(0, 2).equals("SM")) || name.equals(".nomedia")) {
+
                         file.renameTo(new File(Utils.path + "/" + name));
-                        mActivity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse(file.getAbsolutePath()))); //antigua
+                        deleteScanFile(mActivity, file);
+                       // scanFile(mActivity, new File(Utils.path + "/" + name));
+                       //mActivity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse(file.getAbsolutePath()))); //antigua
                         mActivity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse(Utils.path + "/" + name))); //nueva
                     }
+
                 }
             }
         }
@@ -177,9 +182,9 @@ public final class FilesUtils {
     /**
      * Remove all files
      *
-     * @param activity
+     * @param mActivity
      */
-    public static void deleteAllFiles(Activity activity) {
+    public static void deleteAllFiles(Activity mActivity) {
         File files[];
         File folder;
         folder = new File(Utils.path);
@@ -189,9 +194,13 @@ public final class FilesUtils {
                 String name = file.getName();
                 if ((name.contains(".png") || name.contains(".PNG") || name.contains(".svg") || name.contains(".SVG")) && name.substring(0, 2).equals("SM")) {
                     file.delete();
-                    activity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse(file.getAbsolutePath())));
+                    deleteScanFile(mActivity, file);
+                    //activity.getContentResolver().delete(Uri.parse(file.getAbsolutePath()), null, null);
+                    //activity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse(file.getAbsolutePath())));
+
                 }
             }
+
         }
     }
 
@@ -199,15 +208,16 @@ public final class FilesUtils {
         return new File(Utils.path + name);
     }
 
-    public static void removeFile(String name) {
+    public static void removeFile(Activity mActivity, String name) {
         File file = getFile(name);
         if (file.exists()) {
             file.delete();
+            deleteScanFile(mActivity, file);
         }
     }
 
 
-    public static Boolean noMedia() {
+    public static Boolean noMedia(Activity mActivity) {
         {
             String storageState = Environment.getExternalStorageState();
 
@@ -216,9 +226,10 @@ public final class FilesUtils {
                     File noMedia = new File(Utils.path, ".nomedia");
 
                     if (noMedia.exists()) {
+                        scanFile(mActivity, noMedia);
                         return true;
                     }
-
+                    scanFile(mActivity, noMedia);
                     FileOutputStream noMediaOutStream = new FileOutputStream(noMedia);
                     noMediaOutStream.write(0);
                     noMediaOutStream.close();
@@ -236,7 +247,7 @@ public final class FilesUtils {
     }
 
 
-    public static Boolean noMediaRemove() {
+    public static Boolean noMediaRemove(Activity mActivity) {
         {
             String storageState = Environment.getExternalStorageState();
 
@@ -245,6 +256,19 @@ public final class FilesUtils {
                     File noMedia = new File(Utils.path, ".nomedia");
                     if (noMedia.exists()) {
                         noMedia.delete();
+                        scanFile(mActivity, noMedia);
+
+
+                        File folder = new File(Utils.path);
+                        File files[];
+                        if (folder.exists()) {
+                            files = folder.listFiles();
+                            for (File file : files) {
+                                mActivity.getContentResolver().delete(Uri.parse(file.getAbsolutePath()), null, null);
+                            }
+                        }
+
+
                         return true;
                     }
                 } catch (Exception e) {
@@ -258,73 +282,49 @@ public final class FilesUtils {
         }
     }
 
-
-    /**
-     * Remove all files
-     *
-     * @param activity
-     */
-    public static void reScan(Activity activity) {
-
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            final Intent scanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-            final Uri contentUri = Uri.fromFile(new File("file://" + Environment.getExternalStorageDirectory()));
-            scanIntent.setData(contentUri);
-            activity.sendBroadcast(scanIntent);
-        } else {
-            activity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://" + Environment.getExternalStorageDirectory())));
-        }
-        moveFilesRe(Utils.path, Utils.path+"Bis/", activity);
+    private static void scanFile(Activity mActivity, File file) {
+        mActivity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                Uri.fromFile(file)));
     }
 
-    public static void moveFilesRe(String oldPaht,String newPaht, Activity mActivity) {
+    private static void deleteScanFile(final Activity mActivity, File file) {
 
-        if (!oldPaht.equals(newPaht)) {
-            File files[];
-            File folder;
+      /*  File noMedia = new File(Utils.path, ".nomedia");
+        if (!noMedia.exists()) {
+            Thread thread = new Thread() {
+                @Override
+                public void run() {
 
+                    try {
+                        Log.d(Constants.TAG, "Vamosssss1");
+                        noMedia(mActivity);
+                        sleep(5000);
+                        noMediaRemove(mActivity);
+                        Log.d(Constants.TAG, "Vamosssss2");
 
-            folder = new File(oldPaht);
-            createFolder(newPaht);
-            if (folder.exists()) {
-                files = folder.listFiles();
-                for (File file : files) {
-
-                    String name = file.getName();
-
-                    if (((name.contains(".png") || name.contains(".PNG") || name.contains(".svg") || name.contains(".SVG")) && name.substring(0, 2).equals("SM")) || name.equals(".nomedia")) {
-                        file.renameTo(new File(newPaht + name));
-                        mActivity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse(file.getAbsolutePath()))); //antigua
-                        mActivity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse(newPaht  + name))); //nueva
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
                 }
-            }
-        }
+            };
 
-        if (!newPaht.equals(oldPaht)) {
-            File files[];
-            File folder;
+            thread.start();
 
-            folder = new File(newPaht);
-            if (folder.exists()) {
-                files = folder.listFiles();
-                for (File file : files) {
 
-                    String name = file.getName();
+        }*/
 
-                    if (((name.contains(".png") || name.contains(".PNG") || name.contains(".svg") || name.contains(".SVG")) && name.substring(0, 2).equals("SM")) || name.equals(".nomedia")) {
-                        file.renameTo(new File(oldPaht + name));
-                        mActivity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse(file.getAbsolutePath()))); //antigua
-                        mActivity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse(oldPaht + name))); //nueva
-                    }
-                }
-            }
-        }
 
-        removeFile(newPaht);
+        ContentResolver resolver = mActivity.getContentResolver();
+        resolver.delete(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, MediaStore.Images.Media.DATA + "=?", new String[]{file.getPath()});
+        mActivity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse(file.getPath()))); //nueva
+
     }
+
+
 }
+
+
+
 
 
 

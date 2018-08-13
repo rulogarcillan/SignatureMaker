@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <protected-broadcast android:name="android.intent.action.MEDIA_MOUNTED" />
+
 
     <application
         android:allowBackup="true"

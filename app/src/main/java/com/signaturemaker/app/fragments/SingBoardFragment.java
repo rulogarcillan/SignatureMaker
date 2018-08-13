@@ -24,6 +24,8 @@ package com.signaturemaker.app.fragments;
 
 import android.animation.Animator;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -52,6 +54,7 @@ import com.signaturemaker.app.utils.FilesUtils;
 import com.signaturemaker.app.utils.PermissionsUtils;
 import com.signaturemaker.app.utils.Utils;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -557,12 +560,16 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
                     if (idMenu == R.id.savePngTrans) {
                         name = FilesUtils.addExtensionNamePng(theName);
                         statusParticular = FilesUtils.saveBitmapFile(mSingBoard.getTransparentSignatureBitmap(true), name);
+                        getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(Utils.path + name))));
+
                     } else if (idMenu == R.id.savePngWhite) {
                         name = FilesUtils.addExtensionNamePng(theName);
                         statusParticular = FilesUtils.saveBitmapFile(mSingBoard.getSignatureBitmap(), name);
+                        getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(Utils.path + name))));
                     } else if (idMenu == R.id.saveSvg) {
                         name = FilesUtils.addExtensionNameSvg(theName);
                         statusParticular = FilesUtils.saveSvgFile(mSingBoard.getSignatureSvg(), name);
+                        getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(Utils.path + name))));
                     }
                     if (statusParticular) {
                         if (share) {
@@ -580,12 +587,15 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
             if (idMenu == R.id.savePngTrans) {
                 name = FilesUtils.addExtensionNamePng(FilesUtils.generateName());
                 status = FilesUtils.saveBitmapFile(mSingBoard.getTransparentSignatureBitmap(true), name);
+                getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(Utils.path + name))));
             } else if (idMenu == R.id.savePngWhite) {
                 name = FilesUtils.addExtensionNamePng(FilesUtils.generateName());
                 status = FilesUtils.saveBitmapFile(mSingBoard.getSignatureBitmap(), name);
+                getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(Utils.path + name))));
             } else if (idMenu == R.id.saveSvg) {
                 name = FilesUtils.addExtensionNameSvg(FilesUtils.generateName());
                 status = FilesUtils.saveSvgFile(mSingBoard.getSignatureSvg(), name);
+                getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(Utils.path + name))));
             }
             if (status) {
                 if (share) {

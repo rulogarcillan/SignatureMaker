@@ -99,7 +99,7 @@ public class ChooseFolder extends LinearLayout {
     }
 
     private String genPathClickFolder(String nameFolder) {
-        return this.getPath() + "/" + nameFolder;
+        return this.getPath() + "/" + nameFolder + "/";
     }
 
     public String getPath() {

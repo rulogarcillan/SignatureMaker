@@ -134,7 +134,7 @@ public class ListFilesFragment extends Fragment {
                     @Override
                     public void onDismissed(Snackbar transientBottomBar, int event) {
                         if (event != 1) {
-                            FilesUtils.removeFile(itemData.getName());
+                            FilesUtils.removeFile(getActivity(), itemData.getName());
                             if (items.size() > 0) {
                                 txtMnsNoFiles.setVisibility(View.GONE);
                             } else {
@@ -193,10 +193,10 @@ public class ListFilesFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.help_menu, menu);
 
-        MenuItem item = menu.findItem(R.id.action_help);
+       // MenuItem item = menu.findItem(R.id.action_help);
         MenuItem itemS = menu.findItem(R.id.action_sort);
 
-        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+    /*    item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
@@ -204,7 +204,7 @@ public class ListFilesFragment extends Fragment {
                 }
                 return true;
             }
-        });
+        });*/
 
         itemS.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 

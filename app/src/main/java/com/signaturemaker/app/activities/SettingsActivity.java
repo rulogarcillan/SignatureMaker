@@ -104,12 +104,10 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         @Override
         public boolean onPreferenceChange(Preference preference, Object o) {
             if ((Boolean)o == true) {
-                FilesUtils.noMedia();
+                FilesUtils.noMedia((Activity)preference.getContext());
             } else {
-                FilesUtils.noMediaRemove();
+                FilesUtils.noMediaRemove((Activity)preference.getContext());
             }
-
-            FilesUtils.reScan((Activity)preference.getContext());
             return true;
         }
     };
@@ -260,11 +258,11 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             Utils.savePreference(findPreference(Constants.ID_PREF_PATH).getContext(), Constants.ID_PREF_PATH, Utils.path);
             bindPreferenceSummaryToValue(findPreference(Constants.ID_PREF_PATH));
             FilesUtils.moveFiles(oldPath, getActivity());
-            FilesUtils.reScan(getActivity());
-
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_DELETE)).setChecked(false);
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_GALLERY)).setChecked(true);
-            FilesUtils.noMedia();
+             FilesUtils.noMedia(getActivity());
+            //  FilesUtils.moveFiles(oldPath, getActivity());
+            // FilesUtils.reScan(getActivity());
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_NAME)).setChecked(false);
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_COLOR)).setChecked(false);
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_STROKE)).setChecked(false);
