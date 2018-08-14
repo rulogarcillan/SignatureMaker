@@ -47,11 +47,11 @@ public class IntroActivity extends AppIntro2 {
 
         Fragment f1 = AppIntroFragment.newInstance(getResources().getString(R.string.tittle_slider1), "Roboto", getResources().getString(R.string.tittle_body_slider1), "normal",
                 R.drawable.ic_pencil_icon, getResources().getColor(R.color.background_sliders), getResources().getColor(R.color.colorWhite), getResources().getColor(R.color.colorWhite));
-        Fragment f2 = AppIntroFragment.newInstance(getResources().getString(R.string.tittle_slider1), "Roboto", getResources().getString(R.string.tittle_body_slider2), "normal",
+        Fragment f2 = AppIntroFragment.newInstance(getResources().getString(R.string.tittle_slider2), "Roboto", getResources().getString(R.string.tittle_body_slider2), "normal",
                 R.drawable.ic_share_icon, getResources().getColor(R.color.background_sliders), getResources().getColor(R.color.colorWhite), getResources().getColor(R.color.colorWhite));
-        Fragment f3 = AppIntroFragment.newInstance(getResources().getString(R.string.tittle_slider1), "Roboto", getResources().getString(R.string.tittle_body_slider3), "normal",
+        Fragment f3 = AppIntroFragment.newInstance(getResources().getString(R.string.tittle_slider3), "Roboto", getResources().getString(R.string.tittle_body_slider3), "normal",
                 R.drawable.ic_sign_icon, getResources().getColor(R.color.background_sliders), getResources().getColor(R.color.colorWhite), getResources().getColor(R.color.colorWhite));
-        Fragment f4 = AppIntroFragment.newInstance(getResources().getString(R.string.tittle_slider1), "Roboto", getResources().getString(R.string.tittle_body_slider4), "normal",
+        Fragment f4 = AppIntroFragment.newInstance(getResources().getString(R.string.tittle_slider4), "Roboto", getResources().getString(R.string.tittle_body_slider4), "normal",
                 R.drawable.ic_check_icon, getResources().getColor(R.color.background_sliders), getResources().getColor(R.color.colorWhite), getResources().getColor(R.color.colorWhite));
         addSlide(f1);
         addSlide(f2);
