@@ -29,12 +29,10 @@
         <activity
             android:name=".activities.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:configChanges="orientation|screenSize"
             android:theme="@style/AppThemePrefs"></activity>
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/title_appName"
-            android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme"></activity>
     </application>
 

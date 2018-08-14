@@ -24,6 +24,8 @@ package com.signaturemaker.app.activities;
 
 import android.os.Bundle;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
@@ -40,6 +42,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends BaseActivity {
 
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,10 @@ public class MainActivity extends BaseActivity {
         ft.commit();
 
         startChangelog(false);
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
 

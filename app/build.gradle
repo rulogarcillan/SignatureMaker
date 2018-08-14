@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 28
@@ -12,7 +13,7 @@ android {
     }
     buildTypes {
 
-        debug {
+    /*    debug {
             debuggable true
             applicationIdSuffix ".debug"
         }
@@ -21,7 +22,7 @@ android {
             applicationIdSuffix ".test"
             //resValue "string", "title_app", "Signature Maker test"
             //buildConfigField "String", "fooVar", '"blablabla"'
-        }
+        }*/
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -85,5 +86,9 @@ dependencies {
         transitive=true
     }
 
+    implementation 'com.google.firebase:firebase-ads:15.0.0'
+
     implementation project(':chooser')
+
+
 }

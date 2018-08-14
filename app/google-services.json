@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1099061363775",
+    "firebase_url": "https://signaturemaker-a5dfc.firebaseio.com",
+    "project_id": "signaturemaker-a5dfc",
+    "storage_bucket": "signaturemaker-a5dfc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1099061363775:android:10d52fcc153e7e7b",
+        "android_client_info": {
+          "package_name": "com.signaturemaker.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1099061363775-3jvc6dba7k5fvdaspc463kdbvkrl9ped.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiaDRiPb1AO9i_xYdxsNgQEYPLGhrw45k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

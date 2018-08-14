@@ -71,5 +71,7 @@
     <string name="title_pref_wallpaper_sum">Keep last wallpaper used by default</string>
     <string name="title_pref_wallpaper">Default wallpaper</string>
     <string name="tittle_name_of_the_file">Name of the file</string>
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-9438738341601496/1496642762</string>
+
 
 </resources>
