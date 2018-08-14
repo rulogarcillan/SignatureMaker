@@ -23,6 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 package com.signaturemaker.app.fragments;
 
 import android.animation.Animator;
+import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -60,6 +61,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -90,6 +92,13 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
     FloatingActionButton bStroke;
     //@BindView(R.id.bRubber)
     FloatingActionButton bRubber;
+
+    //@BindView(R.id.bWallpaper)
+    FloatingActionButton bWallpaper;
+
+    //@BindView(R.id.layoutWallapaper)
+    ConstraintLayout layoutWallapaper;
+
 
     View rootView;
     YoYo.YoYoString runningAnimationSeek;
@@ -132,12 +141,15 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
         bColor = rootView.findViewById(R.id.bColor);
         bStroke = rootView.findViewById(R.id.bStroke);
         bRubber = rootView.findViewById(R.id.bRubber);
+        bWallpaper = rootView.findViewById(R.id.bWallpaper);
         txtSingHere = rootView.findViewById(R.id.txtSingHere);
         rangeBar = rootView.findViewById(R.id.rangeBar);
         rangeSeekBarLayout = rootView.findViewById(R.id.rangeSeekBarLayout);
         coloPickerLayout = rootView.findViewById(R.id.coloPickerLayout);
         picker = rootView.findViewById(R.id.picker);
         svbar = rootView.findViewById(R.id.svbar);
+        layoutWallapaper = rootView.findViewById(R.id.layoutWallapaper);
+
 
         bList.setOnClickListener(this);
         bSave.setOnClickListener(this);
@@ -145,6 +157,8 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
         bColor.setOnClickListener(this);
         bStroke.setOnClickListener(this);
         bRubber.setOnClickListener(this);
+        bWallpaper.setOnClickListener(this);
+
 
         bList.setOnLongClickListener(this);
         bSave.setOnLongClickListener(this);
@@ -224,6 +238,7 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
         super.onResume();
         setSeekBarRange();
         setColor();
+        selectWallpaper();
     }
 
     /**
@@ -702,6 +717,10 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
             case R.id.bRubber:
                 cleanBoard();
                 break;
+            case R.id.bWallpaper:
+                changeWallpaper();
+                break;
+
             default:
                 break;
         }
@@ -779,5 +798,48 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
         public void onGetTextDialog(String name);
     }
 
+
+    private void changeWallpaper() {
+        Utils.wallpaper++;
+        if (Utils.wallpaper == 5) {
+            Utils.wallpaper = 1;
+        }
+        Utils.saveAllPreferences(getActivity());
+        selectWallpaper();
+    }
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    private void selectWallpaper() {
+
+        final int sdk = android.os.Build.VERSION.SDK_INT;
+        switch (Utils.wallpaper) {
+            case 1:
+                txtSingHere.setTextColor(getResources().getColor(android.R.color.black));
+                if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                    layoutWallapaper.setBackgroundDrawable(getResources().getDrawable(R.drawable.fondotrans1));
+                } else {
+                    layoutWallapaper.setBackground(getResources().getDrawable(R.drawable.fondotrans1));
+                }
+                break;
+            case 2:
+                txtSingHere.setTextColor(getResources().getColor(android.R.color.white));
+                if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                    layoutWallapaper.setBackgroundDrawable(getResources().getDrawable(R.drawable.fondotrans2));
+                } else {
+                    layoutWallapaper.setBackground(getResources().getDrawable(R.drawable.fondotrans2));
+                }
+                break;
+            case 3:
+                txtSingHere.setTextColor(getResources().getColor(android.R.color.black));
+                layoutWallapaper.setBackgroundColor(getResources().getColor(android.R.color.white));
+                break;
+            case 4:
+                txtSingHere.setTextColor(getResources().getColor(android.R.color.white));
+                layoutWallapaper.setBackgroundColor(getResources().getColor(android.R.color.black));
+                break;
+        }
+
+
+    }
 
 }

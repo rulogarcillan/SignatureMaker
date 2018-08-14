@@ -18,11 +18,10 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activities.IntroActivity"
-            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-v
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -30,11 +29,12 @@ v
         <activity
             android:name=".activities.SettingsActivity"
             android:label="@string/title_activity_settings"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/AppThemePrefs"></activity>
-
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/title_appName"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme"></activity>
     </application>
 

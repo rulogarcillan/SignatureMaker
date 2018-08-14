@@ -38,12 +38,14 @@ public final class Constants {
     public static final String ID_PREF_COLOR = "id_pref_color";
     public static final String ID_PREF_STROKE = "id_pref_stroke";
     public static final String ID_PREF_RESET = "id_pref_reset";
+    public static final String ID_PREF_WALLPAPER = "id_pref_wallpaper";
 
     public static final String PREF_ADS = "ADS";
     //public static final String FRAG = "FRAG";
     public static final String PREF_MAX_TROKE = "MAX_STROKE";
     public static final String PREF_MIN_TROKE = "MIN_STROKE";
     public static final String PREF_COLOR = "COLOR";
+    public static final String PREF_WALLPAPER = "WALLPAPER";
 
     public static final String FIRST_TIME = "first_time";
 

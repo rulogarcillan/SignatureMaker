@@ -95,6 +95,11 @@ public final class Utils {
         penColor = Constants.DEFAULT_PEN_COLOR;
     }
 
+    public static void defaultWallpaper() {
+        wallpaper = Constants.DEFAULT_WALLPAPER;
+    }
+
+
     public static void defaultStroke() {
         maxStroke = Constants.DEFAULT_MAX_STROKE;
         minStroke = Constants.DEFAULT_MIN_TROKE;
@@ -103,6 +108,11 @@ public final class Utils {
 
     public static void loadAllPreferences(Context mContext) {
 
+        if (Utils.loadPreference(mContext, Constants.ID_PREF_WALLPAPER, false)) {
+            Utils.wallpaper = loadPreference(mContext, Constants.PREF_WALLPAPER, Constants.DEFAULT_PEN_COLOR);
+        } else {
+            Utils.defaultWallpaper();
+        }
         if (Utils.loadPreference(mContext, Constants.ID_PREF_COLOR, false)) {
             Utils.penColor = loadPreference(mContext, Constants.PREF_COLOR, Constants.DEFAULT_PEN_COLOR);
         } else {
@@ -131,7 +141,6 @@ public final class Utils {
         }
     }
 
-
     public static void saveAllPreferences(Context mContext) {
         if (Utils.loadPreference(mContext, Constants.ID_PREF_COLOR, false)) {
             savePreference(mContext, Constants.PREF_COLOR, Utils.penColor);
@@ -140,8 +149,10 @@ public final class Utils {
             savePreference(mContext, Constants.PREF_MIN_TROKE, Utils.minStroke);
             savePreference(mContext, Constants.PREF_MAX_TROKE, Utils.maxStroke);
         }
+        if (Utils.loadPreference(mContext, Constants.ID_PREF_WALLPAPER, false)) {
+            savePreference(mContext, Constants.PREF_WALLPAPER, Utils.wallpaper);
+        }
     }
-
 
     /**
      * Get last time compilation app
@@ -239,21 +250,16 @@ public final class Utils {
     }
 
     public static String loadPreference(Context mContext, String key, String value) {
-
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         return sharedPreferences.getString(key, value);
-
     }
 
     public static int loadPreference(Context mContext, String key, int value) {
-
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         return sharedPreferences.getInt(key, value);
-
     }
 
     public static Boolean loadPreference(Context mContext, String key, Boolean value) {
-
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         return sharedPreferences.getBoolean(key, value);
 
@@ -298,6 +304,7 @@ public final class Utils {
                         super.onShown(sb);
                         callback.onShown(sb);
                     }
+
                     @Override
                     public void onDismissed(Snackbar transientBottomBar, int event) {
                         super.onDismissed(transientBottomBar, event);

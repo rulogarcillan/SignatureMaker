@@ -33,6 +33,11 @@
             android:key="id_pref_stroke"
             android:summary="@string/title_pref_stroke_sum"
             android:title="@string/title_pref_stroke" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="id_pref_wallpaper"
+            android:summary="@string/title_pref_wallpaper_sum"
+            android:title="@string/title_pref_wallpaper" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/title_pref_advertising_t">
         <CheckBoxPreference

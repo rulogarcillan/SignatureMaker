@@ -103,10 +103,10 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     private static Preference.OnPreferenceChangeListener sBindPreferenceGalleryListener = new Preference.OnPreferenceChangeListener() {
         @Override
         public boolean onPreferenceChange(Preference preference, Object o) {
-            if ((Boolean)o == true) {
-                FilesUtils.noMedia((Activity)preference.getContext());
+            if ((Boolean) o == true) {
+                FilesUtils.noMedia((Activity) preference.getContext());
             } else {
-                FilesUtils.noMediaRemove((Activity)preference.getContext());
+                FilesUtils.noMediaRemove((Activity) preference.getContext());
             }
             return true;
         }
@@ -190,9 +190,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
 
             switch (preference.getKey()) {
-
                 case Constants.ID_PREF_PATH:
-
                     PermissionsUtils.getInstance().callRequestPermissions(getActivity(), PermissionsUtils.permissionsReadWrite, new MultiplePermissionsListener() {
                         @Override
                         public void onPermissionsChecked(MultiplePermissionsReport report) {
@@ -206,10 +204,13 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     break;
                 case Constants.ID_PREF_RESET:
                     setDefaultPreferences();
-
                 case Constants.ID_PREF_DELETE:
                 case Constants.ID_PREF_NAME:
                 case Constants.ID_PREF_ADVERTISING:
+                case Constants.ID_PREF_WALLPAPER:
+                case Constants.ID_PREF_COLOR:
+                case Constants.ID_PREF_STROKE:
+
                     Utils.loadAllPreferences(getActivity());
                     break;
                 default:
@@ -260,13 +261,14 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             FilesUtils.moveFiles(oldPath, getActivity());
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_DELETE)).setChecked(false);
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_GALLERY)).setChecked(true);
-             FilesUtils.noMedia(getActivity());
+            FilesUtils.noMedia(getActivity());
             //  FilesUtils.moveFiles(oldPath, getActivity());
             // FilesUtils.reScan(getActivity());
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_NAME)).setChecked(false);
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_COLOR)).setChecked(false);
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_STROKE)).setChecked(false);
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_ADVERTISING)).setChecked(false);
+            ((CheckBoxPreference) findPreference(Constants.ID_PREF_WALLPAPER)).setChecked(false);
             Utils.saveAllPreferences(getActivity());
             Utils.defaultValues();
 

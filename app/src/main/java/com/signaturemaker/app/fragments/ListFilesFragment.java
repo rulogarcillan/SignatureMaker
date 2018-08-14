@@ -32,6 +32,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -46,10 +47,12 @@ import com.signaturemaker.app.utils.Constants;
 import com.signaturemaker.app.utils.FilesUtils;
 import com.signaturemaker.app.utils.PermissionsUtils;
 import com.signaturemaker.app.utils.Utils;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -147,7 +150,7 @@ public class ListFilesFragment extends Fragment {
                             addItemAdapter(pos, itemData);
                             loadItemsFiles();
                             Utils.sort(items, Utils.sortOrder);
-                           // adapter.setItems(items);
+                            // adapter.setItems(items);
                             //adapter.notifyDataSetChanged();
 
                         }
@@ -166,6 +169,7 @@ public class ListFilesFragment extends Fragment {
             @Override
             public void onClick(ItemFile itemData) {
 
+                showPreviewImage(itemData);
             }
 
             @Override
@@ -175,6 +179,26 @@ public class ListFilesFragment extends Fragment {
         });
 
         return rootView;
+    }
+
+    private void showPreviewImage(ItemFile itemData) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+        //alertDialog.setTitle(R.string.tittle_name_of_the_file);
+        View view = getActivity().getLayoutInflater().inflate(R.layout.imagen_dialog, null);
+        final ImageView image = (ImageView) view.findViewById(R.id.image);
+        if (itemData.getName().endsWith("png") || itemData.getName().endsWith("PNG")) {
+            Picasso.get().load("file:///" + Utils.path + "/" + itemData.getName()).placeholder(R.drawable.ic_png_icon)
+                    .error(R.drawable.ic_png_icon).into(image);
+        }
+        if (itemData.getName().endsWith("svg") || itemData.getName().endsWith("SVG")) {
+            Picasso.get().load("file:///" + Utils.path + "/" + itemData.getName()).placeholder(R.drawable.ic_svg_icon)
+                    .error(R.drawable.ic_svg_icon).into(image);
+        }
+
+
+        alertDialog.setCancelable(true);
+        alertDialog.setView(view);
+        alertDialog.show();
     }
 
     @Override
@@ -193,7 +217,7 @@ public class ListFilesFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.help_menu, menu);
 
-       // MenuItem item = menu.findItem(R.id.action_help);
+        // MenuItem item = menu.findItem(R.id.action_help);
         MenuItem itemS = menu.findItem(R.id.action_sort);
 
     /*    item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
