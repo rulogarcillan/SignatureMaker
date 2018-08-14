@@ -45,13 +45,13 @@ public class IntroActivity extends AppIntro2 {
             launchActivityMain();
         }
 
-        Fragment f1 = AppIntroFragment.newInstance("Firma", "Roboto", "Digitalice su firma de una forma fácil y sencilla", "normal",
+        Fragment f1 = AppIntroFragment.newInstance(getResources().getString(R.string.tittle_slider1), "Roboto", getResources().getString(R.string.tittle_body_slider1), "normal",
                 R.drawable.ic_pencil_icon, getResources().getColor(R.color.background_sliders), getResources().getColor(R.color.colorWhite), getResources().getColor(R.color.colorWhite));
-        Fragment f2 = AppIntroFragment.newInstance("Transfiere", "Roboto", "Guarde y envíe su firma donde usted quiera", "normal",
+        Fragment f2 = AppIntroFragment.newInstance(getResources().getString(R.string.tittle_slider1), "Roboto", getResources().getString(R.string.tittle_body_slider2), "normal",
                 R.drawable.ic_share_icon, getResources().getColor(R.color.background_sliders), getResources().getColor(R.color.colorWhite), getResources().getColor(R.color.colorWhite));
-        Fragment f3 = AppIntroFragment.newInstance("Adjunta", "Roboto", "Adjunte la imagen con la firma en su documento", "normal",
+        Fragment f3 = AppIntroFragment.newInstance(getResources().getString(R.string.tittle_slider1), "Roboto", getResources().getString(R.string.tittle_body_slider3), "normal",
                 R.drawable.ic_sign_icon, getResources().getColor(R.color.background_sliders), getResources().getColor(R.color.colorWhite), getResources().getColor(R.color.colorWhite));
-        Fragment f4 = AppIntroFragment.newInstance("Listo", "Roboto", "¿Estás preparado?", "normal",
+        Fragment f4 = AppIntroFragment.newInstance(getResources().getString(R.string.tittle_slider1), "Roboto", getResources().getString(R.string.tittle_body_slider4), "normal",
                 R.drawable.ic_check_icon, getResources().getColor(R.color.background_sliders), getResources().getColor(R.color.colorWhite), getResources().getColor(R.color.colorWhite));
         addSlide(f1);
         addSlide(f2);

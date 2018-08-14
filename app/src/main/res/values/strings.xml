@@ -1,5 +1,5 @@
 <resources>
-    <string name="title_appName">Signature Maker</string>
+    <string name="title_appName" translatable="false">Signature Maker</string>
     <string name="title_setting">Settings</string>
     <string name="title_activity_settings">Settings</string>
     <string name="title_changelog">Changelog</string>
@@ -32,6 +32,17 @@
     <string name="body_permissions">Necesitas aceptar los permisos para un correcto funcionamiento de la app</string>
     <string name="title_request_permision">Solicitud de permisos de lectura y escritura</string>
     <string name="body_request_permision">Para poder usar la aplicación correctamente es necesario tener acceso a ciertos permisos del sistema. Acepte los permisos o la aplicación no funcionará.</string>
+
+    <string name="tittle_slider1">Sing</string>
+    <string name="tittle_slider2">Transfer</string>
+    <string name="tittle_slider3">Attach</string>
+    <string name="tittle_slider4">Go</string>
+
+    <string name="tittle_body_slider1">Digitalize your sign with an easy and simple procedure</string>
+    <string name="tittle_body_slider2">Save and send you sign wherever you wan</string>
+    <string name="tittle_body_slider3">Attach an image with your sign to your documents</string>
+    <string name="tittle_body_slider4">Are you ready?</string>
+
 
     <string name="action_settings">Settings</string>
     <string name="title_no_files">No files</string>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tittle_slider1">Firma</string>
+    <string name="tittle_slider2">Transfiere</string>
+    <string name="tittle_slider3">Adjunta</string>
+    <string name="tittle_slider4">Listo</string>
+    <string name="tittle_body_slider1">Digitalice su firma de una forma fácil y sencilla</string>
+    <string name="tittle_body_slider2">Guarde y envíe su firma donde usted quiera</string>
+    <string name="tittle_body_slider3">Adjunte la imagen con la firma en su documento</string>
+    <string name="tittle_body_slider4">¿Estás preparado?</string>
+
+
+
+</resources>
