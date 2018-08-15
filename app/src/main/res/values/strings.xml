@@ -2,7 +2,7 @@
     <string name="title_appName" translatable="false">Signature Maker</string>
     <string name="title_setting">Settings</string>
     <string name="title_activity_settings">Settings</string>
-    <string name="title_changelog">Changelog</string>
+    <string name="title_changelog" translatable="false">Changelog</string>
     <string name="title_rate">Rate it</string>
     <string name="title_license">Licenses</string>
     <string name="title_more">More apps</string>
@@ -14,9 +14,9 @@
     <string name="title_bStroke">Stroke</string>
     <string name="title_bRubber">Clean</string>
     <string name="title_SingHere">Sign here</string>
-    <string name="title_save_png">PNG (Transparent BG)</string>
-    <string name="title_save_png_wh">PNG (White BG)</string>
-    <string name="title_save_svg">SVG (Transparent BG)</string>
+    <string name="title_save_png" translatable="false">PNG (Transparent BG)</string>
+    <string name="title_save_png_wh" translatable="false">PNG (White BG)</string>
+    <string name="title_save_svg" translatable="false">SVG (Transparent BG)</string>
     <string name="app_written">Application Written By Raúl R.C</string>
 
     <string name="title_save_ok">File saved correctly</string>
@@ -25,13 +25,13 @@
 
 
     <string name="sort">Sort by date</string>
-    <string name="help_r">Swipe rigth to delete</string>
-    <string name="help_l">Swipe left to share</string>
+    <string name="help_r" translatable="false">Swipe rigth to delete</string>
+    <string name="help_l" translatable="false">Swipe left to share</string>
     <string name="help">Help</string>
 
-    <string name="body_permissions">Necesitas aceptar los permisos para un correcto funcionamiento de la app</string>
-    <string name="title_request_permision">Solicitud de permisos de lectura y escritura</string>
-    <string name="body_request_permision">Para poder usar la aplicación correctamente es necesario tener acceso a ciertos permisos del sistema. Acepte los permisos o la aplicación no funcionará.</string>
+    <string name="body_permissions">You need to accept the permissions for a proper functioning of the app</string>
+    <string name="title_request_permision">Request for reading and writing permissions</string>
+    <string name="body_request_permision">In order to use the application correctly it is necessary to have access to certain system permissions. Accept the permissions or the application will not work.</string>
 
     <string name="tittle_slider1">Sing</string>
     <string name="tittle_slider2">Transfer</string>

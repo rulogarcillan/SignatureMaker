@@ -98,6 +98,7 @@ public final class FilesUtils {
             // file.createNewFile();
             //FileOutputStream os = new FileOutputStream(file);
             BufferedWriter out = new BufferedWriter(new FileWriter(file));
+
             try {
                 out.write(content);
             } catch (IOException e) {

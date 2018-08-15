@@ -10,5 +10,51 @@
     <string name="tittle_body_slider4">¿Estás preparado?</string>
 
 
+    <string name="body_permissions">Necesitas aceptar los permisos para un correcto funcionamiento de la app</string>
+    <string name="title_request_permision">Solicitud de permisos de lectura y escritura</string>
+    <string name="body_request_permision">Para poder usar la aplicación correctamente es necesario tener acceso a ciertos permisos del sistema. Acepte los permisos o la aplicación no funcionará.</string>
+    <string name="title_setting">Ajustes</string>
+    <string name="title_activity_settings">Ajustes</string>
+    <string name="title_rate">Valorar</string>
+    <string name="title_license">Licencias</string>
+    <string name="title_more">Más apps</string>
+    <string name="title_bSave">Salvar</string>
+    <string name="title_bList">Listado</string>
+    <string name="title_bSaveSend">Salvar y enviar</string>
+    <string name="title_bColor">Color</string>
+    <string name="title_bStroke">Trazo</string>
+    <string name="title_bRubber">Limpiar</string>
+    <string name="title_SingHere">Firme aquí</string>
+    <string name="title_save_ok">Se ha guardado correctamente</string>
+    <string name="title_save_ko">Error al guardar</string>
+    <string name="tittle_clean">Limpiar</string>
+    <string name="sort">Ordenar por fecha</string>
+    <string name="help">Ayuda</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="title_no_files">No hay archivos</string>
+    <string name="delete">Eliminar</string>
+    <string name="tittle_send">Enviar</string>
+    <string name="tittle_undo">Deshacer</string>
+    <string name="title_pref_advertising_t">Publicidad</string>
+    <string name="title_pref_advertising">Deshabilitar publicidad</string>
+    <string name="title_pref_advertising_sum">Deshabilita la publicidad si te resulta muy molesta</string>
+    <string name="title_pref_files">Archivos</string>
+    <string name="title_pref_path">Ruta donde se guardarán las firmas</string>
+    <string name="title_pref_delete_sum">Eliminar todas las firmas despues de salir de la app</string>
+    <string name="title_pref_delete">Eliminar firmas</string>
+    <string name="title_pref_gallery">Ocultar firmas</string>
+    <string name="title_pref_gallery_sum">Ocultar las firmas de la galería del teléfono</string>
+    <string name="title_pref_name">Nombre del archivo</string>
+    <string name="title_pref_name_sum">Elegir el nombre del archivo al guardar</string>
+    <string name="title_pref_siganture">Firma</string>
+    <string name="title_pref_stroke">Trazo por defecto</string>
+    <string name="title_pref_stroke_sum">Utilizar el ultimo trazo seleccionado por defecto</string>
+    <string name="title_pref_color">Color por defecto</string>
+    <string name="title_pref_color_sum">Utilizar el último color seleccionado por defecto</string>
+    <string name="title_pref_reset">Valores por defecto</string>
+    <string name="title_pref_reset_sum">Reestablecer todos los valores por defecto</string>
+    <string name="title_pref_wallpaper_sum">Utilizar el ultimo fondo seleccionado por defecto</string>
+    <string name="title_pref_wallpaper">Fondo por defecto</string>
+    <string name="tittle_name_of_the_file">Nombre del archivo</string>
 
 </resources>

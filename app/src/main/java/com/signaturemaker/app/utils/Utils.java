@@ -274,11 +274,23 @@ public final class Utils {
             imageUri = Uri.fromFile(new File(Utils.path + "/" + name));
         }
 
-        Intent shareIntent = new Intent();
-        shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
-        shareIntent.setType("image/*");
-        mActivity.startActivity(Intent.createChooser(shareIntent, mActivity.getText(R.string.tittle_send)));
+        if (name.contains(".png") || name.contains(".PNG")) {
+            Intent shareIntent = new Intent();
+            shareIntent.setAction(Intent.ACTION_SEND);
+            shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+            shareIntent.setType("image/*");
+            mActivity.startActivity(Intent.createChooser(shareIntent, mActivity.getText(R.string.tittle_send)));
+
+        }else{
+            Intent shareIntent = new Intent();
+            shareIntent.setAction(Intent.ACTION_SEND);
+            shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+            shareIntent.setType("text/plain");
+             mActivity.startActivity(Intent.createChooser(shareIntent, mActivity.getText(R.string.tittle_send)));
+        }
+
+
+
 
     }
 

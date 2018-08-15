@@ -3,6 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.getbase.floatingactionbutton.FloatingActionButton
+        android:id="@+id/bWallpaper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        fab:fab_colorNormal="@color/colorPrimary"
+        fab:fab_colorPressed="@color/colorPrimary"
+        fab:fab_icon="@drawable/ic_wallpaper"
+        fab:fab_size="mini"/>
+
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/FabLeft"
         android:layout_width="wrap_content"

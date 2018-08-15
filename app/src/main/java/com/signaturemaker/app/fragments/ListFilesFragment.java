@@ -127,7 +127,7 @@ public class ListFilesFragment extends Fragment {
                 }
                 removeItemAdapter(itemData);
 
-                Log.d(Constants.TAG, pos + "");
+
                 displaySnackbar(getActivity(), itemData.getName(), getResources().getString(R.string.tittle_undo), new Snackbar.Callback() {
                     @Override
                     public void onShown(Snackbar sb) {
