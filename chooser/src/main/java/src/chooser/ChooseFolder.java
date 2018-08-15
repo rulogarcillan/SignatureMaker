@@ -1,9 +1,28 @@
+/*
+ __ _                   _                                 _
+/ _(_) __ _ _ __   __ _| |_ _   _ _ __ ___    /\/\   __ _| | _____ _ __
+\ \| |/ _` | '_ \ / _` | __| | | | '__/ _ \  /    \ / _` | |/ / _ \ '__|
+_\ \ | (_| | | | | (_| | |_| |_| | | |  __/ / /\/\ \ (_| |   <  __/ |
+\__/_|\__, |_| |_|\__,_|\__|\__,_|_|  \___| \/    \/\__,_|_|\_\___|_|
+      |___/
+
+Copyright (C) 2018  Raúl Rodríguez Concepción www.wepica.com
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 package src.chooser;
 
 import android.content.Context;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +30,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 /**
  * Created by rulo on 17/03/15.
@@ -20,31 +44,30 @@ public class ChooseFolder extends LinearLayout {
     private TextView txtPath;
     private RecyclerView list;
     private AdapterExplorer mAdapter;
-    private ArrayList<String> items = new ArrayList<>();
-    private Context context;
+    private List<String> items = new ArrayList<>();
+    private Context mContext;
 
     private String path = Files.root;
 
-    public ChooseFolder(Context context) {
-        super(context);
-        this.context = context;
+    public ChooseFolder(Context mContext) {
+        super(mContext);
+        this.mContext = mContext;
         Initialize();
     }
 
-    public ChooseFolder(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        this.context = context;
+    public ChooseFolder(Context mContext, AttributeSet attrs) {
+        super(mContext, attrs);
+        this.mContext = mContext;
         Initialize();
     }
 
-    public ChooseFolder(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        this.context = context;
+    public ChooseFolder(Context mContext, AttributeSet attrs, int defStyleAttr) {
+        super(mContext, attrs, defStyleAttr);
+        this.mContext = mContext;
         Initialize();
     }
 
     private void Initialize() {
-
 
         String infService = Context.LAYOUT_INFLATER_SERVICE;
         LayoutInflater cf = (LayoutInflater) getContext().getSystemService(infService);
@@ -76,8 +99,7 @@ public class ChooseFolder extends LinearLayout {
     }
 
     private String genPathClickFolder(String nameFolder) {
-
-        return this.getPath() + "/" + nameFolder;
+        return this.getPath() + "/" + nameFolder + "/";
     }
 
     public String getPath() {
@@ -85,22 +107,18 @@ public class ChooseFolder extends LinearLayout {
     }
 
     public void setPath(String path) {
-
         this.path = path;
         this.txtPath.setText(this.path.replace(Files.root, "/sdcard"));
         this.items = Files.loadItems(this.path);
         this.mAdapter.setItems(this.items);
         this.mAdapter.notifyDataSetChanged();
-
     }
 
     public void addFolder(String name) {
-
         Files.addFolder(genPathClickFolder(name));
         this.items.add(1, name);
         this.mAdapter.setItems(this.items);
         this.mAdapter.notifyDataSetChanged();
-
     }
 
 }

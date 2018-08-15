@@ -1,90 +1,94 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion '22.0.1'
-    def Properties versionProps = new Properties()
-    def versionPropsFile = file('version.properties')
-    //Creates the version file if it doesn't exist
-    if (versionPropsFile.exists())
-        versionProps.load(new FileInputStream(versionPropsFile))
-    def name1 = (versionProps['NAME1_CODE']).toInteger()
-    def name2 = (versionProps['NAME2_CODE']).toInteger()
-    def name3 = (versionProps['NAME3_CODE']).toInteger()
-    def contador = (versionProps['VERSION_CODETOT']).toInteger()
-    def code = (versionProps['VERSION_CODE']).toInteger()
-    if (contador >= 9) {
-        versionProps['VERSION_CODE'] = (code + 1).toString()
-        versionProps['VERSION_CODETOT'] = 0.toString()
-
-    } else {
-        versionProps['VERSION_CODE'] = (code).toString()
-        versionProps['VERSION_CODETOT'] = (contador + 1).toString()
-    }
-    if (name3 >= 250) {
-        versionProps['NAME3_CODE'] = 0.toString()
-        if (name2 >= 9) {
-            versionProps['NAME1_CODE'] = (name1 + 1).toString()
-            versionProps['NAME2_CODE'] = 0.toString()
-        } else {
-            versionProps['NAME1_CODE'] = (name1).toString()
-            versionProps['NAME2_CODE'] = (name2 + 1).toString()
-        }
-    } else {
-        versionProps['NAME3_CODE'] = (name3 + 1).toString()
-        versionProps['NAME1_CODE'] = (name1).toString()
-        versionProps['NAME2_CODE'] = (name2).toString()
-    }
-    versionProps.store(versionPropsFile.newWriter(), null)
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.signaturemaker.app"
-        minSdkVersion 15
-        targetSdkVersion 22
-        versionCode code
-        versionName name1 + "." + name2 + "." + name3
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 3000
+        versionName "3.0"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
+
+    /*    debug {
+            debuggable true
+            applicationIdSuffix ".debug"
+        }
+        pre {
+            debuggable true
+            applicationIdSuffix ".test"
+            //resValue "string", "title_app", "Signature Maker test"
+            //buildConfigField "String", "fooVar", '"blablabla"'
+        }*/
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    productFlavors {
-    }
-}
-repositories {
-    jcenter()
-    maven { url "https://jitpack.io" }
-
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    /*implementation 'com.android.support:appcompat-v7:28.0.0-alpha1'
+    implementation 'com.android.support:design:28.0.0-alpha1'
+    implementation 'com.android.support:recyclerview-v7:28.0.0-alpha1'
+    implementation 'com.android.support:support-annotations:28.0.0-alpha1'
+    implementation 'com.android.support:cardview-v7:28.0.0-alpha1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'*/
 
 
-    compile 'com.android.support:appcompat-v7:22.0.0'
-    compile 'com.android.support:design:22.2.0'
-    compile project(':chooser')
-    compile 'com.getbase:floatingactionbutton:1.9.0'
 
-    compile('com.mikepenz.aboutlibraries:library:4.5.7@aar') {
-        transitive = true
+    implementation "androidx.appcompat:appcompat:1.0.0-alpha1"
+    implementation "com.google.android.material:material:1.0.0-alpha1"
+    implementation "androidx.recyclerview:recyclerview:1.0.0-alpha1"
+    implementation "androidx.annotation:annotation:1.0.0-alpha1"
+    implementation "androidx.cardview:cardview:1.0.0-alpha1"
+    implementation "androidx.constraintlayout:constraintlayout:1.1.0"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0-alpha1'
+    implementation 'androidx.vectordrawable:vectordrawable:1.0.0-alpha1'
+
+
+ /*   implementation 'com.jakewharton:butterknife:8.8.1'
+      annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'*/
+
+
+    //permisions
+    implementation('com.karumi:dexter:4.2.0')
+    //about libraries
+    implementation('com.mikepenz:aboutlibraries:6.0.9@aar'){
+        transitive=true;
+    }
+    //gesture drawer
+    implementation('com.github.gcacace:signature-pad:1.2.1')
+    //floating buttons
+    implementation('com.getbase:floatingactionbutton:1.10.1')
+    //animations
+    implementation('com.daimajia.easing:library:2.0@aar')
+    implementation('com.daimajia.androidanimations:library:2.3@aar')
+    //range sneekbar
+    implementation('com.appyvet:materialrangebar:1.4.2') 
+    //color picker
+    implementation('com.larswerkman:HoloColorPicker:1.5')
+    //picasso
+    implementation('com.squareup.picasso:picasso:2.71828')
+    //apptinro
+    implementation 'com.github.apl-devs:appintro:v4.2.3'
+
+    //changelog
+    implementation 'de.cketti.library.changelog:ckchangelog:1.2.2'
+
+    //swipleable recycler
+    implementation ('co.dift.ui.swipetoaction:library:1.1'){
+        transitive=true
     }
 
-    compile 'com.google.android.gms:play-services-ads:10.0.0'
-    compile 'de.cketti.library.changelog:ckchangelog:1.2.2'
-    compile 'com.nispok:snackbar:2.10.2'
-    compile 'me.relex:circleindicator:1.1.2@aar'
+    implementation 'com.google.firebase:firebase-ads:15.0.0'
 
-    compile 'com.nineoldandroids:library:2.4.0'
-    compile 'com.daimajia.easing:library:1.0.1@aar'
-    compile 'com.daimajia.androidanimations:library:1.1.3@aar'
-    compile 'com.larswerkman:HoloColorPicker:1.5'
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.afollestad:material-dialogs:0.7.2.2'
-    /*compile('com.github.afollestad.material-dialogs:core:0.8.5.3@aar') {
-        transitive = true
-    }*/
-      compile 'com.github.rey5137:material:1.1.+'
+    implementation project(':chooser')
+
 
 }

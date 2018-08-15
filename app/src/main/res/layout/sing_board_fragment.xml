@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/layoutWallapaper"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <com.github.gcacace.signaturepad.views.SignaturePad
+        android:id="@+id/singBoard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:penColor="@color/colorPenDefault"
+        app:penMaxWidth="4dp"
+        app:penMinWidth="1dp" />
+
+    <TextView
+        android:id="@+id/txtSingHere"
+        android:layout_width="0dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:layout_marginBottom="8dp"
+        android:text="@string/title_SingHere"
+        app:layout_constraintBottom_toBottomOf="@+id/actionsButtons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/actionsButtons"
+        app:layout_constraintTop_toTopOf="@+id/actionsButtons" />
+
+
+
+    <include
+        android:id="@+id/actionsButtons"
+        layout="@layout/action_buttons" />
+
+    <include layout="@layout/color_picker"/>
+
+    <include layout="@layout/stroke_sliders"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,41 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimary">#3e82f7</color>
+    <color name="colorPrimaryDark">#01579b</color>
+    <color name="colorPrimaryLight">#C5CAE9</color>
+    <color name="colorAccent">#F44336</color>
 
-    <color name="color_nuevo">#7a94af</color>
-    <color name="color_db">#f44336</color>
-    <color name="color_hb">#D32f2f</color>
-
-
-    <color name="primary">#3e82f7</color>
-    <color name="primary_dark">#01579b</color>
-    <color name="primary_light">#C5CAE9</color>
     <color name="accent">#3e82f7</color>
+    <color name="buttonBlue">#03a9f4</color>
+    <color name="buttonOrange">#FFA000</color>
+
+
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorFulltrans">#00000000</color>
+    <color name="colorPenDefault">#200bb2</color>
+    <color name="colorWhitetrans">#CCE8E8E8</color>
+    <color name="colorGerytrans">#CC212121</color>
+
+    <color name="clear">#BBDEFB</color>
+
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#727272</color>
-    <color name="icons">#FFFFFF</color>
-    <color name="divider">#B6B6B6</color>
-
-    <color name="primary2">#F44336</color>
-    <color name="primary3">#03a9f4</color>
-    <color name="primary1">#FFA000</color>
-    <color name="windows">#FFFFFF</color>
-
-    <color name="fulltrans">#00000000</color>
-    <color name="boligrafo">#200bb2</color>
-    <color name="whitetrans">#CCE8E8E8</color>
-    <color name="gerytrans">#CC212121</color>
-
-    <color name="material_drawer_window_background">#F9F9F9</color>
-    <color name="material_drawer_background">#F9F9F9</color>
-    <!-- Material DEFAULT text / items colors -->
-    <color name="material_drawer_icons">#FFF</color>
-    <color name="material_drawer_primary_text">#212121</color>
-    <color name="material_drawer_secondary_text">#727272</color>
-    <color name="material_drawer_hint_text">#B8B8B8</color>
-    <color name="material_drawer_divider">#B6B6B6</color>
-    <!-- Material DEFAULT drawer colors -->
-    <color name="material_drawer_selected">#E8E8E8</color>
-    <color name="material_drawer_header_selection_text">#FFF</color>
-
+    <color name="background_sliders">#01579b</color>
+    <color name="background_sliders2">#7a94af</color>
 
 </resources>

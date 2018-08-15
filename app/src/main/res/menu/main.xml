@@ -1,45 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:com.pain.log.painlog="http://schemas.android.com/apk/res-auto">
+    xmlns:menu="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/settings"
-        android:icon="@drawable/ic_settings"
+        android:icon="@drawable/ic_action_settings"
         android:orderInCategory="100"
-        android:title="@string/settings"
-        com.pain.log.painlog:showAsAction="never|always"></item>
+        android:title="@string/title_setting"
+        menu:showAsAction="never|always"></item>
 
-    <item
+   <item
         android:id="@+id/action_settings"
         android:icon="@drawable/ic_action_navigation"
         android:orderInCategory="200"
-        android:title="@string/action_settings"
-        com.pain.log.painlog:showAsAction="never|always">
-        <menu>
+        android:title="@string/title_setting"
+        menu:showAsAction="never|always">
+       <menu>
 
-            <item
-                android:id="@+id/changelog"
-                android:icon="@drawable/ic_action_changelog"
-                android:title="@string/changelog"
-                com.pain.log.painlog:showAsAction="ifRoom" />
+           <item
+               android:id="@+id/changelog"
+               android:layout_width="wrap_content"
+               android:icon="@drawable/ic_action_changelog"
+               android:title="@string/title_changelog"
+               menu:showAsAction="ifRoom" />
 
-            <item
-                android:id="@+id/license"
-                android:icon="@drawable/ic_license"
-                android:title="@string/license"
-                com.pain.log.painlog:showAsAction="ifRoom" />
+           <item
+               android:id="@+id/license"
+               android:icon="@drawable/ic_action_license"
+               android:title="@string/title_license"
+               menu:showAsAction="ifRoom" />
 
-            <item
-                android:id="@+id/puntuar"
-                android:icon="@drawable/ic_action_rating"
-                android:title="@string/puntuar"
-                com.pain.log.painlog:showAsAction="ifRoom" />
+           <item
+               android:id="@+id/rate"
+               android:icon="@drawable/ic_action_rating"
+               android:title="@string/title_rate"
+               menu:showAsAction="ifRoom" />
 
-            <item
-                android:id="@+id/more"
-                android:icon="@drawable/ic_more"
-                android:title="@string/more"
-                com.pain.log.painlog:showAsAction="ifRoom" />
-        </menu>
+           <item
+               android:id="@+id/more"
+               android:icon="@drawable/ic_action_shop"
+               android:title="@string/title_more"
+               menu:showAsAction="ifRoom" />
+       </menu>
     </item>
 
 </menu>

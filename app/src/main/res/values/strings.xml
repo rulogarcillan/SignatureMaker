@@ -1,109 +1,77 @@
 <resources>
-    <string name="app_name">Signature Maker</string>
+    <string name="title_appName" translatable="false">Signature Maker</string>
+    <string name="title_setting">Settings</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_changelog" translatable="false">Changelog</string>
+    <string name="title_rate">Rate it</string>
+    <string name="title_license">Licenses</string>
+    <string name="title_more">More apps</string>
 
-    <!--       Action bar menu pciones       -->
-    <string name="license">License</string>
-    <string name="more">Others app</string>
-    <string name="action_settings">Settings</string>
-    <string name="changelog" translatable="false">Changelog</string>
-    <string name="puntuar">Rate this app</string>
+    <string name="title_bSave">Save</string>
+    <string name="title_bList">List</string>
+    <string name="title_bSaveSend">Save and Send</string>
+    <string name="title_bColor">Color</string>
+    <string name="title_bStroke">Stroke</string>
+    <string name="title_bRubber">Clean</string>
+    <string name="title_SingHere">Sign here</string>
+    <string name="title_save_png" translatable="false">PNG (Transparent BG)</string>
+    <string name="title_save_png_wh" translatable="false">PNG (White BG)</string>
+    <string name="title_save_svg" translatable="false">SVG (Transparent BG)</string>
+    <string name="app_written">Application Written By Raúl R.C</string>
 
-
-    <!--       Pantalla de firma       -->
-    <string name="firmeAqui">Sign here</string>
-    <string name="trimname">Empty name or character wrong</string>
-    <string name="hinttext">Enter a name</string>
-
-    <!--       Pantalla de listado       -->
-    <string name="vacioFiles">No files</string>
-    <string name="help_d">Swipe rigth to delete</string>
-    <string name="help_s">Swipe left to share</string>
-    <string name="help">Help</string>
-    <string name="eliminado">delete</string>
-    <string name="deshacer">Undo</string>
-
-    <!--       Pantalla de opciones       -->
-    <string name="publi1">Advertising</string>
-    <string name="settings">Settings</string>
-    <string name="archivos">Files</string>
-    <string name="prefPath">Exported signatures path</string>
-    <string name="prefDel">Delete all signatures on exit</string>
-    <string name="prefGal">Do not display signatures in the phone gallery</string>
-    <string name="firma">Signature</string>
-    <string name="prefStroke">Keep last stroke used by default</string>
-    <string name="prefColor">Keep last color used by default</string>
-    <string name="prefColor_a">Default color</string>
-    <string name="prefDel_a">Delete signatures</string>
-    <string name="prefStroke_a">Default stroke</string>
-    <string name="prefPath_a">Exported signatures path</string>
-    <string name="prefGal_a">Hide signatures</string>
-    <string name="prefDef_a">Default values</string>
-    <string name="prefDef">Reset all defaults</string>
-    <string name="prefNam_a">File name</string>
-    <string name="prefNam">Choose file name when saving</string>
-    <string name="pubTitle">Disable ads</string>
-    <string name="disPub">Disable ads if it bothers you.</string>
+    <string name="title_save_ok">File saved correctly</string>
+    <string name="title_save_ko">Error saving</string>
+    <string name="tittle_clean">Clean</string>
 
 
-    <string name="fondo">Type of background</string>
-    <string name="selectcolor">Color</string>
-    <string name="stroke">Stroke</string>
-    <string name="guardar">Save</string>
-    <string name="enviar">Save and send</string>
-    <string name="enviarsolo">Send</string>
-    <string name="listado">List</string>
-    <string name="limpiar">Clean</string>
-    <string name="guardado">Save</string>
-    <string name="noguardado">Failed</string>
-    <string name="importante">Attention!</string>
-    <string name="confborrado">Are you sure to delete this file?</string>
-
-    <!--      Splash     -->
-    <string name="start">Start</string>
-    <string name="splash1">Digitalize your sign with an easy and simple procedure</string>
-    <string name="splash2">Save and send you sign wherever you want</string>
-    <string name="splash3">Attach an image with your sign to your documents</string>
-    <string name="url1">This project is open source, visit us!</string>
-    <string name="url2" translatable="false">https://github.com/rulogarcillan/SignatureMaker</string>
-
-
-    <!--      About libraries     -->
-    <string name="escrita">Application Written By Raúl R.C</string>
-    <string name="aboutLibraries_description_showIcon" translatable="false">true</string>
-    <string name="aboutLibraries_description_showVersion" translatable="false">true</string>
-
-
-    <!-- If you include it in your own library use this pattern: define_* -->
-    <!-- If it should be included in the AboutLibraries lib use this pattern: define_int_* -->
-    <string name="define_int_DiscreteSeekBar" translatable="false"></string>
-    <string name="library_DiscreteSeekBar_author" translatable="false">AnderWeb</string>
-    <string name="library_DiscreteSeekBar_libraryName" translatable="false">DiscreteSeekBar</string>
-    <string name="library_DiscreteSeekBar_libraryDescription" translatable="false">DiscreteSeekbar is my poor attempt to develop an android implementation of the Discrete Slider component from the Google Material Design Guidelines.</string>
-    <string name="library_DiscreteSeekBar_libraryVersion" translatable="false">Unknown</string>
-    <string name="library_DiscreteSeekBar_libraryWebsite" translatable="false">https://github.com/AnderWeb/discreteSeekBar</string>
-    <!-- Possible values right now: apache_2_0, mit, bsd_2, bsd_3 -->
-    <string name="library_DiscreteSeekBar_licenseId" translatable="false">apache_2_0</string>
-    <!-- you still can define the license within your library definition, but it is recommend to use the id -->
-    <!-- possible fields for a custom license: *_licenseVersion, *_licenseLink, *_licenseContent -->
-    <string name="library_DiscreteSeekBar_isOpenSource" translatable="false">true</string>
-    <string name="library_DiscreteSeekBar_repositoryLink" translatable="false">https://github.com/AnderWeb/discreteSeekBar</string>
-
-
-    <string name="define_int_CircleIndicator" translatable="false"></string>
-    <string name="library_CircleIndicator_author" translatable="false">Relex Ongakuer</string>
-    <string name="library_CircleIndicator_libraryName" translatable="false">CircleIndicator</string>
-    <string name="library_CircleIndicator_libraryDescription" translatable="false">A lightweight viewpager indicator like in nexus 5 launcher.</string>
-    <string name="library_CircleIndicator_libraryVersion" translatable="false">1.1.2</string>
-    <string name="library_CircleIndicator_libraryWebsite" translatable="false">https://github.com/ongakuer/CircleIndicator</string>
-    <!-- Possible values right now: apache_2_0, mit, bsd_2, bsd_3 -->
-    <string name="library_CircleIndicator_licenseId" translatable="false">apache_2_0</string>
-    <!-- you still can define the license within your library definition, but it is recommend to use the id -->
-    <!-- possible fields for a custom license: *_licenseVersion, *_licenseLink, *_licenseContent -->
-    <string name="library_CircleIndicator_isOpenSource" translatable="false">true</string>
-    <string name="library_CircleIndicator_repositoryLink" translatable="false">https://github.com/ongakuer/CircleIndicator</string>
-
-
-    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-9438738341601496/1496642762</string>
-    <string name="permisos">The app cannot work without permission</string>
     <string name="sort">Sort by date</string>
+    <string name="help_r" translatable="false">Swipe rigth to delete</string>
+    <string name="help_l" translatable="false">Swipe left to share</string>
+    <string name="help">Help</string>
+
+    <string name="body_permissions">You need to accept the permissions for a proper functioning of the app</string>
+    <string name="title_request_permision">Request for reading and writing permissions</string>
+    <string name="body_request_permision">In order to use the application correctly it is necessary to have access to certain system permissions. Accept the permissions or the application will not work.</string>
+
+    <string name="tittle_slider1">Sing</string>
+    <string name="tittle_slider2">Transfer</string>
+    <string name="tittle_slider3">Attach</string>
+    <string name="tittle_slider4">Go</string>
+
+    <string name="tittle_body_slider1">Digitalize your sign with an easy and simple procedure</string>
+    <string name="tittle_body_slider2">Save and send you sign wherever you wan</string>
+    <string name="tittle_body_slider3">Attach an image with your sign to your documents</string>
+    <string name="tittle_body_slider4">Are you ready?</string>
+
+
+    <string name="action_settings">Settings</string>
+    <string name="title_no_files">No files</string>
+    <string name="delete">Delete</string>
+    <string name="tittle_send">Send</string>
+    <string name="tittle_undo">Undo</string>
+    <!--       Preferences      -->
+    <string name="title_pref_advertising_t">Advertising</string>
+    <string name="title_pref_advertising">Disable ads</string>
+    <string name="title_pref_advertising_sum">Disable ads if it bothers you.</string>
+    <string name="title_pref_files">Files</string>
+    <string name="title_pref_path">Exported signatures path</string>
+    <string name="title_pref_delete_sum">Delete all signatures on exit</string>
+    <string name="title_pref_delete">Delete signatures</string>
+    <string name="title_pref_gallery">Hide signatures</string>
+    <string name="title_pref_gallery_sum">Do not display signatures in the phone gallery</string>
+    <string name="title_pref_name">File name</string>
+    <string name="title_pref_name_sum">Choose file name when saving</string>
+    <string name="title_pref_siganture">Signature</string>
+    <string name="title_pref_stroke">Default stroke</string>
+    <string name="title_pref_stroke_sum">Keep last stroke used by default</string>
+    <string name="title_pref_color">Default color</string>
+    <string name="title_pref_color_sum">Keep last color used by default</string>
+    <string name="title_pref_reset">Default values</string>
+    <string name="title_pref_reset_sum">Reset all defaults</string>
+    <string name="title_pref_wallpaper_sum">Keep last wallpaper used by default</string>
+    <string name="title_pref_wallpaper">Default wallpaper</string>
+    <string name="tittle_name_of_the_file">Name of the file</string>
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-9438738341601496/1496642762</string>
+
+
 </resources>

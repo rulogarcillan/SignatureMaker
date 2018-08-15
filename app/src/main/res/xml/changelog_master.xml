@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
     <release
+        version="3.0.0"
+        versioncode="3000">
+        <change>Rewritten all the source code</change>
+        <change>Compatible with android 9.0 Pie</change>
+        <change>Update all libraries to the latest version</change>
+        <change>New signature with pressure</change>
+        <change>New welcome slider</change>
+        <change>New icons</change>
+        <change><![CDATA[<font color="red">[Off Topic]</font>]]> If you like my developments, collaborate and try my apps and games, please. <![CDATA[<a href="market://search?q=pub:Raúl R.">Donwload!!!</a>]]></change>
+    </release>
+    <release
         version="2.1.54"
         versioncode="2035">
         <change>Fix traslates</change>
-        <change><![CDATA[<font color="red">[Off Topic]</font>]]> If you like my developments, collaborate and try my new app, please. <a href="https://play.google.com/store/apps/details?id=com.r.raul.tools">Donwload!!!</a></change>
     </release>
     <release
         version="2.1.31"

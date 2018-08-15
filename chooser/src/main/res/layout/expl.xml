@@ -1,36 +1,38 @@
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="vertical">
+
+<LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="32dp"
+    android:background="@color/clear"
+    android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="32dp"
-        android:background="@color/clear"
-        android:orientation="horizontal">
+    <ImageView
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_path" />
 
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/path" />
-
-        <TextView
-            android:id="@+id/path"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="/sdcard/" />
-
-
-    </LinearLayout>
-
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/listadoFolder"
+    <TextView
+        android:id="@+id/path"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical"
-        android:focusableInTouchMode="true" />
+        android:layout_gravity="center_vertical"
+        android:text="/sdcard/" />
+
+
+</LinearLayout>
+
+
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/listadoFolder"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical"
+    android:focusableInTouchMode="true" />
 
 
 </LinearLayout>
