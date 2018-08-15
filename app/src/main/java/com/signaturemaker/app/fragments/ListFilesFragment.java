@@ -70,13 +70,13 @@ public class ListFilesFragment extends Fragment {
     private List<ItemFile> items = new ArrayList<>();
 
     // @BindView(R.id.path)
-    TextView path;
+    private TextView path;
     //@BindView(R.id.recycler_view)
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
     //@BindView(R.id.txtMnsNoFiles)
-    TextView txtMnsNoFiles;
-    AdapterFiles adapter;
-    Boolean flagDelete = true;
+    private TextView txtMnsNoFiles;
+    private AdapterFiles adapter;
+    private Boolean flagDelete = true;
 
     public ListFilesFragment() {
         // Required empty public constructor
@@ -204,8 +204,7 @@ public class ListFilesFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        adapter.setItems(items);
-        adapter.notifyDataSetChanged();
+        reloadFiles();
         path.setText(Utils.path.replace(Constants.ROOT, "/sdcard"));
     }
 
@@ -253,7 +252,7 @@ public class ListFilesFragment extends Fragment {
     }
 
 
-    private void loadItemsFiles() {
+    public void loadItemsFiles() {
 
         PermissionsUtils.getInstance().callRequestPermissions(getActivity(), PermissionsUtils.permissionsReadWrite, new MultiplePermissionsListener() {
             @Override
@@ -270,8 +269,6 @@ public class ListFilesFragment extends Fragment {
             public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
             }
         });
-
-
     }
 
     private int removeItemAdapter(final ItemFile item) {
@@ -288,5 +285,11 @@ public class ListFilesFragment extends Fragment {
         adapter.notifyItemInserted(pos);
     }
 
+
+    public void reloadFiles() {
+        loadItemsFiles();
+        adapter.setItems(items);
+        adapter.notifyDataSetChanged();
+    }
 
 }

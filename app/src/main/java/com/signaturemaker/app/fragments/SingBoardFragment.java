@@ -51,6 +51,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.larswerkman.holocolorpicker.ColorPicker;
 import com.larswerkman.holocolorpicker.SVBar;
 import com.signaturemaker.app.R;
+import com.signaturemaker.app.interfaces.ClickInterface;
 import com.signaturemaker.app.utils.FilesUtils;
 import com.signaturemaker.app.utils.PermissionsUtils;
 import com.signaturemaker.app.utils.Utils;
@@ -73,53 +74,55 @@ import static com.signaturemaker.app.utils.Utils.showToast;
 public class SingBoardFragment extends Fragment implements View.OnClickListener, View.OnLongClickListener {
 
     //@BindView(R.id.singBoard)
-    SignaturePad mSingBoard;
+    private SignaturePad mSingBoard;
 
     //@BindView(R.id.FabLeft)
-    FloatingActionsMenu fabLeft;
+    private FloatingActionsMenu fabLeft;
     //@BindView(R.id.FabUp)
-    FloatingActionsMenu fabUp;
+    private FloatingActionsMenu fabUp;
 
     //@BindView(R.id.bSave)
-    FloatingActionButton bSave;
+    private FloatingActionButton bSave;
     //@BindView(R.id.bList)
-    FloatingActionButton bList;
+    private FloatingActionButton bList;
     //@BindView(R.id.bSaveSend)
-    FloatingActionButton bSaveSend;
+    private FloatingActionButton bSaveSend;
     //@BindView(R.id.bColor)
-    FloatingActionButton bColor;
+    private FloatingActionButton bColor;
     //@BindView(R.id.bStroke)
-    FloatingActionButton bStroke;
+    private FloatingActionButton bStroke;
     //@BindView(R.id.bRubber)
-    FloatingActionButton bRubber;
+    private FloatingActionButton bRubber;
 
     //@BindView(R.id.bWallpaper)
-    FloatingActionButton bWallpaper;
+    private FloatingActionButton bWallpaper;
 
     //@BindView(R.id.layoutWallapaper)
-    ConstraintLayout layoutWallapaper;
+    private ConstraintLayout layoutWallapaper;
 
 
-    View rootView;
-    YoYo.YoYoString runningAnimationSeek;
-    YoYo.YoYoString runningAnimationColor;
-    YoYo.YoYoString runningAnimation;
+    private View rootView;
+    private YoYo.YoYoString runningAnimationSeek;
+    private YoYo.YoYoString runningAnimationColor;
+    private YoYo.YoYoString runningAnimation;
 
     //@BindView(R.id.txtSingHere)
-    TextView txtSingHere;
+    private TextView txtSingHere;
     //@BindView(R.id.rangeBar)
-    RangeBar rangeBar;
+    private RangeBar rangeBar;
 
     //@BindView(R.id.rangeSeekBarLayout)
-    LinearLayout rangeSeekBarLayout;
+    private LinearLayout rangeSeekBarLayout;
 
     //@BindView(R.id.coloPickerLayout)
-    LinearLayout coloPickerLayout;
+    private LinearLayout coloPickerLayout;
 
     //@BindView(R.id.picker)
-    ColorPicker picker;
+    private ColorPicker picker;
     //@BindView(R.id.svbar)
-    SVBar svbar;
+    private SVBar svbar;
+
+    private ClickInterface clickInterface;
 
 
     public SingBoardFragment() {
@@ -150,8 +153,11 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
         svbar = rootView.findViewById(R.id.svbar);
         layoutWallapaper = rootView.findViewById(R.id.layoutWallapaper);
 
+        if (bList != null) {
+            bList.setOnClickListener(this);
+            bList.setOnLongClickListener(this);
+        }
 
-        bList.setOnClickListener(this);
         bSave.setOnClickListener(this);
         bSaveSend.setOnClickListener(this);
         bColor.setOnClickListener(this);
@@ -160,7 +166,6 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
         bWallpaper.setOnClickListener(this);
 
 
-        bList.setOnLongClickListener(this);
         bSave.setOnLongClickListener(this);
         bSaveSend.setOnLongClickListener(this);
         bColor.setOnLongClickListener(this);
@@ -575,22 +580,23 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
                     if (idMenu == R.id.savePngTrans) {
                         name = FilesUtils.addExtensionNamePng(theName);
                         statusParticular = FilesUtils.saveBitmapFile(mSingBoard.getTransparentSignatureBitmap(true), name);
-                        getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(Utils.path + name))));
 
                     } else if (idMenu == R.id.savePngWhite) {
                         name = FilesUtils.addExtensionNamePng(theName);
                         statusParticular = FilesUtils.saveBitmapFile(mSingBoard.getSignatureBitmap(), name);
-                        getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(Utils.path + name))));
+
                     } else if (idMenu == R.id.saveSvg) {
                         name = FilesUtils.addExtensionNameSvg(theName);
                         statusParticular = FilesUtils.saveSvgFile(mSingBoard.getSignatureSvg(), name);
-                        getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(Utils.path + name))));
+
                     }
                     if (statusParticular) {
                         if (share) {
                             Utils.shareSign(getActivity(), name);
                         }
                         showToast(getActivity(), getResources().getString(R.string.title_save_ok));
+                        getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(Utils.path + name))));
+                        clickInterface.buttonClicked();
                     } else {
                         showToast(getActivity(), getResources().getString(R.string.title_save_ko));
                     }
@@ -602,21 +608,23 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
             if (idMenu == R.id.savePngTrans) {
                 name = FilesUtils.addExtensionNamePng(FilesUtils.generateName());
                 status = FilesUtils.saveBitmapFile(mSingBoard.getTransparentSignatureBitmap(true), name);
-                getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(Utils.path + name))));
+
             } else if (idMenu == R.id.savePngWhite) {
                 name = FilesUtils.addExtensionNamePng(FilesUtils.generateName());
                 status = FilesUtils.saveBitmapFile(mSingBoard.getSignatureBitmap(), name);
-                getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(Utils.path + name))));
+
             } else if (idMenu == R.id.saveSvg) {
                 name = FilesUtils.addExtensionNameSvg(FilesUtils.generateName());
                 status = FilesUtils.saveSvgFile(mSingBoard.getSignatureSvg(), name);
-                getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(Utils.path + name))));
+
             }
             if (status) {
                 if (share) {
                     Utils.shareSign(getActivity(), name);
                 }
                 showToast(getActivity(), getResources().getString(R.string.title_save_ok));
+                getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(Utils.path + name))));
+                clickInterface.buttonClicked();
             } else {
                 showToast(getActivity(), getResources().getString(R.string.title_save_ko));
             }
@@ -791,6 +799,11 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
             }
         }
         return false;
+    }
+
+
+    public void setInterface(ClickInterface clickInterface) {
+        this.clickInterface = clickInterface;
     }
 
 

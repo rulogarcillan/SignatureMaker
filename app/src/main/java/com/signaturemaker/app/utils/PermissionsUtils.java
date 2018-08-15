@@ -151,7 +151,9 @@ public class PermissionsUtils {
         MultiplePermissionsListener permissionListener = new MultiplePermissionsListener() {
             @Override
             public void onPermissionsChecked(MultiplePermissionsReport report) {
-                myPermissionListener.onPermissionsChecked(report);
+                if (report.areAllPermissionsGranted()) {
+                    myPermissionListener.onPermissionsChecked(report);
+                }
             }
 
             @Override

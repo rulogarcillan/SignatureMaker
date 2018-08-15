@@ -22,8 +22,13 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 package com.signaturemaker.app.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.karumi.dexter.MultiplePermissionsReport;
@@ -31,7 +36,9 @@ import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.signaturemaker.app.R;
+import com.signaturemaker.app.fragments.ListFilesFragment;
 import com.signaturemaker.app.fragments.SingBoardFragment;
+import com.signaturemaker.app.interfaces.ClickInterface;
 import com.signaturemaker.app.utils.FilesUtils;
 import com.signaturemaker.app.utils.PermissionsUtils;
 import com.signaturemaker.app.utils.Utils;
@@ -40,9 +47,14 @@ import java.util.List;
 
 import androidx.fragment.app.FragmentTransaction;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements ClickInterface {
 
     private AdView mAdView;
+    private RelativeLayout layoutMain;
+    private boolean flagAdvertising;
+    private FrameLayout containerFiles;
+    private SingBoardFragment signBoard;
+    private ListFilesFragment listFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,15 +63,32 @@ public class MainActivity extends BaseActivity {
         //ButterKnife.bind(this);
         Utils.loadAllPreferences(this);
 
+        containerFiles = (FrameLayout) findViewById(R.id.containerFiles);
+
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.container, new SingBoardFragment(), SingBoardFragment.class.getSimpleName());
+        ft.replace(R.id.container, signBoard = new SingBoardFragment(), SingBoardFragment.class.getSimpleName());
         ft.commit();
+        signBoard.setInterface(this);
+
+        createTableView();
 
         startChangelog(false);
 
         mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        layoutMain = findViewById(R.id.layoutMain);
+
+
+        initAdvertising();
+
+
+    }
+
+    private void createTableView() {
+        if (containerFiles != null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.containerFiles, listFragment = new ListFilesFragment(), ListFilesFragment.class.getSimpleName())
+                    .commit();
+        }
     }
 
 
@@ -70,7 +99,6 @@ public class MainActivity extends BaseActivity {
             PermissionsUtils.getInstance().callRequestPermissions(this, PermissionsUtils.permissionsReadWrite, new MultiplePermissionsListener() {
                 @Override
                 public void onPermissionsChecked(MultiplePermissionsReport report) {
-
                 }
 
                 @Override
@@ -86,6 +114,64 @@ public class MainActivity extends BaseActivity {
         super.onDestroy();
         if (Utils.deleteExit && PermissionsUtils.hasPermissionWriteRead(this)) {
             FilesUtils.deleteAllFiles(this);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        flagAdvertising = Utils.disableAds;
+        hideAdvertising();
+    }
+
+
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        showAdvertising();
+    }
+
+
+    /**
+     * show advertising if options change
+     */
+    private void showAdvertising() {
+        if ((Utils.disableAds != flagAdvertising) && (Utils.disableAds == false)) {
+            Intent intent = new Intent();
+            intent.setClass(this, this.getClass());
+            finish();
+            this.startActivity(intent);
+        }
+    }
+
+
+    /**
+     * hide advertising if options is selected
+     */
+    private void hideAdvertising() {
+        if ((Utils.disableAds) && (mAdView != null))
+            layoutMain.removeView(mAdView);
+    }
+
+    /**
+     * Init advertising
+     */
+    private void initAdvertising() {
+        mAdView.setVisibility(View.GONE);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                mAdView.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    @Override
+    public void buttonClicked() {
+        if (containerFiles != null) {
+            listFragment.reloadFiles();
         }
     }
 }

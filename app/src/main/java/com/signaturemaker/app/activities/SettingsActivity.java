@@ -34,7 +34,6 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.text.Html;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -91,7 +90,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
 
             } else {
-                Log.d(Constants.TAG, preference.getKey());
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
                 preference.setSummary(stringValue);

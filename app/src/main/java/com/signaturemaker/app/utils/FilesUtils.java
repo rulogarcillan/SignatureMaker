@@ -169,8 +169,8 @@ public final class FilesUtils {
 
                         file.renameTo(new File(Utils.path + "/" + name));
                         deleteScanFile(mActivity, file);
-                       // scanFile(mActivity, new File(Utils.path + "/" + name));
-                       //mActivity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse(file.getAbsolutePath()))); //antigua
+                        // scanFile(mActivity, new File(Utils.path + "/" + name));
+                        //mActivity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse(file.getAbsolutePath()))); //antigua
                         mActivity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse(Utils.path + "/" + name))); //nueva
                     }
 
@@ -288,31 +288,6 @@ public final class FilesUtils {
     }
 
     private static void deleteScanFile(final Activity mActivity, File file) {
-
-      /*  File noMedia = new File(Utils.path, ".nomedia");
-        if (!noMedia.exists()) {
-            Thread thread = new Thread() {
-                @Override
-                public void run() {
-
-                    try {
-                        Log.d(Constants.TAG, "Vamosssss1");
-                        noMedia(mActivity);
-                        sleep(5000);
-                        noMediaRemove(mActivity);
-                        Log.d(Constants.TAG, "Vamosssss2");
-
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            };
-
-            thread.start();
-
-
-        }*/
-
 
         ContentResolver resolver = mActivity.getContentResolver();
         resolver.delete(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, MediaStore.Images.Media.DATA + "=?", new String[]{file.getPath()});
