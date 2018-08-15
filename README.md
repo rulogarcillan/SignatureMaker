@@ -1,10 +1,10 @@
 # Signature Maker 3.0
 
-
 <img src="LOGO/logogrande.png" width="50%">
 
 <a href="https://play.google.com/store/apps/details?id=com.signaturemaker.app">
 <img src="LOGO/getapp.png" width="20%"> </a>
+
 # Index
 
  • [Description en-EN](https://github.com/rulogarcillan/SignatureMaker/blob/master/README.md#description-en-en)
@@ -16,7 +16,7 @@
  • [Licencia-es-ES](https://github.com/rulogarcillan/SignatureMaker#licencia-es-es)
 
 
-#Description en-EN
+# Description en-EN
 
 Digitize your signature.
 
@@ -55,9 +55,7 @@ Procedure:
 
 Cover the pencil with aluminum foil in order to create contact between the finger, the pencil and the screen.
 
-
-
-#License en-EN
+# License en-EN
 
 Signature Maker is an open-source application totally free, which is located un github with licence  [GNU GPL V3.0] (LICENSE.md)
 
@@ -97,7 +95,7 @@ Material:
 ■ Papel de plata.
 Envuelve el lapicero con una capa de papel de plata para que haga contacto tu dedo, el papel y la pantalla.
 
-#Licencia es-ES
+# Licencia es-ES
 
 Signature Maker es una aplicación de código abierto totalmente gratuita alojada en github bajo licencia  [GNU GPL V3.0] (LICENSE.md)
 
