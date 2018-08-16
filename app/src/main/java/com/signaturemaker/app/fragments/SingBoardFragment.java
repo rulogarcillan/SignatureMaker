@@ -46,8 +46,11 @@ import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.github.gcacace.signaturepad.views.SignaturePad;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import com.karumi.dexter.listener.single.PermissionListener;
 import com.larswerkman.holocolorpicker.ColorPicker;
 import com.larswerkman.holocolorpicker.SVBar;
 import com.signaturemaker.app.R;
@@ -289,14 +292,18 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
             @Override
             public boolean onMenuItemClick(final MenuItem menuItem) {
 
-                PermissionsUtils.getInstance().callRequestPermissions(getActivity(), PermissionsUtils.permissionsReadWrite, new MultiplePermissionsListener() {
+                PermissionsUtils.getInstance().callRequestPermissionWrite(getActivity(), new PermissionListener() {
                     @Override
-                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                    public void onPermissionGranted(PermissionGrantedResponse response) {
                         saveFileAndSend(menuItem.getItemId(), false);
                     }
 
                     @Override
-                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                    public void onPermissionDenied(PermissionDeniedResponse response) {
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
                     }
                 });
                 return false;
@@ -329,15 +336,22 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(final MenuItem menuItem) {
-                PermissionsUtils.getInstance().callRequestPermissions(getActivity(), PermissionsUtils.permissionsReadWrite, new MultiplePermissionsListener() {
+                PermissionsUtils.getInstance().callRequestPermissionWrite(getActivity(), new PermissionListener() {
                     @Override
-                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                    public void onPermissionGranted(PermissionGrantedResponse response) {
                         saveFileAndSend(menuItem.getItemId(), true);
                     }
 
                     @Override
-                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                    public void onPermissionDenied(PermissionDeniedResponse response) {
+
                     }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+
+                    }
+
                 });
                 return false;
             }
@@ -553,9 +567,10 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
 
 
     private void openListFilesFragment() {
-        PermissionsUtils.getInstance().callRequestPermissions(getActivity(), PermissionsUtils.permissionsReadWrite, new MultiplePermissionsListener() {
+
+        PermissionsUtils.getInstance().callRequestPermissionWrite(getActivity(), new PermissionListener() {
             @Override
-            public void onPermissionsChecked(MultiplePermissionsReport report) {
+            public void onPermissionGranted(PermissionGrantedResponse response) {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.container, new ListFilesFragment());
                 ft.addToBackStack(SingBoardFragment.class.getSimpleName());
@@ -563,9 +578,14 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
             }
 
             @Override
-            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+            public void onPermissionDenied(PermissionDeniedResponse response) {
+            }
+
+            @Override
+            public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
             }
         });
+
     }
 
 

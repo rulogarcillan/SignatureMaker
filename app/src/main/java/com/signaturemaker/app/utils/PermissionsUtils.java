@@ -79,11 +79,11 @@ public class PermissionsUtils {
     }
 
     /**
-     * Request permission for record audio without listener
+     * Request permission for write external storage without listener
      *
      * @param mActivity
      */
-    public void callRequestPermissionrecordAudio(final Activity mActivity) {
+    public void callRequestPermissionWrite(final Activity mActivity) {
         callRequestPermissionWrite(mActivity, new BasePermissionListener());
     }
 
@@ -92,12 +92,12 @@ public class PermissionsUtils {
      *
      * @param mActivity
      */
-    public void callRequestPermissions(final Activity mActivity, Collection<String> permissions) {
+  /*  public void callRequestPermissions(final Activity mActivity, Collection<String> permissions) {
         callRequestPermissions(mActivity, permissions, new BaseMultiplePermissionsListener());
     }
-
+*/
     /**
-     * Request permission for record audio
+     * Request permission for write
      *
      * @param mActivity
      * @param myPermissionListener
@@ -124,9 +124,9 @@ public class PermissionsUtils {
 
             @Override
             public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                shoDialogInformation(token, mActivity);
-                myPermissionListener.onPermissionRationaleShouldBeShown(permission, token);
+               // shoDialogInformation(token, mActivity);
                 token.continuePermissionRequest();
+                myPermissionListener.onPermissionRationaleShouldBeShown(permission, token);
             }
         };
 
@@ -134,11 +134,16 @@ public class PermissionsUtils {
         PermissionListener compositePermissionListener = new CompositePermissionListener(snackbarPermissionListener, permissionListener);
 
         Dexter.withActivity(mActivity)
-                .withPermission(Manifest.permission.RECORD_AUDIO)
+                .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .withListener(compositePermissionListener).onSameThread().check();
     }
 
-
+    /**
+     * For multiple permissions
+     * @param mActivity
+     * @param permissions
+     * @param myPermissionListener
+     */
     public void callRequestPermissions(final Activity mActivity, Collection<String> permissions, final MultiplePermissionsListener myPermissionListener) {
 
         //This listener only call when permission is denied
@@ -166,6 +171,7 @@ public class PermissionsUtils {
                 .withPermissions(permissions)
                 .withListener(compositePermissionsListener).onSameThread().check();
     }
+
 
     /**
      * Show a dialog with informations of permission

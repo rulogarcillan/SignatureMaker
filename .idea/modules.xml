@@ -3,10 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SignatureMaker.iml" filepath="$PROJECT_DIR$/SignatureMaker.iml" />
-      <module fileurl="file://$PROJECT_DIR$/SignatureMaker.iml" filepath="$PROJECT_DIR$/SignatureMaker.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/chooser/chooser.iml" filepath="$PROJECT_DIR$/chooser/chooser.iml" />
       <module fileurl="file://$PROJECT_DIR$/chooser/chooser.iml" filepath="$PROJECT_DIR$/chooser/chooser.iml" />
     </modules>
   </component>

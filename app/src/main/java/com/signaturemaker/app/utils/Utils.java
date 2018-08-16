@@ -28,6 +28,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
@@ -36,6 +37,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.signaturemaker.app.BuildConfig;
 import com.signaturemaker.app.R;
 import com.signaturemaker.app.models.ItemFile;
 
@@ -47,6 +49,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+
+import androidx.core.content.FileProvider;
 
 public final class Utils {
 
@@ -269,29 +273,43 @@ public final class Utils {
 
         Uri imageUri;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            imageUri = Uri.parse(String.valueOf(new File(Utils.path + "/" + name)));
+            imageUri = Uri.parse(new File(Utils.path + "/" + name).toString());
         } else {
             imageUri = Uri.fromFile(new File(Utils.path + "/" + name));
         }
 
         if (name.contains(".png") || name.contains(".PNG")) {
-            Intent shareIntent = new Intent();
+           /* Intent shareIntent = new Intent();
             shareIntent.setAction(Intent.ACTION_SEND);
             shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
             shareIntent.setType("image/*");
-            mActivity.startActivity(Intent.createChooser(shareIntent, mActivity.getText(R.string.tittle_send)));
+            mActivity.startActivity(Intent.createChooser(shareIntent, mActivity.getText(R.string.tittle_send)));*/
+            // create new Intent
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            Uri uri = FileProvider.getUriForFile(mActivity, BuildConfig.APPLICATION_ID, new File(Utils.path + "/" + name));
+            intent.setDataAndType(uri, "image/*");
+            PackageManager pm = mActivity.getPackageManager();
+            if (intent.resolveActivity(pm) != null) {
+                mActivity.startActivity(intent);
+            }
 
-        }else{
-            Intent shareIntent = new Intent();
+        } else {
+          /*  Intent shareIntent = new Intent();
             shareIntent.setAction(Intent.ACTION_SEND);
             shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
             shareIntent.setType("text/plain");
-             mActivity.startActivity(Intent.createChooser(shareIntent, mActivity.getText(R.string.tittle_send)));
+            mActivity.startActivity(Intent.createChooser(shareIntent, mActivity.getText(R.string.tittle_send)));*/
+
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            Uri uri = FileProvider.getUriForFile(mActivity, BuildConfig.APPLICATION_ID, new File(Utils.path + "/" + name));
+            intent.setDataAndType(uri, "text/html");
+            PackageManager pm = mActivity.getPackageManager();
+            if (intent.resolveActivity(pm) != null) {
+                mActivity.startActivity(intent);
+            }
         }
-
-
-
-
     }
 
     /**
@@ -326,6 +344,38 @@ public final class Utils {
                 .show();
 
 
+    }
+
+
+    /**
+     * Show Snackbar
+     *
+     * @param mActivity
+     * @param msg
+     * @param actionMsg
+     */
+    public static Snackbar createSnackbar(Activity mActivity, String msg, String actionMsg, final Snackbar.Callback callback) {
+        return Snackbar.make(mActivity.findViewById(android.R.id.content), msg, Snackbar.LENGTH_SHORT)
+                .setAction(actionMsg, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                    }
+                })
+                .setActionTextColor(mActivity.getResources().getColor(R.color.colorAccent))
+                .addCallback(new Snackbar.Callback() {
+
+                    @Override
+                    public void onShown(Snackbar sb) {
+                        super.onShown(sb);
+                        callback.onShown(sb);
+                    }
+
+                    @Override
+                    public void onDismissed(Snackbar transientBottomBar, int event) {
+                        super.onDismissed(transientBottomBar, event);
+                        callback.onDismissed(transientBottomBar, event);
+                    }
+                });
     }
 
 }

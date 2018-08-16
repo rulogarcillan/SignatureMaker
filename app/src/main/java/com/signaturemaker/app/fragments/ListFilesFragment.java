@@ -38,8 +38,11 @@ import android.widget.TextView;
 import com.google.android.material.snackbar.Snackbar;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import com.karumi.dexter.listener.single.PermissionListener;
 import com.signaturemaker.app.R;
 import com.signaturemaker.app.adapters.AdapterFiles;
 import com.signaturemaker.app.models.ItemFile;
@@ -60,6 +63,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import co.dift.ui.SwipeToAction;
 
+import static com.signaturemaker.app.utils.Utils.createSnackbar;
 import static com.signaturemaker.app.utils.Utils.displaySnackbar;
 
 public class ListFilesFragment extends Fragment {
@@ -77,6 +81,7 @@ public class ListFilesFragment extends Fragment {
     private TextView txtMnsNoFiles;
     private AdapterFiles adapter;
     private Boolean flagDelete = true;
+    private Snackbar mySnackbar;
 
     public ListFilesFragment() {
         // Required empty public constructor
@@ -87,6 +92,15 @@ public class ListFilesFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        if (mySnackbar != null && mySnackbar.isShown()) {
+            mySnackbar.dismiss();
+        }
+        super.onDestroyView();
     }
 
     @Override
@@ -127,36 +141,39 @@ public class ListFilesFragment extends Fragment {
                 }
                 removeItemAdapter(itemData);
 
-
-                displaySnackbar(getActivity(), itemData.getName(), getResources().getString(R.string.tittle_undo), new Snackbar.Callback() {
-                    @Override
-                    public void onShown(Snackbar sb) {
-                        super.onShown(sb);
-                    }
-
-                    @Override
-                    public void onDismissed(Snackbar transientBottomBar, int event) {
-                        if (event != 1) {
-                            FilesUtils.removeFile(getActivity(), itemData.getName());
-                            if (items.size() > 0) {
-                                txtMnsNoFiles.setVisibility(View.GONE);
-                            } else {
-                                txtMnsNoFiles.setVisibility(View.VISIBLE);
-                            }
-                            loadItemsFiles();
-                            Utils.sort(items, Utils.sortOrder);
-
-                        } else {
-                            addItemAdapter(pos, itemData);
-                            loadItemsFiles();
-                            Utils.sort(items, Utils.sortOrder);
-                            // adapter.setItems(items);
-                            //adapter.notifyDataSetChanged();
-
+                if (getActivity() != null) {
+                    mySnackbar = createSnackbar(getActivity(), itemData.getName(), getResources().getString(R.string.tittle_undo), new Snackbar.Callback() {
+                        @Override
+                        public void onShown(Snackbar sb) {
+                            super.onShown(sb);
                         }
-                        super.onDismissed(transientBottomBar, event);
-                    }
-                });
+
+                        @Override
+                        public void onDismissed(Snackbar transientBottomBar, int event) {
+                            if (event != 1) {
+                                if (getActivity() != null) {
+                                    FilesUtils.removeFile(getActivity(), itemData.getName());
+                                    if (items.size() > 0) {
+                                        txtMnsNoFiles.setVisibility(View.GONE);
+                                    } else {
+                                        txtMnsNoFiles.setVisibility(View.VISIBLE);
+                                    }
+                                    loadItemsFiles();
+                                    Utils.sort(items, Utils.sortOrder);
+                                }
+                            } else {
+                                addItemAdapter(pos, itemData);
+                                loadItemsFiles();
+                                Utils.sort(items, Utils.sortOrder);
+                                // adapter.setItems(items);
+                                //adapter.notifyDataSetChanged();
+
+                            }
+                            super.onDismissed(transientBottomBar, event);
+                        }
+                    });
+                    mySnackbar.show();
+                }
                 return true;
             }
 
@@ -254,9 +271,9 @@ public class ListFilesFragment extends Fragment {
 
     public void loadItemsFiles() {
 
-        PermissionsUtils.getInstance().callRequestPermissions(getActivity(), PermissionsUtils.permissionsReadWrite, new MultiplePermissionsListener() {
+        PermissionsUtils.getInstance().callRequestPermissionWrite(getActivity(), new PermissionListener() {
             @Override
-            public void onPermissionsChecked(MultiplePermissionsReport report) {
+            public void onPermissionGranted(PermissionGrantedResponse response) {
                 items = FilesUtils.loadItemsFiles();
                 if (items.size() > 0) {
                     txtMnsNoFiles.setVisibility(View.GONE);
@@ -266,7 +283,11 @@ public class ListFilesFragment extends Fragment {
             }
 
             @Override
-            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+            public void onPermissionDenied(PermissionDeniedResponse response) {
+            }
+
+            @Override
+            public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
             }
         });
     }

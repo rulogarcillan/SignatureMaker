@@ -33,8 +33,11 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import com.karumi.dexter.listener.single.PermissionListener;
 import com.signaturemaker.app.R;
 import com.signaturemaker.app.fragments.ListFilesFragment;
 import com.signaturemaker.app.fragments.SingBoardFragment;
@@ -96,15 +99,7 @@ public class MainActivity extends BaseActivity implements ClickInterface {
     protected void onStart() {
         super.onStart();
         if (Utils.deleteExit) {
-            PermissionsUtils.getInstance().callRequestPermissions(this, PermissionsUtils.permissionsReadWrite, new MultiplePermissionsListener() {
-                @Override
-                public void onPermissionsChecked(MultiplePermissionsReport report) {
-                }
-
-                @Override
-                public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
-                }
-            });
+            PermissionsUtils.getInstance().callRequestPermissionWrite(this);
         }
 
     }
