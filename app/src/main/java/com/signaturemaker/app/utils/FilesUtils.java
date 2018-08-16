@@ -289,14 +289,12 @@ public final class FilesUtils {
     }
 
     private static void deleteScanFile(final Activity mActivity, File file) {
-
-        ContentResolver resolver = mActivity.getContentResolver();
-        resolver.delete(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, MediaStore.Images.Media.DATA + "=?", new String[]{file.getPath()});
-        mActivity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse(file.getPath()))); //nueva
-
+        if (mActivity != null) {
+            ContentResolver resolver = mActivity.getContentResolver();
+            resolver.delete(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, MediaStore.Images.Media.DATA + "=?", new String[]{file.getPath()});
+            mActivity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse(file.getPath()))); //nueva
+        }
     }
-
-
 }
 
 

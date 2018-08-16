@@ -7,8 +7,8 @@ android {
         applicationId "com.signaturemaker.app"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 3000
-        versionName "3.0"
+        versionCode 3001
+        versionName "3.0.1"
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
@@ -62,7 +62,7 @@ dependencies {
 
 
     //permisions
-    implementation('com.karumi:dexter:4.2.0')
+    implementation('com.karumi:dexter:5.0.0')
     //about libraries
     implementation('com.mikepenz:aboutlibraries:6.0.9@aar'){
         transitive=true;
