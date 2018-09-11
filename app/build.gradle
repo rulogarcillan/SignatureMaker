@@ -64,9 +64,7 @@ dependencies {
     //permisions
     implementation('com.karumi:dexter:5.0.0')
     //about libraries
-    implementation('com.mikepenz:aboutlibraries:6.0.9@aar'){
-        transitive=true;
-    }
+    implementation('com.mikepenz:aboutlibraries:6.2.0-rc01')
     //gesture drawer
     implementation('com.github.gcacace:signature-pad:1.2.1')
     //floating buttons
@@ -75,7 +73,7 @@ dependencies {
     implementation('com.daimajia.easing:library:2.0@aar')
     implementation('com.daimajia.androidanimations:library:2.3@aar')
     //range sneekbar
-    implementation('com.appyvet:materialrangebar:1.4.2') 
+    implementation('com.appyvet:materialrangebar:1.4.3')
     //color picker
     implementation('com.larswerkman:HoloColorPicker:1.5')
     //picasso
