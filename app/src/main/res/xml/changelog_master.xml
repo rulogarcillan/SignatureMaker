@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
     <release
+        version="3.0.3"
+        versioncode="3003">
+        <change>Add privacy polity</change>
+        <change><![CDATA[<font color="red">[Off Topic]</font>]]>If you like my developments, collaborate and try my apps and games, please.<![CDATA[<a href="market://search?q=pub:Raúl R.">Donwload!!!</a>]]></change>  </release>
+    <release
         version="3.0.2"
         versioncode="3002">
         <change>Update libraries</change>
