@@ -7,8 +7,8 @@ android {
         applicationId "com.signaturemaker.app"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 3001
-        versionName "3.0.1"
+        versionCode 3003
+        versionName "3.0.3"
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
@@ -47,14 +47,14 @@ dependencies {
 
 
 
-    implementation "androidx.appcompat:appcompat:1.0.0-alpha1"
-    implementation "com.google.android.material:material:1.0.0-alpha1"
-    implementation "androidx.recyclerview:recyclerview:1.0.0-alpha1"
-    implementation "androidx.annotation:annotation:1.0.0-alpha1"
-    implementation "androidx.cardview:cardview:1.0.0-alpha1"
-    implementation "androidx.constraintlayout:constraintlayout:1.1.0"
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0-alpha1'
-    implementation 'androidx.vectordrawable:vectordrawable:1.0.0-alpha1'
+    implementation "androidx.appcompat:appcompat:1.0.0-rc02"
+    implementation "com.google.android.material:material:1.0.0-rc02"
+    implementation "androidx.recyclerview:recyclerview:1.0.0-rc02"
+    implementation "androidx.annotation:annotation:1.0.0-rc02"
+    implementation "androidx.cardview:cardview:1.0.0-rc02"
+    implementation "androidx.constraintlayout:constraintlayout:2.0.0-alpha2"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0-rc02'
+    implementation 'androidx.vectordrawable:vectordrawable:1.0.0-rc02'
 
 
  /*   implementation 'com.jakewharton:butterknife:8.8.1'
@@ -64,9 +64,7 @@ dependencies {
     //permisions
     implementation('com.karumi:dexter:5.0.0')
     //about libraries
-    implementation('com.mikepenz:aboutlibraries:6.0.9@aar'){
-        transitive=true;
-    }
+    implementation('com.mikepenz:aboutlibraries:6.2.0')
     //gesture drawer
     implementation('com.github.gcacace:signature-pad:1.2.1')
     //floating buttons
@@ -75,7 +73,7 @@ dependencies {
     implementation('com.daimajia.easing:library:2.0@aar')
     implementation('com.daimajia.androidanimations:library:2.3@aar')
     //range sneekbar
-    implementation('com.appyvet:materialrangebar:1.4.2') 
+    implementation('com.appyvet:materialrangebar:1.4.3')
     //color picker
     implementation('com.larswerkman:HoloColorPicker:1.5')
     //picasso

@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
     <release
+        version="3.0.3"
+        versioncode="3003">
+        <change>Add privacy polity</change>
+        <change><![CDATA[<font color="red">[Off Topic]</font>]]>If you like my developments, collaborate and try my apps and games, please.<![CDATA[<a href="market://search?q=pub:Raúl R.">Donwload!!!</a>]]></change>  </release>
+    <release
+        version="3.0.2"
+        versioncode="3002">
+        <change>Update libraries</change>
+        <change>Minor bug fix in Android 6.0</change>
+        <change><![CDATA[<font color="red">[Off Topic]</font>]]> Si te gustan mis desarrollos, por favor, colabora y prueba mis Apps y juegos. <![CDATA[<a href="market://search?q=pub:Raúl R.">Descargar!!!</a>]]></change>
+    </release>
+    <release
         version="3.0.1"
         versioncode="3001">
         <change>Fix sharing option</change>
         <change>Minor bug fix</change>
-        <change><![CDATA[<font color="red">[Off Topic]</font>]]> Si te gustan mis desarrollos, por favor, colabora y prueba mis Apps y juegos. <![CDATA[<a href="market://search?q=pub:Raúl R.">Descargar!!!</a>]]></change>
-    </release>
+   </release>
     <release
         version="3.0.0"
         versioncode="3000">

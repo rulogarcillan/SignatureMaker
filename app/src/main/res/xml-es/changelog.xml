@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
-
+    <release
+        version="3.0.3"
+        versioncode="3003">
+        <change>Se agrega politica de privacidad</change>
+        <change><![CDATA[<font color="red">[Off Topic]</font>]]> Si te gustan mis desarrollos, por favor, colabora y prueba mis Apps y juegos. <![CDATA[<a href="market://search?q=pub:Raúl R.">Descargar!!!</a>]]></change>
+    </release>
+    <release
+        version="3.0.2"
+        versioncode="3002">
+        <change>Librerías actualizadas</change>
+        <change>Corregidos pequeños errores en versiones android 6.0</change>
+    </release>
     <release
         version="3.0.1"
         versioncode="3001">
          <change>Corregida opción compartir</change>
          <change>Corregidos pequeños errores</change>
-        <change><![CDATA[<font color="red">[Off Topic]</font>]]> Si te gustan mis desarrollos, por favor, colabora y prueba mis Apps y juegos. <![CDATA[<a href="market://search?q=pub:Raúl R.">Descargar!!!</a>]]></change>
     </release>
     <release
         version="3.0.0"

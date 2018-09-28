@@ -74,10 +74,18 @@ public class BaseActivity extends AppCompatActivity {
             case R.id.license:
                 startLicense();
                 break;
+            case R.id.privacy_policy:
+                openPrivacy();
+                break;
             default:
                 onBackPressed();
         }
         return true;
+    }
+
+    private void openPrivacy(){
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://info.tuppersoft.com/privacy/privacy_policy_signature.html"));
+        startActivity(browserIntent);
     }
 
     /**
