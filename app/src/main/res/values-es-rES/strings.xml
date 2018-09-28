@@ -56,5 +56,6 @@
     <string name="title_pref_wallpaper_sum">Utilizar el ultimo fondo seleccionado por defecto</string>
     <string name="title_pref_wallpaper">Fondo por defecto</string>
     <string name="tittle_name_of_the_file">Nombre del archivo</string>
+    <string name="title_privacy_policy">Pólitica privacidad</string>
 
 </resources>

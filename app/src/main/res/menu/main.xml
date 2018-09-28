@@ -41,6 +41,15 @@
                android:icon="@drawable/ic_action_shop"
                android:title="@string/title_more"
                menu:showAsAction="ifRoom" />
+
+           <item
+               android:id="@+id/privacy_policy"
+               android:icon="@drawable/ic_privacy"
+               android:title="@string/title_privacy_policy"
+               menu:showAsAction="ifRoom" />
+
+
+
        </menu>
     </item>
 
