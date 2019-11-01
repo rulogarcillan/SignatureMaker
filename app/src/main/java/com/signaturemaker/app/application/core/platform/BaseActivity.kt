@@ -34,9 +34,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.mikepenz.aboutlibraries.Libs
 import com.mikepenz.aboutlibraries.LibsBuilder
 import com.signaturemaker.app.R
+import com.signaturemaker.app.application.core.extensions.Utils.getAppTimeStamp
 import com.signaturemaker.app.application.features.setting.SettingsActivity
 import com.signaturemaker.app.application.features.setting.SettingsActivity.GeneralPreferenceFragment
-import com.signaturemaker.app.application.core.extensions.Utils.getAppTimeStamp
 import de.cketti.library.changelog.ChangeLog
 
 abstract class BaseActivity : AppCompatActivity() {
@@ -63,7 +63,9 @@ abstract class BaseActivity : AppCompatActivity() {
             }
             R.id.rate -> startRate()
             R.id.more -> startMoreApps()
-            R.id.changelog -> startChangelog(true)
+            R.id.changelog -> {
+                //startChangelog(true)
+            }
             R.id.license -> startLicense()
             R.id.privacy_policy -> openPrivacy()
             else -> onBackPressed()
@@ -129,9 +131,11 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
-    class MyChangeLog(context: Context) : ChangeLog(ContextThemeWrapper(context, R.style.AppTheme),
+    class MyChangeLog(context: Context) : ChangeLog(
+        ContextThemeWrapper(context, R.style.AppTheme),
         DEFAULT_CSS
     ) {
+
         companion object {
             const val DEFAULT_CSS = (
 

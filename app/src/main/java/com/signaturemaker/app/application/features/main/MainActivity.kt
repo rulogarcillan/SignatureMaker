@@ -63,7 +63,7 @@ class MainActivity : BaseActivity(), ClickInterface {
 
         createTableView()
 
-        startChangelog(false)
+        //startChangelog(false)
 
 
 

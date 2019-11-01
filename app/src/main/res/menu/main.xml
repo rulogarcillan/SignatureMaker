@@ -22,6 +22,7 @@
                android:layout_width="wrap_content"
                android:icon="@drawable/ic_action_changelog"
                android:title="@string/title_changelog"
+               android:visible="false"
                menu:showAsAction="ifRoom" />
 
            <item
