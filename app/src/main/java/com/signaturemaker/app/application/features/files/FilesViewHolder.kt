@@ -14,9 +14,11 @@ class FilesViewHolder(rootView: View) : SwipeToAction.ViewHolder<ItemFile>(rootV
     private var textName: TextView = rootView.findViewById(R.id.textName)
     private var textDate: TextView = rootView.findViewById(R.id.textDate)
     private var textSize: TextView = rootView.findViewById(R.id.textSize)
-    private var iconFile: ImageView = rootView.findViewById(R.id.iconFile)
+    private var iconFile: ImageView = rootView.findViewById(R.id.imgSign)
 
     fun bind(items: ItemFile) {
+
+        data = items
 
         textName.text = items.name.substring(3)
         textDate.text = items.date

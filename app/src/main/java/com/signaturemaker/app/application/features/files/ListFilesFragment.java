@@ -111,7 +111,7 @@ public class ListFilesFragment extends Fragment {
         setHasOptionsMenu(true);
 
         loadItemsFiles();
-        adapter = new AdapterFiles(items, 0); //Agregamos los items al adapter
+        adapter = new AdapterFiles(items); //Agregamos los items al adapter
 
         //definimos el recycler y agregamos el adaptaer
         recyclerView.setHasFixedSize(true);
@@ -250,23 +250,15 @@ public class ListFilesFragment extends Fragment {
             }
         });*/
 
-        itemS.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_sort:
-                        Utils.sortOrder = Utils.sortOrder * -1;
-                        synchronized (items) {
-                            Utils.sort(items, Utils.sortOrder);
-                        }
-                        recyclerView.getAdapter().notifyDataSetChanged();
-                        break;
-                    default:
-                        break;
+        itemS.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.action_sort) {
+                Utils.sortOrder = Utils.sortOrder * -1;
+                synchronized (items) {
+                    Utils.sort(items, Utils.sortOrder);
                 }
-                return true;
+                recyclerView.getAdapter().notifyDataSetChanged();
             }
+            return true;
         });
 
         super.onCreateOptionsMenu(menu, inflater);
@@ -274,7 +266,6 @@ public class ListFilesFragment extends Fragment {
 
     public void reloadFiles() {
         loadItemsFiles();
-        adapter.setItems(items);
         adapter.notifyDataSetChanged();
     }
 

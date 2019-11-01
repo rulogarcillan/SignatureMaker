@@ -23,15 +23,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 package com.signaturemaker.app.domain.models
 
 data class ItemFile(
-    var date: String = "",
     var name: String = "",
+    var date: String = "",
     var size: String = ""
-) {
-
-    companion object {
-        val TYPE_LARGE = 0
-        val TYPE_SHORT = 1
-    }
-}
+)
 
 

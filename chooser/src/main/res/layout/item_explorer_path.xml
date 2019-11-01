@@ -1,34 +1,33 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
+    android:id="@+id/files"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:minHeight="?android:attr/listPreferredItemHeight"
     android:background="?android:selectableItemBackground"
-    android:id="@+id/files"
+    android:minHeight="?android:attr/listPreferredItemHeight"
     android:padding="8dp">
 
     <ImageView
         android:id="@+id/iconFile"
         android:layout_width="48dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
-        android:src="@drawable/ic_folder"
-      />
+        android:src="@drawable/ic_folder" />
 
     <TextView
         android:id="@+id/textName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_marginLeft="10dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/iconFile"
+        android:layout_toRightOf="@+id/iconFile"
         android:ellipsize="end"
         android:maxLines="1"
         android:text=".."
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/iconFile"
-        android:layout_toEndOf="@+id/iconFile" />
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 
 </RelativeLayout>

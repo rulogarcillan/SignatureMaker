@@ -27,15 +27,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.signaturemaker.app.R
 import com.signaturemaker.app.domain.models.ItemFile
-import java.util.ArrayList
 
-class AdapterFiles(items: List<ItemFile>, viewType: Int) : RecyclerView.Adapter<FilesViewHolder>() {
-
-    var items: List<ItemFile> = ArrayList()
-
-    init {
-        this.items = items
-    }
+class AdapterFiles(val items: MutableList<ItemFile>) : RecyclerView.Adapter<FilesViewHolder>() {
 
     override fun getItemCount(): Int {
         return items.size
@@ -44,6 +37,7 @@ class AdapterFiles(items: List<ItemFile>, viewType: Int) : RecyclerView.Adapter<
     override fun onBindViewHolder(viewHolder: FilesViewHolder, i: Int) {
 
         viewHolder.bind(items[i])
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilesViewHolder {

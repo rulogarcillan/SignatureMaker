@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public final class FilesUtils {
 
@@ -268,8 +269,8 @@ public final class FilesUtils {
     public static String systemTime() {
 
         Date date = new Date();
-        DateFormat dfd = new SimpleDateFormat("ddMMyyyy");
-        DateFormat dfh = new SimpleDateFormat("HHmmss");
+        DateFormat dfd = new SimpleDateFormat("ddMMyyyy", Locale.getDefault());
+        DateFormat dfh = new SimpleDateFormat("HHmmss", Locale.getDefault());
         String dateString = dfd.format(date) + "_" + dfh.format(date);
 
         return dateString;
