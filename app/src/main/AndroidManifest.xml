@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.signaturemaker.app">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -10,15 +11,14 @@
 
 
     <application
-
-
+        android:name=".application.App"
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/title_appName"
-
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}"
@@ -29,6 +29,12 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_provider_paths" />
         </provider>
+
+
+        <meta-data
+            android:name="com.google.android.gms.ads.AD_MANAGER_APP"
+            android:value="true" />
+
 
         <activity
             android:name="com.signaturemaker.app.application.activities.IntroActivity"
@@ -43,12 +49,11 @@
         <activity
             android:name="com.signaturemaker.app.application.activities.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:theme="@style/AppThemePrefs"></activity>
+            android:theme="@style/AppThemePrefs" />
         <activity
             android:name="com.signaturemaker.app.application.activities.MainActivity"
             android:label="@string/title_appName"
-            android:theme="@style/AppTheme"></activity>
-
+            android:theme="@style/AppTheme" />
 
     </application>
 

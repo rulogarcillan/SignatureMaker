@@ -1,0 +1,65 @@
+{
+  "project_info": {
+    "project_number": "1099061363775",
+    "firebase_url": "https://signaturemaker-a5dfc.firebaseio.com",
+    "project_id": "signaturemaker-a5dfc",
+    "storage_bucket": "signaturemaker-a5dfc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1099061363775:android:10d52fcc153e7e7b",
+        "android_client_info": {
+          "package_name": "com.signaturemaker.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1099061363775-47tijkfs4vi0jp68bttf7bdj3nldsjcf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.signaturemaker.app",
+            "certificate_hash": "8023c5521f0ff2b656bf361655d6f8b96de7e494"
+          }
+        },
+        {
+          "client_id": "1099061363775-usp6hd8e6fo3voplsor9forhu9lslm9r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.signaturemaker.app",
+            "certificate_hash": "b0e174d5d7c3ad079e9febf726e4c87c375ec9e4"
+          }
+        },
+        {
+          "client_id": "1099061363775-ssjeec5b34e98i53mlri1pbpaj92ba1i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.signaturemaker.app",
+            "certificate_hash": "62f688bdaa31290e4cb1e02dbcf3e8adfaeb5617"
+          }
+        },
+        {
+          "client_id": "1099061363775-3jvc6dba7k5fvdaspc463kdbvkrl9ped.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiaDRiPb1AO9i_xYdxsNgQEYPLGhrw45k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1099061363775-3jvc6dba7k5fvdaspc463kdbvkrl9ped.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-9438738341601496~9019909565"
+    }
+  ],
+  "configuration_version": "1"
+}

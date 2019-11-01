@@ -24,40 +24,47 @@ package com.signaturemaker.app.application.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import com.crashlytics.android.Crashlytics;
 import com.github.paolorotolo.appintro.AppIntro2;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 import com.signaturemaker.app.R;
 import com.signaturemaker.app.application.utils.Constants;
 import com.signaturemaker.app.application.utils.Utils;
 
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 public class IntroActivity extends AppIntro2 {
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        //Crashlytics.getInstance().crash();
         if (Utils.loadPreference(this, Constants.FIRST_TIME, true)) {
             Utils.savePreference(this, Constants.FIRST_TIME, false);
         } else {
             launchActivityMain();
         }
 
-        Fragment f1 = AppIntroFragment.newInstance(getResources().getString(R.string.tittle_slider1), "Roboto", getResources().getString(R.string.tittle_body_slider1), "normal",
-                R.drawable.ic_pencil_icon, getResources().getColor(R.color.background_sliders), getResources().getColor(R.color.colorWhite), getResources().getColor(R.color.colorWhite));
-        Fragment f2 = AppIntroFragment.newInstance(getResources().getString(R.string.tittle_slider2), "Roboto", getResources().getString(R.string.tittle_body_slider2), "normal",
-                R.drawable.ic_share_icon, getResources().getColor(R.color.background_sliders), getResources().getColor(R.color.colorWhite), getResources().getColor(R.color.colorWhite));
-        Fragment f3 = AppIntroFragment.newInstance(getResources().getString(R.string.tittle_slider3), "Roboto", getResources().getString(R.string.tittle_body_slider3), "normal",
-                R.drawable.ic_sign_icon, getResources().getColor(R.color.background_sliders), getResources().getColor(R.color.colorWhite), getResources().getColor(R.color.colorWhite));
-        Fragment f4 = AppIntroFragment.newInstance(getResources().getString(R.string.tittle_slider4), "Roboto", getResources().getString(R.string.tittle_body_slider4), "normal",
-                R.drawable.ic_check_icon, getResources().getColor(R.color.background_sliders), getResources().getColor(R.color.colorWhite), getResources().getColor(R.color.colorWhite));
+        Fragment f1 = AppIntroFragment.newInstance(getResources().getString(R.string.tittle_slider1), "Roboto",
+                getResources().getString(R.string.tittle_body_slider1), "normal",
+                R.drawable.ic_pencil_icon, getResources().getColor(R.color.background_sliders),
+                getResources().getColor(R.color.colorWhite), getResources().getColor(R.color.colorWhite));
+        Fragment f2 = AppIntroFragment.newInstance(getResources().getString(R.string.tittle_slider2), "Roboto",
+                getResources().getString(R.string.tittle_body_slider2), "normal",
+                R.drawable.ic_share_icon, getResources().getColor(R.color.background_sliders),
+                getResources().getColor(R.color.colorWhite), getResources().getColor(R.color.colorWhite));
+        Fragment f3 = AppIntroFragment.newInstance(getResources().getString(R.string.tittle_slider3), "Roboto",
+                getResources().getString(R.string.tittle_body_slider3), "normal",
+                R.drawable.ic_sign_icon, getResources().getColor(R.color.background_sliders),
+                getResources().getColor(R.color.colorWhite), getResources().getColor(R.color.colorWhite));
+        Fragment f4 = AppIntroFragment.newInstance(getResources().getString(R.string.tittle_slider4), "Roboto",
+                getResources().getString(R.string.tittle_body_slider4), "normal",
+                R.drawable.ic_check_icon, getResources().getColor(R.color.background_sliders),
+                getResources().getColor(R.color.colorWhite), getResources().getColor(R.color.colorWhite));
         addSlide(f1);
         addSlide(f2);
         addSlide(f3);
         addSlide(f4);
-
 
         showSkipButton(false);
         setProgressButtonEnabled(true);
@@ -67,17 +74,17 @@ public class IntroActivity extends AppIntro2 {
     }
 
     @Override
-    public void onSkipPressed(Fragment currentFragment) {
-        super.onSkipPressed(currentFragment);
-
-        //launchActivityMain();
-    }
-
-    @Override
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
         launchActivityMain();
 
+    }
+
+    @Override
+    public void onSkipPressed(Fragment currentFragment) {
+        super.onSkipPressed(currentFragment);
+
+        //launchActivityMain();
     }
 
     @Override
