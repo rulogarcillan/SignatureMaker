@@ -73,7 +73,7 @@ class MainActivity : BaseActivity(), ClickInterface {
     override fun onStart() {
         super.onStart()
         if (Utils.deleteExit) {
-            PermissionsUtils.getInstance().callRequestPermissionWrite(this)
+            PermissionsUtils.instance?.callRequestPermissionWrite(this)
         }
     }
 

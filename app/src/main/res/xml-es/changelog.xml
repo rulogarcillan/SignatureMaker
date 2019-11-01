@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
     <release
+        version="3.0.4"
+        versioncode="3004">
+        <change>Soporte android 10</change>
+        <change>Actualización de librerías</change>
+    </release>
+    <release
         version="3.0.3"
         versioncode="3003">
         <change>Se agrega politica de privacidad</change>
-        <change><![CDATA[<font color="red">[Off Topic]</font>]]> Si te gustan mis desarrollos, por favor, colabora y prueba mis Apps y juegos. <![CDATA[<a href="market://search?q=pub:Raúl R.">Descargar!!!</a>]]></change>
+        <change><![CDATA[<font color="red">[Off Topic]</font>]]> Si te gustan mis desarrollos, por favor, colabora y
+            prueba mis Apps y juegos. <![CDATA[<a href="market://search?q=pub:Raúl R.">Descargar!!!</a>]]></change>
     </release>
     <release
         version="3.0.2"
@@ -15,8 +22,8 @@
     <release
         version="3.0.1"
         versioncode="3001">
-         <change>Corregida opción compartir</change>
-         <change>Corregidos pequeños errores</change>
+        <change>Corregida opción compartir</change>
+        <change>Corregidos pequeños errores</change>
     </release>
     <release
         version="3.0.0"
@@ -27,7 +34,7 @@
         <change>Nueva trazo de firma con presión</change>
         <change>Nuevo slider de bienvenida</change>
         <change>Nuevos iconos</change>
-     </release>
+    </release>
     <release
         version="2.1.54"
         versioncode="2035">
@@ -37,7 +44,7 @@
         version="2.1.31"
         versioncode="2033">
         <change>Se corrige error al salvar firmas con un nombre personalizado. (gracias por los reportes)</change>
-      </release>
+    </release>
     <release
         version="2.1.16"
         versioncode="2031">
@@ -128,6 +135,5 @@
         <change>Versión inicial</change>
     </release>
 
+
 </changelog>
-
-

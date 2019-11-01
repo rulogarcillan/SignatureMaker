@@ -24,6 +24,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -163,7 +164,7 @@ class ListFilesFragment : Fragment() {
 
     fun loadItemsFiles() {
 
-        PermissionsUtils.getInstance().callRequestPermissionWrite(activity, object : PermissionListener {
+        PermissionsUtils.instance?.callRequestPermissionWrite(activity as Activity, object : PermissionListener {
             override fun onPermissionDenied(response: PermissionDeniedResponse) {}
 
             override fun onPermissionGranted(response: PermissionGrantedResponse) {
@@ -236,4 +237,4 @@ class ListFilesFragment : Fragment() {
             alertDialog.show()
         }
     }
-}// Required empty public constructor
+}

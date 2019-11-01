@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
     <release
+        version="3.0.4"
+        versioncode="3004">
+        <change>Support android 10</change>
+        <change>Update libraries</change>
+    </release>
+    <release
         version="3.0.3"
         versioncode="3003">
         <change>Add privacy polity</change>
-        <change><![CDATA[<font color="red">[Off Topic]</font>]]>If you like my developments, collaborate and try my apps and games, please.<![CDATA[<a href="market://search?q=pub:Raúl R.">Donwload!!!</a>]]></change>  </release>
+        <change><![CDATA[<font color="red">[Off Topic]</font>]]>If you like my developments, collaborate and try my
+            apps and games, please.<![CDATA[<a href="market://search?q=pub:Raúl R.">Donwload!!!</a>]]></change>
+    </release>
     <release
         version="3.0.2"
         versioncode="3002">
         <change>Update libraries</change>
         <change>Minor bug fix in Android 6.0</change>
-        <change><![CDATA[<font color="red">[Off Topic]</font>]]> Si te gustan mis desarrollos, por favor, colabora y prueba mis Apps y juegos. <![CDATA[<a href="market://search?q=pub:Raúl R.">Descargar!!!</a>]]></change>
+        <change><![CDATA[<font color="red">[Off Topic]</font>]]> Si te gustan mis desarrollos, por favor, colabora y
+            prueba mis Apps y juegos. <![CDATA[<a href="market://search?q=pub:Raúl R.">Descargar!!!</a>]]></change>
     </release>
     <release
         version="3.0.1"
         versioncode="3001">
         <change>Fix sharing option</change>
         <change>Minor bug fix</change>
-   </release>
+    </release>
     <release
         version="3.0.0"
         versioncode="3000">
@@ -27,7 +36,7 @@
         <change>New signature with pressure</change>
         <change>New welcome slider</change>
         <change>New icons</change>
-        </release>
+    </release>
     <release
         version="2.1.54"
         versioncode="2035">
@@ -42,7 +51,8 @@
         version="2.1.16"
         versioncode="2031">
         <change>Button to sort files by date (ascending / descending )</change>
-        <change>New visual backgrounds to the canvas (the signature is always saved with transparent background)</change>
+        <change>New visual backgrounds to the canvas (the signature is always saved with transparent background)
+        </change>
         <change>New support email</change>
         <change>Fix seekbar (crash app)</change>
         <change>Correction texts and translations</change>

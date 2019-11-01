@@ -24,6 +24,7 @@ package com.signaturemaker.app.application.features.sing
 
 import android.animation.Animator
 import android.annotation.TargetApi
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -328,7 +329,7 @@ class SingBoardFragment private constructor() : Fragment(), View.OnClickListener
 
     private fun openListFilesFragment() {
 
-        PermissionsUtils.getInstance().callRequestPermissionWrite(activity, object : PermissionListener {
+        PermissionsUtils.instance?.callRequestPermissionWrite(activity as Activity, object : PermissionListener {
             override fun onPermissionDenied(response: PermissionDeniedResponse) {}
 
             override fun onPermissionGranted(response: PermissionGrantedResponse) {
@@ -363,8 +364,8 @@ class SingBoardFragment private constructor() : Fragment(), View.OnClickListener
                             statusParticular = FilesUtils.saveSvgFile(singBoard.signatureSvg, mName)
                         }
                     }
-                    if (statusParticular!!) {
-                        if (share!!) {
+                    if (statusParticular) {
+                        if (share) {
                             Utils.shareSign(activity, mName)
                         }
                         showToast(activity, resources.getString(R.string.title_save_ok))
@@ -421,7 +422,7 @@ class SingBoardFragment private constructor() : Fragment(), View.OnClickListener
 
 
         popupMenu.setOnMenuItemClickListener { menuItem ->
-            PermissionsUtils.getInstance().callRequestPermissionWrite(activity!!, object : PermissionListener {
+            PermissionsUtils.instance?.callRequestPermissionWrite(activity as Activity, object : PermissionListener {
                 override fun onPermissionDenied(response: PermissionDeniedResponse) {}
 
                 override fun onPermissionGranted(response: PermissionGrantedResponse) {
@@ -441,30 +442,33 @@ class SingBoardFragment private constructor() : Fragment(), View.OnClickListener
     }
 
     private fun selectName(callBack: TextDialog) {
-        val alertDialog = AlertDialog.Builder(activity!!)
-        alertDialog.setTitle(R.string.tittle_name_of_the_file)
-        val view = layoutInflater.inflate(R.layout.name_selector, null)
 
-        val input = view.findViewById<EditText>(R.id.txtName)
-        alertDialog.setCancelable(false)
+        context?.let {
+            val alertDialog = AlertDialog.Builder(it)
+            alertDialog.setTitle(R.string.tittle_name_of_the_file)
+            val view = layoutInflater.inflate(R.layout.name_selector, null)
 
-        alertDialog.setPositiveButton(
-            android.R.string.ok
-        ) { _, _ ->
-            if (input.text.toString().equals("", ignoreCase = true)) {
-                callBack.onGetTextDialog(FilesUtils.cleanName("no_name"))
-            } else {
-                callBack.onGetTextDialog(FilesUtils.cleanName(input.text.toString()))
+            val input = view.findViewById<EditText>(R.id.txtName)
+            alertDialog.setCancelable(false)
+
+            alertDialog.setPositiveButton(
+                android.R.string.ok
+            ) { _, _ ->
+                if (input.text.toString().equals("", ignoreCase = true)) {
+                    callBack.onGetTextDialog(FilesUtils.cleanName("no_name"))
+                } else {
+                    callBack.onGetTextDialog(FilesUtils.cleanName(input.text.toString()))
+                }
             }
+
+            alertDialog.setNegativeButton(
+                android.R.string.cancel
+            ) { dialog, _ -> dialog.cancel() }
+
+            alertDialog.setNeutralButton(R.string.tittle_clean) { _, _ -> }
+            alertDialog.setView(view)
+            alertDialog.show()
         }
-
-        alertDialog.setNegativeButton(
-            android.R.string.cancel
-        ) { dialog, _ -> dialog.cancel() }
-
-        alertDialog.setNeutralButton(R.string.tittle_clean) { _, _ -> }
-        alertDialog.setView(view)
-        alertDialog.show()
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -526,7 +530,7 @@ class SingBoardFragment private constructor() : Fragment(), View.OnClickListener
 
 
         popupMenu.setOnMenuItemClickListener { menuItem ->
-            PermissionsUtils.getInstance().callRequestPermissionWrite(activity!!, object : PermissionListener {
+            PermissionsUtils.instance?.callRequestPermissionWrite(activity as Activity, object : PermissionListener {
                 override fun onPermissionDenied(response: PermissionDeniedResponse) {
                 }
 

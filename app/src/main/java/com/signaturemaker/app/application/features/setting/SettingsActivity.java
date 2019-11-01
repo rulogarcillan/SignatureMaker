@@ -99,7 +99,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
             switch (preference.getKey()) {
                 case Constants.ID_PREF_PATH:
-                    PermissionsUtils.getInstance()
+                    PermissionsUtils.Companion.getInstance()
                             .callRequestPermissionWrite(getActivity(), new PermissionListener() {
                                 @Override
                                 public void onPermissionDenied(PermissionDeniedResponse response) {
