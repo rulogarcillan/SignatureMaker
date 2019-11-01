@@ -19,7 +19,7 @@
     <string name="title_save_png" translatable="false">PNG (Transparent BG)</string>
     <string name="title_save_png_wh" translatable="false">PNG (White BG)</string>
     <string name="title_save_svg" translatable="false">SVG (Transparent BG)</string>
-    <string name="app_written">Application Written By Raúl R.C</string>
+    <string name="app_written" translatable="false">Application Written By Raúl R.C</string>
 
     <string name="title_save_ok">File saved correctly</string>
     <string name="title_save_ko">Error saving</string>

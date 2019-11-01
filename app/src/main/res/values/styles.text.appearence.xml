@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <style name="fontThin">
+        <item name="fontFamily">?attr/fontTypeThin</item>
+        <item name="android:fontFamily">?attr/fontTypeThin</item>
+    </style>
+
+    <style name="fontlight">
+        <item name="fontFamily">?attr/fontTypeLight</item>
+        <item name="android:fontFamily">?attr/fontTypeLight</item>
+    </style>
+
+    <style name="fontRegular">
+        <item name="fontFamily">?attr/fontTypeRegular</item>
+        <item name="android:fontFamily">?attr/fontTypeRegular</item>
+    </style>
+
+    <style name="fontMedium">
+        <item name="fontFamily">?attr/fontTypeMedium</item>
+        <item name="android:fontFamily">?attr/fontTypeMedium</item>
+    </style>
+
+    <style name="fontBold">
+        <item name="fontFamily">?attr/fontTypeBold</item>
+        <item name="android:fontFamily">?attr/fontTypeBold</item>
+    </style>
+
+
+    <style name="toolbar">
+        <item name="fontFamily">?attr/fontTypeBold</item>
+        <item name="android:fontFamily">?attr/fontTypeBold</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="textHeadline1" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="fontFamily">?attr/fontTypeLight</item>
+        <item name="android:fontFamily">?attr/fontTypeLight</item>
+    </style>
+
+    <style name="textHeadline2" parent="TextAppearance.MaterialComponents.Headline2">
+        <item name="fontFamily">?attr/fontTypeLight</item>
+        <item name="android:fontFamily">?attr/fontTypeLight</item>
+    </style>
+
+    <style name="textHeadline3" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="fontFamily">?attr/fontTypeRegular</item>
+        <item name="android:fontFamily">?attr/fontTypeRegular</item>
+    </style>
+
+    <style name="textHeadline4" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="fontFamily">?attr/fontTypeRegular</item>
+        <item name="android:fontFamily">?attr/fontTypeRegular</item>
+    </style>
+
+    <style name="textHeadline5" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">?attr/fontTypeRegular</item>
+        <item name="android:fontFamily">?attr/fontTypeRegular</item>
+    </style>
+
+    <style name="textHeadline6" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="fontFamily">?attr/fontTypeRegular</item>
+        <item name="android:fontFamily">?attr/fontTypeRegular</item>
+    </style>
+
+    <style name="textSubtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="fontFamily">?attr/fontTypeRegular</item>
+        <item name="android:fontFamily">?attr/fontTypeRegular</item>
+    </style>
+
+    <style name="textSubtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="fontFamily">?attr/fontTypeMedium</item>
+        <item name="android:fontFamily">?attr/fontTypeMedium</item>
+    </style>
+
+    <style name="textBody1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">?attr/fontTypeRegular</item>
+        <item name="android:fontFamily">?attr/fontTypeRegular</item>
+    </style>
+
+    <style name="textBody2" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">?attr/fontTypeRegular</item>
+        <item name="android:fontFamily">?attr/fontTypeRegular</item>
+    </style>
+
+    <style name="textCaption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">?attr/fontTypeRegular</item>
+        <item name="android:fontFamily">?attr/fontTypeRegular</item>
+    </style>
+
+    <style name="textButton" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:letterSpacing">0.1</item>
+        <item name="fontFamily">?attr/fontTypeMedium</item>
+        <item name="android:fontFamily">?attr/fontTypeMedium</item>
+    </style>
+
+    <style name="textOverline" parent="TextAppearance.MaterialComponents.Overline">
+        <item name="fontFamily">?attr/fontTypeMedium</item>
+        <item name="android:fontFamily">?attr/fontTypeMedium</item>
+    </style>
+
+    <style name="textTexView" parent="Widget.AppCompat.TextView">
+        <item name="fontFamily">?attr/fontTypeRegular</item>
+        <item name="android:fontFamily">?attr/fontTypeRegular</item>
+    </style>
+
+    <style name="textButtonCompat" parent="Widget.AppCompat.Button">
+        <item name="fontFamily">?attr/fontTypeBold</item>
+        <item name="android:fontFamily">?attr/fontTypeBold</item>
+    </style>
+
+</resources>

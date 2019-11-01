@@ -20,7 +20,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
-package com.signaturemaker.app.application.utils;
+package com.signaturemaker.app.application.core.extensions;
 
 import android.app.Activity;
 import android.content.Context;
@@ -32,12 +32,12 @@ import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 import androidx.core.content.FileProvider;
 import com.google.android.material.snackbar.Snackbar;
 import com.signaturemaker.app.BuildConfig;
 import com.signaturemaker.app.R;
+import com.signaturemaker.app.application.utils.Constants;
 import com.signaturemaker.app.domain.models.ItemFile;
 import java.io.File;
 import java.text.DateFormat;
@@ -74,12 +74,9 @@ public final class Utils {
     public static Snackbar createSnackbar(Activity mActivity, String msg, String actionMsg,
             final Snackbar.Callback callback) {
         return Snackbar.make(mActivity.findViewById(android.R.id.content), msg, Snackbar.LENGTH_SHORT)
-                .setAction(actionMsg, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                    }
+                .setAction(actionMsg, view -> {
                 })
-                .setActionTextColor(mActivity.getResources().getColor(R.color.colorAccent))
+                .setActionTextColor(mActivity.getResources().getColor(R.color.secondaryColor))
                 .addCallback(new Snackbar.Callback() {
 
                     @Override
@@ -143,12 +140,9 @@ public final class Utils {
     public static void displaySnackbar(Activity mActivity, String msg, String actionMsg,
             final Snackbar.Callback callback) {
         Snackbar.make(mActivity.findViewById(android.R.id.content), msg, Snackbar.LENGTH_SHORT)
-                .setAction(actionMsg, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                    }
+                .setAction(actionMsg, view -> {
                 })
-                .setActionTextColor(mActivity.getResources().getColor(R.color.colorAccent))
+                .setActionTextColor(mActivity.getResources().getColor(R.color.secondaryColor))
                 .addCallback(new Snackbar.Callback() {
 
                     @Override

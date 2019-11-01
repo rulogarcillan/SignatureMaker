@@ -8,19 +8,19 @@
         android:id="@+id/bWallpaper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        fab:fab_colorNormal="@color/colorPrimary"
-        fab:fab_colorPressed="@color/colorPrimary"
+        fab:fab_colorNormal="?attr/colorPrimary"
+        fab:fab_colorPressed="?attr/colorPrimary"
         fab:fab_icon="@drawable/ic_wallpaper"
         fab:fab_size="mini"/>
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/FabLeft"
+        android:id="@+id/fabLeft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        fab:fab_addButtonColorNormal="@color/colorAccent"
+        fab:fab_addButtonColorNormal="?attr/colorSecondary"
         fab:fab_addButtonColorPressed="@color/colorPrimaryLight"
         fab:fab_expandDirection="left">
 
@@ -60,13 +60,13 @@
 
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/FabUp"
+        android:id="@+id/fabUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        fab:fab_addButtonColorNormal="@color/colorAccent"
+        fab:fab_addButtonColorNormal="?attr/colorSecondary"
         fab:fab_addButtonColorPressed="@color/colorPrimaryLight"
         fab:fab_expandDirection="up"
         fab:fab_labelsPosition="right">

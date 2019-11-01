@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:baselineAligned="false"
     android:orientation="vertical"
-    tools:context=".application.activities.MainActivity">
+    tools:context=".application.features.main.MainActivity">
 
 
     <include layout="@layout/content_main"></include>

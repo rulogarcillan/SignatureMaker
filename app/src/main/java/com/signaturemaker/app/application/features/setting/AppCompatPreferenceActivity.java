@@ -1,4 +1,4 @@
-package com.signaturemaker.app.application.activities;
+package com.signaturemaker.app.application.features.setting;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

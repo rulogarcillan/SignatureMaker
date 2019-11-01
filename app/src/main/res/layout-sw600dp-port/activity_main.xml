@@ -23,7 +23,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="6dp"
-            android:background="@color/colorPrimary"></View>
+            android:background="?attr/colorPrimary"></View>
 
         <FrameLayout
 

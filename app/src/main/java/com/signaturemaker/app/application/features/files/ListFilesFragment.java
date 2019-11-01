@@ -1,4 +1,4 @@
-package com.signaturemaker.app.application.fragments;/*
+package com.signaturemaker.app.application.features.files;/*
  __ _                   _                                 _
 / _(_) __ _ _ __   __ _| |_ _   _ _ __ ___    /\/\   __ _| | _____ _ __
 \ \| |/ _` | '_ \ / _` | __| | | | '__/ _ \  /    \ / _` | |/ / _ \ '__|
@@ -22,7 +22,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 
 
-import static com.signaturemaker.app.application.utils.Utils.createSnackbar;
+import static com.signaturemaker.app.application.core.extensions.Utils.createSnackbar;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -49,11 +49,10 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 import com.signaturemaker.app.R;
-import com.signaturemaker.app.application.adapters.AdapterFiles;
+import com.signaturemaker.app.application.core.extensions.Utils;
+import com.signaturemaker.app.application.core.platform.FilesUtils;
+import com.signaturemaker.app.application.core.platform.PermissionsUtils;
 import com.signaturemaker.app.application.utils.Constants;
-import com.signaturemaker.app.application.utils.FilesUtils;
-import com.signaturemaker.app.application.utils.PermissionsUtils;
-import com.signaturemaker.app.application.utils.Utils;
 import com.signaturemaker.app.domain.models.ItemFile;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
@@ -112,7 +111,7 @@ public class ListFilesFragment extends Fragment {
         setHasOptionsMenu(true);
 
         loadItemsFiles();
-        adapter = new AdapterFiles(getActivity(), items, 0); //Agregamos los items al adapter
+        adapter = new AdapterFiles(items, 0); //Agregamos los items al adapter
 
         //definimos el recycler y agregamos el adaptaer
         recyclerView.setHasFixedSize(true);

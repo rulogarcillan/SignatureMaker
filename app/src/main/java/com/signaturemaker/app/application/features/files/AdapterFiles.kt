@@ -20,18 +20,33 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
-package com.signaturemaker.app.domain.models
+package com.signaturemaker.app.application.features.files
 
-data class ItemFile(
-    var date: String = "",
-    var name: String = "",
-    var size: String = ""
-) {
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.signaturemaker.app.R
+import com.signaturemaker.app.domain.models.ItemFile
+import java.util.ArrayList
 
-    companion object {
-        val TYPE_LARGE = 0
-        val TYPE_SHORT = 1
+class AdapterFiles(items: List<ItemFile>, viewType: Int) : RecyclerView.Adapter<FilesViewHolder>() {
+
+    var items: List<ItemFile> = ArrayList()
+
+    init {
+        this.items = items
+    }
+
+    override fun getItemCount(): Int {
+        return items.size
+    }
+
+    override fun onBindViewHolder(viewHolder: FilesViewHolder, i: Int) {
+
+        viewHolder.bind(items[i])
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilesViewHolder {
+        return FilesViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_explore, parent, false))
     }
 }
-
-

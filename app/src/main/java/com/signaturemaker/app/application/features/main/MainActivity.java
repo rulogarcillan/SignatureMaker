@@ -20,7 +20,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
-package com.signaturemaker.app.application.activities;
+package com.signaturemaker.app.application.features.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,12 +32,13 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.signaturemaker.app.R;
-import com.signaturemaker.app.application.fragments.ListFilesFragment;
-import com.signaturemaker.app.application.fragments.SingBoardFragment;
-import com.signaturemaker.app.application.interfaces.ClickInterface;
-import com.signaturemaker.app.application.utils.FilesUtils;
-import com.signaturemaker.app.application.utils.PermissionsUtils;
-import com.signaturemaker.app.application.utils.Utils;
+import com.signaturemaker.app.application.core.extensions.Utils;
+import com.signaturemaker.app.application.core.platform.BaseActivity;
+import com.signaturemaker.app.application.core.platform.FilesUtils;
+import com.signaturemaker.app.application.core.platform.PermissionsUtils;
+import com.signaturemaker.app.application.features.files.ClickInterface;
+import com.signaturemaker.app.application.features.files.ListFilesFragment;
+import com.signaturemaker.app.application.features.sing.SingBoardFragment;
 
 public class MainActivity extends BaseActivity implements ClickInterface {
 
@@ -51,8 +52,6 @@ public class MainActivity extends BaseActivity implements ClickInterface {
 
     private AdView mAdView;
 
-    private SingBoardFragment signBoard;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +62,9 @@ public class MainActivity extends BaseActivity implements ClickInterface {
         containerFiles = findViewById(R.id.containerFiles);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.container, signBoard = new SingBoardFragment(), SingBoardFragment.class.getSimpleName());
+        SingBoardFragment signBoard;
+        ft.replace(R.id.container, signBoard = SingBoardFragment.Companion.newInstance(),
+                SingBoardFragment.class.getSimpleName());
         ft.commit();
         signBoard.setInterface(this);
 

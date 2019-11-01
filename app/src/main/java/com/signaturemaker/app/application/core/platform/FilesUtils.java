@@ -1,4 +1,4 @@
-package com.signaturemaker.app.application.utils;
+package com.signaturemaker.app.application.core.platform;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import com.signaturemaker.app.application.core.extensions.Utils;
 import com.signaturemaker.app.domain.models.ItemFile;
 import java.io.BufferedWriter;
 import java.io.File;

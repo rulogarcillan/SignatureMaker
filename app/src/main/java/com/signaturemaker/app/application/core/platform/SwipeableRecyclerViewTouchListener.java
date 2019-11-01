@@ -1,4 +1,4 @@
-package com.signaturemaker.app.application.utils;
+package com.signaturemaker.app.application.core.platform;
 /*
  * Copyright 2013 Google Inc.
  * Copyright 2015 Bruno Romeu Nunes

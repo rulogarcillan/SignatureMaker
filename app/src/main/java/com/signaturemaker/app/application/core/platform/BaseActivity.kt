@@ -21,7 +21,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 
-package com.signaturemaker.app.application.activities
+package com.signaturemaker.app.application.core.platform
 
 import android.content.Context
 import android.content.Intent
@@ -34,7 +34,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.mikepenz.aboutlibraries.Libs
 import com.mikepenz.aboutlibraries.LibsBuilder
 import com.signaturemaker.app.R
-import com.signaturemaker.app.application.utils.Utils.getAppTimeStamp
+import com.signaturemaker.app.application.features.setting.SettingsActivity
+import com.signaturemaker.app.application.features.setting.SettingsActivity.GeneralPreferenceFragment
+import com.signaturemaker.app.application.core.extensions.Utils.getAppTimeStamp
 import de.cketti.library.changelog.ChangeLog
 
 abstract class BaseActivity : AppCompatActivity() {
@@ -52,7 +54,7 @@ abstract class BaseActivity : AppCompatActivity() {
                 val intent = Intent(this, SettingsActivity::class.java)
                 intent.putExtra(
                     PreferenceActivity.EXTRA_SHOW_FRAGMENT,
-                    SettingsActivity.GeneralPreferenceFragment::class.java.name
+                    GeneralPreferenceFragment::class.java.name
                 )
                 intent.putExtra(PreferenceActivity.EXTRA_NO_HEADERS, true)
                 startActivity(intent)
@@ -127,7 +129,9 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
-    class MyChangeLog(context: Context) : ChangeLog(ContextThemeWrapper(context, R.style.AppTheme), DEFAULT_CSS) {
+    class MyChangeLog(context: Context) : ChangeLog(ContextThemeWrapper(context, R.style.AppTheme),
+        DEFAULT_CSS
+    ) {
         companion object {
             const val DEFAULT_CSS = (
 

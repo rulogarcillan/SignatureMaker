@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3e82f7</color>
-    <color name="colorPrimaryDark">#01579b</color>
-    <color name="colorPrimaryLight">#C5CAE9</color>
-    <color name="colorAccent">#F44336</color>
 
-    <color name="accent">#3e82f7</color>
+    <color name="colorPrimaryLight">#C5CAE9</color>
     <color name="buttonBlue">#03a9f4</color>
     <color name="buttonOrange">#FFA000</color>
-
-
     <color name="colorWhite">#ffffff</color>
     <color name="colorFulltrans">#00000000</color>
     <color name="colorPenDefault">#200bb2</color>
@@ -17,10 +11,17 @@
     <color name="colorGerytrans">#CC212121</color>
 
     <color name="clear">#BBDEFB</color>
-
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#727272</color>
     <color name="background_sliders">#01579b</color>
     <color name="background_sliders2">#7a94af</color>
+
+
+    <color name="primaryColor">#3e82f7</color>
+    <color name="primaryDarkColor">#0041D5</color>
+    <color name="secondaryColor">#d32f2f</color>
+    <color name="secondaryDarkColor">#9a0007</color>
+    <color name="primaryTextColor">#ffffff</color>
+    <color name="secondaryTextColor">#ffffff</color>
 
 </resources>

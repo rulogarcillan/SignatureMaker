@@ -1,4 +1,4 @@
-package com.signaturemaker.app.application.activities;/*
+package com.signaturemaker.app.application.features.setting;/*
  __ _                   _                                 _
 / _(_) __ _ _ __   __ _| |_ _   _ _ __ ___    /\/\   __ _| | _____ _ __
 \ \| |/ _` | '_ \ / _` | __| | | | '__/ _ \  /    \ / _` | |/ / _ \ '__|
@@ -43,9 +43,9 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 import com.signaturemaker.app.R;
 import com.signaturemaker.app.application.utils.Constants;
-import com.signaturemaker.app.application.utils.FilesUtils;
-import com.signaturemaker.app.application.utils.PermissionsUtils;
-import com.signaturemaker.app.application.utils.Utils;
+import com.signaturemaker.app.application.core.platform.FilesUtils;
+import com.signaturemaker.app.application.core.platform.PermissionsUtils;
+import com.signaturemaker.app.application.core.extensions.Utils;
 import src.chooser.ChooseFolder;
 
 /**
