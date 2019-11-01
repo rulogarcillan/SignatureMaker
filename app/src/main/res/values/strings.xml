@@ -75,5 +75,8 @@
     <string name="tittle_name_of_the_file">Name of the file</string>
     <string name="banner_ad_unit_id" translatable="false">ca-app-pub-9438738341601496/1496642762</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>

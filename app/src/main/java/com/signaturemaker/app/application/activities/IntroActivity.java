@@ -20,7 +20,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
-package com.signaturemaker.app.activities;
+package com.signaturemaker.app.application.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,8 +28,8 @@ import android.os.Bundle;
 import com.github.paolorotolo.appintro.AppIntro2;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 import com.signaturemaker.app.R;
-import com.signaturemaker.app.utils.Constants;
-import com.signaturemaker.app.utils.Utils;
+import com.signaturemaker.app.application.utils.Constants;
+import com.signaturemaker.app.application.utils.Utils;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;

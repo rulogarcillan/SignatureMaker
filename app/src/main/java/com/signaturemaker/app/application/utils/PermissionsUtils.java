@@ -20,8 +20,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
-package com.signaturemaker.app.utils;
-
+package com.signaturemaker.app.application.utils;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -30,15 +29,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.view.ViewGroup;
-
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.multi.BaseMultiplePermissionsListener;
 import com.karumi.dexter.listener.multi.CompositeMultiplePermissionsListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.karumi.dexter.listener.multi.SnackbarOnAnyDeniedMultiplePermissionsListener;
@@ -47,29 +45,17 @@ import com.karumi.dexter.listener.single.CompositePermissionListener;
 import com.karumi.dexter.listener.single.PermissionListener;
 import com.karumi.dexter.listener.single.SnackbarOnDeniedPermissionListener;
 import com.signaturemaker.app.R;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
-
 
 public class PermissionsUtils {
 
-    public static final List<String> permissionsReadWrite = Arrays.asList(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    public static final List<String> permissionsReadWrite = Arrays
+            .asList(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
     private static PermissionsUtils INSTANCE = null;
-
-    private PermissionsUtils() {
-    }
-
-    private synchronized static void createInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new PermissionsUtils();
-        }
-    }
 
     public static PermissionsUtils getInstance() {
         if (INSTANCE == null) {
@@ -79,59 +65,62 @@ public class PermissionsUtils {
     }
 
     /**
+     * @return Is permission acepted
+     */
+    public static boolean hasPermissionWriteRead(Context mContext) {
+        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            return false;
+        }
+        return true;
+    }
+
+    private PermissionsUtils() {
+    }
+
+    /**
      * Request permission for write external storage without listener
-     *
-     * @param mActivity
      */
     public void callRequestPermissionWrite(final Activity mActivity) {
         callRequestPermissionWrite(mActivity, new BasePermissionListener());
     }
 
     /**
-     * Request permission for multiple permission without listener
-     *
-     * @param mActivity
-     */
-  /*  public void callRequestPermissions(final Activity mActivity, Collection<String> permissions) {
-        callRequestPermissions(mActivity, permissions, new BaseMultiplePermissionsListener());
-    }
-*/
-    /**
      * Request permission for write
-     *
-     * @param mActivity
-     * @param myPermissionListener
      */
     public void callRequestPermissionWrite(final Activity mActivity, final PermissionListener myPermissionListener) {
 
         //This listener only call when permission is denied
         PermissionListener snackbarPermissionListener = SnackbarOnDeniedPermissionListener.Builder.
-                with((ViewGroup) mActivity.getWindow().getDecorView().getRootView(), R.string.body_permissions)
+                with(mActivity.getWindow().getDecorView().getRootView(), R.string.body_permissions)
                 .withOpenSettingsButton(R.string.title_setting)
                 .build();
 
         //listener of actions
         PermissionListener permissionListener = new PermissionListener() {
             @Override
-            public void onPermissionGranted(PermissionGrantedResponse response) {
-                myPermissionListener.onPermissionGranted(response);
-            }
-
-            @Override
             public void onPermissionDenied(PermissionDeniedResponse response) {
                 myPermissionListener.onPermissionDenied(response);
             }
 
             @Override
+            public void onPermissionGranted(PermissionGrantedResponse response) {
+                myPermissionListener.onPermissionGranted(response);
+            }
+
+            @Override
             public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-               // shoDialogInformation(token, mActivity);
+                // shoDialogInformation(token, mActivity);
                 token.continuePermissionRequest();
                 myPermissionListener.onPermissionRationaleShouldBeShown(permission, token);
             }
         };
 
         //create compositer with all listener
-        PermissionListener compositePermissionListener = new CompositePermissionListener(snackbarPermissionListener, permissionListener);
+        PermissionListener compositePermissionListener = new CompositePermissionListener(snackbarPermissionListener,
+                permissionListener);
 
         Dexter.withActivity(mActivity)
                 .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -140,33 +129,34 @@ public class PermissionsUtils {
 
     /**
      * For multiple permissions
-     * @param mActivity
-     * @param permissions
-     * @param myPermissionListener
      */
-    public void callRequestPermissions(final Activity mActivity, Collection<String> permissions, final MultiplePermissionsListener myPermissionListener) {
+    public void callRequestPermissions(final Activity mActivity, Collection<String> permissions,
+            final MultiplePermissionsListener myPermissionListener) {
 
         //This listener only call when permission is denied
-        MultiplePermissionsListener snackbarPermissionListener = SnackbarOnAnyDeniedMultiplePermissionsListener.Builder.
-                with((ViewGroup) mActivity.getWindow().getDecorView().getRootView(), R.string.body_permissions)
+        MultiplePermissionsListener snackbarPermissionListener
+                = SnackbarOnAnyDeniedMultiplePermissionsListener.Builder.
+                with(mActivity.getWindow().getDecorView().getRootView(), R.string.body_permissions)
                 .withOpenSettingsButton(R.string.title_setting)
                 .build();
 
         //listener of actions
         MultiplePermissionsListener permissionListener = new MultiplePermissionsListener() {
             @Override
+            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions,
+                    PermissionToken token) {
+                myPermissionListener.onPermissionRationaleShouldBeShown(permissions, token);
+            }
+
+            @Override
             public void onPermissionsChecked(MultiplePermissionsReport report) {
                 if (report.areAllPermissionsGranted()) {
                     myPermissionListener.onPermissionsChecked(report);
                 }
             }
-
-            @Override
-            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
-                myPermissionListener.onPermissionRationaleShouldBeShown(permissions, token);
-            }
         };
-        MultiplePermissionsListener compositePermissionsListener = new CompositeMultiplePermissionsListener(snackbarPermissionListener, permissionListener);
+        MultiplePermissionsListener compositePermissionsListener = new CompositeMultiplePermissionsListener(
+                snackbarPermissionListener, permissionListener);
         Dexter.withActivity(mActivity)
                 .withPermissions(permissions)
                 .withListener(compositePermissionsListener).onSameThread().check();
@@ -175,9 +165,6 @@ public class PermissionsUtils {
 
     /**
      * Show a dialog with informations of permission
-     *
-     * @param token
-     * @param mActivity
      */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     private void shoDialogInformation(final PermissionToken token, Activity mActivity) {
@@ -206,15 +193,9 @@ public class PermissionsUtils {
                 .show();
     }
 
-
-    /**
-     * @param mContext
-     * @return Is permission acepted
-     */
-    public static boolean hasPermissionWriteRead(Context mContext) {
-        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            return false;
+    private synchronized static void createInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new PermissionsUtils();
         }
-        return true;
     }
 }

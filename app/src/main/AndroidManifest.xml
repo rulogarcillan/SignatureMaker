@@ -31,7 +31,7 @@
         </provider>
 
         <activity
-            android:name=".activities.IntroActivity"
+            android:name="com.signaturemaker.app.application.activities.IntroActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -41,11 +41,11 @@
         </activity>
 
         <activity
-            android:name=".activities.SettingsActivity"
+            android:name="com.signaturemaker.app.application.activities.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:theme="@style/AppThemePrefs"></activity>
         <activity
-            android:name=".activities.MainActivity"
+            android:name="com.signaturemaker.app.application.activities.MainActivity"
             android:label="@string/title_appName"
             android:theme="@style/AppTheme"></activity>
 

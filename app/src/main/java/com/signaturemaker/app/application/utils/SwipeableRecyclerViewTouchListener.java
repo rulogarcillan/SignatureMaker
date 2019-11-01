@@ -1,4 +1,4 @@
-package com.signaturemaker.app.utils;
+package com.signaturemaker.app.application.utils;
 /*
  * Copyright 2013 Google Inc.
  * Copyright 2015 Bruno Romeu Nunes
@@ -63,31 +63,97 @@ import androidx.recyclerview.widget.RecyclerView;
  * android.view.ViewPropertyAnimator}.</p>
  */
 public class SwipeableRecyclerViewTouchListener implements RecyclerView.OnItemTouchListener {
-    // Cached ViewConfiguration and system-wide constant values
-    private int mSlop;
-    private int mMinFlingVelocity;
-    private int mMaxFlingVelocity;
+
+    class PendingDismissData implements Comparable<PendingDismissData> {
+
+        public int position;
+
+        public View view;
+
+        public PendingDismissData(int position, View view) {
+            this.position = position;
+            this.view = view;
+        }
+
+        @Override
+        public int compareTo(@NonNull PendingDismissData other) {
+            // Sort by descending position
+            return other.position - position;
+        }
+    }
+
+    /**
+     * The callback interface used by {@link SwipeableRecyclerViewTouchListener} to inform its client
+     * about a swipe of one or more list item_explore_l positions.
+     */
+    public interface SwipeListener {
+
+        /**
+         * Called to determine whether the given position can be swiped.
+         */
+        boolean canSwipe(int position);
+
+        /**
+         * Called when the item_explore_l has been dismissed by swiping to the left.
+         *
+         * @param recyclerView           The originating {@link android.support.v7.widget.RecyclerView}.
+         * @param reverseSortedPositions An array of positions to dismiss, sorted in descending
+         *                               order for convenience.
+         */
+        void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions);
+
+        /**
+         * Called when the item_explore_l has been dismissed by swiping to the right.
+         *
+         * @param recyclerView           The originating {@link android.support.v7.widget.RecyclerView}.
+         * @param reverseSortedPositions An array of positions to dismiss, sorted in descending
+         *                               order for convenience.
+         */
+        void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions);
+    }
+
+    private float mAlpha;
+
+    private int mAnimatingPosition = ListView.INVALID_POSITION;
+
     private long mAnimationTime;
 
-    // Fixed properties
-    private RecyclerView mRecyclerView;
-    private SwipeListener mSwipeListener;
-    private int mViewWidth = 1; // 1 and not 0 to prevent dividing by zero
+    private int mDismissAnimationRefCount = 0;
+
+    private int mDownPosition;
+
+    private View mDownView;
+
+    private float mDownX;
+
+    private float mDownY;
+
+    private float mFinalDelta;
+
+    private int mMaxFlingVelocity;
+
+    private int mMinFlingVelocity;
+
+    private boolean mPaused;
 
     // Transient properties
     private List<PendingDismissData> mPendingDismisses = new ArrayList<>();
-    private int mDismissAnimationRefCount = 0;
-    private float mAlpha;
-    private float mDownX;
-    private float mDownY;
+
+    // Fixed properties
+    private RecyclerView mRecyclerView;
+
+    // Cached ViewConfiguration and system-wide constant values
+    private int mSlop;
+
+    private SwipeListener mSwipeListener;
+
     private boolean mSwiping;
+
     private int mSwipingSlop;
+
     private VelocityTracker mVelocityTracker;
-    private int mDownPosition;
-    private int mAnimatingPosition = ListView.INVALID_POSITION;
-    private View mDownView;
-    private boolean mPaused;
-    private float mFinalDelta;
+
+    private int mViewWidth = 1; // 1 and not 0 to prevent dividing by zero
 
     /**
      * Constructs a new swipe touch listener for the given {@link android.support.v7.widget.RecyclerView}
@@ -104,7 +170,6 @@ public class SwipeableRecyclerViewTouchListener implements RecyclerView.OnItemTo
                 android.R.integer.config_shortAnimTime);
         mRecyclerView = recyclerView;
         mSwipeListener = listener;
-
 
         /**
          * This will ensure that this SwipeableRecyclerViewTouchListener is paused during list view scrolling.
@@ -123,6 +188,21 @@ public class SwipeableRecyclerViewTouchListener implements RecyclerView.OnItemTo
         });
     }
 
+    @Override
+    public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent motionEvent) {
+        return handleTouchEvent(motionEvent);
+    }
+
+    @Override
+    public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+    }
+
+    @Override
+    public void onTouchEvent(RecyclerView rv, MotionEvent motionEvent) {
+        handleTouchEvent(motionEvent);
+    }
+
     /**
      * Enables or disables (pauses or resumes) watching for swipe-to-dismiss gestures.
      *
@@ -131,22 +211,6 @@ public class SwipeableRecyclerViewTouchListener implements RecyclerView.OnItemTo
     public void setEnabled(boolean enabled) {
         mPaused = !enabled;
     }
-
-    @Override
-    public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent motionEvent) {
-        return handleTouchEvent(motionEvent);
-    }
-
-    @Override
-    public void onTouchEvent(RecyclerView rv, MotionEvent motionEvent) {
-        handleTouchEvent(motionEvent);
-    }
-
-    @Override
-    public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-    }
-
 
     private boolean handleTouchEvent(MotionEvent motionEvent) {
         if (mViewWidth < 2) {
@@ -370,50 +434,5 @@ public class SwipeableRecyclerViewTouchListener implements RecyclerView.OnItemTo
 
         mPendingDismisses.add(new PendingDismissData(dismissPosition, dismissView));
         animator.start();
-    }
-
-    /**
-     * The callback interface used by {@link SwipeableRecyclerViewTouchListener} to inform its client
-     * about a swipe of one or more list item_explore_l positions.
-     */
-    public interface SwipeListener {
-        /**
-         * Called to determine whether the given position can be swiped.
-         */
-        boolean canSwipe(int position);
-
-        /**
-         * Called when the item_explore_l has been dismissed by swiping to the left.
-         *
-         * @param recyclerView           The originating {@link android.support.v7.widget.RecyclerView}.
-         * @param reverseSortedPositions An array of positions to dismiss, sorted in descending
-         *                               order for convenience.
-         */
-        void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions);
-
-        /**
-         * Called when the item_explore_l has been dismissed by swiping to the right.
-         *
-         * @param recyclerView           The originating {@link android.support.v7.widget.RecyclerView}.
-         * @param reverseSortedPositions An array of positions to dismiss, sorted in descending
-         *                               order for convenience.
-         */
-        void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions);
-    }
-
-    class PendingDismissData implements Comparable<PendingDismissData> {
-        public int position;
-        public View view;
-
-        public PendingDismissData(int position, View view) {
-            this.position = position;
-            this.view = view;
-        }
-
-        @Override
-        public int compareTo(@NonNull PendingDismissData other) {
-            // Sort by descending position
-            return other.position - position;
-        }
     }
 }

@@ -20,8 +20,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
-package com.signaturemaker.app.adapters;
-
+package com.signaturemaker.app.application.adapters;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,8 +29,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.signaturemaker.app.R;
-import com.signaturemaker.app.models.ItemFile;
-import com.signaturemaker.app.utils.Utils;
+import com.signaturemaker.app.domain.models.ItemFile;
+import com.signaturemaker.app.application.utils.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -42,36 +41,10 @@ import co.dift.ui.SwipeToAction;
 
 public class AdapterFiles extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<ItemFile> items = new ArrayList<>();
-    private Activity activity;
-
-
-    public AdapterFiles(Activity activity, List<ItemFile> items, int viewType) {
-
-        this.items = items;
-        this.activity = activity;
-
-
-    }
-
-
-    public List<ItemFile> getItems() {
-        return items;
-    }
-
-    public void setItems(List<ItemFile> items) {
-        this.items = items;
-    }
-
-
-    @Override
-    public int getItemCount() {
-        return items.size();
-    }
-
-
     public class ViewHolder extends SwipeToAction.ViewHolder<ItemFile> {
+
         ImageView iconFile;
+
         TextView textName, textDate, textTam;
 
         public ViewHolder(View container) {
@@ -83,12 +56,30 @@ public class AdapterFiles extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
+    private Activity activity;
+
+    private List<ItemFile> items = new ArrayList<>();
+
+
+    public AdapterFiles(Activity activity, List<ItemFile> items, int viewType) {
+
+        this.items = items;
+        this.activity = activity;
+
+
+    }
 
     @Override
-    public AdapterFiles.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_explore, parent, false);
-        ViewHolder vhItem = new ViewHolder(v);
-        return vhItem;
+    public int getItemCount() {
+        return items.size();
+    }
+
+    public List<ItemFile> getItems() {
+        return items;
+    }
+
+    public void setItems(List<ItemFile> items) {
+        this.items = items;
     }
 
     @Override
@@ -101,16 +92,25 @@ public class AdapterFiles extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         vh.textDate.setText(items.get(i).getDate());
         vh.textTam.setText(items.get(i).getSize());
         if (items.get(i).getName().endsWith("png") || items.get(i).getName().endsWith("PNG")) {
-            Picasso.get().load("file:///" + Utils.path + "/" + items.get(i).getName()).placeholder(R.drawable.ic_png_icon)
+            Picasso.get().load("file:///" + Utils.path + "/" + items.get(i).getName())
+                    .placeholder(R.drawable.ic_png_icon)
                     .error(R.drawable.ic_png_icon).into(vh.iconFile);
         }
         if (items.get(i).getName().endsWith("svg") || items.get(i).getName().endsWith("SVG")) {
-            Picasso.get().load("file:///" + Utils.path + "/" + items.get(i).getName()).placeholder(R.drawable.ic_svg_icon)
+            Picasso.get().load("file:///" + Utils.path + "/" + items.get(i).getName())
+                    .placeholder(R.drawable.ic_svg_icon)
                     .error(R.drawable.ic_svg_icon).into(vh.iconFile);
         }
 
         vh.data = item;
 
+    }
+
+    @Override
+    public AdapterFiles.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_explore, parent, false);
+        ViewHolder vhItem = new ViewHolder(v);
+        return vhItem;
     }
 
 }

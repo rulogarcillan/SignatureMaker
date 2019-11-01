@@ -20,7 +20,9 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
-package com.signaturemaker.app.fragments;
+package com.signaturemaker.app.application.fragments;
+
+import static com.signaturemaker.app.application.utils.Utils.showToast;
 
 import android.animation.Animator;
 import android.annotation.TargetApi;
@@ -37,103 +39,109 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-
+import androidx.appcompat.app.AlertDialog;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import com.appyvet.materialrangebar.RangeBar;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.github.gcacace.signaturepad.views.SignaturePad;
-import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.karumi.dexter.listener.single.PermissionListener;
 import com.larswerkman.holocolorpicker.ColorPicker;
 import com.larswerkman.holocolorpicker.SVBar;
 import com.signaturemaker.app.R;
-import com.signaturemaker.app.interfaces.ClickInterface;
-import com.signaturemaker.app.utils.FilesUtils;
-import com.signaturemaker.app.utils.PermissionsUtils;
-import com.signaturemaker.app.utils.Utils;
-
+import com.signaturemaker.app.application.interfaces.ClickInterface;
+import com.signaturemaker.app.application.utils.FilesUtils;
+import com.signaturemaker.app.application.utils.PermissionsUtils;
+import com.signaturemaker.app.application.utils.Utils;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.List;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
-import static com.signaturemaker.app.utils.Utils.showToast;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class SingBoardFragment extends Fragment implements View.OnClickListener, View.OnLongClickListener {
 
-    //@BindView(R.id.singBoard)
-    private SignaturePad mSingBoard;
+    private interface TextDialog {
 
-    //@BindView(R.id.FabLeft)
-    private FloatingActionsMenu fabLeft;
-    //@BindView(R.id.FabUp)
-    private FloatingActionsMenu fabUp;
+        public void onGetTextDialog(String name);
+    }
+
+    //@BindView(R.id.bColor)
+    private FloatingActionButton bColor;
+
+    //@BindView(R.id.bList)
+    private FloatingActionButton bList;
+
+    //@BindView(R.id.bRubber)
+    private FloatingActionButton bRubber;
 
     //@BindView(R.id.bSave)
     private FloatingActionButton bSave;
-    //@BindView(R.id.bList)
-    private FloatingActionButton bList;
+
     //@BindView(R.id.bSaveSend)
     private FloatingActionButton bSaveSend;
-    //@BindView(R.id.bColor)
-    private FloatingActionButton bColor;
+
     //@BindView(R.id.bStroke)
     private FloatingActionButton bStroke;
-    //@BindView(R.id.bRubber)
-    private FloatingActionButton bRubber;
 
     //@BindView(R.id.bWallpaper)
     private FloatingActionButton bWallpaper;
 
+    private ClickInterface clickInterface;
+
+    //@BindView(R.id.coloPickerLayout)
+    private LinearLayout coloPickerLayout;
+
+    //@BindView(R.id.FabLeft)
+    private FloatingActionsMenu fabLeft;
+
+    //@BindView(R.id.FabUp)
+    private FloatingActionsMenu fabUp;
+
     //@BindView(R.id.layoutWallapaper)
     private ConstraintLayout layoutWallapaper;
 
+    //@BindView(R.id.singBoard)
+    private SignaturePad mSingBoard;
 
-    private View rootView;
-    private YoYo.YoYoString runningAnimationSeek;
-    private YoYo.YoYoString runningAnimationColor;
-    private YoYo.YoYoString runningAnimation;
+    //@BindView(R.id.picker)
+    private ColorPicker picker;
 
-    //@BindView(R.id.txtSingHere)
-    private TextView txtSingHere;
     //@BindView(R.id.rangeBar)
     private RangeBar rangeBar;
 
     //@BindView(R.id.rangeSeekBarLayout)
     private LinearLayout rangeSeekBarLayout;
 
-    //@BindView(R.id.coloPickerLayout)
-    private LinearLayout coloPickerLayout;
+    private View rootView;
 
-    //@BindView(R.id.picker)
-    private ColorPicker picker;
+    private YoYo.YoYoString runningAnimation;
+
+    private YoYo.YoYoString runningAnimationColor;
+
+    private YoYo.YoYoString runningAnimationSeek;
+
     //@BindView(R.id.svbar)
     private SVBar svbar;
 
-    private ClickInterface clickInterface;
-
+    //@BindView(R.id.txtSingHere)
+    private TextView txtSingHere;
 
     public SingBoardFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.sing_board_fragment, container, false);
         //ButterKnife.bind(this, rootView);
@@ -168,7 +176,6 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
         bRubber.setOnClickListener(this);
         bWallpaper.setOnClickListener(this);
 
-
         bSave.setOnLongClickListener(this);
         bSaveSend.setOnLongClickListener(this);
         bColor.setOnLongClickListener(this);
@@ -181,13 +188,13 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
         //listener floating actions buttons
         fabUp.setOnFloatingActionsMenuUpdateListener(new FloatingActionsMenu.OnFloatingActionsMenuUpdateListener() {
             @Override
-            public void onMenuExpanded() {
-                expandFabs();
+            public void onMenuCollapsed() {
+                collapseFabs();
             }
 
             @Override
-            public void onMenuCollapsed() {
-                collapseFabs();
+            public void onMenuExpanded() {
+                expandFabs();
             }
         });
 
@@ -195,10 +202,8 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
         mSingBoard.setOnSignedListener(new SignaturePad.OnSignedListener() {
 
             @Override
-            public void onStartSigning() {
-                goneTxtSingHere();
-                hideColorPicker();
-                hideSeekbarStroke();
+            public void onClear() {
+                visibleTxtSingHere();
             }
 
             @Override
@@ -207,8 +212,10 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
             }
 
             @Override
-            public void onClear() {
-                visibleTxtSingHere();
+            public void onStartSigning() {
+                goneTxtSingHere();
+                hideColorPicker();
+                hideSeekbarStroke();
             }
         });
 
@@ -216,7 +223,7 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
         rangeBar.setOnRangeBarChangeListener(new RangeBar.OnRangeBarChangeListener() {
             @Override
             public void onRangeChangeListener(RangeBar rangeBar, int leftPinIndex,
-                                              int rightPinIndex, String leftPinValue, String rightPinValue) {
+                    int rightPinIndex, String leftPinValue, String rightPinValue) {
                 Utils.minStroke = leftPinIndex;
                 Utils.maxStroke = rightPinIndex;
                 mSingBoard.setMinWidth(Utils.minStroke);
@@ -237,7 +244,6 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
             }
         });
 
-
         return rootView;
     }
 
@@ -250,451 +256,7 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
     }
 
     /**
-     * Method for set color in picker color selector
-     */
-    private void setColor() {
-        picker.setColor(Utils.penColor);
-        picker.setOldCenterColor(Utils.penColor);
-        bColor.setColorNormal(Utils.penColor);
-        mSingBoard.setPenColor(Utils.penColor);
-    }
-
-    /**
-     * Method for set the seekbar
-     */
-    private void setSeekBarRange() {
-        rangeBar.setRangePinsByValue(Utils.minStroke, Utils.maxStroke);
-        mSingBoard.setMinWidth(Utils.minStroke);
-        mSingBoard.setMaxWidth(Utils.maxStroke);
-    }
-
-
-    /**
-     * Show popup menu with save options
-     */
-    private void savePopUpOptions() {
-        PopupMenu popupMenu = new PopupMenu(getContext(), bSave);
-        popupMenu.getMenuInflater().inflate(R.menu.save_menu, popupMenu.getMenu());
-
-        try {
-            Field field = popupMenu.getClass().getDeclaredField("mPopup");
-            field.setAccessible(true);
-            Object menuPopupHelper = field.get(popupMenu);
-            Class<?> cls = Class.forName("com.android.internal.view.menu.MenuPopupHelper");
-            Method method = cls.getDeclaredMethod("setForceShowIcon", new Class[]{boolean.class});
-            method.setAccessible(true);
-            method.invoke(menuPopupHelper, new Object[]{true});
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(final MenuItem menuItem) {
-
-                PermissionsUtils.getInstance().callRequestPermissionWrite(getActivity(), new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted(PermissionGrantedResponse response) {
-                        saveFileAndSend(menuItem.getItemId(), false);
-                    }
-
-                    @Override
-                    public void onPermissionDenied(PermissionDeniedResponse response) {
-                    }
-
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                    }
-                });
-                return false;
-            }
-        });
-
-        popupMenu.show();
-    }
-
-
-    /**
-     * Show popup menu with share options
-     */
-    private void sharePopUpOptions() {
-        PopupMenu popupMenu = new PopupMenu(getContext(), bSave);
-        popupMenu.getMenuInflater().inflate(R.menu.share_menu, popupMenu.getMenu());
-
-        try {
-            Field field = popupMenu.getClass().getDeclaredField("mPopup");
-            field.setAccessible(true);
-            Object menuPopupHelper = field.get(popupMenu);
-            Class<?> cls = Class.forName("com.android.internal.view.menu.MenuPopupHelper");
-            Method method = cls.getDeclaredMethod("setForceShowIcon", new Class[]{boolean.class});
-            method.setAccessible(true);
-            method.invoke(menuPopupHelper, new Object[]{true});
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(final MenuItem menuItem) {
-                PermissionsUtils.getInstance().callRequestPermissionWrite(getActivity(), new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted(PermissionGrantedResponse response) {
-                        saveFileAndSend(menuItem.getItemId(), true);
-                    }
-
-                    @Override
-                    public void onPermissionDenied(PermissionDeniedResponse response) {
-
-                    }
-
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-
-                    }
-
-                });
-                return false;
-            }
-        });
-
-        popupMenu.show();
-    }
-
-
-    /**
-     * Method for clear board sign
-     */
-    private void cleanBoard() {
-
-
-        YoYo.AnimationComposer animation = YoYo.with(Techniques.TakingOff)
-                .duration(400).withListener(new Animator.AnimatorListener() {
-                    @Override
-                    public void onAnimationStart(Animator animation) {
-                        collapseFabs();
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-
-                        mSingBoard.clear();
-                        mSingBoard.setAlpha(1);
-                        mSingBoard.setScaleX(1);
-                        mSingBoard.setScaleY(1);
-                        mSingBoard.setTranslationX(0);
-                        mSingBoard.setTranslationY(0);
-                        mSingBoard.setRotation(0);
-                        mSingBoard.setRotationY(0);
-                        mSingBoard.setRotationX(0);
-                    }
-
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animator animation) {
-
-                    }
-                });
-        if (runningAnimation == null || !runningAnimation.isRunning()) {
-            runningAnimation = animation.playOn(mSingBoard);
-        }
-    }
-
-    /**
-     * Method for collapse the fabs buttons
-     */
-    private void collapseFabs() {
-        fabUp.collapse();
-        fabLeft.collapse();
-        hideSeekbarStroke();
-        hideColorPicker();
-    }
-
-    /**
-     * Method for expand the fabs buttons
-     */
-    private void expandFabs() {
-        fabUp.expand();
-        fabLeft.expand();
-    }
-
-    /**
-     * Method for change the visibility of textview to gone
-     */
-    private void goneTxtSingHere() {
-        txtSingHere.setVisibility(View.GONE);
-    }
-
-    /**
-     * Method for change the visibility of textview to visible
-     */
-    private void visibleTxtSingHere() {
-        txtSingHere.setVisibility(View.VISIBLE);
-    }
-
-
-    /**
-     * Method for hide seekbar stroke
-     */
-    private void hideSeekbarStroke() {
-        YoYo.AnimationComposer animation = YoYo.with(Techniques.TakingOff)
-                .duration(400).withListener(new Animator.AnimatorListener() {
-                    @Override
-                    public void onAnimationStart(Animator animation) {
-                        // collapseFabs();
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        rangeSeekBarLayout.setVisibility(View.INVISIBLE);
-                    }
-
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animator animation) {
-                    }
-                });
-        if (runningAnimationSeek == null || !runningAnimationSeek.isRunning()) {
-            runningAnimationSeek = animation.playOn(rangeSeekBarLayout);
-        }
-    }
-
-    /**
-     * Method for show seekbar stroke
-     */
-    private void showSeekbarStroke() {
-        if (rangeSeekBarLayout.getVisibility() == View.VISIBLE) {
-            hideSeekbarStroke();
-        } else {
-
-            YoYo.AnimationComposer animation = YoYo.with(Techniques.DropOut)
-                    .duration(700).withListener(new Animator.AnimatorListener() {
-                        @Override
-                        public void onAnimationStart(Animator animation) {
-                            rangeSeekBarLayout.setVisibility(View.VISIBLE);
-                            hideColorPicker();
-                        }
-
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-
-                        }
-
-                        @Override
-                        public void onAnimationCancel(Animator animation) {
-                        }
-
-                        @Override
-                        public void onAnimationRepeat(Animator animation) {
-                        }
-                    });
-            if ((runningAnimationSeek == null || !runningAnimationSeek.isRunning()) && (runningAnimationColor == null || !runningAnimationColor.isRunning())) {
-
-                runningAnimationSeek = animation.playOn(rangeSeekBarLayout);
-            }
-        }
-    }
-
-
-    /**
-     * Method for hide color picker
-     */
-    private void hideColorPicker() {
-        YoYo.AnimationComposer animation = YoYo.with(Techniques.TakingOff)
-                .duration(400).withListener(new Animator.AnimatorListener() {
-                    @Override
-                    public void onAnimationStart(Animator animation) {
-                        // collapseFabs();
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        coloPickerLayout.setVisibility(View.INVISIBLE);
-                    }
-
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animator animation) {
-                    }
-                });
-        if (runningAnimationColor == null || !runningAnimationColor.isRunning()) {
-            runningAnimationColor = animation.playOn(coloPickerLayout);
-        }
-    }
-
-    /**
-     * Method for show color picker
-     */
-    private void showColorPicker() {
-        if (coloPickerLayout.getVisibility() == View.VISIBLE) {
-            hideColorPicker();
-        } else {
-            YoYo.AnimationComposer animation = YoYo.with(Techniques.DropOut)
-                    .duration(700).withListener(new Animator.AnimatorListener() {
-                        @Override
-                        public void onAnimationStart(Animator animation) {
-                            coloPickerLayout.setVisibility(View.VISIBLE);
-                            hideSeekbarStroke();
-                        }
-
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-
-                        }
-
-                        @Override
-                        public void onAnimationCancel(Animator animation) {
-                        }
-
-                        @Override
-                        public void onAnimationRepeat(Animator animation) {
-                        }
-                    });
-            if ((runningAnimationSeek == null || !runningAnimationSeek.isRunning()) && (runningAnimationColor == null || !runningAnimationColor.isRunning())) {
-                runningAnimationColor = animation.playOn(coloPickerLayout);
-
-            }
-        }
-    }
-
-
-    private void openListFilesFragment() {
-
-        PermissionsUtils.getInstance().callRequestPermissionWrite(getActivity(), new PermissionListener() {
-            @Override
-            public void onPermissionGranted(PermissionGrantedResponse response) {
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.container, new ListFilesFragment());
-                ft.addToBackStack(SingBoardFragment.class.getSimpleName());
-                ft.commit();
-            }
-
-            @Override
-            public void onPermissionDenied(PermissionDeniedResponse response) {
-            }
-
-            @Override
-            public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-            }
-        });
-
-    }
-
-
-    private void saveFileAndSend(final int idMenu, final Boolean share) {
-        if (Utils.nameSave) {
-            selectName(new TextDialog() {
-                Boolean statusParticular = false;
-
-                @Override
-                public void onGetTextDialog(String theName) {
-                    String name = "";
-                    if (idMenu == R.id.savePngTrans) {
-                        name = FilesUtils.addExtensionNamePng(theName);
-                        statusParticular = FilesUtils.saveBitmapFile(mSingBoard.getTransparentSignatureBitmap(true), name);
-
-                    } else if (idMenu == R.id.savePngWhite) {
-                        name = FilesUtils.addExtensionNamePng(theName);
-                        statusParticular = FilesUtils.saveBitmapFile(mSingBoard.getSignatureBitmap(), name);
-
-                    } else if (idMenu == R.id.saveSvg) {
-                        name = FilesUtils.addExtensionNameSvg(theName);
-                        statusParticular = FilesUtils.saveSvgFile(mSingBoard.getSignatureSvg(), name);
-
-                    }
-                    if (statusParticular) {
-                        if (share) {
-                            Utils.shareSign(getActivity(), name);
-                        }
-                        showToast(getActivity(), getResources().getString(R.string.title_save_ok));
-                        getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(Utils.path + name))));
-                        clickInterface.buttonClicked();
-                    } else {
-                        showToast(getActivity(), getResources().getString(R.string.title_save_ko));
-                    }
-                }
-            });
-        } else {
-            Boolean status = false;
-            String name = "";
-            if (idMenu == R.id.savePngTrans) {
-                name = FilesUtils.addExtensionNamePng(FilesUtils.generateName());
-                status = FilesUtils.saveBitmapFile(mSingBoard.getTransparentSignatureBitmap(true), name);
-
-            } else if (idMenu == R.id.savePngWhite) {
-                name = FilesUtils.addExtensionNamePng(FilesUtils.generateName());
-                status = FilesUtils.saveBitmapFile(mSingBoard.getSignatureBitmap(), name);
-
-            } else if (idMenu == R.id.saveSvg) {
-                name = FilesUtils.addExtensionNameSvg(FilesUtils.generateName());
-                status = FilesUtils.saveSvgFile(mSingBoard.getSignatureSvg(), name);
-
-            }
-            if (status) {
-                if (share) {
-                    Utils.shareSign(getActivity(), name);
-                }
-                showToast(getActivity(), getResources().getString(R.string.title_save_ok));
-                getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(Utils.path + name))));
-                clickInterface.buttonClicked();
-            } else {
-                showToast(getActivity(), getResources().getString(R.string.title_save_ko));
-            }
-        }
-    }
-
-
-    private void selectName(final TextDialog callBack) {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-        alertDialog.setTitle(R.string.tittle_name_of_the_file);
-        View view = getActivity().getLayoutInflater().inflate(R.layout.name_selector, null);
-
-        final EditText input = view.findViewById(R.id.txtName);
-        alertDialog.setCancelable(false);
-
-        alertDialog.setPositiveButton(android.R.string.ok,
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (input.getText().toString().equalsIgnoreCase("")) {
-                            callBack.onGetTextDialog(FilesUtils.cleanName("no_name"));
-                        } else {
-                            callBack.onGetTextDialog(FilesUtils.cleanName(input.getText().toString()));
-                        }
-                    }
-                });
-
-        alertDialog.setNegativeButton(android.R.string.cancel,
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-
-        alertDialog.setNeutralButton(R.string.tittle_clean, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-                //    input.setText("");
-            }
-        });
-        alertDialog.setView(view);
-        alertDialog.show();
-    }
-
-
-    /**
      * Method for all click buttons
-     *
-     * @param view
-     * @return
      */
     /*@Optional
     @OnClick({R.id.bSave, R.id.bList, R.id.bSaveSend, R.id.bColor, R.id.bStroke, R.id.bRubber})
@@ -754,12 +316,8 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
         }
     }
 
-
     /**
      * Method for all long click buttons
-     *
-     * @param view
-     * @return
      */
 /*    @Optional
     @OnLongClick({R.id.bSave, R.id.bList, R.id.bSaveSend, R.id.bColor, R.id.bStroke, R.id.bRubber})
@@ -821,16 +379,9 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
         return false;
     }
 
-
     public void setInterface(ClickInterface clickInterface) {
         this.clickInterface = clickInterface;
     }
-
-
-    private interface TextDialog {
-        public void onGetTextDialog(String name);
-    }
-
 
     private void changeWallpaper() {
         Utils.wallpaper++;
@@ -839,6 +390,298 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
         }
         Utils.saveAllPreferences(getActivity());
         selectWallpaper();
+    }
+
+    /**
+     * Method for clear board sign
+     */
+    private void cleanBoard() {
+
+        YoYo.AnimationComposer animation = YoYo.with(Techniques.TakingOff)
+                .duration(400).withListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+
+                        mSingBoard.clear();
+                        mSingBoard.setAlpha(1);
+                        mSingBoard.setScaleX(1);
+                        mSingBoard.setScaleY(1);
+                        mSingBoard.setTranslationX(0);
+                        mSingBoard.setTranslationY(0);
+                        mSingBoard.setRotation(0);
+                        mSingBoard.setRotationY(0);
+                        mSingBoard.setRotationX(0);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        collapseFabs();
+                    }
+                });
+        if (runningAnimation == null || !runningAnimation.isRunning()) {
+            runningAnimation = animation.playOn(mSingBoard);
+        }
+    }
+
+    /**
+     * Method for collapse the fabs buttons
+     */
+    private void collapseFabs() {
+        fabUp.collapse();
+        fabLeft.collapse();
+        hideSeekbarStroke();
+        hideColorPicker();
+    }
+
+    /**
+     * Method for expand the fabs buttons
+     */
+    private void expandFabs() {
+        fabUp.expand();
+        fabLeft.expand();
+    }
+
+    /**
+     * Method for change the visibility of textview to gone
+     */
+    private void goneTxtSingHere() {
+        txtSingHere.setVisibility(View.GONE);
+    }
+
+    /**
+     * Method for hide color picker
+     */
+    private void hideColorPicker() {
+        YoYo.AnimationComposer animation = YoYo.with(Techniques.TakingOff)
+                .duration(400).withListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        coloPickerLayout.setVisibility(View.INVISIBLE);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+                    }
+
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        // collapseFabs();
+                    }
+                });
+        if (runningAnimationColor == null || !runningAnimationColor.isRunning()) {
+            runningAnimationColor = animation.playOn(coloPickerLayout);
+        }
+    }
+
+    /**
+     * Method for hide seekbar stroke
+     */
+    private void hideSeekbarStroke() {
+        YoYo.AnimationComposer animation = YoYo.with(Techniques.TakingOff)
+                .duration(400).withListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        rangeSeekBarLayout.setVisibility(View.INVISIBLE);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+                    }
+
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        // collapseFabs();
+                    }
+                });
+        if (runningAnimationSeek == null || !runningAnimationSeek.isRunning()) {
+            runningAnimationSeek = animation.playOn(rangeSeekBarLayout);
+        }
+    }
+
+    private void openListFilesFragment() {
+
+        PermissionsUtils.getInstance().callRequestPermissionWrite(getActivity(), new PermissionListener() {
+            @Override
+            public void onPermissionDenied(PermissionDeniedResponse response) {
+            }
+
+            @Override
+            public void onPermissionGranted(PermissionGrantedResponse response) {
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.container, new ListFilesFragment());
+                ft.addToBackStack(SingBoardFragment.class.getSimpleName());
+                ft.commit();
+            }
+
+            @Override
+            public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+            }
+        });
+
+    }
+
+    private void saveFileAndSend(final int idMenu, final Boolean share) {
+        if (Utils.nameSave) {
+            selectName(new TextDialog() {
+                Boolean statusParticular = false;
+
+                @Override
+                public void onGetTextDialog(String theName) {
+                    String name = "";
+                    if (idMenu == R.id.savePngTrans) {
+                        name = FilesUtils.addExtensionNamePng(theName);
+                        statusParticular = FilesUtils
+                                .saveBitmapFile(mSingBoard.getTransparentSignatureBitmap(true), name);
+
+                    } else if (idMenu == R.id.savePngWhite) {
+                        name = FilesUtils.addExtensionNamePng(theName);
+                        statusParticular = FilesUtils.saveBitmapFile(mSingBoard.getSignatureBitmap(), name);
+
+                    } else if (idMenu == R.id.saveSvg) {
+                        name = FilesUtils.addExtensionNameSvg(theName);
+                        statusParticular = FilesUtils.saveSvgFile(mSingBoard.getSignatureSvg(), name);
+
+                    }
+                    if (statusParticular) {
+                        if (share) {
+                            Utils.shareSign(getActivity(), name);
+                        }
+                        showToast(getActivity(), getResources().getString(R.string.title_save_ok));
+                        getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                                Uri.fromFile(new File(Utils.path + name))));
+                        clickInterface.buttonClicked();
+                    } else {
+                        showToast(getActivity(), getResources().getString(R.string.title_save_ko));
+                    }
+                }
+            });
+        } else {
+            Boolean status = false;
+            String name = "";
+            if (idMenu == R.id.savePngTrans) {
+                name = FilesUtils.addExtensionNamePng(FilesUtils.generateName());
+                status = FilesUtils.saveBitmapFile(mSingBoard.getTransparentSignatureBitmap(true), name);
+
+            } else if (idMenu == R.id.savePngWhite) {
+                name = FilesUtils.addExtensionNamePng(FilesUtils.generateName());
+                status = FilesUtils.saveBitmapFile(mSingBoard.getSignatureBitmap(), name);
+
+            } else if (idMenu == R.id.saveSvg) {
+                name = FilesUtils.addExtensionNameSvg(FilesUtils.generateName());
+                status = FilesUtils.saveSvgFile(mSingBoard.getSignatureSvg(), name);
+
+            }
+            if (status) {
+                if (share) {
+                    Utils.shareSign(getActivity(), name);
+                }
+                showToast(getActivity(), getResources().getString(R.string.title_save_ok));
+                getActivity().sendBroadcast(
+                        new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(Utils.path + name))));
+                clickInterface.buttonClicked();
+            } else {
+                showToast(getActivity(), getResources().getString(R.string.title_save_ko));
+            }
+        }
+    }
+
+    /**
+     * Show popup menu with save options
+     */
+    private void savePopUpOptions() {
+        PopupMenu popupMenu = new PopupMenu(getContext(), bSave);
+        popupMenu.getMenuInflater().inflate(R.menu.save_menu, popupMenu.getMenu());
+
+        try {
+            Field field = popupMenu.getClass().getDeclaredField("mPopup");
+            field.setAccessible(true);
+            Object menuPopupHelper = field.get(popupMenu);
+            Class<?> cls = Class.forName("com.android.internal.view.menu.MenuPopupHelper");
+            Method method = cls.getDeclaredMethod("setForceShowIcon", new Class[]{boolean.class});
+            method.setAccessible(true);
+            method.invoke(menuPopupHelper, new Object[]{true});
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(final MenuItem menuItem) {
+
+                PermissionsUtils.getInstance().callRequestPermissionWrite(getActivity(), new PermissionListener() {
+                    @Override
+                    public void onPermissionDenied(PermissionDeniedResponse response) {
+                    }
+
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse response) {
+                        saveFileAndSend(menuItem.getItemId(), false);
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission,
+                            PermissionToken token) {
+                    }
+                });
+                return false;
+            }
+        });
+
+        popupMenu.show();
+    }
+
+    private void selectName(final TextDialog callBack) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+        alertDialog.setTitle(R.string.tittle_name_of_the_file);
+        View view = getActivity().getLayoutInflater().inflate(R.layout.name_selector, null);
+
+        final EditText input = view.findViewById(R.id.txtName);
+        alertDialog.setCancelable(false);
+
+        alertDialog.setPositiveButton(android.R.string.ok,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (input.getText().toString().equalsIgnoreCase("")) {
+                            callBack.onGetTextDialog(FilesUtils.cleanName("no_name"));
+                        } else {
+                            callBack.onGetTextDialog(FilesUtils.cleanName(input.getText().toString()));
+                        }
+                    }
+                });
+
+        alertDialog.setNegativeButton(android.R.string.cancel,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+        alertDialog.setNeutralButton(R.string.tittle_clean, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                //    input.setText("");
+            }
+        });
+        alertDialog.setView(view);
+        alertDialog.show();
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -873,6 +716,152 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
         }
 
 
+    }
+
+    /**
+     * Method for set color in picker color selector
+     */
+    private void setColor() {
+        picker.setColor(Utils.penColor);
+        picker.setOldCenterColor(Utils.penColor);
+        bColor.setColorNormal(Utils.penColor);
+        mSingBoard.setPenColor(Utils.penColor);
+    }
+
+    /**
+     * Method for set the seekbar
+     */
+    private void setSeekBarRange() {
+        rangeBar.setRangePinsByValue(Utils.minStroke, Utils.maxStroke);
+        mSingBoard.setMinWidth(Utils.minStroke);
+        mSingBoard.setMaxWidth(Utils.maxStroke);
+    }
+
+    /**
+     * Show popup menu with share options
+     */
+    private void sharePopUpOptions() {
+        PopupMenu popupMenu = new PopupMenu(getContext(), bSave);
+        popupMenu.getMenuInflater().inflate(R.menu.share_menu, popupMenu.getMenu());
+
+        try {
+            Field field = popupMenu.getClass().getDeclaredField("mPopup");
+            field.setAccessible(true);
+            Object menuPopupHelper = field.get(popupMenu);
+            Class<?> cls = Class.forName("com.android.internal.view.menu.MenuPopupHelper");
+            Method method = cls.getDeclaredMethod("setForceShowIcon", new Class[]{boolean.class});
+            method.setAccessible(true);
+            method.invoke(menuPopupHelper, new Object[]{true});
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(final MenuItem menuItem) {
+                PermissionsUtils.getInstance().callRequestPermissionWrite(getActivity(), new PermissionListener() {
+                    @Override
+                    public void onPermissionDenied(PermissionDeniedResponse response) {
+
+                    }
+
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse response) {
+                        saveFileAndSend(menuItem.getItemId(), true);
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission,
+                            PermissionToken token) {
+
+                    }
+
+                });
+                return false;
+            }
+        });
+
+        popupMenu.show();
+    }
+
+    /**
+     * Method for show color picker
+     */
+    private void showColorPicker() {
+        if (coloPickerLayout.getVisibility() == View.VISIBLE) {
+            hideColorPicker();
+        } else {
+            YoYo.AnimationComposer animation = YoYo.with(Techniques.DropOut)
+                    .duration(700).withListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animator animation) {
+                        }
+
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                            coloPickerLayout.setVisibility(View.VISIBLE);
+                            hideSeekbarStroke();
+                        }
+                    });
+            if ((runningAnimationSeek == null || !runningAnimationSeek.isRunning()) && (runningAnimationColor == null
+                    || !runningAnimationColor.isRunning())) {
+                runningAnimationColor = animation.playOn(coloPickerLayout);
+
+            }
+        }
+    }
+
+    /**
+     * Method for show seekbar stroke
+     */
+    private void showSeekbarStroke() {
+        if (rangeSeekBarLayout.getVisibility() == View.VISIBLE) {
+            hideSeekbarStroke();
+        } else {
+
+            YoYo.AnimationComposer animation = YoYo.with(Techniques.DropOut)
+                    .duration(700).withListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animator animation) {
+                        }
+
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                            rangeSeekBarLayout.setVisibility(View.VISIBLE);
+                            hideColorPicker();
+                        }
+                    });
+            if ((runningAnimationSeek == null || !runningAnimationSeek.isRunning()) && (runningAnimationColor == null
+                    || !runningAnimationColor.isRunning())) {
+
+                runningAnimationSeek = animation.playOn(rangeSeekBarLayout);
+            }
+        }
+    }
+
+    /**
+     * Method for change the visibility of textview to visible
+     */
+    private void visibleTxtSingHere() {
+        txtSingHere.setVisibility(View.VISIBLE);
     }
 
 }

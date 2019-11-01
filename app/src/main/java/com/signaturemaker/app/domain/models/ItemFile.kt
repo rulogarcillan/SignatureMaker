@@ -20,48 +20,18 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
-package com.signaturemaker.app.models;
+package com.signaturemaker.app.domain.models
 
-public class ItemFile {
+data class ItemFile(
+    var date: String? = null,
+    var name: String? = null,
+    var size: String? = null
+) {
 
-    private String name;
-    private String date;
-    private String size;
-
-    public static final int TYPE_LARGE = 0;
-    public static final int TYPE_SHORT = 1;
-
-    public ItemFile(String name, String date, String size) {
-        super();
-        this.name = name;
-        this.date = date;
-        this.size = size;
-    }
-
-    public ItemFile() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getSize() {
-        return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
+    companion object {
+        val TYPE_LARGE = 0
+        val TYPE_SHORT = 1
     }
 }
+
+

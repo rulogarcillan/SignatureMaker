@@ -1,4 +1,4 @@
-/*
+package com.signaturemaker.app.application.fragments;/*
  __ _                   _                                 _
 / _(_) __ _ _ __   __ _| |_ _   _ _ __ ___    /\/\   __ _| | _____ _ __
 \ \| |/ _` | '_ \ / _` | __| | | | '__/ _ \  /    \ / _` | |/ / _ \ '__|
@@ -20,7 +20,6 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
-package com.signaturemaker.app.fragments;
 
 
 import android.net.Uri;
@@ -36,20 +35,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.karumi.dexter.listener.single.PermissionListener;
 import com.signaturemaker.app.R;
-import com.signaturemaker.app.adapters.AdapterFiles;
-import com.signaturemaker.app.models.ItemFile;
-import com.signaturemaker.app.utils.Constants;
-import com.signaturemaker.app.utils.FilesUtils;
-import com.signaturemaker.app.utils.PermissionsUtils;
-import com.signaturemaker.app.utils.Utils;
+import com.signaturemaker.app.application.adapters.AdapterFiles;
+import com.signaturemaker.app.domain.models.ItemFile;
+import com.signaturemaker.app.application.utils.Constants;
+import com.signaturemaker.app.application.utils.FilesUtils;
+import com.signaturemaker.app.application.utils.PermissionsUtils;
+import com.signaturemaker.app.application.utils.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -63,8 +60,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import co.dift.ui.SwipeToAction;
 
-import static com.signaturemaker.app.utils.Utils.createSnackbar;
-import static com.signaturemaker.app.utils.Utils.displaySnackbar;
+import static com.signaturemaker.app.application.utils.Utils.createSnackbar;
 
 public class ListFilesFragment extends Fragment {
 

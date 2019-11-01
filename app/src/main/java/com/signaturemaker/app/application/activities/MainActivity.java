@@ -20,44 +20,38 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
-package com.signaturemaker.app.activities;
+package com.signaturemaker.app.application.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
-
+import androidx.fragment.app.FragmentTransaction;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.karumi.dexter.MultiplePermissionsReport;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionDeniedResponse;
-import com.karumi.dexter.listener.PermissionGrantedResponse;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-import com.karumi.dexter.listener.single.PermissionListener;
 import com.signaturemaker.app.R;
-import com.signaturemaker.app.fragments.ListFilesFragment;
-import com.signaturemaker.app.fragments.SingBoardFragment;
-import com.signaturemaker.app.interfaces.ClickInterface;
-import com.signaturemaker.app.utils.FilesUtils;
-import com.signaturemaker.app.utils.PermissionsUtils;
-import com.signaturemaker.app.utils.Utils;
-
-import java.util.List;
-
-import androidx.fragment.app.FragmentTransaction;
+import com.signaturemaker.app.application.fragments.ListFilesFragment;
+import com.signaturemaker.app.application.fragments.SingBoardFragment;
+import com.signaturemaker.app.application.interfaces.ClickInterface;
+import com.signaturemaker.app.application.utils.FilesUtils;
+import com.signaturemaker.app.application.utils.PermissionsUtils;
+import com.signaturemaker.app.application.utils.Utils;
 
 public class MainActivity extends BaseActivity implements ClickInterface {
 
-    private AdView mAdView;
-    private RelativeLayout layoutMain;
-    private boolean flagAdvertising;
     private FrameLayout containerFiles;
-    private SingBoardFragment signBoard;
+
+    private boolean flagAdvertising;
+
+    private RelativeLayout layoutMain;
+
     private ListFilesFragment listFragment;
+
+    private AdView mAdView;
+
+    private SingBoardFragment signBoard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,20 +74,10 @@ public class MainActivity extends BaseActivity implements ClickInterface {
         mAdView = findViewById(R.id.adView);
         layoutMain = findViewById(R.id.layoutMain);
 
-
         initAdvertising();
 
 
     }
-
-    private void createTableView() {
-        if (containerFiles != null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.containerFiles, listFragment = new ListFilesFragment(), ListFilesFragment.class.getSimpleName())
-                    .commit();
-        }
-    }
-
 
     @Override
     protected void onStart() {
@@ -105,11 +89,9 @@ public class MainActivity extends BaseActivity implements ClickInterface {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (Utils.deleteExit && PermissionsUtils.hasPermissionWriteRead(this)) {
-            FilesUtils.deleteAllFiles(this);
-        }
+    public void onRestart() {
+        super.onRestart();
+        showAdvertising();
     }
 
     @Override
@@ -119,33 +101,37 @@ public class MainActivity extends BaseActivity implements ClickInterface {
         hideAdvertising();
     }
 
-
     @Override
-    public void onRestart() {
-        super.onRestart();
-        showAdvertising();
-    }
-
-
-    /**
-     * show advertising if options change
-     */
-    private void showAdvertising() {
-        if ((Utils.disableAds != flagAdvertising) && (Utils.disableAds == false)) {
-            Intent intent = new Intent();
-            intent.setClass(this, this.getClass());
-            finish();
-            this.startActivity(intent);
+    protected void onDestroy() {
+        super.onDestroy();
+        if (Utils.deleteExit && PermissionsUtils.hasPermissionWriteRead(this)) {
+            FilesUtils.deleteAllFiles(this);
         }
     }
 
+    @Override
+    public void buttonClicked() {
+        if (containerFiles != null) {
+            listFragment.reloadFiles();
+        }
+    }
+
+    private void createTableView() {
+        if (containerFiles != null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.containerFiles, listFragment = new ListFilesFragment(),
+                            ListFilesFragment.class.getSimpleName())
+                    .commit();
+        }
+    }
 
     /**
      * hide advertising if options is selected
      */
     private void hideAdvertising() {
-        if ((Utils.disableAds) && (mAdView != null))
+        if ((Utils.disableAds) && (mAdView != null)) {
             layoutMain.removeView(mAdView);
+        }
     }
 
     /**
@@ -163,10 +149,15 @@ public class MainActivity extends BaseActivity implements ClickInterface {
         });
     }
 
-    @Override
-    public void buttonClicked() {
-        if (containerFiles != null) {
-            listFragment.reloadFiles();
+    /**
+     * show advertising if options change
+     */
+    private void showAdvertising() {
+        if ((Utils.disableAds != flagAdvertising) && (Utils.disableAds == false)) {
+            Intent intent = new Intent();
+            intent.setClass(this, this.getClass());
+            finish();
+            this.startActivity(intent);
         }
     }
 }

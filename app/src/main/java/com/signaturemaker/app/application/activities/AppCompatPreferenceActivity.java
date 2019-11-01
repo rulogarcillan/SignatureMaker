@@ -1,18 +1,16 @@
-package com.signaturemaker.app.activities;
+package com.signaturemaker.app.application.activities;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
-
+import android.view.MenuInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
-
-import android.view.MenuInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 /**
  * A {@link android.preference.PreferenceActivity} which implements and proxies the necessary calls
@@ -35,6 +33,34 @@ public abstract class AppCompatPreferenceActivity extends PreferenceActivity {
         getDelegate().onPostCreate(savedInstanceState);
     }
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        getDelegate().onPostResume();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        getDelegate().onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        getDelegate().onDestroy();
+    }
+
+    @Override
+    public void addContentView(View view, ViewGroup.LayoutParams params) {
+        getDelegate().addContentView(view, params);
+    }
+
+    @Override
+    public MenuInflater getMenuInflater() {
+        return getDelegate().getMenuInflater();
+    }
+
     public ActionBar getSupportActionBar() {
         return getDelegate().getSupportActionBar();
     }
@@ -43,9 +69,14 @@ public abstract class AppCompatPreferenceActivity extends PreferenceActivity {
         getDelegate().setSupportActionBar(toolbar);
     }
 
+    public void invalidateOptionsMenu() {
+        getDelegate().invalidateOptionsMenu();
+    }
+
     @Override
-    public MenuInflater getMenuInflater() {
-        return getDelegate().getMenuInflater();
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        getDelegate().onConfigurationChanged(newConfig);
     }
 
     @Override
@@ -64,42 +95,9 @@ public abstract class AppCompatPreferenceActivity extends PreferenceActivity {
     }
 
     @Override
-    public void addContentView(View view, ViewGroup.LayoutParams params) {
-        getDelegate().addContentView(view, params);
-    }
-
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        getDelegate().onPostResume();
-    }
-
-    @Override
     protected void onTitleChanged(CharSequence title, int color) {
         super.onTitleChanged(title, color);
         getDelegate().setTitle(title);
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        getDelegate().onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        getDelegate().onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        getDelegate().onDestroy();
-    }
-
-    public void invalidateOptionsMenu() {
-        getDelegate().invalidateOptionsMenu();
     }
 
     private AppCompatDelegate getDelegate() {

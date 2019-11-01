@@ -20,9 +20,8 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
-package com.signaturemaker.app.utils;
 
-
+package com.signaturemaker.app.application.utils;
 import android.graphics.Color;
 import android.os.Environment;
 
@@ -31,33 +30,54 @@ public final class Constants {
     public static final String TAG = "RULO";
 
     public static final String ID_PREF_ADVERTISING = "id_pref_advertising";
+
     public static final String ID_PREF_PATH = "id_pref_path";
+
     public static final String ID_PREF_DELETE = "id_pref_delete";
+
     public static final String ID_PREF_GALLERY = "id_pref_gallery";
+
     public static final String ID_PREF_NAME = "id_pref_name";
+
     public static final String ID_PREF_COLOR = "id_pref_color";
+
     public static final String ID_PREF_STROKE = "id_pref_stroke";
+
     public static final String ID_PREF_RESET = "id_pref_reset";
+
     public static final String ID_PREF_WALLPAPER = "id_pref_wallpaper";
 
     public static final String PREF_ADS = "ADS";
+
     //public static final String FRAG = "FRAG";
     public static final String PREF_MAX_TROKE = "MAX_STROKE";
+
     public static final String PREF_MIN_TROKE = "MIN_STROKE";
+
     public static final String PREF_COLOR = "COLOR";
+
     public static final String PREF_WALLPAPER = "WALLPAPER";
 
     public static final String FIRST_TIME = "first_time";
 
     public static final String ROOT = Environment.getExternalStorageDirectory().getAbsolutePath();
+
     public static final Boolean DEFAULT_NAME_SAVE = false;
+
     public static final Boolean DEFAULT_DELETE_EXIT = false;
+
     public static final Boolean DEFAULT_DISABLE_ADS = false;
+
     public static final int DEFAULT_SORT_ORDER = -1;
+
     public static final int DEFAULT_MAX_STROKE = 4;
+
     public static final int DEFAULT_MIN_TROKE = 1;
+
     public static final int DEFAULT_PEN_COLOR = Color.parseColor("#200BB2");
+
     public static final int DEFAULT_WALLPAPER = 3;
+
     public static final String DEFAULT_PATH = ROOT + "/Signature/";
 
 

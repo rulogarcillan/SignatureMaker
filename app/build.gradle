@@ -1,28 +1,20 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.signaturemaker.app"
         minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 3003
-        versionName "3.0.3"
+        targetSdkVersion 29
+        versionCode 3004
+        versionName "3.0.4"
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
 
-    /*    debug {
-            debuggable true
-            applicationIdSuffix ".debug"
-        }
-        pre {
-            debuggable true
-            applicationIdSuffix ".test"
-            //resValue "string", "title_app", "Signature Maker test"
-            //buildConfigField "String", "fooVar", '"blablabla"'
-        }*/
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -33,36 +25,28 @@ android {
         checkReleaseBuilds false
 
     }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+    buildToolsVersion = '29.0.2'
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    /*implementation 'com.android.support:appcompat-v7:28.0.0-alpha1'
-    implementation 'com.android.support:design:28.0.0-alpha1'
-    implementation 'com.android.support:recyclerview-v7:28.0.0-alpha1'
-    implementation 'com.android.support:support-annotations:28.0.0-alpha1'
-    implementation 'com.android.support:cardview-v7:28.0.0-alpha1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.2'*/
-
-
-
-    implementation "androidx.appcompat:appcompat:1.0.0-rc02"
-    implementation "com.google.android.material:material:1.0.0-rc02"
-    implementation "androidx.recyclerview:recyclerview:1.0.0-rc02"
-    implementation "androidx.annotation:annotation:1.0.0-rc02"
-    implementation "androidx.cardview:cardview:1.0.0-rc02"
-    implementation "androidx.constraintlayout:constraintlayout:2.0.0-alpha2"
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0-rc02'
-    implementation 'androidx.vectordrawable:vectordrawable:1.0.0-rc02'
-
-
- /*   implementation 'com.jakewharton:butterknife:8.8.1'
-      annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'*/
-
+    implementation "androidx.appcompat:appcompat:1.1.0"
+    implementation "com.google.android.material:material:1.2.0-alpha01"
+    implementation "androidx.recyclerview:recyclerview:1.1.0-rc01"
+    implementation "androidx.annotation:annotation:1.1.0"
+    implementation "androidx.cardview:cardview:1.0.0"
+    implementation "androidx.constraintlayout:constraintlayout:2.0.0-beta3"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
+    implementation "androidx.preference:preference-ktx:1.1.0"
 
     //permisions
-    implementation('com.karumi:dexter:5.0.0')
+    implementation('com.karumi:dexter:6.0.0')
     //about libraries
     implementation('com.mikepenz:aboutlibraries:6.2.0')
     //gesture drawer
@@ -70,7 +54,7 @@ dependencies {
     //floating buttons
     implementation('com.getbase:floatingactionbutton:1.10.1')
     //animations
-    implementation('com.daimajia.easing:library:2.0@aar')
+    implementation('com.daimajia.easing:library:2.1@aar')
     implementation('com.daimajia.androidanimations:library:2.3@aar')
     //range sneekbar
     implementation('com.appyvet:materialrangebar:1.4.3')
@@ -85,13 +69,13 @@ dependencies {
     implementation 'de.cketti.library.changelog:ckchangelog:1.2.2'
 
     //swipleable recycler
-    implementation ('co.dift.ui.swipetoaction:library:1.1'){
-        transitive=true
+    implementation('co.dift.ui.swipetoaction:library:1.1') {
+        transitive = true
     }
 
-    implementation 'com.google.firebase:firebase-ads:15.0.0'
+    implementation 'com.google.firebase:firebase-ads:18.2.0'
 
     implementation project(':chooser')
 
-
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

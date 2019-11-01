@@ -20,8 +20,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
-package com.signaturemaker.app.utils;
-
+package com.signaturemaker.app.application.utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -35,12 +34,11 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
+import androidx.core.content.FileProvider;
 import com.google.android.material.snackbar.Snackbar;
 import com.signaturemaker.app.BuildConfig;
 import com.signaturemaker.app.R;
-import com.signaturemaker.app.models.ItemFile;
-
+import com.signaturemaker.app.domain.models.ItemFile;
 import java.io.File;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -50,22 +48,78 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
-import androidx.core.content.FileProvider;
-
 public final class Utils {
 
-    private Utils() {
+    public static int sortOrder = Constants.DEFAULT_SORT_ORDER;
+
+    public static int maxStroke = Constants.DEFAULT_MAX_STROKE;
+
+    public static int minStroke = Constants.DEFAULT_MIN_TROKE;
+
+    public static int penColor = Constants.DEFAULT_PEN_COLOR;
+
+    public static int wallpaper = Constants.DEFAULT_WALLPAPER;
+
+    public static String path = Constants.DEFAULT_PATH;
+
+    public static Boolean disableAds = Constants.DEFAULT_DISABLE_ADS;
+
+    public static Boolean nameSave = Constants.DEFAULT_NAME_SAVE;
+
+    public static Boolean deleteExit = Constants.DEFAULT_DELETE_EXIT;
+
+    /**
+     * Show Snackbar
+     */
+    public static Snackbar createSnackbar(Activity mActivity, String msg, String actionMsg,
+            final Snackbar.Callback callback) {
+        return Snackbar.make(mActivity.findViewById(android.R.id.content), msg, Snackbar.LENGTH_SHORT)
+                .setAction(actionMsg, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                    }
+                })
+                .setActionTextColor(mActivity.getResources().getColor(R.color.colorAccent))
+                .addCallback(new Snackbar.Callback() {
+
+                    @Override
+                    public void onDismissed(Snackbar transientBottomBar, int event) {
+                        super.onDismissed(transientBottomBar, event);
+                        callback.onDismissed(transientBottomBar, event);
+                    }
+
+                    @Override
+                    public void onShown(Snackbar sb) {
+                        super.onShown(sb);
+                        callback.onShown(sb);
+                    }
+                });
     }
 
-    public static int sortOrder = Constants.DEFAULT_SORT_ORDER;
-    public static int maxStroke = Constants.DEFAULT_MAX_STROKE;
-    public static int minStroke = Constants.DEFAULT_MIN_TROKE;
-    public static int penColor = Constants.DEFAULT_PEN_COLOR;
-    public static int wallpaper = Constants.DEFAULT_WALLPAPER;
-    public static String path = Constants.DEFAULT_PATH;
-    public static Boolean disableAds = Constants.DEFAULT_DISABLE_ADS;
-    public static Boolean nameSave = Constants.DEFAULT_NAME_SAVE;
-    public static Boolean deleteExit = Constants.DEFAULT_DELETE_EXIT;
+    public static void defaultColor() {
+        penColor = Constants.DEFAULT_PEN_COLOR;
+    }
+
+    public static void defaultDeleteExit() {
+        deleteExit = Constants.DEFAULT_DELETE_EXIT;
+    }
+
+    public static void defaultDisableAds() {
+        disableAds = Constants.DEFAULT_DISABLE_ADS;
+    }
+
+    public static void defaultNameSave() {
+        nameSave = Constants.DEFAULT_NAME_SAVE;
+    }
+
+    public static void defaultPath() {
+        path = Constants.DEFAULT_PATH;
+    }
+
+    public static void defaultStroke() {
+        maxStroke = Constants.DEFAULT_MAX_STROKE;
+        minStroke = Constants.DEFAULT_MIN_TROKE;
+    }
 
     public static void defaultValues() {
         nameSave = Constants.DEFAULT_NAME_SAVE;
@@ -79,36 +133,57 @@ public final class Utils {
         deleteExit = Constants.DEFAULT_DELETE_EXIT;
     }
 
-    public static void defaultDisableAds() {
-        disableAds = Constants.DEFAULT_DISABLE_ADS;
-    }
-
-    public static void defaultNameSave() {
-        nameSave = Constants.DEFAULT_NAME_SAVE;
-    }
-
-    public static void defaultDeleteExit() {
-        deleteExit = Constants.DEFAULT_DELETE_EXIT;
-    }
-
-    public static void defaultPath() {
-        path = Constants.DEFAULT_PATH;
-    }
-
-    public static void defaultColor() {
-        penColor = Constants.DEFAULT_PEN_COLOR;
-    }
-
     public static void defaultWallpaper() {
         wallpaper = Constants.DEFAULT_WALLPAPER;
     }
 
+    /**
+     * Show Snackbar
+     */
+    public static void displaySnackbar(Activity mActivity, String msg, String actionMsg,
+            final Snackbar.Callback callback) {
+        Snackbar.make(mActivity.findViewById(android.R.id.content), msg, Snackbar.LENGTH_SHORT)
+                .setAction(actionMsg, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                    }
+                })
+                .setActionTextColor(mActivity.getResources().getColor(R.color.colorAccent))
+                .addCallback(new Snackbar.Callback() {
 
-    public static void defaultStroke() {
-        maxStroke = Constants.DEFAULT_MAX_STROKE;
-        minStroke = Constants.DEFAULT_MIN_TROKE;
+                    @Override
+                    public void onDismissed(Snackbar transientBottomBar, int event) {
+                        super.onDismissed(transientBottomBar, event);
+                        callback.onDismissed(transientBottomBar, event);
+                    }
+
+                    @Override
+                    public void onShown(Snackbar sb) {
+                        super.onShown(sb);
+                        callback.onShown(sb);
+                    }
+                })
+                .show();
+
+
     }
 
+    /**
+     * Get last time compilation app
+     */
+    public static String getAppTimeStamp(Context context) {
+        String timeStamp = "";
+        try {
+            ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(context.getPackageName(), 0);
+            String appFile = appInfo.sourceDir;
+            long time = new File(appFile).lastModified();
+            DateFormat formatter = DateFormat.getDateTimeInstance();
+            timeStamp = formatter.format(time);
+        } catch (Exception e) {
+            Log.e(Constants.TAG, e.getMessage());
+        }
+        return timeStamp;
+    }
 
     public static void loadAllPreferences(Context mContext) {
 
@@ -145,6 +220,22 @@ public final class Utils {
         }
     }
 
+    public static String loadPreference(Context mContext, String key, String value) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        return sharedPreferences.getString(key, value);
+    }
+
+    public static int loadPreference(Context mContext, String key, int value) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        return sharedPreferences.getInt(key, value);
+    }
+
+    public static Boolean loadPreference(Context mContext, String key, Boolean value) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        return sharedPreferences.getBoolean(key, value);
+
+    }
+
     public static void saveAllPreferences(Context mContext) {
         if (Utils.loadPreference(mContext, Constants.ID_PREF_COLOR, false)) {
             savePreference(mContext, Constants.PREF_COLOR, Utils.penColor);
@@ -158,32 +249,79 @@ public final class Utils {
         }
     }
 
-    /**
-     * Get last time compilation app
-     *
-     * @param context
-     * @return
-     */
-    public static String getAppTimeStamp(Context context) {
-        String timeStamp = "";
-        try {
-            ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(context.getPackageName(), 0);
-            String appFile = appInfo.sourceDir;
-            long time = new File(appFile).lastModified();
-            DateFormat formatter = DateFormat.getDateTimeInstance();
-            timeStamp = formatter.format(time);
-        } catch (Exception e) {
-            Log.e(Constants.TAG, e.getMessage());
+    public static void savePreference(Context mContext, String key, String value) {
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(key, value);
+        editor.commit();
+
+    }
+
+    public static void savePreference(Context mContext, String key, int value) {
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(key, value);
+        editor.commit();
+
+    }
+
+    public static void savePreference(Context mContext, String key, Boolean value) {
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(key, value);
+        editor.commit();
+    }
+
+    public static void shareSign(Activity mActivity, String name) {
+
+        Uri imageUri;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            imageUri = Uri.parse(new File(Utils.path + "/" + name).toString());
+        } else {
+            imageUri = Uri.fromFile(new File(Utils.path + "/" + name));
         }
-        return timeStamp;
+
+        if (name.contains(".png") || name.contains(".PNG")) {
+           /* Intent shareIntent = new Intent();
+            shareIntent.setAction(Intent.ACTION_SEND);
+            shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+            shareIntent.setType("image/*");
+            mActivity.startActivity(Intent.createChooser(shareIntent, mActivity.getText(R.string.tittle_send)));*/
+            // create new Intent
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            Uri uri = FileProvider
+                    .getUriForFile(mActivity, BuildConfig.APPLICATION_ID, new File(Utils.path + "/" + name));
+            intent.setDataAndType(uri, "image/*");
+            PackageManager pm = mActivity.getPackageManager();
+            if (intent.resolveActivity(pm) != null) {
+                mActivity.startActivity(intent);
+            }
+
+        } else {
+          /*  Intent shareIntent = new Intent();
+            shareIntent.setAction(Intent.ACTION_SEND);
+            shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+            shareIntent.setType("text/plain");
+            mActivity.startActivity(Intent.createChooser(shareIntent, mActivity.getText(R.string.tittle_send)));*/
+
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            Uri uri = FileProvider
+                    .getUriForFile(mActivity, BuildConfig.APPLICATION_ID, new File(Utils.path + "/" + name));
+            intent.setDataAndType(uri, "text/html");
+            PackageManager pm = mActivity.getPackageManager();
+            if (intent.resolveActivity(pm) != null) {
+                mActivity.startActivity(intent);
+            }
+        }
     }
 
     /**
      * Show toats
-     *
-     * @param mContext
-     * @param msg
-     * @param duration
      */
     public static void showToast(Context mContext, String msg, int duration) {
         Toast.makeText(mContext, msg, duration).show();
@@ -191,14 +329,10 @@ public final class Utils {
 
     /**
      * Show toats, default short duration
-     *
-     * @param mContext
-     * @param msg
      */
     public static void showToast(Context mContext, String msg) {
         showToast(mContext, msg, Toast.LENGTH_SHORT);
     }
-
 
     public static void sort(List<ItemFile> list, final int type) {
         Collections.sort(list, new Comparator<ItemFile>() {
@@ -227,155 +361,7 @@ public final class Utils {
     }
 
 
-    public static void savePreference(Context mContext, String key, String value) {
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(key, value);
-        editor.commit();
-
-    }
-
-    public static void savePreference(Context mContext, String key, int value) {
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(key, value);
-        editor.commit();
-
-    }
-
-    public static void savePreference(Context mContext, String key, Boolean value) {
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(key, value);
-        editor.commit();
-    }
-
-    public static String loadPreference(Context mContext, String key, String value) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        return sharedPreferences.getString(key, value);
-    }
-
-    public static int loadPreference(Context mContext, String key, int value) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        return sharedPreferences.getInt(key, value);
-    }
-
-    public static Boolean loadPreference(Context mContext, String key, Boolean value) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        return sharedPreferences.getBoolean(key, value);
-
-    }
-
-    public static void shareSign(Activity mActivity, String name) {
-
-        Uri imageUri;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            imageUri = Uri.parse(new File(Utils.path + "/" + name).toString());
-        } else {
-            imageUri = Uri.fromFile(new File(Utils.path + "/" + name));
-        }
-
-        if (name.contains(".png") || name.contains(".PNG")) {
-           /* Intent shareIntent = new Intent();
-            shareIntent.setAction(Intent.ACTION_SEND);
-            shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
-            shareIntent.setType("image/*");
-            mActivity.startActivity(Intent.createChooser(shareIntent, mActivity.getText(R.string.tittle_send)));*/
-            // create new Intent
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            Uri uri = FileProvider.getUriForFile(mActivity, BuildConfig.APPLICATION_ID, new File(Utils.path + "/" + name));
-            intent.setDataAndType(uri, "image/*");
-            PackageManager pm = mActivity.getPackageManager();
-            if (intent.resolveActivity(pm) != null) {
-                mActivity.startActivity(intent);
-            }
-
-        } else {
-          /*  Intent shareIntent = new Intent();
-            shareIntent.setAction(Intent.ACTION_SEND);
-            shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
-            shareIntent.setType("text/plain");
-            mActivity.startActivity(Intent.createChooser(shareIntent, mActivity.getText(R.string.tittle_send)));*/
-
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            Uri uri = FileProvider.getUriForFile(mActivity, BuildConfig.APPLICATION_ID, new File(Utils.path + "/" + name));
-            intent.setDataAndType(uri, "text/html");
-            PackageManager pm = mActivity.getPackageManager();
-            if (intent.resolveActivity(pm) != null) {
-                mActivity.startActivity(intent);
-            }
-        }
-    }
-
-    /**
-     * Show Snackbar
-     *
-     * @param mActivity
-     * @param msg
-     * @param actionMsg
-     */
-    public static void displaySnackbar(Activity mActivity, String msg, String actionMsg, final Snackbar.Callback callback) {
-        Snackbar.make(mActivity.findViewById(android.R.id.content), msg, Snackbar.LENGTH_SHORT)
-                .setAction(actionMsg, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                    }
-                })
-                .setActionTextColor(mActivity.getResources().getColor(R.color.colorAccent))
-                .addCallback(new Snackbar.Callback() {
-
-                    @Override
-                    public void onShown(Snackbar sb) {
-                        super.onShown(sb);
-                        callback.onShown(sb);
-                    }
-
-                    @Override
-                    public void onDismissed(Snackbar transientBottomBar, int event) {
-                        super.onDismissed(transientBottomBar, event);
-                        callback.onDismissed(transientBottomBar, event);
-                    }
-                })
-                .show();
-
-
-    }
-
-
-    /**
-     * Show Snackbar
-     *
-     * @param mActivity
-     * @param msg
-     * @param actionMsg
-     */
-    public static Snackbar createSnackbar(Activity mActivity, String msg, String actionMsg, final Snackbar.Callback callback) {
-        return Snackbar.make(mActivity.findViewById(android.R.id.content), msg, Snackbar.LENGTH_SHORT)
-                .setAction(actionMsg, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                    }
-                })
-                .setActionTextColor(mActivity.getResources().getColor(R.color.colorAccent))
-                .addCallback(new Snackbar.Callback() {
-
-                    @Override
-                    public void onShown(Snackbar sb) {
-                        super.onShown(sb);
-                        callback.onShown(sb);
-                    }
-
-                    @Override
-                    public void onDismissed(Snackbar transientBottomBar, int event) {
-                        super.onDismissed(transientBottomBar, event);
-                        callback.onDismissed(transientBottomBar, event);
-                    }
-                });
+    private Utils() {
     }
 
 }
