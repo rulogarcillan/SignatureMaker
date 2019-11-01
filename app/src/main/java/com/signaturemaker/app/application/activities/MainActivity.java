@@ -153,7 +153,7 @@ public class MainActivity extends BaseActivity implements ClickInterface {
      * show advertising if options change
      */
     private void showAdvertising() {
-        if ((Utils.disableAds != flagAdvertising) && (Utils.disableAds == false)) {
+        if ((Utils.disableAds != flagAdvertising) && (!Utils.disableAds)) {
             Intent intent = new Intent();
             intent.setClass(this, this.getClass());
             finish();
