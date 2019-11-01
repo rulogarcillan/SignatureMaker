@@ -60,7 +60,7 @@ public class MainActivity extends BaseActivity implements ClickInterface {
         //ButterKnife.bind(this);
         Utils.loadAllPreferences(this);
 
-        containerFiles = (FrameLayout) findViewById(R.id.containerFiles);
+        containerFiles = findViewById(R.id.containerFiles);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.container, signBoard = new SingBoardFragment(), SingBoardFragment.class.getSimpleName());

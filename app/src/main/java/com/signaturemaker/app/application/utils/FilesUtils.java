@@ -1,4 +1,5 @@
 package com.signaturemaker.app.application.utils;
+
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -6,9 +7,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
-
 import com.signaturemaker.app.domain.models.ItemFile;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -62,7 +61,7 @@ public final class FilesUtils {
      * Remove all files
      */
     public static void deleteAllFiles(Activity mActivity) {
-        File files[];
+        File[] files;
         File folder;
         folder = new File(Utils.path);
         if (folder.exists()) {
@@ -94,7 +93,7 @@ public final class FilesUtils {
 
     public static List loadItemsFiles() {
 
-        File files[];
+        File[] files;
         File folder;
 
         List<ItemFile> arrayItems = new ArrayList<>();
@@ -106,7 +105,7 @@ public final class FilesUtils {
 
             for (File file : files) {
                 java.util.Date myDate = new java.util.Date(file.lastModified());
-                String tam = Long.toString(file.length() / 1024) + " KB";
+                String tam = file.length() / 1024 + " KB";
                 String name = file.getName();
 
                 if ((name.contains(".png") || name.contains(".PNG") || name.contains(".svg") || name.contains(".SVG"))
@@ -123,7 +122,7 @@ public final class FilesUtils {
     public static void moveFiles(String oldPaht, Activity mActivity) {
 
         if (!oldPaht.equals(Utils.path)) {
-            File files[];
+            File[] files;
             File folder;
 
             folder = new File(oldPaht);
@@ -190,7 +189,7 @@ public final class FilesUtils {
                         scanFile(mActivity, noMedia);
 
                         File folder = new File(Utils.path);
-                        File files[];
+                        File[] files;
                         if (folder.exists()) {
                             files = folder.listFiles();
                             for (File file : files) {

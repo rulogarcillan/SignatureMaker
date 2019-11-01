@@ -162,7 +162,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         private void showDialogPath() {
             View view = getActivity().getLayoutInflater().inflate(R.layout.chooser_path, null);
             AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-            final ChooseFolder chos = (ChooseFolder) view.findViewById(R.id.chooserview);
+            final ChooseFolder chos = view.findViewById(R.id.chooserview);
             chos.setPath(Utils.path);
 
             dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -272,7 +272,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             // Trigger the listener immediately with the preference's
             // current value.
             sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
-                    (String) (PreferenceManager
+                    (PreferenceManager
                             .getDefaultSharedPreferences(preference.getContext())
                             .getString(preference.getKey(), Utils.path)).replace(Constants.ROOT, "/sdcard"));
         } else if (preference.getKey().equalsIgnoreCase(Constants.ID_PREF_GALLERY)) {

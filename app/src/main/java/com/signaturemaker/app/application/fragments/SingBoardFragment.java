@@ -72,7 +72,7 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
 
     private interface TextDialog {
 
-        public void onGetTextDialog(String name);
+        void onGetTextDialog(String name);
     }
 
     //@BindView(R.id.bColor)
@@ -614,9 +614,9 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
             field.setAccessible(true);
             Object menuPopupHelper = field.get(popupMenu);
             Class<?> cls = Class.forName("com.android.internal.view.menu.MenuPopupHelper");
-            Method method = cls.getDeclaredMethod("setForceShowIcon", new Class[]{boolean.class});
+            Method method = cls.getDeclaredMethod("setForceShowIcon", boolean.class);
             method.setAccessible(true);
-            method.invoke(menuPopupHelper, new Object[]{true});
+            method.invoke(menuPopupHelper, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -749,9 +749,9 @@ public class SingBoardFragment extends Fragment implements View.OnClickListener,
             field.setAccessible(true);
             Object menuPopupHelper = field.get(popupMenu);
             Class<?> cls = Class.forName("com.android.internal.view.menu.MenuPopupHelper");
-            Method method = cls.getDeclaredMethod("setForceShowIcon", new Class[]{boolean.class});
+            Method method = cls.getDeclaredMethod("setForceShowIcon", boolean.class);
             method.setAccessible(true);
-            method.invoke(menuPopupHelper, new Object[]{true});
+            method.invoke(menuPopupHelper, true);
         } catch (Exception e) {
             e.printStackTrace();
         }

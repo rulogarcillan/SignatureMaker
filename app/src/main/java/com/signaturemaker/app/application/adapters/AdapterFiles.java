@@ -21,23 +21,21 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 package com.signaturemaker.app.application.adapters;
+
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.signaturemaker.app.R;
-import com.signaturemaker.app.domain.models.ItemFile;
-import com.signaturemaker.app.application.utils.Utils;
-import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.recyclerview.widget.RecyclerView;
 import co.dift.ui.SwipeToAction;
+import com.signaturemaker.app.R;
+import com.signaturemaker.app.application.utils.Utils;
+import com.signaturemaker.app.domain.models.ItemFile;
+import com.squareup.picasso.Picasso;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AdapterFiles extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -49,10 +47,10 @@ public class AdapterFiles extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         public ViewHolder(View container) {
             super(container);
-            iconFile = (ImageView) container.findViewById(R.id.imgSign);
-            textName = (TextView) container.findViewById(R.id.textName);
-            textDate = (TextView) container.findViewById(R.id.textDate);
-            textTam = (TextView) container.findViewById(R.id.textSize);
+            iconFile = container.findViewById(R.id.imgSign);
+            textName = container.findViewById(R.id.textName);
+            textDate = container.findViewById(R.id.textDate);
+            textTam = container.findViewById(R.id.textSize);
         }
     }
 
