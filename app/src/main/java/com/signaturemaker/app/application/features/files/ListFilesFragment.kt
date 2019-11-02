@@ -139,7 +139,9 @@ class ListFilesFragment : Fragment() {
                 }
 
                 override fun swipeRight(itemData: ItemFile): Boolean {
-                    Utils.shareSign(activity, itemData.name)
+                    activity?.let {
+                        Utils.shareSign(it, itemData.name)
+                    }
                     return true
                 }
             })

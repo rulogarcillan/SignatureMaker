@@ -65,7 +65,7 @@ public final class FilesUtils {
     public static void deleteAllFiles(Activity mActivity) {
         File[] files;
         File folder;
-        folder = new File(Utils.path);
+        folder = new File(Utils.INSTANCE.getPath());
         if (folder.exists()) {
             files = folder.listFiles();
             for (File file : files) {
@@ -90,7 +90,7 @@ public final class FilesUtils {
     }
 
     public static File getFile(String name) {
-        return new File(Utils.path + name);
+        return new File(Utils.INSTANCE.getPath() + name);
     }
 
     public static List loadItemsFiles() {
@@ -101,7 +101,7 @@ public final class FilesUtils {
         List<ItemFile> arrayItems = new ArrayList<>();
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        folder = new File(Utils.path);
+        folder = new File(Utils.INSTANCE.getPath());
         if (folder.exists()) {
             files = folder.listFiles();
 
@@ -117,13 +117,13 @@ public final class FilesUtils {
                 }
             }
         }
-        Utils.sort(arrayItems, Utils.sortOrder);
+        Utils.INSTANCE.sort(arrayItems, Utils.INSTANCE.getSortOrder());
         return arrayItems;
     }
 
     public static void moveFiles(String oldPaht, Activity mActivity) {
 
-        if (!oldPaht.equals(Utils.path)) {
+        if (!oldPaht.equals(Utils.INSTANCE.getPath())) {
             File[] files;
             File folder;
 
@@ -137,12 +137,12 @@ public final class FilesUtils {
                     if (((name.contains(".png") || name.contains(".PNG") || name.contains(".svg") || name
                             .contains(".SVG")) && name.substring(0, 2).equals("SM")) || name.equals(".nomedia")) {
 
-                        file.renameTo(new File(Utils.path + "/" + name));
+                        file.renameTo(new File(Utils.INSTANCE.getPath() + "/" + name));
                         deleteScanFile(mActivity, file);
                         // scanFile(mActivity, new File(Utils.path + "/" + name));
                         //mActivity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse(file.getAbsolutePath()))); //antigua
                         mActivity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
-                                Uri.parse(Utils.path + "/" + name))); //nueva
+                                Uri.parse(Utils.INSTANCE.getPath() + "/" + name))); //nueva
                     }
 
                 }
@@ -156,7 +156,7 @@ public final class FilesUtils {
 
             if (Environment.MEDIA_MOUNTED.equals(storageState)) {
                 try {
-                    File noMedia = new File(Utils.path, ".nomedia");
+                    File noMedia = new File(Utils.INSTANCE.getPath(), ".nomedia");
 
                     if (noMedia.exists()) {
                         scanFile(mActivity, noMedia);
@@ -185,12 +185,12 @@ public final class FilesUtils {
 
             if (Environment.MEDIA_MOUNTED.equals(storageState)) {
                 try {
-                    File noMedia = new File(Utils.path, ".nomedia");
+                    File noMedia = new File(Utils.INSTANCE.getPath(), ".nomedia");
                     if (noMedia.exists()) {
                         noMedia.delete();
                         scanFile(mActivity, noMedia);
 
-                        File folder = new File(Utils.path);
+                        File folder = new File(Utils.INSTANCE.getPath());
                         File[] files;
                         if (folder.exists()) {
                             files = folder.listFiles();
@@ -223,8 +223,8 @@ public final class FilesUtils {
     public static boolean saveBitmapFile(Bitmap bitmap, String name) {
 
         File file;
-        createFolder(Utils.path);
-        file = new File(Utils.path + name);
+        createFolder(Utils.INSTANCE.getPath());
+        file = new File(Utils.INSTANCE.getPath() + name);
 
         try {
             file.createNewFile();
@@ -242,8 +242,8 @@ public final class FilesUtils {
     public static boolean saveSvgFile(String content, String name) {
 
         File file;
-        createFolder(Utils.path);
-        file = new File(Utils.path + name);
+        createFolder(Utils.INSTANCE.getPath());
+        file = new File(Utils.INSTANCE.getPath() + name);
 
         try {
             // file.createNewFile();

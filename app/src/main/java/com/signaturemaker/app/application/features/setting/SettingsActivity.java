@@ -22,7 +22,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -42,10 +41,11 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 import com.signaturemaker.app.R;
-import com.signaturemaker.app.application.utils.Constants;
+import com.signaturemaker.app.application.core.extensions.Utils;
 import com.signaturemaker.app.application.core.platform.FilesUtils;
 import com.signaturemaker.app.application.core.platform.PermissionsUtils;
-import com.signaturemaker.app.application.core.extensions.Utils;
+import com.signaturemaker.app.application.utils.Constants;
+import com.signaturemaker.app.data.repositories.SharedPreferencesRepository;
 import src.chooser.ChooseFolder;
 
 /**
@@ -126,7 +126,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 case Constants.ID_PREF_COLOR:
                 case Constants.ID_PREF_STROKE:
 
-                    Utils.loadAllPreferences(getActivity());
+                    Utils.INSTANCE.loadAllPreferences(getActivity());
                     break;
                 default:
                     break;
@@ -137,10 +137,11 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         private void setDefaultPreferences() {
 
             findPreference(Constants.ID_PREF_PATH).setDefaultValue(Constants.DEFAULT_PATH);
-            String oldPath = Utils.path;
-            Utils.defaultPath();
-            Utils.savePreference(findPreference(Constants.ID_PREF_PATH).getContext(), Constants.ID_PREF_PATH,
-                    Utils.path);
+            String oldPath = Utils.INSTANCE.getPath();
+            Utils.INSTANCE.defaultPath();
+            SharedPreferencesRepository.INSTANCE
+                    .savePreference(findPreference(Constants.ID_PREF_PATH).getContext(), Constants.ID_PREF_PATH,
+                            Utils.INSTANCE.getPath());
             bindPreferenceSummaryToValue(findPreference(Constants.ID_PREF_PATH));
             FilesUtils.moveFiles(oldPath, getActivity());
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_DELETE)).setChecked(false);
@@ -153,8 +154,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_STROKE)).setChecked(false);
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_ADVERTISING)).setChecked(false);
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_WALLPAPER)).setChecked(false);
-            Utils.saveAllPreferences(getActivity());
-            Utils.defaultValues();
+            Utils.INSTANCE.saveAllPreferences(getActivity());
+            Utils.INSTANCE.defaultValues();
 
 
         }
@@ -163,18 +164,17 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             View view = getActivity().getLayoutInflater().inflate(R.layout.chooser_path, null);
             AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
             final ChooseFolder chos = view.findViewById(R.id.chooserview);
-            chos.setPath(Utils.path);
+            chos.setPath(Utils.INSTANCE.getPath());
 
-            dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-
-                public void onClick(DialogInterface dialog, int id) {
-                    String oldPath = Utils.path;
-                    Utils.path = chos.getPath();
-                    Utils.savePreference(findPreference(Constants.ID_PREF_PATH).getContext(), Constants.ID_PREF_PATH,
-                            Utils.path);
-                    bindPreferenceSummaryToValue(findPreference(Constants.ID_PREF_PATH));
-                    FilesUtils.moveFiles(oldPath, getActivity());
-                }
+            dialog.setPositiveButton(android.R.string.ok, (dialog1, id) -> {
+                String oldPath = Utils.INSTANCE.getPath();
+                Utils.INSTANCE.setPath(chos.getPath());
+                SharedPreferencesRepository.INSTANCE
+                        .savePreference(findPreference(Constants.ID_PREF_PATH).getContext(),
+                                Constants.ID_PREF_PATH,
+                                Utils.INSTANCE.getPath());
+                bindPreferenceSummaryToValue(findPreference(Constants.ID_PREF_PATH));
+                FilesUtils.moveFiles(oldPath, getActivity());
             });
 
             dialog.setView(view);
@@ -274,7 +274,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
                     (PreferenceManager
                             .getDefaultSharedPreferences(preference.getContext())
-                            .getString(preference.getKey(), Utils.path)).replace(Constants.ROOT, "/sdcard"));
+                            .getString(preference.getKey(), Utils.INSTANCE.getPath()))
+                            .replace(Constants.ROOT, "/sdcard"));
         } else if (preference.getKey().equalsIgnoreCase(Constants.ID_PREF_GALLERY)) {
             preference.setOnPreferenceChangeListener(sBindPreferenceGalleryListener);
         }
