@@ -49,6 +49,7 @@ import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.Utils
 import com.signaturemaker.app.application.core.extensions.createSnackBar
 import com.signaturemaker.app.application.core.platform.FilesUtils
+import com.signaturemaker.app.application.core.platform.FilesUtils.loadItemsFiles
 import com.signaturemaker.app.application.core.platform.PermissionsUtils
 import com.signaturemaker.app.application.utils.Constants
 import com.signaturemaker.app.domain.models.ItemFile
@@ -56,12 +57,11 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.list_files_fragment.recyclerView
 import kotlinx.android.synthetic.main.list_files_fragment.txtMnsNoFiles
 import kotlinx.android.synthetic.main.pathbar.path
-import java.util.ArrayList
 
 class ListFilesFragment : Fragment() {
 
     private var adapter: AdapterFiles? = null
-    private var items: MutableList<ItemFile> = ArrayList()
+    private val items: MutableList<ItemFile> = mutableListOf()
     private var mySnackBar: Snackbar? = null
 
     override fun onCreateView(
@@ -104,30 +104,28 @@ class ListFilesFragment : Fragment() {
                 }
 
                 override fun swipeLeft(itemData: ItemFile): Boolean {
-
-                    adapter?.let {
+                    adapter?.let { mAdapter ->
                         val pos = items.indexOf(itemData)
                         if (pos == -1) {
                             return true
                         }
                         removeItemAdapter(itemData)
-                        activity?.let {
-                            mySnackBar = it.createSnackBar(itemData.name,
+                        activity?.let { mActivity ->
+                            mySnackBar = mActivity.createSnackBar(itemData.name,
                                 resources.getString(R.string.tittle_undo), object : Snackbar.Callback() {
                                     override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
                                         if (event != 1) {
-                                            FilesUtils.removeFile(it, itemData.name)
+                                            FilesUtils.removeFile(mActivity, itemData.name)
                                             if (items.size > 0) {
                                                 txtMnsNoFiles.visibility = View.GONE
                                             } else {
                                                 txtMnsNoFiles.visibility = View.VISIBLE
                                             }
-                                            loadItemsFiles()
-                                            Utils.sort(items, Utils.sortOrder)
+                                            Utils.sort(mAdapter.items, Utils.sortOrder)
                                         } else {
                                             addItemAdapter(pos, itemData)
                                             loadItemsFiles()
-                                            Utils.sort(items, Utils.sortOrder)
+                                            Utils.sort(mAdapter.items, Utils.sortOrder)
                                         }
                                         super.onDismissed(transientBottomBar, event)
                                     }
@@ -168,7 +166,8 @@ class ListFilesFragment : Fragment() {
             override fun onPermissionDenied(response: PermissionDeniedResponse) {}
 
             override fun onPermissionGranted(response: PermissionGrantedResponse) {
-                items = FilesUtils.loadItemsFiles() as MutableList<ItemFile>
+                items.clear()
+                items.addAll(FilesUtils.loadItemsFiles())
                 if (items.size > 0) {
                     txtMnsNoFiles.visibility = View.GONE
                 } else {
@@ -188,10 +187,10 @@ class ListFilesFragment : Fragment() {
         itemS.setOnMenuItemClickListener { item ->
             if (item.itemId == R.id.action_sort) {
                 Utils.sortOrder = Utils.sortOrder * -1
-                synchronized(items) {
-                    Utils.sort(items, Utils.sortOrder)
+                adapter?.let {
+                    Utils.sort(it.items, Utils.sortOrder)
+                    adapter?.notifyDataSetChanged()
                 }
-                recyclerView.adapter?.notifyDataSetChanged()
             }
             true
         }

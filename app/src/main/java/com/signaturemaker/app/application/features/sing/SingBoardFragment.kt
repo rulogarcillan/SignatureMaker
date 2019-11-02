@@ -26,6 +26,7 @@ import android.animation.Animator
 import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -106,9 +107,9 @@ class SingBoardFragment private constructor() : Fragment(), View.OnClickListener
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (bList != null) {
-            bList.setOnClickListener(this)
-            bList.setOnLongClickListener(this)
+        bList?.let {
+            it.setOnClickListener(this)
+            it.setOnLongClickListener(this)
         }
 
         bSave.setOnClickListener(this)
@@ -163,7 +164,7 @@ class SingBoardFragment private constructor() : Fragment(), View.OnClickListener
             Utils.maxStroke = rightPinIndex
             singBoard.setMinWidth(Utils.minStroke.toFloat())
             singBoard.setMaxWidth(Utils.maxStroke.toFloat())
-            Utils.saveAllPreferences(activity)
+            Utils.saveAllPreferences(context)
         }
 
         //listerner picker
@@ -171,7 +172,7 @@ class SingBoardFragment private constructor() : Fragment(), View.OnClickListener
             Utils.penColor = i
             bColor.colorNormal = Utils.penColor
             singBoard.setPenColor(Utils.penColor)
-            Utils.saveAllPreferences(activity)
+            Utils.saveAllPreferences(context)
         }
     }
 
@@ -366,7 +367,9 @@ class SingBoardFragment private constructor() : Fragment(), View.OnClickListener
                     }
                     if (statusParticular) {
                         if (share) {
-                            Utils.shareSign(activity, mName)
+                            activity?.let {
+                                Utils.shareSign(it, mName)
+                            }
                         }
                         context?.showToast(resources.getString(R.string.title_save_ok))
                         activity?.sendBroadcast(
@@ -382,25 +385,33 @@ class SingBoardFragment private constructor() : Fragment(), View.OnClickListener
                 }
             })
         } else {
-            var status: Boolean? = false
+            var status: Boolean = false
             var name = ""
             when (idMenu) {
                 R.id.savePngTrans -> {
                     name = FilesUtils.addExtensionNamePng(FilesUtils.generateName())
-                    status = FilesUtils.saveBitmapFile(singBoard.getTransparentSignatureBitmap(true), name)
+                    val sing = singBoard.getTransparentSignatureBitmap(true)
+                    sing?.let {
+                        status = FilesUtils.saveBitmapFile(it, name)
+                    }
                 }
                 R.id.savePngWhite -> {
                     name = FilesUtils.addExtensionNamePng(FilesUtils.generateName())
-                    status = FilesUtils.saveBitmapFile(singBoard.signatureBitmap, name)
+                    val sing: Bitmap? = singBoard.signatureBitmap
+                    sing?.let {
+                        status = FilesUtils.saveBitmapFile(it, name)
+                    }
                 }
                 R.id.saveSvg -> {
                     name = FilesUtils.addExtensionNameSvg(FilesUtils.generateName())
                     status = FilesUtils.saveSvgFile(singBoard.signatureSvg, name)
                 }
             }
-            if (status == true) {
-                if (share == true) {
-                    Utils.shareSign(activity, name)
+            if (status) {
+                if (share) {
+                    activity?.let {
+                        Utils.shareSign(it, name)
+                    }
                 }
                 context?.showToast(resources.getString(R.string.title_save_ok))
                 activity?.sendBroadcast(

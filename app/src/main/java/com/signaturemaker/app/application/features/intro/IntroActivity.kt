@@ -29,16 +29,16 @@ import androidx.fragment.app.Fragment
 import com.github.paolorotolo.appintro.AppIntro2
 import com.github.paolorotolo.appintro.AppIntroFragment
 import com.signaturemaker.app.R
-import com.signaturemaker.app.application.core.extensions.Utils
 import com.signaturemaker.app.application.features.main.MainActivity
 import com.signaturemaker.app.application.utils.Constants
+import com.signaturemaker.app.data.repositories.SharedPreferencesRepository
 
 class IntroActivity : AppIntro2() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (Utils.loadPreference(this, Constants.FIRST_TIME, true)) {
-            Utils.savePreference(this, Constants.FIRST_TIME, false)
+        if (SharedPreferencesRepository.loadPreference(this, Constants.FIRST_TIME, true)) {
+            SharedPreferencesRepository.savePreference(this, Constants.FIRST_TIME, false)
         } else {
             launchActivityMain()
         }

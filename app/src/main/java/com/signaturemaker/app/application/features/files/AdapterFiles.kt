@@ -35,9 +35,7 @@ class AdapterFiles(val items: MutableList<ItemFile>) : RecyclerView.Adapter<File
     }
 
     override fun onBindViewHolder(viewHolder: FilesViewHolder, i: Int) {
-
         viewHolder.bind(items[i])
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilesViewHolder {

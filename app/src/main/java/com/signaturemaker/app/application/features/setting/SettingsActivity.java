@@ -143,10 +143,10 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     .savePreference(findPreference(Constants.ID_PREF_PATH).getContext(), Constants.ID_PREF_PATH,
                             Utils.INSTANCE.getPath());
             bindPreferenceSummaryToValue(findPreference(Constants.ID_PREF_PATH));
-            FilesUtils.moveFiles(oldPath, getActivity());
+            FilesUtils.INSTANCE.moveFiles(oldPath, getActivity());
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_DELETE)).setChecked(false);
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_GALLERY)).setChecked(true);
-            FilesUtils.noMedia(getActivity());
+            FilesUtils.INSTANCE.noMedia(getActivity());
             //  FilesUtils.moveFiles(oldPath, getActivity());
             // FilesUtils.reScan(getActivity());
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_NAME)).setChecked(false);
@@ -174,7 +174,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                                 Constants.ID_PREF_PATH,
                                 Utils.INSTANCE.getPath());
                 bindPreferenceSummaryToValue(findPreference(Constants.ID_PREF_PATH));
-                FilesUtils.moveFiles(oldPath, getActivity());
+                FilesUtils.INSTANCE.moveFiles(oldPath, getActivity());
             });
 
             dialog.setView(view);
@@ -219,9 +219,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         @Override
         public boolean onPreferenceChange(Preference preference, Object o) {
             if ((Boolean) o == true) {
-                FilesUtils.noMedia((Activity) preference.getContext());
+                FilesUtils.INSTANCE.noMedia((Activity) preference.getContext());
             } else {
-                FilesUtils.noMediaRemove((Activity) preference.getContext());
+                FilesUtils.INSTANCE.noMediaRemove((Activity) preference.getContext());
             }
             return true;
         }
