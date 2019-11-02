@@ -25,26 +25,21 @@ package com.signaturemaker.app.application.core.extensions;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
-import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
 import androidx.core.content.FileProvider;
-import com.google.android.material.snackbar.Snackbar;
 import com.signaturemaker.app.BuildConfig;
-import com.signaturemaker.app.R;
 import com.signaturemaker.app.application.utils.Constants;
+import com.signaturemaker.app.data.repositories.SharedPreferencesRepository;
 import com.signaturemaker.app.domain.models.ItemFile;
 import java.io.File;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -68,30 +63,6 @@ public final class Utils {
 
     public static Boolean deleteExit = Constants.DEFAULT_DELETE_EXIT;
 
-    /**
-     * Show Snackbar
-     */
-    public static Snackbar createSnackbar(Activity mActivity, String msg, String actionMsg,
-            final Snackbar.Callback callback) {
-        return Snackbar.make(mActivity.findViewById(android.R.id.content), msg, Snackbar.LENGTH_SHORT)
-                .setAction(actionMsg, view -> {
-                })
-                .setActionTextColor(mActivity.getResources().getColor(R.color.secondaryColor))
-                .addCallback(new Snackbar.Callback() {
-
-                    @Override
-                    public void onDismissed(Snackbar transientBottomBar, int event) {
-                        super.onDismissed(transientBottomBar, event);
-                        callback.onDismissed(transientBottomBar, event);
-                    }
-
-                    @Override
-                    public void onShown(Snackbar sb) {
-                        super.onShown(sb);
-                        callback.onShown(sb);
-                    }
-                });
-    }
 
     public static void defaultColor() {
         penColor = Constants.DEFAULT_PEN_COLOR;
@@ -135,34 +106,6 @@ public final class Utils {
     }
 
     /**
-     * Show Snackbar
-     */
-    public static void displaySnackbar(Activity mActivity, String msg, String actionMsg,
-            final Snackbar.Callback callback) {
-        Snackbar.make(mActivity.findViewById(android.R.id.content), msg, Snackbar.LENGTH_SHORT)
-                .setAction(actionMsg, view -> {
-                })
-                .setActionTextColor(mActivity.getResources().getColor(R.color.secondaryColor))
-                .addCallback(new Snackbar.Callback() {
-
-                    @Override
-                    public void onDismissed(Snackbar transientBottomBar, int event) {
-                        super.onDismissed(transientBottomBar, event);
-                        callback.onDismissed(transientBottomBar, event);
-                    }
-
-                    @Override
-                    public void onShown(Snackbar sb) {
-                        super.onShown(sb);
-                        callback.onShown(sb);
-                    }
-                })
-                .show();
-
-
-    }
-
-    /**
      * Get last time compilation app
      */
     public static String getAppTimeStamp(Context context) {
@@ -181,92 +124,54 @@ public final class Utils {
 
     public static void loadAllPreferences(Context mContext) {
 
-        if (Utils.loadPreference(mContext, Constants.ID_PREF_WALLPAPER, false)) {
-            Utils.wallpaper = loadPreference(mContext, Constants.PREF_WALLPAPER, Constants.DEFAULT_PEN_COLOR);
+        if (SharedPreferencesRepository.INSTANCE.loadPreference(mContext, Constants.ID_PREF_WALLPAPER, false)) {
+            Utils.wallpaper = SharedPreferencesRepository.INSTANCE
+                    .loadPreference(mContext, Constants.PREF_WALLPAPER, Constants.DEFAULT_PEN_COLOR);
         } else {
             Utils.defaultWallpaper();
         }
-        if (Utils.loadPreference(mContext, Constants.ID_PREF_COLOR, false)) {
-            Utils.penColor = loadPreference(mContext, Constants.PREF_COLOR, Constants.DEFAULT_PEN_COLOR);
+        if (SharedPreferencesRepository.INSTANCE.loadPreference(mContext, Constants.ID_PREF_COLOR, false)) {
+            Utils.penColor = SharedPreferencesRepository.INSTANCE
+                    .loadPreference(mContext, Constants.PREF_COLOR, Constants.DEFAULT_PEN_COLOR);
         } else {
             Utils.defaultColor();
         }
-        if (Utils.loadPreference(mContext, Constants.ID_PREF_STROKE, false)) {
-            Utils.minStroke = loadPreference(mContext, Constants.PREF_MIN_TROKE, Constants.DEFAULT_MIN_TROKE);
-            Utils.maxStroke = loadPreference(mContext, Constants.PREF_MAX_TROKE, Constants.DEFAULT_MAX_STROKE);
+        if (SharedPreferencesRepository.INSTANCE.loadPreference(mContext, Constants.ID_PREF_STROKE, false)) {
+            Utils.minStroke = SharedPreferencesRepository.INSTANCE
+                    .loadPreference(mContext, Constants.PREF_MIN_TROKE, Constants.DEFAULT_MIN_TROKE);
+            Utils.maxStroke = SharedPreferencesRepository.INSTANCE
+                    .loadPreference(mContext, Constants.PREF_MAX_TROKE, Constants.DEFAULT_MAX_STROKE);
         } else {
             Utils.defaultStroke();
         }
-        if (Utils.loadPreference(mContext, Constants.ID_PREF_ADVERTISING, false)) {
+        if (SharedPreferencesRepository.INSTANCE.loadPreference(mContext, Constants.ID_PREF_ADVERTISING, false)) {
             Utils.disableAds = true;
         } else {
             Utils.defaultDisableAds();
         }
-        if (Utils.loadPreference(mContext, Constants.ID_PREF_NAME, false)) {
+        if (SharedPreferencesRepository.INSTANCE.loadPreference(mContext, Constants.ID_PREF_NAME, false)) {
             Utils.nameSave = true;
         } else {
             Utils.defaultNameSave();
         }
-        if (Utils.loadPreference(mContext, Constants.ID_PREF_DELETE, false)) {
+        if (SharedPreferencesRepository.INSTANCE.loadPreference(mContext, Constants.ID_PREF_DELETE, false)) {
             Utils.deleteExit = true;
         } else {
             Utils.defaultDeleteExit();
         }
     }
 
-    public static String loadPreference(Context mContext, String key, String value) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        return sharedPreferences.getString(key, value);
-    }
-
-    public static int loadPreference(Context mContext, String key, int value) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        return sharedPreferences.getInt(key, value);
-    }
-
-    public static Boolean loadPreference(Context mContext, String key, Boolean value) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        return sharedPreferences.getBoolean(key, value);
-
-    }
-
     public static void saveAllPreferences(Context mContext) {
-        if (Utils.loadPreference(mContext, Constants.ID_PREF_COLOR, false)) {
-            savePreference(mContext, Constants.PREF_COLOR, Utils.penColor);
+        if (SharedPreferencesRepository.INSTANCE.loadPreference(mContext, Constants.ID_PREF_COLOR, false)) {
+            SharedPreferencesRepository.INSTANCE.savePreference(mContext, Constants.PREF_COLOR, Utils.penColor);
         }
-        if (Utils.loadPreference(mContext, Constants.ID_PREF_STROKE, false)) {
-            savePreference(mContext, Constants.PREF_MIN_TROKE, Utils.minStroke);
-            savePreference(mContext, Constants.PREF_MAX_TROKE, Utils.maxStroke);
+        if (SharedPreferencesRepository.INSTANCE.loadPreference(mContext, Constants.ID_PREF_STROKE, false)) {
+            SharedPreferencesRepository.INSTANCE.savePreference(mContext, Constants.PREF_MIN_TROKE, Utils.minStroke);
+            SharedPreferencesRepository.INSTANCE.savePreference(mContext, Constants.PREF_MAX_TROKE, Utils.maxStroke);
         }
-        if (Utils.loadPreference(mContext, Constants.ID_PREF_WALLPAPER, false)) {
-            savePreference(mContext, Constants.PREF_WALLPAPER, Utils.wallpaper);
+        if (SharedPreferencesRepository.INSTANCE.loadPreference(mContext, Constants.ID_PREF_WALLPAPER, false)) {
+            SharedPreferencesRepository.INSTANCE.savePreference(mContext, Constants.PREF_WALLPAPER, Utils.wallpaper);
         }
-    }
-
-    public static void savePreference(Context mContext, String key, String value) {
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(key, value);
-        editor.commit();
-
-    }
-
-    public static void savePreference(Context mContext, String key, int value) {
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(key, value);
-        editor.commit();
-
-    }
-
-    public static void savePreference(Context mContext, String key, Boolean value) {
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(key, value);
-        editor.commit();
     }
 
     public static void shareSign(Activity mActivity, String name) {
@@ -296,11 +201,6 @@ public final class Utils {
             }
 
         } else {
-          /*  Intent shareIntent = new Intent();
-            shareIntent.setAction(Intent.ACTION_SEND);
-            shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
-            shareIntent.setType("text/plain");
-            mActivity.startActivity(Intent.createChooser(shareIntent, mActivity.getText(R.string.tittle_send)));*/
 
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -314,44 +214,23 @@ public final class Utils {
         }
     }
 
-    /**
-     * Show toats
-     */
-    public static void showToast(Context mContext, String msg, int duration) {
-        Toast.makeText(mContext, msg, duration).show();
-    }
-
-    /**
-     * Show toats, default short duration
-     */
-    public static void showToast(Context mContext, String msg) {
-        showToast(mContext, msg, Toast.LENGTH_SHORT);
-    }
 
     public static void sort(List<ItemFile> list, final int type) {
-        Collections.sort(list, new Comparator<ItemFile>() {
-            @Override
-            public int compare(ItemFile lhs, ItemFile rhs) {
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-                String date1 = lhs.getDate();
-                String date2 = rhs.getDate();
-                Date ddate = null;
-                Date ddate2 = null;
-                try {
-                    ddate = formatter.parse(date1);
-                    ddate2 = formatter.parse(date2);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                return ddate.compareTo(ddate2) * type;
+        Collections.sort(list, (lhs, rhs) -> {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            String date1 = lhs.getDate();
+            String date2 = rhs.getDate();
+            Date ddate = null;
+            Date ddate2 = null;
+            try {
+                ddate = formatter.parse(date1);
+                ddate2 = formatter.parse(date2);
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
+            return ddate.compareTo(ddate2) * type;
         });
-       /* Collections.sort(lista, new Comparator<ItemFile>() {
-            @Override
-            public int compare(ItemFile left, ItemFile right) {
-                return left.getName().compareTo(right.getName()) * type;
-            }
-        });*/
+
     }
 
 

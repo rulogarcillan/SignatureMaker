@@ -47,7 +47,7 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.Utils
-import com.signaturemaker.app.application.core.extensions.Utils.createSnackbar
+import com.signaturemaker.app.application.core.extensions.createSnackBar
 import com.signaturemaker.app.application.core.platform.FilesUtils
 import com.signaturemaker.app.application.core.platform.PermissionsUtils
 import com.signaturemaker.app.application.utils.Constants
@@ -111,21 +111,19 @@ class ListFilesFragment : Fragment() {
                             return true
                         }
                         removeItemAdapter(itemData)
-                        if (activity != null) {
-                            mySnackBar = createSnackbar(activity, itemData.name,
+                        activity?.let {
+                            mySnackBar = it.createSnackBar(itemData.name,
                                 resources.getString(R.string.tittle_undo), object : Snackbar.Callback() {
                                     override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
                                         if (event != 1) {
-                                            if (activity != null) {
-                                                FilesUtils.removeFile(activity, itemData.name)
-                                                if (items.size > 0) {
-                                                    txtMnsNoFiles.visibility = View.GONE
-                                                } else {
-                                                    txtMnsNoFiles.visibility = View.VISIBLE
-                                                }
-                                                loadItemsFiles()
-                                                Utils.sort(items, Utils.sortOrder)
+                                            FilesUtils.removeFile(it, itemData.name)
+                                            if (items.size > 0) {
+                                                txtMnsNoFiles.visibility = View.GONE
+                                            } else {
+                                                txtMnsNoFiles.visibility = View.VISIBLE
                                             }
+                                            loadItemsFiles()
+                                            Utils.sort(items, Utils.sortOrder)
                                         } else {
                                             addItemAdapter(pos, itemData)
                                             loadItemsFiles()
@@ -205,16 +203,16 @@ class ListFilesFragment : Fragment() {
     }
 
     private fun addItemAdapter(pos: Int, item: ItemFile) {
-        items.add(pos, item)
+        adapter?.items?.add(pos, item)
         adapter?.notifyItemInserted(pos)
     }
 
     private fun removeItemAdapter(item: ItemFile): Int {
         val pos = items.indexOf(item)
         Log.d(Constants.TAG, item.name)
-
-        items.remove(item)
+        adapter?.items?.remove(item)
         adapter?.notifyItemRemoved(pos)
+        adapter?.notifyItemRangeChanged(pos, items.size)
         return pos
     }
 

@@ -50,8 +50,8 @@ import com.karumi.dexter.listener.single.PermissionListener
 import com.larswerkman.holocolorpicker.ColorPicker
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.Utils
-import com.signaturemaker.app.application.core.extensions.Utils.showToast
 import com.signaturemaker.app.application.core.extensions.gone
+import com.signaturemaker.app.application.core.extensions.showToast
 import com.signaturemaker.app.application.core.extensions.visible
 import com.signaturemaker.app.application.core.platform.FilesUtils
 import com.signaturemaker.app.application.core.platform.PermissionsUtils
@@ -201,12 +201,12 @@ class SingBoardFragment private constructor() : Fragment(), View.OnClickListener
     override fun onLongClick(view: View): Boolean {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             when (view.id) {
-                R.id.bList -> showToast(context, getString(R.string.title_bList))
-                R.id.bSave -> showToast(context, getString(R.string.title_bSave))
-                R.id.bSaveSend -> showToast(context, getString(R.string.title_bSaveSend))
-                R.id.bColor -> showToast(context, getString(R.string.title_bColor))
-                R.id.bStroke -> showToast(context, getString(R.string.title_bStroke))
-                R.id.bRubber -> showToast(context, getString(R.string.title_bRubber))
+                R.id.bList -> context?.showToast(getString(R.string.title_bList))
+                R.id.bSave -> context?.showToast(getString(R.string.title_bSave))
+                R.id.bSaveSend -> context?.showToast(getString(R.string.title_bSaveSend))
+                R.id.bColor -> context?.showToast(getString(R.string.title_bColor))
+                R.id.bStroke -> context?.showToast(getString(R.string.title_bStroke))
+                R.id.bRubber -> context?.showToast(getString(R.string.title_bRubber))
                 else -> {
                 }
             }
@@ -368,7 +368,7 @@ class SingBoardFragment private constructor() : Fragment(), View.OnClickListener
                         if (share) {
                             Utils.shareSign(activity, mName)
                         }
-                        showToast(activity, resources.getString(R.string.title_save_ok))
+                        context?.showToast(resources.getString(R.string.title_save_ok))
                         activity?.sendBroadcast(
                             Intent(
                                 Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
@@ -377,7 +377,7 @@ class SingBoardFragment private constructor() : Fragment(), View.OnClickListener
                         )
                         clickInterface?.buttonClicked()
                     } else {
-                        showToast(activity, resources.getString(R.string.title_save_ko))
+                        context?.showToast(resources.getString(R.string.title_save_ko))
                     }
                 }
             })
@@ -402,13 +402,13 @@ class SingBoardFragment private constructor() : Fragment(), View.OnClickListener
                 if (share == true) {
                     Utils.shareSign(activity, name)
                 }
-                showToast(activity, resources.getString(R.string.title_save_ok))
+                context?.showToast(resources.getString(R.string.title_save_ok))
                 activity?.sendBroadcast(
                     Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(File(Utils.path + name)))
                 )
                 clickInterface?.buttonClicked()
             } else {
-                showToast(activity, resources.getString(R.string.title_save_ko))
+                context?.showToast(resources.getString(R.string.title_save_ko))
             }
         }
     }
