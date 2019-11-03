@@ -58,6 +58,7 @@ import com.signaturemaker.app.application.core.platform.FilesUtils
 import com.signaturemaker.app.application.core.platform.PermissionsUtils
 import com.signaturemaker.app.application.features.files.ClickInterface
 import com.signaturemaker.app.application.features.files.ListFilesFragment
+import com.signaturemaker.app.application.features.main.MainActivity
 import kotlinx.android.synthetic.main.action_buttons.bColor
 import kotlinx.android.synthetic.main.action_buttons.bList
 import kotlinx.android.synthetic.main.action_buttons.bRubber
@@ -106,7 +107,7 @@ class SingBoardFragment private constructor() : Fragment(), View.OnClickListener
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        showBackButton()
         bList?.let {
             it.setOnClickListener(this)
             it.setOnLongClickListener(this)
@@ -193,9 +194,6 @@ class SingBoardFragment private constructor() : Fragment(), View.OnClickListener
             R.id.bStroke -> showSeekbarStroke()
             R.id.bRubber -> cleanBoard()
             R.id.bWallpaper -> changeWallpaper()
-
-            else -> {
-            }
         }
     }
 
@@ -226,6 +224,14 @@ class SingBoardFragment private constructor() : Fragment(), View.OnClickListener
         }
         Utils.saveAllPreferences(activity)
         selectWallpaper()
+    }
+
+    fun showBackButton() {
+        activity?.let { mActivity ->
+            if (mActivity is MainActivity) {
+                mActivity.supportActionBar?.setDisplayHomeAsUpEnabled(false)
+            }
+        }
     }
 
     /**

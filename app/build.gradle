@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 
@@ -10,8 +11,8 @@ android {
         applicationId "com.signaturemaker.app"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 3008
-        versionName "3.0.8"
+        versionCode 3009
+        versionName "3.0.9"
         vectorDrawables.useSupportLibrary = true
     }
     signingConfigs {
@@ -58,6 +59,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
     implementation "androidx.preference:preference-ktx:1.1.0"
+    implementation "androidx.browser:browser:1.2.0-alpha09"
 
     //permisions
     implementation('com.karumi:dexter:6.0.0')
@@ -74,8 +76,9 @@ dependencies {
     implementation('com.appyvet:materialrangebar:1.4.3')
     //color picker
     implementation('com.larswerkman:HoloColorPicker:1.5')
-    //picasso
-    implementation('com.squareup.picasso:picasso:2.71828')
+    //GLIDE
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
+    kapt 'com.github.bumptech.glide:compiler:4.10.0'
     //apptinro
     implementation 'com.github.apl-devs:appintro:v4.2.3'
 

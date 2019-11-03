@@ -6,8 +6,8 @@ import android.widget.TextView
 import co.dift.ui.SwipeToAction
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.Utils
+import com.signaturemaker.app.application.core.extensions.loadFromUrl
 import com.signaturemaker.app.domain.models.ItemFile
-import com.squareup.picasso.Picasso
 
 class FilesViewHolder(rootView: View) : SwipeToAction.ViewHolder<ItemFile>(rootView) {
 
@@ -24,15 +24,6 @@ class FilesViewHolder(rootView: View) : SwipeToAction.ViewHolder<ItemFile>(rootV
         textDate.text = items.date
         textSize.text = items.size
 
-        if (items.name.endsWith("png") || items.name.endsWith("PNG")) {
-            Picasso.get().load("file:///" + Utils.path + "/" + items.name)
-                .placeholder(R.drawable.ic_png_icon)
-                .error(R.drawable.ic_png_icon).into(iconFile)
-        }
-        if (items.name.endsWith("svg") || items.name.endsWith("SVG")) {
-            Picasso.get().load("file:///" + Utils.path + "/" + items.name)
-                .placeholder(R.drawable.ic_svg_icon)
-                .error(R.drawable.ic_svg_icon).into(iconFile)
-        }
+        iconFile.loadFromUrl("file:///" + Utils.path + "/" + items.name)
     }
 }

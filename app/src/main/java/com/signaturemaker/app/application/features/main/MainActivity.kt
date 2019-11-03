@@ -25,7 +25,6 @@ package com.signaturemaker.app.application.features.main
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.RelativeLayout
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.signaturemaker.app.R
@@ -38,11 +37,11 @@ import com.signaturemaker.app.application.features.files.ListFilesFragment
 import com.signaturemaker.app.application.features.sing.SingBoardFragment
 import kotlinx.android.synthetic.main.activity_main.adView
 import kotlinx.android.synthetic.main.activity_main.containerFiles
+import kotlinx.android.synthetic.main.activity_main.layoutMain
 
 class MainActivity : BaseActivity(), ClickInterface {
 
     private var flagAdvertising: Boolean = false
-    private var layoutMain: RelativeLayout? = null
     private var listFragment: ListFilesFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,8 +63,6 @@ class MainActivity : BaseActivity(), ClickInterface {
         createTableView()
 
         //startChangelog(false)
-
-
 
         initAdvertising()
     }
@@ -116,7 +113,7 @@ class MainActivity : BaseActivity(), ClickInterface {
      */
     private fun hideAdvertising() {
         if (Utils.disableAds && adView != null) {
-            layoutMain?.removeView(adView)
+            layoutMain.removeView(adView)
         }
     }
 
@@ -138,7 +135,7 @@ class MainActivity : BaseActivity(), ClickInterface {
      * show advertising if options change
      */
     private fun showAdvertising() {
-        if (Utils.disableAds != flagAdvertising && !Utils.disableAds) {
+        if (Utils.disableAds != flagAdvertising) {
             val intent = Intent()
             intent.setClass(this, this.javaClass)
             finish()

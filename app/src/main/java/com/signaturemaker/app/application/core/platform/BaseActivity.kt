@@ -31,6 +31,8 @@ import android.view.ContextThemeWrapper
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.content.ContextCompat
 import com.mikepenz.aboutlibraries.Libs
 import com.mikepenz.aboutlibraries.LibsBuilder
 import com.signaturemaker.app.R
@@ -74,9 +76,14 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     private fun openPrivacy() {
-        val browserIntent =
-            Intent(Intent.ACTION_VIEW, Uri.parse("https://info.tuppersoft.com/privacy/privacy_policy_signature.html"))
-        startActivity(browserIntent)
+        val url = "https://info.tuppersoft.com/privacy/privacy_policy_signature.html"
+        val builder = CustomTabsIntent.Builder()
+
+        val customTabsIntent = builder.setToolbarColor(ContextCompat.getColor(this, R.color.primaryDarkColor))
+            .setNavigationBarColor(ContextCompat.getColor(this, R.color.primaryColor)).build()
+        customTabsIntent.intent.flags =
+            Intent.FLAG_ACTIVITY_MULTIPLE_TASK or Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS or Intent.FLAG_ACTIVITY_NO_HISTORY
+        customTabsIntent.launchUrl(this, Uri.parse(url))
     }
 
     /**

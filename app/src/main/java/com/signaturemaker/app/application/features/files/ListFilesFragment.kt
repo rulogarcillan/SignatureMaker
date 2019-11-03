@@ -48,12 +48,12 @@ import com.karumi.dexter.listener.single.PermissionListener
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.Utils
 import com.signaturemaker.app.application.core.extensions.createSnackBar
+import com.signaturemaker.app.application.core.extensions.loadFromUrl
 import com.signaturemaker.app.application.core.platform.FilesUtils
-import com.signaturemaker.app.application.core.platform.FilesUtils.loadItemsFiles
 import com.signaturemaker.app.application.core.platform.PermissionsUtils
+import com.signaturemaker.app.application.features.main.MainActivity
 import com.signaturemaker.app.application.utils.Constants
 import com.signaturemaker.app.domain.models.ItemFile
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.list_files_fragment.recyclerView
 import kotlinx.android.synthetic.main.list_files_fragment.txtMnsNoFiles
 import kotlinx.android.synthetic.main.pathbar.path
@@ -76,6 +76,7 @@ class ListFilesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setHasOptionsMenu(true)
+        showBackButton()
         loadItemsFiles()
         adapter = AdapterFiles(items) //Agregamos los items al adapter
 
@@ -92,7 +93,7 @@ class ListFilesFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
 
-        val swipeToAction = SwipeToAction(recyclerView,
+        SwipeToAction(recyclerView,
             object : SwipeToAction.SwipeListener<ItemFile> {
 
                 override fun onClick(itemData: ItemFile) {
@@ -143,6 +144,14 @@ class ListFilesFragment : Fragment() {
                     return true
                 }
             })
+    }
+
+    private fun showBackButton() {
+        activity?.let { mActivity ->
+            if (mActivity is MainActivity) {
+                mActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            }
+        }
     }
 
     override fun onResume() {
@@ -223,14 +232,7 @@ class ListFilesFragment : Fragment() {
             //alertDialog.setTitle(R.string.tittle_name_of_the_file);
             val view = it.layoutInflater.inflate(R.layout.imagen_dialog, null)
             val image = view.findViewById<ImageView>(R.id.image)
-            if (itemData.name.endsWith("png") || itemData.name.endsWith("PNG")) {
-                Picasso.get().load("file:///" + Utils.path + "/" + itemData.name).placeholder(R.drawable.ic_png_icon)
-                    .error(R.drawable.ic_png_icon).into(image)
-            }
-            if (itemData.name.endsWith("svg") || itemData.name.endsWith("SVG")) {
-                Picasso.get().load("file:///" + Utils.path + "/" + itemData.name).placeholder(R.drawable.ic_svg_icon)
-                    .error(R.drawable.ic_svg_icon).into(image)
-            }
+            image.loadFromUrl("file:///" + Utils.path + "/" + itemData.name)
             alertDialog.setCancelable(true)
             alertDialog.setView(view)
             alertDialog.show()
