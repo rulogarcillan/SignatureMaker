@@ -11,8 +11,8 @@ android {
         applicationId "com.signaturemaker.app"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 3009
-        versionName "3.0.9"
+        versionCode 3010
+        versionName "3.0.10"
         vectorDrawables.useSupportLibrary = true
     }
     signingConfigs {
