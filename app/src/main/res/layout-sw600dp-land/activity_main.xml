@@ -12,7 +12,6 @@
         android:orientation="horizontal">
 
         <FrameLayout
-
             android:id="@+id/containerFiles"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -23,7 +22,7 @@
         <View
             android:layout_width="6dp"
             android:layout_height="match_parent"
-            android:background="?attr/colorPrimary"></View>
+            android:background="?attr/colorPrimary" />
 
         <FrameLayout
             android:id="@+id/container"
@@ -43,6 +42,6 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="center_horizontal|top"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id"></com.google.android.gms.ads.AdView>
+        ads:adUnitId="@string/banner_ad_unit_id" />
 
 </RelativeLayout>

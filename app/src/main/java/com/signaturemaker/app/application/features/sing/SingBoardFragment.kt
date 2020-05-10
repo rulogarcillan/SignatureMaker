@@ -34,13 +34,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.PopupMenu
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.appyvet.materialrangebar.RangeBar
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
+import com.getbase.floatingactionbutton.FloatingActionButton
 import com.getbase.floatingactionbutton.FloatingActionsMenu
 import com.github.gcacace.signaturepad.views.SignaturePad
 import com.karumi.dexter.PermissionToken
@@ -49,6 +54,7 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import com.larswerkman.holocolorpicker.ColorPicker
+import com.larswerkman.holocolorpicker.SVBar
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.Utils
 import com.signaturemaker.app.application.core.extensions.gone
@@ -59,34 +65,40 @@ import com.signaturemaker.app.application.core.platform.PermissionsUtils
 import com.signaturemaker.app.application.features.files.ClickInterface
 import com.signaturemaker.app.application.features.files.ListFilesFragment
 import com.signaturemaker.app.application.features.main.MainActivity
-import kotlinx.android.synthetic.main.action_buttons.bColor
-import kotlinx.android.synthetic.main.action_buttons.bList
-import kotlinx.android.synthetic.main.action_buttons.bRubber
-import kotlinx.android.synthetic.main.action_buttons.bSave
-import kotlinx.android.synthetic.main.action_buttons.bSaveSend
-import kotlinx.android.synthetic.main.action_buttons.bStroke
-import kotlinx.android.synthetic.main.action_buttons.bWallpaper
-import kotlinx.android.synthetic.main.action_buttons.fabLeft
-import kotlinx.android.synthetic.main.action_buttons.fabUp
-import kotlinx.android.synthetic.main.color_picker.coloPickerLayout
-import kotlinx.android.synthetic.main.color_picker.picker
-import kotlinx.android.synthetic.main.color_picker.svbar
-import kotlinx.android.synthetic.main.sing_board_fragment.layoutWallapaper
-import kotlinx.android.synthetic.main.sing_board_fragment.singBoard
-import kotlinx.android.synthetic.main.sing_board_fragment.txtSingHere
-import kotlinx.android.synthetic.main.stroke_sliders.rangeBar
-import kotlinx.android.synthetic.main.stroke_sliders.rangeSeekBarLayout
+
+
 import java.io.File
 
 /**
  * A placeholder fragment containing a simple view.
  */
-class SingBoardFragment private constructor() : Fragment(), View.OnClickListener, View.OnLongClickListener {
+class SingBoardFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
 
     private var clickInterface: ClickInterface? = null
     private var runningAnimationSeek: YoYo.YoYoString? = null
     private var runningAnimationColor: YoYo.YoYoString? = null
     private var runningAnimation: YoYo.YoYoString? = null
+    private lateinit var singBoard: SignaturePad
+
+    private lateinit var bColor: FloatingActionButton
+    private lateinit var bList: FloatingActionButton
+    private lateinit var bRubber: FloatingActionButton
+    private lateinit var bSave: FloatingActionButton
+    private lateinit var bSaveSend: FloatingActionButton
+    private lateinit var bStroke: FloatingActionButton
+    private lateinit var bWallpaper: FloatingActionButton
+    private lateinit var fabLeft: FloatingActionsMenu
+    private lateinit var fabUp: FloatingActionsMenu
+
+    private lateinit var coloPickerLayout: LinearLayout
+    private lateinit var picker: ColorPicker
+    private lateinit var svbar: SVBar
+
+    private lateinit var layoutWallapaper: ConstraintLayout
+    private lateinit var txtSingHere: TextView
+
+    private lateinit var rangeBar: RangeBar
+    private lateinit var rangeSeekBarLayout: LinearLayout
 
     companion object {
         fun newInstance(): SingBoardFragment = SingBoardFragment()
@@ -102,7 +114,32 @@ class SingBoardFragment private constructor() : Fragment(), View.OnClickListener
         savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.sing_board_fragment, container, false)
+        val view = inflater.inflate(R.layout.sing_board_fragment, container, false)
+        singBoard = view.findViewById(R.id.singBoard)
+        singBoard.isSaveEnabled = false
+
+        bColor = view.findViewById(R.id.bColor)
+        bList = view.findViewById(R.id.bList)
+        bRubber = view.findViewById(R.id.bRubber)
+        bSave = view.findViewById(R.id.bSave)
+        bSaveSend = view.findViewById(R.id.bSaveSend)
+        bStroke = view.findViewById(R.id.bStroke)
+        bWallpaper = view.findViewById(R.id.bWallpaper)
+        fabLeft = view.findViewById(R.id.fabLeft)
+        fabUp = view.findViewById(R.id.fabUp)
+
+        coloPickerLayout = view.findViewById(R.id.coloPickerLayout)
+        picker = view.findViewById(R.id.picker)
+        svbar = view.findViewById(R.id.svbar)
+
+        layoutWallapaper = view.findViewById(R.id.layoutWallapaper)
+        txtSingHere = view.findViewById(R.id.txtSingHere)
+
+        rangeBar = view.findViewById(R.id.rangeBar)
+        rangeSeekBarLayout = view.findViewById(R.id.rangeSeekBarLayout)
+
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

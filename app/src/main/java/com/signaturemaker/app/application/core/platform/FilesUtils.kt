@@ -30,7 +30,7 @@ object FilesUtils {
         var output = name
 
         for (i in original.indices) {
-            output = output.replace(original[i], ascii[i]).toLowerCase().trim { it <= ' ' }
+            output = output.replace(original[i], ascii[i]).toLowerCase(Locale.ROOT).trim { it <= ' ' }
         }
         return output
     }
@@ -88,19 +88,20 @@ object FilesUtils {
         val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
         if (folder.exists()) {
             files = folder.listFiles()
+            files?.let {
+                for (file in files) {
+                    val myDate = Date(file.lastModified())
+                    val tam = (file.length() / 1024).toString() + " KB"
+                    val name = file.name
 
-            for (file in files) {
-                val myDate = Date(file.lastModified())
-                val tam = (file.length() / 1024).toString() + " KB"
-                val name = file.name
-
-                if ((name.contains(".png") || name.contains(".PNG") || name.contains(".svg") || name.contains(".SVG")) && name.substring(
-                        0,
-                        3
-                    ) == "SM_"
-                ) {
-                    val item = ItemFile(name, dateFormat.format(myDate), tam)
-                    arrayItems.add(item)
+                    if ((name.contains(".png") || name.contains(".PNG") || name.contains(".svg") || name.contains(".SVG")) && name.substring(
+                            0,
+                            3
+                        ) == "SM_"
+                    ) {
+                        val item = ItemFile(name, dateFormat.format(myDate), tam)
+                        arrayItems.add(item)
+                    }
                 }
             }
         }
@@ -109,30 +110,32 @@ object FilesUtils {
         return arrayItems
     }
 
-    fun moveFiles(oldPaht: String, mActivity: Activity) {
+    fun moveFiles(oldPath: String, mActivity: Activity) {
 
-        if (oldPaht != Utils.path) {
+        if (oldPath != Utils.path) {
             val files: Array<File>?
-            val folder = File(oldPaht)
+            val folder = File(oldPath)
 
             if (folder.exists()) {
                 files = folder.listFiles()
-                for (file in files) {
+                files?.let {
+                    for (file in files) {
 
-                    val name = file.name
+                        val name = file.name
 
-                    if ((name.contains(".png") || name.contains(".PNG") || name.contains(".svg") || name
-                            .contains(".SVG")) && name.substring(0, 2) == "SM" || name == ".nomedia"
-                    ) {
+                        if ((name.contains(".png") || name.contains(".PNG") || name.contains(".svg") || name
+                                .contains(".SVG")) && name.substring(0, 2) == "SM" || name == ".nomedia"
+                        ) {
 
-                        file.renameTo(File(Utils.path + "/" + name))
-                        deleteScanFile(mActivity, file)
-                        mActivity.sendBroadcast(
-                            Intent(
-                                Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
-                                Uri.parse(Utils.path + "/" + name)
-                            )
-                        ) //nueva
+                            file.renameTo(File(Utils.path + "/" + name))
+                            deleteScanFile(mActivity, file)
+                            mActivity.sendBroadcast(
+                                Intent(
+                                    Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                                    Uri.parse(Utils.path + "/" + name)
+                                )
+                            ) //nueva
+                        }
                     }
                 }
             }
@@ -182,8 +185,10 @@ object FilesUtils {
                         val files: Array<File>?
                         if (folder.exists()) {
                             files = folder.listFiles()
-                            for (file in files) {
-                                mActivity.contentResolver.delete(Uri.parse(file.absolutePath), null, null)
+                            files?.let {
+                                for (file in files) {
+                                    mActivity.contentResolver.delete(Uri.parse(file.absolutePath), null, null)
+                                }
                             }
                         }
 
@@ -208,12 +213,13 @@ object FilesUtils {
         }
     }
 
-    fun saveBitmapFile(bitmap: Bitmap, name: String): Boolean {
-
-        val file = File(Utils.path + name)
-        createFolder(Utils.path)
-
+    fun saveBitmapFile(bitmap: Bitmap?, name: String): Boolean {
+        if (bitmap == null) {
+            return false
+        }
         try {
+            val file = File(Utils.path + name)
+            createFolder(Utils.path)
             file.createNewFile()
             val os = FileOutputStream(file)
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, os)
@@ -222,7 +228,6 @@ object FilesUtils {
             e.printStackTrace()
             return false
         }
-
         return true
     }
 

@@ -85,14 +85,11 @@ public class ChooseFolder extends LinearLayout {
         list.setItemAnimator(new DefaultItemAnimator());
         list.setHasFixedSize(true);
         list.setAdapter(mAdapter);
-        mAdapter.SetOnItemClickListener(new AdapterExplorer.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                if (position == 0) {
-                    setPath(Files.getPathPreviousFolder(path));
-                } else {
-                    setPath(genPathClickFolder(items.get(position)));
-                }
+        mAdapter.SetOnItemClickListener((view, position) -> {
+            if (position == 0) {
+                setPath(Files.getPathPreviousFolder(path));
+            } else {
+                setPath(genPathClickFolder(items.get(position)));
             }
         });
 

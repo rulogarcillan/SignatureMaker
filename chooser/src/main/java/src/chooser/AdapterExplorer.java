@@ -36,7 +36,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class AdapterExplorer extends RecyclerView.Adapter<AdapterExplorer.ViewHolder> {
 
 
-    private List<String> items = new ArrayList<>();
+    private List<String> items;
 
     OnItemClickListener mItemClickListener;
 

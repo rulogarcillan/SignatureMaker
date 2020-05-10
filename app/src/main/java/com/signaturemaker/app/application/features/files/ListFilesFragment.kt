@@ -33,10 +33,12 @@ import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import co.dift.ui.SwipeToAction
 import com.google.android.material.snackbar.Snackbar
@@ -54,8 +56,6 @@ import com.signaturemaker.app.application.core.platform.PermissionsUtils
 import com.signaturemaker.app.application.features.main.MainActivity
 import com.signaturemaker.app.application.utils.Constants
 import com.signaturemaker.app.domain.models.ItemFile
-import kotlinx.android.synthetic.main.list_files_fragment.recyclerView
-import kotlinx.android.synthetic.main.list_files_fragment.txtMnsNoFiles
 import kotlinx.android.synthetic.main.pathbar.path
 
 class ListFilesFragment : Fragment() {
@@ -63,6 +63,7 @@ class ListFilesFragment : Fragment() {
     private var adapter: AdapterFiles? = null
     private val items: MutableList<ItemFile> = mutableListOf()
     private var mySnackBar: Snackbar? = null
+    private lateinit var txtMnsNoFiles: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -74,6 +75,9 @@ class ListFilesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
+        txtMnsNoFiles = view.findViewById(R.id.txtMnsNoFiles)
 
         setHasOptionsMenu(true)
         showBackButton()
