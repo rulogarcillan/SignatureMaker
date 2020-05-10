@@ -23,6 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 
 package com.signaturemaker.app.application.core.platform
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -90,17 +91,24 @@ abstract class BaseActivity : AppCompatActivity() {
      * Star Activity to rate it
      */
     private fun startRate() {
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse("market://details?id=com.signaturemaker.app")
-        startActivity(intent)
+        try {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("market://details?id=com.signaturemaker.app")
+            startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+        }
     }
 
     /**
      * Start activity my others play store apps
      */
     private fun startMoreApps() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pub:Raúl R."))
-        startActivity(intent)
+        try {
+
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pub:Raúl R."))
+            startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+        }
     }
 
     /**

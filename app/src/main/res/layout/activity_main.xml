@@ -10,7 +10,7 @@
     tools:context=".application.features.main.MainActivity">
 
 
-    <include layout="@layout/content_main"></include>
+    <include layout="@layout/content_main" />
 
 
     <com.google.android.gms.ads.AdView
@@ -18,11 +18,11 @@
         android:id="@+id/adView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center_horizontal|top"
         ads:adSize="BANNER"
-        android:layout_alignParentRight="true"
-        ads:adUnitId="@string/banner_ad_unit_id"></com.google.android.gms.ads.AdView>
+        ads:adUnitId="@string/banner_ad_unit_id" />
 
 
 </RelativeLayout>

@@ -23,37 +23,23 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 package src.chooser;
 
 import android.os.Environment;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public final class Files {
+final class Files {
 
 
-    public static final String root = Environment.getExternalStorageDirectory().getAbsolutePath();
+    static final String root = Environment.getExternalStorageDirectory().getAbsolutePath();
 
-    public static ArrayList<String> loadItems(String path) {
-        File[] files;
-        File folder;
-        ArrayList<String> arrayItems = new ArrayList<>();
-        arrayItems.add("..");
-
-        folder = new File(path);
-        if (folder.exists()) {
-            files = folder.listFiles();
-            Arrays.sort(files);
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    arrayItems.add(file.getName());
-                }
-            }
+    static void addFolder(String path) {
+        File file = new File(path);
+        if (!file.isDirectory()) {
+            file.mkdirs();
         }
-        return arrayItems;
-
     }
 
-    public static String getPathPreviousFolder(String path) {
+    static String getPathPreviousFolder(String path) {
 
         File folder = new File(path);
         String previousPath = root;
@@ -63,11 +49,26 @@ public final class Files {
         return previousPath;
     }
 
+    static ArrayList<String> loadItems(String path) {
+        File[] files;
+        File folder;
+        ArrayList<String> arrayItems = new ArrayList<>();
+        arrayItems.add("..");
 
-    public static void addFolder(String path) {
-        File file = new File(path);
-        if (!file.isDirectory()) {
-            file.mkdirs();
+        folder = new File(path);
+        if (folder.exists()) {
+            files = folder.listFiles();
+            if (files != null) {
+                Arrays.sort(files);
+                for (File file : files) {
+                    if (file.isDirectory()) {
+                        arrayItems.add(file.getName());
+                    }
+                }
+            }
+
         }
+        return arrayItems;
+
     }
 }
