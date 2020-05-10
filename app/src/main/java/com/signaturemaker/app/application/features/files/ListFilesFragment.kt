@@ -33,12 +33,10 @@ import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import co.dift.ui.SwipeToAction
 import com.google.android.material.snackbar.Snackbar
@@ -55,29 +53,29 @@ import com.signaturemaker.app.application.core.platform.FilesUtils
 import com.signaturemaker.app.application.core.platform.PermissionsUtils
 import com.signaturemaker.app.application.features.main.MainActivity
 import com.signaturemaker.app.application.utils.Constants
+import com.signaturemaker.app.databinding.ListFilesFragmentBinding
 import com.signaturemaker.app.domain.models.ItemFile
-import kotlinx.android.synthetic.main.pathbar.path
 
 class ListFilesFragment : Fragment() {
 
     private var adapter: AdapterFiles? = null
     private val items: MutableList<ItemFile> = mutableListOf()
     private var mySnackBar: Snackbar? = null
-    private lateinit var txtMnsNoFiles: TextView
+    private var _binding: ListFilesFragmentBinding? = null
+    private val binding get() = _binding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.list_files_fragment, container, false)
+        _binding = ListFilesFragmentBinding.inflate(inflater, container, false)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
-        txtMnsNoFiles = view.findViewById(R.id.txtMnsNoFiles)
 
         setHasOptionsMenu(true)
         showBackButton()
@@ -85,19 +83,19 @@ class ListFilesFragment : Fragment() {
         adapter = AdapterFiles(items) //Agregamos los items al adapter
 
         //definimos el recycler y agregamos el adaptaer
-        recyclerView.setHasFixedSize(true)
+        binding?.recyclerView?.setHasFixedSize(true)
         val layoutManager = StaggeredGridLayoutManager(
             1,
             StaggeredGridLayoutManager.VERTICAL
         )
-        recyclerView.layoutManager = layoutManager
-        recyclerView.itemAnimator = DefaultItemAnimator()
+        binding?.recyclerView?.layoutManager = layoutManager
+        binding?.recyclerView?.itemAnimator = DefaultItemAnimator()
         val itemDecoration = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
-        recyclerView.addItemDecoration(itemDecoration)
-        recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = adapter
+        binding?.recyclerView?.addItemDecoration(itemDecoration)
+        binding?.recyclerView?.setHasFixedSize(true)
+        binding?.recyclerView?.adapter = adapter
 
-        SwipeToAction(recyclerView,
+        SwipeToAction(binding?.recyclerView,
             object : SwipeToAction.SwipeListener<ItemFile> {
 
                 override fun onClick(itemData: ItemFile) {
@@ -122,9 +120,9 @@ class ListFilesFragment : Fragment() {
                                         if (event != 1) {
                                             FilesUtils.removeFile(mActivity, itemData.name)
                                             if (items.size > 0) {
-                                                txtMnsNoFiles.visibility = View.GONE
+                                                binding?.txtMnsNoFiles?.visibility = View.GONE
                                             } else {
-                                                txtMnsNoFiles.visibility = View.VISIBLE
+                                                binding?.txtMnsNoFiles?.visibility = View.VISIBLE
                                             }
                                             Utils.sort(mAdapter.items, Utils.sortOrder)
                                         } else {
@@ -161,7 +159,9 @@ class ListFilesFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         reloadFiles()
-        path.text = Utils.path.replace(Constants.ROOT, "/sdcard")
+        context?.let {
+            binding?.pathbar?.path?.text = Utils.path.replace(Constants.ROOT, "/sdcard")
+        }
     }
 
     override fun onDestroyView() {
@@ -170,6 +170,7 @@ class ListFilesFragment : Fragment() {
                 it.dismiss()
             }
         }
+        _binding = null
         super.onDestroyView()
     }
 
@@ -182,9 +183,9 @@ class ListFilesFragment : Fragment() {
                 items.clear()
                 items.addAll(FilesUtils.loadItemsFiles())
                 if (items.size > 0) {
-                    txtMnsNoFiles.visibility = View.GONE
+                    binding?.txtMnsNoFiles?.visibility = View.GONE
                 } else {
-                    txtMnsNoFiles.visibility = View.VISIBLE
+                    binding?.txtMnsNoFiles?.visibility = View.VISIBLE
                 }
             }
 

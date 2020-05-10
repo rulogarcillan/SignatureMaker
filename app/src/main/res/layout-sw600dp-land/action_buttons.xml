@@ -10,7 +10,7 @@
         fab:fab_colorNormal="?attr/colorPrimary"
         fab:fab_colorPressed="?attr/colorPrimary"
         fab:fab_icon="@drawable/ic_wallpaper"
-        fab:fab_size="mini"/>
+        fab:fab_size="mini" />
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/fabLeft"
@@ -27,21 +27,21 @@
             android:id="@+id/bSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:tooltipText="@string/title_bSave"
             fab:fab_colorNormal="@color/buttonBlue"
             fab:fab_colorPressed="@color/colorPrimaryLight"
             fab:fab_icon="@drawable/ic_action_save"
-            fab:fab_size="mini"
-            android:tooltipText="@string/title_bSave" />
+            fab:fab_size="mini" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/bSaveSend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:tooltipText="@string/title_bSaveSend"
             fab:fab_colorNormal="@color/buttonBlue"
             fab:fab_colorPressed="@color/colorPrimaryLight"
             fab:fab_icon="@drawable/ic_action_upload"
-            fab:fab_size="mini"
-            android:tooltipText="@string/title_bSaveSend" />
+            fab:fab_size="mini" />
 
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
@@ -64,31 +64,31 @@
             android:id="@+id/bColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:tooltipText="@string/title_bColor"
             fab:fab_colorNormal="@color/colorPenDefault"
             fab:fab_colorPressed="@color/colorPrimaryLight"
             fab:fab_icon="@drawable/ic_action_palette"
-            fab:fab_size="mini"
-            android:tooltipText="@string/title_bColor"/>
+            fab:fab_size="mini" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/bStroke"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:tooltipText="@string/title_bStroke"
             fab:fab_colorNormal="@color/buttonOrange"
             fab:fab_colorPressed="@color/colorPrimaryLight"
             fab:fab_icon="@drawable/ic_action_stroke"
-            fab:fab_size="mini"
-            android:tooltipText="@string/title_bStroke"/>
+            fab:fab_size="mini" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/bRubber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:tooltipText="@string/title_bRubber"
             fab:fab_colorNormal="@color/buttonOrange"
             fab:fab_colorPressed="@color/colorPrimaryLight"
             fab:fab_icon="@drawable/ic_action_rubber"
-            fab:fab_size="mini"
-            android:tooltipText="@string/title_bRubber"/>
+            fab:fab_size="mini" />
 
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>

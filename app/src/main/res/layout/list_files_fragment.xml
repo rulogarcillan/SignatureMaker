@@ -7,7 +7,9 @@
     android:orientation="vertical"
     tools:layout_width="match_parent">
 
-    <include layout="@layout/pathbar"></include>
+    <include
+        android:id="@+id/pathbar"
+        layout="@layout/pathbar" />
 
     <RelativeLayout
         android:layout_width="match_parent"

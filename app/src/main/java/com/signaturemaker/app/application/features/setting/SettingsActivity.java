@@ -188,38 +188,38 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
      */
     private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener
             = (preference, value) -> {
-                String stringValue = value.toString();
+        String stringValue = value.toString();
 
-                if (preference instanceof ListPreference) {
-                    // For list preferences, look up the correct display value in
-                    // the preference's 'entries' list.
-                    ListPreference listPreference = (ListPreference) preference;
-                    int index = listPreference.findIndexOfValue(stringValue);
+        if (preference instanceof ListPreference) {
+            // For list preferences, look up the correct display value in
+            // the preference's 'entries' list.
+            ListPreference listPreference = (ListPreference) preference;
+            int index = listPreference.findIndexOfValue(stringValue);
 
-                    // Set the summary to reflect the new value.
-                    preference.setSummary(
-                            index >= 0
-                                    ? listPreference.getEntries()[index]
-                                    : null);
+            // Set the summary to reflect the new value.
+            preference.setSummary(
+                    index >= 0
+                            ? listPreference.getEntries()[index]
+                            : null);
 
 
-                } else {
-                    // For all other preferences, set the summary to the value's
-                    // simple string representation.
-                    preference.setSummary(stringValue);
-                }
-                return true;
-            };
+        } else {
+            // For all other preferences, set the summary to the value's
+            // simple string representation.
+            preference.setSummary(stringValue);
+        }
+        return true;
+    };
 
     private static Preference.OnPreferenceChangeListener sBindPreferenceGalleryListener
             = (preference, o) -> {
-                if ((Boolean) o) {
-                    FilesUtils.INSTANCE.noMedia((Activity) preference.getContext());
-                } else {
-                    FilesUtils.INSTANCE.noMediaRemove((Activity) preference.getContext());
-                }
-                return true;
-            };
+        if ((Boolean) o) {
+            FilesUtils.INSTANCE.noMedia((Activity) preference.getContext());
+        } else {
+            FilesUtils.INSTANCE.noMediaRemove((Activity) preference.getContext());
+        }
+        return true;
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -34,18 +34,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.PopupMenu
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.appyvet.materialrangebar.RangeBar
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
-import com.getbase.floatingactionbutton.FloatingActionButton
 import com.getbase.floatingactionbutton.FloatingActionsMenu
 import com.github.gcacace.signaturepad.views.SignaturePad
 import com.karumi.dexter.PermissionToken
@@ -54,7 +49,6 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import com.larswerkman.holocolorpicker.ColorPicker
-import com.larswerkman.holocolorpicker.SVBar
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.Utils
 import com.signaturemaker.app.application.core.extensions.gone
@@ -65,8 +59,7 @@ import com.signaturemaker.app.application.core.platform.PermissionsUtils
 import com.signaturemaker.app.application.features.files.ClickInterface
 import com.signaturemaker.app.application.features.files.ListFilesFragment
 import com.signaturemaker.app.application.features.main.MainActivity
-
-
+import com.signaturemaker.app.databinding.SingBoardFragmentBinding
 import java.io.File
 
 /**
@@ -78,27 +71,9 @@ class SingBoardFragment : Fragment(), View.OnClickListener, View.OnLongClickList
     private var runningAnimationSeek: YoYo.YoYoString? = null
     private var runningAnimationColor: YoYo.YoYoString? = null
     private var runningAnimation: YoYo.YoYoString? = null
-    private lateinit var singBoard: SignaturePad
 
-    private lateinit var bColor: FloatingActionButton
-    private lateinit var bList: FloatingActionButton
-    private lateinit var bRubber: FloatingActionButton
-    private lateinit var bSave: FloatingActionButton
-    private lateinit var bSaveSend: FloatingActionButton
-    private lateinit var bStroke: FloatingActionButton
-    private lateinit var bWallpaper: FloatingActionButton
-    private lateinit var fabLeft: FloatingActionsMenu
-    private lateinit var fabUp: FloatingActionsMenu
-
-    private lateinit var coloPickerLayout: LinearLayout
-    private lateinit var picker: ColorPicker
-    private lateinit var svbar: SVBar
-
-    private lateinit var layoutWallapaper: ConstraintLayout
-    private lateinit var txtSingHere: TextView
-
-    private lateinit var rangeBar: RangeBar
-    private lateinit var rangeSeekBarLayout: LinearLayout
+    private var _binding: SingBoardFragmentBinding? = null
+    private val binding get() = _binding
 
     companion object {
         fun newInstance(): SingBoardFragment = SingBoardFragment()
@@ -114,60 +89,45 @@ class SingBoardFragment : Fragment(), View.OnClickListener, View.OnLongClickList
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.sing_board_fragment, container, false)
-        singBoard = view.findViewById(R.id.singBoard)
-        singBoard.isSaveEnabled = false
+        _binding = SingBoardFragmentBinding.inflate(inflater, container, false)
+        val view = binding?.root
 
-        bColor = view.findViewById(R.id.bColor)
-        bList = view.findViewById(R.id.bList)
-        bRubber = view.findViewById(R.id.bRubber)
-        bSave = view.findViewById(R.id.bSave)
-        bSaveSend = view.findViewById(R.id.bSaveSend)
-        bStroke = view.findViewById(R.id.bStroke)
-        bWallpaper = view.findViewById(R.id.bWallpaper)
-        fabLeft = view.findViewById(R.id.fabLeft)
-        fabUp = view.findViewById(R.id.fabUp)
-
-        coloPickerLayout = view.findViewById(R.id.coloPickerLayout)
-        picker = view.findViewById(R.id.picker)
-        svbar = view.findViewById(R.id.svbar)
-
-        layoutWallapaper = view.findViewById(R.id.layoutWallapaper)
-        txtSingHere = view.findViewById(R.id.txtSingHere)
-
-        rangeBar = view.findViewById(R.id.rangeBar)
-        rangeSeekBarLayout = view.findViewById(R.id.rangeSeekBarLayout)
-
+        binding?.singBoard?.isSaveEnabled = false
 
         return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showBackButton()
-        bList?.let {
+        binding?.actionsButtons?.bList?.let {
             it.setOnClickListener(this)
             it.setOnLongClickListener(this)
         }
 
-        bSave.setOnClickListener(this)
-        bSaveSend.setOnClickListener(this)
-        bColor.setOnClickListener(this)
-        bStroke.setOnClickListener(this)
-        bRubber.setOnClickListener(this)
-        bWallpaper.setOnClickListener(this)
+        binding?.actionsButtons?.bSave?.setOnClickListener(this)
+        binding?.actionsButtons?.bSaveSend?.setOnClickListener(this)
+        binding?.actionsButtons?.bColor?.setOnClickListener(this)
+        binding?.actionsButtons?.bStroke?.setOnClickListener(this)
+        binding?.actionsButtons?.bRubber?.setOnClickListener(this)
+        binding?.actionsButtons?.bWallpaper?.setOnClickListener(this)
 
-        bSave.setOnLongClickListener(this)
-        bSaveSend.setOnLongClickListener(this)
-        bColor.setOnLongClickListener(this)
-        bStroke.setOnLongClickListener(this)
-        bRubber.setOnLongClickListener(this)
+        binding?.actionsButtons?.bSave?.setOnLongClickListener(this)
+        binding?.actionsButtons?.bSaveSend?.setOnLongClickListener(this)
+        binding?.actionsButtons?.bColor?.setOnLongClickListener(this)
+        binding?.actionsButtons?.bStroke?.setOnLongClickListener(this)
+        binding?.actionsButtons?.bRubber?.setOnLongClickListener(this)
 
         //add bar to picker
-        picker.addSVBar(svbar)
+        binding?.cpColorPicker?.picker?.addSVBar(binding?.cpColorPicker?.svbar)
 
         //listener floating actions buttons
-        fabUp.setOnFloatingActionsMenuUpdateListener(object :
+        binding?.actionsButtons?.fabUp?.setOnFloatingActionsMenuUpdateListener(object :
             FloatingActionsMenu.OnFloatingActionsMenuUpdateListener {
             override fun onMenuCollapsed() {
                 collapseFabs()
@@ -179,10 +139,10 @@ class SingBoardFragment : Fragment(), View.OnClickListener, View.OnLongClickList
         })
 
         //listener board
-        singBoard.setOnSignedListener(object : SignaturePad.OnSignedListener {
+        binding?.singBoard?.setOnSignedListener(object : SignaturePad.OnSignedListener {
 
             override fun onClear() {
-                txtSingHere?.visible()
+                binding?.txtSingHere?.visible()
             }
 
             override fun onSigned() {
@@ -190,26 +150,26 @@ class SingBoardFragment : Fragment(), View.OnClickListener, View.OnLongClickList
             }
 
             override fun onStartSigning() {
-                txtSingHere?.gone()
+                binding?.txtSingHere?.gone()
                 hideColorPicker()
                 hideSeekbarStroke()
             }
         })
 
         //listener rangebar
-        rangeBar.setOnRangeBarChangeListener { rangeBar, leftPinIndex, rightPinIndex, leftPinValue, rightPinValue ->
+        binding?.stSlider?.rangeBar?.setOnRangeBarChangeListener { rangeBar, leftPinIndex, rightPinIndex, leftPinValue, rightPinValue ->
             Utils.minStroke = leftPinIndex
             Utils.maxStroke = rightPinIndex
-            singBoard.setMinWidth(Utils.minStroke.toFloat())
-            singBoard.setMaxWidth(Utils.maxStroke.toFloat())
+            binding?.singBoard?.setMinWidth(Utils.minStroke.toFloat())
+            binding?.singBoard?.setMaxWidth(Utils.maxStroke.toFloat())
             Utils.saveAllPreferences(context)
         }
 
         //listerner picker
-        picker.onColorChangedListener = ColorPicker.OnColorChangedListener { i ->
+        binding?.cpColorPicker?.picker?.onColorChangedListener = ColorPicker.OnColorChangedListener { i ->
             Utils.penColor = i
-            bColor.colorNormal = Utils.penColor
-            singBoard.setPenColor(Utils.penColor)
+            binding?.actionsButtons?.bColor?.colorNormal = Utils.penColor
+            binding?.singBoard?.setPenColor(Utils.penColor)
             Utils.saveAllPreferences(context)
         }
     }
@@ -281,7 +241,7 @@ class SingBoardFragment : Fragment(), View.OnClickListener, View.OnLongClickList
                 override fun onAnimationCancel(animation: Animator) {}
 
                 override fun onAnimationEnd(animation: Animator) {
-                    singBoard.apply {
+                    binding?.singBoard?.apply {
                         clear()
                         alpha = 1f
                         scaleX = 1f
@@ -303,7 +263,7 @@ class SingBoardFragment : Fragment(), View.OnClickListener, View.OnLongClickList
             })
 
         if (runningAnimation == null || runningAnimation?.isRunning == false) {
-            runningAnimation = animation.playOn(singBoard)
+            runningAnimation = animation.playOn(binding?.singBoard)
         }
     }
 
@@ -311,8 +271,8 @@ class SingBoardFragment : Fragment(), View.OnClickListener, View.OnLongClickList
      * Method for collapse the fabs buttons
      */
     private fun collapseFabs() {
-        fabUp.collapse()
-        fabLeft.collapse()
+        binding?.actionsButtons?.fabUp?.collapse()
+        binding?.actionsButtons?.fabLeft?.collapse()
         hideSeekbarStroke()
         hideColorPicker()
     }
@@ -321,8 +281,8 @@ class SingBoardFragment : Fragment(), View.OnClickListener, View.OnLongClickList
      * Method for expand the fabs buttons
      */
     private fun expandFabs() {
-        fabUp.expand()
-        fabLeft.expand()
+        binding?.actionsButtons?.fabUp?.expand()
+        binding?.actionsButtons?.fabLeft?.expand()
     }
 
     /**
@@ -334,7 +294,7 @@ class SingBoardFragment : Fragment(), View.OnClickListener, View.OnLongClickList
                 override fun onAnimationCancel(animation: Animator) {}
 
                 override fun onAnimationEnd(animation: Animator) {
-                    coloPickerLayout.visibility = View.INVISIBLE
+                    binding?.cpColorPicker?.root?.visibility = View.INVISIBLE
                 }
 
                 override fun onAnimationRepeat(animation: Animator) {}
@@ -344,7 +304,7 @@ class SingBoardFragment : Fragment(), View.OnClickListener, View.OnLongClickList
                 }
             })
         if (runningAnimationColor == null || runningAnimationColor?.isRunning == false) {
-            runningAnimationColor = animation.playOn(coloPickerLayout)
+            runningAnimationColor = animation.playOn(binding?.cpColorPicker?.root)
         }
     }
 
@@ -357,7 +317,7 @@ class SingBoardFragment : Fragment(), View.OnClickListener, View.OnLongClickList
                 override fun onAnimationCancel(animation: Animator) {}
 
                 override fun onAnimationEnd(animation: Animator) {
-                    rangeSeekBarLayout.visibility = View.INVISIBLE
+                    binding?.stSlider?.root?.visibility = View.INVISIBLE
                 }
 
                 override fun onAnimationRepeat(animation: Animator) {}
@@ -367,7 +327,7 @@ class SingBoardFragment : Fragment(), View.OnClickListener, View.OnLongClickList
                 }
             })
         if (runningAnimationSeek == null || runningAnimationSeek?.isRunning == false) {
-            runningAnimationSeek = animation.playOn(rangeSeekBarLayout)
+            runningAnimationSeek = animation.playOn(binding?.stSlider?.root)
         }
     }
 
@@ -377,10 +337,12 @@ class SingBoardFragment : Fragment(), View.OnClickListener, View.OnLongClickList
             override fun onPermissionDenied(response: PermissionDeniedResponse) {}
 
             override fun onPermissionGranted(response: PermissionGrantedResponse) {
-                val ft = fragmentManager?.beginTransaction()
-                ft?.replace(R.id.container, ListFilesFragment())
-                ft?.addToBackStack(SingBoardFragment::class.java.simpleName)
-                ft?.commit()
+                activity?.let {
+                    val ft = it.supportFragmentManager.beginTransaction()
+                    ft.replace(R.id.container, ListFilesFragment())
+                    ft.addToBackStack(SingBoardFragment::class.java.simpleName)
+                    ft.commit()
+                }
             }
 
             override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest, token: PermissionToken) {}
@@ -397,15 +359,18 @@ class SingBoardFragment : Fragment(), View.OnClickListener, View.OnLongClickList
                         R.id.savePngTrans -> {
                             mName = FilesUtils.addExtensionNamePng(name)
                             statusParticular = FilesUtils
-                                .saveBitmapFile(singBoard.getTransparentSignatureBitmap(true), mName)
+                                .saveBitmapFile(binding?.singBoard?.getTransparentSignatureBitmap(true), mName)
                         }
                         R.id.savePngWhite -> {
                             mName = FilesUtils.addExtensionNamePng(name)
-                            statusParticular = FilesUtils.saveBitmapFile(singBoard.signatureBitmap, mName)
+                            statusParticular = FilesUtils.saveBitmapFile(binding?.singBoard?.signatureBitmap, mName)
                         }
                         R.id.saveSvg -> {
-                            mName = FilesUtils.addExtensionNameSvg(name)
-                            statusParticular = FilesUtils.saveSvgFile(singBoard.signatureSvg, mName)
+
+                            binding?.singBoard?.signatureSvg?.let {
+                                mName = FilesUtils.addExtensionNameSvg(name)
+                                statusParticular = FilesUtils.saveSvgFile(it, mName)
+                            }
                         }
                     }
                     if (statusParticular) {
@@ -433,21 +398,23 @@ class SingBoardFragment : Fragment(), View.OnClickListener, View.OnLongClickList
             when (idMenu) {
                 R.id.savePngTrans -> {
                     name = FilesUtils.addExtensionNamePng(FilesUtils.generateName())
-                    val sing = singBoard.getTransparentSignatureBitmap(true)
+                    val sing = binding?.singBoard?.getTransparentSignatureBitmap(true)
                     sing?.let {
                         status = FilesUtils.saveBitmapFile(it, name)
                     }
                 }
                 R.id.savePngWhite -> {
                     name = FilesUtils.addExtensionNamePng(FilesUtils.generateName())
-                    val sing: Bitmap? = singBoard.signatureBitmap
+                    val sing: Bitmap? = binding?.singBoard?.signatureBitmap
                     sing?.let {
                         status = FilesUtils.saveBitmapFile(it, name)
                     }
                 }
                 R.id.saveSvg -> {
-                    name = FilesUtils.addExtensionNameSvg(FilesUtils.generateName())
-                    status = FilesUtils.saveSvgFile(singBoard.signatureSvg, name)
+                    binding?.singBoard?.signatureSvg?.let {
+                        name = FilesUtils.addExtensionNameSvg(FilesUtils.generateName())
+                        status = FilesUtils.saveSvgFile(it, name)
+                    }
                 }
             }
             if (status) {
@@ -471,7 +438,7 @@ class SingBoardFragment : Fragment(), View.OnClickListener, View.OnLongClickList
      * Show popup menu with save options
      */
     private fun savePopUpOptions() {
-        val popupMenu = PopupMenu(context, bSave)
+        val popupMenu = PopupMenu(context, binding?.actionsButtons?.bSave)
         popupMenu.menuInflater.inflate(R.menu.save_menu, popupMenu.menu)
 
 
@@ -530,27 +497,27 @@ class SingBoardFragment : Fragment(), View.OnClickListener, View.OnLongClickList
         when (Utils.wallpaper) {
             1 -> {
                 context?.let {
-                    txtSingHere.setTextColor(ContextCompat.getColor(it, android.R.color.black))
-                    layoutWallapaper.background = getDrawable(it, R.drawable.fondotrans1)
+                    binding?.txtSingHere?.setTextColor(ContextCompat.getColor(it, android.R.color.black))
+                    binding?.layoutWallapaper?.background = getDrawable(it, R.drawable.fondotrans1)
                 }
             }
             2 -> {
                 context?.let {
-                    txtSingHere.setTextColor(ContextCompat.getColor(it, android.R.color.white))
-                    layoutWallapaper.background = getDrawable(it, R.drawable.fondotrans2)
+                    binding?.txtSingHere?.setTextColor(ContextCompat.getColor(it, android.R.color.white))
+                    binding?.layoutWallapaper?.background = getDrawable(it, R.drawable.fondotrans2)
                 }
             }
             3 -> {
 
                 context?.let {
-                    txtSingHere.setTextColor(ContextCompat.getColor(it, android.R.color.black))
-                    layoutWallapaper.setBackgroundColor(ContextCompat.getColor(it, android.R.color.white))
+                    binding?.txtSingHere?.setTextColor(ContextCompat.getColor(it, android.R.color.black))
+                    binding?.layoutWallapaper?.setBackgroundColor(ContextCompat.getColor(it, android.R.color.white))
                 }
             }
             4 -> {
                 context?.let {
-                    txtSingHere.setTextColor(ContextCompat.getColor(it, android.R.color.white))
-                    layoutWallapaper.setBackgroundColor(ContextCompat.getColor(it, android.R.color.black))
+                    binding?.txtSingHere?.setTextColor(ContextCompat.getColor(it, android.R.color.white))
+                    binding?.layoutWallapaper?.setBackgroundColor(ContextCompat.getColor(it, android.R.color.black))
                 }
             }
         }
@@ -560,26 +527,26 @@ class SingBoardFragment : Fragment(), View.OnClickListener, View.OnLongClickList
      * Method for set color in picker color selector
      */
     private fun setColor() {
-        picker.color = Utils.penColor
-        picker.oldCenterColor = Utils.penColor
-        bColor.colorNormal = Utils.penColor
-        singBoard.setPenColor(Utils.penColor)
+        binding?.cpColorPicker?.picker?.color = Utils.penColor
+        binding?.cpColorPicker?.picker?.oldCenterColor = Utils.penColor
+        binding?.actionsButtons?.bColor?.colorNormal = Utils.penColor
+        binding?.singBoard?.setPenColor(Utils.penColor)
     }
 
     /**
      * Method for set the seekbar
      */
     private fun setSeekBarRange() {
-        rangeBar.setRangePinsByValue(Utils.minStroke.toFloat(), Utils.maxStroke.toFloat())
-        singBoard.setMinWidth(Utils.minStroke.toFloat())
-        singBoard.setMaxWidth(Utils.maxStroke.toFloat())
+        binding?.stSlider?.rangeBar?.setRangePinsByValue(Utils.minStroke.toFloat(), Utils.maxStroke.toFloat())
+        binding?.singBoard?.setMinWidth(Utils.minStroke.toFloat())
+        binding?.singBoard?.setMaxWidth(Utils.maxStroke.toFloat())
     }
 
     /**
      * Show popup menu with share options
      */
     private fun sharePopUpOptions() {
-        val popupMenu = PopupMenu(context, bSave)
+        val popupMenu = PopupMenu(context, binding?.actionsButtons?.bSave)
         popupMenu.menuInflater.inflate(R.menu.share_menu, popupMenu.menu)
 
 
@@ -608,7 +575,7 @@ class SingBoardFragment : Fragment(), View.OnClickListener, View.OnLongClickList
      * Method for show color picker
      */
     private fun showColorPicker() {
-        if (coloPickerLayout.visibility == View.VISIBLE) {
+        if (binding?.cpColorPicker?.root?.visibility == View.VISIBLE) {
             hideColorPicker()
         } else {
             val animation = YoYo.with(Techniques.DropOut)
@@ -621,12 +588,12 @@ class SingBoardFragment : Fragment(), View.OnClickListener, View.OnLongClickList
                     override fun onAnimationRepeat(animation: Animator) {}
 
                     override fun onAnimationStart(animation: Animator) {
-                        coloPickerLayout.visibility = View.VISIBLE
+                        binding?.cpColorPicker?.root?.visibility = View.VISIBLE
                         hideSeekbarStroke()
                     }
                 })
             if ((runningAnimationSeek == null || runningAnimationSeek?.isRunning == false) && (runningAnimationColor == null || runningAnimationColor?.isRunning == false)) {
-                runningAnimationColor = animation.playOn(coloPickerLayout)
+                runningAnimationColor = animation.playOn(binding?.cpColorPicker?.root)
             }
         }
     }
@@ -635,7 +602,7 @@ class SingBoardFragment : Fragment(), View.OnClickListener, View.OnLongClickList
      * Method for show seekbar stroke
      */
     private fun showSeekbarStroke() {
-        if (rangeSeekBarLayout.visibility == View.VISIBLE) {
+        if (binding?.stSlider?.root?.visibility == View.VISIBLE) {
             hideSeekbarStroke()
         } else {
 
@@ -649,13 +616,13 @@ class SingBoardFragment : Fragment(), View.OnClickListener, View.OnLongClickList
                     override fun onAnimationRepeat(animation: Animator) {}
 
                     override fun onAnimationStart(animation: Animator) {
-                        rangeSeekBarLayout.visibility = View.VISIBLE
+                        binding?.stSlider?.root?.visibility = View.VISIBLE
                         hideColorPicker()
                     }
                 })
             if ((runningAnimationSeek == null || runningAnimationSeek?.isRunning == false) && (runningAnimationColor == null || runningAnimationColor?.isRunning == false)) {
 
-                runningAnimationSeek = animation.playOn(rangeSeekBarLayout)
+                runningAnimationSeek = animation.playOn(binding?.stSlider?.root)
             }
         }
     }

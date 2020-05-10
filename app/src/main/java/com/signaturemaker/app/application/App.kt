@@ -14,8 +14,7 @@ class App : Application() {
         Log.d(TAG, "Iniciamos la app")
         if (BuildConfig.DEBUG) {
             Stetho.initializeWithDefaults(this)
-          //  TooLargeTool.startLogging(this)
-
+            //  TooLargeTool.startLogging(this)
         }
     }
 }

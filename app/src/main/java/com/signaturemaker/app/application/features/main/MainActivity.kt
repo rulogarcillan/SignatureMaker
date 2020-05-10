@@ -25,11 +25,8 @@ package com.signaturemaker.app.application.features.main
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.FrameLayout
-import android.widget.RelativeLayout
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.Utils
 import com.signaturemaker.app.application.core.platform.BaseActivity
@@ -38,23 +35,22 @@ import com.signaturemaker.app.application.core.platform.PermissionsUtils
 import com.signaturemaker.app.application.features.files.ClickInterface
 import com.signaturemaker.app.application.features.files.ListFilesFragment
 import com.signaturemaker.app.application.features.sing.SingBoardFragment
+import com.signaturemaker.app.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity(), ClickInterface {
 
     private var flagAdvertising: Boolean = false
     private var listFragment: ListFilesFragment? = null
 
-    private lateinit var adView: AdView
-    private var containerFiles: FrameLayout? = null
-    private lateinit var layoutMain: RelativeLayout
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        adView = findViewById(R.id.adView)
-        containerFiles = findViewById(R.id.containerFiles)
-        layoutMain = findViewById(R.id.layoutMain)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
 
         Utils.loadAllPreferences(this)
 
@@ -105,13 +101,12 @@ class MainActivity : BaseActivity(), ClickInterface {
     }
 
     private fun createTableView() {
-        if (containerFiles !=null){
+        if (binding.containerFiles != null) {
             supportFragmentManager.beginTransaction().replace(
                 R.id.containerFiles, ListFilesFragment(),
                 ListFilesFragment::class.java.simpleName
             ).commit()
         }
-
     }
 
     /**
@@ -119,7 +114,7 @@ class MainActivity : BaseActivity(), ClickInterface {
      */
     private fun hideAdvertising() {
         if (Utils.disableAds) {
-            layoutMain.removeView(adView)
+            binding.layoutMain.removeView(binding.adView)
         }
     }
 
@@ -127,12 +122,12 @@ class MainActivity : BaseActivity(), ClickInterface {
      * Init advertising
      */
     private fun initAdvertising() {
-        adView.visibility = View.GONE
+        binding.adView.visibility = View.GONE
         val adRequest = AdRequest.Builder().build()
-        adView.loadAd(adRequest)
-        adView.adListener = object : AdListener() {
+        binding.adView.loadAd(adRequest)
+        binding.adView.adListener = object : AdListener() {
             override fun onAdLoaded() {
-                adView.visibility = View.VISIBLE
+                binding.adView.visibility = View.VISIBLE
             }
         }
     }
