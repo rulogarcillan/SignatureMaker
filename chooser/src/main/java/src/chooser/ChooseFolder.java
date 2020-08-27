@@ -25,29 +25,30 @@ package src.chooser;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by rulo on 17/03/15.
  */
 public class ChooseFolder extends LinearLayout {
 
-    private TextView txtPath;
-    private RecyclerView list;
-    private AdapterExplorer mAdapter;
     private List<String> items = new ArrayList<>();
+
+    private RecyclerView list;
+
+    private AdapterExplorer mAdapter;
+
     private Context mContext;
 
     private String path = Files.root;
+
+    private TextView txtPath;
 
     public ChooseFolder(Context mContext) {
         super(mContext);
@@ -65,6 +66,25 @@ public class ChooseFolder extends LinearLayout {
         super(mContext, attrs, defStyleAttr);
         this.mContext = mContext;
         Initialize();
+    }
+
+    public void addFolder(String name) {
+        Files.addFolder(genPathClickFolder(name));
+        this.items.add(1, name);
+        this.mAdapter.setItems(this.items);
+        this.mAdapter.notifyDataSetChanged();
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+        this.txtPath.setText(this.path.replace(Files.root, "/sdcard"));
+        this.items = Files.loadItems(this.path);
+        this.mAdapter.setItems(this.items);
+        this.mAdapter.notifyDataSetChanged();
     }
 
     private void Initialize() {
@@ -97,25 +117,6 @@ public class ChooseFolder extends LinearLayout {
 
     private String genPathClickFolder(String nameFolder) {
         return this.getPath() + "/" + nameFolder + "/";
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-        this.txtPath.setText(this.path.replace(Files.root, "/sdcard"));
-        this.items = Files.loadItems(this.path);
-        this.mAdapter.setItems(this.items);
-        this.mAdapter.notifyDataSetChanged();
-    }
-
-    public void addFolder(String name) {
-        Files.addFolder(genPathClickFolder(name));
-        this.items.add(1, name);
-        this.mAdapter.setItems(this.items);
-        this.mAdapter.notifyDataSetChanged();
     }
 
 }

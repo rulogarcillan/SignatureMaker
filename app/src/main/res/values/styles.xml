@@ -47,6 +47,10 @@
     </style>
 
     <style name="AppTheme.NoActionBar">
+
+
+        <item name="colorPrimaryVariant">@color/background_sliders</item>
+        <item name="colorPrimaryDark">?attr/colorPrimaryVariant</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

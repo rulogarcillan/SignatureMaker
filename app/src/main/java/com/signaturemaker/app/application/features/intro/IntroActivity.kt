@@ -44,25 +44,25 @@ class IntroActivity : AppIntro2() {
         }
 
         val f1 = AppIntroFragment.newInstance(
-            resources.getString(R.string.tittle_slider1), "Roboto",
+            resources.getString(R.string.tittle_slider1), "fontTypeMedium",
             resources.getString(R.string.tittle_body_slider1), "normal",
             R.drawable.ic_pencil_icon, ContextCompat.getColor(this, R.color.background_sliders),
             ContextCompat.getColor(this, R.color.colorWhite), ContextCompat.getColor(this, R.color.colorWhite)
         )
         val f2 = AppIntroFragment.newInstance(
-            resources.getString(R.string.tittle_slider2), "Roboto",
+            resources.getString(R.string.tittle_slider2), "fontTypeMedium",
             resources.getString(R.string.tittle_body_slider2), "normal",
             R.drawable.ic_share_icon, ContextCompat.getColor(this, R.color.background_sliders),
             ContextCompat.getColor(this, R.color.colorWhite), ContextCompat.getColor(this, R.color.colorWhite)
         )
         val f3 = AppIntroFragment.newInstance(
-            resources.getString(R.string.tittle_slider3), "Roboto",
+            resources.getString(R.string.tittle_slider3), "fontTypeMedium",
             resources.getString(R.string.tittle_body_slider3), "normal",
             R.drawable.ic_sign_icon, ContextCompat.getColor(this, R.color.background_sliders),
             ContextCompat.getColor(this, R.color.colorWhite), ContextCompat.getColor(this, R.color.colorWhite)
         )
         val f4 = AppIntroFragment.newInstance(
-            resources.getString(R.string.tittle_slider4), "Roboto",
+            resources.getString(R.string.tittle_slider4), "fontTypeMedium",
             resources.getString(R.string.tittle_body_slider4), "normal",
             R.drawable.ic_check_icon, ContextCompat.getColor(this, R.color.background_sliders),
             ContextCompat.getColor(this, R.color.colorWhite), ContextCompat.getColor(this, R.color.colorWhite)
