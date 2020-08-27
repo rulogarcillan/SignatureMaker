@@ -1,0 +1,19 @@
+{
+  "changelog": [
+    {
+      "date": "12/05/2020",
+      "versionCode": 1,
+      "versionName": "0.1.0-beta",
+      "change": [
+        {
+          "type": "fix",
+          "text": "blablabla"
+        },
+        {
+          "type": "feat",
+          "text": "blablabla"
+        }
+      ]
+    }
+  ]
+}

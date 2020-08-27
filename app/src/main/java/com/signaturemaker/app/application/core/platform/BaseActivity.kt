@@ -152,6 +152,7 @@ abstract class BaseActivity : AppCompatActivity() {
     ) {
 
         companion object {
+
             const val DEFAULT_CSS = (
 
                     "body {                                                           " + "	font-family: Verdana, Helvetica, Arial, sans-serif;   " + "	font-size: 11px;                                      " + "	color: #000000;                                       " + "	background-color: #ffffff;                            " + "	margin: 0px;                                          " + "	padding: 0px;                                         " + "}                                                        "

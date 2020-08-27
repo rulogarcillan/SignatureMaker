@@ -2,8 +2,8 @@
     android:width="512dp"
     android:height="512dp"
     android:autoMirrored="true"
-    android:viewportWidth="110"
-    android:viewportHeight="110">
+    android:viewportHeight="110"
+    android:viewportWidth="110">
     <path
         android:fillColor="#F5BA3D"
         android:pathData="M55,54.848m-55,0a55,55 0,1 1,110 0a55,55 0,1 1,-110 0" />

@@ -76,6 +76,7 @@ class SingBoardFragment : Fragment(), View.OnClickListener, View.OnLongClickList
     private val binding get() = _binding
 
     companion object {
+
         fun newInstance(): SingBoardFragment = SingBoardFragment()
     }
 

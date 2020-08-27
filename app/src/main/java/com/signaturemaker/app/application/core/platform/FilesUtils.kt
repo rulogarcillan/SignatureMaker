@@ -19,7 +19,6 @@ import java.util.Locale
 
 object FilesUtils {
 
-
     fun addExtensionNamePng(name: String) = "SM_$name.png"
     fun addExtensionNameSvg(name: String) = "SM_$name.svg"
 

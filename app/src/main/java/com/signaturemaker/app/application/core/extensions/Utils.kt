@@ -118,7 +118,11 @@ object Utils {
 
         mContext?.let {
             if (SharedPreferencesRepository.loadPreference(mContext, Constants.ID_PREF_WALLPAPER, false)) {
-                wallpaper = SharedPreferencesRepository.loadPreference(mContext, Constants.PREF_WALLPAPER, Constants.DEFAULT_WALLPAPER)
+                wallpaper = SharedPreferencesRepository.loadPreference(
+                    mContext,
+                    Constants.PREF_WALLPAPER,
+                    Constants.DEFAULT_WALLPAPER
+                )
             } else {
                 defaultWallpaper()
             }

@@ -1,0 +1,105 @@
+{
+  "changelog": [
+    {
+      "date": "30/07/2020",
+      "versionCode": 3004,
+      "versionName": "3.0.4",
+      "change": [
+        {
+          "type": "fix",
+          "text": "Corregidos textos incorrectos"
+        }
+      ]
+    },
+    {
+      "date": "21/05/2020",
+      "versionCode": 7,
+      "versionName": "0.4.0-beta",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Se implementa modo oscuro"
+        }
+      ]
+    },
+    {
+      "date": "14/05/2020",
+      "versionCode": 6,
+      "versionName": "0.3.0-beta",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Se agrega sugerencias y comentarios"
+        },
+        {
+          "type": "feat",
+          "text": "Idioma español"
+        },
+        {
+          "type": "fix",
+          "text": "Corregidos textos incorrectos"
+        }
+      ]
+    },
+    {
+      "date": "13/05/2020",
+      "versionCode": 5,
+      "versionName": "0.2.2-beta",
+      "change": [
+        {
+          "type": "fix",
+          "text": "Se corrige error de ui en el layout de progreso"
+        },
+        {
+          "type": "fix",
+          "text": "Se corrige scroll en la pantalla de filtros"
+        },
+        {
+          "type": "fix",
+          "text": "Se corrige un crash al guardar imágen"
+        }
+      ]
+    },
+    {
+      "date": "13/05/2020",
+      "versionCode": 4,
+      "versionName": "0.2.1-beta",
+      "change": [
+        {
+          "type": "fix",
+          "text": "Se corrige crash en el link a twitter"
+        }
+      ]
+    },
+    {
+      "date": "13/05/2020",
+      "versionCode": 3,
+      "versionName": "0.2.0-beta",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Se agrega vista de cambios"
+        },
+        {
+          "type": "feat",
+          "text": "Se habilitan los botones sociales"
+        },
+        {
+          "type": "fix",
+          "text": "Se corrige MaterialToolbar en la pantalla de ajustes"
+        }
+      ]
+    },
+    {
+      "date": "12/05/2020",
+      "versionCode": 2,
+      "versionName": "0.1.0-beta",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Lanzamiento versión beta"
+        }
+      ]
+    }
+  ]
+}
