@@ -18,7 +18,7 @@
         android:label="@string/title_appName"
         android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/App.Theme"
         tools:ignore="GoogleAppIndexingWarning">
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -40,7 +40,7 @@
         <activity
             android:name="com.signaturemaker.app.application.features.intro.IntroActivity"
             android:configChanges="orientation|screenSize"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/App.Theme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -48,13 +48,20 @@
         </activity>
 
         <activity
-            android:name="com.signaturemaker.app.application.features.setting.SettingsActivity"
+            android:name="com.signaturemaker.app.application.features.settingg.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:theme="@style/AppThemePrefs" />
         <activity
             android:name="com.signaturemaker.app.application.features.main.MainActivity"
             android:label="@string/title_appName"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/App.Theme" />
+
+        <activity
+            android:name=".application.features.setting.SettingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeSetting"
+            tools:ignore="LockedOrientationActivity" />
+
 
     </application>
 

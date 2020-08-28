@@ -1,3 +1,11 @@
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="font_mini">@dimen/text_size_14</dimen>
+    <dimen name="font_medium">@dimen/text_size_16</dimen>
+    <dimen name="font_large">@dimen/text_size_18</dimen>
+    <dimen name="toolbarTitleSize">@dimen/font_large</dimen>
+
+    <dimen name="dimen_logo">96dp</dimen>
+    <dimen name="dimen_distance_logo">@dimen/margin_32</dimen>
+    <dimen name="fab_margin">@dimen/margin_16</dimen>
 </resources>

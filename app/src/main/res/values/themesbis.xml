@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="ThemeSetting" parent="App.Theme">
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryVariant">@color/white</item>
+        <item name="android:colorBackground">@color/white</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorOnBackground">@color/black</item>
+        <item name="colorOnSurface">@color/black</item>
+        <item name="colorControlNormal">@color/black</item>
+        <item name="colorToolbarIcon">@color/black</item>
+
+        <item name="android:navigationBarColor">?android:colorBackground</item>
+        <item name="android:navigationBarDividerColor" tools:ignore="NewApi">?android:colorBackground</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
+    </style>
+
+
+    <style name="App.Theme" parent="App.Theme.Custom" />
+
+    <style name="App.Theme.Custom" parent="Base.Theme.DayNight">
+        <item name="colorForegroundItems">@color/brown_cd470b</item>
+        <item name="colorIcon">@color/grey_757575</item>
+        <item name="separator">@color/grey</item>
+        <item name="principalText">@color/darkGrey</item>
+        <item name="secondaryText">@color/warmGrey</item>
+        <item name="colorOnPrimaryVariant">@color/grey_808080</item>
+        <!--        <item name="colorBackgroundMain">@color/grey</item>-->
+        <item name="colorButtons">@color/primaryColor</item>
+        <item name="colorPanelFunnel">?attr/colorPrimary</item>
+        <item name="colorChips">@color/grey</item>
+        <item name="shimmerColor">@color/grey</item>
+        <item name="calendarIcon">@color/primaryColor</item>
+        <item name="colorToolbarIcon">@color/white</item>
+        <item name="colorChipFix">@color/orange_F57C00</item>
+        <item name="colorChipFeat">@color/green_689F38</item>
+        <item name="colorChipChangelogText">@color/white</item>
+    </style>
+
+
+</resources>

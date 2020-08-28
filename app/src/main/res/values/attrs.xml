@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="typeFonts">
-        <attr name="fontTypeThin" format="string" />
-        <attr name="fontTypeLight" format="string" />
-        <attr name="fontTypeRegular" format="string" />
-        <attr name="fontTypeMedium" format="string" />
-        <attr name="fontTypeBold" format="string" />
-    </declare-styleable>
 
+
+    <declare-styleable name="myColors">
+        <attr name="calendarIcon" format="color" />
+        <attr name="colorPanelFunnel" format="color" />
+        <attr name="colorChipFix" format="color" />
+        <attr name="colorChipFeat" format="color" />
+        <attr name="colorChipChangelogText" format="color" />
+        <attr name="colorToolbarIcon" format="color" />
+        <attr name="colorBackgroundMain" format="color" />
+        <attr name="colorButtons" format="color" />
+        <attr name="colorChips" format="color" />
+        <attr name="shimmerColor" format="color" />
+        <attr name="colorIcon" format="color" />
+        <attr name="separator" format="color" />
+        <attr name="colorForegroundItems" format="color" />
+        <attr name="principalText" format="color" />
+        <attr name="secondaryText" format="color" />
+        <attr name="colorOnPrimaryVariant" format="color" />
+    </declare-styleable>
 
 </resources>

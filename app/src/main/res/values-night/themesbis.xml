@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+
+    <style name="ThemeSetting" parent="App.Theme">
+
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">false</item>
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorSurface">@color/black</item>
+        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="android:colorBackground">@color/black</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnBackground">@color/white</item>
+        <item name="colorOnSurface">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+
+        <item name="android:navigationBarColor">?android:colorBackground</item>
+        <item name="android:navigationBarDividerColor" tools:ignore="NewApi">?android:colorBackground</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
+    </style>
+
+    <style name="App.Theme" parent="App.Theme.Custom">
+
+        <!--Custom colors for items, text, icons....-->
+        <item name="colorForegroundItems">@color/brown_cd470b</item>
+        <item name="colorIcon">@color/white</item>
+        <item name="separator">@color/black_700</item>
+        <item name="principalText">@color/white_fafafa</item>
+        <item name="secondaryText">@color/warmGrey</item>
+        <item name="colorOnPrimaryVariant">@color/grey_808080</item>
+        <!-- <item name="colorBackgroundMain">@color/grey</item>-->
+        <item name="shimmerColor">@color/grey</item>
+        <item name="calendarIcon">@color/blue_78ADDE</item>
+        <item name="colorButtons">@color/blue_78ADDE</item>
+        <item name="colorChips">@color/grey_808080</item>
+        <item name="colorToolbarIcon">@color/white</item>
+        <item name="colorChipFix">@color/orange_F57C00</item>
+        <item name="colorChipFeat">@color/green_689F38</item>
+        <item name="colorChipChangelogText">@color/white</item>
+
+
+    </style>
+</resources>

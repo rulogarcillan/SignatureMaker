@@ -1,0 +1,47 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal">
+
+
+    <LinearLayout
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:gravity="end">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cvTypeChangelog"
+            android:layout_width="wrap_content"
+            app:cardElevation="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/tvTypeChangelog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAllCaps="true"
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp"
+                android:textSize="10sp"
+                style="@style/fontBold"
+                tools:text="fix" />
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tvChangelog"
+        style="@style/fontMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="6dp"
+        android:gravity="center_vertical"
+        android:textColor="?attr/secondaryText"
+        android:textSize="14sp"
+        tools:text="Release beta version" />
+</LinearLayout>

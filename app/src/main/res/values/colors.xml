@@ -24,4 +24,27 @@
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#ffffff</color>
 
+
+    <color name="grey_1F1F1F">#1F1F1F</color>
+    <color name="blue_5A9EDE">#5A9EDE</color>
+    <color name="blue_78ADDE">#78ADDE</color>
+    <color name="black_800">#121212</color> <!--Color surface (dark)-->
+    <color name="black_700">#272727</color> <!--Color surface (dark)-->
+    <color name="black_212121">#212121</color>
+
+    <!--customs colors day and night (using with style, nos apply equivalence)-->
+    <color name="black">#000</color>
+    <color name="white">#fff</color>
+    <color name="grey">#EBEBEB</color>
+    <color name="grey_808080">#808080</color>
+    <color name="grey_757575">#757575</color>
+    <color name="darkGrey">#333333</color>
+    <color name="white_fafafa">#fafafa</color>
+    <color name="warmGrey">#9F9F9F</color>
+    <color name="brown_cd470b">#80cd470b</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="orange_F57C00">#FF982E</color>
+    <color name="green_689F38">#86C74E</color>
+
 </resources>

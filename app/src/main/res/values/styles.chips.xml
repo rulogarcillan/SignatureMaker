@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="chip.delete" parent="Widget.MaterialComponents.Chip.Entry">
+        <item name="android:checkable">false</item>
+    </style>
+
+    <style name="chip.fix" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/chip_fix_color</item>
+        <item name="android:textColor">?attr/colorChipChangelogText</item>
+    </style>
+
+    <style name="chip.feat" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/chip_feat_color</item>
+        <item name="android:textColor">?attr/colorChipChangelogText</item>
+    </style>
+
+    <style name="chip.any" parent="Widget.MaterialComponents.Chip.Choice">
+    </style>
+
+    <style name="chip.filter" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="android:textColor">@color/chip_text_color</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="chipBackgroundColor">@color/chip_color</item>
+    </style>
+
+</resources>

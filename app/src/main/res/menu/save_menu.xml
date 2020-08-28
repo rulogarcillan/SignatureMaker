@@ -21,6 +21,5 @@
         android:title="@string/title_save_svg"
         menu:showAsAction="ifRoom" />
 
-    ic_png
 </menu>
 

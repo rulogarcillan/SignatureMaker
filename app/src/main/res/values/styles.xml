@@ -46,14 +46,6 @@
         <item name="colorOnSecondary">@color/secondaryTextColor</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
-
-
-        <item name="colorPrimaryVariant">@color/background_sliders</item>
-        <item name="colorPrimaryDark">?attr/colorPrimaryVariant</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

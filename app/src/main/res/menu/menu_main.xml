@@ -1,10 +1,17 @@
+<?xml version ="1.0" encoding ="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".application.features.main.MainActivity">
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/idSuggest"
+            android:icon="@drawable/ic_message"
+            android:title=""
+            app:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/idSettings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/title_setting"
+            app:showAsAction="ifRoom" />
+    </group>
 </menu>
+

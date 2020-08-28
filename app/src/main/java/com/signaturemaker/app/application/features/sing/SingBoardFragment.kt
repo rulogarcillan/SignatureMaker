@@ -31,6 +31,8 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
@@ -38,7 +40,6 @@ import android.widget.PopupMenu
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
 import com.getbase.floatingactionbutton.FloatingActionsMenu
@@ -51,21 +52,28 @@ import com.karumi.dexter.listener.single.PermissionListener
 import com.larswerkman.holocolorpicker.ColorPicker
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.Utils
-import com.signaturemaker.app.application.core.extensions.gone
 import com.signaturemaker.app.application.core.extensions.showToast
-import com.signaturemaker.app.application.core.extensions.visible
 import com.signaturemaker.app.application.core.platform.FilesUtils
+import com.signaturemaker.app.application.core.platform.GlobalFragment
 import com.signaturemaker.app.application.core.platform.PermissionsUtils
 import com.signaturemaker.app.application.features.files.ClickInterface
 import com.signaturemaker.app.application.features.files.ListFilesFragment
 import com.signaturemaker.app.application.features.main.MainActivity
+import com.signaturemaker.app.application.features.setting.SettingActivity
 import com.signaturemaker.app.databinding.SingBoardFragmentBinding
+import com.tuppersoft.skizo.core.extension.gone
+import com.tuppersoft.skizo.core.extension.visible
 import java.io.File
 
 /**
  * A placeholder fragment containing a simple view.
  */
-class SingBoardFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
+class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongClickListener {
+
+    override val toolbarTitle: String
+        get() = getString(R.string.title_appName)
+    override val showBackButton: Boolean
+        get() = false
 
     private var clickInterface: ClickInterface? = null
     private var runningAnimationSeek: YoYo.YoYoString? = null
@@ -74,11 +82,6 @@ class SingBoardFragment : Fragment(), View.OnClickListener, View.OnLongClickList
 
     private var _binding: SingBoardFragmentBinding? = null
     private val binding get() = _binding
-
-    companion object {
-
-        fun newInstance(): SingBoardFragment = SingBoardFragment()
-    }
 
     private interface TextDialog {
 
@@ -626,5 +629,24 @@ class SingBoardFragment : Fragment(), View.OnClickListener, View.OnLongClickList
                 runningAnimationSeek = animation.playOn(binding?.stSlider?.root)
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_main, menu)
+
+        menu.findItem(R.id.idSuggest).setOnMenuItemClickListener {
+            true
+        }
+
+        menu.findItem(R.id.idSettings).setOnMenuItemClickListener {
+            activity?.let {
+                val myIntent = Intent(it, SettingActivity::class.java)
+                startActivity(myIntent)
+                it.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up)
+            }
+            true
+        }
+
+        super.onCreateOptionsMenu(menu, inflater)
     }
 }

@@ -24,7 +24,9 @@ package com.signaturemaker.app.application.features.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
+import androidx.activity.viewModels
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.signaturemaker.app.R
@@ -34,40 +36,32 @@ import com.signaturemaker.app.application.core.platform.FilesUtils
 import com.signaturemaker.app.application.core.platform.PermissionsUtils
 import com.signaturemaker.app.application.features.files.ClickInterface
 import com.signaturemaker.app.application.features.files.ListFilesFragment
-import com.signaturemaker.app.application.features.sing.SingBoardFragment
+import com.signaturemaker.app.application.features.setting.SettingViewModel
 import com.signaturemaker.app.databinding.ActivityMainBinding
+import com.tuppersoft.skizo.core.extension.gone
+import com.tuppersoft.skizo.core.extension.visible
+import kotlinx.android.synthetic.main.app_toolbar.view.tvTittle
 
 class MainActivity : BaseActivity(), ClickInterface {
 
     private var flagAdvertising: Boolean = false
     private var listFragment: ListFilesFragment? = null
+    private val settingViewModel: SettingViewModel by viewModels()
 
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
-
+        setContentView(binding.root)
+        setSupportActionBar(binding.idToolbar.mtbToolbar)
+        initObserver()
 
         Utils.loadAllPreferences(this)
 
-        val ft = supportFragmentManager.beginTransaction()
-        val signBoard: SingBoardFragment = SingBoardFragment.newInstance()
-        ft.replace(
-            R.id.container,
-            signBoard,
-            SingBoardFragment::class.java.simpleName
-        )
-        ft.commit()
-        signBoard.setInterface(this)
+        //signBoard.setInterface(this)
 
         createTableView()
-
-        //startChangelog(false)
-
         initAdvertising()
     }
 
@@ -94,6 +88,16 @@ class MainActivity : BaseActivity(), ClickInterface {
         if (Utils.deleteExit && PermissionsUtils.hasPermissionWriteRead(this)) {
             FilesUtils.deleteAllFiles(this)
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+            }
+            else -> return true
+        }
+        return true
     }
 
     override fun buttonClicked() {
@@ -141,6 +145,47 @@ class MainActivity : BaseActivity(), ClickInterface {
             intent.setClass(this, this.javaClass)
             finish()
             this.startActivity(intent)
+        }
+    }
+
+    private fun initObserver() {
+        settingViewModel.title.observe(this, ::setTitleToolbar)
+        settingViewModel.backButton.observe(this, ::showBackButton)
+        settingViewModel.cancelButton.observe(this, ::showCancelButton)
+        settingViewModel.showToolbar.observe(this, ::showToolbarOrHide)
+    }
+
+    private fun setTitleToolbar(title: String) {
+        binding.idToolbar.mtbToolbar.tvTittle.text = title
+        if (title.isNotEmpty()) {
+            binding.idToolbar.mtbToolbar.tvTittle.visible()
+        } else {
+            binding.idToolbar.mtbToolbar.tvTittle.gone()
+        }
+        supportActionBar?.title = ""
+    }
+
+    private fun showBackButton(flag: Boolean) {
+
+        val actionBar = supportActionBar
+        actionBar?.let {
+            actionBar.setHomeButtonEnabled(flag)
+            actionBar.setDisplayHomeAsUpEnabled(flag)
+            actionBar.setDisplayShowHomeEnabled(flag)
+
+        }
+    }
+
+    private fun showCancelButton(flag: Boolean) {
+        // invalidateOptionsMenu()
+        binding.idToolbar.mtbToolbar.menu?.findItem(R.id.idCancel)?.isVisible = flag
+    }
+
+    private fun showToolbarOrHide(flag: Boolean) {
+        if (flag) {
+            supportActionBar?.show()
+        } else {
+            supportActionBar?.hide()
         }
     }
 }
