@@ -40,6 +40,7 @@ import android.widget.PopupMenu
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentTransaction
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
 import com.getbase.floatingactionbutton.FloatingActionsMenu
@@ -59,19 +60,22 @@ import com.signaturemaker.app.application.core.platform.PermissionsUtils
 import com.signaturemaker.app.application.features.files.ClickInterface
 import com.signaturemaker.app.application.features.files.ListFilesFragment
 import com.signaturemaker.app.application.features.main.MainActivity
-import com.signaturemaker.app.application.features.setting.SettingActivity
+import com.signaturemaker.app.application.features.menu.SettingActivity
+import com.signaturemaker.app.application.features.suggest.CustomDialogSuggest
 import com.signaturemaker.app.databinding.SingBoardFragmentBinding
 import com.tuppersoft.skizo.core.extension.gone
 import com.tuppersoft.skizo.core.extension.visible
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
 /**
  * A placeholder fragment containing a simple view.
  */
+@AndroidEntryPoint
 class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongClickListener {
 
     override val toolbarTitle: String
-        get() = getString(R.string.title_appName)
+        get() = getString(R.string.app_name)
     override val showBackButton: Boolean
         get() = false
 
@@ -635,6 +639,7 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
         inflater.inflate(R.menu.menu_main, menu)
 
         menu.findItem(R.id.idSuggest).setOnMenuItemClickListener {
+            showSendSuggest()
             true
         }
 
@@ -648,5 +653,14 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
         }
 
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    private fun showSendSuggest() {
+        val ft: FragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+        ft.let {
+            val dialog: CustomDialogSuggest = CustomDialogSuggest.getInstance()
+            dialog.show(ft, "dialog")
+            dialog.isCancelable = true
+        }
     }
 }

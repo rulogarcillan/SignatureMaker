@@ -7,7 +7,7 @@
 
     <activity
         android:id="@+id/SettingFragment"
-        android:name="com.signaturemaker.app.application.features.setting.SettingActivity"
+        android:name="com.signaturemaker.app.application.features.menu.SettingActivity"
         tools:layout="@layout/setting_activity" />
 
     <fragment

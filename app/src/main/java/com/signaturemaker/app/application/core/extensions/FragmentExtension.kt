@@ -11,7 +11,7 @@ import com.signaturemaker.app.R
 
 /**
  * Created by Raúl Rodríguez Concepción on 27/08/2020.
- * Talento Mobile
+
  * raulrcs@gmail.com
  */
 

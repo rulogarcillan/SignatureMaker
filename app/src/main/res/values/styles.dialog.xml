@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- DIALOG FULLSCREEN -->
+    <style name="fullscreen_dialog" parent="App.Theme.Custom">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowAnimationStyle">@style/dialog_animations_up_down</item>
+    </style>
+
+    <style name="dialog_animations_up_down">
+        <item name="android:windowEnterAnimation">@anim/skizo_slide_in_up</item>
+        <item name="android:windowExitAnimation">@anim/skizo_slide_in_top</item>
+    </style>
+
+</resources>

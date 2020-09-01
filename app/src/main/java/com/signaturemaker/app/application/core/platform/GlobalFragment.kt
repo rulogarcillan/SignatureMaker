@@ -2,11 +2,11 @@ package com.signaturemaker.app.application.core.platform
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.signaturemaker.app.application.features.setting.SettingViewModel
+import com.signaturemaker.app.application.features.menu.SettingViewModel
 
 /**
  * Created by Raúl Rodríguez Concepción on 2019-09-27.
- * Talento Mobile
+
  * raulrcs@gmail.com
  */
 abstract class GlobalFragment : Fragment() {

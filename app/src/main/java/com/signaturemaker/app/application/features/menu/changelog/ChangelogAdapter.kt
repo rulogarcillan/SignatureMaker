@@ -1,4 +1,4 @@
-package com.signaturemaker.app.application.features.setting.changelog
+package com.signaturemaker.app.application.features.menu.changelog
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -15,8 +15,8 @@ import com.signaturemaker.app.R
 import com.signaturemaker.app.R.layout
 import com.signaturemaker.app.application.core.extensions.inflate
 import com.signaturemaker.app.application.core.extensions.toDateStringLocalFormat
-import com.signaturemaker.app.application.features.setting.changelog.ChangelogIdentifier.FEAT
-import com.signaturemaker.app.application.features.setting.changelog.ChangelogIdentifier.FIX
+import com.signaturemaker.app.application.features.menu.changelog.ChangelogIdentifier.FEAT
+import com.signaturemaker.app.application.features.menu.changelog.ChangelogIdentifier.FIX
 import com.signaturemaker.app.domain.models.Change
 import com.signaturemaker.app.domain.models.Changelog
 import com.tuppersoft.skizo.core.extension.getColorFromAttr
@@ -52,7 +52,13 @@ class ItemChangelogHolder(val root: View) : RecyclerView.ViewHolder(root) {
             llChangelog.addView(v)
         }
 
-        tvTittle.text = """${item.versionName}  (${item.getDateInLong().toDateStringLocalFormat()})"""
+        val dateIfNotNulll = if (item.getDateInLong() != null) {
+            "(${item.getDateInLong()?.toDateStringLocalFormat()})"
+        } else {
+            ""
+        }
+
+        tvTittle.text = "${item.versionName} $dateIfNotNulll"
     }
 
     private fun changelogView(mContext: Context, changeItem: Change): View {

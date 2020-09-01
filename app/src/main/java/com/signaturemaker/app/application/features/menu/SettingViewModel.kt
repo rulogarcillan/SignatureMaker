@@ -1,4 +1,4 @@
-package com.signaturemaker.app.application.features.setting
+package com.signaturemaker.app.application.features.menu
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

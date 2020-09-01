@@ -36,12 +36,14 @@ import com.signaturemaker.app.application.core.platform.FilesUtils
 import com.signaturemaker.app.application.core.platform.PermissionsUtils
 import com.signaturemaker.app.application.features.files.ClickInterface
 import com.signaturemaker.app.application.features.files.ListFilesFragment
-import com.signaturemaker.app.application.features.setting.SettingViewModel
+import com.signaturemaker.app.application.features.menu.SettingViewModel
 import com.signaturemaker.app.databinding.ActivityMainBinding
 import com.tuppersoft.skizo.core.extension.gone
 import com.tuppersoft.skizo.core.extension.visible
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.app_toolbar.view.tvTittle
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity(), ClickInterface {
 
     private var flagAdvertising: Boolean = false
@@ -119,6 +121,7 @@ class MainActivity : BaseActivity(), ClickInterface {
     private fun hideAdvertising() {
         if (Utils.disableAds) {
             binding.layoutMain.removeView(binding.adView)
+           // binding.adView.getChildAt(0).gone()
         }
     }
 

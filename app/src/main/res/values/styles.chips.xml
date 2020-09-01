@@ -15,8 +15,7 @@
         <item name="android:textColor">?attr/colorChipChangelogText</item>
     </style>
 
-    <style name="chip.any" parent="Widget.MaterialComponents.Chip.Choice">
-    </style>
+    <style name="chip.any" parent="Widget.MaterialComponents.Chip.Choice"></style>
 
     <style name="chip.filter" parent="Widget.MaterialComponents.Chip.Filter">
         <item name="android:textColor">@color/chip_text_color</item>

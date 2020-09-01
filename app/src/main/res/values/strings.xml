@@ -1,6 +1,5 @@
 <resources>
 
-    <string name="title_appName" translatable="false">Signature maker</string>
 
     <string name="title_setting">Settings</string>
     <string name="title_activity_settings">Settings</string>
@@ -77,10 +76,8 @@
     <string name="tittle_name_of_the_file">Name of the file</string>
     <string name="banner_ad_unit_id" translatable="false">ca-app-pub-9438738341601496/1496642762</string>
 
-
-
-    <string name="app_name_release" translatable="false">Medicine kit</string>
-    <string name="app_name_debug" translatable="false">Medicine kit debug</string>
+    <string name="app_name_release" translatable="false">Signature maker</string>
+    <string name="app_name_debug" translatable="false">Signature maker debug</string>
     <string name="filter">Filter</string>
     <string name="theme">Theme</string>
     <string name="what_is_the_name">What is the name?</string>
@@ -122,8 +119,19 @@
     <string name="write_your_suggestion_or_comment">Write your suggestion or comment</string>
     <string name="put_your_email">Put your email</string>
     <string name="valid_mail">write a valid email</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
 
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
 
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails</string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
 
 </resources>

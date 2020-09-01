@@ -1,10 +1,12 @@
 apply plugin: 'com.android.library'
+apply from: 'version.gradle'
 
 android {
-    compileSdkVersion 30
+    buildToolsVersion = buildVersion
+    compileSdkVersion sdk_version
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 30
+        minSdkVersion min_sdk_version
+        targetSdkVersion sdk_version
         versionCode 1
         versionName "1.0"
     }
@@ -25,7 +27,6 @@ android {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
-    buildToolsVersion = '30.0.1'
 }
 
 dependencies {

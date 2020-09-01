@@ -1,4 +1,4 @@
-package com.signaturemaker.app.application.features.setting
+package com.signaturemaker.app.application.features.menu
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.app_toolbar.view.tvTittle
 
 /**
  * Created by Raúl Rodríguez Concepción on 10/05/2020.
- * Talento Mobile
+
  * raulrcs@gmail.com
  */
 

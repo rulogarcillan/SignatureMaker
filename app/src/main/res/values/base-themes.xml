@@ -8,14 +8,15 @@
         <!--selection controls.-->
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryVariant">@color/primaryDarkColor</item>
-        <item name="colorSecondary">@color/green_200</item>
-        <item name="colorSecondaryVariant">@color/green_500</item>
+        <item name="colorSecondary">@color/secondaryColor</item>
+        <item name="colorSecondaryVariant">@color/secondaryDarkColor</item>
         <item name="android:colorBackground">@color/white</item>
         <item name="colorSurface">@color/white</item>
         <item name="colorError">@color/red_600</item>
+
         <!--"On" colors define how text, icons and strokes are colored in relation to the surface-->
         <item name="colorOnPrimary">@color/white</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">@color/secondaryTextColor</item>
         <item name="colorOnBackground">@color/black</item>
         <item name="colorOnSurface">@color/black</item>
         <item name="colorOnError">@color/white</item>
@@ -77,14 +78,6 @@
            <item name="colorPrimaryDark">?attr/colorPrimaryVariant</item>
            <item name="colorAccent">?attr/colorPrimaryVariant</item>
          -->
-    </style>
-
-
-    <style name="AppTheme.NoActionBar">
-        <item name="colorPrimaryVariant">@color/background_sliders</item>
-        <item name="colorPrimaryDark">?attr/colorPrimaryVariant</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
     </style>
 
 

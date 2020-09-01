@@ -27,11 +27,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.recyclerview.widget.RecyclerView;
+import java.util.List;
 
 public class AdapterExplorer extends RecyclerView.Adapter<AdapterExplorer.ViewHolder> {
 
@@ -79,6 +76,7 @@ public class AdapterExplorer extends RecyclerView.Adapter<AdapterExplorer.ViewHo
     }
 
     public interface OnItemClickListener {
+
         public void onItemClick(View view, int position);
     }
 

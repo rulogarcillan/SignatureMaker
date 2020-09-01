@@ -1,10 +1,11 @@
-package com.signaturemaker.app.application.features.setting
+package com.signaturemaker.app.application.features.menu
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.preference.PreferenceActivity
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -18,11 +19,14 @@ import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.findNavController
 import com.signaturemaker.app.application.core.extensions.getNavOptions
 import com.signaturemaker.app.application.core.platform.GlobalFragment
-import com.signaturemaker.app.application.features.setting.MenuIdentifier.CHANGELOG
-import com.signaturemaker.app.application.features.setting.MenuIdentifier.LICENSE
-import com.signaturemaker.app.application.features.setting.MenuIdentifier.MOREAPP
-import com.signaturemaker.app.application.features.setting.MenuIdentifier.PRIVACY
-import com.signaturemaker.app.application.features.setting.MenuIdentifier.RATE
+import com.signaturemaker.app.application.features.menu.MenuIdentifier.CHANGELOG
+import com.signaturemaker.app.application.features.menu.MenuIdentifier.LICENSE
+import com.signaturemaker.app.application.features.menu.MenuIdentifier.MOREAPP
+import com.signaturemaker.app.application.features.menu.MenuIdentifier.PRIVACY
+import com.signaturemaker.app.application.features.menu.MenuIdentifier.RATE
+import com.signaturemaker.app.application.features.menu.MenuIdentifier.SETTING
+import com.signaturemaker.app.application.features.setting.SettingsActivity
+import com.signaturemaker.app.application.features.setting.SettingsActivity.GeneralPreferenceFragment
 import com.signaturemaker.app.databinding.SettingFragmentBinding
 
 class SettingFragment : GlobalFragment() {
@@ -77,6 +81,7 @@ class SettingFragment : GlobalFragment() {
 
         val list: MutableList<ItemSettingMenu> = mutableListOf()
 
+        list.add(ItemSettingMenu(SETTING, R.drawable.ic_settings, R.string.title_setting))
         list.add(ItemSettingMenu(CHANGELOG, R.drawable.ic_changelog, R.string.changelog))
         list.add(ItemSettingMenu(RATE, R.drawable.ic_rate, R.string.rate))
         list.add(ItemSettingMenu(MOREAPP, R.drawable.ic_moreapp, R.string.more_app))
@@ -110,6 +115,16 @@ class SettingFragment : GlobalFragment() {
             }
             CHANGELOG -> {
                 findNavController().navigate(R.id.ChangelogFragment, null, getNavOptions())
+            }
+            SETTING -> {
+
+                val intent = Intent(context, SettingsActivity::class.java)
+                intent.putExtra(
+                    PreferenceActivity.EXTRA_SHOW_FRAGMENT,
+                    GeneralPreferenceFragment::class.java.name
+                )
+                intent.putExtra(PreferenceActivity.EXTRA_NO_HEADERS, true)
+                startActivity(intent)
             }
         }
     }

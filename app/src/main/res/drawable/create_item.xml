@@ -6,8 +6,8 @@
             <stroke
                 android:width="2dp"
                 android:color="?attr/colorOnPrimaryVariant"
-                android:dashWidth="5dp"
-                android:dashGap="5dp" />
+                android:dashGap="5dp"
+                android:dashWidth="5dp" />
             <padding
                 android:bottom="5dp"
                 android:left="5dp"

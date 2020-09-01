@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/SettingFragment"
-        android:name="com.signaturemaker.app.application.features.setting.SettingFragment"
+        android:name="com.signaturemaker.app.application.features.menu.SettingFragment"
         tools:layout="@layout/setting_fragment">
         <action
             android:id="@+id/action_SettingFragment_to_ChangelogFragment"
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/ChangelogFragment"
-        android:name="com.signaturemaker.app.application.features.setting.changelog.ChangelogFragment"
+        android:name="com.signaturemaker.app.application.features.menu.changelog.ChangelogFragment"
         tools:layout="@layout/changelog_fragment" />
 
 </navigation>

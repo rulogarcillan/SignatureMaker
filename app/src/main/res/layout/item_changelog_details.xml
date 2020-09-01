@@ -1,8 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal">
 
 
@@ -15,19 +15,19 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cvTypeChangelog"
             android:layout_width="wrap_content"
-            app:cardElevation="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            app:cardElevation="0dp">
 
             <TextView
                 android:id="@+id/tvTypeChangelog"
+                style="@style/fontBold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAllCaps="true"
-                android:paddingStart="6dp"
                 android:paddingEnd="6dp"
+                android:paddingStart="6dp"
+                android:textAllCaps="true"
                 android:textSize="10sp"
-                style="@style/fontBold"
                 tools:text="fix" />
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>

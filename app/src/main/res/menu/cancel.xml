@@ -3,11 +3,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <item
-            android:id="@+id/idCancel"
-            android:icon="@drawable/ic_close"
-            android:title=""
-            android:visible="true"
-            app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/idCancel"
+        android:icon="@drawable/ic_close"
+        android:title=""
+        android:visible="true"
+        app:showAsAction="ifRoom" />
 </menu>
 

@@ -39,5 +39,14 @@
         <item name="colorChipChangelogText">@color/white</item>
     </style>
 
+    <style name="App.Theme.Intro" parent="App.Theme.Custom" >
+        <item name="android:navigationBarColor">@color/black</item>
+        <item name="colorPrimaryVariant">@color/background_sliders</item>
+        <item name="colorPrimaryDark">?attr/colorPrimaryVariant</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:navigationBarDividerColor" tools:ignore="NewApi">@color/black</item>
+    </style>
+
 
 </resources>

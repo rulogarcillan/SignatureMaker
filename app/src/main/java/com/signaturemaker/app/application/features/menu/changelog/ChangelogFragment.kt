@@ -1,4 +1,4 @@
-package com.signaturemaker.app.application.features.setting.changelog
+package com.signaturemaker.app.application.features.menu.changelog
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,6 +16,7 @@ import javax.inject.Inject
 class ChangelogFragment : GlobalFragment() {
 
     companion object {
+
         fun newInstance() = ChangelogFragment()
     }
 
@@ -26,7 +27,6 @@ class ChangelogFragment : GlobalFragment() {
         get() = getString(R.string.changelog)
     override val showBackButton: Boolean
         get() = true
-
 
     private var _binding: ChangelogFragmentBinding? = null
     private val binding get() = _binding!!

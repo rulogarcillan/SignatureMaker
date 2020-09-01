@@ -1,4 +1,4 @@
-package com.signaturemaker.app.application.features.settingg;/*
+package com.signaturemaker.app.application.features.setting;/*
  __ _                   _                                 _
 / _(_) __ _ _ __   __ _| |_ _   _ _ __ ___    /\/\   __ _| | _____ _ __
 \ \| |/ _` | '_ \ / _` | __| | | | '__/ _ \  /    \ / _` | |/ / _ \ '__|
