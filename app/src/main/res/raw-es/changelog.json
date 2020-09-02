@@ -1,8 +1,8 @@
 {
   "changelog": [
     {
-
-      "versionCode": 3011,
+      "date": "01/09/2020",
+      "versionCode": 3100,
       "versionName": "3.1.0-beta1",
       "change": [
         {
@@ -16,6 +16,32 @@
         {
           "type": "feat",
           "text": "Support android 11"
+        }
+      ]
+    },
+    {
+      "date": "10/05/2020",
+      "versionCode": 3006,
+      "versionName": "3.0.42",
+      "change": [
+        {
+          "type": "fix",
+          "text": "Fixed error when saving signature"
+        },
+        {
+          "type": "fix",
+          "text": "Fix others bug"
+        }
+      ]
+    },
+    {
+      "date": "03/11/2019",
+      "versionCode": 3005,
+      "versionName": "3.0.10",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Migrate code to kotlin"
         }
       ]
     },
@@ -315,7 +341,6 @@
       ]
     },
     {
-
       "versionCode": 103,
       "versionName": "1.0.3",
       "change": [
@@ -351,7 +376,6 @@
       ]
     },
     {
-
       "versionCode": 101,
       "versionName": "1.0.1",
       "change": [
@@ -364,7 +388,6 @@
       ]
     },
     {
-
       "versionCode": 101,
       "versionName": "1.0.1",
       "change": [
