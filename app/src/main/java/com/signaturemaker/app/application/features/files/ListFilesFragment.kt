@@ -8,7 +8,7 @@ _\ \ | (_| | | | | (_| | |_| |_| | | |  __/ / /\/\ \ (_| |   <  __/ |
 \__/_|\__, |_| |_|\__,_|\__|\__,_|_|  \___| \/    \/\__,_|_|\_\___|_|
       |___/
 
-Copyright (C) 2018  Raúl Rodríguez Concepción www.wepica.com
+Copyright (C) 2018  Raúl Rodríguez Concepción www.tuppersoft.com
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -25,20 +25,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import co.dift.ui.SwipeToAction
 import com.google.android.material.snackbar.Snackbar
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -48,17 +45,22 @@ import com.karumi.dexter.listener.single.PermissionListener
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.Utils
 import com.signaturemaker.app.application.core.extensions.createSnackBar
-import com.signaturemaker.app.application.core.extensions.loadFromUrl
 import com.signaturemaker.app.application.core.platform.FilesUtils
+import com.signaturemaker.app.application.core.platform.GlobalFragment
 import com.signaturemaker.app.application.core.platform.PermissionsUtils
-import com.signaturemaker.app.application.features.main.MainActivity
+import com.signaturemaker.app.application.features.image.ImageActivity
 import com.signaturemaker.app.application.utils.Constants
 import com.signaturemaker.app.databinding.ListFilesFragmentBinding
 import com.signaturemaker.app.domain.models.ItemFile
 
-class ListFilesFragment : Fragment() {
+class ListFilesFragment : GlobalFragment() {
 
-    private var adapter: AdapterFiles? = null
+    override val toolbarTitle: String
+        get() = getString(R.string.app_name)
+    override val showBackButton: Boolean
+        get() = true
+
+    private val mAdapter: AdapterFiles = AdapterFiles()
     private val items: MutableList<ItemFile> = mutableListOf()
     private var mySnackBar: Snackbar? = null
     private var _binding: ListFilesFragmentBinding? = null
@@ -76,38 +78,77 @@ class ListFilesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         setHasOptionsMenu(true)
-        showBackButton()
         loadItemsFiles()
-        adapter = AdapterFiles(items) //Agregamos los items al adapter
 
-        //definimos el recycler y agregamos el adaptaer
-        binding?.recyclerView?.setHasFixedSize(true)
-        val layoutManager = StaggeredGridLayoutManager(
-            1,
-            StaggeredGridLayoutManager.VERTICAL
-        )
-        binding?.recyclerView?.layoutManager = layoutManager
-        binding?.recyclerView?.itemAnimator = DefaultItemAnimator()
-        val itemDecoration = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
-        binding?.recyclerView?.addItemDecoration(itemDecoration)
-        binding?.recyclerView?.setHasFixedSize(true)
-        binding?.recyclerView?.adapter = adapter
+        binding?.recyclerView?.apply {
+            val itemDecoration = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
+            addItemDecoration(itemDecoration)
+            setHasFixedSize(true)
+            adapter = mAdapter
+            //mAdapter.submitList(items.toList())
+        }
 
-        SwipeToAction(binding?.recyclerView,
+        mAdapter.setOnClickItemListener { item, imageView ->
+            showDetailsImage(item, imageView)
+        }
+
+
+        mAdapter.setOnClickShare { item ->
+            activity?.let { mActivity ->
+                Utils.shareSign(mActivity, item.name)
+            }
+        }
+
+
+        mAdapter.setOnClickDelete { item ->
+            mAdapter.let { mAdapter ->
+                val pos = mAdapter.currentList.indexOf(item)
+                if (pos != -1) {
+                    removeItemAdapter(item)
+                    activity?.let { mActivity ->
+                        mySnackBar = mActivity.createSnackBar(item.name,
+                            resources.getString(R.string.tittle_undo), object : Snackbar.Callback() {
+                                override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+                                    if (event != 1) {
+                                        FilesUtils.removeFile(mActivity, item.name)
+                                        if (mAdapter.currentList.size > 0) {
+                                            binding?.txtMnsNoFiles?.visibility = View.GONE
+                                        } else {
+                                            binding?.txtMnsNoFiles?.visibility = View.VISIBLE
+                                        }
+                                        addListToAdapter(Utils.sort(mAdapter.currentList, Utils.sortOrder))
+                                    } else {
+                                        loadItemsFiles()
+                                        reloadFiles()
+                                    }
+                                    super.onDismissed(transientBottomBar, event)
+                                }
+                            })
+                        mySnackBar?.show()
+
+                    }
+                }
+            }
+        }
+
+        /*SwipeToAction(
+            binding.recyclerView,
             object : SwipeToAction.SwipeListener<ItemFile> {
 
                 override fun onClick(itemData: ItemFile) {
-
-                    showPreviewImage(itemData)
+                    /*findNavController(this@ListFilesFragment).navigate(
+                        ListFilesFragmentDirections.actionListFilesFragmentToImageActivity(
+                            itemData
+                        )
+                    )*/
                 }
 
                 override fun onLongClick(itemData: ItemFile) {
                 }
 
                 override fun swipeLeft(itemData: ItemFile): Boolean {
-                    adapter?.let { mAdapter ->
+                    mAdapter.let { mAdapter ->
                         val pos = items.indexOf(itemData)
                         if (pos == -1) {
                             return true
@@ -120,15 +161,14 @@ class ListFilesFragment : Fragment() {
                                         if (event != 1) {
                                             FilesUtils.removeFile(mActivity, itemData.name)
                                             if (items.size > 0) {
-                                                binding?.txtMnsNoFiles?.visibility = View.GONE
+                                                binding.txtMnsNoFiles.visibility = View.GONE
                                             } else {
-                                                binding?.txtMnsNoFiles?.visibility = View.VISIBLE
+                                                binding.txtMnsNoFiles.visibility = View.VISIBLE
                                             }
-                                            Utils.sort(mAdapter.items, Utils.sortOrder)
+                                            addListToAdapter(Utils.sort(mAdapter.currentList, Utils.sortOrder))
                                         } else {
-                                            addItemAdapter(pos, itemData)
                                             loadItemsFiles()
-                                            Utils.sort(mAdapter.items, Utils.sortOrder)
+                                            reloadFiles()
                                         }
                                         super.onDismissed(transientBottomBar, event)
                                     }
@@ -145,15 +185,7 @@ class ListFilesFragment : Fragment() {
                     }
                     return true
                 }
-            })
-    }
-
-    private fun showBackButton() {
-        activity?.let { mActivity ->
-            if (mActivity is MainActivity) {
-                mActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            }
-        }
+            })*/
     }
 
     override fun onResume() {
@@ -181,7 +213,10 @@ class ListFilesFragment : Fragment() {
 
             override fun onPermissionGranted(response: PermissionGrantedResponse) {
                 items.clear()
-                items.addAll(FilesUtils.loadItemsFiles())
+                items.addAll(
+                    Utils.sort(FilesUtils.loadItemsFiles(), Utils.sortOrder)
+                )
+
                 if (items.size > 0) {
                     binding?.txtMnsNoFiles?.visibility = View.GONE
                 } else {
@@ -201,10 +236,7 @@ class ListFilesFragment : Fragment() {
         itemS.setOnMenuItemClickListener { item ->
             if (item.itemId == R.id.action_sort) {
                 Utils.sortOrder = Utils.sortOrder * -1
-                adapter?.let {
-                    Utils.sort(it.items, Utils.sortOrder)
-                    adapter?.notifyDataSetChanged()
-                }
+                addListToAdapter(Utils.sort(mAdapter.currentList, Utils.sortOrder))
             }
             true
         }
@@ -214,33 +246,36 @@ class ListFilesFragment : Fragment() {
 
     fun reloadFiles() {
         loadItemsFiles()
-        adapter?.notifyDataSetChanged()
-    }
-
-    private fun addItemAdapter(pos: Int, item: ItemFile) {
-        adapter?.items?.add(pos, item)
-        adapter?.notifyItemInserted(pos)
+        mAdapter.submitList(items)
+        mAdapter.notifyDataSetChanged()
     }
 
     private fun removeItemAdapter(item: ItemFile): Int {
-        val pos = items.indexOf(item)
-        Log.d(Constants.TAG, item.name)
-        adapter?.items?.remove(item)
-        adapter?.notifyItemRemoved(pos)
-        adapter?.notifyItemRangeChanged(pos, items.size)
+        val pos = mAdapter.currentList.indexOf(item)
+        mAdapter.submitList(mAdapter.currentList.toMutableList().apply {
+            remove(item)
+        })
+        mAdapter.notifyItemRemoved(pos)
+        mAdapter.notifyItemRangeChanged(pos, items.size)
         return pos
     }
 
-    private fun showPreviewImage(itemData: ItemFile) {
-        activity?.let {
-            val alertDialog = AlertDialog.Builder(it)
-            //alertDialog.setTitle(R.string.tittle_name_of_the_file);
-            val view = it.layoutInflater.inflate(R.layout.imagen_dialog, null)
-            val image = view.findViewById<ImageView>(R.id.image)
-            image.loadFromUrl("file:///" + Utils.path + "/" + itemData.name)
-            alertDialog.setCancelable(true)
-            alertDialog.setView(view)
-            alertDialog.show()
-        }
+    private fun addListToAdapter(list: List<ItemFile>) {
+        mAdapter.submitList(list)
+        mAdapter.notifyDataSetChanged()
+    }
+
+    private fun showDetailsImage(item: ItemFile, imageView: ImageView) {
+
+        val intent = Intent(activity, ImageActivity::class.java)
+        val b = Bundle()
+        b.putParcelable(ImageActivity.TAG, item)
+
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+            activity as Activity,
+            imageView, ViewCompat.getTransitionName(imageView) ?: ""
+        )
+        intent.putExtras(b)
+        startActivity(intent, options.toBundle())
     }
 }

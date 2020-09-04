@@ -6,7 +6,7 @@ _\ \ | (_| | | | | (_| | |_| |_| | | |  __/ / /\/\ \ (_| |   <  __/ |
 \__/_|\__, |_| |_|\__,_|\__|\__,_|_|  \___| \/    \/\__,_|_|\_\___|_|
       |___/
 
-Copyright (C) 2018  Raúl Rodríguez Concepción www.wepica.com
+Copyright (C) 2018  Raúl Rodríguez Concepción www.tuppersoft.com
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

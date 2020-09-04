@@ -15,3 +15,14 @@ fun ImageView.loadFromUrl(url: String) {
         }
     }
 }
+
+fun ImageView.loadFromUrlWhitoutPlaceHolder(url: String) {
+    when {
+        url.toLowerCase(Locale.ROOT).endsWith("png") -> {
+            GlideApp.with(context).load(url).into(this)
+        }
+        url.toLowerCase(Locale.ROOT).endsWith("svg") -> {
+            GlideApp.with(context).load(url).into(this)
+        }
+    }
+}

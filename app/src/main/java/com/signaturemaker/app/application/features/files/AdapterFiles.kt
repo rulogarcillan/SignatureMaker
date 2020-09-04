@@ -6,7 +6,7 @@ _\ \ | (_| | | | | (_| | |_| |_| | | |  __/ / /\/\ \ (_| |   <  __/ |
 \__/_|\__, |_| |_|\__,_|\__|\__,_|_|  \___| \/    \/\__,_|_|\_\___|_|
       |___/
 
-Copyright (C) 2018  Raúl Rodríguez Concepción www.wepica.com
+Copyright (C) 2018  Raúl Rodríguez Concepción www.tuppersoft.com
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -24,21 +24,96 @@ package com.signaturemaker.app.application.features.files
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import android.widget.ImageView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import com.daimajia.swipe.SwipeLayout
+import com.daimajia.swipe.implments.SwipeItemRecyclerMangerImpl
+import com.daimajia.swipe.interfaces.SwipeAdapterInterface
+import com.daimajia.swipe.interfaces.SwipeItemMangerInterface
+import com.daimajia.swipe.util.Attributes.Mode
 import com.signaturemaker.app.R
+import com.signaturemaker.app.databinding.ItemExploreBinding
 import com.signaturemaker.app.domain.models.ItemFile
 
-class AdapterFiles(val items: MutableList<ItemFile>) : RecyclerView.Adapter<FilesViewHolder>() {
+class AdapterFiles :
+    ListAdapter<ItemFile, FilesViewHolder>(DiffUtilsFilesBaseItem), SwipeAdapterInterface, SwipeItemMangerInterface {
 
-    override fun getItemCount(): Int {
-        return items.size
+    private var onClickItem: ((item: ItemFile, imageView: ImageView) -> Unit)? = null
+    private var onClickShare: ((item: ItemFile) -> Unit)? = null
+    private var onClickDelete: ((item: ItemFile) -> Unit)? = null
+
+    private var mItemManger = SwipeItemRecyclerMangerImpl(this)
+
+    fun setOnClickItemListener(lambda: ((item: ItemFile, imageView: ImageView) -> Unit)) {
+        this.onClickItem = lambda
     }
 
-    override fun onBindViewHolder(viewHolder: FilesViewHolder, i: Int) {
-        viewHolder.bind(items[i])
+    fun setOnClickShare(lambda: ((item: ItemFile) -> Unit)) {
+        this.onClickShare = lambda
+    }
+
+    fun setOnClickDelete(lambda: ((item: ItemFile) -> Unit)) {
+        this.onClickDelete = lambda
+    }
+
+    override fun onBindViewHolder(viewHolder: FilesViewHolder, pos: Int) {
+        mItemManger.bindView(viewHolder.itemView, pos)
+        viewHolder.bind(currentList[pos], pos, mItemManger, onClickItem, onClickShare, onClickDelete)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilesViewHolder {
-        return FilesViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_explore, parent, false))
+        return FilesViewHolder(ItemExploreBinding.inflate(LayoutInflater.from(parent.context)))
+    }
+
+    override fun submitList(list: List<ItemFile>?) {
+        super.submitList(list?.toList())
+        notifyDataSetChanged()
+    }
+
+    object DiffUtilsFilesBaseItem : DiffUtil.ItemCallback<ItemFile>() {
+
+        override fun areItemsTheSame(oldItem: ItemFile, newItem: ItemFile) = newItem.name == oldItem.name
+
+        override fun areContentsTheSame(oldItem: ItemFile, newItem: ItemFile) = newItem == oldItem
+    }
+
+    override fun getSwipeLayoutResourceId(position: Int): Int {
+        return R.id.swipelayout
+    }
+
+    override fun closeAllExcept(layout: SwipeLayout?) {
+        mItemManger.closeAllExcept(layout)
+    }
+
+    override fun openItem(position: Int) {
+    }
+
+    override fun closeItem(position: Int) {
+    }
+
+    override fun closeAllItems() {
+    }
+
+    override fun getOpenItems(): MutableList<Int> {
+        return mItemManger.openItems
+    }
+
+    override fun getOpenLayouts(): MutableList<SwipeLayout> {
+        return mItemManger.openLayouts
+    }
+
+    override fun removeShownLayouts(layout: SwipeLayout?) {
+    }
+
+    override fun isOpen(position: Int): Boolean {
+        return mItemManger.isOpen(position)
+    }
+
+    override fun getMode(): Mode {
+        return mItemManger.mode
+    }
+
+    override fun setMode(mode: Mode?) {
     }
 }

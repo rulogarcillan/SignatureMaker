@@ -1,5 +1,6 @@
 package com.signaturemaker.app.domain.models
 
+import androidx.annotation.Keep
 import java.io.Serializable
 
 /**
@@ -7,5 +8,8 @@ import java.io.Serializable
 
  * raulrcs@gmail.com
  */
-data class SuggestMessage(var email: String,
-    var message: String) : Serializable
+@Keep
+data class SuggestMessage(
+    var email: String,
+    var message: String
+) : Serializable

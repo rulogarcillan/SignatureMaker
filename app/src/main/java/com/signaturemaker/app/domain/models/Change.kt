@@ -1,11 +1,13 @@
 package com.signaturemaker.app.domain.models
 
-import com.google.gson.annotations.SerializedName
+import androidx.annotation.Keep
+import com.squareup.moshi.Json
 import java.io.Serializable
 
+@Keep
 data class Change(
-    @SerializedName("text")
+    @Json(name = "text")
     val text: String,
-    @SerializedName("type")
+    @Json(name = "type")
     val type: String
 ) : Serializable

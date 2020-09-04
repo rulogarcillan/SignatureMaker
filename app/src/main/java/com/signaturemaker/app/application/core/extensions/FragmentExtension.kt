@@ -35,9 +35,6 @@ inline fun <reified T : Fragment> Fragment.navigate(
     return fragmentTransaction.commitAllowingStateLoss()
 }
 
-fun Fragment.findNavController(): NavController = NavHostFragment.findNavController(this)
-fun DialogFragment.findNavController(): NavController = NavHostFragment.findNavController(this)
-
 fun getNavOptions(): NavOptions? {
     return Builder()
         .setEnterAnim(R.anim.enter_from_left)

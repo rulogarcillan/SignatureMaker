@@ -13,10 +13,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.signaturemaker.app.R
-import com.signaturemaker.app.application.core.extensions.findNavController
 import com.signaturemaker.app.application.core.extensions.getNavOptions
 import com.signaturemaker.app.application.core.platform.GlobalFragment
 import com.signaturemaker.app.application.features.menu.MenuIdentifier.CHANGELOG

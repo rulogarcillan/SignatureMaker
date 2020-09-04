@@ -15,11 +15,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ChangelogFragment : GlobalFragment() {
 
-    companion object {
-
-        fun newInstance() = ChangelogFragment()
-    }
-
     @Inject
     lateinit var changelog: List<Changelog>
 

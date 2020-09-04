@@ -5,6 +5,8 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.android.gms.oss-licenses-plugin'
 apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
 
 apply from: 'version.gradle'
 
@@ -32,10 +34,10 @@ android {
             keyPassword 'android'
         }
         release {
-            storeFile file('xxxxxxx')
-            storePassword 'xxxxxx'
-            keyAlias 'xxxxxx'
-            keyPassword 'xxxxx'
+            storeFile file('xxxxx')
+            storePassword 'xxxxx'
+            keyAlias 'xxxxx'
+            keyPassword 'xxxxxx'
         }
     }
 
@@ -43,6 +45,7 @@ android {
         debug {
             buildConfigField "String", "BASE_URL", '"https://api.tuppersoft.com"'
             buildConfigField "String", "END_POINT", '"/medical"'
+            buildConfigField "String", "APP_NAME", '"Signature maker"'
             resValue "string", "app_name", "@string/app_name_debug"
             signingConfig signingConfigs.debug
             debuggable true
@@ -56,6 +59,7 @@ android {
         release {
             buildConfigField "String", "BASE_URL", '"https://api.tuppersoft.com"'
             buildConfigField "String", "END_POINT", '"/medical"'
+            buildConfigField "String", "APP_NAME", '"Signature maker"'
             resValue "string", "app_name", "@string/app_name_release"
             signingConfig signingConfigs.release
             debuggable false
@@ -102,9 +106,12 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
     implementation "androidx.fragment:fragment-ktx:1.2.5"
+    implementation "androidx.fragment:fragment:1.2.5"
+
 
     implementation "androidx.navigation:navigation-fragment-ktx:2.3.0"
     implementation "androidx.navigation:navigation-ui-ktx:2.3.0"
+
     //licenses
     implementation 'com.google.android.gms:play-services-oss-licenses:17.0.0'
 
@@ -130,10 +137,15 @@ dependencies {
     implementation 'com.github.apl-devs:appintro:v4.2.3'
 
     //retrofit
-    api 'com.squareup.retrofit2:retrofit:2.9.0'
-    api "com.squareup.retrofit2:converter-gson:2.9.0"
-    api "com.squareup.okhttp3:okhttp:4.8.1"
-    api "com.squareup.okhttp3:logging-interceptor:4.7.2"
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    //implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation "com.squareup.okhttp3:okhttp:4.8.1"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.7.2"
+    implementation "com.squareup.retrofit2:converter-moshi:2.6.1"
+
+
+    implementation 'com.daimajia.swipelayout:library:1.2.0@aar'
+
 
     //Android DI hilt
     implementation "com.google.dagger:hilt-android:2.28-alpha"

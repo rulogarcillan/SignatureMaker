@@ -1,9 +1,11 @@
 package com.signaturemaker.app.domain.models
 
-import com.google.gson.annotations.SerializedName
+import androidx.annotation.Keep
+import com.squareup.moshi.Json
 import java.io.Serializable
 
+@Keep
 data class ChangelogDto(
-    @SerializedName("changelog")
+    @Json(name = "changelog")
     val changelog: List<Changelog> = listOf()
 ) : Serializable

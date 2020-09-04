@@ -6,7 +6,7 @@ _\ \ | (_| | | | | (_| | |_| |_| | | |  __/ / /\/\ \ (_| |   <  __/ |
 \__/_|\__, |_| |_|\__,_|\__|\__,_|_|  \___| \/    \/\__,_|_|\_\___|_|
       |___/
 
-Copyright (C) 2018  Raúl Rodríguez Concepción www.wepica.com
+Copyright (C) 2018  Raúl Rodríguez Concepción www.tuppersoft.com
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -87,7 +87,7 @@ class PermissionsUtils private constructor() {
             permissionListener
         )
 
-        Dexter.withActivity(mActivity)
+        Dexter.withContext(mActivity)
             .withPermission(permission.WRITE_EXTERNAL_STORAGE)
             .withListener(compositePermissionListener).onSameThread().check()
     }
@@ -126,7 +126,7 @@ class PermissionsUtils private constructor() {
         val compositePermissionsListener = CompositeMultiplePermissionsListener(
             snackbarPermissionListener, permissionListener
         )
-        Dexter.withActivity(mActivity)
+        Dexter.withContext(mActivity)
             .withPermissions(permissions)
             .withListener(compositePermissionsListener).onSameThread().check()
     }
