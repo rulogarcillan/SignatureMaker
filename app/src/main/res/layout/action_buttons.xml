@@ -14,7 +14,6 @@
         fab:fab_size="mini" />
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/fabLeft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
@@ -60,7 +59,6 @@
 
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/fabUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"

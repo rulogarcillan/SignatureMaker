@@ -5,16 +5,13 @@
     <color name="buttonBlue">#03a9f4</color>
     <color name="buttonOrange">#FFA000</color>
     <color name="colorWhite">#ffffff</color>
-    <color name="colorFulltrans">#00000000</color>
     <color name="colorPenDefault">#200bb2</color>
     <color name="colorWhitetrans">#CCE8E8E8</color>
-    <color name="colorGerytrans">#CC212121</color>
 
     <color name="clear">#BBDEFB</color>
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#727272</color>
     <color name="background_sliders">#01579b</color>
-    <color name="background_sliders2">#7a94af</color>
 
 
     <color name="primaryColor">#3e82f7</color>
@@ -25,12 +22,9 @@
     <color name="secondaryTextColor">#ffffff</color>
 
 
-    <color name="grey_1F1F1F">#1F1F1F</color>
-    <color name="blue_5A9EDE">#5A9EDE</color>
     <color name="blue_78ADDE">#78ADDE</color>
     <color name="black_800">#121212</color> <!--Color surface (dark)-->
     <color name="black_700">#272727</color> <!--Color surface (dark)-->
-    <color name="black_212121">#212121</color>
 
     <!--customs colors day and night (using with style, nos apply equivalence)-->
     <color name="black">#000</color>

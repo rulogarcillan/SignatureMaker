@@ -8,23 +8,19 @@
     android:orientation="vertical"
     tools:layout_width="match_parent">
 
-    <include
-        android:id="@+id/pathbar"
-        layout="@layout/pathbar" />
+    <include layout="@layout/pathbar" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <TextView
-            android:id="@+id/txtMnsNoFiles"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"

@@ -6,7 +6,6 @@
 
 
     <com.github.gcacace.signaturepad.views.SignaturePad
-        android:id="@+id/singBoard"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:penColor="@color/colorPenDefault"
@@ -14,7 +13,6 @@
         app:penMinWidth="1dp" />
 
     <TextView
-        android:id="@+id/txtSingHere"
         android:layout_width="0dp"
         android:layout_height="21dp"
         android:layout_marginBottom="8dp"
@@ -32,12 +30,8 @@
         android:id="@+id/actionsButtons"
         layout="@layout/action_buttons" />
 
-    <include
-        android:id="@+id/cpColorPicker"
-        layout="@layout/color_picker" />
+    <include layout="@layout/color_picker" />
 
-    <include
-        android:id="@+id/stSlider"
-        layout="@layout/stroke_sliders" />
+    <include layout="@layout/stroke_sliders" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

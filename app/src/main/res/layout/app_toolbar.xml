@@ -9,7 +9,6 @@
     app:elevation="0dp">
 
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/mtbToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="0dp"
