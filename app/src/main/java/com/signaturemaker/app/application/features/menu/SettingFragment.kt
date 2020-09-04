@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.getNavOptions
+import com.signaturemaker.app.application.core.extensions.openRate
 import com.signaturemaker.app.application.core.platform.GlobalFragment
 import com.signaturemaker.app.application.features.menu.MenuIdentifier.CHANGELOG
 import com.signaturemaker.app.application.features.menu.MenuIdentifier.LICENSE
@@ -46,7 +47,6 @@ class SettingFragment : GlobalFragment() {
         const val urlRate = "market://details?id=com.signaturemaker.app"
         const val urlMoreApps = "market://search?q=pub:Raúl R."
 
-        fun newInstance() = SettingFragment()
     }
 
     private var _binding: SettingFragmentBinding? = null
@@ -105,7 +105,7 @@ class SettingFragment : GlobalFragment() {
                 startActivity(Intent(context, OssLicensesMenuActivity::class.java))
             }
             RATE -> {
-                openRate()
+                context?.openRate()
             }
             MOREAPP -> {
                 openMoreApps()
@@ -150,17 +150,7 @@ class SettingFragment : GlobalFragment() {
         startActivity(intent)
     }
 
-    /**
-     * Star Activity to rate it
-     */
-    private fun openRate() {
-        try {
-            val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse(urlRate)
-            startActivity(intent)
-        } catch (e: ActivityNotFoundException) {
-        }
-    }
+
 
     /**
      * Start activity my others play store apps

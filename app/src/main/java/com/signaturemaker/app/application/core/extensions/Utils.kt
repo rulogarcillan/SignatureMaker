@@ -23,12 +23,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 package com.signaturemaker.app.application.core.extensions
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import androidx.core.content.FileProvider
 import com.signaturemaker.app.BuildConfig
+import com.signaturemaker.app.application.features.menu.SettingFragment
 import com.signaturemaker.app.application.utils.Constants
 import com.signaturemaker.app.data.repositories.SharedPreferencesRepository
 import com.signaturemaker.app.domain.models.ItemFile
@@ -199,4 +201,8 @@ object Utils {
 
         return temporalList.toList()
     }
+
+
 }
+
+

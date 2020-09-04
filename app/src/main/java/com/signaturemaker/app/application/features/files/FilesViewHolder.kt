@@ -17,7 +17,6 @@ import com.signaturemaker.app.application.features.image.ImageActivity
 import com.signaturemaker.app.data.repositories.SharedPreferencesRepository
 import com.signaturemaker.app.databinding.ItemExploreBinding
 import com.signaturemaker.app.domain.models.ItemFile
-import com.tuppersoft.skizo.core.extension.gone
 import com.tuppersoft.skizo.core.extension.visible
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -106,7 +105,7 @@ class FilesViewHolder(private val binding: ItemExploreBinding) : SwipeToAction.V
                 }
 
                 override fun onAnimationEnd(animation: Animation?) {
-                    binding.ivSwipe.visibility= View.INVISIBLE
+                    binding.ivSwipe.visibility = View.INVISIBLE
                 }
 
                 override fun onAnimationStart(animation: Animation?) {

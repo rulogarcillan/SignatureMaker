@@ -1,6 +1,8 @@
 <resources>
 
 
+    <string name="app_name_debug" translatable="false">Signature maker - debug</string>
+    <string name="app_name_release" translatable="false">Signature maker</string>
     <string name="title_setting">Settings</string>
     <string name="title_activity_settings">Settings</string>
 

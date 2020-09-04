@@ -16,12 +16,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/ivLogo"
             android:layout_width="106dp"
             android:layout_height="106dp"
             android:layout_marginTop="36dp"
             app:srcCompat="@mipmap/ic_launcher_round" />
 
         <TextView
+            android:id="@+id/tvAppName"
             style="@style/fontBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,6 +32,7 @@
             android:textSize="18sp" />
 
         <TextView
+            android:id="@+id/tvVersion"
             style="@style/fontMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,6 +41,7 @@
             tools:text="v3.14" />
 
         <View
+            android:id="@+id/vSeparatorTop"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginBottom="@dimen/margin_16"
@@ -48,6 +52,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginEnd="48dp"
@@ -74,6 +79,7 @@
 
 
         <View
+            android:id="@+id/vSeparator"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginBottom="@dimen/margin_16"
@@ -83,6 +89,7 @@
             android:background="?attr/separator" />
 
         <TextView
+            android:id="@+id/tvDeveloperName"
             style="@style/fontMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -92,6 +99,7 @@
 
 
         <LinearLayout
+            android:id="@+id/llLinks"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_16"
@@ -100,17 +108,20 @@
 
 
             <ImageView
+                android:id="@+id/ivLinkedin"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_marginEnd="@dimen/margin_16"
                 app:srcCompat="@drawable/ic_linkedin" />
 
             <ImageView
+                android:id="@+id/ivGithub"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 app:srcCompat="@drawable/ic_git" />
 
             <ImageView
+                android:id="@+id/ivTwitter"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_marginStart="@dimen/margin_16"

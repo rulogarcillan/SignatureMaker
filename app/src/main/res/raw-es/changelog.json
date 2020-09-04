@@ -1,9 +1,9 @@
 {
   "changelog": [
     {
-      "date": "04/09/2020",
-      "versionCode": 3104,
-      "versionName": "3.1.0-beta4",
+      "date": "05/09/2020",
+      "versionCode": 3105,
+      "versionName": "3.1.0-beta5",
       "change": [
         {
           "type": "feat",
@@ -24,6 +24,11 @@
         {
           "type": "feat",
           "text": "New preview images screen"
+        },
+
+        {
+          "type": "feat",
+          "text": "Refactor all resource images to SVG"
         },
         {
           "type": "feat",

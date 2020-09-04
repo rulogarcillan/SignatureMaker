@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <group android:checkableBehavior="none">
+
+        <item
+            android:id="@+id/idRate"
+            android:icon="@drawable/ic_rate"
+            android:title=""
+            app:showAsAction="ifRoom" />
         <item
             android:id="@+id/idSuggest"
             android:icon="@drawable/ic_message"

@@ -10,7 +10,9 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/app_toolbar" />
+        <include
+            android:id="@+id/inSettingToolbar"
+            layout="@layout/app_toolbar" />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/container"

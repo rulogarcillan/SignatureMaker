@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="32dp"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/clear"
     android:orientation="horizontal">
 
@@ -14,5 +15,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:text="/sdcard/" />
+        tools:text="/sdcard/" />
 </LinearLayout>

@@ -47,6 +47,7 @@
             </TextView>
 
             <ImageView
+                android:id="@+id/btPositive"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -69,6 +70,7 @@
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/tvEmail"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:background="@android:color/transparent"
@@ -81,6 +83,7 @@
             android:background="?attr/separator" />
 
         <EditText
+            android:id="@+id/tvMessage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"

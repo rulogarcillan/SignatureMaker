@@ -54,6 +54,7 @@ import com.karumi.dexter.listener.single.PermissionListener
 import com.larswerkman.holocolorpicker.ColorPicker
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.Utils
+import com.signaturemaker.app.application.core.extensions.openRate
 import com.signaturemaker.app.application.core.extensions.showToast
 import com.signaturemaker.app.application.core.platform.FilesUtils
 import com.signaturemaker.app.application.core.platform.GlobalFragment
@@ -132,7 +133,7 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
         binding.actionsButtons.bRubber.setOnLongClickListener(this)
 
         //add bar to picker
-        binding.cpColorPicker.picker.addSVBar(binding.cpColorPicker?.svbar)
+        binding.cpColorPicker.picker.addSVBar(binding.cpColorPicker.svbar)
 
         //listener floating actions buttons
         binding.actionsButtons.fabUp.setOnFloatingActionsMenuUpdateListener(object :
@@ -231,7 +232,7 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
         selectWallpaper()
     }
 
-    fun showBackButton() {
+    private fun showBackButton() {
         activity?.let { mActivity ->
             if (mActivity is MainActivity) {
                 mActivity.supportActionBar?.setDisplayHomeAsUpEnabled(false)
@@ -445,9 +446,8 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
      * Show popup menu with save options
      */
     private fun savePopUpOptions() {
-        val popupMenu = PopupMenu(context, binding.actionsButtons?.bSave)
+        val popupMenu = PopupMenu(context, binding.actionsButtons.bSave)
         popupMenu.menuInflater.inflate(R.menu.save_menu, popupMenu.menu)
-
 
         popupMenu.setOnMenuItemClickListener { menuItem ->
             PermissionsUtils.instance?.callRequestPermissionWrite(activity as Activity, object : PermissionListener {
@@ -641,6 +641,12 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
             showSendSuggest()
             true
         }
+
+        menu.findItem(R.id.idRate).setOnMenuItemClickListener {
+            context?.openRate()
+            true
+        }
+
 
         menu.findItem(R.id.idSettings).setOnMenuItemClickListener {
             activity?.let {
