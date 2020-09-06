@@ -40,21 +40,13 @@ import java.text.DateFormat
 object Utils {
 
     var sortOrder = Constants.DEFAULT_SORT_ORDER
-
     var maxStroke = Constants.DEFAULT_MAX_STROKE
-
     var minStroke = Constants.DEFAULT_MIN_TROKE
-
     var penColor = Constants.DEFAULT_PEN_COLOR
-
     var wallpaper = Constants.DEFAULT_WALLPAPER
-
     var path = Constants.DEFAULT_PATH
-
     var disableAds: Boolean = Constants.DEFAULT_DISABLE_ADS
-
     var nameSave: Boolean = Constants.DEFAULT_NAME_SAVE
-
     var deleteExit: Boolean = Constants.DEFAULT_DELETE_EXIT
 
     private fun defaultColor() {
@@ -82,6 +74,10 @@ object Utils {
         minStroke = Constants.DEFAULT_MIN_TROKE
     }
 
+    private fun defaultWallpaper() {
+        wallpaper = Constants.DEFAULT_WALLPAPER
+    }
+
     fun defaultValues() {
         nameSave = Constants.DEFAULT_NAME_SAVE
         disableAds = Constants.DEFAULT_DISABLE_ADS
@@ -94,27 +90,8 @@ object Utils {
         deleteExit = Constants.DEFAULT_DELETE_EXIT
     }
 
-    private fun defaultWallpaper() {
-        wallpaper = Constants.DEFAULT_WALLPAPER
-    }
 
-    /**
-     * Get last time compilation app
-     */
-    fun getAppTimeStamp(context: Context): String {
-        var timeStamp = ""
-        try {
-            val appInfo = context.packageManager.getApplicationInfo(context.packageName, 0)
-            val appFile = appInfo.sourceDir
-            val time = File(appFile).lastModified()
-            val formatter = DateFormat.getDateTimeInstance()
-            timeStamp = formatter.format(time)
-        } catch (e: Exception) {
-            Log.e(Constants.TAG, e.message ?: "not message exception")
-        }
 
-        return timeStamp
-    }
 
     fun loadAllPreferences(mContext: Context?) {
 
@@ -201,7 +178,6 @@ object Utils {
 
         return temporalList.toList()
     }
-
 
 }
 
