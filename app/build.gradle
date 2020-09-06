@@ -167,7 +167,6 @@ dependencies {
     implementation 'com.tuppersoft-libs:skizo-uicomponent:0.0.3'
     implementation 'com.tuppersoft-libs:skizo-core:0.0.3'
 
-    implementation project(':chooser')
 
 }
 apply plugin: 'com.google.gms.google-services'

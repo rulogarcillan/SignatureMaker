@@ -2,9 +2,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory android:title="@string/title_pref_files">
-        <Preference
-            android:key="id_pref_path"
-            android:title="@string/title_pref_path" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="id_pref_delete"

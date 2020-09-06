@@ -28,25 +28,15 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.text.Html;
 import android.view.MenuItem;
-import android.view.View;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionDeniedResponse;
-import com.karumi.dexter.listener.PermissionGrantedResponse;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.single.PermissionListener;
 import com.signaturemaker.app.R;
 import com.signaturemaker.app.application.core.extensions.Utils;
 import com.signaturemaker.app.application.core.platform.FilesUtils;
-import com.signaturemaker.app.application.core.platform.PermissionsUtils;
 import com.signaturemaker.app.application.utils.Constants;
 import com.signaturemaker.app.data.repositories.SharedPreferencesRepository;
-import src.chooser.ChooseFolder;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -70,13 +60,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             addPreferencesFromResource(R.xml.pref_general);
             setHasOptionsMenu(true);
 
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
-            bindPreferenceSummaryToValue(findPreference(Constants.ID_PREF_PATH));
-            bindPreferenceSummaryToValue(findPreference(Constants.ID_PREF_GALLERY));
-
             CheckBoxPreference prefAds = (CheckBoxPreference) findPreference(Constants.ID_PREF_ADVERTISING);
             prefAds.setSummary(Html.fromHtml(
                     "<font color='red'>" + getResources().getString(R.string.title_pref_advertising_sum)
@@ -98,25 +81,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
 
             switch (preference.getKey()) {
-                case Constants.ID_PREF_PATH:
-                    PermissionsUtils.Companion.getInstance()
-                            .callRequestPermissionWrite(getActivity(), new PermissionListener() {
-                                @Override
-                                public void onPermissionDenied(PermissionDeniedResponse response) {
-                                }
-
-                                @Override
-                                public void onPermissionGranted(PermissionGrantedResponse response) {
-                                    showDialogPath();
-                                }
-
-                                @Override
-                                public void onPermissionRationaleShouldBeShown(PermissionRequest permission,
-                                        PermissionToken token) {
-                                }
-                            });
-
-                    break;
                 case Constants.ID_PREF_RESET:
                     setDefaultPreferences();
                 case Constants.ID_PREF_DELETE:
@@ -142,7 +106,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             SharedPreferencesRepository.INSTANCE
                     .savePreference(findPreference(Constants.ID_PREF_PATH).getContext(), Constants.ID_PREF_PATH,
                             Utils.INSTANCE.getPath());
-            bindPreferenceSummaryToValue(findPreference(Constants.ID_PREF_PATH));
             FilesUtils.INSTANCE.moveFiles(oldPath, getActivity());
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_DELETE)).setChecked(false);
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_GALLERY)).setChecked(true);
@@ -158,27 +121,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             Utils.INSTANCE.defaultValues();
 
 
-        }
-
-        private void showDialogPath() {
-            View view = getActivity().getLayoutInflater().inflate(R.layout.chooser_path, null);
-            AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-            final ChooseFolder chos = view.findViewById(R.id.chooserview);
-            chos.setPath(Utils.INSTANCE.getPath());
-
-            dialog.setPositiveButton(android.R.string.ok, (dialog1, id) -> {
-                String oldPath = Utils.INSTANCE.getPath();
-                Utils.INSTANCE.setPath(chos.getPath());
-                SharedPreferencesRepository.INSTANCE
-                        .savePreference(findPreference(Constants.ID_PREF_PATH).getContext(),
-                                Constants.ID_PREF_PATH,
-                                Utils.INSTANCE.getPath());
-                bindPreferenceSummaryToValue(findPreference(Constants.ID_PREF_PATH));
-                FilesUtils.INSTANCE.moveFiles(oldPath, getActivity());
-            });
-
-            dialog.setView(view);
-            dialog.show();
         }
     }
 
@@ -244,34 +186,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         if (actionBar != null) {
             // Show the Up button in the action bar.
             actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-    }
-
-    /**
-     * Binds a preference's summary to its value. More specifically, when the
-     * preference's value is changed, its summary (line of text below the
-     * preference title) is updated to reflect the value. The summary is also
-     * immediately updated upon calling this method. The exact display format is
-     * dependent on the type of preference.
-     *
-     * @see #sBindPreferenceSummaryToValueListener
-     */
-    private static void bindPreferenceSummaryToValue(Preference preference) {
-
-        if (preference.getKey().equalsIgnoreCase(Constants.ID_PREF_PATH)) {
-
-            // Set the listener to watch for value changes.
-            preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
-
-            // Trigger the listener immediately with the preference's
-            // current value.
-            sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
-                    (PreferenceManager
-                            .getDefaultSharedPreferences(preference.getContext())
-                            .getString(preference.getKey(), Utils.INSTANCE.getPath()))
-                            .replace(Constants.ROOT, "/sdcard"));
-        } else if (preference.getKey().equalsIgnoreCase(Constants.ID_PREF_GALLERY)) {
-            preference.setOnPreferenceChangeListener(sBindPreferenceGalleryListener);
         }
     }
 
