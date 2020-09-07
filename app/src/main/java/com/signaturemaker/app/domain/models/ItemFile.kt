@@ -29,7 +29,7 @@ import kotlinx.android.parcel.Parcelize
 @Keep
 @Parcelize
 data class ItemFile(
-    val name: String ,
+    val name: String,
     val date: String = "",
     val size: String = ""
 ) : Parcelable

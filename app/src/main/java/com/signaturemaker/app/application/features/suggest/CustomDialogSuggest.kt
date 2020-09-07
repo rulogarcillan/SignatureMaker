@@ -64,7 +64,6 @@ open class CustomDialogSuggest : DialogFragment() {
                         binding.tvMessage.text.toString()
                     )
                     suggestViewModel.sendSuggest(msg)
-
                 } else {
                     Toast.makeText(view.context, getString(R.string.valid_mail), Toast.LENGTH_LONG).show()
                 }

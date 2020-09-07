@@ -19,12 +19,12 @@ class SignatureRepositoryImp @Inject constructor(
             try {
                 val response = api.sendSuggest(suggestMessage)
                 if (response.isSuccessful) {
-                   emit( Response.onSuccess(true))
+                    emit(Response.onSuccess(true))
                 } else {
-                    emit(  Response.onFailure(Failure.ServerError))
+                    emit(Response.onFailure(Failure.ServerError))
                 }
             } catch (t: Exception) {
-                emit(  Response.onFailure(Failure.ServerError))
+                emit(Response.onFailure(Failure.ServerError))
             }
 
         }

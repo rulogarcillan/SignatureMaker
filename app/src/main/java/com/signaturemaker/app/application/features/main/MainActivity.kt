@@ -75,7 +75,7 @@ class MainActivity : BaseActivity() {
     override fun onStart() {
         super.onStart()
         if (Utils.deleteExit) {
-            PermissionsUtils.instance?.callRequestPermissionWrite(this)
+            PermissionsUtils.callRequestPermissionWrite(this)
         }
     }
 

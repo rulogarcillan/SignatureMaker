@@ -32,8 +32,12 @@
         android:id="@+id/actionsButtons"
         layout="@layout/action_buttons" />
 
-    <include layout="@layout/color_picker" android:id="@+id/cpColorPicker" />
+    <include
+        android:id="@+id/cpColorPicker"
+        layout="@layout/color_picker" />
 
-    <include layout="@layout/stroke_sliders" android:id="@+id/stSlider"/>
+    <include
+        android:id="@+id/stSlider"
+        layout="@layout/stroke_sliders" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -46,7 +46,6 @@ class SettingFragment : GlobalFragment() {
         const val userTwitter = "tuppersoft"
         const val urlRate = "market://details?id=com.signaturemaker.app"
         const val urlMoreApps = "market://search?q=pub:Raúl R."
-
     }
 
     private var _binding: SettingFragmentBinding? = null
@@ -149,8 +148,6 @@ class SettingFragment : GlobalFragment() {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(urlGithub))
         startActivity(intent)
     }
-
-
 
     /**
      * Start activity my others play store apps

@@ -1,12 +1,9 @@
 package com.signaturemaker.app.application.core.extensions
 
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.NavOptions.Builder
-import androidx.navigation.fragment.NavHostFragment
 import com.signaturemaker.app.R
 
 /**

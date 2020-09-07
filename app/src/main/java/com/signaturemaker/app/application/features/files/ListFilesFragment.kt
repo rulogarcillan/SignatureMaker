@@ -163,7 +163,7 @@ class ListFilesFragment : GlobalFragment() {
     }
 
     fun loadItemsFiles() {
-        PermissionsUtils.instance?.callRequestPermissionWrite(activity as Activity, object : PermissionListener {
+        PermissionsUtils.callRequestPermissionWrite(activity as Activity, object : PermissionListener {
             override fun onPermissionDenied(response: PermissionDeniedResponse) {}
 
             override fun onPermissionGranted(response: PermissionGrantedResponse) {

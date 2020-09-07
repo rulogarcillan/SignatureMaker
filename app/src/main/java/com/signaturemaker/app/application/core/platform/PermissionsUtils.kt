@@ -45,7 +45,7 @@ import com.karumi.dexter.listener.single.PermissionListener
 import com.karumi.dexter.listener.single.SnackbarOnDeniedPermissionListener
 import com.signaturemaker.app.R
 
-class PermissionsUtils private constructor() {
+object PermissionsUtils {
 
     /**
      * Request permission for write
@@ -150,38 +150,16 @@ class PermissionsUtils private constructor() {
             .show()
     }
 
-    companion object {
-
-        val permissionsReadWrite = listOf(permission.READ_EXTERNAL_STORAGE, permission.WRITE_EXTERNAL_STORAGE)
-
-        private var INSTANCE: PermissionsUtils? = null
-
-        val instance: PermissionsUtils?
-            get() {
-                if (INSTANCE == null) {
-                    createInstance()
-                }
-                return INSTANCE
-            }
-
-        /**
-         * @return Is permission acepted
-         */
-        fun hasPermissionWriteRead(mContext: Context): Boolean {
-            return ActivityCompat.checkSelfPermission(
-                mContext,
-                permission.READ_EXTERNAL_STORAGE
-            ) == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
-                mContext,
-                permission.WRITE_EXTERNAL_STORAGE
-            ) == PackageManager.PERMISSION_GRANTED
-        }
-
-        @Synchronized
-        private fun createInstance() {
-            if (INSTANCE == null) {
-                INSTANCE = PermissionsUtils()
-            }
-        }
+    /**
+     * @return Is permission acepted
+     */
+    fun hasPermissionWriteRead(mContext: Context): Boolean {
+        return ActivityCompat.checkSelfPermission(
+            mContext,
+            permission.READ_EXTERNAL_STORAGE
+        ) == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
+            mContext,
+            permission.WRITE_EXTERNAL_STORAGE
+        ) == PackageManager.PERMISSION_GRANTED
     }
 }

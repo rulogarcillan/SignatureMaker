@@ -340,7 +340,7 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
 
     private fun openListFilesFragment() {
 
-        PermissionsUtils.instance?.callRequestPermissionWrite(activity as Activity, object : PermissionListener {
+        PermissionsUtils.callRequestPermissionWrite(activity as Activity, object : PermissionListener {
             override fun onPermissionDenied(response: PermissionDeniedResponse) {}
 
             override fun onPermissionGranted(response: PermissionGrantedResponse) {
@@ -445,7 +445,7 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
         popupMenu.menuInflater.inflate(R.menu.save_menu, popupMenu.menu)
 
         popupMenu.setOnMenuItemClickListener { menuItem ->
-            PermissionsUtils.instance?.callRequestPermissionWrite(activity as Activity, object : PermissionListener {
+            PermissionsUtils.callRequestPermissionWrite(activity as Activity, object : PermissionListener {
                 override fun onPermissionDenied(response: PermissionDeniedResponse) {}
 
                 override fun onPermissionGranted(response: PermissionGrantedResponse) {
@@ -553,7 +553,7 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
 
 
         popupMenu.setOnMenuItemClickListener { menuItem ->
-            PermissionsUtils.instance?.callRequestPermissionWrite(activity as Activity, object : PermissionListener {
+            PermissionsUtils.callRequestPermissionWrite(activity as Activity, object : PermissionListener {
                 override fun onPermissionDenied(response: PermissionDeniedResponse) {
                 }
 
