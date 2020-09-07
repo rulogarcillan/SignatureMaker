@@ -21,7 +21,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -34,9 +33,7 @@ import android.view.MenuItem;
 import androidx.appcompat.app.ActionBar;
 import com.signaturemaker.app.R;
 import com.signaturemaker.app.application.core.extensions.Utils;
-import com.signaturemaker.app.application.core.platform.FilesUtils;
 import com.signaturemaker.app.application.utils.Constants;
-import com.signaturemaker.app.data.repositories.SharedPreferencesRepository;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -70,7 +67,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         public boolean onOptionsItemSelected(MenuItem item) {
             int id = item.getItemId();
             if (id == android.R.id.home) {
-                // startActivity(new Intent(getActivity(), SettingsActivity.class));
                 getActivity().onBackPressed();
                 return true;
             }
@@ -99,19 +95,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         }
 
         private void setDefaultPreferences() {
-
-            findPreference(Constants.ID_PREF_PATH).setDefaultValue(Constants.DEFAULT_PATH);
-            String oldPath = Utils.INSTANCE.getPath();
-            Utils.INSTANCE.defaultPath();
-            SharedPreferencesRepository.INSTANCE
-                    .savePreference(findPreference(Constants.ID_PREF_PATH).getContext(), Constants.ID_PREF_PATH,
-                            Utils.INSTANCE.getPath());
-            FilesUtils.INSTANCE.moveFiles(oldPath, getActivity());
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_DELETE)).setChecked(false);
-            ((CheckBoxPreference) findPreference(Constants.ID_PREF_GALLERY)).setChecked(true);
-            FilesUtils.INSTANCE.noMedia(getActivity());
-            //  FilesUtils.moveFiles(oldPath, getActivity());
-            // FilesUtils.reScan(getActivity());
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_NAME)).setChecked(false);
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_COLOR)).setChecked(false);
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_STROKE)).setChecked(false);
@@ -119,8 +103,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             ((CheckBoxPreference) findPreference(Constants.ID_PREF_WALLPAPER)).setChecked(false);
             Utils.INSTANCE.saveAllPreferences(getActivity());
             Utils.INSTANCE.defaultValues();
-
-
         }
     }
 
@@ -153,15 +135,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         return true;
     };
 
-    private static Preference.OnPreferenceChangeListener sBindPreferenceGalleryListener
-            = (preference, o) -> {
-        if ((Boolean) o) {
-            FilesUtils.INSTANCE.noMedia((Activity) preference.getContext());
-        } else {
-            FilesUtils.INSTANCE.noMediaRemove((Activity) preference.getContext());
-        }
-        return true;
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

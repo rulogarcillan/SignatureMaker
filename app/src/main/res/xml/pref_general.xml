@@ -7,11 +7,6 @@
             android:key="id_pref_delete"
             android:summary="@string/title_pref_delete_sum"
             android:title="@string/title_pref_delete" />
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="id_pref_gallery"
-            android:summary="@string/title_pref_gallery_sum"
-            android:title="@string/title_pref_gallery" />
 
         <CheckBoxPreference
             android:defaultValue="false"

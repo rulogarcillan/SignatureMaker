@@ -15,6 +15,7 @@ import com.signaturemaker.app.R
 import com.signaturemaker.app.R.layout
 import com.signaturemaker.app.application.core.extensions.inflate
 import com.signaturemaker.app.application.core.extensions.toDateStringLocalFormat
+import com.signaturemaker.app.application.features.menu.changelog.ChangelogIdentifier.DEL
 import com.signaturemaker.app.application.features.menu.changelog.ChangelogIdentifier.FEAT
 import com.signaturemaker.app.application.features.menu.changelog.ChangelogIdentifier.FIX
 import com.signaturemaker.app.domain.models.Change
@@ -52,19 +53,18 @@ class ItemChangelogHolder(val root: View) : RecyclerView.ViewHolder(root) {
             llChangelog.addView(v)
         }
 
-        val dateIfNotNulll = if (item.getDateInLong() != null) {
+        val dateIfNotNull = if (item.getDateInLong() != null) {
             "(${item.getDateInLong()?.toDateStringLocalFormat()})"
         } else {
             ""
         }
 
-        tvTittle.text = "${item.versionName} $dateIfNotNulll"
+        tvTittle.text = "${item.versionName} $dateIfNotNull"
     }
 
     private fun changelogView(mContext: Context, changeItem: Change): View {
         val inflater = mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val v = inflater.inflate(R.layout.item_changelog_details, null)
-        // val chipGroup: ChipGroup = v.findViewById(R.id.cgItem)
         val tvChangelog: TextView = v.findViewById(R.id.tvChangelog)
         val tvTypeChangelog: TextView = v.findViewById(R.id.tvTypeChangelog)
         val cvTypeChangelog: MaterialCardView = v.findViewById(R.id.cvTypeChangelog)
@@ -75,6 +75,9 @@ class ItemChangelogHolder(val root: View) : RecyclerView.ViewHolder(root) {
             }
             FEAT.toString().toUpperCase(Locale.ROOT) -> {
                 R.style.chip_feat
+            }
+            DEL.toString().toUpperCase(Locale.ROOT) -> {
+                R.style.chip_del
             }
             else -> {
                 R.style.chip_any
@@ -99,6 +102,15 @@ class ItemChangelogHolder(val root: View) : RecyclerView.ViewHolder(root) {
                     ContextCompat.getColorStateList(
                         mContext,
                         R.color.chip_feat_color
+                    )
+                )
+                tvTypeChangelog.setTextColor(mContext.getColorFromAttr(R.attr.colorChipChangelogText))
+            }
+            DEL.toString().toUpperCase(Locale.ROOT) -> {
+                cvTypeChangelog.setCardBackgroundColor(
+                    ContextCompat.getColorStateList(
+                        mContext,
+                        R.color.chip_del_color
                     )
                 )
                 tvTypeChangelog.setTextColor(mContext.getColorFromAttr(R.attr.colorChipChangelogText))

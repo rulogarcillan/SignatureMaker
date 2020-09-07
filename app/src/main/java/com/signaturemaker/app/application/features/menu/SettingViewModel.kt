@@ -2,6 +2,7 @@ package com.signaturemaker.app.application.features.menu
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import javax.inject.Inject
 
 /**

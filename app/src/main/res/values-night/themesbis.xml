@@ -35,6 +35,7 @@
         <item name="colorChips">@color/grey_808080</item>
         <item name="colorToolbarIcon">@color/white</item>
         <item name="colorChipFix">@color/orange_F57C00</item>
+        <item name="colorChipDel">@color/red_500</item>
         <item name="colorChipFeat">@color/green_689F38</item>
         <item name="colorChipChangelogText">@color/white</item>
 

@@ -7,5 +7,5 @@ package com.signaturemaker.app.application.features.menu.changelog
  */
 enum class ChangelogIdentifier {
 
-    FIX, FEAT
+    FIX, FEAT, DEL
 }

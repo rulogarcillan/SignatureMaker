@@ -8,8 +8,6 @@
     android:orientation="vertical"
     tools:layout_width="match_parent">
 
-    <include layout="@layout/pathbar" android:id="@+id/pathbar"/>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

@@ -1,11 +1,7 @@
 package com.signaturemaker.app.application.core.platform
 
 import android.app.Activity
-import android.content.Intent
 import android.graphics.Bitmap
-import android.net.Uri
-import android.os.Environment
-import android.provider.MediaStore
 import com.signaturemaker.app.application.core.extensions.Utils
 import com.signaturemaker.app.domain.models.ItemFile
 import java.io.BufferedWriter
@@ -39,7 +35,7 @@ object FilesUtils {
      *
      * @param path name of folder (path complete)
      */
-    fun createFolder(path: String) {
+    private fun createFolder(path: String) {
         val file = File(path)
         if (!file.isDirectory) {
             file.mkdirs()
@@ -49,20 +45,20 @@ object FilesUtils {
     /**
      * Remove all files
      */
-    fun deleteAllFiles(mActivity: Activity) {
+    fun deleteAllFiles() {
         val files: Array<File>?
         val folder = File(Utils.path)
         if (folder.exists()) {
             files = folder.listFiles()
             for (file in files) {
                 val name = file.name
-                if ((name.contains(".png") || name.contains(".PNG") || name.contains(".svg") || name.contains(".SVG")) && name.substring(
-                        0,
-                        2
-                    ) == "SM"
+                if ((name.contains(".png")
+                            || name.contains(".PNG")
+                            || name.contains(".svg")
+                            || name.contains(".SVG"))
+                    && name.startsWith("SM")
                 ) {
                     file.delete()
-                    deleteScanFile(mActivity, file)
                 }
             }
         }
@@ -73,7 +69,7 @@ object FilesUtils {
         return systemTime()
     }
 
-    fun getFile(name: String): File {
+    private fun getFile(name: String): File {
         return File(Utils.path + name)
     }
 
@@ -123,17 +119,10 @@ object FilesUtils {
                         val name = file.name
 
                         if ((name.contains(".png") || name.contains(".PNG") || name.contains(".svg") || name
-                                .contains(".SVG")) && name.substring(0, 2) == "SM" || name == ".nomedia"
+                                .contains(".SVG")) && name.substring(0, 2) == "SM"
                         ) {
 
                             file.renameTo(File(Utils.path + "/" + name))
-                            deleteScanFile(mActivity, file)
-                            mActivity.sendBroadcast(
-                                Intent(
-                                    Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
-                                    Uri.parse(Utils.path + "/" + name)
-                                )
-                            ) //nueva
                         }
                     }
                 }
@@ -141,74 +130,17 @@ object FilesUtils {
         }
     }
 
-    fun noMedia(mActivity: Activity): Boolean {
-        run {
-            val storageState = Environment.getExternalStorageState()
-
-            if (Environment.MEDIA_MOUNTED == storageState) {
-                try {
-                    val noMedia = File(Utils.path, ".nomedia")
-
-                    if (noMedia.exists()) {
-                        scanFile(mActivity, noMedia)
-                        return true
-                    }
-                    scanFile(mActivity, noMedia)
-                    val noMediaOutStream = FileOutputStream(noMedia)
-                    noMediaOutStream.write(0)
-                    noMediaOutStream.close()
-                } catch (e: Exception) {
-                    return false
-                }
-            } else {
-                return false
-            }
-
-            return true
-
-        }
-    }
-
-    fun noMediaRemove(mActivity: Activity): Boolean {
-        run {
-            val storageState = Environment.getExternalStorageState()
-
-            if (Environment.MEDIA_MOUNTED == storageState) {
-                try {
-                    val noMedia = File(Utils.path, ".nomedia")
-                    if (noMedia.exists()) {
-                        noMedia.delete()
-                        scanFile(mActivity, noMedia)
-
-                        val folder = File(Utils.path)
-                        val files: Array<File>?
-                        if (folder.exists()) {
-                            files = folder.listFiles()
-                            files?.let {
-                                for (file in files) {
-                                    mActivity.contentResolver.delete(Uri.parse(file.absolutePath), null, null)
-                                }
-                            }
-                        }
-
-                        return true
-                    }
-                } catch (e: Exception) {
-                    return false
-                }
-            } else {
-                return false
-            }
-            return true
-
-        }
-    }
-
-    fun removeFile(mActivity: Activity, name: String) {
+    fun removeFileByName(name: String) {
         val file = getFile(name)
         if (file.exists()) {
             file.delete()
-            deleteScanFile(mActivity, file)
+        }
+    }
+
+    fun removeFile(path: String) {
+        val file = File(path)
+        if (file.exists()) {
+            file.delete()
         }
     }
 
@@ -257,35 +189,13 @@ object FilesUtils {
     /**
      * rturn a string -->>> ddMMyyyy_hhmmss
      */
-    fun systemTime(): String {
+    private fun systemTime(): String {
 
         val date = Date()
         val dfd = SimpleDateFormat("ddMMyyyy", Locale.getDefault())
         val dfh = SimpleDateFormat("HHmmss", Locale.getDefault())
 
         return dfd.format(date) + "_" + dfh.format(date)
-    }
-
-    private fun deleteScanFile(mActivity: Activity?, file: File) {
-        if (mActivity != null) {
-            val resolver = mActivity.contentResolver
-            resolver.delete(
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, MediaStore.Images.Media.DATA + "=?",
-                arrayOf(file.path)
-            )
-            mActivity.sendBroadcast(
-                Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse(file.path))
-            ) //nueva
-        }
-    }
-
-    private fun scanFile(mActivity: Activity, file: File) {
-        mActivity.sendBroadcast(
-            Intent(
-                Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
-                Uri.fromFile(file)
-            )
-        )
     }
 }
 

@@ -41,6 +41,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
@@ -59,8 +60,8 @@ import com.signaturemaker.app.application.core.extensions.showToast
 import com.signaturemaker.app.application.core.platform.FilesUtils
 import com.signaturemaker.app.application.core.platform.GlobalFragment
 import com.signaturemaker.app.application.core.platform.PermissionsUtils
-import com.signaturemaker.app.application.features.files.ClickInterface
 import com.signaturemaker.app.application.features.main.MainActivity
+import com.signaturemaker.app.application.features.main.SharedViewModel
 import com.signaturemaker.app.application.features.menu.SettingActivity
 import com.signaturemaker.app.application.features.suggest.CustomDialogSuggest
 import com.signaturemaker.app.databinding.SingBoardFragmentBinding
@@ -80,13 +81,14 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
     override val showBackButton: Boolean
         get() = false
 
-    private var clickInterface: ClickInterface? = null
     private var runningAnimationSeek: YoYo.YoYoString? = null
     private var runningAnimationColor: YoYo.YoYoString? = null
     private var runningAnimation: YoYo.YoYoString? = null
 
     private var _binding: SingBoardFragmentBinding? = null
     private val binding get() = _binding!!
+
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     private interface TextDialog {
 
@@ -217,10 +219,6 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
             }
         }
         return false
-    }
-
-    fun setInterface(clickInterface: ClickInterface) {
-        this.clickInterface = clickInterface
     }
 
     private fun changeWallpaper() {
@@ -394,7 +392,7 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
                                 Uri.fromFile(File(Utils.path + mName))
                             )
                         )
-                        clickInterface?.buttonClicked()
+                        sharedViewModel.reloadFileList()
                     } else {
                         context?.showToast(resources.getString(R.string.title_save_ko))
                     }
@@ -432,10 +430,7 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
                     }
                 }
                 context?.showToast(resources.getString(R.string.title_save_ok))
-                activity?.sendBroadcast(
-                    Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(File(Utils.path + name)))
-                )
-                clickInterface?.buttonClicked()
+                sharedViewModel.reloadFileList()
             } else {
                 context?.showToast(resources.getString(R.string.title_save_ko))
             }

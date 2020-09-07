@@ -1,9 +1,9 @@
 {
   "changelog": [
     {
-      "date": "05/09/2020",
-      "versionCode": 3105,
-      "versionName": "3.1.0-beta5",
+      "date": "07/09/2020",
+      "versionCode": 3106,
+      "versionName": "3.1.0-beta6",
       "change": [
         {
           "type": "feat",
@@ -15,7 +15,7 @@
         },
         {
           "type": "feat",
-          "text": "Redising swipe options"
+          "text": "Redesing swipe options"
         },
         {
           "type": "feat",
@@ -32,7 +32,15 @@
         },
         {
           "type": "feat",
-          "text": "Support android 11"
+          "text": "Preparing support to android 11"
+        },
+        {
+          "type": "del",
+          "text": "Select custom path"
+        },
+        {
+          "type": "del",
+          "text": "Enabled/disabled nomedia"
         }
       ]
     },

@@ -5,6 +5,7 @@
     <declare-styleable name="myColors">
         <attr name="calendarIcon" format="color" />
         <attr name="colorPanelFunnel" format="color" />
+        <attr name="colorChipDel" format="color" />
         <attr name="colorChipFix" format="color" />
         <attr name="colorChipFeat" format="color" />
         <attr name="colorChipChangelogText" format="color" />

@@ -23,28 +23,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 package com.signaturemaker.app.application.core.extensions
 
 import android.app.Activity
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import androidx.core.content.FileProvider
 import com.signaturemaker.app.BuildConfig
-import com.signaturemaker.app.application.features.menu.SettingFragment
 import com.signaturemaker.app.application.utils.Constants
 import com.signaturemaker.app.data.repositories.SharedPreferencesRepository
 import com.signaturemaker.app.domain.models.ItemFile
 import java.io.File
-import java.text.DateFormat
 
 object Utils {
 
     var sortOrder = Constants.DEFAULT_SORT_ORDER
     var maxStroke = Constants.DEFAULT_MAX_STROKE
-    var minStroke = Constants.DEFAULT_MIN_TROKE
+    var minStroke = Constants.DEFAULT_MIN_STROKE
     var penColor = Constants.DEFAULT_PEN_COLOR
     var wallpaper = Constants.DEFAULT_WALLPAPER
-    var path = Constants.DEFAULT_PATH
+    var path = "" //load from application
     var disableAds: Boolean = Constants.DEFAULT_DISABLE_ADS
     var nameSave: Boolean = Constants.DEFAULT_NAME_SAVE
     var deleteExit: Boolean = Constants.DEFAULT_DELETE_EXIT
@@ -65,13 +61,9 @@ object Utils {
         nameSave = Constants.DEFAULT_NAME_SAVE
     }
 
-    fun defaultPath() {
-        path = Constants.DEFAULT_PATH
-    }
-
     private fun defaultStroke() {
         maxStroke = Constants.DEFAULT_MAX_STROKE
-        minStroke = Constants.DEFAULT_MIN_TROKE
+        minStroke = Constants.DEFAULT_MIN_STROKE
     }
 
     private fun defaultWallpaper() {
@@ -83,15 +75,11 @@ object Utils {
         disableAds = Constants.DEFAULT_DISABLE_ADS
         sortOrder = Constants.DEFAULT_SORT_ORDER
         maxStroke = Constants.DEFAULT_MAX_STROKE
-        minStroke = Constants.DEFAULT_MIN_TROKE
+        minStroke = Constants.DEFAULT_MIN_STROKE
         penColor = Constants.DEFAULT_PEN_COLOR
         wallpaper = Constants.DEFAULT_WALLPAPER
-        path = Constants.DEFAULT_PATH
         deleteExit = Constants.DEFAULT_DELETE_EXIT
     }
-
-
-
 
     fun loadAllPreferences(mContext: Context?) {
 
@@ -113,7 +101,7 @@ object Utils {
             }
             if (SharedPreferencesRepository.loadPreference(mContext, Constants.ID_PREF_STROKE, false)) {
                 minStroke = SharedPreferencesRepository
-                    .loadPreference(mContext, Constants.PREF_MIN_TROKE, Constants.DEFAULT_MIN_TROKE)
+                    .loadPreference(mContext, Constants.PREF_MIN_TROKE, Constants.DEFAULT_MIN_STROKE)
                 maxStroke = SharedPreferencesRepository
                     .loadPreference(mContext, Constants.PREF_MAX_TROKE, Constants.DEFAULT_MAX_STROKE)
             } else {
@@ -178,7 +166,6 @@ object Utils {
 
         return temporalList.toList()
     }
-
 }
 
 

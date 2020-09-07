@@ -28,15 +28,11 @@ import android.os.Environment;
 
 public final class Constants {
 
-    public static final String TAG = "RULO";
-
     public static final String ID_PREF_ADVERTISING = "id_pref_advertising";
 
     public static final String ID_PREF_PATH = "id_pref_path";
 
     public static final String ID_PREF_DELETE = "id_pref_delete";
-
-    public static final String ID_PREF_GALLERY = "id_pref_gallery";
 
     public static final String ID_PREF_NAME = "id_pref_name";
 
@@ -48,9 +44,6 @@ public final class Constants {
 
     public static final String ID_PREF_WALLPAPER = "id_pref_wallpaper";
 
-    public static final String PREF_ADS = "ADS";
-
-    //public static final String FRAG = "FRAG";
     public static final String PREF_MAX_TROKE = "MAX_STROKE";
 
     public static final String PREF_MIN_TROKE = "MIN_STROKE";
@@ -61,7 +54,8 @@ public final class Constants {
 
     public static final String FIRST_TIME = "first_time";
 
-    public static final String ROOT = Environment.getExternalStorageDirectory().getAbsolutePath();
+    public static final String NEED_MIGRATE = "need_migrate";
+
 
     public static final Boolean DEFAULT_NAME_SAVE = false;
 
@@ -73,13 +67,15 @@ public final class Constants {
 
     public static final int DEFAULT_MAX_STROKE = 4;
 
-    public static final int DEFAULT_MIN_TROKE = 1;
+    public static final int DEFAULT_MIN_STROKE = 1;
 
     public static final int DEFAULT_PEN_COLOR = Color.parseColor("#200BB2");
 
     public static final int DEFAULT_WALLPAPER = 3;
 
-    public static final String DEFAULT_PATH = ROOT + "/Signature/";
+    public static final String ROOT = Environment.getExternalStorageDirectory().getAbsolutePath();
+
+    public static final String DEFAULT_OLD_PATH = ROOT + "/Signature/";
 
 
 }

@@ -22,10 +22,13 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 package com.signaturemaker.app.application.features.main
 
+import android.Manifest.permission
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.activity.viewModels
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
@@ -34,20 +37,23 @@ import com.signaturemaker.app.application.core.extensions.Utils
 import com.signaturemaker.app.application.core.platform.BaseActivity
 import com.signaturemaker.app.application.core.platform.FilesUtils
 import com.signaturemaker.app.application.core.platform.PermissionsUtils
-import com.signaturemaker.app.application.features.files.ClickInterface
 import com.signaturemaker.app.application.features.files.ListFilesFragment
 import com.signaturemaker.app.application.features.menu.SettingViewModel
+import com.signaturemaker.app.application.utils.Constants
+import com.signaturemaker.app.data.repositories.SharedPreferencesRepository
 import com.signaturemaker.app.databinding.ActivityMainBinding
 import com.tuppersoft.skizo.core.extension.gone
+import com.tuppersoft.skizo.core.extension.loadSharedPreference
+import com.tuppersoft.skizo.core.extension.logd
 import com.tuppersoft.skizo.core.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.app_toolbar.view.tvTittle
+import java.io.File
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity(), ClickInterface {
+class MainActivity : BaseActivity() {
 
     private var flagAdvertising: Boolean = false
-    private var listFragment: ListFilesFragment? = null
     private val settingViewModel: SettingViewModel by viewModels()
 
     private lateinit var binding: ActivityMainBinding
@@ -57,13 +63,12 @@ class MainActivity : BaseActivity(), ClickInterface {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.idToolbar.mtbToolbar)
-        initObserver()
 
         Utils.loadAllPreferences(this)
 
-        //signBoard.setInterface(this)
-
-        createTableView()
+        initObserver()
+        initMigrate()
+        //createTableView()
         initAdvertising()
     }
 
@@ -88,7 +93,7 @@ class MainActivity : BaseActivity(), ClickInterface {
     override fun onDestroy() {
         super.onDestroy()
         if (Utils.deleteExit && PermissionsUtils.hasPermissionWriteRead(this)) {
-            FilesUtils.deleteAllFiles(this)
+            FilesUtils.deleteAllFiles()
         }
     }
 
@@ -100,10 +105,6 @@ class MainActivity : BaseActivity(), ClickInterface {
             else -> return true
         }
         return true
-    }
-
-    override fun buttonClicked() {
-        listFragment?.reloadFiles()
     }
 
     private fun createTableView() {
@@ -180,7 +181,6 @@ class MainActivity : BaseActivity(), ClickInterface {
     }
 
     private fun showCancelButton(flag: Boolean) {
-        // invalidateOptionsMenu()
         binding.idToolbar.mtbToolbar.menu?.findItem(R.id.idCancel)?.isVisible = flag
     }
 
@@ -190,5 +190,44 @@ class MainActivity : BaseActivity(), ClickInterface {
         } else {
             supportActionBar?.hide()
         }
+    }
+
+    private val requestPermissionLauncher: ActivityResultLauncher<String> =
+        registerForActivityResult(
+            RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                "Migrate start".logd()
+                migrateFiles()
+                FilesUtils.removeFile(loadOldPath())
+                "Migrate finish".logd()
+                createTableView()
+            } else {
+                createTableView()
+                "Cancel migrate - permission is denied".logd()
+            }
+        }
+
+    private fun initMigrate() {
+        if (SharedPreferencesRepository.loadPreference(this, Constants.NEED_MIGRATE, true) && isNeedMigrate()) {
+            "Need migrate files".logd()
+            permissions()
+        } else {
+            "No need migrate files".logd()
+            createTableView()
+        }
+        SharedPreferencesRepository.savePreference(this, Constants.NEED_MIGRATE, false)
+    }
+
+    private fun loadOldPath(): String = loadSharedPreference(Constants.ID_PREF_PATH, Constants.DEFAULT_OLD_PATH)
+
+    private fun isNeedMigrate(): Boolean = File(loadOldPath()).exists()
+
+    private fun migrateFiles() {
+        FilesUtils.moveFiles(loadOldPath(), this)
+    }
+
+    private fun permissions() {
+        requestPermissionLauncher.launch(permission.WRITE_EXTERNAL_STORAGE)
     }
 }

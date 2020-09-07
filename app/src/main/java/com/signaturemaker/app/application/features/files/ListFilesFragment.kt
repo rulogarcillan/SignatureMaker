@@ -35,6 +35,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.android.material.snackbar.Snackbar
 import com.karumi.dexter.PermissionToken
@@ -49,7 +50,7 @@ import com.signaturemaker.app.application.core.platform.FilesUtils
 import com.signaturemaker.app.application.core.platform.GlobalFragment
 import com.signaturemaker.app.application.core.platform.PermissionsUtils
 import com.signaturemaker.app.application.features.image.ImageActivity
-import com.signaturemaker.app.application.utils.Constants
+import com.signaturemaker.app.application.features.main.SharedViewModel
 import com.signaturemaker.app.databinding.ListFilesFragmentBinding
 import com.signaturemaker.app.domain.models.ItemFile
 
@@ -66,6 +67,8 @@ class ListFilesFragment : GlobalFragment() {
     private var _binding: ListFilesFragmentBinding? = null
     private val binding get() = _binding
 
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -79,6 +82,7 @@ class ListFilesFragment : GlobalFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setHasOptionsMenu(true)
+        initObserver()
         loadItemsFiles()
 
         binding?.recyclerView?.apply {
@@ -111,7 +115,7 @@ class ListFilesFragment : GlobalFragment() {
                             resources.getString(R.string.tittle_undo), object : Snackbar.Callback() {
                                 override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
                                     if (event != 1) {
-                                        FilesUtils.removeFile(mActivity, item.name)
+                                        FilesUtils.removeFileByName(item.name)
                                         if (mAdapter.currentList.size > 0) {
                                             binding?.txtMnsNoFiles?.visibility = View.GONE
                                         } else {
@@ -131,69 +135,21 @@ class ListFilesFragment : GlobalFragment() {
                 }
             }
         }
+    }
 
-        /*SwipeToAction(
-            binding.recyclerView,
-            object : SwipeToAction.SwipeListener<ItemFile> {
+    private fun initObserver() {
+        initReloadFileList()
+    }
 
-                override fun onClick(itemData: ItemFile) {
-                    /*findNavController(this@ListFilesFragment).navigate(
-                        ListFilesFragmentDirections.actionListFilesFragmentToImageActivity(
-                            itemData
-                        )
-                    )*/
-                }
-
-                override fun onLongClick(itemData: ItemFile) {
-                }
-
-                override fun swipeLeft(itemData: ItemFile): Boolean {
-                    mAdapter.let { mAdapter ->
-                        val pos = items.indexOf(itemData)
-                        if (pos == -1) {
-                            return true
-                        }
-                        removeItemAdapter(itemData)
-                        activity?.let { mActivity ->
-                            mySnackBar = mActivity.createSnackBar(itemData.name,
-                                resources.getString(R.string.tittle_undo), object : Snackbar.Callback() {
-                                    override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
-                                        if (event != 1) {
-                                            FilesUtils.removeFile(mActivity, itemData.name)
-                                            if (items.size > 0) {
-                                                binding.txtMnsNoFiles.visibility = View.GONE
-                                            } else {
-                                                binding.txtMnsNoFiles.visibility = View.VISIBLE
-                                            }
-                                            addListToAdapter(Utils.sort(mAdapter.currentList, Utils.sortOrder))
-                                        } else {
-                                            loadItemsFiles()
-                                            reloadFiles()
-                                        }
-                                        super.onDismissed(transientBottomBar, event)
-                                    }
-                                })
-                            mySnackBar?.show()
-                        }
-                    }
-                    return true
-                }
-
-                override fun swipeRight(itemData: ItemFile): Boolean {
-                    activity?.let {
-                        Utils.shareSign(it, itemData.name)
-                    }
-                    return true
-                }
-            })*/
+    private fun initReloadFileList() {
+        sharedViewModel.reloadFileList.observe(viewLifecycleOwner, {
+            reloadFiles()
+        })
     }
 
     override fun onResume() {
         super.onResume()
         reloadFiles()
-        context?.let {
-            binding?.pathbar?.path?.text = Utils.path.replace(Constants.ROOT, "/sdcard")
-        }
     }
 
     override fun onDestroyView() {
@@ -207,7 +163,6 @@ class ListFilesFragment : GlobalFragment() {
     }
 
     fun loadItemsFiles() {
-
         PermissionsUtils.instance?.callRequestPermissionWrite(activity as Activity, object : PermissionListener {
             override fun onPermissionDenied(response: PermissionDeniedResponse) {}
 
@@ -224,7 +179,11 @@ class ListFilesFragment : GlobalFragment() {
                 }
             }
 
-            override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest, token: PermissionToken) {}
+            override fun onPermissionRationaleShouldBeShown(
+                permission: PermissionRequest,
+                token: PermissionToken
+            ) {
+            }
         })
     }
 

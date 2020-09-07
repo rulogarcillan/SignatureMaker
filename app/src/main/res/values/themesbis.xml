@@ -45,11 +45,12 @@
         <item name="calendarIcon">@color/primaryColor</item>
         <item name="colorToolbarIcon">@color/white</item>
         <item name="colorChipFix">@color/orange_F57C00</item>
+        <item name="colorChipDel">@color/red_500</item>
         <item name="colorChipFeat">@color/green_689F38</item>
         <item name="colorChipChangelogText">@color/white</item>
     </style>
 
-    <style name="App.Theme.Intro" parent="App.Theme.Custom" >
+    <style name="App.Theme.Intro" parent="App.Theme.Custom">
         <item name="android:navigationBarColor">@color/black</item>
         <item name="colorPrimaryVariant">@color/background_sliders</item>
         <item name="colorPrimaryDark">?attr/colorPrimaryVariant</item>
