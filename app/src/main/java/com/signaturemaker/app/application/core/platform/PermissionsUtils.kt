@@ -92,63 +92,6 @@ object PermissionsUtils {
             .withListener(compositePermissionListener).onSameThread().check()
     }
 
-    /**
-     * For multiple permissions
-     */
-    fun callRequestPermissions(
-        mActivity: Activity, permissions: Collection<String>,
-        myPermissionListener: MultiplePermissionsListener
-    ) {
-
-        //This listener only call when permission is denied
-        val snackbarPermissionListener = SnackbarOnAnyDeniedMultiplePermissionsListener.Builder.with(
-            mActivity.window.decorView.rootView,
-            R.string.body_permissions
-        )
-            .withOpenSettingsButton(R.string.title_setting)
-            .build()
-
-        //listener of actions
-        val permissionListener = object : MultiplePermissionsListener {
-            override fun onPermissionRationaleShouldBeShown(
-                permissions: List<PermissionRequest>,
-                token: PermissionToken
-            ) {
-                myPermissionListener.onPermissionRationaleShouldBeShown(permissions, token)
-            }
-
-            override fun onPermissionsChecked(report: MultiplePermissionsReport) {
-                if (report.areAllPermissionsGranted()) {
-                    myPermissionListener.onPermissionsChecked(report)
-                }
-            }
-        }
-        val compositePermissionsListener = CompositeMultiplePermissionsListener(
-            snackbarPermissionListener, permissionListener
-        )
-        Dexter.withContext(mActivity)
-            .withPermissions(permissions)
-            .withListener(compositePermissionsListener).onSameThread().check()
-    }
-
-    /**
-     * Show a dialog with informations of permission
-     */
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    private fun shoDialogInformation(token: PermissionToken, mActivity: Activity) {
-        AlertDialog.Builder(mActivity).setTitle(R.string.title_request_permision)
-            .setMessage(R.string.body_request_permision)
-            .setNegativeButton(android.R.string.cancel) { dialog, _ ->
-                dialog.dismiss()
-                token.cancelPermissionRequest()
-            }
-            .setPositiveButton(android.R.string.ok) { dialog, _ ->
-                dialog.dismiss()
-                token.continuePermissionRequest()
-            }
-            .setOnDismissListener { token.cancelPermissionRequest() }
-            .show()
-    }
 
     /**
      * @return Is permission acepted

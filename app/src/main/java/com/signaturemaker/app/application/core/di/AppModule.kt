@@ -1,8 +1,8 @@
 package com.signaturemaker.app.application.core.di
 
 import android.content.Context
-import com.crashlytics.android.Crashlytics
 import com.facebook.stetho.okhttp3.StethoInterceptor
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.signaturemaker.app.BuildConfig
 import com.signaturemaker.app.R
 import com.signaturemaker.app.data.datasource.SignatureServices
@@ -58,7 +58,7 @@ object AppModule {
             outputStream.close()
             inputStream.close()
         } catch (e: IOException) {
-            Crashlytics.log("Error al cargar el changelog")
+            FirebaseCrashlytics.getInstance().log("Error al cargar el changelog")
         }
         return outputStream.toString()
     }

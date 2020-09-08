@@ -27,15 +27,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.activity.viewModels
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.Utils
 import com.signaturemaker.app.application.core.platform.BaseActivity
 import com.signaturemaker.app.application.core.platform.FilesUtils
+import com.signaturemaker.app.application.core.platform.PermissionRequester
 import com.signaturemaker.app.application.core.platform.PermissionsUtils
 import com.signaturemaker.app.application.features.files.ListFilesFragment
 import com.signaturemaker.app.application.features.menu.SettingViewModel
@@ -192,27 +192,13 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private val requestPermissionLauncher: ActivityResultLauncher<String> =
-        registerForActivityResult(
-            RequestPermission()
-        ) { isGranted: Boolean ->
-            if (isGranted) {
-                "Migrate start".logd()
-                migrateFiles()
-                FilesUtils.removeFile(loadOldPath())
-                "Migrate finish".logd()
-                createTableView()
-            } else {
-                createTableView()
-                "Cancel migrate - permission is denied".logd()
-            }
-        }
-
     private fun initMigrate() {
-        if (SharedPreferencesRepository.loadPreference(this, Constants.NEED_MIGRATE, true) && isNeedMigrate()) {
+        if (SharedPreferencesRepository.loadPreference(this, Constants.NEED_MIGRATE, true) && !isNeedMigrate()) {
+            FirebaseCrashlytics.getInstance().log("Need migrate files")
             "Need migrate files".logd()
             permissions()
         } else {
+            FirebaseCrashlytics.getInstance().log("No need migrate files")
             "No need migrate files".logd()
             createTableView()
         }
@@ -228,6 +214,15 @@ class MainActivity : BaseActivity() {
     }
 
     private fun permissions() {
-        requestPermissionLauncher.launch(permission.WRITE_EXTERNAL_STORAGE)
+        PermissionRequester(this, permission.WRITE_EXTERNAL_STORAGE).runWithPermission({
+            "Migrate start".logd()
+            migrateFiles()
+            FilesUtils.removeFile(loadOldPath())
+            "Migrate finish".logd()
+            createTableView()
+        }, {
+            createTableView()
+            "Cancel migrate - permission is denied".logd()
+        })
     }
 }

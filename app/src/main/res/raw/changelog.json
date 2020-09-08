@@ -15,7 +15,7 @@
         },
         {
           "type": "feat",
-          "text": "Redesing swipe options"
+          "text": "Redesign swipe options"
         },
         {
           "type": "feat",
@@ -174,7 +174,7 @@
       "change": [
         {
           "type": "feat",
-          "text": "Button to sort files by date (ascending / descending )"
+          "text": "Button to sort files by date (ascending / descending)"
         },
         {
           "type": "feat",

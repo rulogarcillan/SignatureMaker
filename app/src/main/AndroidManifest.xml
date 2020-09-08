@@ -54,12 +54,10 @@
             android:theme="@style/App.Theme" />
         <activity
             android:name=".application.features.menu.SettingActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/ThemeSetting"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".application.features.image.ImageActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/ThemeImage"
             tools:ignore="LockedOrientationActivity" />
     </application>
