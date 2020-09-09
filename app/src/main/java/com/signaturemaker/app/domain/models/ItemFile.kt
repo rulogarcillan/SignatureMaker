@@ -31,7 +31,8 @@ import kotlinx.android.parcel.Parcelize
 data class ItemFile(
     val name: String,
     val date: String = "",
-    val size: String = ""
+    val size: String = "",
+    val shimmer: Boolean = false
 ) : Parcelable
 
 

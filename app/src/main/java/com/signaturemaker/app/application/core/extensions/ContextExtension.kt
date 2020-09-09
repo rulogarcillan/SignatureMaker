@@ -1,10 +1,13 @@
 package com.signaturemaker.app.application.core.extensions
 
+import android.Manifest.permission
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import com.signaturemaker.app.application.features.menu.SettingFragment
 
 /**
@@ -25,3 +28,14 @@ fun Context.openRate() {
     } catch (e: ActivityNotFoundException) {
     }
 }
+
+fun Context.hasPermissionWriteRead(): Boolean {
+    return ActivityCompat.checkSelfPermission(
+        this,
+        permission.READ_EXTERNAL_STORAGE
+    ) == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
+        this,
+        permission.WRITE_EXTERNAL_STORAGE
+    ) == PackageManager.PERMISSION_GRANTED
+}
+

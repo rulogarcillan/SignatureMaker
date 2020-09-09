@@ -33,10 +33,10 @@ import com.google.android.gms.ads.AdRequest
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.Utils
+import com.signaturemaker.app.application.core.extensions.hasPermissionWriteRead
 import com.signaturemaker.app.application.core.platform.BaseActivity
 import com.signaturemaker.app.application.core.platform.FilesUtils
 import com.signaturemaker.app.application.core.platform.PermissionRequester
-import com.signaturemaker.app.application.core.platform.PermissionsUtils
 import com.signaturemaker.app.application.features.files.ListFilesFragment
 import com.signaturemaker.app.application.features.menu.SettingViewModel
 import com.signaturemaker.app.application.utils.Constants
@@ -72,13 +72,6 @@ class MainActivity : BaseActivity() {
         initAdvertising()
     }
 
-    override fun onStart() {
-        super.onStart()
-        if (Utils.deleteExit) {
-            PermissionsUtils.callRequestPermissionWrite(this)
-        }
-    }
-
     public override fun onRestart() {
         super.onRestart()
         showAdvertising()
@@ -92,7 +85,7 @@ class MainActivity : BaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        if (Utils.deleteExit && PermissionsUtils.hasPermissionWriteRead(this)) {
+        if (Utils.deleteExit && hasPermissionWriteRead()) {
             FilesUtils.deleteAllFiles()
         }
     }
@@ -214,7 +207,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun permissions() {
-        PermissionRequester(this, permission.WRITE_EXTERNAL_STORAGE).runWithPermission({
+        PermissionRequester(this, permission.WRITE_EXTERNAL_STORAGE, binding.root).runWithPermission({
             "Migrate start".logd()
             migrateFiles()
             FilesUtils.removeFile(loadOldPath())

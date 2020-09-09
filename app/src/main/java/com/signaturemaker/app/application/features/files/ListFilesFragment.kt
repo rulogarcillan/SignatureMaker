@@ -24,6 +24,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 
 
+import android.Manifest.permission
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -38,17 +39,12 @@ import androidx.core.view.ViewCompat
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.android.material.snackbar.Snackbar
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionDeniedResponse
-import com.karumi.dexter.listener.PermissionGrantedResponse
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.single.PermissionListener
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.Utils
 import com.signaturemaker.app.application.core.extensions.createSnackBar
 import com.signaturemaker.app.application.core.platform.FilesUtils
 import com.signaturemaker.app.application.core.platform.GlobalFragment
-import com.signaturemaker.app.application.core.platform.PermissionsUtils
+import com.signaturemaker.app.application.core.platform.PermissionRequester
 import com.signaturemaker.app.application.features.image.ImageActivity
 import com.signaturemaker.app.application.features.main.SharedViewModel
 import com.signaturemaker.app.databinding.ListFilesFragmentBinding
@@ -65,7 +61,7 @@ class ListFilesFragment : GlobalFragment() {
     private val items: MutableList<ItemFile> = mutableListOf()
     private var mySnackBar: Snackbar? = null
     private var _binding: ListFilesFragmentBinding? = null
-    private val binding get() = _binding
+    private val binding get() = _binding!!
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
@@ -75,7 +71,7 @@ class ListFilesFragment : GlobalFragment() {
     ): View? {
 
         _binding = ListFilesFragmentBinding.inflate(inflater, container, false)
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -83,27 +79,40 @@ class ListFilesFragment : GlobalFragment() {
 
         setHasOptionsMenu(true)
         initObserver()
-        loadItemsFiles()
 
-        binding?.recyclerView?.apply {
+        binding.recyclerView.apply {
             val itemDecoration = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
             addItemDecoration(itemDecoration)
             setHasFixedSize(true)
             adapter = mAdapter
-            //mAdapter.submitList(items.toList())
+            mAdapter.submitList(
+                listOf(
+                    ItemFile(name = "", date = "", size = "", shimmer = true),
+                    ItemFile(name = "", date = "", size = "", shimmer = true),
+                    ItemFile(name = "", date = "", size = "", shimmer = true),
+                    ItemFile(name = "", date = "", size = "", shimmer = true),
+                    ItemFile(name = "", date = "", size = "", shimmer = true),
+                    ItemFile(name = "", date = "", size = "", shimmer = true),
+                    ItemFile(name = "", date = "", size = "", shimmer = true),
+                    ItemFile(name = "", date = "", size = "", shimmer = true),
+                    ItemFile(name = "", date = "", size = "", shimmer = true),
+                    ItemFile(name = "", date = "", size = "", shimmer = true),
+                    ItemFile(name = "", date = "", size = "", shimmer = true),
+                    ItemFile(name = "", date = "", size = "", shimmer = true)
+                )
+            )
         }
+
 
         mAdapter.setOnClickItemListener { item, imageView ->
             showDetailsImage(item, imageView)
         }
-
 
         mAdapter.setOnClickShare { item ->
             activity?.let { mActivity ->
                 Utils.shareSign(mActivity, item.name)
             }
         }
-
 
         mAdapter.setOnClickDelete { item ->
             mAdapter.let { mAdapter ->
@@ -117,13 +126,12 @@ class ListFilesFragment : GlobalFragment() {
                                     if (event != 1) {
                                         FilesUtils.removeFileByName(item.name)
                                         if (mAdapter.currentList.size > 0) {
-                                            binding?.txtMnsNoFiles?.visibility = View.GONE
+                                            binding.txtMnsNoFiles.visibility = View.GONE
                                         } else {
-                                            binding?.txtMnsNoFiles?.visibility = View.VISIBLE
+                                            binding.txtMnsNoFiles.visibility = View.VISIBLE
                                         }
                                         addListToAdapter(Utils.sort(mAdapter.currentList, Utils.sortOrder))
                                     } else {
-                                        loadItemsFiles()
                                         reloadFiles()
                                     }
                                     super.onDismissed(transientBottomBar, event)
@@ -162,29 +170,21 @@ class ListFilesFragment : GlobalFragment() {
         super.onDestroyView()
     }
 
-    fun loadItemsFiles() {
-        PermissionsUtils.callRequestPermissionWrite(activity as Activity, object : PermissionListener {
-            override fun onPermissionDenied(response: PermissionDeniedResponse) {}
-
-            override fun onPermissionGranted(response: PermissionGrantedResponse) {
+    private fun loadItemsFiles() {
+        activity?.let { mActivity ->
+            PermissionRequester(mActivity, permission.WRITE_EXTERNAL_STORAGE, binding.root).runWithPermission({
                 items.clear()
                 items.addAll(
                     Utils.sort(FilesUtils.loadItemsFiles(), Utils.sortOrder)
                 )
-
+                addListToAdapter(items)
                 if (items.size > 0) {
-                    binding?.txtMnsNoFiles?.visibility = View.GONE
+                    binding.txtMnsNoFiles.visibility = View.GONE
                 } else {
-                    binding?.txtMnsNoFiles?.visibility = View.VISIBLE
+                    binding.txtMnsNoFiles.visibility = View.VISIBLE
                 }
-            }
-
-            override fun onPermissionRationaleShouldBeShown(
-                permission: PermissionRequest,
-                token: PermissionToken
-            ) {
-            }
-        })
+            }, {})
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -205,8 +205,6 @@ class ListFilesFragment : GlobalFragment() {
 
     fun reloadFiles() {
         loadItemsFiles()
-        mAdapter.submitList(items)
-        mAdapter.notifyDataSetChanged()
     }
 
     private fun removeItemAdapter(item: ItemFile): Int {

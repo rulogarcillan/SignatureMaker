@@ -35,6 +35,10 @@
           "text": "Preparing support to android 11"
         },
         {
+          "type": "feat",
+          "text": "small UI changes"
+        },
+        {
           "type": "del",
           "text": "Select custom path"
         },

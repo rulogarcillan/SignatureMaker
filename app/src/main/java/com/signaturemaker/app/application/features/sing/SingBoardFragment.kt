@@ -22,12 +22,11 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 package com.signaturemaker.app.application.features.sing
 
+import android.Manifest.permission
 import android.animation.Animator
 import android.annotation.TargetApi
-import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -47,28 +46,24 @@ import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
 import com.getbase.floatingactionbutton.FloatingActionsMenu
 import com.github.gcacace.signaturepad.views.SignaturePad
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionDeniedResponse
-import com.karumi.dexter.listener.PermissionGrantedResponse
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.single.PermissionListener
 import com.larswerkman.holocolorpicker.ColorPicker
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.Utils
+import com.signaturemaker.app.application.core.extensions.createSnackBar
 import com.signaturemaker.app.application.core.extensions.openRate
 import com.signaturemaker.app.application.core.extensions.showToast
 import com.signaturemaker.app.application.core.platform.FilesUtils
 import com.signaturemaker.app.application.core.platform.GlobalFragment
-import com.signaturemaker.app.application.core.platform.PermissionsUtils
+import com.signaturemaker.app.application.core.platform.PermissionRequester
 import com.signaturemaker.app.application.features.main.MainActivity
 import com.signaturemaker.app.application.features.main.SharedViewModel
 import com.signaturemaker.app.application.features.menu.SettingActivity
 import com.signaturemaker.app.application.features.suggest.CustomDialogSuggest
 import com.signaturemaker.app.databinding.SingBoardFragmentBinding
+import com.tuppersoft.skizo.core.extension.getColorFromAttr
 import com.tuppersoft.skizo.core.extension.gone
 import com.tuppersoft.skizo.core.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.File
 
 /**
  * A placeholder fragment containing a simple view.
@@ -101,11 +96,8 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
     ): View? {
 
         _binding = SingBoardFragmentBinding.inflate(inflater, container, false)
-        val view = binding.root
-
         binding.singBoard.isSaveEnabled = false
-
-        return view
+        return binding.root
     }
 
     override fun onDestroyView() {
@@ -307,7 +299,6 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
                 override fun onAnimationRepeat(animation: Animator) {}
 
                 override fun onAnimationStart(animation: Animator) {
-                    // collapseFabs();
                 }
             })
         if (runningAnimationColor == null || runningAnimationColor?.isRunning == false) {
@@ -340,15 +331,13 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
 
     private fun openListFilesFragment() {
 
-        PermissionsUtils.callRequestPermissionWrite(activity as Activity, object : PermissionListener {
-            override fun onPermissionDenied(response: PermissionDeniedResponse) {}
-
-            override fun onPermissionGranted(response: PermissionGrantedResponse) {
-                navigateToListFiles()
-            }
-
-            override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest, token: PermissionToken) {}
-        })
+        activity?.let { mActivity ->
+            PermissionRequester(
+                mActivity,
+                permission.WRITE_EXTERNAL_STORAGE,
+                binding.root
+            ).runWithPermission({ navigateToListFiles() }, {})
+        }
     }
 
     private fun navigateToListFiles() {
@@ -385,21 +374,16 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
                                 Utils.shareSign(it, mName)
                             }
                         }
-                        context?.showToast(resources.getString(R.string.title_save_ok))
-                        activity?.sendBroadcast(
-                            Intent(
-                                Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
-                                Uri.fromFile(File(Utils.path + mName))
-                            )
-                        )
+
+                        activity?.createSnackBar(resources.getString(R.string.title_save_ok))?.show()
                         sharedViewModel.reloadFileList()
                     } else {
-                        context?.showToast(resources.getString(R.string.title_save_ko))
+                        activity?.createSnackBar(resources.getString(R.string.title_save_ko))?.show()
                     }
                 }
             })
         } else {
-            var status: Boolean = false
+            var status = false
             var name = ""
             when (idMenu) {
                 R.id.savePngTrans -> {
@@ -429,10 +413,10 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
                         Utils.shareSign(it, name)
                     }
                 }
-                context?.showToast(resources.getString(R.string.title_save_ok))
+                activity?.createSnackBar(resources.getString(R.string.title_save_ok))?.show()
                 sharedViewModel.reloadFileList()
             } else {
-                context?.showToast(resources.getString(R.string.title_save_ko))
+                activity?.createSnackBar(resources.getString(R.string.title_save_ko))?.show()
             }
         }
     }
@@ -445,19 +429,14 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
         popupMenu.menuInflater.inflate(R.menu.save_menu, popupMenu.menu)
 
         popupMenu.setOnMenuItemClickListener { menuItem ->
-            PermissionsUtils.callRequestPermissionWrite(activity as Activity, object : PermissionListener {
-                override fun onPermissionDenied(response: PermissionDeniedResponse) {}
 
-                override fun onPermissionGranted(response: PermissionGrantedResponse) {
-                    saveFileAndSend(menuItem.itemId, false)
-                }
+            activity?.let { mActivity ->
+                PermissionRequester(
+                    mActivity,
+                    permission.WRITE_EXTERNAL_STORAGE, binding.root
+                ).runWithPermission({ saveFileAndSend(menuItem.itemId, false) }, {})
+            }
 
-                override fun onPermissionRationaleShouldBeShown(
-                    permission: PermissionRequest,
-                    token: PermissionToken
-                ) {
-                }
-            })
             false
         }
 
@@ -499,7 +478,8 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
         when (Utils.wallpaper) {
             1 -> {
                 context?.let {
-                    binding.txtSingHere.setTextColor(ContextCompat.getColor(it, android.R.color.black))
+
+                    binding.txtSingHere.setTextColor(it.getColorFromAttr(R.attr.principalText))
                     binding.root.background = getDrawable(it, R.drawable.fondotrans1)
                 }
             }
@@ -512,7 +492,7 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
             3 -> {
 
                 context?.let {
-                    binding.txtSingHere.setTextColor(ContextCompat.getColor(it, android.R.color.black))
+                    binding.txtSingHere.setTextColor(it.getColorFromAttr(R.attr.principalText))
                     binding.root.setBackgroundColor(ContextCompat.getColor(it, android.R.color.white))
                 }
             }
@@ -550,26 +530,16 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
     private fun sharePopUpOptions() {
         val popupMenu = PopupMenu(context, binding.actionsButtons.bSave)
         popupMenu.menuInflater.inflate(R.menu.share_menu, popupMenu.menu)
-
-
         popupMenu.setOnMenuItemClickListener { menuItem ->
-            PermissionsUtils.callRequestPermissionWrite(activity as Activity, object : PermissionListener {
-                override fun onPermissionDenied(response: PermissionDeniedResponse) {
-                }
-
-                override fun onPermissionGranted(response: PermissionGrantedResponse) {
-                    saveFileAndSend(menuItem.itemId, true)
-                }
-
-                override fun onPermissionRationaleShouldBeShown(
-                    permission: PermissionRequest,
-                    token: PermissionToken
-                ) {
-                }
-            })
+            activity?.let { mActivity ->
+                PermissionRequester(
+                    mActivity,
+                    permission.WRITE_EXTERNAL_STORAGE,
+                    binding.root
+                ).runWithPermission({ saveFileAndSend(menuItem.itemId, true) }, {})
+            }
             false
         }
-
         popupMenu.show()
     }
 

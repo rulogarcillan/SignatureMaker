@@ -21,6 +21,7 @@ import com.tuppersoft.skizo.core.extension.visible
 import java.util.concurrent.atomic.AtomicBoolean
 
 class FilesViewHolder(private val binding: ItemExploreBinding) : SwipeToAction.ViewHolder<ItemFile>(binding.root) {
+
     companion object {
 
         private const val FIRST_HELP = "FIRST_HELP"

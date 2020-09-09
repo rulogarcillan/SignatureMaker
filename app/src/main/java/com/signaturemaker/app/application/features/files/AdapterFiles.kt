@@ -27,6 +27,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.daimajia.swipe.SwipeLayout
 import com.daimajia.swipe.implments.SwipeItemRecyclerMangerImpl
 import com.daimajia.swipe.interfaces.SwipeAdapterInterface
@@ -34,10 +35,12 @@ import com.daimajia.swipe.interfaces.SwipeItemMangerInterface
 import com.daimajia.swipe.util.Attributes.Mode
 import com.signaturemaker.app.R
 import com.signaturemaker.app.databinding.ItemExploreBinding
+import com.signaturemaker.app.databinding.ItemExploreDummyBinding
 import com.signaturemaker.app.domain.models.ItemFile
 
 class AdapterFiles :
-    ListAdapter<ItemFile, FilesViewHolder>(DiffUtilsFilesBaseItem), SwipeAdapterInterface, SwipeItemMangerInterface {
+    ListAdapter<ItemFile, RecyclerView.ViewHolder>(DiffUtilsFilesBaseItem), SwipeAdapterInterface,
+    SwipeItemMangerInterface {
 
     private var onClickItem: ((item: ItemFile, imageView: ImageView) -> Unit)? = null
     private var onClickShare: ((item: ItemFile) -> Unit)? = null
@@ -57,18 +60,25 @@ class AdapterFiles :
         this.onClickDelete = lambda
     }
 
-    override fun onBindViewHolder(viewHolder: FilesViewHolder, pos: Int) {
-        mItemManger.bindView(viewHolder.itemView, pos)
-        viewHolder.bind(currentList[pos], pos, mItemManger, onClickItem, onClickShare, onClickDelete)
+    override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, pos: Int) {
+
+        if (viewHolder is FilesViewHolder) {
+            mItemManger.bindView(viewHolder.itemView, pos)
+            viewHolder.bind(currentList[pos], pos, mItemManger, onClickItem, onClickShare, onClickDelete)
+        }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilesViewHolder {
-        return FilesViewHolder(ItemExploreBinding.inflate(LayoutInflater.from(parent.context)))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+
+        return if (viewType == 0) {
+            ShimmerViewHolder(ItemExploreDummyBinding.inflate(LayoutInflater.from(parent.context)))
+        } else {
+            FilesViewHolder(ItemExploreBinding.inflate(LayoutInflater.from(parent.context)))
+        }
     }
 
-    override fun submitList(list: List<ItemFile>?) {
-        super.submitList(list?.toList())
-        notifyDataSetChanged()
+    override fun getItemViewType(position: Int): Int {
+        return if (currentList[position].shimmer) 0 else 1
     }
 
     object DiffUtilsFilesBaseItem : DiffUtil.ItemCallback<ItemFile>() {
