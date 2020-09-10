@@ -13,7 +13,7 @@ import com.signaturemaker.app.R
 class PermissionRequester(
     val activity: ComponentActivity,
     private val permission: String,
-    view: View?=null
+    view: View? = null
 ) {
 
     private var onGranted: () -> Unit = {}

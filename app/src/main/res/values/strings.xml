@@ -68,7 +68,7 @@
     <string name="banner_ad_unit_id" translatable="false">ca-app-pub-9438738341601496/1496642762</string>
 
     <string name="develop_by_ra_l_rodr_guez_concepci_n" translatable="false">develop by Raúl Rodríguez Concepción</string>
-    <string name="changelog">Changelog</string>
+    <string name="changelog" translatable="false">Changelog</string>
     <string name="license">Licenses</string>
     <string name="rate">Rate it</string>
     <string name="more_app">More apps</string>
@@ -76,15 +76,12 @@
     <string name="send_suggestions">Send suggestions</string>
     <string name="complete_fields">Complete all fields</string>
     <string name="thanks_comment">Thank you for your comments</string>
+    <string name="problems_comment">A problem has occurred, please try again later</string>
     <string name="write_your_suggestion_or_comment">Write your suggestion or comment</string>
     <string name="put_your_email">Put your email</string>
     <string name="valid_mail">write a valid email</string>
-    <!-- Preference Titles -->
-
-    <!-- Messages Preferences -->
-
-    <!-- Sync Preferences -->
     <string name="share">Share</string>
+    <string name="sending_message_please_wait">Sending message, please wait</string>
 
 
 </resources>

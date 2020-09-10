@@ -6,7 +6,7 @@ import android.view.animation.Animation.AnimationListener
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.core.view.ViewCompat
-import co.dift.ui.SwipeToAction
+import androidx.recyclerview.widget.RecyclerView
 import com.daimajia.swipe.SwipeLayout
 import com.daimajia.swipe.SwipeLayout.SwipeListener
 import com.daimajia.swipe.implments.SwipeItemRecyclerMangerImpl
@@ -20,7 +20,7 @@ import com.signaturemaker.app.domain.models.ItemFile
 import com.tuppersoft.skizo.core.extension.visible
 import java.util.concurrent.atomic.AtomicBoolean
 
-class FilesViewHolder(private val binding: ItemExploreBinding) : SwipeToAction.ViewHolder<ItemFile>(binding.root) {
+class FilesViewHolder(private val binding: ItemExploreBinding) : RecyclerView.ViewHolder(binding.root) {
 
     companion object {
 

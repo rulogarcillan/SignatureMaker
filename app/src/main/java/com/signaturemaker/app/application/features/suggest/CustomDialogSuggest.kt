@@ -1,9 +1,12 @@
 package com.signaturemaker.app.application.features.suggest
 
+import android.os.Build.VERSION
+import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager.LayoutParams
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
@@ -11,13 +14,15 @@ import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.isValidEmail
 import com.signaturemaker.app.databinding.CustomDialogSuggestBinding
 import com.signaturemaker.app.domain.models.SuggestMessage
+import com.tuppersoft.skizo.core.extension.getColorFromAttr
+import com.tuppersoft.skizo.core.extension.hideKeyboard
+import com.tuppersoft.skizo.core.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 open class CustomDialogSuggest : DialogFragment() {
 
     private val suggestViewModel: SuggestViewModel by viewModels()
-
     private var _binding: CustomDialogSuggestBinding? = null
     private val binding get() = _binding!!
 
@@ -50,7 +55,7 @@ open class CustomDialogSuggest : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
-        this.isCancelable = false
+        this.isCancelable = true
 
         binding.btPositive.setOnClickListener {
 
@@ -64,6 +69,11 @@ open class CustomDialogSuggest : DialogFragment() {
                         binding.tvMessage.text.toString()
                     )
                     suggestViewModel.sendSuggest(msg)
+                    activity?.let {
+                        setStatusBarColorIfPossible(it.getColorFromAttr(android.R.attr.colorBackground))
+                    }
+                    binding.root.hideKeyboard()
+                    binding.loading.visible()
                 } else {
                     Toast.makeText(view.context, getString(R.string.valid_mail), Toast.LENGTH_LONG).show()
                 }
@@ -84,9 +94,23 @@ open class CustomDialogSuggest : DialogFragment() {
             if (it) {
                 dismiss()
                 Toast.makeText(view?.context, getString(R.string.thanks_comment), Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(view?.context, getString(R.string.thanks_comment), Toast.LENGTH_LONG).show()
             }
 
         })
+    }
+
+    private fun setStatusBarColorIfPossible(color: Int) {
+        if (VERSION.SDK_INT >= VERSION_CODES.M) {
+            dialog?.window?.let {
+                var flags = it.decorView.systemUiVisibility
+                flags = flags.xor(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
+                it.decorView.systemUiVisibility = flags
+                it.addFlags(LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+                it.statusBarColor = color
+            }
+        }
     }
 }
 
