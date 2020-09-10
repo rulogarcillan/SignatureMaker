@@ -203,7 +203,7 @@ class MainActivity : BaseActivity() {
     private fun isNeedMigrate(): Boolean = File(loadOldPath()).exists()
 
     private fun migrateFiles() {
-        FilesUtils.moveFiles(loadOldPath(), this)
+        FilesUtils.moveFiles(loadOldPath())
     }
 
     private fun permissions() {

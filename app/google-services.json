@@ -67,6 +67,43 @@
         }
       },
       "admob_app_id": "ca-app-pub-9438738341601496~9019909565"
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1099061363775:android:fcbde2979ec4bd37ed648a",
+        "android_client_info": {
+          "package_name": "com.signaturemaker.app.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1099061363775-f8me0mql0a9bp8jrcf47v613uaf053a6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.signaturemaker.app.debug",
+            "certificate_hash": "b0e174d5d7c3ad079e9febf726e4c87c375ec9e4"
+          }
+        },
+        {
+          "client_id": "1099061363775-3jvc6dba7k5fvdaspc463kdbvkrl9ped.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiaDRiPb1AO9i_xYdxsNgQEYPLGhrw45k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1099061363775-3jvc6dba7k5fvdaspc463kdbvkrl9ped.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

@@ -43,6 +43,7 @@ android {
 
     buildTypes {
         debug {
+            applicationIdSuffix ".debug"
             buildConfigField "String", "BASE_URL", '"https://api.tuppersoft.com"'
             buildConfigField "String", "END_POINT", '"/medical"'
             buildConfigField "String", "APP_NAME", '"Signature maker"'

@@ -105,7 +105,7 @@ object FilesUtils {
         return arrayItems
     }
 
-    fun moveFiles(oldPath: String, mActivity: Activity) {
+    fun moveFiles(oldPath: String) {
 
         if (oldPath != Utils.path) {
             val files: Array<File>?
