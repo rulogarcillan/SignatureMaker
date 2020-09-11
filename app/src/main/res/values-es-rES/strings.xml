@@ -64,6 +64,7 @@
     <string name="valid_mail">Escribe un correo electrónico válido</string>
     <string name="share">Compartir</string>
     <string name="sending_message_please_wait">Enviando mensaje, por favor espere</string>
+    <string name="join_channel">Pincha aquí y únete a nuestro canal de telegram</string>
 
 
 </resources>

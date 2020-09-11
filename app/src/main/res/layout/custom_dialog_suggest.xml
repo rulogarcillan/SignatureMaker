@@ -102,6 +102,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
         <EditText
             android:id="@+id/tvEmail"
             android:layout_width="match_parent"
@@ -118,11 +119,17 @@
         <EditText
             android:id="@+id/tvMessage"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:background="@android:color/transparent"
             android:gravity="top"
             android:hint="@string/write_your_suggestion_or_comment"
             android:padding="@dimen/margin_16" />
+
+        <include
+            android:id="@+id/telegramJoin"
+            layout="@layout/telegram"
+        />
     </LinearLayout>
 
 </LinearLayout>

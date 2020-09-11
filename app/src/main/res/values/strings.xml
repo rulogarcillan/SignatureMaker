@@ -82,6 +82,7 @@
     <string name="valid_mail">write a valid email</string>
     <string name="share">Share</string>
     <string name="sending_message_please_wait">Sending message, please wait</string>
+     <string name="join_channel">Click here to join our telegram channel</string>
 
 
 </resources>

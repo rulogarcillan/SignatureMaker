@@ -1,5 +1,7 @@
 package com.signaturemaker.app.application.features.suggest
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
@@ -14,6 +16,8 @@ import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.isValidEmail
 import com.signaturemaker.app.databinding.CustomDialogSuggestBinding
 import com.signaturemaker.app.domain.models.SuggestMessage
+import com.tuppersoft.skizo.core.extension.collapse
+import com.tuppersoft.skizo.core.extension.expand
 import com.tuppersoft.skizo.core.extension.getColorFromAttr
 import com.tuppersoft.skizo.core.extension.hideKeyboard
 import com.tuppersoft.skizo.core.extension.visible
@@ -53,9 +57,13 @@ open class CustomDialogSuggest : DialogFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         super.onViewCreated(view, savedInstanceState)
         this.isCancelable = true
+
+        binding.telegramJoin.root.setOnClickListener {
+            val telegram = Intent(Intent.ACTION_VIEW, Uri.parse("https://telegram.me/InfotechAvl_bot"))
+            startActivity(telegram)
+        }
 
         binding.btPositive.setOnClickListener {
 
@@ -110,6 +118,20 @@ open class CustomDialogSuggest : DialogFragment() {
                 it.addFlags(LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
                 it.statusBarColor = color
             }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showBannerTelegram()
+    }
+
+    private fun showBannerTelegram() {
+        binding.telegramJoin.root.apply {
+            postDelayed({ expand() }, 500)
+            postDelayed({
+                collapse()
+            }, 1000 * 5)
         }
     }
 }

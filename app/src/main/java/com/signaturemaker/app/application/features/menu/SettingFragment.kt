@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.preference.PreferenceActivity
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -26,8 +25,6 @@ import com.signaturemaker.app.application.features.menu.MenuIdentifier.MOREAPP
 import com.signaturemaker.app.application.features.menu.MenuIdentifier.PRIVACY
 import com.signaturemaker.app.application.features.menu.MenuIdentifier.RATE
 import com.signaturemaker.app.application.features.menu.MenuIdentifier.SETTING
-import com.signaturemaker.app.application.features.setting.SettingsActivity
-import com.signaturemaker.app.application.features.setting.SettingsActivity.GeneralPreferenceFragment
 import com.signaturemaker.app.databinding.SettingFragmentBinding
 
 class SettingFragment : GlobalFragment() {
@@ -116,14 +113,7 @@ class SettingFragment : GlobalFragment() {
                 findNavController().navigate(R.id.ChangelogFragment, null, getNavOptions())
             }
             SETTING -> {
-
-                val intent = Intent(context, SettingsActivity::class.java)
-                intent.putExtra(
-                    PreferenceActivity.EXTRA_SHOW_FRAGMENT,
-                    GeneralPreferenceFragment::class.java.name
-                )
-                intent.putExtra(PreferenceActivity.EXTRA_NO_HEADERS, true)
-                startActivity(intent)
+                findNavController().navigate(R.id.SettingsFragment, null, getNavOptions())
             }
         }
     }

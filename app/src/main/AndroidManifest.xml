@@ -45,10 +45,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".application.features.setting.SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:theme="@style/AppThemePrefs" />
-        <activity
             android:name=".application.features.main.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/App.Theme" />

@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_SettingFragment_to_ChangelogFragment"
             app:destination="@id/ChangelogFragment" />
+        <action
+            android:id="@+id/action_SettingFragment_to_SettingsFragment"
+            app:destination="@id/SettingsFragment" />
     </fragment>
 
     <fragment
@@ -18,4 +21,7 @@
         android:name="com.signaturemaker.app.application.features.menu.changelog.ChangelogFragment"
         tools:layout="@layout/changelog_fragment" />
 
+    <fragment
+        android:id="@+id/SettingsFragment"
+        android:name="com.signaturemaker.app.application.features.setting.SettingsFragment" />
 </navigation>
