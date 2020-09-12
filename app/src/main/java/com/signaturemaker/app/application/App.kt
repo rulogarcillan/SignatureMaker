@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.facebook.stetho.Stetho
 import com.signaturemaker.app.BuildConfig
 import com.signaturemaker.app.application.core.extensions.Utils
-import com.signaturemaker.app.data.repositories.SharedPreferencesRepository
 import com.tuppersoft.skizo.core.extension.logd
 import dagger.hilt.android.HiltAndroidApp
 
@@ -22,17 +21,15 @@ class App : Application() {
         }
 
         setPath()
-
-        AppCompatDelegate.setDefaultNightMode(
-            SharedPreferencesRepository.loadPreference(
-                this,
-                "THEME_MODE",
-                AppCompatDelegate.MODE_NIGHT_NO
-            )
-        )
+        Utils.loadAllPreferences(this)
+        loadTheme()
     }
 
     private fun setPath() {
         Utils.path = applicationContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES)?.path + "/"
+    }
+
+    private fun loadTheme() {
+        AppCompatDelegate.setDefaultNightMode(Utils.themeMode)
     }
 }

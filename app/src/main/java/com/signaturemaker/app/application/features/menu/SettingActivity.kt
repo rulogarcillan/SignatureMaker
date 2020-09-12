@@ -3,10 +3,8 @@ package com.signaturemaker.app.application.features.menu
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatDelegate
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.platform.BaseActivity
-import com.signaturemaker.app.data.repositories.SharedPreferencesRepository
 import com.signaturemaker.app.databinding.SettingActivityBinding
 import com.tuppersoft.skizo.core.extension.gone
 import com.tuppersoft.skizo.core.extension.visible
@@ -81,20 +79,6 @@ class SettingActivity : BaseActivity() {
         } else {
             supportActionBar?.hide()
         }
-    }
-
-    private fun changeTheme() {
-        if (SharedPreferencesRepository.loadPreference(
-                this,
-                "THEME_MODE",
-                delegate.localNightMode
-            ) == AppCompatDelegate.MODE_NIGHT_YES
-        ) {
-            delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
-        } else {
-            delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
-        }
-        SharedPreferencesRepository.savePreference(this, "THEME_MODE", delegate.localNightMode)
     }
 }
 

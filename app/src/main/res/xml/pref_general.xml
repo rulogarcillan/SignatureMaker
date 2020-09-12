@@ -33,8 +33,8 @@
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/title_pref_advertising_t">
         <CheckBoxPreference
-            android:defaultValue="false"
             android:key="id_pref_advertising"
+            android:defaultValue="false"
             android:title="@string/title_pref_advertising" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/title_setting">

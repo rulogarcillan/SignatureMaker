@@ -66,5 +66,9 @@
     <string name="sending_message_please_wait">Enviando mensaje, por favor espere</string>
     <string name="join_channel">Pincha aquí y únete a nuestro canal de telegram</string>
 
+    <string name="mode_light">Claro</string>
+    <string name="mode_dark">Oscuro</string>
+    <string name="mode_system">Definido por el sistema</string>
+    <string name="mode_battery">Osucro en ahorro de bateria</string>
 
 </resources>

@@ -1,6 +1,8 @@
 package com.signaturemaker.app.application.features.setting
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.activityViewModels
 import androidx.preference.Preference
@@ -12,6 +14,7 @@ import com.signaturemaker.app.application.core.extensions.Utils.loadAllPreferenc
 import com.signaturemaker.app.application.core.extensions.Utils.saveAllPreferences
 import com.signaturemaker.app.application.features.menu.SettingViewModel
 import com.signaturemaker.app.application.utils.Constants
+import com.tuppersoft.skizo.core.extension.loadSharedPreference
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
@@ -53,6 +56,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 setDefaultPreferences()
                 loadAllPreferences(activity)
             }
+            Constants.ID_THEME_MODE->{
+               // changeTheme()
+                loadAllPreferences(activity)
+            }
             else -> {
                 loadAllPreferences(activity)
             }
@@ -67,7 +74,19 @@ class SettingsFragment : PreferenceFragmentCompat() {
         (findPreference(Constants.ID_PREF_STROKE) as androidx.preference.CheckBoxPreference?)?.isChecked = false
         (findPreference(Constants.ID_PREF_ADVERTISING) as androidx.preference.CheckBoxPreference?)?.isChecked = false
         (findPreference(Constants.ID_PREF_WALLPAPER) as androidx.preference.CheckBoxPreference?)?.isChecked = false
+        (findPreference(Constants.ID_THEME_MODE) as androidx.preference.ListPreference?)?.setDefaultValue(
+            AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+        )
         saveAllPreferences(activity)
         defaultValues()
+    }
+
+    private fun changeTheme() {
+        (requireActivity() as AppCompatActivity).apply {
+            delegate.localNightMode = loadSharedPreference(
+                Constants.ID_THEME_MODE,
+                AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+            )
+        }
     }
 }

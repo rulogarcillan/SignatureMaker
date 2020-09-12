@@ -26,11 +26,13 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.FileProvider
 import com.signaturemaker.app.BuildConfig
 import com.signaturemaker.app.application.utils.Constants
-import com.signaturemaker.app.data.repositories.SharedPreferencesRepository
 import com.signaturemaker.app.domain.models.ItemFile
+import com.tuppersoft.skizo.core.extension.loadSharedPreference
+import com.tuppersoft.skizo.core.extension.saveSharedPreference
 import java.io.File
 
 object Utils {
@@ -44,21 +46,10 @@ object Utils {
     var disableAds: Boolean = Constants.DEFAULT_DISABLE_ADS
     var nameSave: Boolean = Constants.DEFAULT_NAME_SAVE
     var deleteExit: Boolean = Constants.DEFAULT_DELETE_EXIT
+    var themeMode = Constants.DEFAULT_THEME_MODE
 
     private fun defaultColor() {
         penColor = Constants.DEFAULT_PEN_COLOR
-    }
-
-    private fun defaultDeleteExit() {
-        deleteExit = Constants.DEFAULT_DELETE_EXIT
-    }
-
-    private fun defaultDisableAds() {
-        disableAds = Constants.DEFAULT_DISABLE_ADS
-    }
-
-    private fun defaultNameSave() {
-        nameSave = Constants.DEFAULT_NAME_SAVE
     }
 
     private fun defaultStroke() {
@@ -79,63 +70,51 @@ object Utils {
         penColor = Constants.DEFAULT_PEN_COLOR
         wallpaper = Constants.DEFAULT_WALLPAPER
         deleteExit = Constants.DEFAULT_DELETE_EXIT
+        themeMode = Constants.DEFAULT_THEME_MODE
     }
 
     fun loadAllPreferences(mContext: Context?) {
 
         mContext?.let {
-            if (SharedPreferencesRepository.loadPreference(mContext, Constants.ID_PREF_WALLPAPER, false)) {
-                wallpaper = SharedPreferencesRepository.loadPreference(
-                    mContext,
-                    Constants.PREF_WALLPAPER,
-                    Constants.DEFAULT_WALLPAPER
-                )
+            if (mContext.loadSharedPreference(Constants.ID_PREF_WALLPAPER, false)) {
+                wallpaper = mContext.loadSharedPreference(Constants.PREF_WALLPAPER, Constants.DEFAULT_WALLPAPER)
             } else {
                 defaultWallpaper()
             }
-            if (SharedPreferencesRepository.loadPreference(mContext, Constants.ID_PREF_COLOR, false)) {
-                penColor = SharedPreferencesRepository
-                    .loadPreference(mContext, Constants.PREF_COLOR, Constants.DEFAULT_PEN_COLOR)
+            if (mContext.loadSharedPreference(Constants.ID_PREF_COLOR, false)) {
+                penColor = mContext.loadSharedPreference(Constants.PREF_COLOR, Constants.DEFAULT_PEN_COLOR)
             } else {
                 defaultColor()
             }
-            if (SharedPreferencesRepository.loadPreference(mContext, Constants.ID_PREF_STROKE, false)) {
-                minStroke = SharedPreferencesRepository
-                    .loadPreference(mContext, Constants.PREF_MIN_TROKE, Constants.DEFAULT_MIN_STROKE)
-                maxStroke = SharedPreferencesRepository
-                    .loadPreference(mContext, Constants.PREF_MAX_TROKE, Constants.DEFAULT_MAX_STROKE)
+            if (mContext.loadSharedPreference(Constants.ID_PREF_STROKE, false)) {
+                minStroke = mContext.loadSharedPreference(Constants.PREF_MIN_TROKE, Constants.DEFAULT_MIN_STROKE)
+                maxStroke = mContext.loadSharedPreference(Constants.PREF_MAX_TROKE, Constants.DEFAULT_MAX_STROKE)
             } else {
                 defaultStroke()
             }
-            if (SharedPreferencesRepository.loadPreference(mContext, Constants.ID_PREF_ADVERTISING, false)) {
-                disableAds = true
-            } else {
-                defaultDisableAds()
-            }
-            if (SharedPreferencesRepository.loadPreference(mContext, Constants.ID_PREF_NAME, false)) {
-                nameSave = true
-            } else {
-                defaultNameSave()
-            }
-            if (SharedPreferencesRepository.loadPreference(mContext, Constants.ID_PREF_DELETE, false)) {
-                deleteExit = true
-            } else {
-                defaultDeleteExit()
-            }
+
+
+            disableAds = mContext.loadSharedPreference(Constants.ID_PREF_ADVERTISING, false)
+            nameSave = mContext.loadSharedPreference(Constants.ID_PREF_NAME, false)
+            deleteExit = mContext.loadSharedPreference(Constants.ID_PREF_DELETE, false)
+            themeMode = mContext.loadSharedPreference(
+                Constants.ID_THEME_MODE,
+                AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+            )
         }
     }
 
     fun saveAllPreferences(mContext: Context?) {
         mContext?.let {
-            if (SharedPreferencesRepository.loadPreference(mContext, Constants.ID_PREF_COLOR, false)) {
-                SharedPreferencesRepository.savePreference(mContext, Constants.PREF_COLOR, penColor)
+            if (mContext.loadSharedPreference(Constants.ID_PREF_COLOR, false)) {
+                mContext.saveSharedPreference(Constants.PREF_COLOR, penColor)
             }
-            if (SharedPreferencesRepository.loadPreference(mContext, Constants.ID_PREF_STROKE, false)) {
-                SharedPreferencesRepository.savePreference(mContext, Constants.PREF_MIN_TROKE, minStroke)
-                SharedPreferencesRepository.savePreference(mContext, Constants.PREF_MAX_TROKE, maxStroke)
+            if (mContext.loadSharedPreference(Constants.ID_PREF_STROKE, false)) {
+                mContext.saveSharedPreference(Constants.PREF_MIN_TROKE, minStroke)
+                mContext.saveSharedPreference(Constants.PREF_MAX_TROKE, maxStroke)
             }
-            if (SharedPreferencesRepository.loadPreference(mContext, Constants.ID_PREF_WALLPAPER, false)) {
-                SharedPreferencesRepository.savePreference(mContext, Constants.PREF_WALLPAPER, wallpaper)
+            if (mContext.loadSharedPreference(Constants.ID_PREF_WALLPAPER, false)) {
+                mContext.saveSharedPreference(Constants.PREF_WALLPAPER, wallpaper)
             }
         }
     }
@@ -167,5 +146,3 @@ object Utils {
         return temporalList.toList()
     }
 }
-
-

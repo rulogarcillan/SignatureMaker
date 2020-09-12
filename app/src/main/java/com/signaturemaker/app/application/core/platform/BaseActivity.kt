@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.signaturemaker.app.data.repositories.SharedPreferencesRepository
+import com.signaturemaker.app.application.core.extensions.Utils
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -13,12 +13,6 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
-        AppCompatDelegate.setDefaultNightMode(
-            SharedPreferencesRepository.loadPreference(
-                this,
-                "THEME_MODE",
-                AppCompatDelegate.MODE_NIGHT_NO
-            )
-        )
+        AppCompatDelegate.setDefaultNightMode(Utils.themeMode)
     }
 }

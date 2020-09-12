@@ -14,9 +14,10 @@ import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.Utils
 import com.signaturemaker.app.application.core.extensions.loadFromUrl
 import com.signaturemaker.app.application.features.image.ImageActivity
-import com.signaturemaker.app.data.repositories.SharedPreferencesRepository
 import com.signaturemaker.app.databinding.ItemExploreBinding
 import com.signaturemaker.app.domain.models.ItemFile
+import com.tuppersoft.skizo.core.extension.loadSharedPreference
+import com.tuppersoft.skizo.core.extension.saveSharedPreference
 import com.tuppersoft.skizo.core.extension.visible
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -97,9 +98,9 @@ class FilesViewHolder(private val binding: ItemExploreBinding) : RecyclerView.Vi
     }
 
     private fun handleAnim(position: Int) {
-        if (position == 0 && SharedPreferencesRepository.loadPreference(binding.root.context, FIRST_HELP, true)) {
+        if (position == 0 && binding.root.context.loadSharedPreference(FIRST_HELP, true)) {
             binding.ivSwipe.visible()
-            SharedPreferencesRepository.savePreference(binding.root.context, FIRST_HELP, false)
+            binding.root.context.saveSharedPreference(FIRST_HELP, false)
             binding.ivSwipe.startAnimation(swipe)
             swipe.setAnimationListener(object : AnimationListener {
                 override fun onAnimationRepeat(animation: Animation?) {

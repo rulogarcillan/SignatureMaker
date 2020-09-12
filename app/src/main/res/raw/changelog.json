@@ -2,8 +2,8 @@
   "changelog": [
     {
       "date": "10/09/2020",
-      "versionCode": 3108,
-      "versionName": "3.1.0-beta8",
+      "versionCode": 3109,
+      "versionName": "3.1.0-beta9",
       "change": [
         {
           "type": "feat",
@@ -41,6 +41,10 @@
         {
           "type": "feat",
           "text": "Refactor preferences UI"
+        },
+        {
+          "type": "feat",
+          "text": "Add telegram group eng/es"
         },
         {
           "type": "del",

@@ -40,11 +40,11 @@ import com.signaturemaker.app.application.core.platform.PermissionRequester
 import com.signaturemaker.app.application.features.files.ListFilesFragment
 import com.signaturemaker.app.application.features.menu.SettingViewModel
 import com.signaturemaker.app.application.utils.Constants
-import com.signaturemaker.app.data.repositories.SharedPreferencesRepository
 import com.signaturemaker.app.databinding.ActivityMainBinding
 import com.tuppersoft.skizo.core.extension.gone
 import com.tuppersoft.skizo.core.extension.loadSharedPreference
 import com.tuppersoft.skizo.core.extension.logd
+import com.tuppersoft.skizo.core.extension.saveSharedPreference
 import com.tuppersoft.skizo.core.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.app_toolbar.view.tvTittle
@@ -63,8 +63,6 @@ class MainActivity : BaseActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.idToolbar.mtbToolbar)
-
-        Utils.loadAllPreferences(this)
 
         initObserver()
         initMigrate()
@@ -186,7 +184,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initMigrate() {
-        if (SharedPreferencesRepository.loadPreference(this, Constants.NEED_MIGRATE, true) && !isNeedMigrate()) {
+        if (loadSharedPreference(Constants.NEED_MIGRATE, true) && !isNeedMigrate()) {
             FirebaseCrashlytics.getInstance().log("Need migrate files")
             "Need migrate files".logd()
             permissions()
@@ -195,7 +193,7 @@ class MainActivity : BaseActivity() {
             "No need migrate files".logd()
             createTableView()
         }
-        SharedPreferencesRepository.savePreference(this, Constants.NEED_MIGRATE, false)
+        saveSharedPreference(Constants.NEED_MIGRATE, false)
     }
 
     private fun loadOldPath(): String = loadSharedPreference(Constants.ID_PREF_PATH, Constants.DEFAULT_OLD_PATH)

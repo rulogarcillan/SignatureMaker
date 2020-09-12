@@ -22,6 +22,7 @@ import com.tuppersoft.skizo.core.extension.getColorFromAttr
 import com.tuppersoft.skizo.core.extension.hideKeyboard
 import com.tuppersoft.skizo.core.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Locale
 
 @AndroidEntryPoint
 open class CustomDialogSuggest : DialogFragment() {
@@ -61,7 +62,14 @@ open class CustomDialogSuggest : DialogFragment() {
         this.isCancelable = true
 
         binding.telegramJoin.root.setOnClickListener {
-            val telegram = Intent(Intent.ACTION_VIEW, Uri.parse("https://telegram.me/InfotechAvl_bot"))
+
+            val url = if (Locale.getDefault().language.toLowerCase(Locale.ROOT) == "es") {
+                "https://telegram.me/signature_maker_es"
+            } else {
+                "https://telegram.me/signature_maker_eng"
+            }
+
+            val telegram = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(telegram)
         }
 

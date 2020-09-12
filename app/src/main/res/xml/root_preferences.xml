@@ -53,6 +53,12 @@
     <PreferenceCategory
         android:icon="@drawable/ic_reset"
         android:title="@string/title_setting">
+        <ListPreference
+            android:entries="@array/theme_entries"
+            android:entryValues="@array/theme_values"
+            android:key="id_theme_mode"
+            android:title="@string/theme"
+            app:iconSpaceReserved="false" />
         <Preference
             android:key="id_pref_reset"
             android:summary="@string/title_pref_reset_sum"

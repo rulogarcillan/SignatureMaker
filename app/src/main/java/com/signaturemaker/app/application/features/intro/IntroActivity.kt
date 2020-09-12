@@ -31,14 +31,15 @@ import com.github.paolorotolo.appintro.AppIntroFragment
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.features.main.MainActivity
 import com.signaturemaker.app.application.utils.Constants
-import com.signaturemaker.app.data.repositories.SharedPreferencesRepository
+import com.tuppersoft.skizo.core.extension.loadSharedPreference
+import com.tuppersoft.skizo.core.extension.saveSharedPreference
 
 class IntroActivity : AppIntro2() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (SharedPreferencesRepository.loadPreference(this, Constants.FIRST_TIME, true)) {
-            SharedPreferencesRepository.savePreference(this, Constants.FIRST_TIME, false)
+        if (loadSharedPreference(Constants.FIRST_TIME, true)) {
+            saveSharedPreference(Constants.FIRST_TIME, false)
 
             val f1 = AppIntroFragment.newInstance(
                 resources.getString(R.string.tittle_slider1), "fontTypeMedium",

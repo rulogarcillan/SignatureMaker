@@ -25,8 +25,11 @@ package com.signaturemaker.app.application.utils;
 
 import android.graphics.Color;
 import android.os.Environment;
+import androidx.appcompat.app.AppCompatDelegate;
 
 public final class Constants {
+
+    public static final String ID_THEME_MODE = "id_theme_mode";
 
     public static final String ID_PREF_ADVERTISING = "id_pref_advertising";
 
@@ -64,6 +67,8 @@ public final class Constants {
     public static final Boolean DEFAULT_DISABLE_ADS = false;
 
     public static final int DEFAULT_SORT_ORDER = -1;
+
+    public static final int DEFAULT_THEME_MODE = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM;
 
     public static final int DEFAULT_MAX_STROKE = 4;
 
