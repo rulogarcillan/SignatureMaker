@@ -14,7 +14,6 @@ import com.signaturemaker.app.application.core.extensions.Utils.loadAllPreferenc
 import com.signaturemaker.app.application.core.extensions.Utils.saveAllPreferences
 import com.signaturemaker.app.application.features.menu.SettingViewModel
 import com.signaturemaker.app.application.utils.Constants
-import com.tuppersoft.skizo.core.extension.loadSharedPreference
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
@@ -38,10 +37,16 @@ class SettingsFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
 
-        val countingPreference: androidx.preference.CheckBoxPreference? =
+        val adsPreference: androidx.preference.CheckBoxPreference? =
             findPreference(Constants.ID_PREF_ADVERTISING)
 
-        countingPreference?.summaryProvider = Preference.SummaryProvider<androidx.preference.CheckBoxPreference> {
+        val themePreference = (findPreference(Constants.ID_THEME_MODE) as androidx.preference.ListPreference?)
+        themePreference?.setOnPreferenceChangeListener { preference, newValue ->
+            loadAllPreferences(activity)
+            true
+        }
+
+        adsPreference?.summaryProvider = Preference.SummaryProvider<androidx.preference.CheckBoxPreference> {
             HtmlCompat.fromHtml(
                 "<font color='#d32f2f'>" + resources.getString(string.title_pref_advertising_sum)
                         + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY
@@ -54,10 +59,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
         when (preference?.key) {
             Constants.ID_PREF_RESET -> {
                 setDefaultPreferences()
-                loadAllPreferences(activity)
-            }
-            Constants.ID_THEME_MODE->{
-               // changeTheme()
                 loadAllPreferences(activity)
             }
             else -> {
@@ -81,12 +82,4 @@ class SettingsFragment : PreferenceFragmentCompat() {
         defaultValues()
     }
 
-    private fun changeTheme() {
-        (requireActivity() as AppCompatActivity).apply {
-            delegate.localNightMode = loadSharedPreference(
-                Constants.ID_THEME_MODE,
-                AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
-            )
-        }
-    }
 }

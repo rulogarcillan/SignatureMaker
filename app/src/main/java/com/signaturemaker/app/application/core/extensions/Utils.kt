@@ -26,7 +26,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.FileProvider
 import com.signaturemaker.app.BuildConfig
 import com.signaturemaker.app.application.utils.Constants
@@ -93,14 +92,10 @@ object Utils {
                 defaultStroke()
             }
 
-
-            disableAds = mContext.loadSharedPreference(Constants.ID_PREF_ADVERTISING, false)
-            nameSave = mContext.loadSharedPreference(Constants.ID_PREF_NAME, false)
-            deleteExit = mContext.loadSharedPreference(Constants.ID_PREF_DELETE, false)
-            themeMode = mContext.loadSharedPreference(
-                Constants.ID_THEME_MODE,
-                AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
-            )
+            disableAds = mContext.loadSharedPreference(Constants.ID_PREF_ADVERTISING, Constants.DEFAULT_DISABLE_ADS)
+            nameSave = mContext.loadSharedPreference(Constants.ID_PREF_NAME, Constants.DEFAULT_NAME_SAVE)
+            deleteExit = mContext.loadSharedPreference(Constants.ID_PREF_DELETE, Constants.DEFAULT_DELETE_EXIT)
+            themeMode = mContext.loadSharedPreference(Constants.ID_THEME_MODE, Constants.DEFAULT_THEME_MODE.toString()).toInt()
         }
     }
 
