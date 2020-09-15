@@ -1,10 +1,14 @@
 {
   "changelog": [
     {
-      "date": "10/09/2020",
-      "versionCode": 3109,
-      "versionName": "3.1.0-beta9",
+      "date": "15/09/2020",
+      "versionCode": 3110,
+      "versionName": "3.1.0-beta10",
       "change": [
+        {
+          "type": "feat",
+          "text": "Dark theme"
+        },
         {
           "type": "feat",
           "text": "New menu"

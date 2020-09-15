@@ -50,7 +50,6 @@ import com.larswerkman.holocolorpicker.ColorPicker
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.Utils
 import com.signaturemaker.app.application.core.extensions.createSnackBar
-import com.signaturemaker.app.application.core.extensions.openRate
 import com.signaturemaker.app.application.core.extensions.showToast
 import com.signaturemaker.app.application.core.platform.FilesUtils
 import com.signaturemaker.app.application.core.platform.GlobalFragment
@@ -60,7 +59,6 @@ import com.signaturemaker.app.application.features.main.SharedViewModel
 import com.signaturemaker.app.application.features.menu.SettingActivity
 import com.signaturemaker.app.application.features.suggest.CustomDialogSuggest
 import com.signaturemaker.app.databinding.SingBoardFragmentBinding
-import com.tuppersoft.skizo.core.extension.getColorFromAttr
 import com.tuppersoft.skizo.core.extension.gone
 import com.tuppersoft.skizo.core.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
@@ -479,7 +477,7 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
             1 -> {
                 context?.let {
 
-                    binding.txtSingHere.setTextColor(it.getColorFromAttr(R.attr.principalText))
+                    binding.txtSingHere.setTextColor(ContextCompat.getColor(it, R.color.darkGrey))
                     binding.root.background = getDrawable(it, R.drawable.fondotrans1)
                 }
             }
@@ -492,7 +490,7 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
             3 -> {
 
                 context?.let {
-                    binding.txtSingHere.setTextColor(it.getColorFromAttr(R.attr.principalText))
+                    binding.txtSingHere.setTextColor(ContextCompat.getColor(it, R.color.darkGrey))
                     binding.root.setBackgroundColor(ContextCompat.getColor(it, android.R.color.white))
                 }
             }
@@ -606,12 +604,6 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
             showSendSuggest()
             true
         }
-
-        menu.findItem(R.id.idRate).setOnMenuItemClickListener {
-            context?.openRate()
-            true
-        }
-
 
         menu.findItem(R.id.idSettings).setOnMenuItemClickListener {
             activity?.let {

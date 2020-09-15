@@ -5,11 +5,11 @@
     <style name="ThemeSetting" parent="App.Theme">
 
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">false</item>
-        <item name="colorPrimary">@color/black</item>
-        <item name="colorSurface">@color/black</item>
-        <item name="colorPrimaryVariant">@color/black</item>
-        <item name="colorSecondary">@color/purple_200</item>
-        <item name="android:colorBackground">@color/black</item>
+        <item name="colorPrimary">@color/darkGreyPrimary</item>
+        <item name="colorSurface">@color/darkGreyPrimary</item>
+        <item name="colorPrimaryVariant">@color/darkGreyPrimary</item>
+        <item name="colorSecondary">@color/light_blue_100</item>
+        <item name="android:colorBackground">@color/darkGreyPrimary</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorOnBackground">@color/white</item>
         <item name="colorOnSurface">@color/white</item>
@@ -21,26 +21,29 @@
     </style>
 
     <style name="App.Theme" parent="App.Theme.Custom">
-
-        <!--Custom colors for items, text, icons....-->
-        <item name="colorForegroundItems">@color/brown_cd470b</item>
-        <item name="backgroundInfo">@color/yellow_50</item>
-        <item name="colorIcon">@color/white</item>
-        <item name="separator">@color/black_700</item>
-        <item name="principalText">@color/white_fafafa</item>
-        <item name="secondaryText">@color/warmGrey</item>
-        <item name="colorOnPrimaryVariant">@color/grey_808080</item>
-        <!-- <item name="colorBackgroundMain">@color/grey</item>-->
+        <item name="layerBackground">@color/darkGreyPrimarytrans</item>
+        <item name="backgroundInfo">@color/blue_600</item>
+        <item name="menuText">@color/white</item>
+        <item name="separator">@color/cyan_50</item>
+        <item name="principalText">@color/cyan_50</item>
+        <item name="secondaryText">@color/white</item>
         <item name="shimmerColor">@color/grey</item>
-        <item name="calendarIcon">@color/blue_78ADDE</item>
-        <item name="colorButtons">@color/blue_78ADDE</item>
-        <item name="colorChips">@color/grey_808080</item>
         <item name="colorToolbarIcon">@color/white</item>
         <item name="colorChipFix">@color/orange_F57C00</item>
         <item name="colorChipDel">@color/red_500</item>
         <item name="colorChipFeat">@color/green_689F38</item>
         <item name="colorChipChangelogText">@color/white</item>
+        <item name="buttonLeft">@color/blue_900</item>
+        <item name="buttonUp">@color/orange_500</item>
+    </style>
 
+    <style name="MySnackBarStyle" parent="Widget.MaterialComponents.Snackbar">
+        <item name="android:backgroundTint">@color/white</item>
+    </style>
 
+    <style name="alertdialog" parent="Theme.AppCompat.DayNight.Dialog.Alert">
+        <item name="colorOnPrimary">@color/light_blue_100</item>
+        <item name="colorAccent">@color/light_blue_100</item>
+        <item name="android:colorBackground">@color/darkGreyPrimary</item>
     </style>
 </resources>

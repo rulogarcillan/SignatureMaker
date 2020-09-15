@@ -4,6 +4,7 @@
     <string name="app_name_debug" translatable="false">Signature maker - debug</string>
     <string name="app_name_release" translatable="false">Signature maker</string>
     <string name="title_setting">Settings</string>
+    <string name="title_others">Others</string>
     <string name="title_activity_settings">Settings</string>
 
 
@@ -44,7 +45,7 @@
     <string name="delete">Delete</string>
     <string name="tittle_undo">Undo</string>
     <!--       Preferences      -->
-    <string name="title_pref_advertising_t">Advertising</string>
+    <string name="title_pref_app">App</string>
     <string name="title_pref_advertising">Disable ads</string>
     <string name="title_pref_advertising_sum">Disable ads if it bothers you.</string>
     <string name="title_pref_files">Files</string>
@@ -90,6 +91,8 @@
     <string name="mode_system">Defined by the system</string>
     <string name="mode_battery">Dark in battery saver mode</string>
     <string name="theme" translatable="false">Theme</string>
+    <string name="min">Min.</string>
+    <string name="max">Max.</string>
 
 
 </resources>

@@ -1,6 +1,7 @@
 package com.signaturemaker.app.application.features.suggest
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.net.Uri
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
@@ -118,7 +119,7 @@ open class CustomDialogSuggest : DialogFragment() {
     }
 
     private fun setStatusBarColorIfPossible(color: Int) {
-        if (VERSION.SDK_INT >= VERSION_CODES.M) {
+        if (VERSION.SDK_INT >= VERSION_CODES.M && !isUsingNightModeResources()) {
             dialog?.window?.let {
                 var flags = it.decorView.systemUiVisibility
                 flags = flags.xor(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
@@ -126,6 +127,16 @@ open class CustomDialogSuggest : DialogFragment() {
                 it.addFlags(LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
                 it.statusBarColor = color
             }
+        }
+    }
+
+    private fun isUsingNightModeResources(): Boolean {
+        return when (resources.configuration.uiMode and
+                Configuration.UI_MODE_NIGHT_MASK) {
+            Configuration.UI_MODE_NIGHT_YES -> true
+            Configuration.UI_MODE_NIGHT_NO -> false
+            Configuration.UI_MODE_NIGHT_UNDEFINED -> false
+            else -> false
         }
     }
 

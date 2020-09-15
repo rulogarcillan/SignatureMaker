@@ -12,6 +12,7 @@ import com.signaturemaker.app.R.string
 import com.signaturemaker.app.application.core.extensions.Utils.defaultValues
 import com.signaturemaker.app.application.core.extensions.Utils.loadAllPreferences
 import com.signaturemaker.app.application.core.extensions.Utils.saveAllPreferences
+import com.signaturemaker.app.application.core.extensions.createSnackBar
 import com.signaturemaker.app.application.features.menu.SettingViewModel
 import com.signaturemaker.app.application.utils.Constants
 
@@ -43,6 +44,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val themePreference = (findPreference(Constants.ID_THEME_MODE) as androidx.preference.ListPreference?)
         themePreference?.setOnPreferenceChangeListener { preference, newValue ->
             loadAllPreferences(activity)
+            activity?.createSnackBar("sfkjdkf")?.show()
             true
         }
 
@@ -75,9 +77,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
         (findPreference(Constants.ID_PREF_STROKE) as androidx.preference.CheckBoxPreference?)?.isChecked = false
         (findPreference(Constants.ID_PREF_ADVERTISING) as androidx.preference.CheckBoxPreference?)?.isChecked = false
         (findPreference(Constants.ID_PREF_WALLPAPER) as androidx.preference.CheckBoxPreference?)?.isChecked = false
-        (findPreference(Constants.ID_THEME_MODE) as androidx.preference.ListPreference?)?.setDefaultValue(
-            AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
-        )
+        (findPreference(Constants.ID_THEME_MODE) as androidx.preference.ListPreference?)?.value =
+            AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM.toString()
+
         saveAllPreferences(activity)
         defaultValues()
     }

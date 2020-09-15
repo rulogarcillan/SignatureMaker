@@ -29,7 +29,9 @@
     <string name="title_no_files">No hay archivos</string>
     <string name="delete">Eliminar</string>
     <string name="tittle_undo">Deshacer</string>
-    <string name="title_pref_advertising_t">Publicidad</string>
+    <string name="title_pref_app">Aplicación</string>
+    <string name="title_others">Otros</string>
+
     <string name="title_pref_advertising">Deshabilitar publicidad</string>
     <string name="title_pref_advertising_sum">Deshabilita la publicidad si te resulta muy molesta</string>
     <string name="title_pref_files">Archivos</string>

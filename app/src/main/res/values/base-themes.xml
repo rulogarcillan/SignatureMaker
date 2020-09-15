@@ -57,6 +57,11 @@
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.MaterialComponents.Dialog.Alert
         </item>
         <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.PrimarySurface</item>
+
+        <item name="snackbarStyle">@style/MySnackBarStyle</item>
+        <item name="alertDialogTheme">@style/alertdialog</item>
+
+
     </style>
 
     <style name="Base.Theme.MaterialThemeBuilder" parent="Theme.MaterialComponents.DayNight.NoActionBar">

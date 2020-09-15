@@ -25,20 +25,25 @@ package com.signaturemaker.app.application.features.main
 import android.Manifest.permission
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.Utils
+import com.signaturemaker.app.application.core.extensions.currentNavigationFragment
 import com.signaturemaker.app.application.core.extensions.hasPermissionWriteRead
 import com.signaturemaker.app.application.core.platform.BaseActivity
 import com.signaturemaker.app.application.core.platform.FilesUtils
 import com.signaturemaker.app.application.core.platform.PermissionRequester
 import com.signaturemaker.app.application.features.files.ListFilesFragment
 import com.signaturemaker.app.application.features.menu.SettingViewModel
+import com.signaturemaker.app.application.features.sing.SingBoardFragment
 import com.signaturemaker.app.application.utils.Constants
 import com.signaturemaker.app.databinding.ActivityMainBinding
 import com.tuppersoft.skizo.core.extension.gone
@@ -216,4 +221,15 @@ class MainActivity : BaseActivity() {
             "Cancel migrate - permission is denied".logd()
         })
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if (supportFragmentManager.currentNavigationFragment is SingBoardFragment) {
+            Handler().postDelayed({
+                android.os.Process.killProcess(android.os.Process.myPid())
+            }, 500)
+        }
+    }
 }
+
+

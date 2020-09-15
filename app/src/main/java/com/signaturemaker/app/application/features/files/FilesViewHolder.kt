@@ -5,6 +5,7 @@ import android.view.animation.Animation
 import android.view.animation.Animation.AnimationListener
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.daimajia.swipe.SwipeLayout
@@ -19,6 +20,7 @@ import com.signaturemaker.app.domain.models.ItemFile
 import com.tuppersoft.skizo.core.extension.loadSharedPreference
 import com.tuppersoft.skizo.core.extension.saveSharedPreference
 import com.tuppersoft.skizo.core.extension.visible
+import java.util.Locale
 import java.util.concurrent.atomic.AtomicBoolean
 
 class FilesViewHolder(private val binding: ItemExploreBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -49,6 +51,18 @@ class FilesViewHolder(private val binding: ItemExploreBinding) : RecyclerView.Vi
         binding.textSize.text = item.size
 
         binding.imgSign.loadFromUrl("file:///" + Utils.path + "/" + item.name)
+
+        if (item.name.endsWith("svg", true)) {
+            binding.signWallpaper.setBackgroundColor(
+                ContextCompat.getColor(
+                    binding.root.context,
+                    R.color.transparent
+                )
+            )
+        } else {
+            binding.signWallpaper.setBackgroundColor(ContextCompat.getColor(binding.root.context, R.color.white))
+        }
+
 
         binding.principalLayer.setOnClickListener {
             onClickItem?.invoke(item, binding.imgSign)

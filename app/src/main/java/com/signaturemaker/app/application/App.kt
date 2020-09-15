@@ -31,5 +31,6 @@ class App : Application() {
 
     private fun loadTheme() {
         AppCompatDelegate.setDefaultNightMode(Utils.themeMode)
+
     }
 }

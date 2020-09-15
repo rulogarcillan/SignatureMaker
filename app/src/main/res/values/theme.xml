@@ -32,23 +32,20 @@
     <style name="App.Theme" parent="App.Theme.Custom" />
 
     <style name="App.Theme.Custom" parent="Base.Theme.DayNight">
-        <item name="colorForegroundItems">@color/brown_cd470b</item>
+        <item name="layerBackground">@color/colorWhitetrans</item>
         <item name="backgroundInfo">@color/yellow_50</item>
-        <item name="colorIcon">@color/grey_757575</item>
         <item name="separator">@color/grey</item>
+        <item name="menuText">?attr/principalText</item>
         <item name="principalText">@color/darkGrey</item>
         <item name="secondaryText">@color/warmGrey</item>
-        <item name="colorOnPrimaryVariant">@color/grey_808080</item>
-        <item name="colorButtons">@color/primaryColor</item>
-        <item name="colorPanelFunnel">?attr/colorPrimary</item>
-        <item name="colorChips">@color/grey</item>
         <item name="shimmerColor">@color/grey</item>
-        <item name="calendarIcon">@color/primaryColor</item>
         <item name="colorToolbarIcon">@color/white</item>
         <item name="colorChipFix">@color/orange_F57C00</item>
         <item name="colorChipDel">@color/red_500</item>
         <item name="colorChipFeat">@color/green_689F38</item>
         <item name="colorChipChangelogText">@color/white</item>
+        <item name="buttonLeft">@color/buttonBlue</item>
+        <item name="buttonUp">@color/orange_500</item>
     </style>
 
     <style name="App.Theme.Intro" parent="App.Theme.Custom">
@@ -58,6 +55,16 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:navigationBarDividerColor" tools:ignore="NewApi">@color/black</item>
+    </style>
+
+    <style name="MySnackBarStyle" parent="Widget.MaterialComponents.Snackbar">
+        <item name="android:backgroundTint">@color/darkGreyPrimary</item>
+    </style>
+
+    <style name="alertdialog" parent="Theme.AppCompat.DayNight.Dialog.Alert">
+        <item name="colorOnPrimary">@color/primaryColor</item>
+        <item name="colorAccent">@color/primaryColor</item>
+        <item name="android:colorBackground">@color/white</item>
     </style>
 
 

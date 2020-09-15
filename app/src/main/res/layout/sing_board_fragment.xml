@@ -22,7 +22,7 @@
         android:layout_marginStart="8dp"
         android:gravity="center"
         android:text="@string/title_SingHere"
-        android:textColor="?attr/principalText"
+        android:textColor="@color/darkGrey"
         android:textSize="@dimen/text_size_14"
         app:layout_constraintBottom_toBottomOf="@+id/actionsButtons"
         app:layout_constraintEnd_toEndOf="parent"

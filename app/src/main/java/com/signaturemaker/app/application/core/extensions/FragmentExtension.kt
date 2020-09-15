@@ -1,6 +1,7 @@
 package com.signaturemaker.app.application.core.extensions
 
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.NavOptions
 import androidx.navigation.NavOptions.Builder
@@ -40,3 +41,6 @@ fun getNavOptions(): NavOptions? {
         .setPopExitAnim(R.anim.pop_exit_to_left)
         .build()
 }
+
+val FragmentManager.currentNavigationFragment: Fragment?
+    get() = primaryNavigationFragment?.childFragmentManager?.fragments?.first()

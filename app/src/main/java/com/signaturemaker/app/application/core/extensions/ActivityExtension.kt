@@ -7,7 +7,8 @@ import com.google.android.material.snackbar.Snackbar
  * Show Snackbar
  */
 fun Activity.createSnackBar(
-    msg: String, actionMsg: String? = null,
+    msg: String,
+    actionMsg: String? = null,
     callback: Snackbar.Callback? = null
 ): Snackbar {
     return Snackbar.make(this.findViewById(android.R.id.content), msg, Snackbar.LENGTH_SHORT).apply {
