@@ -17,7 +17,7 @@
         <item name="colorOnSurface">@color/grey</item>
         <item name="colorOnError">@color/darkGreyPrimary</item>
 
-        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="27">false</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">false</item>
         <item name="android:statusBarColor" tools:ignore="NewApi">?attr/colorSurface</item>
     </style>

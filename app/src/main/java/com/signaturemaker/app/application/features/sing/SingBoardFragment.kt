@@ -26,7 +26,6 @@ import android.Manifest.permission
 import android.animation.Animator
 import android.annotation.TargetApi
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -350,16 +349,24 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
                     var mName = ""
                     when (idMenu) {
                         R.id.savePngTrans -> {
-                            mName = FilesUtils.addExtensionNamePng(name)
-                            statusParticular = FilesUtils
-                                .saveBitmapFile(binding.singBoard.getTransparentSignatureBitmap(true), mName)
+                            context?.let {
+                                statusParticular = FilesUtils.saveBitmap(
+                                    it,
+                                    binding.singBoard.getTransparentSignatureBitmap(true),
+                                    FilesUtils.addExtensionNamePng(name)
+                                )
+                            }
                         }
                         R.id.savePngWhite -> {
-                            mName = FilesUtils.addExtensionNamePng(name)
-                            statusParticular = FilesUtils.saveBitmapFile(binding.singBoard.signatureBitmap, mName)
+                            context?.let {
+                                statusParticular = FilesUtils.saveBitmap(
+                                    it,
+                                    binding.singBoard.signatureBitmap,
+                                    FilesUtils.addExtensionNamePng(name)
+                                )
+                            }
                         }
                         R.id.saveSvg -> {
-
                             binding.singBoard.signatureSvg?.let {
                                 mName = FilesUtils.addExtensionNameSvg(name)
                                 statusParticular = FilesUtils.saveSvgFile(it, mName)
@@ -385,17 +392,22 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
             var name = ""
             when (idMenu) {
                 R.id.savePngTrans -> {
-                    name = FilesUtils.addExtensionNamePng(FilesUtils.generateName())
-                    val sing = binding.singBoard.getTransparentSignatureBitmap(true)
-                    sing?.let {
-                        status = FilesUtils.saveBitmapFile(it, name)
+                    context?.let {
+                        status = FilesUtils.saveBitmap(
+                            it,
+                            binding.singBoard.getTransparentSignatureBitmap(true),
+                            FilesUtils.addExtensionNamePng(FilesUtils.generateName())
+                        )
                     }
                 }
                 R.id.savePngWhite -> {
-                    name = FilesUtils.addExtensionNamePng(FilesUtils.generateName())
-                    val sing: Bitmap? = binding.singBoard.signatureBitmap
-                    sing?.let {
-                        status = FilesUtils.saveBitmapFile(it, name)
+                    context?.let {
+                        status = FilesUtils.saveBitmap(
+                            it,
+                            binding.singBoard.signatureBitmap,
+                            FilesUtils.addExtensionNamePng(FilesUtils.generateName())
+                        )
+
                     }
                 }
                 R.id.saveSvg -> {

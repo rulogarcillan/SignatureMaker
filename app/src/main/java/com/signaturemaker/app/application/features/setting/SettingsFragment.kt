@@ -44,7 +44,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val themePreference = (findPreference(Constants.ID_THEME_MODE) as androidx.preference.ListPreference?)
         themePreference?.setOnPreferenceChangeListener { preference, newValue ->
             loadAllPreferences(activity)
-            activity?.createSnackBar("sfkjdkf")?.show()
+            activity?.createSnackBar(getString(string.change_theme_note))?.show()
             true
         }
 

@@ -1,14 +1,26 @@
 package com.signaturemaker.app.application.core.platform
 
-import android.app.Activity
+import android.content.ContentResolver
+import android.content.ContentValues
+import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Bitmap.CompressFormat.PNG
+import android.media.MediaScannerConnection
+import android.net.Uri
+import android.os.Build.VERSION
+import android.os.Build.VERSION_CODES
+import android.provider.MediaStore.Images.Media
+import android.provider.MediaStore.MediaColumns
+import androidx.annotation.RequiresApi
 import com.signaturemaker.app.application.core.extensions.Utils
 import com.signaturemaker.app.domain.models.ItemFile
+import com.tuppersoft.skizo.core.extension.logd
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileOutputStream
 import java.io.FileWriter
 import java.io.IOException
+import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -30,6 +42,10 @@ object FilesUtils {
         return output
     }
 
+    fun generateName(): String {
+        return systemTime()
+    }
+
     /**
      * Create a new folder
      *
@@ -42,10 +58,14 @@ object FilesUtils {
         }
     }
 
+    fun getFile(name: String): File {
+        return File(Utils.path + File.separator + name)
+    }
+
     /**
      * Remove all files
      */
-    fun deleteAllFiles() {
+    fun deleteAllFiles(mContext: Context?) {
         val files: Array<File>?
         val folder = File(Utils.path)
         if (folder.exists()) {
@@ -59,18 +79,10 @@ object FilesUtils {
                     && name.startsWith("SM")
                 ) {
                     file.delete()
+                    callScanIntent(mContext, file.path)
                 }
             }
         }
-    }
-
-    fun generateName(): String {
-
-        return systemTime()
-    }
-
-    private fun getFile(name: String): File {
-        return File(Utils.path + name)
     }
 
     fun loadItemsFiles(): MutableList<ItemFile> {
@@ -105,7 +117,7 @@ object FilesUtils {
         return arrayItems
     }
 
-    fun moveFiles(oldPath: String) {
+    fun moveFiles(mContext: Context?, oldPath: String) {
 
         if (oldPath != Utils.path) {
             val files: Array<File>?
@@ -117,12 +129,13 @@ object FilesUtils {
                     for (file in files) {
 
                         val name = file.name
+                        val fileDest = File(Utils.path + File.separator + name)
 
                         if ((name.contains(".png") || name.contains(".PNG") || name.contains(".svg") || name
                                 .contains(".SVG")) && name.substring(0, 2) == "SM"
                         ) {
-
-                            file.renameTo(File(Utils.path + "/" + name))
+                            file.renameTo(fileDest)
+                            callScanIntent(mContext, file.path)
                         }
                     }
                 }
@@ -130,36 +143,12 @@ object FilesUtils {
         }
     }
 
-    fun removeFileByName(name: String) {
-        val file = getFile(name)
-        if (file.exists()) {
-            file.delete()
-        }
-    }
-
-    fun removeFile(path: String) {
+    fun removeFile(mContext: Context?, path: String) {
         val file = File(path)
         if (file.exists()) {
             file.delete()
+            callScanIntent(mContext, file.path)
         }
-    }
-
-    fun saveBitmapFile(bitmap: Bitmap?, name: String): Boolean {
-        if (bitmap == null) {
-            return false
-        }
-        try {
-            val file = File(Utils.path + name)
-            createFolder(Utils.path)
-            file.createNewFile()
-            val os = FileOutputStream(file)
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, os)
-            os.close()
-        } catch (e: Exception) {
-            e.printStackTrace()
-            return false
-        }
-        return true
     }
 
     fun saveSvgFile(content: String, name: String): Boolean {
@@ -196,6 +185,99 @@ object FilesUtils {
         val dfh = SimpleDateFormat("HHmmss", Locale.getDefault())
 
         return dfd.format(date) + "_" + dfh.format(date)
+    }
+
+    @Throws(IOException::class)
+    fun saveBitmap(
+        context: Context,
+        bitmap: Bitmap?,
+        displayName: String
+    ): Boolean {
+
+        return if (VERSION.SDK_INT >= VERSION_CODES.Q) {
+            saveImageForAndroid10(
+                context,
+                bitmap,
+                displayName
+            )
+        } else {
+            saveImageForLessAndroid10(context, bitmap, displayName)
+        }
+    }
+
+    @RequiresApi(VERSION_CODES.Q)
+    private fun saveImageForAndroid10(
+        context: Context,
+        bitmap: Bitmap?,
+        displayName: String
+    ): Boolean {
+        if (bitmap == null) {
+            return false
+        }
+
+        var stream: OutputStream? = null
+        val contentValues = ContentValues()
+        contentValues.put(MediaColumns.DISPLAY_NAME, displayName)
+        contentValues.put(MediaColumns.MIME_TYPE, "image/png")
+        contentValues.put(MediaColumns.RELATIVE_PATH, Utils.path)
+        val resolver: ContentResolver = context.contentResolver
+        var uri: Uri? = null
+        try {
+            val contentUri: Uri = Media.EXTERNAL_CONTENT_URI
+            uri = resolver.insert(contentUri, contentValues)
+            if (uri == null) {
+                return false
+            }
+            stream = resolver.openOutputStream(uri)
+            if (stream == null) {
+                //throw IOException("Failed to get output stream.")
+                return false
+            }
+
+            if (!bitmap.compress(PNG, 100, stream)) {
+                // throw IOException("Failed to save bitmap.")
+                return false
+            }
+        } catch (e: IOException) {
+            if (uri != null) {
+                // Don't leave an orphan entry in the MediaStore
+                resolver.delete(uri, null, null)
+            }
+            //throw e
+            return false
+        } finally {
+            stream?.close()
+        }
+        return true
+    }
+
+    private fun saveImageForLessAndroid10(context: Context?, bitmap: Bitmap?, name: String): Boolean {
+        if (bitmap == null) {
+            return false
+        }
+        val file = File(Utils.path + File.separator + name)
+
+        try {
+            createFolder(Utils.path)
+            file.createNewFile()
+            val os = FileOutputStream(file)
+            bitmap.compress(PNG, 100, os)
+            os.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return false
+        }
+
+        callScanIntent(context, file.path)
+        return true
+    }
+
+    private fun callScanIntent(context: Context?, filePath: String) {
+        context?.let { mContext ->
+            MediaScannerConnection.scanFile(
+                mContext, arrayOf(filePath), null
+            ) { path, _ -> "Scan complete for: $path".logd() }
+        }
     }
 }
 

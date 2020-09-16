@@ -2,8 +2,8 @@
   "changelog": [
     {
       "date": "15/09/2020",
-      "versionCode": 3110,
-      "versionName": "3.1.0-beta10",
+      "versionCode": 3111,
+      "versionName": "3.1.0",
       "change": [
         {
           "type": "feat",

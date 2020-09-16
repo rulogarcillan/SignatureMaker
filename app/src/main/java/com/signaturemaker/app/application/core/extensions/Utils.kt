@@ -25,12 +25,14 @@ package com.signaturemaker.app.application.core.extensions
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.media.MediaScannerConnection
 import android.net.Uri
 import androidx.core.content.FileProvider
 import com.signaturemaker.app.BuildConfig
 import com.signaturemaker.app.application.utils.Constants
 import com.signaturemaker.app.domain.models.ItemFile
 import com.tuppersoft.skizo.core.extension.loadSharedPreference
+import com.tuppersoft.skizo.core.extension.logd
 import com.tuppersoft.skizo.core.extension.saveSharedPreference
 import java.io.File
 
@@ -95,7 +97,10 @@ object Utils {
             disableAds = mContext.loadSharedPreference(Constants.ID_PREF_ADVERTISING, Constants.DEFAULT_DISABLE_ADS)
             nameSave = mContext.loadSharedPreference(Constants.ID_PREF_NAME, Constants.DEFAULT_NAME_SAVE)
             deleteExit = mContext.loadSharedPreference(Constants.ID_PREF_DELETE, Constants.DEFAULT_DELETE_EXIT)
-            themeMode = mContext.loadSharedPreference(Constants.ID_THEME_MODE, Constants.DEFAULT_THEME_MODE.toString()).toInt()
+            themeMode = mContext.loadSharedPreference(
+                Constants.ID_THEME_MODE,
+                Constants.DEFAULT_THEME_MODE.toString()
+            ).toInt()
         }
     }
 
@@ -140,4 +145,6 @@ object Utils {
 
         return temporalList.toList()
     }
+
+
 }

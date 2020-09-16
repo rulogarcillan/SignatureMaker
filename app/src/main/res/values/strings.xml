@@ -91,8 +91,9 @@
     <string name="mode_system">Defined by the system</string>
     <string name="mode_battery">Dark in battery saver mode</string>
     <string name="theme" translatable="false">Theme</string>
-    <string name="min">Min.</string>
-    <string name="max">Max.</string>
+    <string name="min" translatable="false">Min.</string>
+    <string name="max" translatable="false">Max.</string>
+    <string name="change_theme_note">For the changes to take effect, you must restart the application completely</string>
 
 
 </resources>

@@ -124,7 +124,7 @@ class ListFilesFragment : GlobalFragment() {
                             resources.getString(R.string.tittle_undo), object : Snackbar.Callback() {
                                 override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
                                     if (event != 1) {
-                                        FilesUtils.removeFileByName(item.name)
+                                        FilesUtils.removeFile(context, FilesUtils.getFile(item.name).path)
                                         if (mAdapter.currentList.size > 0) {
                                             binding.txtMnsNoFiles.visibility = View.GONE
                                         } else {
