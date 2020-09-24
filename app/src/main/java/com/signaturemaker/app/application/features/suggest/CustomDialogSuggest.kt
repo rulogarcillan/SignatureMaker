@@ -20,6 +20,7 @@ import com.signaturemaker.app.domain.models.SuggestMessage
 import com.tuppersoft.skizo.core.extension.collapse
 import com.tuppersoft.skizo.core.extension.expand
 import com.tuppersoft.skizo.core.extension.getColorFromAttr
+import com.tuppersoft.skizo.core.extension.gone
 import com.tuppersoft.skizo.core.extension.hideKeyboard
 import com.tuppersoft.skizo.core.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
@@ -112,7 +113,11 @@ open class CustomDialogSuggest : DialogFragment() {
                 dismiss()
                 Toast.makeText(view?.context, getString(R.string.thanks_comment), Toast.LENGTH_LONG).show()
             } else {
-                Toast.makeText(view?.context, getString(R.string.thanks_comment), Toast.LENGTH_LONG).show()
+                binding.loading.gone()
+                activity?.let {
+                    setStatusBarColorIfPossible(it.getColorFromAttr(R.attr.colorPrimaryVariant))
+                }
+                Toast.makeText(view?.context, getString(R.string.problems_comment), Toast.LENGTH_LONG).show()
             }
 
         })
@@ -142,7 +147,7 @@ open class CustomDialogSuggest : DialogFragment() {
 
     override fun onResume() {
         super.onResume()
-        showBannerTelegram()
+       // showBannerTelegram()
     }
 
     private fun showBannerTelegram() {

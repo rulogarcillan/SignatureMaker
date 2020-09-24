@@ -133,6 +133,6 @@ class AdapterFiles :
             removeAt(position)
         }.toList())
 
-      notifyDataSetChanged()
+        notifyDataSetChanged()
     }
 }

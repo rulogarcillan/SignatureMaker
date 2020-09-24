@@ -45,7 +45,7 @@ android {
         debug {
             applicationIdSuffix ".debug"
             buildConfigField "String", "BASE_URL", '"https://api.tuppersoft.com"'
-            buildConfigField "String", "END_POINT", '"/medical"'
+            buildConfigField "String", "END_POINT", '"/commons"'
             buildConfigField "String", "APP_NAME", '"Signature maker"'
             resValue "string", "app_name", "@string/app_name_debug"
             signingConfig signingConfigs.debug
@@ -59,7 +59,7 @@ android {
 
         release {
             buildConfigField "String", "BASE_URL", '"https://api.tuppersoft.com"'
-            buildConfigField "String", "END_POINT", '"/medical"'
+            buildConfigField "String", "END_POINT", '"/commons"'
             buildConfigField "String", "APP_NAME", '"Signature maker"'
             resValue "string", "app_name", "@string/app_name_release"
             signingConfig signingConfigs.release

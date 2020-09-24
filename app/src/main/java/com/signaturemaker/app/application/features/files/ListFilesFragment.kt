@@ -50,6 +50,8 @@ import com.signaturemaker.app.application.features.image.ImageActivity
 import com.signaturemaker.app.application.features.main.SharedViewModel
 import com.signaturemaker.app.databinding.ListFilesFragmentBinding
 import com.signaturemaker.app.domain.models.ItemFile
+import com.tuppersoft.skizo.core.extension.gone
+import com.tuppersoft.skizo.core.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -113,13 +115,14 @@ class ListFilesFragment : GlobalFragment() {
                 val pos = mAdapter.currentList.indexOf(item)
                 if (pos != -1) {
                     mAdapter.removeItem(pos)
+
                     activity?.let { mActivity ->
                         mySnackBar = mActivity.createSnackBar(item.name,
                             resources.getString(R.string.tittle_undo), object : Snackbar.Callback() {
                                 override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
                                     if (event != 1) {
                                         listFilesViewModel.removeFile(item)
-                                        //addListToAdapter(Utils.sort(mAdapter.currentList, Utils.sortOrder))
+                                        configMessageEmpty()
                                     } else {
                                         reloadFiles()
                                     }
@@ -134,6 +137,14 @@ class ListFilesFragment : GlobalFragment() {
         }
     }
 
+    private fun configMessageEmpty() {
+        if (mAdapter.currentList.isNotEmpty()) {
+            binding.txtMnsNoFiles.gone()
+        } else {
+            binding.txtMnsNoFiles.visible()
+        }
+    }
+
     private fun initObserver() {
         initReloadFileList()
         initHandleFileList()
@@ -142,12 +153,7 @@ class ListFilesFragment : GlobalFragment() {
     private fun initHandleFileList() {
         listFilesViewModel.listFiles.observe(viewLifecycleOwner, { list ->
             addListToAdapter(list)
-            if (list.isNotEmpty()) {
-                binding.txtMnsNoFiles.visibility = View.GONE
-            } else {
-                binding.txtMnsNoFiles.visibility = View.VISIBLE
-            }
-
+            configMessageEmpty()
         })
     }
 
