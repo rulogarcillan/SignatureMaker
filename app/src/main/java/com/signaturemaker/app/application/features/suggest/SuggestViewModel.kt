@@ -21,16 +21,16 @@ class SuggestViewModel @ViewModelInject constructor(
     private val sendSuggest: SendSuggest
 ) : ViewModel() {
 
-    private val _sendSussecs: MutableLiveData<Boolean> = MutableLiveData()
-    val sendSussecs: LiveData<Boolean>
-        get() = _sendSussecs
+    private val _sendSuccess: MutableLiveData<Boolean> = MutableLiveData()
+    val sendSuccess: LiveData<Boolean>
+        get() = _sendSuccess
 
     fun sendSuggest(suggestMessage: SuggestMessage) {
         viewModelScope.launch(Dispatchers.IO) {
             sendSuggest.invoke(Params(suggestMessage)) {
-                _sendSussecs.postValue(false)
+                _sendSuccess.postValue(false)
             }.collect {
-                _sendSussecs.postValue(true)
+                _sendSuccess.postValue(true)
             }
         }
     }

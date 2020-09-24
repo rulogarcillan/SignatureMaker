@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.navigation.navArgs
 import com.signaturemaker.app.application.core.extensions.Utils
+import com.signaturemaker.app.application.core.extensions.loadFromUrl
 import com.signaturemaker.app.application.core.extensions.loadFromUrlWhitoutPlaceHolder
 import com.signaturemaker.app.application.core.platform.BaseActivity
 import com.signaturemaker.app.databinding.ImageActivityBinding
@@ -40,7 +41,11 @@ class ImageActivity : BaseActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding.tvTittle.text = args.itemFile?.name
 
-        binding.ivPhoto.loadFromUrlWhitoutPlaceHolder("file:///" + Utils.path + "/" + args.itemFile?.name)
+        args.itemFile?.uri?.let {uri->
+            binding.ivPhoto.loadFromUrl(uri)
+        }
+
+        //binding.ivPhoto.loadFromUrlWhitoutPlaceHolder("file:///" + Utils.path + "/" + args.itemFile?.name)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

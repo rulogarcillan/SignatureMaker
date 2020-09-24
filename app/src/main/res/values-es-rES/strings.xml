@@ -74,6 +74,7 @@
     <string name="mode_battery">Osucro en ahorro de bateria</string>
 
     <string name="change_theme_note">Para que los cambios surtan efecto, debes reiniciar la aplicación por completo</string>
+    <string name="empty_canvas">Error, canvas vacío</string>
 
 
 </resources>

@@ -35,7 +35,6 @@ import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.Utils
 import com.signaturemaker.app.application.core.extensions.hasPermissionWriteRead
 import com.signaturemaker.app.application.core.platform.BaseActivity
-import com.signaturemaker.app.application.core.platform.FilesUtils
 import com.signaturemaker.app.application.core.platform.PermissionRequester
 import com.signaturemaker.app.application.features.files.ListFilesFragment
 import com.signaturemaker.app.application.features.menu.SettingViewModel
@@ -55,6 +54,7 @@ class MainActivity : BaseActivity() {
 
     private var flagAdvertising: Boolean = false
     private val settingViewModel: SettingViewModel by viewModels()
+    private val mainViewModel: MainViewModel by viewModels()
 
     private lateinit var binding: ActivityMainBinding
 
@@ -82,10 +82,10 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         if (Utils.deleteExit && hasPermissionWriteRead()) {
-            FilesUtils.deleteAllFiles(this)
+            mainViewModel.removeAllFiles(Utils.path)
         }
+        super.onDestroy()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -184,7 +184,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initMigrate() {
-        if (loadSharedPreference(Constants.NEED_MIGRATE, true) && !isNeedMigrate()) {
+        if (loadSharedPreference(Constants.NEED_MIGRATE, true) && isNeedMigrate()) {
             FirebaseCrashlytics.getInstance().log("Need migrate files")
             "Need migrate files".logd()
             permissions()
@@ -200,21 +200,20 @@ class MainActivity : BaseActivity() {
 
     private fun isNeedMigrate(): Boolean = File(loadOldPath()).exists()
 
-    private fun migrateFiles() {
-        FilesUtils.moveFiles(this, loadOldPath())
-    }
-
     private fun permissions() {
         PermissionRequester(this, permission.WRITE_EXTERNAL_STORAGE, binding.root).runWithPermission({
             "Migrate start".logd()
             migrateFiles()
-            FilesUtils.removeFile(this, loadOldPath())
             "Migrate finish".logd()
             createTableView()
         }, {
             createTableView()
             "Cancel migrate - permission is denied".logd()
         })
+    }
+
+    private fun migrateFiles() {
+        mainViewModel.moveAllFiles(loadOldPath(), Utils.path)
     }
 
     override fun onBackPressed() {

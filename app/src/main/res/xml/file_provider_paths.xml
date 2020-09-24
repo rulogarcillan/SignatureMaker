@@ -1,6 +1,4 @@
 <paths>
-
-
     <external-path
         name="external_files"
         path="." />

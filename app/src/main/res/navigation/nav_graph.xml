@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/SingBoardFragment"
-        android:name="com.signaturemaker.app.application.features.sing.SingBoardFragment"
+        android:name="com.signaturemaker.app.application.features.sign.SignBoardFragment"
         tools:layout="@layout/sing_board_fragment">
         <action
             android:id="@+id/action_SingBoardFragment_to_SettingFragment"

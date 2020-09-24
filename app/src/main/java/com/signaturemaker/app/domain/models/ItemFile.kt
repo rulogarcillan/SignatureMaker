@@ -22,6 +22,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 package com.signaturemaker.app.domain.models
 
+import android.net.Uri
 import android.os.Parcelable
 import androidx.annotation.Keep
 import kotlinx.android.parcel.Parcelize
@@ -29,6 +30,7 @@ import kotlinx.android.parcel.Parcelize
 @Keep
 @Parcelize
 data class ItemFile(
+    val uri: Uri = Uri.EMPTY,
     val name: String,
     val date: String = "",
     val size: String = "",

@@ -54,4 +54,5 @@ object Constants {
     val DEFAULT_PEN_COLOR = Color.parseColor("#200BB2")
     private val ROOT = Environment.getExternalStorageDirectory().absolutePath
     val DEFAULT_OLD_PATH = "$ROOT/Signature/"
+    const val FOLDER_APP_NAME = "Signature maker"
 }

@@ -107,7 +107,7 @@ open class CustomDialogSuggest : DialogFragment() {
     }
 
     private fun observeSendSuggest() {
-        suggestViewModel.sendSussecs.observe(viewLifecycleOwner, {
+        suggestViewModel.sendSuccess.observe(viewLifecycleOwner, {
             if (it) {
                 dismiss()
                 Toast.makeText(view?.context, getString(R.string.thanks_comment), Toast.LENGTH_LONG).show()

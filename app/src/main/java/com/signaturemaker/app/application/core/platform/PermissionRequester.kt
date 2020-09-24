@@ -42,7 +42,7 @@ class PermissionRequester(
         requestPermissionLauncher.launch(permission)
     }
 
-    fun goSetting() {
+    private fun goSetting() {
         val intent = Intent(
             Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
             Uri.parse("package:" + activity.packageName)

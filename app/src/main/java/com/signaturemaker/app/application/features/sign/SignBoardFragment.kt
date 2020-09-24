@@ -20,7 +20,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
-package com.signaturemaker.app.application.features.sing
+package com.signaturemaker.app.application.features.sign
 
 import android.Manifest.permission
 import android.animation.Animator
@@ -40,6 +40,7 @@ import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
@@ -49,8 +50,8 @@ import com.larswerkman.holocolorpicker.ColorPicker
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.Utils
 import com.signaturemaker.app.application.core.extensions.createSnackBar
+import com.signaturemaker.app.application.core.extensions.shareSign
 import com.signaturemaker.app.application.core.extensions.showToast
-import com.signaturemaker.app.application.core.platform.FilesUtils
 import com.signaturemaker.app.application.core.platform.GlobalFragment
 import com.signaturemaker.app.application.core.platform.PermissionRequester
 import com.signaturemaker.app.application.features.main.MainActivity
@@ -58,15 +59,18 @@ import com.signaturemaker.app.application.features.main.SharedViewModel
 import com.signaturemaker.app.application.features.menu.SettingActivity
 import com.signaturemaker.app.application.features.suggest.CustomDialogSuggest
 import com.signaturemaker.app.databinding.SingBoardFragmentBinding
+import com.signaturemaker.app.domain.models.error.FileError.CreateError
+import com.signaturemaker.app.domain.models.error.FileError.EmptyBitmap
 import com.tuppersoft.skizo.core.extension.gone
 import com.tuppersoft.skizo.core.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Locale
 
 /**
  * A placeholder fragment containing a simple view.
  */
 @AndroidEntryPoint
-class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongClickListener {
+class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongClickListener {
 
     override val toolbarTitle: String
         get() = getString(R.string.app_name)
@@ -81,8 +85,9 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
     private val binding get() = _binding!!
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
+    private val signBoardViewModel: SignBoardViewModel by viewModels()
 
-    private interface TextDialog {
+    private fun interface TextDialog {
 
         fun onGetTextDialog(name: String)
     }
@@ -94,6 +99,7 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
 
         _binding = SingBoardFragmentBinding.inflate(inflater, container, false)
         binding.singBoard.isSaveEnabled = false
+        initObserver()
         return binding.root
     }
 
@@ -188,7 +194,7 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
             R.id.bSave -> savePopUpOptions()
             R.id.bSaveSend -> sharePopUpOptions()
             R.id.bColor -> showColorPicker()
-            R.id.bStroke -> showSeekbarStroke()
+            R.id.bStroke -> showSeekBarStroke()
             R.id.bRubber -> cleanBoard()
             R.id.bWallpaper -> changeWallpaper()
         }
@@ -338,96 +344,71 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
     }
 
     private fun navigateToListFiles() {
-        findNavController().navigate(SingBoardFragmentDirections.actionSingBoardFragmentToListFilesFragment())
+        findNavController().navigate(SignBoardFragmentDirections.actionSingBoardFragmentToListFilesFragment())
     }
 
-    private fun saveFileAndSend(idMenu: Int, share: Boolean) {
-        if (Utils.nameSave) {
-            selectName(object : TextDialog {
-                var statusParticular: Boolean = false
-                override fun onGetTextDialog(name: String) {
-                    var mName = ""
-                    when (idMenu) {
-                        R.id.savePngTrans -> {
-                            context?.let {
-                                statusParticular = FilesUtils.saveBitmap(
-                                    it,
-                                    binding.singBoard.getTransparentSignatureBitmap(true),
-                                    FilesUtils.addExtensionNamePng(name)
-                                )
-                            }
-                        }
-                        R.id.savePngWhite -> {
-                            context?.let {
-                                statusParticular = FilesUtils.saveBitmap(
-                                    it,
-                                    binding.singBoard.signatureBitmap,
-                                    FilesUtils.addExtensionNamePng(name)
-                                )
-                            }
-                        }
-                        R.id.saveSvg -> {
-                            binding.singBoard.signatureSvg?.let {
-                                mName = FilesUtils.addExtensionNameSvg(name)
-                                statusParticular = FilesUtils.saveSvgFile(it, mName)
-                            }
-                        }
-                    }
-                    if (statusParticular) {
-                        if (share) {
-                            activity?.let {
-                                Utils.shareSign(it, mName)
-                            }
-                        }
+    private fun initObserver() {
+        handleSaveBitmap()
+        handleFailure()
+    }
 
-                        activity?.createSnackBar(resources.getString(R.string.title_save_ok))?.show()
-                        sharedViewModel.reloadFileList()
-                    } else {
-                        activity?.createSnackBar(resources.getString(R.string.title_save_ko))?.show()
-                    }
-                }
-            })
-        } else {
-            var status = false
-            var name = ""
-            when (idMenu) {
-                R.id.savePngTrans -> {
-                    context?.let {
-                        status = FilesUtils.saveBitmap(
-                            it,
-                            binding.singBoard.getTransparentSignatureBitmap(true),
-                            FilesUtils.addExtensionNamePng(FilesUtils.generateName())
-                        )
-                    }
-                }
-                R.id.savePngWhite -> {
-                    context?.let {
-                        status = FilesUtils.saveBitmap(
-                            it,
-                            binding.singBoard.signatureBitmap,
-                            FilesUtils.addExtensionNamePng(FilesUtils.generateName())
-                        )
-
-                    }
-                }
-                R.id.saveSvg -> {
-                    binding.singBoard.signatureSvg?.let {
-                        name = FilesUtils.addExtensionNameSvg(FilesUtils.generateName())
-                        status = FilesUtils.saveSvgFile(it, name)
-                    }
-                }
-            }
-            if (status) {
-                if (share) {
-                    activity?.let {
-                        Utils.shareSign(it, name)
-                    }
-                }
+    private fun handleSaveBitmap() {
+        signBoardViewModel.saveBitmap.observe(viewLifecycleOwner, { event ->
+            event.getContentIfNotHandled()?.let { uriResponse ->
                 activity?.createSnackBar(resources.getString(R.string.title_save_ok))?.show()
                 sharedViewModel.reloadFileList()
-            } else {
-                activity?.createSnackBar(resources.getString(R.string.title_save_ko))?.show()
+                if (uriResponse.share) {
+                    activity?.shareSign(uriResponse.uri)
+                }
             }
+        })
+    }
+
+    private fun handleFailure() {
+        signBoardViewModel.failure.observe(viewLifecycleOwner, { event ->
+            event.getContentIfNotHandled()?.let { failure ->
+                when (failure) {
+                    is EmptyBitmap -> {
+                        activity?.createSnackBar(failure.message)?.show()
+                    }
+                    is CreateError -> {
+                        activity?.createSnackBar(failure.message)?.show()
+                    }
+                }
+            }
+
+        })
+    }
+
+    private fun selectedNameAndSave(idMenu: Int, share: Boolean) {
+        selectName { name -> saveFileAndSend(idMenu, share, name) }
+    }
+
+    private fun saveFileAndSend(idMenu: Int, share: Boolean, name: String? = null) {
+        when (idMenu) {
+            R.id.savePngTrans -> {
+                signBoardViewModel.saveFileBitmap(
+                    share,
+                    binding.singBoard.getTransparentSignatureBitmap(true),
+                    Utils.path,
+                    name
+                )
+            }
+            R.id.savePngWhite -> {
+
+                signBoardViewModel.saveFileBitmap(
+                    share,
+                    binding.singBoard.signatureBitmap,
+                    Utils.path,
+                    name
+                )
+            }
+            /*R.id.saveSvg -> {
+                binding.singBoard.signatureSvg?.let {
+                    name = FilesUtils.addExtensionNameSvg(FilesUtils.generateName())
+                    status = FilesUtils.saveSvgFile(it, name)
+                }
+            }*/
         }
     }
 
@@ -437,19 +418,21 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
     private fun savePopUpOptions() {
         val popupMenu = PopupMenu(context, binding.actionsButtons.bSave)
         popupMenu.menuInflater.inflate(R.menu.save_menu, popupMenu.menu)
-
         popupMenu.setOnMenuItemClickListener { menuItem ->
-
             activity?.let { mActivity ->
                 PermissionRequester(
                     mActivity,
                     permission.WRITE_EXTERNAL_STORAGE, binding.root
-                ).runWithPermission({ saveFileAndSend(menuItem.itemId, false) }, {})
+                ).runWithPermission({
+                    if (Utils.nameSave) {
+                        selectedNameAndSave(menuItem.itemId, false)
+                    } else {
+                        saveFileAndSend(menuItem.itemId, false)
+                    }
+                }, {})
             }
-
             false
         }
-
         popupMenu.show()
     }
 
@@ -467,9 +450,9 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
                 android.R.string.ok
             ) { _, _ ->
                 if (input.text.toString().equals("", ignoreCase = true)) {
-                    callBack.onGetTextDialog(FilesUtils.cleanName("no_name"))
+                    callBack.onGetTextDialog(cleanName("no_name"))
                 } else {
-                    callBack.onGetTextDialog(FilesUtils.cleanName(input.text.toString()))
+                    callBack.onGetTextDialog(cleanName(input.text.toString()))
                 }
             }
 
@@ -481,6 +464,20 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
             alertDialog.setView(view)
             alertDialog.show()
         }
+    }
+
+    fun addExtensionNameSvg(name: String) = "SM_$name.svg"
+
+    private fun cleanName(name: String): String {
+
+        val original = " áàäéèëíìïóòöúùuñÁÀÄÉÈËÍÌÏÓÒÖÚÙÜÑçÇ.\\/:?*\"<>|"
+        val ascii = "_aaaeeeiiiooouuunAAAEEEIIIOOOUUUNcC          "
+        var output = name
+
+        for (i in original.indices) {
+            output = output.replace(original[i], ascii[i]).toLowerCase(Locale.ROOT).trim { it <= ' ' }
+        }
+        return output
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -546,7 +543,14 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
                     mActivity,
                     permission.WRITE_EXTERNAL_STORAGE,
                     binding.root
-                ).runWithPermission({ saveFileAndSend(menuItem.itemId, true) }, {})
+                ).runWithPermission({
+                    if (Utils.nameSave) {
+                        selectedNameAndSave(menuItem.itemId, true)
+                    } else {
+                        saveFileAndSend(menuItem.itemId, true)
+                    }
+
+                }, {})
             }
             false
         }
@@ -583,7 +587,7 @@ class SingBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
     /**
      * Method for show seekbar stroke
      */
-    private fun showSeekbarStroke() {
+    private fun showSeekBarStroke() {
         if (binding.stSlider.root.visibility == View.VISIBLE) {
             hideSeekbarStroke()
         } else {

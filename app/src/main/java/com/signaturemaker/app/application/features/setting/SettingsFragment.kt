@@ -42,7 +42,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             findPreference(Constants.ID_PREF_ADVERTISING)
 
         val themePreference = (findPreference(Constants.ID_THEME_MODE) as androidx.preference.ListPreference?)
-        themePreference?.setOnPreferenceChangeListener { preference, newValue ->
+        themePreference?.setOnPreferenceChangeListener { _, _ ->
             loadAllPreferences(activity)
             activity?.createSnackBar(getString(string.change_theme_note))?.show()
             true

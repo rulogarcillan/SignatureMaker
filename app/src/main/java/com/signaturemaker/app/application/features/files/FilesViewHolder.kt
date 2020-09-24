@@ -9,10 +9,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.daimajia.swipe.SwipeLayout
-import com.daimajia.swipe.SwipeLayout.SwipeListener
 import com.daimajia.swipe.implments.SwipeItemRecyclerMangerImpl
 import com.signaturemaker.app.R
-import com.signaturemaker.app.application.core.extensions.Utils
 import com.signaturemaker.app.application.core.extensions.loadFromUrl
 import com.signaturemaker.app.application.features.image.ImageActivity
 import com.signaturemaker.app.databinding.ItemExploreBinding
@@ -20,19 +18,24 @@ import com.signaturemaker.app.domain.models.ItemFile
 import com.tuppersoft.skizo.core.extension.loadSharedPreference
 import com.tuppersoft.skizo.core.extension.saveSharedPreference
 import com.tuppersoft.skizo.core.extension.visible
-import java.util.Locale
 import java.util.concurrent.atomic.AtomicBoolean
 
-class FilesViewHolder(private val binding: ItemExploreBinding) : RecyclerView.ViewHolder(binding.root) {
+class FilesViewHolder(private val binding: ItemExploreBinding) : RecyclerView.ViewHolder(binding.root),
+    SwipeLayout.SwipeListener {
 
     companion object {
 
         private const val FIRST_HELP = "FIRST_HELP"
     }
 
-    val shareBoolean: AtomicBoolean = AtomicBoolean(false)
-    val deleteBoolean: AtomicBoolean = AtomicBoolean(false)
+    private val shareBoolean: AtomicBoolean = AtomicBoolean(false)
+    private val deleteBoolean: AtomicBoolean = AtomicBoolean(false)
     private val swipe: Animation by lazy { AnimationUtils.loadAnimation(binding.root.context, R.anim.swipe_icon) }
+
+    private var mManager: SwipeItemRecyclerMangerImpl? = null
+    private var mOnClickShare: ((item: ItemFile) -> Unit)? = null
+    private var mOnClickDelete: ((item: ItemFile) -> Unit)? = null
+    private var mItem: ItemFile? = null
 
     fun bind(
         item: ItemFile,
@@ -43,6 +46,11 @@ class FilesViewHolder(private val binding: ItemExploreBinding) : RecyclerView.Vi
         onClickDelete: ((item: ItemFile) -> Unit)? = null
 
     ) {
+        mManager = manager
+        mOnClickDelete = onClickDelete
+        mOnClickShare = onClickShare
+        mItem = item
+
         handleAnim(position)
         setTransitionIds(item)
 
@@ -50,7 +58,7 @@ class FilesViewHolder(private val binding: ItemExploreBinding) : RecyclerView.Vi
         binding.textDate.text = item.date
         binding.textSize.text = item.size
 
-        binding.imgSign.loadFromUrl("file:///" + Utils.path + "/" + item.name)
+        binding.imgSign.loadFromUrl(item.uri)
 
         if (item.name.endsWith("svg", true)) {
             binding.signWallpaper.setBackgroundColor(
@@ -79,32 +87,8 @@ class FilesViewHolder(private val binding: ItemExploreBinding) : RecyclerView.Vi
             binding.swipelayout.close()
         }
 
-        binding.swipelayout.addSwipeListener(object : SwipeListener {
-            override fun onStartOpen(layout: SwipeLayout?) {
-                manager.closeAllExcept(layout)
-            }
-
-            override fun onOpen(layout: SwipeLayout?) {
-            }
-
-            override fun onStartClose(layout: SwipeLayout?) {
-            }
-
-            override fun onClose(layout: SwipeLayout?) {
-                if (shareBoolean.compareAndSet(true, false)) {
-                    onClickShare?.invoke(item)
-                }
-                if (deleteBoolean.compareAndSet(true, false)) {
-                    onClickDelete?.invoke(item)
-                }
-            }
-
-            override fun onUpdate(layout: SwipeLayout?, leftOffset: Int, topOffset: Int) {
-            }
-
-            override fun onHandRelease(layout: SwipeLayout?, xvel: Float, yvel: Float) {
-            }
-        })
+        binding.swipelayout.removeSwipeListener(this)
+        binding.swipelayout.addSwipeListener(this)
     }
 
     private fun setTransitionIds(item: ItemFile) {
@@ -128,5 +112,35 @@ class FilesViewHolder(private val binding: ItemExploreBinding) : RecyclerView.Vi
                 }
             })
         }
+    }
+
+    override fun onStartOpen(layout: SwipeLayout?) {
+        mManager?.closeAllExcept(layout)
+    }
+
+    override fun onOpen(layout: SwipeLayout?) {
+    }
+
+    override fun onStartClose(layout: SwipeLayout?) {
+    }
+
+    override fun onClose(layout: SwipeLayout?) {
+        if (shareBoolean.compareAndSet(true, false)) {
+            mItem?.let {
+                mOnClickShare?.invoke(it)
+            }
+        }
+        if (deleteBoolean.compareAndSet(true, false)) {
+            mItem?.let {
+                mOnClickDelete?.invoke(it)
+
+            }
+        }
+    }
+
+    override fun onUpdate(layout: SwipeLayout?, leftOffset: Int, topOffset: Int) {
+    }
+
+    override fun onHandRelease(layout: SwipeLayout?, xvel: Float, yvel: Float) {
     }
 }

@@ -126,4 +126,13 @@ class AdapterFiles :
 
     override fun setMode(mode: Mode?) {
     }
+
+    fun removeItem(position: Int) {
+
+        submitList(currentList.toMutableList().apply {
+            removeAt(position)
+        }.toList())
+
+      notifyDataSetChanged()
+    }
 }

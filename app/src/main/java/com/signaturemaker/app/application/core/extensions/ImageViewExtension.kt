@@ -1,5 +1,6 @@
 package com.signaturemaker.app.application.core.extensions
 
+import android.net.Uri
 import android.widget.ImageView
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.platform.GlideApp
@@ -14,6 +15,14 @@ fun ImageView.loadFromUrl(url: String) {
             GlideApp.with(context).load(url).placeholder(R.drawable.ic_svg_icon).into(this)
         }
     }
+}
+
+fun ImageView.loadFromUrl(uri: Uri) {
+    GlideApp
+        .with(context)
+        .load(uri)
+        .placeholder(R.drawable.ic_svg_icon)
+        .into(this)
 }
 
 fun ImageView.loadFromUrlWhitoutPlaceHolder(url: String) {

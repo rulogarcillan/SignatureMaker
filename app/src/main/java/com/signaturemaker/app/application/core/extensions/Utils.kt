@@ -22,19 +22,11 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 package com.signaturemaker.app.application.core.extensions
 
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
-import android.media.MediaScannerConnection
-import android.net.Uri
-import androidx.core.content.FileProvider
-import com.signaturemaker.app.BuildConfig
 import com.signaturemaker.app.application.utils.Constants
 import com.signaturemaker.app.domain.models.ItemFile
 import com.tuppersoft.skizo.core.extension.loadSharedPreference
-import com.tuppersoft.skizo.core.extension.logd
 import com.tuppersoft.skizo.core.extension.saveSharedPreference
-import java.io.File
 
 object Utils {
 
@@ -119,22 +111,6 @@ object Utils {
         }
     }
 
-    fun shareSign(mActivity: Activity, name: String) {
-        val uri = FileProvider.getUriForFile(mActivity, BuildConfig.APPLICATION_ID, File("$path/$name"))
-        val imageUris: ArrayList<Uri> = arrayListOf(uri)
-        val shareIntent = Intent().apply {
-            action = Intent.ACTION_SEND_MULTIPLE
-            flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-            putParcelableArrayListExtra(Intent.EXTRA_STREAM, imageUris)
-            type = if (name.contains(".png") || name.contains(".PNG")) {
-                "image/*"
-            } else {
-                "text/html"
-            }
-        }
-        mActivity.startActivity(Intent.createChooser(shareIntent, "Share images to.."))
-    }
-
     fun sort(list: List<ItemFile>, type: Int): List<ItemFile> {
         val temporalList = list.toMutableList()
         if (type == 1) {
@@ -145,6 +121,4 @@ object Utils {
 
         return temporalList.toList()
     }
-
-
 }

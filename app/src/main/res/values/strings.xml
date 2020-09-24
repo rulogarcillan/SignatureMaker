@@ -94,6 +94,7 @@
     <string name="min" translatable="false">Min.</string>
     <string name="max" translatable="false">Max.</string>
     <string name="change_theme_note">For the changes to take effect, you must restart the application completely</string>
+    <string name="empty_canvas">Error, empty canvas</string>
 
 
 </resources>

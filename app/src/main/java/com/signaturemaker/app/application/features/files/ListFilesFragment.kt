@@ -37,19 +37,22 @@ import android.widget.ImageView
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.android.material.snackbar.Snackbar
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.Utils
 import com.signaturemaker.app.application.core.extensions.createSnackBar
-import com.signaturemaker.app.application.core.platform.FilesUtils
+import com.signaturemaker.app.application.core.extensions.shareSign
 import com.signaturemaker.app.application.core.platform.GlobalFragment
 import com.signaturemaker.app.application.core.platform.PermissionRequester
 import com.signaturemaker.app.application.features.image.ImageActivity
 import com.signaturemaker.app.application.features.main.SharedViewModel
 import com.signaturemaker.app.databinding.ListFilesFragmentBinding
 import com.signaturemaker.app.domain.models.ItemFile
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ListFilesFragment : GlobalFragment() {
 
     override val toolbarTitle: String
@@ -58,12 +61,12 @@ class ListFilesFragment : GlobalFragment() {
         get() = true
 
     private val mAdapter: AdapterFiles = AdapterFiles()
-    private val items: MutableList<ItemFile> = mutableListOf()
     private var mySnackBar: Snackbar? = null
     private var _binding: ListFilesFragmentBinding? = null
     private val binding get() = _binding!!
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
+    private val listFilesViewModel: ListFilesViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -91,13 +94,6 @@ class ListFilesFragment : GlobalFragment() {
                     ItemFile(name = "", date = "", size = "", shimmer = true),
                     ItemFile(name = "", date = "", size = "", shimmer = true),
                     ItemFile(name = "", date = "", size = "", shimmer = true),
-                    ItemFile(name = "", date = "", size = "", shimmer = true),
-                    ItemFile(name = "", date = "", size = "", shimmer = true),
-                    ItemFile(name = "", date = "", size = "", shimmer = true),
-                    ItemFile(name = "", date = "", size = "", shimmer = true),
-                    ItemFile(name = "", date = "", size = "", shimmer = true),
-                    ItemFile(name = "", date = "", size = "", shimmer = true),
-                    ItemFile(name = "", date = "", size = "", shimmer = true),
                     ItemFile(name = "", date = "", size = "", shimmer = true)
                 )
             )
@@ -109,28 +105,21 @@ class ListFilesFragment : GlobalFragment() {
         }
 
         mAdapter.setOnClickShare { item ->
-            activity?.let { mActivity ->
-                Utils.shareSign(mActivity, item.name)
-            }
+            activity?.shareSign(item.uri)
         }
 
         mAdapter.setOnClickDelete { item ->
             mAdapter.let { mAdapter ->
                 val pos = mAdapter.currentList.indexOf(item)
                 if (pos != -1) {
-                    removeItemAdapter(item)
+                    mAdapter.removeItem(pos)
                     activity?.let { mActivity ->
                         mySnackBar = mActivity.createSnackBar(item.name,
                             resources.getString(R.string.tittle_undo), object : Snackbar.Callback() {
                                 override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
                                     if (event != 1) {
-                                        FilesUtils.removeFile(context, FilesUtils.getFile(item.name).path)
-                                        if (mAdapter.currentList.size > 0) {
-                                            binding.txtMnsNoFiles.visibility = View.GONE
-                                        } else {
-                                            binding.txtMnsNoFiles.visibility = View.VISIBLE
-                                        }
-                                        addListToAdapter(Utils.sort(mAdapter.currentList, Utils.sortOrder))
+                                        listFilesViewModel.removeFile(item)
+                                        //addListToAdapter(Utils.sort(mAdapter.currentList, Utils.sortOrder))
                                     } else {
                                         reloadFiles()
                                     }
@@ -147,6 +136,19 @@ class ListFilesFragment : GlobalFragment() {
 
     private fun initObserver() {
         initReloadFileList()
+        initHandleFileList()
+    }
+
+    private fun initHandleFileList() {
+        listFilesViewModel.listFiles.observe(viewLifecycleOwner, { list ->
+            addListToAdapter(list)
+            if (list.isNotEmpty()) {
+                binding.txtMnsNoFiles.visibility = View.GONE
+            } else {
+                binding.txtMnsNoFiles.visibility = View.VISIBLE
+            }
+
+        })
     }
 
     private fun initReloadFileList() {
@@ -173,16 +175,7 @@ class ListFilesFragment : GlobalFragment() {
     private fun loadItemsFiles() {
         activity?.let { mActivity ->
             PermissionRequester(mActivity, permission.WRITE_EXTERNAL_STORAGE, binding.root).runWithPermission({
-                items.clear()
-                items.addAll(
-                    Utils.sort(FilesUtils.loadItemsFiles(), Utils.sortOrder)
-                )
-                addListToAdapter(items)
-                if (items.size > 0) {
-                    binding.txtMnsNoFiles.visibility = View.GONE
-                } else {
-                    binding.txtMnsNoFiles.visibility = View.VISIBLE
-                }
+                listFilesViewModel.getAllFiles(Utils.path)
             }, {})
         }
     }
@@ -207,18 +200,8 @@ class ListFilesFragment : GlobalFragment() {
         loadItemsFiles()
     }
 
-    private fun removeItemAdapter(item: ItemFile): Int {
-        val pos = mAdapter.currentList.indexOf(item)
-        mAdapter.submitList(mAdapter.currentList.toMutableList().apply {
-            remove(item)
-        })
-        mAdapter.notifyItemRemoved(pos)
-        mAdapter.notifyItemRangeChanged(pos, items.size)
-        return pos
-    }
-
     private fun addListToAdapter(list: List<ItemFile>) {
-        mAdapter.submitList(list)
+        mAdapter.submitList(Utils.sort(list, Utils.sortOrder))
         mAdapter.notifyDataSetChanged()
     }
 
