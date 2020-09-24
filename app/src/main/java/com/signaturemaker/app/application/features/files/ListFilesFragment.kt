@@ -122,7 +122,11 @@ class ListFilesFragment : GlobalFragment() {
                                 override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
                                     if (event != 1) {
                                         listFilesViewModel.removeFile(item)
-                                        configMessageEmpty()
+                                        if (mAdapter.currentList.isNotEmpty()) {
+                                            _binding?.txtMnsNoFiles?.gone()
+                                        } else {
+                                            _binding?.txtMnsNoFiles?.visible()
+                                        }
                                     } else {
                                         reloadFiles()
                                     }
@@ -137,13 +141,7 @@ class ListFilesFragment : GlobalFragment() {
         }
     }
 
-    private fun configMessageEmpty() {
-        if (mAdapter.currentList.isNotEmpty()) {
-            binding.txtMnsNoFiles.gone()
-        } else {
-            binding.txtMnsNoFiles.visible()
-        }
-    }
+
 
     private fun initObserver() {
         initReloadFileList()
@@ -153,7 +151,11 @@ class ListFilesFragment : GlobalFragment() {
     private fun initHandleFileList() {
         listFilesViewModel.listFiles.observe(viewLifecycleOwner, { list ->
             addListToAdapter(list)
-            configMessageEmpty()
+            if (list.isNotEmpty()) {
+                binding.txtMnsNoFiles.gone()
+            } else {
+                binding.txtMnsNoFiles.visible()
+            }
         })
     }
 

@@ -1,9 +1,9 @@
 {
   "changelog": [
     {
-      "date": "24/09/2020",
-      "versionCode": 3112,
-      "versionName": "3.1.1",
+      "date": "25/09/2020",
+      "versionCode": 3113,
+      "versionName": "3.1.2",
       "change": [
         {
           "type": "feat",
