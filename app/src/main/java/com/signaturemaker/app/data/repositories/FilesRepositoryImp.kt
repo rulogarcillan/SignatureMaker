@@ -101,12 +101,12 @@ class FilesRepositoryImp @Inject constructor(@ApplicationContext val appContext:
     }
 
     @RequiresApi(VERSION_CODES.Q)
-    override suspend fun deleteFileBitmapMoreAndroid10(imageUri: Uri): Flow<Response<Boolean>> {
+    override suspend fun deleteFileBitmapMoreAndroid10(uri: Uri): Flow<Response<Boolean>> {
 
         val resolver = appContext.contentResolver
 
         val numImagesRemoved = resolver.delete(
-            imageUri,
+            uri,
             null,
             null
         )
