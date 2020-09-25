@@ -27,12 +27,12 @@
             android:id="@+id/iconTelegram"
             android:layout_width="@dimen/margin_64"
             android:layout_height="@dimen/margin_64"
+            android:contentDescription="telegram logo"
             android:padding="@dimen/margin_8"
             android:src="@drawable/ic_telegram"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="telegram logo" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:layout_width="0dp"

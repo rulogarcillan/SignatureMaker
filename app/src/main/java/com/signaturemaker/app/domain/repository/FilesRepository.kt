@@ -1,6 +1,5 @@
 package com.signaturemaker.app.domain.repository
 
-import android.app.LauncherActivity.ListItem
 import android.graphics.Bitmap
 import android.net.Uri
 import com.signaturemaker.app.domain.models.ItemFile
@@ -22,7 +21,7 @@ interface FilesRepository {
         displayName: String
     ): Flow<Response<Uri>>
 
-    suspend fun deleteFileBitmapMoreAndroid10(uri:Uri): Flow<Response<Boolean>>
+    suspend fun deleteFileBitmapMoreAndroid10(uri: Uri): Flow<Response<Boolean>>
 
     suspend fun deleteFileBitmapLessAndroid10(file: File): Flow<Response<Boolean>>
 

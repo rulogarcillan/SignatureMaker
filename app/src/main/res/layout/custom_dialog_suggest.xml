@@ -128,8 +128,7 @@
 
         <include
             android:id="@+id/telegramJoin"
-            layout="@layout/telegram"
-        />
+            layout="@layout/telegram" />
     </LinearLayout>
 
 </LinearLayout>

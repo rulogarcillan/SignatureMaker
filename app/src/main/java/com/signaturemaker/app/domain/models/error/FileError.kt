@@ -9,6 +9,7 @@ import com.tuppersoft.skizo.core.domain.exception.Failure.FeatureFailure
  */
 
 class FileError {
+
     data class EmptyBitmap(val message: String) : FeatureFailure()
     data class CreateError(val message: String) : FeatureFailure()
 }

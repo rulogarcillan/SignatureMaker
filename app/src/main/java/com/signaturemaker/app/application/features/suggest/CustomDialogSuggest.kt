@@ -147,7 +147,7 @@ open class CustomDialogSuggest : DialogFragment() {
 
     override fun onResume() {
         super.onResume()
-       // showBannerTelegram()
+        // showBannerTelegram()
     }
 
     private fun showBannerTelegram() {

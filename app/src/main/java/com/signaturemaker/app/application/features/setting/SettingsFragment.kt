@@ -1,7 +1,6 @@
 package com.signaturemaker.app.application.features.setting
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.activityViewModels
@@ -83,5 +82,4 @@ class SettingsFragment : PreferenceFragmentCompat() {
         saveAllPreferences(activity)
         defaultValues()
     }
-
 }

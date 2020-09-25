@@ -141,8 +141,6 @@ class ListFilesFragment : GlobalFragment() {
         }
     }
 
-
-
     private fun initObserver() {
         initReloadFileList()
         initHandleFileList()
