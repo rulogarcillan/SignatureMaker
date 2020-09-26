@@ -2,8 +2,9 @@ package com.signaturemaker.app.domain.usecase
 
 import com.signaturemaker.app.domain.models.SuggestMessage
 import com.signaturemaker.app.domain.repository.SignatureRepository
-import com.tuppersoft.skizo.core.domain.baseusecase.FlowGlobalUseCase
-import com.tuppersoft.skizo.core.domain.response.Response
+import com.signaturemaker.app.domain.usecase.SendSuggest.Params
+import com.tuppersoft.skizo.kotlin.core.domain.baseusecase.FlowGlobalUseCase
+import com.tuppersoft.skizo.kotlin.core.domain.response.Response
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -11,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
  * raulrcs@gmail.com
  */
 class SendSuggest constructor(private val repository: SignatureRepository) :
-    FlowGlobalUseCase<Boolean, SendSuggest.Params>() {
+    FlowGlobalUseCase<Boolean, Params>() {
 
     data class Params(
         var suggestMessage: SuggestMessage

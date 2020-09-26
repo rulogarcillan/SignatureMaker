@@ -3,9 +3,10 @@ package com.signaturemaker.app.domain.usecase
 import android.os.Build.VERSION_CODES
 import com.signaturemaker.app.domain.models.ItemFile
 import com.signaturemaker.app.domain.repository.FilesRepository
-import com.tuppersoft.skizo.core.domain.baseusecase.FlowGlobalUseCase
-import com.tuppersoft.skizo.core.domain.response.Response
-import com.tuppersoft.skizo.core.extension.logd
+import com.signaturemaker.app.domain.usecase.RemoveFile.Params
+import com.tuppersoft.skizo.android.core.extension.logd
+import com.tuppersoft.skizo.kotlin.core.domain.baseusecase.FlowGlobalUseCase
+import com.tuppersoft.skizo.kotlin.core.domain.response.Response
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import java.io.File
@@ -15,7 +16,7 @@ import java.io.File
  * raulrcs@gmail.com
  */
 class RemoveFile constructor(private val repository: FilesRepository) :
-    FlowGlobalUseCase<Boolean, RemoveFile.Params>() {
+    FlowGlobalUseCase<Boolean, Params>() {
 
     data class Params(
         val sdkInt: Int,

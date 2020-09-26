@@ -5,8 +5,9 @@ import android.os.Build.VERSION_CODES
 import com.signaturemaker.app.application.core.extensions.Utils
 import com.signaturemaker.app.domain.models.ItemFile
 import com.signaturemaker.app.domain.repository.FilesRepository
-import com.tuppersoft.skizo.core.domain.baseusecase.FlowGlobalUseCase
-import com.tuppersoft.skizo.core.domain.response.Response
+import com.signaturemaker.app.domain.usecase.GetAllFiles.Params
+import com.tuppersoft.skizo.kotlin.core.domain.baseusecase.FlowGlobalUseCase
+import com.tuppersoft.skizo.kotlin.core.domain.response.Response
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import java.text.SimpleDateFormat
@@ -17,7 +18,7 @@ import java.util.Date
  * raulrcs@gmail.com
  */
 class GetAllFiles constructor(private val repository: FilesRepository) :
-    FlowGlobalUseCase<List<ItemFile>, GetAllFiles.Params>() {
+    FlowGlobalUseCase<List<ItemFile>, Params>() {
 
     data class Params(
         val sdkInt: Int,

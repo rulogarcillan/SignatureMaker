@@ -11,7 +11,7 @@ import com.signaturemaker.app.application.core.platform.Event
 import com.signaturemaker.app.domain.models.UriResponse
 import com.signaturemaker.app.domain.usecase.SaveBitmap
 import com.signaturemaker.app.domain.usecase.SaveBitmap.Params
-import com.tuppersoft.skizo.core.domain.exception.Failure
+import com.tuppersoft.skizo.kotlin.core.domain.exception.Failure
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch

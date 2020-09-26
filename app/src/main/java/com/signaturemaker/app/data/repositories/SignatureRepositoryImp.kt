@@ -3,8 +3,8 @@ package com.signaturemaker.app.data.repositories
 import com.signaturemaker.app.data.datasource.SignatureServices
 import com.signaturemaker.app.domain.models.SuggestMessage
 import com.signaturemaker.app.domain.repository.SignatureRepository
-import com.tuppersoft.skizo.core.domain.exception.Failure
-import com.tuppersoft.skizo.core.domain.response.Response
+import com.tuppersoft.skizo.kotlin.core.domain.exception.Failure
+import com.tuppersoft.skizo.kotlin.core.domain.response.Response
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject

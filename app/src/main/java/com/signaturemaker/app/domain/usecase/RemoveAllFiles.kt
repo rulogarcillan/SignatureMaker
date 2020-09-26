@@ -1,8 +1,8 @@
 package com.signaturemaker.app.domain.usecase
 
 import com.signaturemaker.app.domain.usecase.RemoveFile.Params
-import com.tuppersoft.skizo.core.customtypealias.OnFailure
-import com.tuppersoft.skizo.core.domain.baseusecase.GlobalUseCase
+import com.tuppersoft.skizo.kotlin.core.customtypealias.OnFailure
+import com.tuppersoft.skizo.kotlin.core.domain.baseusecase.GlobalUseCase
 import kotlinx.coroutines.flow.collect
 
 /**

@@ -50,8 +50,8 @@ import com.signaturemaker.app.application.features.image.ImageActivity
 import com.signaturemaker.app.application.features.main.SharedViewModel
 import com.signaturemaker.app.databinding.ListFilesFragmentBinding
 import com.signaturemaker.app.domain.models.ItemFile
-import com.tuppersoft.skizo.core.extension.gone
-import com.tuppersoft.skizo.core.extension.visible
+import com.tuppersoft.skizo.android.core.extension.gone
+import com.tuppersoft.skizo.android.core.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

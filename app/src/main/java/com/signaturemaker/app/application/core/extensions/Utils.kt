@@ -25,8 +25,8 @@ package com.signaturemaker.app.application.core.extensions
 import android.content.Context
 import com.signaturemaker.app.application.utils.Constants
 import com.signaturemaker.app.domain.models.ItemFile
-import com.tuppersoft.skizo.core.extension.loadSharedPreference
-import com.tuppersoft.skizo.core.extension.saveSharedPreference
+import com.tuppersoft.skizo.android.core.extension.loadSharedPreference
+import com.tuppersoft.skizo.android.core.extension.saveSharedPreference
 
 object Utils {
 

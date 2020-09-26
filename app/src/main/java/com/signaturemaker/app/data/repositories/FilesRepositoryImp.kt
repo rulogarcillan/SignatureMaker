@@ -16,8 +16,8 @@ import com.signaturemaker.app.domain.models.ItemFile
 import com.signaturemaker.app.domain.models.error.FileError.CreateError
 import com.signaturemaker.app.domain.models.error.FileError.EmptyBitmap
 import com.signaturemaker.app.domain.repository.FilesRepository
-import com.tuppersoft.skizo.core.domain.response.Response
-import com.tuppersoft.skizo.core.extension.logd
+import com.tuppersoft.skizo.android.core.extension.logd
+import com.tuppersoft.skizo.kotlin.core.domain.response.Response
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect

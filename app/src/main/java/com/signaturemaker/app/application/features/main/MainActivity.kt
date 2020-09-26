@@ -40,11 +40,11 @@ import com.signaturemaker.app.application.features.files.ListFilesFragment
 import com.signaturemaker.app.application.features.menu.SettingViewModel
 import com.signaturemaker.app.application.utils.Constants
 import com.signaturemaker.app.databinding.ActivityMainBinding
-import com.tuppersoft.skizo.core.extension.gone
-import com.tuppersoft.skizo.core.extension.loadSharedPreference
-import com.tuppersoft.skizo.core.extension.logd
-import com.tuppersoft.skizo.core.extension.saveSharedPreference
-import com.tuppersoft.skizo.core.extension.visible
+import com.tuppersoft.skizo.android.core.extension.gone
+import com.tuppersoft.skizo.android.core.extension.loadSharedPreference
+import com.tuppersoft.skizo.android.core.extension.logd
+import com.tuppersoft.skizo.android.core.extension.saveSharedPreference
+import com.tuppersoft.skizo.android.core.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.app_toolbar.view.tvTittle
 import java.io.File

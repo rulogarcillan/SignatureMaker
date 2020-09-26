@@ -1,6 +1,6 @@
 package com.signaturemaker.app.domain.models.error
 
-import com.tuppersoft.skizo.core.domain.exception.Failure.FeatureFailure
+import com.tuppersoft.skizo.kotlin.core.domain.exception.Failure.FeatureFailure
 
 /**
  * Created by Raúl Rodríguez Concepción on 16/09/2020.

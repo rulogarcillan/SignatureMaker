@@ -2,9 +2,9 @@ package com.signaturemaker.app.domain.usecase
 
 import com.signaturemaker.app.domain.repository.FilesRepository
 import com.signaturemaker.app.domain.usecase.MoveAllFiles.Params
-import com.tuppersoft.skizo.core.customtypealias.OnFailure
-import com.tuppersoft.skizo.core.domain.baseusecase.GlobalUseCase
-import com.tuppersoft.skizo.core.extension.logd
+import com.tuppersoft.skizo.android.core.extension.logd
+import com.tuppersoft.skizo.kotlin.core.customtypealias.OnFailure
+import com.tuppersoft.skizo.kotlin.core.domain.baseusecase.GlobalUseCase
 import kotlinx.coroutines.flow.collect
 import java.io.File
 
@@ -41,7 +41,6 @@ class MoveAllFiles constructor(private val repository: FilesRepository) :
 
         repository.deleteFileBitmapLessAndroid10(File(params.pathOldOfFiles)).collect {
             "${params.pathOldOfFiles} folder removed".logd()
-
         }
         return true
     }

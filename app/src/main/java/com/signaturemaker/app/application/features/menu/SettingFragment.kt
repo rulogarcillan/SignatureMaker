@@ -25,7 +25,7 @@ import com.signaturemaker.app.application.features.menu.MenuIdentifier.PRIVACY
 import com.signaturemaker.app.application.features.menu.MenuIdentifier.RATE
 import com.signaturemaker.app.application.features.menu.MenuIdentifier.SETTING
 import com.signaturemaker.app.databinding.SettingFragmentBinding
-import com.tuppersoft.skizo.core.extension.getColorFromAttr
+import com.tuppersoft.skizo.android.core.extension.getColorFromAttr
 
 class SettingFragment : GlobalFragment() {
 

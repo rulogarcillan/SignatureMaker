@@ -20,7 +20,7 @@ import com.signaturemaker.app.application.features.menu.changelog.ChangelogIdent
 import com.signaturemaker.app.application.features.menu.changelog.ChangelogIdentifier.FIX
 import com.signaturemaker.app.domain.models.Change
 import com.signaturemaker.app.domain.models.Changelog
-import com.tuppersoft.skizo.core.extension.getColorFromAttr
+import com.tuppersoft.skizo.android.core.extension.getColorFromAttr
 import java.util.Locale
 
 /**

@@ -6,8 +6,8 @@ import androidx.activity.viewModels
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.platform.BaseActivity
 import com.signaturemaker.app.databinding.SettingActivityBinding
-import com.tuppersoft.skizo.core.extension.gone
-import com.tuppersoft.skizo.core.extension.visible
+import com.tuppersoft.skizo.android.core.extension.gone
+import com.tuppersoft.skizo.android.core.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.app_toolbar.view.tvTittle
 

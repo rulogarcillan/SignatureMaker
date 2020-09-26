@@ -17,12 +17,12 @@ import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.isValidEmail
 import com.signaturemaker.app.databinding.CustomDialogSuggestBinding
 import com.signaturemaker.app.domain.models.SuggestMessage
-import com.tuppersoft.skizo.core.extension.collapse
-import com.tuppersoft.skizo.core.extension.expand
-import com.tuppersoft.skizo.core.extension.getColorFromAttr
-import com.tuppersoft.skizo.core.extension.gone
-import com.tuppersoft.skizo.core.extension.hideKeyboard
-import com.tuppersoft.skizo.core.extension.visible
+import com.tuppersoft.skizo.android.core.extension.collapse
+import com.tuppersoft.skizo.android.core.extension.expand
+import com.tuppersoft.skizo.android.core.extension.getColorFromAttr
+import com.tuppersoft.skizo.android.core.extension.gone
+import com.tuppersoft.skizo.android.core.extension.hideKeyboard
+import com.tuppersoft.skizo.android.core.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
 

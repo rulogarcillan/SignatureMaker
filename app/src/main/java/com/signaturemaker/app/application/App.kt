@@ -9,7 +9,7 @@ import com.facebook.stetho.Stetho
 import com.signaturemaker.app.BuildConfig
 import com.signaturemaker.app.application.core.extensions.Utils
 import com.signaturemaker.app.application.utils.Constants.FOLDER_APP_NAME
-import com.tuppersoft.skizo.core.extension.logd
+import com.tuppersoft.skizo.android.core.extension.logd
 import dagger.hilt.android.HiltAndroidApp
 import java.io.File
 

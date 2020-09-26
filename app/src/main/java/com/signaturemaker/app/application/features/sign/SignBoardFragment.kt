@@ -61,8 +61,9 @@ import com.signaturemaker.app.application.features.suggest.CustomDialogSuggest
 import com.signaturemaker.app.databinding.SingBoardFragmentBinding
 import com.signaturemaker.app.domain.models.error.FileError.CreateError
 import com.signaturemaker.app.domain.models.error.FileError.EmptyBitmap
-import com.tuppersoft.skizo.core.extension.gone
-import com.tuppersoft.skizo.core.extension.visible
+import com.tuppersoft.skizo.android.core.extension.gone
+import com.tuppersoft.skizo.android.core.extension.visible
+
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
 

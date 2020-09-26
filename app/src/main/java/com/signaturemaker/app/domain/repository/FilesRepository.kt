@@ -3,7 +3,7 @@ package com.signaturemaker.app.domain.repository
 import android.graphics.Bitmap
 import android.net.Uri
 import com.signaturemaker.app.domain.models.ItemFile
-import com.tuppersoft.skizo.core.domain.response.Response
+import com.tuppersoft.skizo.kotlin.core.domain.response.Response
 import kotlinx.coroutines.flow.Flow
 import java.io.File
 

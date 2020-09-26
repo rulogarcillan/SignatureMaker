@@ -15,9 +15,10 @@ import com.signaturemaker.app.application.core.extensions.loadFromUrl
 import com.signaturemaker.app.application.features.image.ImageActivity
 import com.signaturemaker.app.databinding.ItemExploreBinding
 import com.signaturemaker.app.domain.models.ItemFile
-import com.tuppersoft.skizo.core.extension.loadSharedPreference
-import com.tuppersoft.skizo.core.extension.saveSharedPreference
-import com.tuppersoft.skizo.core.extension.visible
+import com.tuppersoft.skizo.android.core.extension.loadSharedPreference
+import com.tuppersoft.skizo.android.core.extension.saveSharedPreference
+import com.tuppersoft.skizo.android.core.extension.visible
+
 import java.util.concurrent.atomic.AtomicBoolean
 
 class FilesViewHolder(private val binding: ItemExploreBinding) : RecyclerView.ViewHolder(binding.root),
