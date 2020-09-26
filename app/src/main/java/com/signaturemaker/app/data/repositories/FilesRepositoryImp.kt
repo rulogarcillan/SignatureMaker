@@ -12,6 +12,7 @@ import android.os.Build.VERSION_CODES
 import android.provider.MediaStore
 import androidx.annotation.RequiresApi
 import com.signaturemaker.app.R
+import com.signaturemaker.app.application.core.extensions.Utils
 import com.signaturemaker.app.domain.models.ItemFile
 import com.signaturemaker.app.domain.models.error.FileError.CreateError
 import com.signaturemaker.app.domain.models.error.FileError.EmptyBitmap
@@ -28,6 +29,7 @@ import java.io.IOException
 import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 import javax.inject.Inject
 
 class FilesRepositoryImp @Inject constructor(@ApplicationContext val appContext: Context) : FilesRepository {
@@ -46,16 +48,15 @@ class FilesRepositoryImp @Inject constructor(@ApplicationContext val appContext:
         contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, displayName)
         contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/png")
         contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, pathToSave)
-        contentValues.put(MediaStore.MediaColumns.DATE_TAKEN, System.currentTimeMillis())
+        //contentValues.put(MediaStore.MediaColumns.DATE_TAKEN, System.currentTimeMillis())
         val resolver: ContentResolver = appContext.contentResolver
-
         var uri: Uri? = null
         try {
             val contentUri = MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL)
-            uri = resolver.insert(contentUri, contentValues)
-            if (uri == null) {
-                return flow { emit(Response.onFailure(CreateError(appContext.getString(R.string.title_save_ko)))) }
-            }
+            uri = contentUri?.let {
+                resolver.insert(contentUri, contentValues)
+            } ?: return flow { emit(Response.onFailure(CreateError(appContext.getString(R.string.title_save_ko)))) }
+
             stream = resolver.openOutputStream(uri)
             if (stream == null) {
                 return flow { emit(Response.onFailure(EmptyBitmap(appContext.getString(R.string.title_save_ko)))) }
@@ -102,15 +103,11 @@ class FilesRepositoryImp @Inject constructor(@ApplicationContext val appContext:
 
     @RequiresApi(VERSION_CODES.Q)
     override suspend fun deleteFileBitmapMoreAndroid10(uri: Uri): Flow<Response<Boolean>> {
-
-        val resolver = appContext.contentResolver
-
-        val numImagesRemoved = resolver.delete(
+        appContext.contentResolver?.delete(
             uri,
             null,
             null
         )
-
         return flow { emit(Response.onSuccess(true)) }
     }
 
@@ -125,10 +122,12 @@ class FilesRepositoryImp @Inject constructor(@ApplicationContext val appContext:
         )
         val orderBy = MediaStore.Images.Media.DATE_TAKEN
 
-
         appContext.contentResolver.query(
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI, columns,
-            null, null, "$orderBy DESC"
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            columns,
+            MediaStore.Audio.Media.RELATIVE_PATH + " like ? ",
+            arrayOf(Utils.path),
+            "$orderBy DESC"
         )?.use { cursor ->
             val idColumn = cursor.getColumnIndex(MediaStore.Images.Media._ID)
             val displayNameColumn = cursor.getColumnIndex(MediaStore.Images.Media.DISPLAY_NAME)
@@ -137,12 +136,12 @@ class FilesRepositoryImp @Inject constructor(@ApplicationContext val appContext:
 
             while (cursor.moveToNext()) {
                 val id = cursor.getLong(idColumn)
-                val displayName = cursor.getString(displayNameColumn)
+                val displayName = cursor.getString(displayNameColumn) ?: "NO_NAME"
                 val size = cursor.getInt(sizeColumn)
-                val date = cursor.getString(dateColumn)
+                val date = cursor.getLong(dateColumn)
 
-                val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
-                val myDate = Date(date.toLong())
+                val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.ROOT)
+                val myDate = Date(date)
                 val tam = (size / 1024).toString() + " KB"
 
                 if (displayName.startsWith("SM")) {
@@ -183,11 +182,13 @@ class FilesRepositoryImp @Inject constructor(@ApplicationContext val appContext:
         }
     }
 
+    @Deprecated("Only for migration")
     override suspend fun moveFile(oldPath: String, newPath: String, fileName: String): Flow<Response<Boolean>> {
         createFolder(newPath)
         return flow {
             val oldFile = File(oldPath + File.separator + fileName)
             val newFile = File(newPath + File.separator + fileName)
+
             oldFile.renameTo(newFile)
             reloadMediaScanner(oldFile.path, newFile.path).collect {
                 emit(Response.onSuccess(true))

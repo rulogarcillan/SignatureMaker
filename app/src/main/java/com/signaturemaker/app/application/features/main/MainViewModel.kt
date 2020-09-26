@@ -37,7 +37,7 @@ class MainViewModel @ViewModelInject constructor(
 
     fun moveAllFiles(oldPath: String, newPath: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            moveAllFiles.invoke(MoveAllFiles.Params(oldPath, newPath))
+            moveAllFiles.invoke(MoveAllFiles.Params(Build.VERSION.SDK_INT, oldPath, newPath))
         }
     }
 }
