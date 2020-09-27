@@ -5,7 +5,6 @@ import android.net.Uri
 import com.signaturemaker.app.domain.models.ItemFile
 import com.tuppersoft.skizo.kotlin.core.domain.response.Response
 import kotlinx.coroutines.flow.Flow
-import java.io.File
 
 interface FilesRepository {
 
@@ -21,11 +20,9 @@ interface FilesRepository {
         displayName: String
     ): Flow<Response<Uri>>
 
-    suspend fun deleteFileBitmapMoreAndroid10(uri: Uri): Flow<Response<Boolean>>
+    suspend fun deleteFileBitmapFromUri(uri: Uri): Flow<Response<Boolean>>
 
-    suspend fun deleteFileBitmapLessAndroid10(file: File): Flow<Response<Boolean>>
-
-    @Deprecated ("")
+    @Deprecated("")
     suspend fun moveFile(
         oldPath: String,
         newPath: String,
@@ -35,5 +32,5 @@ interface FilesRepository {
     suspend fun reloadMediaScanner(vararg filePath: String): Flow<Response<Boolean>>
 
     suspend fun loadItemsFilesMoreAndroid10(): Flow<Response<List<ItemFile>>>
-    suspend fun loadItemsFilesLessAndroid10(filesPath: String): Flow<Response<List<File>>>
+    suspend fun loadItemsFilesLessAndroid10(filesPath: String): Flow<Response<List<ItemFile>>>
 }

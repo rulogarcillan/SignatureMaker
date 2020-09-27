@@ -244,7 +244,7 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
                 override fun onAnimationCancel(animation: Animator) {}
 
                 override fun onAnimationEnd(animation: Animator) {
-                    binding.singBoard.apply {
+                    _binding?.singBoard?.apply {
                         clear()
                         alpha = 1f
                         scaleX = 1f
@@ -297,7 +297,7 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
                 override fun onAnimationCancel(animation: Animator) {}
 
                 override fun onAnimationEnd(animation: Animator) {
-                    binding.cpColorPicker.root.visibility = View.INVISIBLE
+                    _binding?.cpColorPicker?.root?.visibility = View.INVISIBLE
                 }
 
                 override fun onAnimationRepeat(animation: Animator) {}
@@ -319,7 +319,7 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
                 override fun onAnimationCancel(animation: Animator) {}
 
                 override fun onAnimationEnd(animation: Animator) {
-                    binding.stSlider.root.visibility = View.INVISIBLE
+                    _binding?.stSlider?.root?.visibility = View.INVISIBLE
                 }
 
                 override fun onAnimationRepeat(animation: Animator) {}
@@ -575,7 +575,7 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
                     override fun onAnimationRepeat(animation: Animator) {}
 
                     override fun onAnimationStart(animation: Animator) {
-                        binding.cpColorPicker.root.visibility = View.VISIBLE
+                        _binding?.cpColorPicker?.root?.visibility = View.VISIBLE
                         hideSeekbarStroke()
                     }
                 })
@@ -603,7 +603,7 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
                     override fun onAnimationRepeat(animation: Animator) {}
 
                     override fun onAnimationStart(animation: Animator) {
-                        binding.stSlider.root.visibility = View.VISIBLE
+                        _binding?.stSlider?.root?.visibility = View.VISIBLE
                         hideColorPicker()
                     }
                 })

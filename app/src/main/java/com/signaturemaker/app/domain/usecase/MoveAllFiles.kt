@@ -39,9 +39,7 @@ class MoveAllFiles constructor(private val repository: FilesRepository) :
                             name
                         ).collect {
                             "${file.path} is moved to ${params.pathNewOfFiles}".logd()
-                            repository.deleteFileBitmapLessAndroid10(file).collect {
-                                "${file.path} file removed".logd()
-                            }
+                            file.delete()
                         }
                     } else {
                         repository.moveFile(params.pathOldOfFiles, params.pathNewOfFiles, name).collect {

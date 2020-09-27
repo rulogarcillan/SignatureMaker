@@ -11,6 +11,7 @@ import android.net.Uri
 import android.os.Build.VERSION_CODES
 import android.provider.MediaStore
 import androidx.annotation.RequiresApi
+import androidx.core.content.FileProvider
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.Utils
 import com.signaturemaker.app.domain.models.ItemFile
@@ -98,11 +99,17 @@ class FilesRepositoryImp @Inject constructor(@ApplicationContext val appContext:
 
         reloadMediaScanner(file.path).collect()
 
-        return flow { emit(Response.onSuccess(Uri.parse(file.path))) }
+        val photoURI: Uri = FileProvider.getUriForFile(
+            appContext,
+            appContext.applicationContext.packageName.toString(),
+            file
+        )
+
+        return flow { emit(Response.onSuccess(photoURI)) }
     }
 
     @RequiresApi(VERSION_CODES.Q)
-    override suspend fun deleteFileBitmapMoreAndroid10(uri: Uri): Flow<Response<Boolean>> {
+    override suspend fun deleteFileBitmapFromUri(uri: Uri): Flow<Response<Boolean>> {
         appContext.contentResolver?.delete(
             uri,
             null,
@@ -160,25 +167,37 @@ class FilesRepositoryImp @Inject constructor(@ApplicationContext val appContext:
         return flow { emit(Response.onSuccess(galleryImageUrls.toList())) }
     }
 
-    override suspend fun loadItemsFilesLessAndroid10(filesPath: String): Flow<Response<List<File>>> {
+    override suspend fun loadItemsFilesLessAndroid10(filesPath: String): Flow<Response<List<ItemFile>>> {
         val folder = File(filesPath)
         return if (folder.exists()) {
-            flow { emit(Response.onSuccess(folder.listFiles()?.toMutableList()?.toList() ?: emptyList())) }
-        } else {
-            flow { emit(Response.onSuccess(emptyList<File>())) }
-        }
-    }
 
-    override suspend fun deleteFileBitmapLessAndroid10(file: File): Flow<Response<Boolean>> {
-        return flow {
-            if (file.exists()) {
-                file.delete()
-                reloadMediaScanner(file.path).collect {
-                    emit(Response.onSuccess(true))
+            val itemListFiles: MutableList<ItemFile> = mutableListOf()
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
+            folder.listFiles()?.toMutableList()?.toList()?.forEach { file ->
+
+                val myDate = Date(file.lastModified())
+                val tam = (file.length() / 1024).toString() + " KB"
+                val name = file.name
+
+                if ((name.contains(".png") || name.contains(".PNG") || name.contains(".svg") || name.contains(
+                        ".SVG"
+                    )) && name.startsWith(
+                        "SM_"
+                    )
+                ) {
+                    val photoURI: Uri = FileProvider.getUriForFile(
+                        appContext,
+                        appContext.applicationContext.packageName.toString(),
+                        file
+                    )
+                    itemListFiles.add(ItemFile(photoURI, name, dateFormat.format(myDate), tam))
                 }
-            } else {
-                emit(Response.onSuccess(true))
+
             }
+            Utils.sort(itemListFiles, Utils.sortOrder)
+            flow { emit(Response.onSuccess(itemListFiles)) }
+        } else {
+            flow { emit(Response.onSuccess(emptyList<ItemFile>())) }
         }
     }
 
@@ -203,7 +222,6 @@ class FilesRepositoryImp @Inject constructor(@ApplicationContext val appContext:
             ) { path, _ ->
                 "Scan complete for: $path".logd()
             }
-
             emit(Response.onSuccess(true))
         }
     }

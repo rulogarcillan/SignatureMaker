@@ -19,7 +19,6 @@
         android:theme="@style/App.Theme"
         tools:ignore="GoogleAppIndexingWarning">
 
-
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}"

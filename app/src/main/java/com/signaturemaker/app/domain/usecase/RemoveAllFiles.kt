@@ -24,7 +24,7 @@ class RemoveAllFiles constructor(
 
         getAllFiles.invoke(GetAllFiles.Params(params.sdkInt, params.pathOfFiles)).collect {
             it.forEach { itemFile ->
-                removeFile.invoke(Params(params.sdkInt, itemFile))
+                removeFile.invoke(Params(itemFile))
             }
         }
         return true

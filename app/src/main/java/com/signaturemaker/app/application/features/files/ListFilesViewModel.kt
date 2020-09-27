@@ -45,7 +45,7 @@ class ListFilesViewModel @ViewModelInject constructor(
 
     fun removeFile(itemFile: ItemFile) {
         viewModelScope.launch(Dispatchers.IO) {
-            removeFile.invoke(Params(Build.VERSION.SDK_INT, itemFile)).collect {
+            removeFile.invoke(Params(itemFile)).collect {
                 "Removed!!".logd()
             }
         }
