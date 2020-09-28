@@ -20,6 +20,7 @@ import com.signaturemaker.app.domain.models.error.FileError.EmptyBitmap
 import com.signaturemaker.app.domain.repository.FilesRepository
 import com.tuppersoft.skizo.android.core.extension.logd
 import com.tuppersoft.skizo.kotlin.core.domain.response.Response
+import com.tuppersoft.skizo.kotlin.core.domain.response.Response.onSuccess
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -109,13 +110,27 @@ class FilesRepositoryImp @Inject constructor(@ApplicationContext val appContext:
     }
 
     @RequiresApi(VERSION_CODES.Q)
-    override suspend fun deleteFileBitmapFromUri(uri: Uri): Flow<Response<Boolean>> {
+    override suspend fun deleteFileBitmapMoreAndroid10(uri: Uri): Flow<Response<Boolean>> {
         appContext.contentResolver?.delete(
             uri,
             null,
             null
         )
         return flow { emit(Response.onSuccess(true)) }
+    }
+
+
+    override suspend fun deleteFileBitmapLessAndroid10(file: File): Flow<Response<Boolean>> {
+        return flow {
+            if (file.exists()) {
+                file.delete()
+                reloadMediaScanner(file.path).collect {
+                    emit(onSuccess(true))
+                }
+            } else {
+                emit(onSuccess(true))
+            }
+        }
     }
 
     @RequiresApi(VERSION_CODES.Q)

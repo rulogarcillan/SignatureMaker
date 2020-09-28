@@ -13,6 +13,7 @@ import com.signaturemaker.app.domain.usecase.RemoveFile
 import com.signaturemaker.app.domain.usecase.RemoveFile.Params
 import com.tuppersoft.skizo.android.core.extension.logd
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -44,8 +45,8 @@ class ListFilesViewModel @ViewModelInject constructor(
     }
 
     fun removeFile(itemFile: ItemFile) {
-        viewModelScope.launch(Dispatchers.IO) {
-            removeFile.invoke(Params(itemFile)).collect {
+        GlobalScope.launch(Dispatchers.IO) {
+            removeFile.invoke(Params(Build.VERSION.SDK_INT,itemFile)).collect {
                 "Removed!!".logd()
             }
         }
