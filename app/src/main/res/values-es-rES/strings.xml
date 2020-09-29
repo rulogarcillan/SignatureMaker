@@ -75,6 +75,9 @@
 
     <string name="change_theme_note">Para que los cambios surtan efecto, debes reiniciar la aplicación por completo</string>
     <string name="empty_canvas">Error, canvas vacío</string>
+    <string name="suggest">Sugerencias</string>
+    <string name="suggest_sort">El comentario es demaisado corto, ¡por favor! amplía tu mensaje hasta 30 caracteres.</string>
+
 
 
 </resources>

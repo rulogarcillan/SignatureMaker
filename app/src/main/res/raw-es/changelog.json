@@ -1,9 +1,10 @@
 {
   "changelog": [
+
     {
-      "date": "28/09/2020",
-      "versionCode": 3118,
-      "versionName": "3.1.4",
+      "date": "29/09/2020",
+      "versionCode": 3121,
+      "versionName": "3.1.7",
       "change": [
         {
           "type": "feat",
@@ -48,6 +49,10 @@
         {
           "type": "feat",
           "text": "Add telegram group eng/es"
+        },
+        {
+          "type": "fix",
+          "text": "Fix some bugs"
         },
         {
           "type": "del",

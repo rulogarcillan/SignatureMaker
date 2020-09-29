@@ -38,7 +38,6 @@ import android.widget.PopupMenu
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -57,13 +56,11 @@ import com.signaturemaker.app.application.core.platform.PermissionRequester
 import com.signaturemaker.app.application.features.main.MainActivity
 import com.signaturemaker.app.application.features.main.SharedViewModel
 import com.signaturemaker.app.application.features.menu.SettingActivity
-import com.signaturemaker.app.application.features.suggest.CustomDialogSuggest
 import com.signaturemaker.app.databinding.SingBoardFragmentBinding
 import com.signaturemaker.app.domain.models.error.FileError.CreateError
 import com.signaturemaker.app.domain.models.error.FileError.EmptyBitmap
 import com.tuppersoft.skizo.android.core.extension.gone
 import com.tuppersoft.skizo.android.core.extension.visible
-
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
 
@@ -617,11 +614,6 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main, menu)
 
-        menu.findItem(R.id.idSuggest).setOnMenuItemClickListener {
-            showSendSuggest()
-            true
-        }
-
         menu.findItem(R.id.idSettings).setOnMenuItemClickListener {
             activity?.let {
                 val myIntent = Intent(it, SettingActivity::class.java)
@@ -632,14 +624,5 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
         }
 
         super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    private fun showSendSuggest() {
-        val ft: FragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-        ft.let {
-            val dialog: CustomDialogSuggest = CustomDialogSuggest.getInstance()
-            dialog.show(ft, "dialog")
-            dialog.isCancelable = true
-        }
     }
 }

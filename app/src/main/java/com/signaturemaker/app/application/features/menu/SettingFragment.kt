@@ -11,6 +11,7 @@ import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.browser.customtabs.CustomTabsIntent
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
@@ -24,8 +25,11 @@ import com.signaturemaker.app.application.features.menu.MenuIdentifier.MOREAPP
 import com.signaturemaker.app.application.features.menu.MenuIdentifier.PRIVACY
 import com.signaturemaker.app.application.features.menu.MenuIdentifier.RATE
 import com.signaturemaker.app.application.features.menu.MenuIdentifier.SETTING
+import com.signaturemaker.app.application.features.menu.MenuIdentifier.SUGGEST
+import com.signaturemaker.app.application.features.suggest.CustomDialogSuggest
 import com.signaturemaker.app.databinding.SettingFragmentBinding
 import com.tuppersoft.skizo.android.core.extension.getColorFromAttr
+import java.util.Locale
 
 class SettingFragment : GlobalFragment() {
 
@@ -71,6 +75,7 @@ class SettingFragment : GlobalFragment() {
         }
         binding.ivGithub.setOnClickListener { openGithub() }
         binding.ivTwitter.setOnClickListener { openTwitter() }
+        binding.ivTelegram.setOnClickListener { openTelegram() }
     }
 
     private fun initRecyclerView() {
@@ -78,6 +83,7 @@ class SettingFragment : GlobalFragment() {
         val list: MutableList<ItemSettingMenu> = mutableListOf()
 
         list.add(ItemSettingMenu(SETTING, R.drawable.ic_settings, R.string.title_setting))
+        list.add(ItemSettingMenu(SUGGEST, R.drawable.ic_message, R.string.send_suggestions))
         list.add(ItemSettingMenu(CHANGELOG, R.drawable.ic_changelog, R.string.changelog))
         list.add(ItemSettingMenu(RATE, R.drawable.ic_rate, R.string.rate))
         list.add(ItemSettingMenu(MOREAPP, R.drawable.ic_moreapp, R.string.more_app))
@@ -115,6 +121,18 @@ class SettingFragment : GlobalFragment() {
             SETTING -> {
                 findNavController().navigate(R.id.SettingsFragment, null, getNavOptions())
             }
+            SUGGEST -> {
+                showSendSuggest()
+            }
+        }
+    }
+
+    private fun showSendSuggest() {
+        val ft: FragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+        ft.let {
+            val dialog: CustomDialogSuggest = CustomDialogSuggest.getInstance()
+            dialog.show(ft, "dialog")
+            dialog.isCancelable = true
         }
     }
 
@@ -161,6 +179,17 @@ class SettingFragment : GlobalFragment() {
             intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/$userTwitter"))
         }
         activity?.startActivity(intent)
+    }
+
+    private fun openTelegram() {
+        val url = if (Locale.getDefault().language.toLowerCase(Locale.ROOT) == "es") {
+            "https://telegram.me/signature_maker_es"
+        } else {
+            "https://telegram.me/signature_maker_eng"
+        }
+
+        val telegram = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(telegram)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

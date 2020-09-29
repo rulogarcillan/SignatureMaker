@@ -17,8 +17,6 @@ import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.isValidEmail
 import com.signaturemaker.app.databinding.CustomDialogSuggestBinding
 import com.signaturemaker.app.domain.models.SuggestMessage
-import com.tuppersoft.skizo.android.core.extension.collapse
-import com.tuppersoft.skizo.android.core.extension.expand
 import com.tuppersoft.skizo.android.core.extension.getColorFromAttr
 import com.tuppersoft.skizo.android.core.extension.gone
 import com.tuppersoft.skizo.android.core.extension.hideKeyboard
@@ -46,6 +44,8 @@ open class CustomDialogSuggest : DialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = CustomDialogSuggestBinding.inflate(inflater, container, false)
         initObservers()
+        activity?.window?.setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        binding.root.hideKeyboard()
         return binding.root
     }
 
@@ -59,20 +59,24 @@ open class CustomDialogSuggest : DialogFragment() {
         super.onDestroy()
     }
 
+    private fun openTelegram() {
+        val url = if (Locale.getDefault().language.toLowerCase(Locale.ROOT) == "es") {
+            "https://telegram.me/signature_maker_es"
+        } else {
+            "https://telegram.me/signature_maker_eng"
+        }
+
+        val telegram = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(telegram)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         this.isCancelable = true
 
         binding.telegramJoin.root.setOnClickListener {
 
-            val url = if (Locale.getDefault().language.toLowerCase(Locale.ROOT) == "es") {
-                "https://telegram.me/signature_maker_es"
-            } else {
-                "https://telegram.me/signature_maker_eng"
-            }
-
-            val telegram = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            startActivity(telegram)
+            openTelegram()
         }
 
         binding.btPositive.setOnClickListener {
@@ -82,16 +86,20 @@ open class CustomDialogSuggest : DialogFragment() {
                 Toast.makeText(view.context, getString(R.string.complete_fields), Toast.LENGTH_LONG).show()
             } else {
                 if (binding.tvEmail.text.toString().isValidEmail()) {
-                    val msg = SuggestMessage(
-                        binding.tvEmail.text.toString(),
-                        binding.tvMessage.text.toString()
-                    )
-                    suggestViewModel.sendSuggest(msg)
-                    activity?.let {
-                        setStatusBarColorIfPossible(it.getColorFromAttr(android.R.attr.colorBackground))
+                    if (binding.tvMessage.text.toString().length > 30) {
+                        val msg = SuggestMessage(
+                            binding.tvEmail.text.toString(),
+                            binding.tvMessage.text.toString()
+                        )
+                        suggestViewModel.sendSuggest(msg)
+                        activity?.let {
+                            setStatusBarColorIfPossible(it.getColorFromAttr(android.R.attr.colorBackground))
+                        }
+                        binding.root.hideKeyboard()
+                        binding.loading.visible()
+                    } else {
+                        Toast.makeText(view.context, getString(R.string.suggest_sort), Toast.LENGTH_LONG).show()
                     }
-                    binding.root.hideKeyboard()
-                    binding.loading.visible()
                 } else {
                     Toast.makeText(view.context, getString(R.string.valid_mail), Toast.LENGTH_LONG).show()
                 }
@@ -147,16 +155,18 @@ open class CustomDialogSuggest : DialogFragment() {
 
     override fun onResume() {
         super.onResume()
-        // showBannerTelegram()
+        binding.root.post { binding.root.hideKeyboard() }
     }
 
-    private fun showBannerTelegram() {
-        binding.telegramJoin.root.apply {
-            postDelayed({ expand() }, 500)
-            postDelayed({
-                collapse()
-            }, 1000 * 5)
-        }
-    }
+    /*  private fun showBannerTelegram() {
+          binding.telegramJoin.root.apply {
+              postDelayed({ expand() }, 500)
+              postDelayed({
+                  collapse()
+                  binding.root.hideKeyboard()
+
+              }, 1000 * 5)
+          }
+      }*/
 }
 

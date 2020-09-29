@@ -126,6 +126,13 @@
                 android:layout_height="32dp"
                 android:layout_marginStart="@dimen/margin_16"
                 app:srcCompat="@drawable/ic_twitter" />
+
+            <ImageView
+                android:id="@+id/ivTelegram"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="@dimen/margin_16"
+                app:srcCompat="@drawable/ic_telegram" />
         </LinearLayout>
 
     </LinearLayout>

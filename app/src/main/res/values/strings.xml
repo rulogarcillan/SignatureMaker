@@ -81,6 +81,7 @@
     <string name="write_your_suggestion_or_comment">Write your suggestion or comment</string>
     <string name="put_your_email">Put your email</string>
     <string name="valid_mail">write a valid email</string>
+    <string name="suggest_sort">The comment is very short, please! write a few words more, at least 30 characters</string>
     <string name="share">Share</string>
     <string name="sending_message_please_wait">Sending message, please wait</string>
     <string name="join_channel">Click here to join our telegram channel</string>
@@ -96,5 +97,6 @@
     <string name="change_theme_note">For the changes to take effect, you must restart the application completely</string>
     <string name="empty_canvas">Error, empty canvas</string>
 
+    <string name="suggest">Suggest</string>
 
 </resources>
