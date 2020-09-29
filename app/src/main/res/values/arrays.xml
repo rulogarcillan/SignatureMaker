@@ -1,0 +1,16 @@
+<resources>
+    <!-- Reply Preference -->
+    <string-array name="theme_entries">
+        <item>@string/mode_light</item>
+        <item>@string/mode_dark</item>
+        <item>@string/mode_system</item>
+        <item>@string/mode_battery</item>
+    </string-array>
+
+    <string-array name="theme_values">
+        <item>1</item>
+        <item>2</item>
+        <item>-1</item>
+        <item>3</item>
+    </string-array>
+</resources>

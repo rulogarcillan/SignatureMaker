@@ -6,7 +6,7 @@ _\ \ | (_| | | | | (_| | |_| |_| | | |  __/ / /\/\ \ (_| |   <  __/ |
 \__/_|\__, |_| |_|\__,_|\__|\__,_|_|  \___| \/    \/\__,_|_|\_\___|_|
       |___/
 
-Copyright (C) 2018  Raúl Rodríguez Concepción www.wepica.com
+Copyright (C) 2018  Raúl Rodríguez Concepción www.tuppersoft.com
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -22,62 +22,36 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 package com.signaturemaker.app.application.core.extensions
 
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
-import android.util.Log
-import androidx.core.content.FileProvider
-import com.signaturemaker.app.BuildConfig
 import com.signaturemaker.app.application.utils.Constants
-import com.signaturemaker.app.data.repositories.SharedPreferencesRepository
 import com.signaturemaker.app.domain.models.ItemFile
-import java.io.File
-import java.text.DateFormat
+import com.tuppersoft.skizo.android.core.extension.loadSharedPreference
+import com.tuppersoft.skizo.android.core.extension.saveSharedPreference
 
 object Utils {
 
     var sortOrder = Constants.DEFAULT_SORT_ORDER
-
     var maxStroke = Constants.DEFAULT_MAX_STROKE
-
-    var minStroke = Constants.DEFAULT_MIN_TROKE
-
+    var minStroke = Constants.DEFAULT_MIN_STROKE
     var penColor = Constants.DEFAULT_PEN_COLOR
-
     var wallpaper = Constants.DEFAULT_WALLPAPER
-
-    var path = Constants.DEFAULT_PATH
-
+    var path = "" //load from application
     var disableAds: Boolean = Constants.DEFAULT_DISABLE_ADS
-
     var nameSave: Boolean = Constants.DEFAULT_NAME_SAVE
-
     var deleteExit: Boolean = Constants.DEFAULT_DELETE_EXIT
+    var themeMode = Constants.DEFAULT_THEME_MODE
 
     private fun defaultColor() {
         penColor = Constants.DEFAULT_PEN_COLOR
     }
 
-    private fun defaultDeleteExit() {
-        deleteExit = Constants.DEFAULT_DELETE_EXIT
-    }
-
-    private fun defaultDisableAds() {
-        disableAds = Constants.DEFAULT_DISABLE_ADS
-    }
-
-    private fun defaultNameSave() {
-        nameSave = Constants.DEFAULT_NAME_SAVE
-    }
-
-    fun defaultPath() {
-        path = Constants.DEFAULT_PATH
-    }
-
     private fun defaultStroke() {
         maxStroke = Constants.DEFAULT_MAX_STROKE
-        minStroke = Constants.DEFAULT_MIN_TROKE
+        minStroke = Constants.DEFAULT_MIN_STROKE
+    }
+
+    private fun defaultWallpaper() {
+        wallpaper = Constants.DEFAULT_WALLPAPER
     }
 
     fun defaultValues() {
@@ -85,111 +59,66 @@ object Utils {
         disableAds = Constants.DEFAULT_DISABLE_ADS
         sortOrder = Constants.DEFAULT_SORT_ORDER
         maxStroke = Constants.DEFAULT_MAX_STROKE
-        minStroke = Constants.DEFAULT_MIN_TROKE
+        minStroke = Constants.DEFAULT_MIN_STROKE
         penColor = Constants.DEFAULT_PEN_COLOR
         wallpaper = Constants.DEFAULT_WALLPAPER
-        path = Constants.DEFAULT_PATH
         deleteExit = Constants.DEFAULT_DELETE_EXIT
-    }
-
-    private fun defaultWallpaper() {
-        wallpaper = Constants.DEFAULT_WALLPAPER
-    }
-
-    /**
-     * Get last time compilation app
-     */
-    fun getAppTimeStamp(context: Context): String {
-        var timeStamp = ""
-        try {
-            val appInfo = context.packageManager.getApplicationInfo(context.packageName, 0)
-            val appFile = appInfo.sourceDir
-            val time = File(appFile).lastModified()
-            val formatter = DateFormat.getDateTimeInstance()
-            timeStamp = formatter.format(time)
-        } catch (e: Exception) {
-            Log.e(Constants.TAG, e.message ?: "not message exception")
-        }
-
-        return timeStamp
+        themeMode = Constants.DEFAULT_THEME_MODE
     }
 
     fun loadAllPreferences(mContext: Context?) {
 
         mContext?.let {
-            if (SharedPreferencesRepository.loadPreference(mContext, Constants.ID_PREF_WALLPAPER, false)) {
-                wallpaper = SharedPreferencesRepository.loadPreference(mContext, Constants.PREF_WALLPAPER, Constants.DEFAULT_WALLPAPER)
+            if (mContext.loadSharedPreference(Constants.ID_PREF_WALLPAPER, false)) {
+                wallpaper = mContext.loadSharedPreference(Constants.PREF_WALLPAPER, Constants.DEFAULT_WALLPAPER)
             } else {
                 defaultWallpaper()
             }
-            if (SharedPreferencesRepository.loadPreference(mContext, Constants.ID_PREF_COLOR, false)) {
-                penColor = SharedPreferencesRepository
-                    .loadPreference(mContext, Constants.PREF_COLOR, Constants.DEFAULT_PEN_COLOR)
+            if (mContext.loadSharedPreference(Constants.ID_PREF_COLOR, false)) {
+                penColor = mContext.loadSharedPreference(Constants.PREF_COLOR, Constants.DEFAULT_PEN_COLOR)
             } else {
                 defaultColor()
             }
-            if (SharedPreferencesRepository.loadPreference(mContext, Constants.ID_PREF_STROKE, false)) {
-                minStroke = SharedPreferencesRepository
-                    .loadPreference(mContext, Constants.PREF_MIN_TROKE, Constants.DEFAULT_MIN_TROKE)
-                maxStroke = SharedPreferencesRepository
-                    .loadPreference(mContext, Constants.PREF_MAX_TROKE, Constants.DEFAULT_MAX_STROKE)
+            if (mContext.loadSharedPreference(Constants.ID_PREF_STROKE, false)) {
+                minStroke = mContext.loadSharedPreference(Constants.PREF_MIN_TROKE, Constants.DEFAULT_MIN_STROKE)
+                maxStroke = mContext.loadSharedPreference(Constants.PREF_MAX_TROKE, Constants.DEFAULT_MAX_STROKE)
             } else {
                 defaultStroke()
             }
-            if (SharedPreferencesRepository.loadPreference(mContext, Constants.ID_PREF_ADVERTISING, false)) {
-                disableAds = true
-            } else {
-                defaultDisableAds()
-            }
-            if (SharedPreferencesRepository.loadPreference(mContext, Constants.ID_PREF_NAME, false)) {
-                nameSave = true
-            } else {
-                defaultNameSave()
-            }
-            if (SharedPreferencesRepository.loadPreference(mContext, Constants.ID_PREF_DELETE, false)) {
-                deleteExit = true
-            } else {
-                defaultDeleteExit()
-            }
+
+            disableAds = mContext.loadSharedPreference(Constants.ID_PREF_ADVERTISING, Constants.DEFAULT_DISABLE_ADS)
+            nameSave = mContext.loadSharedPreference(Constants.ID_PREF_NAME, Constants.DEFAULT_NAME_SAVE)
+            deleteExit = mContext.loadSharedPreference(Constants.ID_PREF_DELETE, Constants.DEFAULT_DELETE_EXIT)
+            themeMode = mContext.loadSharedPreference(
+                Constants.ID_THEME_MODE,
+                Constants.DEFAULT_THEME_MODE.toString()
+            ).toInt()
         }
     }
 
     fun saveAllPreferences(mContext: Context?) {
         mContext?.let {
-            if (SharedPreferencesRepository.loadPreference(mContext, Constants.ID_PREF_COLOR, false)) {
-                SharedPreferencesRepository.savePreference(mContext, Constants.PREF_COLOR, penColor)
+            if (mContext.loadSharedPreference(Constants.ID_PREF_COLOR, false)) {
+                mContext.saveSharedPreference(Constants.PREF_COLOR, penColor)
             }
-            if (SharedPreferencesRepository.loadPreference(mContext, Constants.ID_PREF_STROKE, false)) {
-                SharedPreferencesRepository.savePreference(mContext, Constants.PREF_MIN_TROKE, minStroke)
-                SharedPreferencesRepository.savePreference(mContext, Constants.PREF_MAX_TROKE, maxStroke)
+            if (mContext.loadSharedPreference(Constants.ID_PREF_STROKE, false)) {
+                mContext.saveSharedPreference(Constants.PREF_MIN_TROKE, minStroke)
+                mContext.saveSharedPreference(Constants.PREF_MAX_TROKE, maxStroke)
             }
-            if (SharedPreferencesRepository.loadPreference(mContext, Constants.ID_PREF_WALLPAPER, false)) {
-                SharedPreferencesRepository.savePreference(mContext, Constants.PREF_WALLPAPER, wallpaper)
+            if (mContext.loadSharedPreference(Constants.ID_PREF_WALLPAPER, false)) {
+                mContext.saveSharedPreference(Constants.PREF_WALLPAPER, wallpaper)
             }
         }
     }
 
-    fun shareSign(mActivity: Activity, name: String) {
-        val uri = FileProvider.getUriForFile(mActivity, BuildConfig.APPLICATION_ID, File("$path/$name"))
-        val imageUris: ArrayList<Uri> = arrayListOf(uri)
-        val shareIntent = Intent().apply {
-            action = Intent.ACTION_SEND_MULTIPLE
-            flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-            putParcelableArrayListExtra(Intent.EXTRA_STREAM, imageUris)
-            type = if (name.contains(".png") || name.contains(".PNG")) {
-                "image/*"
-            } else {
-                "text/html"
-            }
-        }
-        mActivity.startActivity(Intent.createChooser(shareIntent, "Share images to.."))
-    }
-
-    fun sort(list: MutableList<ItemFile>, type: Int) {
+    fun sort(list: List<ItemFile>, type: Int): List<ItemFile> {
+        val temporalList = list.toMutableList()
         if (type == 1) {
-            list.sortByDescending { it.date }
+            temporalList.sortByDescending { it.date }
         } else {
-            list.sortBy { it.date }
+            temporalList.sortBy { it.date }
         }
+
+        return temporalList.toList()
     }
 }

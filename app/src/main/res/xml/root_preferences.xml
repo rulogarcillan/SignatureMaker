@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        android:icon="@drawable/ic_files_outline"
+        android:title="@string/title_pref_files">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="id_pref_delete"
+            android:summary="@string/title_pref_delete_sum"
+            android:title="@string/title_pref_delete"
+            app:iconSpaceReserved="false" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="id_pref_name"
+            android:summary="@string/title_pref_name_sum"
+            android:title="@string/title_pref_name"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:icon="@drawable/ic_signature"
+        android:title="@string/title_pref_siganture">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="id_pref_color"
+            android:summary="@string/title_pref_color_sum"
+            android:title="@string/title_pref_color"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="id_pref_stroke"
+            android:summary="@string/title_pref_stroke_sum"
+            android:title="@string/title_pref_stroke"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="id_pref_wallpaper"
+            android:summary="@string/title_pref_wallpaper_sum"
+            android:title="@string/title_pref_wallpaper"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:icon="@drawable/ic_app"
+        android:title="@string/title_pref_app">
+        <ListPreference
+            android:entries="@array/theme_entries"
+            android:entryValues="@array/theme_values"
+            android:key="id_theme_mode"
+            android:title="@string/theme"
+            app:iconSpaceReserved="false"
+            app:useSimpleSummaryProvider="true" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="id_pref_advertising"
+            android:title="@string/title_pref_advertising"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:icon="@drawable/ic_others"
+        android:title="@string/title_others">
+        <Preference
+            android:key="id_pref_reset"
+            android:summary="@string/title_pref_reset_sum"
+            android:title="@string/title_pref_reset"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+</PreferenceScreen>

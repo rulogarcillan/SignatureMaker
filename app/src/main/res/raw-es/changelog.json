@@ -1,0 +1,451 @@
+{
+  "changelog": [
+
+    {
+      "date": "29/09/2020",
+      "versionCode": 3121,
+      "versionName": "3.1.7",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Dark theme"
+        },
+        {
+          "type": "feat",
+          "text": "New menu"
+        },
+        {
+          "type": "feat",
+          "text": "New option to send suggestions"
+        },
+        {
+          "type": "feat",
+          "text": "Redesign swipe options"
+        },
+        {
+          "type": "feat",
+          "text": "Help visual effect is added"
+        },
+        {
+          "type": "feat",
+          "text": "New preview images screen"
+        },
+        {
+          "type": "feat",
+          "text": "Refactor all resource images to SVG"
+        },
+        {
+          "type": "feat",
+          "text": "Preparing support to android 11"
+        },
+        {
+          "type": "feat",
+          "text": "Small UI changes"
+        },
+        {
+          "type": "feat",
+          "text": "Refactor preferences UI"
+        },
+        {
+          "type": "feat",
+          "text": "Add telegram group eng/es"
+        },
+        {
+          "type": "fix",
+          "text": "Fix some bugs"
+        },
+        {
+          "type": "del",
+          "text": "Select custom path"
+        },
+        {
+          "type": "del",
+          "text": "Enabled/disabled nomedia"
+        },
+        {
+          "type": "del",
+          "text": "save files as svg (temporal)"
+        }
+      ]
+    },
+    {
+      "date": "10/05/2020",
+      "versionCode": 3006,
+      "versionName": "3.0.42",
+      "change": [
+        {
+          "type": "fix",
+          "text": "Fixed error when saving signature"
+        },
+        {
+          "type": "fix",
+          "text": "Fix others bug"
+        }
+      ]
+    },
+    {
+      "date": "03/11/2019",
+      "versionCode": 3005,
+      "versionName": "3.0.10",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Migrate code to kotlin"
+        }
+      ]
+    },
+    {
+
+      "versionCode": 3004,
+      "versionName": "3.0.4",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Support android 10"
+        },
+        {
+          "type": "feat",
+          "text": "Update libraries"
+        }
+      ]
+    },
+    {
+
+      "versionCode": 3003,
+      "versionName": "3.0.3",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Add privacy polity"
+        }
+      ]
+    },
+    {
+
+      "versionCode": 3002,
+      "versionName": "3.0.2",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Update libraries"
+        }
+      ]
+    },
+    {
+
+      "versionCode": 3001,
+      "versionName": "3.0.1",
+      "change": [
+        {
+          "type": "fix",
+          "text": "Fix sharing option"
+        },
+        {
+          "type": "fix",
+          "text": "Minor bug fix"
+        }
+      ]
+    },
+    {
+
+      "versionCode": 3000,
+      "versionName": "3.0.0",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Rewritten all the source code"
+        },
+        {
+          "type": "feat",
+          "text": "Compatible with android 9.0 Pie"
+        },
+        {
+          "type": "feat",
+          "text": "Update all libraries to the latest version"
+        },
+        {
+          "type": "feat",
+          "text": "New icons"
+        }
+      ]
+    },
+    {
+
+      "versionCode": 2035,
+      "versionName": "2.1.54",
+      "change": [
+        {
+          "type": "fix",
+          "text": "Fix translates"
+        }
+      ]
+    },
+    {
+
+      "versionCode": 2033,
+      "versionName": "2.1.31",
+      "change": [
+        {
+          "type": "fix",
+          "text": "Fix bug when save signature with custom name. (thanks for reports)"
+        }
+      ]
+    },
+    {
+
+      "versionCode": 2031,
+      "versionName": "2.1.16",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Button to sort files by date (ascending / descending)"
+        },
+        {
+          "type": "feat",
+          "text": "New visual backgrounds to the canvas (the signature is always saved with transparent background)"
+        },
+        {
+          "type": "feat",
+          "text": "New support email"
+        },
+        {
+          "type": "Fix",
+          "text": "Fix seekbar (crash app)"
+        },
+        {
+          "type": "fix",
+          "text": "fix texts and translations"
+        }
+      ]
+    },
+    {
+
+      "versionCode": 2006,
+      "versionName": "2.0.24",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Add advertising"
+        },
+        {
+          "type": "feat",
+          "text": "Disable/Enable ads from settings"
+        },
+        {
+          "type": "feat",
+          "text": "Disable ads if it bothers you."
+        }
+      ]
+    },
+    {
+
+      "versionCode": 2005,
+      "versionName": "2.0.23",
+      "change": [
+        {
+          "type": "feat",
+          "text": "New icon clean"
+        },
+        {
+          "type": "fix",
+          "text": "Minor bug fix"
+        }
+      ]
+    },
+    {
+
+      "versionCode": 2004,
+      "versionName": "2.0.22",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Add some material design to pre-lollipop"
+        },
+        {
+          "type": "fix",
+          "text": "Fixed bug in save and send"
+        }
+      ]
+    },
+    {
+
+      "versionCode": 2003,
+      "versionName": "2.0.21",
+      "change": [
+
+        {
+          "type": "fix",
+          "text": "Fixed bug in splash for large screens (sorry for the inconvenience)"
+
+        }
+      ]
+    },
+    {
+
+      "versionCode": 2002,
+      "versionName": "2.0.2",
+      "change": [
+
+        {
+          "type": "feat",
+          "text": "Option to choose the file name when saving (Enabled / disabled in options)"
+
+        },
+        {
+          "type": "feat",
+          "text": "Add Url project in the initial splash"
+
+        }
+      ]
+    },
+    {
+
+      "versionCode": 2001,
+      "versionName": "2.0.1",
+      "change": [
+
+        {
+          "type": "feat",
+          "text": "Info button on long press"
+
+        }
+      ]
+    },
+    {
+
+      "versionCode": 2000,
+      "versionName": "2.0.0",
+      "change": [
+
+        {
+          "type": "feat",
+          "text": "New UI"
+
+        },
+        {
+          "type": "feat",
+          "text": "New options"
+
+        },
+        {
+          "type": "feat",
+          "text": "Selectable path files"
+
+        },
+        {
+          "type": "feat",
+          "text": "Save last stroke"
+
+        },
+        {
+          "type": "feat",
+          "text": "Save last color"
+
+        },
+        {
+          "type": "feat",
+          "text": "Delete signatrue on exit"
+
+        },
+        {
+          "type": "feat",
+          "text": "Toggle view signatures in gallery"
+
+        },
+        {
+          "type": "feat",
+          "text": "Mode landscape more efficient"
+
+        },
+        {
+          "type": "feat",
+          "text": "Change icon"
+
+        },
+        {
+          "type": "feat",
+          "text": "More material design"
+
+        },
+        {
+          "type": "feat",
+          "text": "Add initial splash"
+
+        },
+        {
+          "type": "feat",
+          "text": "Add license"
+
+        },
+        {
+          "type": "feat",
+          "text": "Open source and free"
+
+        },
+        {
+          "type": "fix",
+          "text": "Minor bug fix"
+
+        }
+      ]
+    },
+    {
+      "versionCode": 103,
+      "versionName": "1.0.3",
+      "change": [
+
+        {
+          "type": "feat",
+          "text": "New icon"
+
+        },
+        {
+          "type": "feat",
+          "text": "New menu others app"
+
+        }
+      ]
+    },
+    {
+
+      "versionCode": 102,
+      "versionName": "1.0.2",
+      "change": [
+
+        {
+          "type": "feat",
+          "text": "Change default file Path"
+
+        },
+        {
+          "type": "fix",
+          "text": "Minor bug fix"
+
+        }
+      ]
+    },
+    {
+      "versionCode": 101,
+      "versionName": "1.0.1",
+      "change": [
+
+        {
+          "type": "fix",
+          "text": "Minor bug fix"
+
+        }
+      ]
+    },
+    {
+      "versionCode": 101,
+      "versionName": "1.0.1",
+      "change": [
+        {
+          "type": "feat",
+          "text": "First release"
+
+        }
+      ]
+    }
+  ]
+}

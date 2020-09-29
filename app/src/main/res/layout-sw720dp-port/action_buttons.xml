@@ -17,8 +17,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
         fab:fab_addButtonColorNormal="?attr/colorSecondary"
         fab:fab_addButtonColorPressed="@color/colorPrimaryLight"
         fab:fab_expandDirection="left">
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:tooltipText="@string/title_bSave"
-            fab:fab_colorNormal="@color/buttonBlue"
+            fab:fab_colorNormal="?attr/buttonLeft"
             fab:fab_colorPressed="@color/colorPrimaryLight"
             fab:fab_icon="@drawable/ic_action_save"
             fab:fab_size="mini" />
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:tooltipText="@string/title_bSaveSend"
-            fab:fab_colorNormal="@color/buttonBlue"
+            fab:fab_colorNormal="?attr/buttonLeft"
             fab:fab_colorPressed="@color/colorPrimaryLight"
             fab:fab_icon="@drawable/ic_action_upload"
             fab:fab_size="mini" />
@@ -52,8 +52,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
         fab:fab_addButtonColorNormal="?attr/colorSecondary"
         fab:fab_addButtonColorPressed="@color/colorPrimaryLight"
         fab:fab_expandDirection="up"
@@ -75,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:tooltipText="@string/title_bStroke"
-            fab:fab_colorNormal="@color/buttonOrange"
+            fab:fab_colorNormal="?attr/buttonUp"
             fab:fab_colorPressed="@color/colorPrimaryLight"
             fab:fab_icon="@drawable/ic_action_stroke"
             fab:fab_size="mini" />
@@ -85,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:tooltipText="@string/title_bRubber"
-            fab:fab_colorNormal="@color/buttonOrange"
+            fab:fab_colorNormal="?attr/buttonUp"
             fab:fab_colorPressed="@color/colorPrimaryLight"
             fab:fab_icon="@drawable/ic_action_rubber"
             fab:fab_size="mini" />

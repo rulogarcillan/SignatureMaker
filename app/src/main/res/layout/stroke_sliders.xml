@@ -13,7 +13,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:orientation="horizontal"
         android:paddingTop="12dp">
 
@@ -22,8 +21,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_weight="1"
-            android:gravity="left"
-            android:text="Min."
+            android:gravity="start"
+            android:text="@string/min"
+            android:textColor="?attr/secondaryText"
             app:layout_constraintStart_toStartOf="@+id/rangeBar"
             tools:layout_editor_absoluteY="16dp" />
 
@@ -32,8 +32,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"
             android:layout_weight="1"
-            android:gravity="right"
-            android:text="Max."
+            android:gravity="end"
+            android:text="@string/max"
+            android:textColor="?attr/secondaryText"
             app:layout_constraintEnd_toEndOf="parent"
             tools:layout_editor_absoluteY="16dp" />
     </LinearLayout>
@@ -46,7 +47,6 @@
         app:mrb_connectingLineColor="?attr/colorPrimaryVariant"
         app:mrb_pinColor="?attr/colorSecondary"
         app:mrb_pinMaxFont="10sp"
-        app:mrb_pinTextColor="@android:color/white"
         app:mrb_rangeBarColor="?attr/colorPrimary"
         app:mrb_rangeBarPaddingBottom="12dp"
         app:mrb_selectorBoundarySize="2dp"

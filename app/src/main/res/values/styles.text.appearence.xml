@@ -28,12 +28,6 @@
     </style>
 
 
-    <style name="toolbar">
-        <item name="fontFamily">?attr/fontTypeBold</item>
-        <item name="android:fontFamily">?attr/fontTypeBold</item>
-        <item name="android:textSize">18sp</item>
-    </style>
-
     <style name="textHeadline1" parent="TextAppearance.MaterialComponents.Headline1">
         <item name="fontFamily">?attr/fontTypeLight</item>
         <item name="android:fontFamily">?attr/fontTypeLight</item>
@@ -103,11 +97,6 @@
     <style name="textTexView" parent="Widget.AppCompat.TextView">
         <item name="fontFamily">?attr/fontTypeRegular</item>
         <item name="android:fontFamily">?attr/fontTypeRegular</item>
-    </style>
-
-    <style name="textButtonCompat" parent="Widget.AppCompat.Button">
-        <item name="fontFamily">?attr/fontTypeBold</item>
-        <item name="android:fontFamily">?attr/fontTypeBold</item>
     </style>
 
 </resources>

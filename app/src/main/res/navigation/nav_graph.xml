@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/SingBoardFragment">
+
+    <fragment
+        android:id="@+id/SingBoardFragment"
+        android:name="com.signaturemaker.app.application.features.sign.SignBoardFragment"
+        tools:layout="@layout/sing_board_fragment">
+        <action
+            android:id="@+id/action_SingBoardFragment_to_SettingFragment"
+            app:destination="@id/SettingFragment" />
+        <action
+            android:id="@+id/action_SingBoardFragment_to_ListFilesFragment"
+            app:destination="@id/ListFilesFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/ListFilesFragment"
+        android:name="com.signaturemaker.app.application.features.files.ListFilesFragment"
+        tools:layout="@layout/list_files_fragment">
+
+        <action
+            android:id="@+id/action_ListFilesFragment_to_ImageActivity"
+            app:destination="@id/ImageActivity" />
+    </fragment>
+
+    <activity
+        android:id="@+id/SettingFragment"
+        android:name="com.signaturemaker.app.application.features.menu.SettingActivity"
+        tools:layout="@layout/setting_activity" />
+
+
+    <activity
+        android:id="@+id/ImageActivity"
+        android:name="com.signaturemaker.app.application.features.image.ImageActivity"
+        tools:layout="@layout/image_activity">
+
+        <argument
+            android:name="itemFile"
+            android:defaultValue="@null"
+            app:argType="com.signaturemaker.app.domain.models.ItemFile"
+            app:nullable="true" />
+
+    </activity>
+</navigation>

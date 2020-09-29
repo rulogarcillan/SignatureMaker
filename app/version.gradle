@@ -1,0 +1,23 @@
+import groovy.json.JsonSlurper
+
+ext {
+    def jsonFile = file('./src/main/res/raw/changelog.json')
+    def parsedJson = new JsonSlurper().parseText(jsonFile.text)
+
+    mVersionCode = parsedJson.changelog[0].versionCode
+    mVersionName = parsedJson.changelog[0].versionName
+
+    print "Comnpiled veersionName " + mVersionName + "\n"
+    print "Comnpiled veersionCode " + mVersionCode + "\n"
+
+    //sdk version
+    sdk_version = 29
+    min_sdk_version = 21
+    buildVersion = "29.0.2"
+}
+
+
+
+
+
+

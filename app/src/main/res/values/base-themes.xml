@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Base.Theme.DayNight" parent="Base.Theme" />
+
+    <style name="Base.Theme" parent="Base.Theme.MaterialThemeBuilder">
+
+        <!--selection controls.-->
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryVariant">@color/primaryDarkColor</item>
+        <item name="colorSecondary">@color/secondaryColor</item>
+        <item name="colorSecondaryVariant">@color/secondaryDarkColor</item>
+        <item name="android:colorBackground">@color/white</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorError">@color/red_600</item>
+
+        <!--"On" colors define how text, icons and strokes are colored in relation to the surface-->
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnSecondary">@color/secondaryTextColor</item>
+        <item name="colorOnBackground">@color/black</item>
+        <item name="colorOnSurface">@color/black</item>
+        <item name="colorOnError">@color/white</item>
+
+        <item name="colorControlNormal">@color/white</item>
+        <item name="actionMenuTextColor">@color/white</item>
+        <item name="android:actionMenuTextColor">@color/white</item>
+        <!--Fonts-->
+        <item name="fontTypeThin">@font/sarabun_thin</item>
+        <item name="fontTypeLight">@font/sarabun_light</item>
+        <item name="fontTypeRegular">@font/sarabun_regular</item>
+        <item name="fontTypeMedium">@font/sarabun_medium</item>
+        <item name="fontTypeBold">@font/sarabun_bold</item>
+        <!--Material type attributes-->
+        <item name="textAppearanceHeadline1">@style/textHeadline1</item>
+        <item name="textAppearanceHeadline2">@style/textHeadline2</item>
+        <item name="textAppearanceHeadline3">@style/textHeadline3</item>
+        <item name="textAppearanceHeadline4">@style/textHeadline4</item>
+        <item name="textAppearanceHeadline5">@style/textHeadline5</item>
+        <item name="textAppearanceHeadline6">@style/textHeadline6</item>
+        <item name="textAppearanceSubtitle1">@style/textSubtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/textSubtitle2</item>
+        <item name="textAppearanceBody1">@style/textBody1</item>
+        <item name="textAppearanceBody2">@style/textBody2</item>
+        <item name="textAppearanceCaption">@style/textCaption</item>
+        <item name="textAppearanceButton">@style/textButton</item>
+        <item name="textAppearanceOverline">@style/textOverline</item>
+
+        <item name="android:textViewStyle">@style/textTexView</item>
+        <!--Material shape attributes-->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.MyTheme.SmallComponent
+        </item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.MyTheme.MediumComponent
+        </item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.MyTheme.LargeComponent
+        </item>
+        <!--Component styles-->
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.MaterialComponents.Dialog.Alert
+        </item>
+        <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.PrimarySurface</item>
+
+        <item name="snackbarStyle">@style/MySnackBarStyle</item>
+        <item name="alertDialogTheme">@style/alertdialog</item>
+
+
+    </style>
+
+    <style name="Base.Theme.MaterialThemeBuilder" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!--color de status y modo oscuro o claro-->
+        <item name="android:statusBarColor" tools:ignore="NewApi">?attr/colorPrimaryVariant</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">false</item>
+        <!--color de botonera de navegación inferior, linea, modo oscuro o claro-->
+        <item name="android:navigationBarColor" tools:ignore="NewApi">
+            ?android:attr/colorBackground
+        </item>
+        <item name="android:navigationBarDividerColor" tools:ignore="NewApi">
+            ?attr/colorControlHighlight
+        </item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
+
+        <!--Remap legacy AppCompat attributes to MaterialComponent attributes
+        en la ultima versión del themeBuild no aparece lo comento-->
+        <!--
+           <item name="colorPrimaryDark">?attr/colorPrimaryVariant</item>
+           <item name="colorAccent">?attr/colorPrimaryVariant</item>
+         -->
+    </style>
+
+
+</resources>

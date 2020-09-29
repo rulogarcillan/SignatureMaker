@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="chip.fix" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/chip_fix_color</item>
+        <item name="android:textColor">?attr/colorChipChangelogText</item>
+    </style>
+
+    <style name="chip.feat" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/chip_feat_color</item>
+        <item name="android:textColor">?attr/colorChipChangelogText</item>
+    </style>
+
+    <style name="chip.del" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/chip_del_color</item>
+        <item name="android:textColor">?attr/colorChipChangelogText</item>
+    </style>
+
+    <style name="chip.any" parent="Widget.MaterialComponents.Chip.Choice"></style>
+
+</resources>
