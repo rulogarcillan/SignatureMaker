@@ -12,16 +12,19 @@ import com.signaturemaker.app.domain.models.UriResponse
 import com.signaturemaker.app.domain.usecase.SaveBitmap
 import com.signaturemaker.app.domain.usecase.SaveBitmap.Params
 import com.tuppersoft.skizo.kotlin.core.domain.exception.Failure
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 /**
  * Created by Raúl Rodríguez Concepción on 16/09/2020.
- * Talento Mobile
+
  * raulrcs@gmail.com
  */
-class SignBoardViewModel @ViewModelInject constructor(
+@HiltViewModel
+class SignBoardViewModel @Inject constructor(
     private val saveBitmapUseCase: SaveBitmap
 ) : ViewModel() {
 

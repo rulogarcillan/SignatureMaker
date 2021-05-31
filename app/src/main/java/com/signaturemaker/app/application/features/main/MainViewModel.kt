@@ -8,18 +8,20 @@ import androidx.lifecycle.viewModelScope
 import com.signaturemaker.app.domain.usecase.MoveAllFiles
 import com.signaturemaker.app.domain.usecase.RemoveAllFiles
 import com.signaturemaker.app.domain.usecase.RemoveAllFiles.Params
+import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 /**
  * Created by Raúl Rodríguez Concepción on 17/09/2020.
- * Talento Mobile
+
  * raulrcs@gmail.com
  */
 
-class MainViewModel @ViewModelInject constructor(
-    @ApplicationContext private val appContext: Context,
+@HiltViewModel
+class MainViewModel @Inject constructor(
     private val removeAllFiles: RemoveAllFiles,
     private val moveAllFiles: MoveAllFiles
 ) : ViewModel() {

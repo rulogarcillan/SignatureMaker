@@ -4,7 +4,7 @@ import com.tuppersoft.skizo.kotlin.core.domain.exception.Failure.FeatureFailure
 
 /**
  * Created by Raúl Rodríguez Concepción on 16/09/2020.
- * Talento Mobile
+
  * raulrcs@gmail.com
  */
 

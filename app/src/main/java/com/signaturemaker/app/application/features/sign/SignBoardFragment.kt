@@ -52,7 +52,6 @@ import com.signaturemaker.app.application.core.extensions.createSnackBar
 import com.signaturemaker.app.application.core.extensions.shareSign
 import com.signaturemaker.app.application.core.extensions.showToast
 import com.signaturemaker.app.application.core.platform.GlobalFragment
-import com.signaturemaker.app.application.core.platform.PermissionRequester
 import com.signaturemaker.app.application.features.main.MainActivity
 import com.signaturemaker.app.application.features.main.SharedViewModel
 import com.signaturemaker.app.application.features.menu.SettingActivity
@@ -170,12 +169,13 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
         }
 
         //listerner picker
-        binding.cpColorPicker.picker.onColorChangedListener = ColorPicker.OnColorChangedListener { i ->
-            Utils.penColor = i
-            binding.actionsButtons.bColor.colorNormal = Utils.penColor
-            binding.singBoard.setPenColor(Utils.penColor)
-            Utils.saveAllPreferences(context)
-        }
+        binding.cpColorPicker.picker.onColorChangedListener =
+            ColorPicker.OnColorChangedListener { i ->
+                Utils.penColor = i
+                binding.actionsButtons.bColor.colorNormal = Utils.penColor
+                binding.singBoard.setPenColor(Utils.penColor)
+                Utils.saveAllPreferences(context)
+            }
     }
 
     override fun onResume() {
@@ -332,12 +332,12 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
 
     private fun openListFilesFragment() {
 
-        activity?.let { mActivity ->
-            PermissionRequester(
-                mActivity,
-                permission.WRITE_EXTERNAL_STORAGE,
-                binding.root
-            ).runWithPermission({ navigateToListFiles() }, {})
+        (activity as? MainActivity)?.let { mActivity ->
+            mActivity.runWithPermission(
+                { navigateToListFiles() },
+                {},
+                permission.WRITE_EXTERNAL_STORAGE
+            )
         }
     }
 
@@ -351,7 +351,8 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
     }
 
     private fun handleSaveBitmap() {
-        signBoardViewModel.saveBitmap.observe(viewLifecycleOwner, { event ->
+
+        signBoardViewModel.saveBitmap.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let { uriResponse ->
                 activity?.createSnackBar(resources.getString(R.string.title_save_ok))?.show()
                 sharedViewModel.reloadFileList()
@@ -359,11 +360,11 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
                     activity?.shareSign(uriResponse.uri)
                 }
             }
-        })
+        }
     }
 
     private fun handleFailure() {
-        signBoardViewModel.failure.observe(viewLifecycleOwner, { event ->
+        signBoardViewModel.failure.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let { failure ->
                 when (failure) {
                     is EmptyBitmap -> {
@@ -374,8 +375,7 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
                     }
                 }
             }
-
-        })
+        }
     }
 
     private fun selectedNameAndSave(idMenu: Int, share: Boolean) {
@@ -417,17 +417,17 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
         val popupMenu = PopupMenu(context, binding.actionsButtons.bSave)
         popupMenu.menuInflater.inflate(R.menu.save_menu, popupMenu.menu)
         popupMenu.setOnMenuItemClickListener { menuItem ->
-            activity?.let { mActivity ->
-                PermissionRequester(
-                    mActivity,
-                    permission.WRITE_EXTERNAL_STORAGE, binding.root
-                ).runWithPermission({
+
+
+            (activity as? MainActivity)?.let { mActivity ->
+                mActivity.runWithPermission({
                     if (Utils.nameSave) {
                         selectedNameAndSave(menuItem.itemId, false)
                     } else {
                         saveFileAndSend(menuItem.itemId, false)
                     }
-                }, {})
+                }, {}, permission.WRITE_EXTERNAL_STORAGE)
+
             }
             false
         }
@@ -473,7 +473,8 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
         var output = name
 
         for (i in original.indices) {
-            output = output.replace(original[i], ascii[i]).toLowerCase(Locale.ROOT).trim { it <= ' ' }
+            output =
+                output.replace(original[i], ascii[i]).toLowerCase(Locale.ROOT).trim { it <= ' ' }
         }
         return output
     }
@@ -490,7 +491,12 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
             }
             2 -> {
                 context?.let {
-                    binding.txtSingHere.setTextColor(ContextCompat.getColor(it, android.R.color.white))
+                    binding.txtSingHere.setTextColor(
+                        ContextCompat.getColor(
+                            it,
+                            android.R.color.white
+                        )
+                    )
                     binding.root.background = getDrawable(it, R.drawable.fondotrans2)
                 }
             }
@@ -498,13 +504,28 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
 
                 context?.let {
                     binding.txtSingHere.setTextColor(ContextCompat.getColor(it, R.color.darkGrey))
-                    binding.root.setBackgroundColor(ContextCompat.getColor(it, android.R.color.white))
+                    binding.root.setBackgroundColor(
+                        ContextCompat.getColor(
+                            it,
+                            android.R.color.white
+                        )
+                    )
                 }
             }
             4 -> {
                 context?.let {
-                    binding.txtSingHere.setTextColor(ContextCompat.getColor(it, android.R.color.white))
-                    binding.root.setBackgroundColor(ContextCompat.getColor(it, android.R.color.black))
+                    binding.txtSingHere.setTextColor(
+                        ContextCompat.getColor(
+                            it,
+                            android.R.color.white
+                        )
+                    )
+                    binding.root.setBackgroundColor(
+                        ContextCompat.getColor(
+                            it,
+                            android.R.color.black
+                        )
+                    )
                 }
             }
         }
@@ -524,7 +545,10 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
      * Method for set the seekbar
      */
     private fun setSeekBarRange() {
-        binding.stSlider.rangeBar.setRangePinsByValue(Utils.minStroke.toFloat(), Utils.maxStroke.toFloat())
+        binding.stSlider.rangeBar.setRangePinsByValue(
+            Utils.minStroke.toFloat(),
+            Utils.maxStroke.toFloat()
+        )
         binding.singBoard.setMinWidth(Utils.minStroke.toFloat())
         binding.singBoard.setMaxWidth(Utils.maxStroke.toFloat())
     }
@@ -536,20 +560,18 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
         val popupMenu = PopupMenu(context, binding.actionsButtons.bSave)
         popupMenu.menuInflater.inflate(R.menu.share_menu, popupMenu.menu)
         popupMenu.setOnMenuItemClickListener { menuItem ->
-            activity?.let { mActivity ->
-                PermissionRequester(
-                    mActivity,
-                    permission.WRITE_EXTERNAL_STORAGE,
-                    binding.root
-                ).runWithPermission({
+
+            (activity as? MainActivity)?.let { mActivity ->
+                mActivity.runWithPermission({
                     if (Utils.nameSave) {
                         selectedNameAndSave(menuItem.itemId, true)
                     } else {
                         saveFileAndSend(menuItem.itemId, true)
                     }
+                }, {}, permission.WRITE_EXTERNAL_STORAGE)
 
-                }, {})
             }
+
             false
         }
         popupMenu.show()

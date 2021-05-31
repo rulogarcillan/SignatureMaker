@@ -12,6 +12,8 @@ import com.signaturemaker.app.domain.usecase.GetAllFiles
 import com.signaturemaker.app.domain.usecase.RemoveFile
 import com.signaturemaker.app.domain.usecase.RemoveFile.Params
 import com.tuppersoft.skizo.android.core.extension.logd
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
@@ -19,11 +21,12 @@ import kotlinx.coroutines.launch
 
 /**
  * Created by Raúl Rodríguez Concepción on 17/09/2020.
- * Talento Mobile
+
  * raulrcs@gmail.com
  */
 
-class ListFilesViewModel @ViewModelInject constructor(
+@HiltViewModel
+class ListFilesViewModel @Inject constructor(
     private val getAllFiles: GetAllFiles,
     private val removeFile: RemoveFile
 ) : ViewModel() {

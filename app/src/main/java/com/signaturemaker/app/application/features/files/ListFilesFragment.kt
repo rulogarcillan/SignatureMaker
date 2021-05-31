@@ -45,8 +45,8 @@ import com.signaturemaker.app.application.core.extensions.Utils
 import com.signaturemaker.app.application.core.extensions.createSnackBar
 import com.signaturemaker.app.application.core.extensions.shareSign
 import com.signaturemaker.app.application.core.platform.GlobalFragment
-import com.signaturemaker.app.application.core.platform.PermissionRequester
 import com.signaturemaker.app.application.features.image.ImageActivity
+import com.signaturemaker.app.application.features.main.MainActivity
 import com.signaturemaker.app.application.features.main.SharedViewModel
 import com.signaturemaker.app.databinding.ListFilesFragmentBinding
 import com.signaturemaker.app.domain.models.ItemFile
@@ -180,9 +180,11 @@ class ListFilesFragment : GlobalFragment() {
 
     private fun loadItemsFiles() {
         activity?.let { mActivity ->
-            PermissionRequester(mActivity, permission.WRITE_EXTERNAL_STORAGE, binding.root).runWithPermission({
-                listFilesViewModel.getAllFiles(Utils.path)
-            }, {})
+            (mActivity as? MainActivity)?.let {
+              it.runWithPermission({
+                    listFilesViewModel.getAllFiles(Utils.path)
+                }, {}, permission.WRITE_EXTERNAL_STORAGE)
+            }
         }
     }
 

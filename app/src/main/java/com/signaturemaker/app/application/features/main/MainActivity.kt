@@ -24,18 +24,22 @@ package com.signaturemaker.app.application.features.main
 
 import android.Manifest.permission
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.Utils
 import com.signaturemaker.app.application.core.extensions.hasPermissionWriteRead
 import com.signaturemaker.app.application.core.platform.BaseActivity
-import com.signaturemaker.app.application.core.platform.PermissionRequester
 import com.signaturemaker.app.application.features.files.ListFilesFragment
 import com.signaturemaker.app.application.features.menu.SettingViewModel
 import com.signaturemaker.app.application.utils.Constants
@@ -196,12 +200,13 @@ class MainActivity : BaseActivity() {
         saveSharedPreference(Constants.NEED_MIGRATE, false)
     }
 
-    private fun loadOldPath(): String = loadSharedPreference(Constants.ID_PREF_PATH, Constants.DEFAULT_OLD_PATH)
+    private fun loadOldPath(): String =
+        loadSharedPreference(Constants.ID_PREF_PATH, Constants.DEFAULT_OLD_PATH)
 
     private fun isNeedMigrate(): Boolean = File(loadOldPath()).exists()
 
     private fun permissions() {
-        PermissionRequester(this, permission.WRITE_EXTERNAL_STORAGE, binding.root).runWithPermission({
+        runWithPermission({
             "Migrate start".logd()
             migrateFiles()
             "Migrate finish".logd()
@@ -209,7 +214,7 @@ class MainActivity : BaseActivity() {
         }, {
             createTableView()
             "Cancel migrate - permission is denied".logd()
-        })
+        }, permission.WRITE_EXTERNAL_STORAGE)
     }
 
     private fun migrateFiles() {
@@ -223,6 +228,45 @@ class MainActivity : BaseActivity() {
                   android.os.Process.killProcess(android.os.Process.myPid())
               }, 200)
         }*/
+    }
+
+
+    private var onGranted: () -> Unit = {}
+    private var onDenied: () -> Unit = {}
+
+    private val requestPermissionLauncher: ActivityResultLauncher<String> =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                onGranted.invoke()
+            } else {
+                binding.root.let {
+                    Snackbar.make(it, R.string.body_permissions, Snackbar.LENGTH_SHORT)
+                        .setAction(R.string.title_setting) {
+                            goSetting()
+                        }.show()
+                }
+                onDenied.invoke()
+            }
+        }
+
+    fun runWithPermission(
+        onGranted: () -> Unit, onDenied: () -> Unit, permission: String,
+    ) {
+        this.onGranted = onGranted
+        this.onDenied = onDenied
+        requestPermissionLauncher.launch(permission)
+    }
+
+    private fun goSetting() {
+        val intent = Intent(
+            Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+            Uri.parse("package:$packageName")
+        )
+        intent.addCategory(Intent.CATEGORY_DEFAULT)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
     }
 }
 
