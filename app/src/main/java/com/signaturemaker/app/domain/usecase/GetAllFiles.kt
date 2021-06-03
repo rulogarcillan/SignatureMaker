@@ -7,12 +7,13 @@ import com.signaturemaker.app.domain.usecase.GetAllFiles.Params
 import com.tuppersoft.skizo.kotlin.core.domain.baseusecase.FlowGlobalUseCase
 import com.tuppersoft.skizo.kotlin.core.domain.response.Response
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
 /**
  * Created by Raúl Rodríguez Concepción
  * raulrcs@gmail.com
  */
-class GetAllFiles constructor(private val repository: FilesRepository) :
+class GetAllFiles @Inject constructor(private val repository: FilesRepository) :
     FlowGlobalUseCase<List<ItemFile>, Params>() {
 
     data class Params(

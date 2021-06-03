@@ -11,12 +11,13 @@ import com.tuppersoft.skizo.kotlin.core.domain.response.Response
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import java.io.File
+import javax.inject.Inject
 
 /**
  * Created by Raúl Rodríguez Concepción
  * raulrcs@gmail.com
  */
-class RemoveFile constructor(private val repository: FilesRepository) :
+class RemoveFile @Inject constructor(private val repository: FilesRepository) :
     FlowGlobalUseCase<Boolean, Params>() {
 
     data class Params(
