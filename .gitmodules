@@ -1,6 +1,0 @@
-[submodule "skizo-android-core"]
-	path = skizo-android-core
-	url = https://github.com/rulogarcillan/skizo-android-core.git
-[submodule "skizo-kotlin-core"]
-	path = skizo-kotlin-core
-	url = https://github.com/rulogarcillan/skizo-kotlin-core.git
