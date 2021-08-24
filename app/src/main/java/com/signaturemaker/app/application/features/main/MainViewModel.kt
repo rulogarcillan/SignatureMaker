@@ -1,15 +1,12 @@
 package com.signaturemaker.app.application.features.main
 
-import android.content.Context
 import android.os.Build
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.signaturemaker.app.domain.usecase.MoveAllFiles
 import com.signaturemaker.app.domain.usecase.RemoveAllFiles
 import com.signaturemaker.app.domain.usecase.RemoveAllFiles.Params
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

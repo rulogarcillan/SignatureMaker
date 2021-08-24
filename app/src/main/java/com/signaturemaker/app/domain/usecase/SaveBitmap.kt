@@ -7,16 +7,17 @@ import com.signaturemaker.app.domain.repository.FilesRepository
 import com.signaturemaker.app.domain.usecase.SaveBitmap.Params
 import com.tuppersoft.skizo.kotlin.core.domain.baseusecase.FlowGlobalUseCase
 import com.tuppersoft.skizo.kotlin.core.domain.response.Response
-import kotlinx.coroutines.flow.Flow
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import javax.inject.Inject
+import kotlinx.coroutines.flow.Flow
 
 /**
  * Created by Raúl Rodríguez Concepción
  * raulrcs@gmail.com
  */
-class SaveBitmap constructor(private val repository: FilesRepository) :
+class SaveBitmap @Inject constructor(private val repository: FilesRepository) :
     FlowGlobalUseCase<Uri, Params>() {
 
     data class Params(

@@ -1,7 +1,6 @@
 package com.signaturemaker.app.application.features.files
 
 import android.os.Build
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -49,7 +48,7 @@ class ListFilesViewModel @Inject constructor(
 
     fun removeFile(itemFile: ItemFile) {
         GlobalScope.launch(Dispatchers.IO) {
-            removeFile.invoke(Params(Build.VERSION.SDK_INT,itemFile)).collect {
+            removeFile.invoke(Params(Build.VERSION.SDK_INT, itemFile)).collect {
                 "Removed!!".logd()
             }
         }

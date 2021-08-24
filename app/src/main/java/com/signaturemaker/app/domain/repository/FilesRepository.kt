@@ -4,8 +4,8 @@ import android.graphics.Bitmap
 import android.net.Uri
 import com.signaturemaker.app.domain.models.ItemFile
 import com.tuppersoft.skizo.kotlin.core.domain.response.Response
-import kotlinx.coroutines.flow.Flow
 import java.io.File
+import kotlinx.coroutines.flow.Flow
 
 interface FilesRepository {
 

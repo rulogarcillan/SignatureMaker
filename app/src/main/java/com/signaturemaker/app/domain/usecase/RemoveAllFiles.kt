@@ -3,13 +3,14 @@ package com.signaturemaker.app.domain.usecase
 import com.signaturemaker.app.domain.usecase.RemoveFile.Params
 import com.tuppersoft.skizo.kotlin.core.customtypealias.OnFailure
 import com.tuppersoft.skizo.kotlin.core.domain.baseusecase.GlobalUseCase
+import javax.inject.Inject
 import kotlinx.coroutines.flow.collect
 
 /**
  * Created by Raúl Rodríguez Concepción
  * raulrcs@gmail.com
  */
-class RemoveAllFiles constructor(
+class RemoveAllFiles @Inject constructor(
     private val removeFile: RemoveFile,
     private val getAllFiles: GetAllFiles
 ) :

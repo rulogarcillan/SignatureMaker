@@ -22,9 +22,6 @@ import com.tuppersoft.skizo.android.core.extension.logd
 import com.tuppersoft.skizo.kotlin.core.domain.response.Response
 import com.tuppersoft.skizo.kotlin.core.domain.response.Response.onSuccess
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -33,6 +30,9 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import javax.inject.Inject
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
 
 class FilesRepositoryImp @Inject constructor(@ApplicationContext val appContext: Context) : FilesRepository {
 
@@ -50,7 +50,8 @@ class FilesRepositoryImp @Inject constructor(@ApplicationContext val appContext:
         contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, displayName)
         contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/png")
         contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, pathToSave)
-        //contentValues.put(MediaStore.MediaColumns.DATE_TAKEN, System.currentTimeMillis())
+        contentValues.put(MediaStore.MediaColumns.DATE_TAKEN, System.currentTimeMillis())
+
         val resolver: ContentResolver = appContext.contentResolver
         var uri: Uri? = null
         try {
@@ -75,7 +76,7 @@ class FilesRepositoryImp @Inject constructor(@ApplicationContext val appContext:
         } finally {
             stream?.close()
         }
-        return flow { emit(Response.onSuccess(uri!!)) }
+        return flow { emit(onSuccess(uri!!)) }
     }
 
     override suspend fun saveFileBitmapLessAndroid10(
@@ -106,7 +107,7 @@ class FilesRepositoryImp @Inject constructor(@ApplicationContext val appContext:
             file
         )
 
-        return flow { emit(Response.onSuccess(photoURI)) }
+        return flow { emit(onSuccess(photoURI)) }
     }
 
     @RequiresApi(VERSION_CODES.Q)
@@ -116,9 +117,8 @@ class FilesRepositoryImp @Inject constructor(@ApplicationContext val appContext:
             null,
             null
         )
-        return flow { emit(Response.onSuccess(true)) }
+        return flow { emit(onSuccess(true)) }
     }
-
 
     override suspend fun deleteFileBitmapLessAndroid10(file: File): Flow<Response<Boolean>> {
         return flow {
@@ -155,7 +155,6 @@ class FilesRepositoryImp @Inject constructor(@ApplicationContext val appContext:
             val displayNameColumn = cursor.getColumnIndex(MediaStore.Images.Media.DISPLAY_NAME)
             val sizeColumn = cursor.getColumnIndex(MediaStore.Images.Media.SIZE)
             val dateColumn = cursor.getColumnIndex(MediaStore.Images.Media.DATE_TAKEN)
-
             while (cursor.moveToNext()) {
                 val id = cursor.getLong(idColumn)
                 val displayName = cursor.getString(displayNameColumn) ?: "NO_NAME"
@@ -179,7 +178,7 @@ class FilesRepositoryImp @Inject constructor(@ApplicationContext val appContext:
             }
         }
 
-        return flow { emit(Response.onSuccess(galleryImageUrls.toList())) }
+        return flow { emit(onSuccess(galleryImageUrls.toList())) }
     }
 
     override suspend fun loadItemsFilesLessAndroid10(filesPath: String): Flow<Response<List<ItemFile>>> {
@@ -210,9 +209,9 @@ class FilesRepositoryImp @Inject constructor(@ApplicationContext val appContext:
 
             }
             Utils.sort(itemListFiles, Utils.sortOrder)
-            flow { emit(Response.onSuccess(itemListFiles)) }
+            flow { emit(onSuccess(itemListFiles)) }
         } else {
-            flow { emit(Response.onSuccess(emptyList<ItemFile>())) }
+            flow { emit(onSuccess(emptyList<ItemFile>())) }
         }
     }
 
@@ -225,7 +224,7 @@ class FilesRepositoryImp @Inject constructor(@ApplicationContext val appContext:
 
             oldFile.renameTo(newFile)
             reloadMediaScanner(oldFile.path, newFile.path).collect {
-                emit(Response.onSuccess(true))
+                emit(onSuccess(true))
             }
         }
     }
@@ -237,7 +236,7 @@ class FilesRepositoryImp @Inject constructor(@ApplicationContext val appContext:
             ) { path, _ ->
                 "Scan complete for: $path".logd()
             }
-            emit(Response.onSuccess(true))
+            emit(onSuccess(true))
         }
     }
 

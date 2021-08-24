@@ -50,8 +50,8 @@ import com.tuppersoft.skizo.android.core.extension.logd
 import com.tuppersoft.skizo.android.core.extension.saveSharedPreference
 import com.tuppersoft.skizo.android.core.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.app_toolbar.view.tvTittle
 import java.io.File
+import kotlinx.android.synthetic.main.app_toolbar.view.tvTittle
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
@@ -229,7 +229,6 @@ class MainActivity : BaseActivity() {
               }, 200)
         }*/
     }
-
 
     private var onGranted: () -> Unit = {}
     private var onDenied: () -> Unit = {}

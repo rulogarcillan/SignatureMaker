@@ -6,8 +6,8 @@ import com.signaturemaker.app.domain.repository.FilesRepository
 import com.signaturemaker.app.domain.usecase.GetAllFiles.Params
 import com.tuppersoft.skizo.kotlin.core.domain.baseusecase.FlowGlobalUseCase
 import com.tuppersoft.skizo.kotlin.core.domain.response.Response
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
+import kotlinx.coroutines.flow.Flow
 
 /**
  * Created by Raúl Rodríguez Concepción

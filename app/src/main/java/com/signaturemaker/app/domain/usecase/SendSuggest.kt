@@ -5,13 +5,14 @@ import com.signaturemaker.app.domain.repository.SignatureRepository
 import com.signaturemaker.app.domain.usecase.SendSuggest.Params
 import com.tuppersoft.skizo.kotlin.core.domain.baseusecase.FlowGlobalUseCase
 import com.tuppersoft.skizo.kotlin.core.domain.response.Response
+import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Created by Raúl Rodríguez Concepción on 2019-12-23.
  * raulrcs@gmail.com
  */
-class SendSuggest constructor(private val repository: SignatureRepository) :
+class SendSuggest @Inject constructor(private val repository: SignatureRepository) :
     FlowGlobalUseCase<Boolean, Params>() {
 
     data class Params(

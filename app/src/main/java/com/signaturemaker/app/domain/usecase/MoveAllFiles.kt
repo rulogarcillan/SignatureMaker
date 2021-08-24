@@ -7,15 +7,16 @@ import com.signaturemaker.app.domain.usecase.MoveAllFiles.Params
 import com.tuppersoft.skizo.android.core.extension.logd
 import com.tuppersoft.skizo.kotlin.core.customtypealias.OnFailure
 import com.tuppersoft.skizo.kotlin.core.domain.baseusecase.GlobalUseCase
-import kotlinx.coroutines.flow.collect
 import java.io.File
+import javax.inject.Inject
+import kotlinx.coroutines.flow.collect
 
 /**
  * Created by Raúl Rodríguez Concepción
  * raulrcs@gmail.com
  */
 @Deprecated("Only for migration")
-class MoveAllFiles constructor(private val repository: FilesRepository) :
+class MoveAllFiles @Inject constructor(private val repository: FilesRepository) :
     GlobalUseCase<Boolean, Params>() {
 
     data class Params(

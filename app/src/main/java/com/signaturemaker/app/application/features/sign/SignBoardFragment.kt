@@ -418,7 +418,6 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
         popupMenu.menuInflater.inflate(R.menu.save_menu, popupMenu.menu)
         popupMenu.setOnMenuItemClickListener { menuItem ->
 
-
             (activity as? MainActivity)?.let { mActivity ->
                 mActivity.runWithPermission({
                     if (Utils.nameSave) {

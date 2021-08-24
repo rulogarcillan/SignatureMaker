@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <group android:checkableBehavior="none">
-        
+
         <item
             android:id="@+id/idSettings"
             android:icon="@drawable/ic_menu"

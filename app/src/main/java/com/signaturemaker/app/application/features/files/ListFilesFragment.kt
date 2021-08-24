@@ -181,7 +181,7 @@ class ListFilesFragment : GlobalFragment() {
     private fun loadItemsFiles() {
         activity?.let { mActivity ->
             (mActivity as? MainActivity)?.let {
-              it.runWithPermission({
+                it.runWithPermission({
                     listFilesViewModel.getAllFiles(Utils.path)
                 }, {}, permission.WRITE_EXTERNAL_STORAGE)
             }
