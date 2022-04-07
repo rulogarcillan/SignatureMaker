@@ -34,6 +34,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.signaturemaker.app.R
@@ -47,11 +49,13 @@ import com.signaturemaker.app.databinding.ActivityMainBinding
 import com.tuppersoft.skizo.android.core.extension.gone
 import com.tuppersoft.skizo.android.core.extension.loadSharedPreference
 import com.tuppersoft.skizo.android.core.extension.logd
+import com.tuppersoft.skizo.android.core.extension.loge
 import com.tuppersoft.skizo.android.core.extension.saveSharedPreference
 import com.tuppersoft.skizo.android.core.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import kotlinx.android.synthetic.main.app_toolbar.view.tvTittle
+
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
@@ -126,11 +130,16 @@ class MainActivity : BaseActivity() {
      */
     private fun initAdvertising() {
         binding.adView.visibility = View.GONE
+        MobileAds.initialize(this) {}
         val adRequest = AdRequest.Builder().build()
         binding.adView.loadAd(adRequest)
         binding.adView.adListener = object : AdListener() {
             override fun onAdLoaded() {
                 binding.adView.visibility = View.VISIBLE
+            }
+
+            override fun onAdFailedToLoad(adError : LoadAdError) {
+                "Error al cargar, en modo debug no se cargan".loge()
             }
         }
     }

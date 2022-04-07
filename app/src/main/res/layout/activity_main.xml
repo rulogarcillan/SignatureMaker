@@ -35,13 +35,13 @@
         app:barrierDirection="top"
         app:constraint_referenced_ids="adView" />
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
+    <com.google.android.gms.ads.AdView android:id="@+id/adView"
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        app:adSize="BANNER"
-        app:adUnitId="@string/banner_ad_unit_id"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

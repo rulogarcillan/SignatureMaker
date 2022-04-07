@@ -1,6 +1,16 @@
 {
   "changelog": [
-
+    {
+      "date": "07/04/2022",
+      "versionCode": 3200,
+      "versionName": "3.2.0",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Support for android 12L"
+        }
+      ]
+    },
     {
       "date": "29/09/2020",
       "versionCode": 3121,

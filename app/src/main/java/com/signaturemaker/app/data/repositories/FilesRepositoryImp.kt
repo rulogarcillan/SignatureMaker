@@ -8,7 +8,9 @@ import android.graphics.Bitmap
 import android.graphics.Bitmap.CompressFormat.PNG
 import android.media.MediaScannerConnection
 import android.net.Uri
+import android.os.Build
 import android.os.Build.VERSION_CODES
+
 import android.provider.MediaStore
 import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
@@ -47,15 +49,23 @@ class FilesRepositoryImp @Inject constructor(@ApplicationContext val appContext:
         }
         var stream: OutputStream? = null
         val contentValues = ContentValues()
-        contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, displayName)
-        contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/png")
-        contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, pathToSave)
-        contentValues.put(MediaStore.MediaColumns.DATE_TAKEN, System.currentTimeMillis())
+        contentValues.put(MediaStore.Images.Media.DISPLAY_NAME, displayName)
+        contentValues.put(MediaStore.Images.Media.MIME_TYPE, "image/png")
+        contentValues.put(MediaStore.Images.Media.RELATIVE_PATH, pathToSave)
+        contentValues.put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis())
+        contentValues.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis())
 
         val resolver: ContentResolver = appContext.contentResolver
         var uri: Uri? = null
         try {
-            val contentUri = MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL)
+            val contentUri =
+                if (Build.VERSION.SDK_INT >= VERSION_CODES.Q) {
+                    MediaStore.Images.Media.getContentUri(
+                        MediaStore.VOLUME_EXTERNAL_PRIMARY
+                    )
+                } else {
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                }
             uri = contentUri?.let {
                 resolver.insert(contentUri, contentValues)
             } ?: return flow { emit(Response.onFailure(CreateError(appContext.getString(R.string.title_save_ko)))) }
@@ -136,33 +146,42 @@ class FilesRepositoryImp @Inject constructor(@ApplicationContext val appContext:
     @RequiresApi(VERSION_CODES.Q)
     override suspend fun loadItemsFilesMoreAndroid10(): Flow<Response<List<ItemFile>>> {
         val galleryImageUrls = mutableListOf<ItemFile>()
+        val collection =
+            if (Build.VERSION.SDK_INT >= VERSION_CODES.Q) {
+                MediaStore.Images.Media.getContentUri(
+                    MediaStore.VOLUME_EXTERNAL
+                )
+            } else {
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+            }
         val columns = arrayOf(
-            MediaStore.Video.Media._ID,
-            MediaStore.Video.Media.DISPLAY_NAME,
-            MediaStore.Video.Media.SIZE,
+            MediaStore.Images.Media._ID,
+            MediaStore.Images.Media.DISPLAY_NAME,
+            MediaStore.Images.Media.SIZE,
+            MediaStore.Images.Media.DATE_ADDED,
             MediaStore.Images.Media.DATE_TAKEN
         )
         val orderBy = MediaStore.Images.Media.DATE_TAKEN
 
         appContext.contentResolver.query(
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            collection,
             columns,
-            MediaStore.Audio.Media.RELATIVE_PATH + " like ? ",
+            MediaStore.Images.Media.RELATIVE_PATH + " like ? ",
             arrayOf(Utils.path),
             "$orderBy DESC"
         )?.use { cursor ->
             val idColumn = cursor.getColumnIndex(MediaStore.Images.Media._ID)
             val displayNameColumn = cursor.getColumnIndex(MediaStore.Images.Media.DISPLAY_NAME)
             val sizeColumn = cursor.getColumnIndex(MediaStore.Images.Media.SIZE)
-            val dateColumn = cursor.getColumnIndex(MediaStore.Images.Media.DATE_TAKEN)
+            val dateAddedColumn = cursor.getColumnIndex(MediaStore.Images.Media.DATE_ADDED)
             while (cursor.moveToNext()) {
                 val id = cursor.getLong(idColumn)
                 val displayName = cursor.getString(displayNameColumn) ?: "NO_NAME"
                 val size = cursor.getInt(sizeColumn)
-                val date = cursor.getLong(dateColumn)
+                val date = cursor.getLong(dateAddedColumn)
 
                 val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.ROOT)
-                val myDate = Date(date)
+                val myDate = Date(date * 1000L)
                 val tam = (size / 1024).toString() + " KB"
 
                 if (displayName.startsWith("SM")) {
