@@ -34,10 +34,10 @@ android {
             keyPassword 'android'
         }
         release {
-            storeFile file('tuppersoft.jks')
-            storePassword 'temporal'
-            keyAlias 'rulo'
-            keyPassword 'temporal'
+            storeFile file('xxxxx')
+            storePassword 'xxxxx'
+            keyAlias 'xxxxx'
+            keyPassword 'xxxxx'
         }
     }
 

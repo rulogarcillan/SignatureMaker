@@ -25,7 +25,7 @@ interface FilesRepository {
 
     suspend fun deleteFileBitmapLessAndroid10(file: File): Flow<Response<Boolean>>
 
-    @Deprecated("")
+    @Deprecated("Only for migration")
     suspend fun moveFile(
         oldPath: String,
         newPath: String,

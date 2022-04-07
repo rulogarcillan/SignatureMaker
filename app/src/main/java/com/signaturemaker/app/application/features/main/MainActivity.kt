@@ -73,8 +73,10 @@ class MainActivity : BaseActivity() {
         setSupportActionBar(binding.idToolbar.mtbToolbar)
 
         initObserver()
-        initMigrate()
-        //createTableView()
+
+        //initMigrate()
+        createTableView()
+
         initAdvertising()
     }
 
@@ -138,7 +140,7 @@ class MainActivity : BaseActivity() {
                 binding.adView.visibility = View.VISIBLE
             }
 
-            override fun onAdFailedToLoad(adError : LoadAdError) {
+            override fun onAdFailedToLoad(adError: LoadAdError) {
                 "Error al cargar, en modo debug no se cargan".loge()
             }
         }
@@ -196,6 +198,7 @@ class MainActivity : BaseActivity() {
         }
     }
 
+    @Deprecated("Ya no se necesita usar este metodo, lo dejamos por si en un futuro es necesario una nueva migración")
     private fun initMigrate() {
         if (loadSharedPreference(Constants.NEED_MIGRATE, true) && isNeedMigrate()) {
             FirebaseCrashlytics.getInstance().log("Need migrate files")
