@@ -30,7 +30,7 @@ class ChangelogFragment : GlobalFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = ChangelogFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }

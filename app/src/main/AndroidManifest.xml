@@ -36,7 +36,8 @@
         <activity
             android:name=".application.features.intro.IntroActivity"
             android:configChanges="orientation|screenSize"
-            android:theme="@style/App.Theme.Intro">
+            android:theme="@style/App.Theme.Intro"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -31,6 +31,7 @@ import com.signaturemaker.app.databinding.SettingFragmentBinding
 import com.tuppersoft.skizo.android.core.extension.getColorFromAttr
 import java.util.Locale
 
+
 class SettingFragment : GlobalFragment() {
 
     override val toolbarTitle: String
@@ -106,25 +107,33 @@ class SettingFragment : GlobalFragment() {
                 OssLicensesMenuActivity.setActivityTitle(getString(R.string.license))
                 startActivity(Intent(context, OssLicensesMenuActivity::class.java))
             }
-            RATE -> {
-                context?.openRate()
-            }
-            MOREAPP -> {
-                openMoreApps()
-            }
-            PRIVACY -> {
-                openPrivacy()
-            }
-            CHANGELOG -> {
-                findNavController().navigate(R.id.ChangelogFragment, null, getNavOptions())
-            }
-            SETTING -> {
-                findNavController().navigate(R.id.SettingsFragment, null, getNavOptions())
-            }
-            SUGGEST -> {
-                showSendSuggest()
-            }
+            RATE -> showRateApp()
+            MOREAPP -> openMoreApps()
+            PRIVACY -> openPrivacy()
+            CHANGELOG -> findNavController().navigate(R.id.ChangelogFragment, null, getNavOptions())
+            SETTING -> findNavController().navigate(R.id.SettingsFragment, null, getNavOptions())
+            SUGGEST -> showSendSuggest()
+
         }
+    }
+
+    private fun showRateApp() {
+
+        context?.openRate()
+        //Auto rate
+        /*    val manager = ReviewManagerFactory.create(requireActivity())
+            val request: Task<ReviewInfo> = manager.requestReviewFlow()
+            request.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // Getting the ReviewInfo object
+                    val reviewInfo: ReviewInfo = task.result
+                    val flow: Task<Void> = manager.launchReviewFlow(requireActivity(), reviewInfo)
+                    flow.addOnCompleteListener { task1 ->
+                        task.isComplete
+
+                    }
+                }
+            }*/
     }
 
     private fun showSendSuggest() {

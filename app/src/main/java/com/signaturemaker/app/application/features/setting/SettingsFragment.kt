@@ -55,7 +55,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
     }
 
-    override fun onPreferenceTreeClick(preference: Preference?): Boolean {
+    override fun onPreferenceTreeClick(preference: Preference): Boolean {
 
         when (preference?.key) {
             Constants.ID_PREF_RESET -> {

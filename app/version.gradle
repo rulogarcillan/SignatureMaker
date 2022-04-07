@@ -11,9 +11,9 @@ ext {
     print "Comnpiled veersionCode " + mVersionCode + "\n"
 
     //sdk version
-    sdk_version = 30
+    sdk_version = 32
     min_sdk_version = 21
-    buildVersion = "30.0.3"
+    buildVersion = "32.0.0"
 }
 
 
