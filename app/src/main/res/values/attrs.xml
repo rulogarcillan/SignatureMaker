@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <declare-styleable name="myColors">
+        <attr name="buttonLeft" format="color" />
+        <attr name="buttonUp" format="color" />
+        <attr name="principalTextBoard" format="color" />
+        <attr name="layerBackground" format="color" />
+        <attr name="menuText" format="color" />
+        <attr name="backgroundInfo" format="color" />
+        <attr name="colorChipDel" format="color" />
+        <attr name="colorChipFix" format="color" />
+        <attr name="colorChipFeat" format="color" />
+        <attr name="colorChipChangelogText" format="color" />
+        <attr name="colorToolbarIcon" format="color" />
+        <attr name="shimmerColor" format="color" />
+        <attr name="separator" format="color" />
+        <attr name="principalText" format="color" />
+        <attr name="secondaryText" format="color" />
+    </declare-styleable>
+
+</resources>

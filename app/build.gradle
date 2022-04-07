@@ -1,0 +1,166 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.android.gms.oss-licenses-plugin'
+apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
+apply from: 'version.gradle'
+
+android {
+
+    viewBinding {
+        enabled = true
+    }
+
+    buildToolsVersion = buildVersion
+    compileSdkVersion sdk_version
+    defaultConfig {
+        minSdkVersion min_sdk_version
+        targetSdkVersion sdk_version
+        applicationId "com.signaturemaker.app"
+        versionCode mVersionCode
+        versionName mVersionName
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("androiddebug.keystore")
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+        release {
+            storeFile file('xxxxx')
+            storePassword 'xxxxx'
+            keyAlias 'xxxxx'
+            keyPassword 'xxxxx'
+        }
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            buildConfigField "String", "BASE_URL", '"https://api.tuppersoft.com"'
+            buildConfigField "String", "END_POINT", '"/commons"'
+            buildConfigField "String", "APP_NAME", '"Signature maker"'
+            resValue "string", "app_name", "@string/app_name_debug"
+            signingConfig signingConfigs.debug
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile(
+                    'proguard-android-optimize.txt'),
+                    'proguard-rules.pro'
+        }
+
+        release {
+            buildConfigField "String", "BASE_URL", '"https://api.tuppersoft.com"'
+            buildConfigField "String", "END_POINT", '"/commons"'
+            buildConfigField "String", "APP_NAME", '"Signature maker"'
+            resValue "string", "app_name", "@string/app_name_release"
+            signingConfig signingConfigs.release
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile(
+                    'proguard-android-optimize.txt'),
+                    'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+    packagingOptions {
+        exclude 'META-INF/library-core_release.kotlin_module'
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.6.20"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1-native-mt'
+
+    implementation "androidx.appcompat:appcompat:1.4.1"
+    implementation "com.google.android.material:material:1.5.0"
+    implementation "androidx.recyclerview:recyclerview:1.2.1"
+    implementation "androidx.annotation:annotation:1.3.0"
+    implementation "androidx.constraintlayout:constraintlayout:2.1.3"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "androidx.preference:preference-ktx:1.2.0"
+    implementation 'androidx.preference:preference-ktx:1.2.0'
+    implementation "androidx.browser:browser:1.4.0"
+
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
+    //implementation "androidx.fragment:fragment-ktx:1.2.5"
+    implementation 'androidx.activity:activity-ktx:1.4.0'
+    implementation 'androidx.fragment:fragment-ktx:1.4.1'
+
+    implementation "androidx.navigation:navigation-fragment-ktx:2.4.1"
+    implementation "androidx.navigation:navigation-ui-ktx:2.4.1"
+
+    //licenses
+    implementation 'com.google.android.gms:play-services-oss-licenses:17.0.0'
+
+    //gesture drawer
+    implementation('com.github.gcacace:signature-pad:1.3.1')
+    //floating buttons
+    implementation('com.getbase:floatingactionbutton:1.10.1')
+    //animations
+    implementation('com.daimajia.easing:library:2.4@aar')
+    implementation('com.daimajia.androidanimations:library:2.4@aar')
+    //range sneekbar
+    implementation('com.appyvet:materialrangebar:1.4.3')
+    //color picker
+    implementation('com.larswerkman:HoloColorPicker:1.5')
+
+    //GLIDE
+    implementation 'com.github.bumptech.glide:glide:4.13.1'
+    implementation 'com.google.android.play:core-ktx:1.8.1'
+    kapt 'com.github.bumptech.glide:compiler:4.13.1'
+
+    //apptinro
+    implementation 'com.github.apl-devs:appintro:v4.2.3'
+
+    implementation 'com.airbnb.android:lottie:5.0.3'
+
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
+    implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
+
+    implementation 'com.daimajia.swipelayout:library:1.2.0@aar'
+
+    //Android DI hilt
+    implementation 'com.google.dagger:hilt-android:2.41'
+    kapt 'com.google.dagger:hilt-android-compiler:2.41'
+    kapt "androidx.hilt:hilt-compiler:1.0.0"
+
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.6.0'
+
+    implementation 'com.google.firebase:firebase-ads:20.6.0'
+    implementation 'com.google.firebase:firebase-core:20.1.2'
+    implementation 'com.google.firebase:firebase-analytics:20.1.2'
+    implementation 'com.google.firebase:firebase-analytics-ktx:20.1.2'
+    implementation 'com.google.firebase:firebase-crashlytics:18.2.9'
+
+    api project(':skizo-android-core')
+    api project(':skizo-kotlin-core')
+
+
+}

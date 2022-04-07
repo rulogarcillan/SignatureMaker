@@ -1,0 +1,61 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:background="@drawable/custom_background"
+    android:orientation="vertical"
+    android:paddingBottom="20dp"
+    android:visibility="invisible">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="12dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:text="@string/min"
+            android:textColor="?attr/secondaryText"
+            app:layout_constraintStart_toStartOf="@+id/rangeBar"
+            tools:layout_editor_absoluteY="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="@string/max"
+            android:textColor="?attr/secondaryText"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="16dp" />
+    </LinearLayout>
+
+    <com.appyvet.materialrangebar.RangeBar
+        android:id="@+id/rangeBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:mrb_connectingLineColor="?attr/colorPrimaryVariant"
+        app:mrb_pinColor="?attr/colorSecondary"
+        app:mrb_pinMaxFont="10sp"
+        app:mrb_rangeBarColor="?attr/colorPrimary"
+        app:mrb_rangeBarPaddingBottom="12dp"
+        app:mrb_selectorBoundarySize="2dp"
+        app:mrb_selectorColor="?attr/colorPrimaryVariant"
+        app:mrb_selectorSize="10dp"
+        app:mrb_temporaryPins="true"
+        app:mrb_tickEnd="10"
+        app:mrb_tickInterval="1"
+        app:mrb_tickStart="0"
+        tools:layout_editor_absoluteY="8dp" />
+
+</LinearLayout>

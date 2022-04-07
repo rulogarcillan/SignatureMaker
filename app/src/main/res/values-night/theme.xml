@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+
+    <style name="ThemeSetting" parent="App.Theme">
+
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">false</item>
+        <item name="colorPrimary">@color/darkGreyPrimary</item>
+        <item name="colorSurface">@color/darkGreyPrimary</item>
+        <item name="colorPrimaryVariant">@color/darkGreyPrimary</item>
+        <item name="colorSecondary">@color/light_blue_100</item>
+        <item name="android:colorBackground">@color/darkGreyPrimary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnBackground">@color/white</item>
+        <item name="colorOnSurface">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+
+        <item name="android:navigationBarColor">?android:colorBackground</item>
+        <item name="android:navigationBarDividerColor" tools:ignore="NewApi">?android:colorBackground</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
+    </style>
+
+    <style name="App.Theme" parent="App.Theme.Custom">
+        <item name="layerBackground">@color/darkGreyPrimarytrans</item>
+        <item name="backgroundInfo">@color/blue_600</item>
+        <item name="menuText">@color/white</item>
+        <item name="separator">@color/cyan_50</item>
+        <item name="principalText">@color/cyan_50</item>
+        <item name="secondaryText">@color/white</item>
+        <item name="shimmerColor">@color/grey</item>
+        <item name="colorToolbarIcon">@color/white</item>
+        <item name="colorChipFix">@color/orange_F57C00</item>
+        <item name="colorChipDel">@color/red_500</item>
+        <item name="colorChipFeat">@color/green_689F38</item>
+        <item name="colorChipChangelogText">@color/white</item>
+        <item name="buttonLeft">@color/blue_900</item>
+        <item name="buttonUp">@color/orange_500</item>
+    </style>
+
+    <style name="MySnackBarStyle" parent="Widget.MaterialComponents.Snackbar">
+        <item name="android:backgroundTint">@color/white</item>
+    </style>
+
+    <style name="alertdialog" parent="Theme.AppCompat.DayNight.Dialog.Alert">
+        <item name="colorOnPrimary">@color/light_blue_100</item>
+        <item name="colorAccent">@color/light_blue_100</item>
+        <item name="android:colorBackground">@color/darkGreyPrimary</item>
+    </style>
+</resources>

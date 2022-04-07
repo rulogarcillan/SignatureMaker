@@ -1,0 +1,1 @@
+include ':app','skizo-android-core', 'skizo-kotlin-core'

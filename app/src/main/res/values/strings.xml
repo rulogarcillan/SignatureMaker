@@ -1,0 +1,102 @@
+<resources>
+
+
+    <string name="app_name_debug" translatable="false">Signature maker - debug</string>
+    <string name="app_name_release" translatable="false">Signature maker</string>
+    <string name="title_setting">Settings</string>
+    <string name="title_others">Others</string>
+    <string name="title_activity_settings">Settings</string>
+
+
+    <string name="title_bSave">Save</string>
+    <string name="title_bList">List</string>
+    <string name="title_bSaveSend">Save and Send</string>
+    <string name="title_bColor">Color</string>
+    <string name="title_bStroke">Stroke</string>
+    <string name="title_bRubber">Clean</string>
+    <string name="title_SingHere">Sign here</string>
+    <string name="title_save_png" translatable="false">PNG (Transparent BG)</string>
+    <string name="title_save_png_wh" translatable="false">PNG (White BG)</string>
+    <string name="title_save_svg" translatable="false">SVG (Transparent BG)</string>
+
+    <string name="title_save_ok">File saved correctly</string>
+    <string name="title_save_ko">Error saving</string>
+    <string name="tittle_clean">Clean</string>
+
+
+    <string name="sort">Sort by date</string>
+
+    <string name="body_permissions">You need to accept the permissions for a proper functioning of the app</string>
+    <string name="title_request_permision">Request for reading and writing permissions</string>
+    <string name="body_request_permision">In order to use the application correctly it is necessary to have access to certain system permissions. Accept the permissions or the application will not work.</string>
+
+    <string name="tittle_slider1">Sing</string>
+    <string name="tittle_slider2">Transfer</string>
+    <string name="tittle_slider3">Attach</string>
+    <string name="tittle_slider4">Go</string>
+
+    <string name="tittle_body_slider1">Digitalize your sign with an easy and simple procedure</string>
+    <string name="tittle_body_slider2">Save and send you sign wherever you wan</string>
+    <string name="tittle_body_slider3">Attach an image with your sign to your documents</string>
+    <string name="tittle_body_slider4">Are you ready?</string>
+
+
+    <string name="title_no_files">No files</string>
+    <string name="delete">Delete</string>
+    <string name="tittle_undo">Undo</string>
+    <!--       Preferences      -->
+    <string name="title_pref_app">App</string>
+    <string name="title_pref_advertising">Disable ads</string>
+    <string name="title_pref_advertising_sum">Disable ads if it bothers you.</string>
+    <string name="title_pref_files">Files</string>
+    <string name="title_pref_path">Exported signatures path</string>
+    <string name="title_pref_delete_sum">Delete all signatures on exit</string>
+    <string name="title_pref_delete">Delete signatures</string>
+    <string name="title_pref_gallery">Hide signatures</string>
+    <string name="title_pref_gallery_sum">Do not display signatures in the phone gallery</string>
+    <string name="title_pref_name">File name</string>
+    <string name="title_pref_name_sum">Choose file name when saving</string>
+    <string name="title_pref_siganture">Signature</string>
+    <string name="title_pref_stroke">Default stroke</string>
+    <string name="title_pref_stroke_sum">Keep last stroke used by default</string>
+    <string name="title_pref_color">Default color</string>
+    <string name="title_pref_color_sum">Keep last color used by default</string>
+    <string name="title_pref_reset">Default values</string>
+    <string name="title_pref_reset_sum">Reset all defaults</string>
+    <string name="title_pref_wallpaper_sum">Keep last wallpaper used by default</string>
+    <string name="title_pref_wallpaper">Default wallpaper</string>
+    <string name="tittle_name_of_the_file">Name of the file</string>
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-9438738341601496/1496642762</string>
+
+    <string name="develop_by_ra_l_rodr_guez_concepci_n" translatable="false">develop by Raúl Rodríguez Concepción</string>
+    <string name="changelog" translatable="false">Changelog</string>
+    <string name="license">Licenses</string>
+    <string name="rate">Rate it</string>
+    <string name="more_app">More apps</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="send_suggestions">Send suggestions</string>
+    <string name="complete_fields">Complete all fields</string>
+    <string name="thanks_comment">Thank you for your comments</string>
+    <string name="problems_comment">A problem has occurred, please try again later</string>
+    <string name="write_your_suggestion_or_comment">Write your suggestion or comment</string>
+    <string name="put_your_email">Put your email</string>
+    <string name="valid_mail">write a valid email</string>
+    <string name="suggest_sort">The comment is very short, please! write a few words more, at least 30 characters</string>
+    <string name="share">Share</string>
+    <string name="sending_message_please_wait">Sending message, please wait</string>
+    <string name="join_channel">Click here to join our telegram channel</string>
+
+
+    <string name="mode_light">Force light</string>
+    <string name="mode_dark">Force Dark</string>
+    <string name="mode_system">Defined by the system</string>
+    <string name="mode_battery">Dark in battery saver mode</string>
+    <string name="theme" translatable="false">Theme</string>
+    <string name="min" translatable="false">Min.</string>
+    <string name="max" translatable="false">Max.</string>
+    <string name="change_theme_note">For the changes to take effect, you must restart the application completely</string>
+    <string name="empty_canvas">Error, empty canvas</string>
+
+    <string name="suggest">Suggest</string>
+
+</resources>

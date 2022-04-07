@@ -1,0 +1,12 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.20"
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1-native-mt'
+
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"

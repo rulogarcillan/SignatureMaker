@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/principalLayer"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/imgSign"
+        android:layout_width="@dimen/margin_64"
+        android:layout_height="@dimen/margin_64"
+        android:src="?attr/shimmerColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <View
+        android:id="@+id/textName"
+        android:layout_width="164dp"
+        android:layout_height="@dimen/margin_16"
+        android:layout_marginStart="@dimen/margin_8"
+        android:background="?attr/shimmerColor"
+        app:layout_constraintBottom_toTopOf="@+id/textDate"
+        app:layout_constraintStart_toEndOf="@+id/imgSign"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/textDate"
+        android:layout_width="64dp"
+        android:layout_height="@dimen/margin_16"
+        android:layout_marginStart="@dimen/margin_8"
+        android:background="?attr/shimmerColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgSign"
+        app:layout_constraintTop_toBottomOf="@+id/textName" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
