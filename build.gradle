@@ -2,18 +2,22 @@
 
 buildscript {
 
+    ext {
+        agp_version = '8.1.0'
+    }
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.2'
-        classpath 'com.google.gms:google-services:4.3.10'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.20"
-        classpath 'com.google.android.gms:oss-licenses-plugin:0.10.5'
-        classpath "com.google.dagger:hilt-android-gradle-plugin:2.41"
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.4.1"
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.8.1'
+        classpath "com.android.tools.build:gradle:$agp_version"
+        classpath 'com.google.gms:google-services:4.3.15'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0"
+        classpath 'com.google.android.gms:oss-licenses-plugin:0.10.6'
+        classpath "com.google.dagger:hilt-android-gradle-plugin:2.47"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.7.0"
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.8'
+
     }
 
 }
@@ -26,8 +30,10 @@ allprojects {
         maven { url 'https://jitpack.io' }
         maven { url 'https://dl.bintray.com/guardian/android' }
     }
+
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+

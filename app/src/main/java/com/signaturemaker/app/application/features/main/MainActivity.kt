@@ -25,6 +25,8 @@ package com.signaturemaker.app.application.features.main
 import android.Manifest.permission
 import android.content.Intent
 import android.net.Uri
+import android.os.Build.VERSION
+import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.provider.Settings
 import android.view.MenuItem
@@ -54,7 +56,6 @@ import com.tuppersoft.skizo.android.core.extension.saveSharedPreference
 import com.tuppersoft.skizo.android.core.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
-import kotlinx.android.synthetic.main.app_toolbar.view.tvTittle
 
 
 @AndroidEntryPoint
@@ -166,11 +167,11 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setTitleToolbar(title: String) {
-        binding.idToolbar.mtbToolbar.tvTittle.text = title
+        binding.idToolbar.tvTittle.text = title
         if (title.isNotEmpty()) {
-            binding.idToolbar.mtbToolbar.tvTittle.visible()
+            binding.idToolbar.tvTittle.visible()
         } else {
-            binding.idToolbar.mtbToolbar.tvTittle.gone()
+            binding.idToolbar.tvTittle.gone()
         }
         supportActionBar?.title = ""
     }
@@ -218,6 +219,11 @@ class MainActivity : BaseActivity() {
     private fun isNeedMigrate(): Boolean = File(loadOldPath()).exists()
 
     private fun permissions() {
+        val permission=  if (VERSION.SDK_INT >= VERSION_CODES.TIRAMISU) {
+            permission.READ_MEDIA_IMAGES
+        }else{
+            permission.WRITE_EXTERNAL_STORAGE
+        }
         runWithPermission({
             "Migrate start".logd()
             migrateFiles()
@@ -226,20 +232,11 @@ class MainActivity : BaseActivity() {
         }, {
             createTableView()
             "Cancel migrate - permission is denied".logd()
-        }, permission.WRITE_EXTERNAL_STORAGE)
+        }, permission)
     }
 
     private fun migrateFiles() {
         mainViewModel.moveAllFiles(loadOldPath(), Utils.path)
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        /*if (supportFragmentManager.currentNavigationFragment is SingBoardFragment) {
-              Handler().postDelayed({
-                  android.os.Process.killProcess(android.os.Process.myPid())
-              }, 200)
-        }*/
     }
 
     private var onGranted: () -> Unit = {}

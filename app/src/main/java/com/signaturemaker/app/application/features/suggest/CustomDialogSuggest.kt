@@ -116,19 +116,19 @@ open class CustomDialogSuggest : DialogFragment() {
     }
 
     private fun observeSendSuggest() {
-        suggestViewModel.sendSuccess.observe(viewLifecycleOwner, {
+        suggestViewModel.sendSuccess.observe(viewLifecycleOwner) {
             if (it) {
                 dismiss()
                 Toast.makeText(view?.context, getString(R.string.thanks_comment), Toast.LENGTH_LONG).show()
             } else {
                 binding.loading.gone()
                 activity?.let {
-                    setStatusBarColorIfPossible(it.getColorFromAttr(R.attr.colorPrimaryVariant))
+                    setStatusBarColorIfPossible(it.getColorFromAttr(com.google.android.material.R.attr.colorPrimaryVariant))
                 }
                 Toast.makeText(view?.context, getString(R.string.problems_comment), Toast.LENGTH_LONG).show()
             }
 
-        })
+        }
     }
 
     private fun setStatusBarColorIfPossible(color: Int) {

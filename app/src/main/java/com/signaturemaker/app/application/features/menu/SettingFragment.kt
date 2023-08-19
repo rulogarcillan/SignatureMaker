@@ -153,8 +153,8 @@ class SettingFragment : GlobalFragment() {
     private fun openPrivacy() {
         val builder = CustomTabsIntent.Builder()
         context?.let {
-            val customTabsIntent = builder.setToolbarColor(it.getColorFromAttr(R.attr.colorPrimary))
-                .setNavigationBarColor(it.getColorFromAttr(R.attr.colorPrimary)).build()
+            val customTabsIntent = builder.setToolbarColor(it.getColorFromAttr(androidx.appcompat.R.attr.colorPrimary))
+                .setNavigationBarColor(it.getColorFromAttr(androidx.appcompat.R.attr.colorPrimary)).build()
             customTabsIntent.intent.flags =
                 Intent.FLAG_ACTIVITY_MULTIPLE_TASK or Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS or Intent.FLAG_ACTIVITY_NO_HISTORY
             customTabsIntent.launchUrl(it, Uri.parse(urlPrivacy))

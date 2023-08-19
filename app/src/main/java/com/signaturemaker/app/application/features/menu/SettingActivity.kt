@@ -9,7 +9,6 @@ import com.signaturemaker.app.databinding.SettingActivityBinding
 import com.tuppersoft.skizo.android.core.extension.gone
 import com.tuppersoft.skizo.android.core.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.app_toolbar.view.tvTittle
 
 /**
  * Created by Raúl Rodríguez Concepción on 10/05/2020.
@@ -53,11 +52,11 @@ class SettingActivity : BaseActivity() {
     }
 
     private fun setTitleToolbar(title: String) {
-        binding.inSettingToolbar.mtbToolbar.tvTittle.text = title
+        binding.inSettingToolbar.tvTittle.text = title
         if (title.isNotEmpty()) {
-            binding.inSettingToolbar.mtbToolbar.tvTittle.visible()
+            binding.inSettingToolbar.tvTittle.visible()
         } else {
-            binding.inSettingToolbar.mtbToolbar.tvTittle.gone()
+            binding.inSettingToolbar.tvTittle.gone()
         }
         supportActionBar?.title = ""
     }

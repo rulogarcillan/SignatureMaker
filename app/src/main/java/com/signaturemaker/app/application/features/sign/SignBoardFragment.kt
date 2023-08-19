@@ -27,6 +27,8 @@ import android.animation.Animator
 import android.annotation.TargetApi
 import android.content.Intent
 import android.os.Build
+import android.os.Build.VERSION
+import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -333,10 +335,15 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
     private fun openListFilesFragment() {
 
         (activity as? MainActivity)?.let { mActivity ->
+            val permission = if (VERSION.SDK_INT >= VERSION_CODES.TIRAMISU) {
+                permission.READ_MEDIA_IMAGES
+            } else {
+                permission.WRITE_EXTERNAL_STORAGE
+            }
             mActivity.runWithPermission(
                 { navigateToListFiles() },
                 {},
-                permission.WRITE_EXTERNAL_STORAGE
+                permission
             )
         }
     }
@@ -370,9 +377,12 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
                     is EmptyBitmap -> {
                         activity?.createSnackBar(failure.message)?.show()
                     }
+
                     is CreateError -> {
                         activity?.createSnackBar(failure.message)?.show()
                     }
+
+                    else -> Unit
                 }
             }
         }
@@ -392,6 +402,7 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
                     name
                 )
             }
+
             R.id.savePngWhite -> {
 
                 signBoardViewModel.saveFileBitmap(
@@ -417,7 +428,11 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
         val popupMenu = PopupMenu(context, binding.actionsButtons.bSave)
         popupMenu.menuInflater.inflate(R.menu.save_menu, popupMenu.menu)
         popupMenu.setOnMenuItemClickListener { menuItem ->
-
+            val permission = if (VERSION.SDK_INT >= VERSION_CODES.TIRAMISU) {
+                permission.READ_MEDIA_IMAGES
+            } else {
+                permission.WRITE_EXTERNAL_STORAGE
+            }
             (activity as? MainActivity)?.let { mActivity ->
                 mActivity.runWithPermission({
                     if (Utils.nameSave) {
@@ -425,7 +440,7 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
                     } else {
                         saveFileAndSend(menuItem.itemId, false)
                     }
-                }, {}, permission.WRITE_EXTERNAL_STORAGE)
+                }, {}, permission)
 
             }
             false
@@ -488,6 +503,7 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
                     binding.root.background = getDrawable(it, R.drawable.fondotrans1)
                 }
             }
+
             2 -> {
                 context?.let {
                     binding.txtSingHere.setTextColor(
@@ -499,6 +515,7 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
                     binding.root.background = getDrawable(it, R.drawable.fondotrans2)
                 }
             }
+
             3 -> {
 
                 context?.let {
@@ -511,6 +528,7 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
                     )
                 }
             }
+
             4 -> {
                 context?.let {
                     binding.txtSingHere.setTextColor(
@@ -559,7 +577,11 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
         val popupMenu = PopupMenu(context, binding.actionsButtons.bSave)
         popupMenu.menuInflater.inflate(R.menu.share_menu, popupMenu.menu)
         popupMenu.setOnMenuItemClickListener { menuItem ->
-
+            val permission = if (VERSION.SDK_INT >= VERSION_CODES.TIRAMISU) {
+                permission.READ_MEDIA_IMAGES
+            } else {
+                permission.WRITE_EXTERNAL_STORAGE
+            }
             (activity as? MainActivity)?.let { mActivity ->
                 mActivity.runWithPermission({
                     if (Utils.nameSave) {
@@ -567,7 +589,7 @@ class SignBoardFragment : GlobalFragment(), View.OnClickListener, View.OnLongCli
                     } else {
                         saveFileAndSend(menuItem.itemId, true)
                     }
-                }, {}, permission.WRITE_EXTERNAL_STORAGE)
+                }, {}, permission)
 
             }
 

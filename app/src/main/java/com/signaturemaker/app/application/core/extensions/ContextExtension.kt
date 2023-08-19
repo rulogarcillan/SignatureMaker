@@ -6,6 +6,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build.VERSION
+import android.os.Build.VERSION_CODES
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.signaturemaker.app.application.features.menu.SettingFragment
@@ -25,17 +27,23 @@ fun Context.openRate() {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(SettingFragment.urlRate)
         this.startActivity(intent)
-    } catch (e: ActivityNotFoundException) {
-    }
+    } catch (_: ActivityNotFoundException) { }
 }
 
 fun Context.hasPermissionWriteRead(): Boolean {
-    return ActivityCompat.checkSelfPermission(
-        this,
-        permission.READ_EXTERNAL_STORAGE
-    ) == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
-        this,
-        permission.WRITE_EXTERNAL_STORAGE
-    ) == PackageManager.PERMISSION_GRANTED
+    return if (VERSION.SDK_INT >= VERSION_CODES.TIRAMISU) {
+        ActivityCompat.checkSelfPermission(
+            this,
+            permission.READ_MEDIA_IMAGES
+        ) == PackageManager.PERMISSION_GRANTED
+    } else {
+        ActivityCompat.checkSelfPermission(
+            this,
+            permission.READ_EXTERNAL_STORAGE
+        ) == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
+            this,
+            permission.WRITE_EXTERNAL_STORAGE
+        ) == PackageManager.PERMISSION_GRANTED
+    }
 }
 

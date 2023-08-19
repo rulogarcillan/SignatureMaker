@@ -27,6 +27,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 import android.Manifest.permission
 import android.app.Activity
 import android.content.Intent
+import android.os.Build.VERSION
+import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -73,8 +75,7 @@ class ListFilesFragment : GlobalFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
+    ): View {
         _binding = ListFilesFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -147,20 +148,20 @@ class ListFilesFragment : GlobalFragment() {
     }
 
     private fun initHandleFileList() {
-        listFilesViewModel.listFiles.observe(viewLifecycleOwner, { list ->
+        listFilesViewModel.listFiles.observe(viewLifecycleOwner) { list ->
             addListToAdapter(list)
             if (list.isNotEmpty()) {
                 binding.txtMnsNoFiles.gone()
             } else {
                 binding.txtMnsNoFiles.visible()
             }
-        })
+        }
     }
 
     private fun initReloadFileList() {
-        sharedViewModel.reloadFileList.observe(viewLifecycleOwner, {
+        sharedViewModel.reloadFileList.observe(viewLifecycleOwner) {
             reloadFiles()
-        })
+        }
     }
 
     override fun onResume() {
@@ -180,10 +181,15 @@ class ListFilesFragment : GlobalFragment() {
 
     private fun loadItemsFiles() {
         activity?.let { mActivity ->
+            val permission = if (VERSION.SDK_INT >= VERSION_CODES.TIRAMISU) {
+                permission.READ_MEDIA_IMAGES
+            } else {
+                permission.WRITE_EXTERNAL_STORAGE
+            }
             (mActivity as? MainActivity)?.let {
                 it.runWithPermission({
                     listFilesViewModel.getAllFiles(Utils.path)
-                }, {}, permission.WRITE_EXTERNAL_STORAGE)
+                }, {}, permission)
             }
         }
     }
