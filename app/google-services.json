@@ -15,14 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "1099061363775-dejo01i5qvnte3f9bruiujtn8sdhbvah.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.signaturemaker.app",
-            "certificate_hash": "7d8572d6ad1289bdfae8fec50012195540d04316"
-          }
-        },
-        {
           "client_id": "1099061363775-47tijkfs4vi0jp68bttf7bdj3nldsjcf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -31,11 +23,11 @@
           }
         },
         {
-          "client_id": "1099061363775-usp6hd8e6fo3voplsor9forhu9lslm9r.apps.googleusercontent.com",
+          "client_id": "1099061363775-dejo01i5qvnte3f9bruiujtn8sdhbvah.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.signaturemaker.app",
-            "certificate_hash": "b0e174d5d7c3ad079e9febf726e4c87c375ec9e4"
+            "certificate_hash": "7d8572d6ad1289bdfae8fec50012195540d04316"
           }
         },
         {
@@ -44,6 +36,14 @@
           "android_info": {
             "package_name": "com.signaturemaker.app",
             "certificate_hash": "62f688bdaa31290e4cb1e02dbcf3e8adfaeb5617"
+          }
+        },
+        {
+          "client_id": "1099061363775-usp6hd8e6fo3voplsor9forhu9lslm9r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.signaturemaker.app",
+            "certificate_hash": "b0e174d5d7c3ad079e9febf726e4c87c375ec9e4"
           }
         },
         {

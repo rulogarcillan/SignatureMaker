@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- DIALOG ANIMATIONS-->
-    <style name="dialog_animations_fade_in_fade_out">
-        <item name="android:windowEnterAnimation">@anim/skizo_fade_in</item>
-        <item name="android:windowExitAnimation">@anim/skizo_fade_out</item>
-    </style>
-</resources>

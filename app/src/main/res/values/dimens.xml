@@ -1,6 +1,0 @@
-<resources>
-
-    <dimen name="font_large">@dimen/text_size_18</dimen>
-    <dimen name="toolbarTitleSize">@dimen/font_large</dimen>
-
-</resources>
