@@ -39,6 +39,9 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.ump.ConsentInformation
+import com.google.android.ump.ConsentRequestParameters
+import com.google.android.ump.UserMessagingPlatform
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.Utils
@@ -56,6 +59,7 @@ import com.tuppersoft.skizo.android.core.extension.saveSharedPreference
 import com.tuppersoft.skizo.android.core.extension.visible
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
+import java.util.concurrent.atomic.AtomicBoolean
 
 
 @AndroidEntryPoint
@@ -64,7 +68,8 @@ class MainActivity : BaseActivity() {
     private var flagAdvertising: Boolean = false
     private val settingViewModel: SettingViewModel by viewModels()
     private val mainViewModel: MainViewModel by viewModels()
-
+    private lateinit var consentInformation: ConsentInformation
+    private var isMobileAdsInitializeCalled = AtomicBoolean(false)
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,11 +79,9 @@ class MainActivity : BaseActivity() {
         setSupportActionBar(binding.idToolbar.mtbToolbar)
 
         initObserver()
-
+        gdpr()
         //initMigrate()
         createTableView()
-
-        initAdvertising()
     }
 
     public override fun onRestart() {
@@ -118,6 +121,41 @@ class MainActivity : BaseActivity() {
         }
     }
 
+    private fun gdpr() {
+        // Create a ConsentRequestParameters object.
+        val params = ConsentRequestParameters
+            .Builder()
+            .build()
+
+        consentInformation = UserMessagingPlatform.getConsentInformation(this)
+        consentInformation.requestConsentInfoUpdate(
+            this,
+            params,
+            {
+                UserMessagingPlatform.loadAndShowConsentFormIfRequired(
+                    this@MainActivity
+                ) { loadAndShowError ->
+                    // Consent gathering failed.
+                    "Error de consentimiento: ${loadAndShowError?.message}".logd()
+                    if (consentInformation.canRequestAds()) {
+                        initAdvertising()
+                    }
+                }
+
+            },
+            { requestConsentError ->
+                "Error de consentimiento2: ${requestConsentError.message}".logd()
+                String.format(
+                    "%s: %s",
+                    requestConsentError.errorCode,
+                    requestConsentError.message
+                ).logd()
+            })
+        if (consentInformation.canRequestAds()) {
+            initAdvertising()
+        }
+    }
+
     /**
      * hide advertising if options is selected
      */
@@ -132,6 +170,9 @@ class MainActivity : BaseActivity() {
      * Init advertising
      */
     private fun initAdvertising() {
+        if (isMobileAdsInitializeCalled.getAndSet(true)) {
+            return
+        }
         binding.adView.visibility = View.GONE
         MobileAds.initialize(this) {}
         val adRequest = AdRequest.Builder().build()

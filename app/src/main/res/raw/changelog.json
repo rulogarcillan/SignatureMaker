@@ -1,6 +1,17 @@
 {
   "changelog": [
     {
+      "date": "22/12/2023",
+      "versionCode": 3400,
+      "versionName": "3.4.0",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Added new GDPR consent"
+        }
+      ]
+    },
+    {
       "date": "19/08/2023",
       "versionCode": 3300,
       "versionName": "3.3.0",

@@ -166,6 +166,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics:18.4.0'
     implementation 'com.google.android.gms:play-services-ads:22.2.0'
 
+    implementation("com.google.android.ump:user-messaging-platform:2.1.0")
 
     api project(':skizo-android-core')
     api project(':skizo-kotlin-core')

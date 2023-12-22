@@ -15,11 +15,14 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
+import com.google.android.ump.ConsentInformation
+import com.google.android.ump.UserMessagingPlatform
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.getNavOptions
 import com.signaturemaker.app.application.core.extensions.openRate
 import com.signaturemaker.app.application.core.platform.GlobalFragment
 import com.signaturemaker.app.application.features.menu.MenuIdentifier.CHANGELOG
+import com.signaturemaker.app.application.features.menu.MenuIdentifier.GDPR
 import com.signaturemaker.app.application.features.menu.MenuIdentifier.LICENSE
 import com.signaturemaker.app.application.features.menu.MenuIdentifier.MOREAPP
 import com.signaturemaker.app.application.features.menu.MenuIdentifier.PRIVACY
@@ -29,10 +32,21 @@ import com.signaturemaker.app.application.features.menu.MenuIdentifier.SUGGEST
 import com.signaturemaker.app.application.features.suggest.CustomDialogSuggest
 import com.signaturemaker.app.databinding.SettingFragmentBinding
 import com.tuppersoft.skizo.android.core.extension.getColorFromAttr
+import com.tuppersoft.skizo.android.core.extension.loge
 import java.util.Locale
 
 
 class SettingFragment : GlobalFragment() {
+
+
+    // Show a privacy options button if required.
+    private val isPrivacyOptionsRequired: Boolean
+        get() =
+            (activity as? SettingActivity)?.let {
+                it.consentInformation.privacyOptionsRequirementStatus ==
+                        ConsentInformation.PrivacyOptionsRequirementStatus.REQUIRED
+            } ?: false
+
 
     override val toolbarTitle: String
         get() = ""
@@ -90,6 +104,8 @@ class SettingFragment : GlobalFragment() {
         list.add(ItemSettingMenu(MOREAPP, R.drawable.ic_moreapp, R.string.more_app))
         list.add(ItemSettingMenu(LICENSE, R.drawable.ic_copyright, R.string.license))
         list.add(ItemSettingMenu(PRIVACY, R.drawable.ic_privacy, R.string.privacy_policy))
+        list.add(ItemSettingMenu(GDPR, R.drawable.ic_action_list, R.string.handle_privacy_policy))
+
 
         val settingAdapter = SettingAdapter()
         binding.rvMenu.layoutManager = GridLayoutManager(context, 1)
@@ -107,13 +123,20 @@ class SettingFragment : GlobalFragment() {
                 OssLicensesMenuActivity.setActivityTitle(getString(R.string.license))
                 startActivity(Intent(context, OssLicensesMenuActivity::class.java))
             }
+
             RATE -> showRateApp()
             MOREAPP -> openMoreApps()
             PRIVACY -> openPrivacy()
             CHANGELOG -> findNavController().navigate(R.id.ChangelogFragment, null, getNavOptions())
             SETTING -> findNavController().navigate(R.id.SettingsFragment, null, getNavOptions())
             SUGGEST -> showSendSuggest()
-
+            GDPR -> {
+                if (isPrivacyOptionsRequired) {
+                    UserMessagingPlatform.showPrivacyOptionsForm(requireActivity()) { formError ->
+                        formError?.message?.loge()
+                    }
+                }
+            }
         }
     }
 

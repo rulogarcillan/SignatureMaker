@@ -7,5 +7,5 @@ package com.signaturemaker.app.application.features.menu
  */
 enum class MenuIdentifier {
 
-    LICENSE, RATE, MOREAPP, PRIVACY, CHANGELOG, SETTING, SUGGEST
+    LICENSE, RATE, MOREAPP, PRIVACY,GDPR, CHANGELOG, SETTING, SUGGEST
 }

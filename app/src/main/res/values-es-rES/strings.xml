@@ -57,6 +57,7 @@
     <string name="rate">Valóranos</string>
     <string name="more_app">Más aplicaciones</string>
     <string name="privacy_policy">Política de privacidad</string>
+    <string name="handle_privacy_policy">Ajustar política de privacidad</string>
     <string name="send_suggestions">Envíar sugerencias</string>
     <string name="complete_fields">Completa todos los campos</string>
     <string name="thanks_comment">Gracias por tus comentarios</string>

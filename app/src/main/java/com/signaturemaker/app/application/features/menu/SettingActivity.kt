@@ -3,6 +3,9 @@ package com.signaturemaker.app.application.features.menu
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
+import androidx.core.content.ContentProviderCompat.requireContext
+import com.google.android.ump.ConsentInformation
+import com.google.android.ump.UserMessagingPlatform
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.platform.BaseActivity
 import com.signaturemaker.app.databinding.SettingActivityBinding
@@ -18,6 +21,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SettingActivity : BaseActivity() {
+
+    val consentInformation: ConsentInformation =
+        UserMessagingPlatform.getConsentInformation(this)
 
     private lateinit var binding: SettingActivityBinding
     private val settingViewModel: SettingViewModel by viewModels()
