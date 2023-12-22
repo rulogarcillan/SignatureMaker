@@ -21,7 +21,8 @@ koin = "3.4.1"
 koinCompose = "3.4.1"
 koinCore = "3.4.1"
 koinTest = "3.4.1"
-detekt = "1.23.3"
+detekt = "1.23.4"
+navigation = "2.7.6"
 detektComposeRules = "0.3.8"
 detektComposeRulesKode = "1.2.2"
 
@@ -29,6 +30,8 @@ detektComposeRulesKode = "1.2.2"
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
+
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
 
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
 compose-animation = { module = "androidx.compose.animation:animation" }

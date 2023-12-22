@@ -3,40 +3,25 @@ package com.signaturemaker.app
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.signaturemaker.app.navigation.SignatureMakerNavigation
 import com.signaturemaker.app.ui.theming.SignatureMakerAppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContent {
-            SignatureMakerAppTheme {
-                // A surface container using the 'background' color from the theme
-                Greeting("Android")
-            }
+            ComposeMainActivity()
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Button(
-        onClick = { throw RuntimeException("Test Crash") },
-        modifier = modifier
-    ) {
-        Text(text = "Hello $name!")
-    }
-}
 
-@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun ComposeMainActivity(navController: NavHostController = rememberNavController()) {
     SignatureMakerAppTheme {
-        Greeting("Android")
+        SignatureMakerNavigation(navController = navController)
     }
 }
