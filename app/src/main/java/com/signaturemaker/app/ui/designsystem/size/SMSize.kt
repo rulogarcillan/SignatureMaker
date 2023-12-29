@@ -10,6 +10,8 @@ import com.signaturemaker.app.ui.designsystem.Foundation
 @Immutable
 private object SMSizeDefaults {
   val Size00: Dp = Foundation.size0
+  val Size10: Dp = Foundation.size1
+  val Size20: Dp = Foundation.size2
   val Size50: Dp = Foundation.size4
   val Size100: Dp = Foundation.size8
   val Size125: Dp = Foundation.size10
@@ -51,6 +53,8 @@ private object SMSizeDefaults {
 @Immutable
 data class SMSize(
   val size00: Dp = SMSizeDefaults.Size00,
+  val size10: Dp = SMSizeDefaults.Size10,
+  val size20: Dp = SMSizeDefaults.Size20,
   val size50: Dp = SMSizeDefaults.Size50,
   val size100: Dp = SMSizeDefaults.Size100,
   val size125: Dp = SMSizeDefaults.Size125,

@@ -18,6 +18,8 @@ internal object Foundation {
   val radius24: Dp = 24.dp
   val radius360: Dp = 360.dp
   val size0: Dp = 0.dp
+  val size1: Dp = 1.dp
+  val size2: Dp = 2.dp
   val size4: Dp = 4.dp
   val size8: Dp = 8.dp
   val size10: Dp = 10.dp
@@ -77,4 +79,11 @@ internal object Foundation {
   val purple40: Color = Color(0xFF6650a4)
   val purpleGrey40: Color = Color(0xFF625b71)
   val pink40: Color = Color(0xFF7D5260)
+
+  val Blue40: Color = Color(0xFF3F51B5)
+  val Red40: Color = Color(0xFFF44336)
+  val Green40: Color = Color(0xFF4CAF50)
+  val Black40: Color = Color(0xFF000000)
+  val White40: Color = Color(0xFFFFFFFF)
+  val Gray40: Color = Color(0xFF6F6F6F)
 }

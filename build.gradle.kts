@@ -6,7 +6,6 @@ plugins {
     alias(libs.plugins.google.services) apply false
     alias(libs.plugins.firebase.crashlytics.gradle)
     alias(libs.plugins.detekt)
-
 }
 
 subprojects{
@@ -19,7 +18,6 @@ subprojects{
         allRules = false
         config.setFrom(File("$projectDir/../config/detekt-config.yml")) // point to your custom config defining rules to run, overwriting default behavior
     }
-
 
     dependencies {
         detektPlugins(rootProject.libs.detekt.formatting)

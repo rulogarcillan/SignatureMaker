@@ -6,6 +6,8 @@ import androidx.compose.material3.LocalMinimumInteractiveComponentEnforcement
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import com.signaturemaker.app.ui.designsystem.color.LocalSMColor
+import com.signaturemaker.app.ui.designsystem.color.SMColor
 import com.signaturemaker.app.ui.designsystem.radius.LocalSMRadius
 import com.signaturemaker.app.ui.designsystem.radius.SMRadius
 import com.signaturemaker.app.ui.designsystem.size.LocalSMSize
@@ -20,12 +22,14 @@ fun SMTheme(
     radius: SMRadius = SMTheme.radius,
     size: SMSize = SMTheme.size,
     spacing: SMSpacing = SMTheme.spacing,
+    color: SMColor = SMTheme.color,
     colorScheme: ColorScheme = MaterialTheme.colorScheme,
     content: @Composable () -> Unit
 ) {
 
     CompositionLocalProvider(
         LocalSMRadius provides radius,
+        LocalSMColor provides color,
         LocalSMSize provides size,
         LocalSMSpacing provides spacing,
         LocalMinimumInteractiveComponentEnforcement provides false,
@@ -55,4 +59,8 @@ object SMTheme {
     val material: MaterialTheme
         @Composable
         get() = MaterialTheme
+
+    val color: SMColor
+        @Composable
+        get() = LocalSMColor.current
 }

@@ -106,6 +106,13 @@ dependencies {
     implementation(libs.compose.ui.tooling)
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)
-    implementation(libs.compose.material3)
+    implementation(libs.compose.materialIconsExtended)
+
+    implementation (libs.koin.android)
+    implementation (libs.koin.android.compose)
+
+    implementation( "com.github.gcacace:signature-pad:1.3.1")
+
+  //  implementation(libs.signature.pad)
 
 }

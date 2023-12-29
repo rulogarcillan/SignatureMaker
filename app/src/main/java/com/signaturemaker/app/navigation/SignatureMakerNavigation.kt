@@ -6,8 +6,10 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.signaturemaker.app.features.sign.SignRoute
+import com.signaturemaker.app.features.gallery.GalleryDestination
+import com.signaturemaker.app.features.gallery.GalleryRoute
 import com.signaturemaker.app.features.sign.SignDestination
+import com.signaturemaker.app.features.sign.SignRoute
 
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -18,6 +20,7 @@ fun SignatureMakerNavigation(navController: NavHostController) {
         startDestination = SignDestination.route
     ) {
         addSignRoute(navController)
+        addGalleryRoute(navController)
     }
 }
 
@@ -25,5 +28,12 @@ fun SignatureMakerNavigation(navController: NavHostController) {
 private fun NavGraphBuilder.addSignRoute(navController: NavHostController) {
     composable(SignDestination.route) {
         SignRoute()
+    }
+}
+
+@ExperimentalFoundationApi
+private fun NavGraphBuilder.addGalleryRoute(navController: NavHostController) {
+    composable(GalleryDestination.route) {
+        GalleryRoute()
     }
 }

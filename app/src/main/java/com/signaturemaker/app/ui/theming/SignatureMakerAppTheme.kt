@@ -13,7 +13,9 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import com.signaturemaker.app.ui.designsystem.SMTheme
 import com.signaturemaker.app.ui.theming.color.DarkColor
+import com.signaturemaker.app.ui.theming.color.DarkSmColor
 import com.signaturemaker.app.ui.theming.color.LightColor
+import com.signaturemaker.app.ui.theming.color.LightSmColor
 
 
 @Composable
@@ -32,6 +34,11 @@ fun SignatureMakerAppTheme(
         else -> LightColor
     }
 
+    val smColor = when {
+        darkTheme -> DarkSmColor
+        else -> LightSmColor
+    }
+
 
     val view = LocalView.current
 
@@ -43,7 +50,7 @@ fun SignatureMakerAppTheme(
         }
     }
 
-    SMTheme(colorScheme = materialColorScheme) {
+    SMTheme(color = smColor, colorScheme = materialColorScheme) {
         content()
     }
 }
