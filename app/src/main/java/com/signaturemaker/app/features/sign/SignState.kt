@@ -26,7 +26,9 @@ class SignState(
     val sheetState: SheetState,
     private val coroutineScope: CoroutineScope,
     initialColor: Color,
-    @DrawableRes initialImage: Int
+    @DrawableRes initialImage: Int,
+    initialMinStrokeWidth: Float,
+    initialMaxStrokeWidth: Float
 ) {
     // Observable state properties
     var showSignHere by mutableStateOf(true)
@@ -39,6 +41,9 @@ class SignState(
         private set
 
     var selectedImage by mutableIntStateOf(initialImage)
+        private set
+
+    var strokeWidthRange by mutableStateOf(initialMinStrokeWidth..initialMaxStrokeWidth)
         private set
 
     // Reference to clear function from SignaturePad
@@ -71,6 +76,10 @@ class SignState(
         selectedImage = image
     }
 
+    fun updateStrokeWidth(range: ClosedFloatingPointRange<Float>) {
+        strokeWidthRange = range
+    }
+
     fun clearSignature() {
         clearFunction?.invoke()
     }
@@ -85,6 +94,8 @@ class SignState(
 fun rememberSignState(
     initialColor: Color,
     @DrawableRes initialImage: Int,
+    initialMinStrokeWidth: Float = 2f,
+    initialMaxStrokeWidth: Float = 5f,
     sheetState: SheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = true,
         confirmValueChange = { true }
@@ -96,7 +107,9 @@ fun rememberSignState(
             sheetState = sheetState,
             coroutineScope = coroutineScope,
             initialColor = initialColor,
-            initialImage = initialImage
+            initialImage = initialImage,
+            initialMinStrokeWidth = initialMinStrokeWidth,
+            initialMaxStrokeWidth = initialMaxStrokeWidth
         )
     }
 }

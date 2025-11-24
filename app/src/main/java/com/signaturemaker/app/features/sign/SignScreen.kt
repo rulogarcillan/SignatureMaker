@@ -20,10 +20,6 @@ import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.RangeSlider
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -89,6 +85,9 @@ fun MyXmlTextView(signState: SignState) {
     }, update = { view ->
         view as SignaturePad
         view.setPenColor(signState.selectedColor.toArgb())
+        view.setMinWidth(signState.strokeWidthRange.start)
+        view.setMaxWidth(signState.strokeWidthRange.endInclusive)
+        view.setVelocityFilterWeight(0.1f)
         signState.clearFunction = {
             view.clear()
         }
@@ -172,21 +171,19 @@ fun OptionModalBottomSheet(
         }
 
         SectionOption(title = "Stroke width") {
-            var sliderValues by remember {
-                mutableStateOf(5f..13f) // pass the initial values
-            }
-
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 RangeSlider(
-                    value = sliderValues,
+                    value = signState.strokeWidthRange,
                     onValueChange = { newValues ->
-                        sliderValues = newValues
+                        signState.updateStrokeWidth(newValues)
                     },
                     onValueChangeFinished = {},
-                    valueRange = 1f..20f,
+                    valueRange = 1f..10f,
                     steps = 0
                 )
-                SMText(text = "Start: ${sliderValues.start}, End: ${sliderValues.endInclusive}")
+                SMText(
+                    text = "Min: ${"%.1f".format(signState.strokeWidthRange.start)}, Max: ${"%.1f".format(signState.strokeWidthRange.endInclusive)}"
+                )
             }
         }
 
