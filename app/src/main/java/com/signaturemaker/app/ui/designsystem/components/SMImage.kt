@@ -9,7 +9,9 @@ import androidx.compose.ui.graphics.DefaultAlpha
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 
-
+/*
+* A simple wrapper around [Image] to standardize image usage across the app.
+*/
 @Composable
 fun SMImage(
     painter: Painter,

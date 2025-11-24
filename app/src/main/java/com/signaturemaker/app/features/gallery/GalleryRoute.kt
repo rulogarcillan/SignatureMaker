@@ -5,9 +5,8 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun GalleryRoute(
-    //onNavigateToXXXX: () -> Unit,
+    // onNavigateToXXXX: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     GalleryScreen(modifier = modifier)
 }
-

@@ -61,7 +61,6 @@ fun SMText(
     )
 }
 
-
 /**
  * SMText is a wrapper of Text
  * AnnotatedString

@@ -21,6 +21,9 @@ private object SMRadiusDefaults {
   val Radius1000: Dp = Foundation.radius360
 }
 
+/**
+ * Radius palette for SignatureMaker app
+ */
 @Immutable
 data class SMRadius(
   val radius00: Dp = SMRadiusDefaults.Radius00,

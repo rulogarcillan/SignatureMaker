@@ -32,7 +32,7 @@ import androidx.compose.ui.graphics.ImageShader
 import androidx.compose.ui.graphics.ShaderBrush
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.viewinterop.AndroidView
@@ -52,16 +52,15 @@ import com.signaturemaker.app.ui.designsystem.components.SMText
 fun SignScreen(
     modifier: Modifier = Modifier,
 ) {
-
     val signState: SignState = rememberSignState(
-        selectedColor = SMTheme.color.pen1,
-        selectedImage = R.drawable.mascara3
+        initialColor = SMTheme.color.pen1,
+        initialImage = R.drawable.mascara3
     )
 
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(tiledBackgroundBrush(signState.backgroundState.selectedImage))
+            .background(tiledBackgroundBrush(signState.selectedImage))
     ) {
         MyXmlTextView(signState)
         OptionModalBottomSheet(signState = signState)
@@ -77,12 +76,11 @@ fun SignScreen(
         ) {
             SMButton(
                 text = "Options",
-                onClick = { signState.bottomSheetState.showBottomSheet() }
+                onClick = { signState.showBottomSheet() }
             )
         }
     }
 }
-
 
 @Composable
 fun MyXmlTextView(signState: SignState) {
@@ -90,21 +88,21 @@ fun MyXmlTextView(signState: SignState) {
         LayoutInflater.from(context).inflate(R.layout.signature_pad, null, false)
     }, update = { view ->
         view as SignaturePad
-        view.setPenColor(signState.strokeColorState.selectedColor.toArgb())
+        view.setPenColor(signState.selectedColor.toArgb())
         signState.clearFunction = {
             view.clear()
         }
         view.setOnSignedListener(object : SignaturePad.OnSignedListener {
             override fun onStartSigning() {
-                signState.showSignHereChange(false)
+                signState.updateShowSignHere(false)
             }
 
             override fun onClear() {
-                signState.showSignHereChange(true)
+                signState.updateShowSignHere(true)
             }
 
             override fun onSigned() {
-                signState.showSignHereChange(false)
+                signState.updateShowSignHere(false)
             }
         })
     })
@@ -116,7 +114,6 @@ fun OptionModalBottomSheet(
     signState: SignState,
     modifier: Modifier = Modifier
 ) {
-
     val colorPen = listOf(SMTheme.color.pen1, SMTheme.color.pen2, SMTheme.color.pen3, SMTheme.color.pen4)
     val imageBackground = listOf(
         R.drawable.mascara3,
@@ -125,57 +122,56 @@ fun OptionModalBottomSheet(
     )
 
     SMModalBottomSheet(
-        onDismissRequest = { signState.bottomSheetState.closeBottomSheet() },
-        sheetState = signState.bottomSheetState.sheetState,
+        onDismissRequest = { signState.closeBottomSheet() },
+        sheetState = signState.sheetState,
         modifier = modifier,
-        openBottomSheet = signState.bottomSheetState.isShowBottomSheet,
+        openBottomSheet = signState.isShowBottomSheet,
     ) {
-
         SectionOption(title = "Options") {
             Row(
-                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 SMIconButton(
                     imageVector = Icons.Default.CleaningServices,
                     label = "Clear",
                     onClick = {
-                        signState.clearFunction?.invoke()
-                        signState.bottomSheetState.closeBottomSheet()
+                        signState.clearSignature()
+                        signState.closeBottomSheet()
                     },
                 )
 
                 SMIconButton(
                     imageVector = Icons.Default.Save,
                     label = "Save",
-                    onClick = { signState.bottomSheetState.closeBottomSheet() },
+                    onClick = { signState.closeBottomSheet() },
                 )
 
                 SMIconButton(
                     imageVector = Icons.Default.Share,
                     label = "Share",
-                    onClick = { signState.bottomSheetState.closeBottomSheet() },
+                    onClick = { signState.closeBottomSheet() },
                 )
             }
         }
 
-
         SectionOption(title = "Stroke color") {
             Row(
-                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 colorPen.forEach { color ->
                     SMColorSelector(
                         color = color,
-                        selected = color == signState.strokeColorState.selectedColor,
+                        selected = color == signState.selectedColor,
                         modifier = Modifier.size(SMTheme.size.size450),
-                        onClick = { signState.strokeColorState.changeColor(color) }
+                        onClick = { signState.updateColor(color) }
                     )
                 }
             }
         }
 
         SectionOption(title = "Stroke width") {
-
             var sliderValues by remember {
                 mutableStateOf(5f..13f) // pass the initial values
             }
@@ -196,14 +192,15 @@ fun OptionModalBottomSheet(
 
         SectionOption(title = "Background") {
             Row(
-                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 imageBackground.forEach { image ->
                     SMImageSelector(
                         image = painterResource(id = image),
-                        selected = image == signState.backgroundState.selectedImage,
+                        selected = image == signState.selectedImage,
                         modifier = Modifier.size(SMTheme.size.size450),
-                        onClick = { signState.backgroundState.changeImage(image) }
+                        onClick = { signState.updateImage(image) }
                     )
                 }
             }
@@ -213,24 +210,26 @@ fun OptionModalBottomSheet(
 
 @Composable
 fun SectionOption(
-    title: String, modifier: Modifier = Modifier, content: @Composable () -> Unit
+    title: String,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit
 ) {
     Column(modifier = modifier.padding(horizontal = SMTheme.spacing.spacing150)) {
         SMText(
-            text = title, style = SMTheme.material.typography.titleSmall
+            text = title,
+            style = SMTheme.material.typography.titleSmall
         )
         Spacer(modifier = Modifier.height(SMTheme.spacing.spacing100))
         SMLineSeparator(modifier = Modifier.padding(top = SMTheme.spacing.spacing250))
         Spacer(modifier = Modifier.height(SMTheme.spacing.spacing200))
         content()
         Spacer(modifier = Modifier.height(SMTheme.spacing.spacing200))
-
     }
 }
 
 @Composable
 fun tiledBackgroundBrush(@DrawableRes imageRes: Int): Brush {
-    val imageBitmap = ImageBitmap.imageResource(LocalContext.current.resources, imageRes)
+    val imageBitmap = ImageBitmap.imageResource(LocalResources.current, imageRes)
     val shader = ImageShader(imageBitmap, TileMode.Repeated, TileMode.Repeated)
     return ShaderBrush(shader)
 }

@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.kotlinComposeCompiler)
     alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.crashlytics.gradle)
 }
@@ -69,8 +70,10 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+        }
     }
 
     buildFeatures {
@@ -78,9 +81,6 @@ android {
         buildConfig = true
     }
 
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
-    }
 
     packaging {
         resources {
@@ -94,8 +94,8 @@ dependencies {
     implementation(platform(libs.compose.bom))
     implementation(platform(libs.firebase.bom))
 
-    implementation(libs.firebase.crashlytics.ktx)
-    implementation(libs.firebase.analytics.ktx)
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.analytics)
 
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
@@ -103,16 +103,18 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
 
     implementation(libs.compose.ui)
+    implementation(libs.compose.foundation)
     implementation(libs.compose.ui.tooling)
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)
     implementation(libs.compose.materialIconsExtended)
 
+    api(libs.kotlin.collections.immutable)
+
     implementation (libs.koin.android)
     implementation (libs.koin.android.compose)
 
-    implementation( "com.github.gcacace:signature-pad:1.3.1")
+    implementation(libs.signature.pad)
 
-  //  implementation(libs.signature.pad)
 
 }

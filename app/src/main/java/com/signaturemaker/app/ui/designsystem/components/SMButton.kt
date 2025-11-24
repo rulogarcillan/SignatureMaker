@@ -18,8 +18,9 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.semantics
 import com.signaturemaker.app.ui.designsystem.SMTheme
 
-
-//wrapper for Button component
+/**
+ * A simple button with optional start and end icons.
+ */
 @Composable
 fun SMButton(
     text: String,
@@ -58,7 +59,5 @@ fun SMButton(
                 SMIcon(imageVector = endImage, contentDescription = null)
             }
         }
-
     }
-
 }

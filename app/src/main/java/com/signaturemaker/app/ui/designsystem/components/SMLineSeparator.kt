@@ -8,8 +8,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.signaturemaker.app.ui.designsystem.SMTheme
 
+/**
+ * A line separator component.
+ */
 @Composable
-fun SMLineSeparator(modifier: Modifier) {
+fun SMLineSeparator(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .fillMaxWidth()

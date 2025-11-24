@@ -1,72 +1,75 @@
 [versions]
 namespace = "com.signaturemaker.app"
 applicationId = "com.signaturemaker.app"
-androidBuildTools = "34.0.0"
-androidCompileSdk = "34"
+androidBuildTools = "36.0.0"
+androidCompileSdk = "36"
 androidMinSdk = "26"
-androidTargetSdk = "34"
-composeCompiler = "1.5.6"
+androidTargetSdk = "36"
 
-agp = "8.2.0"
-kotlin = "1.9.21"
-core-ktx = "1.12.0"
-lifecycle-runtime-ktx = "2.6.2"
+agp = "8.13.1"
+kotlin = "2.2.21"
+core-ktx = "1.17.0"
+lifecycle-runtime-ktx = "2.10.0"
 googleKspGradlePlugin = "1.9.21-1.0.16"
-activity-compose = "1.8.2"
-compose-bom = "2023.10.01"
-firebase-bom = "32.7.0"
-firebase-crashlytics = "2.9.9"
-google-services = "4.4.0"
-koin = "3.4.1"
-koinCompose = "3.4.1"
-koinCore = "3.4.1"
-koinTest = "3.4.1"
-detekt = "1.23.4"
-navigation = "2.7.6"
-detektComposeRules = "0.3.8"
-detektComposeRulesKode = "1.2.2"
+activity-compose = "1.12.0"
+compose-bom = "2025.11.01"
+firebase-bom = "34.6.0"
+firebase-crashlytics = "3.0.6"
+google-services = "4.4.4"
+koin = "4.1.1"
+koinCompose = "4.1.1"
+koinCore = "4.1.1"
+koinTest = "4.1.1"
+detekt = "1.23.8"
+navigation = "2.9.6"
+detektComposeRules = "0.4.28"
+detektComposeRulesKode = "1.4.0"
 signaturePad = "1.3.1"
+kotlinCollections = "0.4.0"
 
 [libraries]
-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
-androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
+# Kotlin
+kotlin_collections_immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinCollections" }
 
-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
-compose-animation = { module = "androidx.compose.animation:animation" }
-compose-animationGraphics = { module = "androidx.compose.animation:animation-graphics" }
-compose-foundation = { module = "androidx.compose.foundation:foundation" }
-compose-material3 = { module = "androidx.compose.material3:material3" }
-compose-materialIconsCore = { module = "androidx.compose.material:material-icons-core" }
-compose-materialIconsExtended = { module = "androidx.compose.material:material-icons-extended" }
-compose-materialRipple = { module = "androidx.compose.material:material-ripple" }
-compose-ui = { module = "androidx.compose.ui:ui" }
-compose-ui-util = { module = "androidx.compose.ui:ui-util" }
-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+core_ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+lifecycle_runtime_ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
+activity_compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
+androidx_navigation_compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
 
-firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
-firebase-crashlytics-ktx = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
-firebase-analytics-ktx = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
-firebase-crashlytics-gradle = { group = "com.google.firebase", name = "firebase-crashlytics-gradle" }
+compose_bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
+compose_animation = { module = "androidx.compose.animation:animation" }
+compose_animationGraphics = { module = "androidx.compose.animation:animation-graphics" }
+compose_foundation = { module = "androidx.compose.foundation:foundation" }
+compose_material3 = { module = "androidx.compose.material3:material3" }
+compose_materialIconsCore = { module = "androidx.compose.material:material-icons-core" }
+compose_materialIconsExtended = { module = "androidx.compose.material:material-icons-extended" }
+compose_ui = { module = "androidx.compose.ui:ui" }
+compose_ui_util = { module = "androidx.compose.ui:ui-util" }
+compose_ui_graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+compose_ui_tooling = { module = "androidx.compose.ui:ui-tooling" }
+compose_ui_tooling_preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+
+firebase_bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
+firebase_crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
+firebase_analytics = { group = "com.google.firebase", name = "firebase-analytics" }
+firebase_crashlytics_gradle = { group = "com.google.firebase", name = "firebase-crashlytics-gradle" }
 
 
-detekt-api = { module = "io.gitlab.arturbosch.detekt:detekt-api", version.ref = "detekt" }
-detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
-detekt-test = { module = "io.gitlab.arturbosch.detekt:detekt-test", version.ref = "detekt" }
-detekt-compose-rules = { module = "io.nlopez.compose.rules:detekt", version.ref = "detektComposeRules" }
-detekt-compose-rules-kode = { module = "ru.kode:detekt-rules-compose", version.ref = "detektComposeRulesKode" }
+detekt_api = { module = "io.gitlab.arturbosch.detekt:detekt-api", version.ref = "detekt" }
+detekt_formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+detekt_test = { module = "io.gitlab.arturbosch.detekt:detekt-test", version.ref = "detekt" }
+detekt_compose_rules = { module = "io.nlopez.compose.rules:detekt", version.ref = "detektComposeRules" }
+detekt_compose_rules_kode = { module = "ru.kode:detekt-rules-compose", version.ref = "detektComposeRulesKode" }
+detekt_plugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
 
-koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
-koin-android-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinCompose" }
-koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
-koin-test = { module = "io.insert-koin:koin-test", version.ref = "koinTest" }
-koin-testJunit4 = { module = "io.insert-koin:koin-test-junit4", version.ref = "koin" }
-koin-testJunit5 = { module = "io.insert-koin:koin-test-junit5", version.ref = "koin" }
+koin_android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin_android_compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinCompose" }
+koin_core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
+koin_test = { module = "io.insert-koin:koin-test", version.ref = "koinTest" }
+koin_testJunit4 = { module = "io.insert-koin:koin-test-junit4", version.ref = "koin" }
+koin_testJunit5 = { module = "io.insert-koin:koin-test-junit5", version.ref = "koin" }
 
-signature-pad = { module = "com.github.gcacace:signature-pad", version =  "signaturePad" }
+signature_pad = { module = "com.github.gcacace:signature-pad", version.ref = "signaturePad" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -75,3 +78,4 @@ google-services = { id = "com.google.gms.google-services", version.ref = "google
 firebase-crashlytics-gradle = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 googleKsp = { id = "com.google.devtools.ksp", version.ref = "googleKspGradlePlugin" }
+kotlinComposeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

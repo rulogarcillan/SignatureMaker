@@ -14,14 +14,20 @@ import androidx.navigation.NavHostController
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
+/**
+ * Main Activity Menu
+ */
 @Stable
-class MainActivityState(
+data class MainActivityState(
     val navController: NavHostController,
     val menuSelected: MainActivityMenu,
     val drawerState: DrawerState,
     val onDrawerClick: () -> Unit,
     val changeMenuSelected: (MainActivityMenu) -> Unit
 ) {
+    /**
+     * Navigate to a destination and clear back stack
+     */
     fun navigateTo(destination: String) {
         navController.navigate(destination) {
             popUpTo(navController.graph.id) {
@@ -29,16 +35,17 @@ class MainActivityState(
             }
         }
     }
-
 }
 
+/**
+ * Remember MainActivityState
+ */
 @Composable
 fun rememberMainActivityState(
     navController: NavHostController,
     drawerState: DrawerState = rememberDrawerState(DrawerValue.Closed),
     coroutineScope: CoroutineScope = rememberCoroutineScope()
 ): MainActivityState {
-
     var selectedMenu by remember { mutableStateOf<MainActivityMenu>(MainActivityMenu.Sign) }
 
     val changeMenuSelected = { it: MainActivityMenu -> selectedMenu = it }
@@ -62,4 +69,3 @@ fun rememberMainActivityState(
         )
     }
 }
-

@@ -7,11 +7,11 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonColors
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -25,7 +25,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import com.signaturemaker.app.ui.designsystem.SMTheme
 
-
+/**
+ * A simple icon button.
+ */
 @Composable
 fun SMIconButton(
     imageVector: ImageVector,
@@ -36,7 +38,6 @@ fun SMIconButton(
     colors: IconButtonColors = IconButtonDefaults.iconButtonColors(),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-
     IconButton(
         onClick = onClick,
         modifier = modifier,
@@ -48,11 +49,12 @@ fun SMIconButton(
             imageVector = imageVector,
             contentDescription = contentDescription
         )
-
     }
 }
 
-
+/**
+ * An icon button with a label below the icon.
+ */
 @Composable
 fun SMIconButton(
     imageVector: ImageVector,
@@ -64,7 +66,6 @@ fun SMIconButton(
     color: Color = LocalContentColor.current,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-
     Column(
         modifier
             .width(SMTheme.size.size700)
@@ -74,7 +75,7 @@ fun SMIconButton(
                 enabled = enabled,
                 role = Role.Button,
                 interactionSource = interactionSource,
-                indication = rememberRipple(
+                indication = ripple(
                     bounded = false,
                     radius = SMTheme.size.size700 / 3
                 )

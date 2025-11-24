@@ -4,6 +4,9 @@ import com.signaturemaker.app.di.presentation.presentationModule
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
 
+/*
+ * SignatureMaker Dependency Injection implementation
+ */
 open class SignatureMakerDiImpl : SignatureMakerDi {
     override fun start(appDeclaration: KoinAppDeclaration) = startKoin {
         appDeclaration()
@@ -12,4 +15,3 @@ open class SignatureMakerDiImpl : SignatureMakerDi {
 
     override fun getModules() = listOf(presentationModule)
 }
-

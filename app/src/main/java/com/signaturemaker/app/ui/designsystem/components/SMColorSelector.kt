@@ -15,9 +15,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.unit.dp
 import com.signaturemaker.app.ui.designsystem.SMTheme
 
+/**
+ * A circular color selector component.
+ */
 @Composable
 fun SMColorSelector(
     color: Color,
@@ -28,10 +30,11 @@ fun SMColorSelector(
     Box(
         modifier = modifier
             .clip(CircleShape)
-            .clickable(onClick = { onClick(color) })
-            //.background(SMTheme.material.colorScheme.primary, CircleShape)
-            //.then(if (selected) Modifier.padding(SMTheme.spacing.spacing100) else Modifier)
-            .background(color, CircleShape),
+            .background(color, CircleShape)
+            .clickable(onClick = { onClick(color) }),
+            // .background(SMTheme.material.colorScheme.primary, CircleShape)
+            // .then(if (selected) Modifier.padding(SMTheme.spacing.spacing100) else Modifier)
+
         contentAlignment = androidx.compose.ui.Alignment.Center
     ) {
         if (selected) {
@@ -40,6 +43,9 @@ fun SMColorSelector(
     }
 }
 
+/**
+ * A circular image selector component.
+ */
 @Composable
 fun SMImageSelector(
     image: Painter,
@@ -47,7 +53,6 @@ fun SMImageSelector(
     modifier: Modifier = Modifier,
     onClick: (Painter) -> Unit = {}
 ) {
-
     Box(modifier = modifier, contentAlignment = androidx.compose.ui.Alignment.BottomEnd) {
         Box(
             modifier = Modifier
@@ -56,7 +61,8 @@ fun SMImageSelector(
             contentAlignment = androidx.compose.ui.Alignment.Center
         ) {
             Image(
-                painter = image, contentDescription = null,
+                painter = image,
+                contentDescription = null,
                 Modifier
                     .padding(SMTheme.spacing.spacing100)
                     .clip(CircleShape)

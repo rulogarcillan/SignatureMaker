@@ -6,7 +6,9 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.unit.Dp
 import com.signaturemaker.app.ui.designsystem.Foundation
 
-
+/**
+ * Size palette for SignatureMaker app
+ */
 @Immutable
 private object SMSizeDefaults {
   val Size00: Dp = Foundation.size0
@@ -50,6 +52,9 @@ private object SMSizeDefaults {
   val Size1200: Dp = Foundation.size328
 }
 
+/**
+ * Size palette for SignatureMaker app
+ */
 @Immutable
 data class SMSize(
   val size00: Dp = SMSizeDefaults.Size00,

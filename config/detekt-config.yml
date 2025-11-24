@@ -602,7 +602,7 @@ compose:
   UnnecessaryEventHandlerParameter:
     active: true
   UnstableCollections:
-    active: false
+    active: true
   ViewModelForwarding:
     active: true
   ViewModelInjection:

@@ -17,7 +17,9 @@ import com.signaturemaker.app.ui.theming.color.DarkSmColor
 import com.signaturemaker.app.ui.theming.color.LightColor
 import com.signaturemaker.app.ui.theming.color.LightSmColor
 
-
+/**
+ * Application theme wrapper
+ */
 @Composable
 fun SignatureMakerAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -38,7 +40,6 @@ fun SignatureMakerAppTheme(
         darkTheme -> DarkSmColor
         else -> LightSmColor
     }
-
 
     val view = LocalView.current
 

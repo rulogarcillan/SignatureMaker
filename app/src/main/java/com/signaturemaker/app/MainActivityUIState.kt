@@ -14,8 +14,11 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.vector.ImageVector
 
+/**
+ * Main Activity UI State
+ */
 @Immutable
-data class MainActivityUIState(
+data class MainActivityUIState private constructor(
     val menu: List<MainActivityMenu>,
 ) {
     companion object {
@@ -35,11 +38,13 @@ data class MainActivityUIState(
                 )
             )
         }
-
     }
 }
 
-
+/**
+ * Main Activity Menu
+ */
+@Immutable
 sealed class MainActivityMenu(val title: String, val icon: ImageVector) {
     data object Sign : MainActivityMenu("Create signature", Icons.Default.ModeEditOutline)
     data object Gallery : MainActivityMenu("Gallery", Icons.Default.BrowseGallery)
@@ -51,5 +56,4 @@ sealed class MainActivityMenu(val title: String, val icon: ImageVector) {
     data object Licenses : MainActivityMenu("Licenses", Icons.Default.Copyright)
     data object PrivacyPolicy : MainActivityMenu("Privacy policy", Icons.Default.Fingerprint)
     data object EditPrivacyPolicy : MainActivityMenu("Edit privacy policy", Icons.Default.Badge)
-
 }

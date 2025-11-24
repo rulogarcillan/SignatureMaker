@@ -11,7 +11,6 @@ import com.signaturemaker.app.features.gallery.GalleryRoute
 import com.signaturemaker.app.features.sign.SignDestination
 import com.signaturemaker.app.features.sign.SignRoute
 
-
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SignatureMakerNavigation(navController: NavHostController) {

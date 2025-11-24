@@ -11,105 +11,92 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.DisposableHandle
 import kotlinx.coroutines.launch
 
-@Stable
-data class SignState(
-    val showSignHere: Boolean,
-    val showSignHereChange: (show: Boolean) -> Unit,
-    val bottomSheetState: BottomSheetState,
-    val strokeColorState: StrokeColorState,
-    val backgroundState: BackgroundState
-) {
-    var clearFunction: (() -> Unit)? = null
-}
-
-
+/*
+ * State holder for Sign Screen following Compose best practices
+ * All state is properly hoisted and observable
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Stable
-data class BottomSheetState(
+class SignState(
     val sheetState: SheetState,
-    val isShowBottomSheet: Boolean,
-    val showBottomSheet: () -> Unit,
-    val closeBottomSheet: () -> DisposableHandle,
-)
+    private val coroutineScope: CoroutineScope,
+    initialColor: Color,
+    @DrawableRes initialImage: Int
+) {
+    // Observable state properties
+    var showSignHere by mutableStateOf(true)
+        private set
 
-@Stable
-data class StrokeColorState(
-    val selectedColor: Color,
-    val changeColor: (color: Color) -> Unit
-)
+    var isShowBottomSheet by mutableStateOf(false)
+        private set
 
-@Stable
-data class BackgroundState(
-    @DrawableRes val selectedImage: Int,
-    val changeImage: (image: Int) -> Unit
-)
+    var selectedColor by mutableStateOf(initialColor)
+        private set
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun rememberSignState(
-    selectedColor: Color,
-    @DrawableRes selectedImage: Int,
-    sheetState: SheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true, confirmValueChange = { true }),
-    coroutineScope: CoroutineScope = rememberCoroutineScope(),
-): SignState {
+    var selectedImage by mutableIntStateOf(initialImage)
+        private set
 
-    var isShowBottomSheet by rememberSaveable { mutableStateOf(false) }
-    var _selectedColor by remember { mutableStateOf(selectedColor) }
-    var _selectedImage by rememberSaveable { mutableIntStateOf(selectedImage) }
-    var showSignHere by rememberSaveable { mutableStateOf(true) }
+    // Reference to clear function from SignaturePad
+    var clearFunction: (() -> Unit)? = null
 
-    val showBottomSheet = {
-        isShowBottomSheet = true
-    }
-    val closeBottomSheet = {
-        coroutineScope.launch { sheetState.hide() }.invokeOnCompletion {
-            if (!sheetState.isVisible) isShowBottomSheet = false
-        }
-    }
-
-    val changeColor = { color: Color ->
-        _selectedColor = color
-    }
-
-    val changeImage = { image: Int ->
-        _selectedImage = image
-    }
-
-    val changeShowSignHere = { show: Boolean ->
+    // State mutation functions
+    fun updateShowSignHere(show: Boolean) {
         showSignHere = show
     }
 
+    fun showBottomSheet() {
+        isShowBottomSheet = true
+    }
 
-    return remember(
-        isShowBottomSheet,
-        showBottomSheet,
-        sheetState,
-        closeBottomSheet
-    ) {
+    fun closeBottomSheet() {
+        coroutineScope.launch {
+            sheetState.hide()
+        }.invokeOnCompletion {
+            if (!sheetState.isVisible) {
+                isShowBottomSheet = false
+            }
+        }
+    }
+
+    fun updateColor(color: Color) {
+        selectedColor = color
+    }
+
+    fun updateImage(@DrawableRes image: Int) {
+        selectedImage = image
+    }
+
+    fun clearSignature() {
+        clearFunction?.invoke()
+    }
+}
+
+/*
+ * Remember SignState following Compose best practices
+ * The state holder is remembered and its internal state is properly observable
+ */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun rememberSignState(
+    initialColor: Color,
+    @DrawableRes initialImage: Int,
+    sheetState: SheetState = rememberModalBottomSheetState(
+        skipPartiallyExpanded = true,
+        confirmValueChange = { true }
+    ),
+    coroutineScope: CoroutineScope = rememberCoroutineScope(),
+): SignState {
+    return remember(sheetState, coroutineScope) {
         SignState(
-            showSignHere = showSignHere,
-            showSignHereChange = changeShowSignHere,
-            bottomSheetState = BottomSheetState(
-                sheetState = sheetState,
-                isShowBottomSheet = isShowBottomSheet,
-                showBottomSheet = showBottomSheet,
-                closeBottomSheet = closeBottomSheet
-            ),
-            strokeColorState = StrokeColorState(
-                selectedColor = _selectedColor,
-                changeColor = changeColor
-            ),
-            backgroundState = BackgroundState(
-                selectedImage = _selectedImage,
-                changeImage = changeImage
-            )
+            sheetState = sheetState,
+            coroutineScope = coroutineScope,
+            initialColor = initialColor,
+            initialImage = initialImage
         )
     }
 }

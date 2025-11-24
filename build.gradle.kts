@@ -4,9 +4,10 @@ plugins {
     alias(libs.plugins.kotlinAndroid) apply false
     alias(libs.plugins.googleKsp) apply false
     alias(libs.plugins.google.services) apply false
-    alias(libs.plugins.firebase.crashlytics.gradle)
+    alias(libs.plugins.firebase.crashlytics.gradle) apply false
     alias(libs.plugins.detekt)
 }
+
 
 subprojects{
 

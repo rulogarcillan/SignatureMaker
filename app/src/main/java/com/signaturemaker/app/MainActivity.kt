@@ -2,7 +2,6 @@ package com.signaturemaker.app
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.focusGroup
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -57,6 +56,9 @@ import com.signaturemaker.app.ui.designsystem.components.SMLineSeparator
 import com.signaturemaker.app.ui.designsystem.components.SMText
 import com.signaturemaker.app.ui.theming.SignatureMakerAppTheme
 
+/*
+ * Main Activity
+ */
 class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,10 +68,15 @@ class MainActivity : BaseActivity() {
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
+/**
+ * Main Activity Composable
+ */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ComposeMainActivity(navController: NavHostController = rememberNavController()) {
-
+fun ComposeMainActivity(
+    modifier: Modifier = Modifier,
+    navController: NavHostController = rememberNavController(),
+) {
     val mainActivityUIState = remember { MainActivityUIState.create() }
 
     val mainActivityState = rememberMainActivityState(
@@ -78,7 +85,7 @@ fun ComposeMainActivity(navController: NavHostController = rememberNavController
 
     SignatureMakerAppTheme {
         ModalNavigationDrawer(
-            modifier = Modifier.safeDrawingPadding(),
+            modifier = modifier.safeDrawingPadding(),
             drawerState = mainActivityState.drawerState,
             drawerContent = {
                 ModalDrawerSheet(
@@ -92,14 +99,12 @@ fun ComposeMainActivity(navController: NavHostController = rememberNavController
                     DrawerTitleSection()
                     DrawerOptionsSection(mainActivityUIState, mainActivityState)
                     SMLineSeparator(modifier = Modifier.padding(top = SMTheme.spacing.spacing250))
-
                 }
             },
         ) {
             Scaffold(
                 modifier = Modifier.safeDrawingPadding(),
                 topBar = {
-
                     TopAppBar(
                         colors = TopAppBarDefaults.topAppBarColors(
                             containerColor = SMTheme.material.colorScheme.primary,
@@ -118,8 +123,8 @@ fun ComposeMainActivity(navController: NavHostController = rememberNavController
                             )
                         }
                     )
-
-                }) {
+                }
+            ) {
                 Box(
                     modifier = Modifier
                         .padding(
@@ -133,7 +138,6 @@ fun ComposeMainActivity(navController: NavHostController = rememberNavController
                 }
             }
         }
-
     }
 }
 
@@ -142,7 +146,8 @@ private fun DrawerTopSection(onCloseDrawerClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(SMTheme.spacing.spacing250), horizontalArrangement = Arrangement.End
+            .padding(SMTheme.spacing.spacing250),
+        horizontalArrangement = Arrangement.End
     ) {
         SMIconButton(
             imageVector = Icons.Default.Close,
@@ -151,7 +156,6 @@ private fun DrawerTopSection(onCloseDrawerClick: () -> Unit) {
         )
     }
 }
-
 
 @Composable
 private fun DrawerTitleSection() {
@@ -173,9 +177,7 @@ private fun DrawerTitleSection() {
         SMText(text = "Signature Maker")
         SMText(text = "v4.0.0", style = SMTheme.material.typography.bodySmall)
         SMLineSeparator(modifier = Modifier.padding(top = SMTheme.spacing.spacing250))
-
     }
-
 }
 
 @Composable
@@ -183,14 +185,12 @@ private fun DrawerOptionsSection(
     mainActivityUIState: MainActivityUIState,
     mainActivityState: MainActivityState
 ) {
-
     val selected = mainActivityState.menuSelected
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .verticalScroll(rememberScrollState()),
     ) {
-
         mainActivityUIState.menu.forEach {
             DrawerOptionItem(
                 text = it.title,
@@ -209,11 +209,8 @@ private fun DrawerOptionsSection(
             )
             println(mainActivityState.menuSelected)
         }
-
-
     }
 }
-
 
 @Composable
 private fun DrawerOptionItem(
@@ -221,9 +218,8 @@ private fun DrawerOptionItem(
     startIcon: ImageVector,
     selected: Boolean,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit,
+    onClick: () -> Unit = { },
 ) {
-
     val colorIsSelected = if (selected) {
         SMTheme.material.colorScheme.primary.copy(alpha = 0.6f)
     } else {
@@ -266,4 +262,3 @@ private fun DrawerOptionItem(
         }
     }
 }
-

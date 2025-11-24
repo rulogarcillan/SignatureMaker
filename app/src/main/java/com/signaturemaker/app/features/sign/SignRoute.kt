@@ -5,9 +5,8 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun SignRoute(
-    //onNavigateToXXXX: () -> Unit,
+    // onNavigateToXXXX: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    SignScreen(modifier= modifier)
+    SignScreen(modifier = modifier)
 }
-

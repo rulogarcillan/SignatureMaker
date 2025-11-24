@@ -9,5 +9,4 @@ internal val LightColor = lightColorScheme(
       tertiary = Foundation.pink40*/
 )
 
-
 internal val LightSmColor = SMColor()

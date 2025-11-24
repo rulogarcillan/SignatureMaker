@@ -6,7 +6,6 @@ import org.koin.android.ext.koin.androidContext
 
 class SignatureMakerApp : Application() {
 
-
     override fun onCreate() {
         super.onCreate()
         SignatureMakerDiImpl().start {

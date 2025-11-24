@@ -1,7 +1,6 @@
 package com.signaturemaker.app.ui.theming.color
 
 import androidx.compose.material3.darkColorScheme
-import com.signaturemaker.app.ui.designsystem.Foundation
 import com.signaturemaker.app.ui.designsystem.color.SMColor
 
 internal val DarkColor = darkColorScheme(

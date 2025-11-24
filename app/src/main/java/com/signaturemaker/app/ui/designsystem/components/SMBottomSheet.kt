@@ -13,22 +13,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.semantics
 import com.signaturemaker.app.ui.designsystem.SMTheme
 
-
+/**
+ * A wrapper around [ModalBottomSheet] to standardize bottom sheet usage across the app.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SMModalBottomSheet(
     onDismissRequest: () -> Unit,
-    //modalContentDescription: String,
+    // modalContentDescription: String,
     sheetState: SheetState,
     openBottomSheet: Boolean,
     modifier: Modifier = Modifier,
     isFullScreen: Boolean = false,
     dragHandle: @Composable (() -> Unit)? = { BottomSheetDefaults.DragHandle() },
-    windowInsets: WindowInsets = BottomSheetDefaults.windowInsets,
+    contentWindowInsets: @Composable () -> WindowInsets = { BottomSheetDefaults.windowInsets },
     content: @Composable ColumnScope.() -> Unit
 ) {
-
-    //val context = LocalContext.current
+    // val context = LocalContext.current
 
     if (openBottomSheet) {
         ModalBottomSheet(
@@ -47,7 +48,7 @@ fun SMModalBottomSheet(
             ),
             content = content,
             onDismissRequest = onDismissRequest,
-            windowInsets = windowInsets
+            contentWindowInsets = contentWindowInsets
         )
     }
 }

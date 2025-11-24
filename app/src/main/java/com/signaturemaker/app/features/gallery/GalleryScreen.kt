@@ -8,6 +8,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.signaturemaker.app.ui.designsystem.components.SMText
 
+/**
+ * Gallery screen.
+ */
 @Composable
 fun GalleryScreen(
     modifier: Modifier = Modifier,
@@ -19,6 +22,6 @@ fun GalleryScreen(
 
 @Preview
 @Composable
-fun GalleryScreenPreview() {
+private fun GalleryScreenPreview() {
     GalleryScreen()
 }

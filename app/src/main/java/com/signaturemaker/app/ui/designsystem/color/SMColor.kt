@@ -14,9 +14,11 @@ private object SMColorDefaults {
   val Pen4: Color = Foundation.Green40
   val Selector: Color = Foundation.White40
   val Selector2: Color = Foundation.Gray40
-
 }
 
+/**
+ * Color palette for SignatureMaker app
+ */
 @Immutable
 data class SMColor(
   val pen1: Color = SMColorDefaults.Pen1,
@@ -25,7 +27,7 @@ data class SMColor(
   val pen4: Color = SMColorDefaults.Pen4,
   val selector: Color = SMColorDefaults.Selector,
   val selector2: Color = SMColorDefaults.Selector2,
-  //val border: Color = SMColorDefaults.Border,
+  // val border: Color = SMColorDefaults.Border,
 
 )
 
