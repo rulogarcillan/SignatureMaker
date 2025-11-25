@@ -1,8 +1,5 @@
 package com.signaturemaker.app.features.sign
 
-import android.app.Activity
-import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
 import androidx.activity.compose.LocalActivity
 import androidx.annotation.DrawableRes
@@ -51,9 +48,9 @@ import com.signaturemaker.app.ui.designsystem.components.SMImageSelector
 import com.signaturemaker.app.ui.designsystem.components.SMLineSeparator
 import com.signaturemaker.app.ui.designsystem.components.SMModalBottomSheet
 import com.signaturemaker.app.ui.designsystem.components.SMText
+import com.signaturemaker.app.ui.snackbar.LocalSnackbarController
 import com.signaturemaker.app.utils.shareSign
 import org.koin.androidx.compose.koinViewModel
-
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -67,6 +64,9 @@ fun SignScreen(
         initialImage = R.drawable.mascara3
     )
 
+    // Get SnackbarController from CompositionLocal
+    val snackbarController = LocalSnackbarController.current
+
     // Handler function with state hoisting pattern
     val onAction: (SignAction) -> Unit = { action ->
         handleSignAction(action, viewModel)
@@ -76,16 +76,22 @@ fun SignScreen(
     val failureEvent by viewModel.failure.observeAsState()
 
     saveBitmapEvent?.getContentIfNotHandled()?.let { uriResponse ->
-
         if (uriResponse.share) {
             LocalActivity.current?.shareSign(uriResponse.uri)
         } else {
-            println("Mostrar mensaje de guardado para URI: ${uriResponse.uri}")
+            // Show success snackbar
+            snackbarController?.showSuccess(
+                message = stringResource(R.string.message_file_saved_successfully)
+            )
         }
     }
 
     failureEvent?.getContentIfNotHandled()?.let { failure ->
-        println("Error al guardar la firma: $failure")
+        // Show error snackbar
+        snackbarController?.showError(
+            message = stringResource(R.string.message_error_saving_file),
+            actionLabel = stringResource(R.string.action_retry)
+        )
     }
 
     Box(

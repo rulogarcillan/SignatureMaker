@@ -29,11 +29,13 @@ import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.Surface
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -53,6 +55,8 @@ import com.signaturemaker.app.ui.designsystem.components.SMIcon
 import com.signaturemaker.app.ui.designsystem.components.SMIconButton
 import com.signaturemaker.app.ui.designsystem.components.SMLineSeparator
 import com.signaturemaker.app.ui.designsystem.components.SMText
+import com.signaturemaker.app.ui.snackbar.rememberSnackbarController
+import com.signaturemaker.app.ui.snackbar.LocalSnackbarController
 import com.signaturemaker.app.ui.theming.SignatureMakerAppTheme
 
 /*
@@ -82,58 +86,66 @@ fun ComposeMainActivity(
         navController = navController
     )
 
+    // Create SnackbarController for the entire app
+    val snackbarController = rememberSnackbarController()
+
     SignatureMakerAppTheme {
-        ModalNavigationDrawer(
-            modifier = modifier.safeDrawingPadding(),
-            drawerState = mainActivityState.drawerState,
-            drawerContent = {
-                ModalDrawerSheet(
-                    drawerShape = RectangleShape,
-                    drawerContainerColor = SMTheme.material.colorScheme.surface,
-                    modifier = Modifier
-                        .focusGroup()
-                        .fillMaxHeight()
-                ) {
-                    DrawerTopSection(onCloseDrawerClick = { mainActivityState.onDrawerClick() })
-                    DrawerTitleSection()
-                    DrawerOptionsSection(mainActivityUIState, mainActivityState)
-                    SMLineSeparator(modifier = Modifier.padding(top = SMTheme.spacing.spacing250))
-                }
-            },
-        ) {
-            Scaffold(
-                modifier = Modifier.safeDrawingPadding(),
-                topBar = {
-                    TopAppBar(
-                        colors = TopAppBarDefaults.topAppBarColors(
-                            containerColor = SMTheme.material.colorScheme.primary,
-                            actionIconContentColor = contentColorFor(SMTheme.material.colorScheme.primary),
-                            titleContentColor = contentColorFor(SMTheme.material.colorScheme.primary)
-                        ),
-                        title = { SMText(text = stringResource(R.string.app_title)) },
-                        navigationIcon = {
-                            SMIconButton(
-                                colors = IconButtonDefaults.iconButtonColors(
-                                    contentColor = contentColorFor(SMTheme.material.colorScheme.primary)
-                                ),
-                                onClick = { mainActivityState.onDrawerClick() },
-                                contentDescription = "",
-                                imageVector = Icons.Default.Menu
-                            )
-                        }
-                    )
-                }
+        CompositionLocalProvider(LocalSnackbarController provides snackbarController) {
+            ModalNavigationDrawer(
+                modifier = modifier.safeDrawingPadding(),
+                drawerState = mainActivityState.drawerState,
+                drawerContent = {
+                    ModalDrawerSheet(
+                        drawerShape = RectangleShape,
+                        drawerContainerColor = SMTheme.material.colorScheme.surface,
+                        modifier = Modifier
+                            .focusGroup()
+                            .fillMaxHeight()
+                    ) {
+                        DrawerTopSection(onCloseDrawerClick = { mainActivityState.onDrawerClick() })
+                        DrawerTitleSection()
+                        DrawerOptionsSection(mainActivityUIState, mainActivityState)
+                        SMLineSeparator(modifier = Modifier.padding(top = SMTheme.spacing.spacing250))
+                    }
+                },
             ) {
-                Box(
-                    modifier = Modifier
-                        .padding(
-                            top = it.calculateTopPadding(),
-                            start = it.calculateStartPadding(LayoutDirection.Ltr),
-                            bottom = it.calculateEndPadding(LayoutDirection.Rtl)
+                Scaffold(
+                    modifier = Modifier.safeDrawingPadding(),
+                    snackbarHost = {
+                        SnackbarHost(hostState = snackbarController.snackbarHostState)
+                    },
+                    topBar = {
+                        TopAppBar(
+                            colors = TopAppBarDefaults.topAppBarColors(
+                                containerColor = SMTheme.material.colorScheme.primary,
+                                actionIconContentColor = contentColorFor(SMTheme.material.colorScheme.primary),
+                                titleContentColor = contentColorFor(SMTheme.material.colorScheme.primary)
+                            ),
+                            title = { SMText(text = stringResource(R.string.app_title)) },
+                            navigationIcon = {
+                                SMIconButton(
+                                    colors = IconButtonDefaults.iconButtonColors(
+                                        contentColor = contentColorFor(SMTheme.material.colorScheme.primary)
+                                    ),
+                                    onClick = { mainActivityState.onDrawerClick() },
+                                    contentDescription = "",
+                                    imageVector = Icons.Default.Menu
+                                )
+                            }
                         )
-                        .fillMaxSize()
+                    }
                 ) {
-                    SignatureMakerNavigation(navController = navController)
+                    Box(
+                        modifier = Modifier
+                            .padding(
+                                top = it.calculateTopPadding(),
+                                start = it.calculateStartPadding(LayoutDirection.Ltr),
+                                bottom = it.calculateEndPadding(LayoutDirection.Rtl)
+                            )
+                            .fillMaxSize()
+                    ) {
+                        SignatureMakerNavigation(navController = navController)
+                    }
                 }
             }
         }

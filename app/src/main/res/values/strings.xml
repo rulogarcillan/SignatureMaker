@@ -31,6 +31,10 @@
 
     <string name="title_save_ok">File saved correctly</string>
     <string name="title_save_ko">Error saving</string>
+    <string name="message_file_saved_successfully">File saved successfully</string>
+    <string name="message_error_saving_file">Error saving file</string>
+    <string name="action_retry">Retry</string>
+    <string name="action_view">View</string>
     <string name="tittle_clean">Clean</string>
 
 
