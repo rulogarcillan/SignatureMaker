@@ -51,7 +51,6 @@ import com.signaturemaker.app.navigation.SignatureMakerNavigation
 import com.signaturemaker.app.ui.designsystem.SMTheme
 import com.signaturemaker.app.ui.designsystem.components.SMIcon
 import com.signaturemaker.app.ui.designsystem.components.SMIconButton
-import com.signaturemaker.app.ui.designsystem.components.SMImage
 import com.signaturemaker.app.ui.designsystem.components.SMLineSeparator
 import com.signaturemaker.app.ui.designsystem.components.SMText
 import com.signaturemaker.app.ui.theming.SignatureMakerAppTheme
@@ -166,13 +165,13 @@ private fun DrawerTitleSection() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        SMImage(
+        SMIcon(
             painter = painterResource(id = R.drawable.ic_launcher_foreground),
             contentDescription = "Logo",
+            tint = SMTheme.material.colorScheme.primary,
             modifier = Modifier
                 .size(64.dp)
                 .aspectRatio(1f),
-            alignment = Alignment.Center
         )
         SMText(text = "Signature Maker")
         SMText(text = "v4.0.0", style = SMTheme.material.typography.bodySmall)

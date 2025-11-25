@@ -27,8 +27,6 @@ data class SMColor(
   val pen4: Color = SMColorDefaults.Pen4,
   val selector: Color = SMColorDefaults.Selector,
   val selector2: Color = SMColorDefaults.Selector2,
-  // val border: Color = SMColorDefaults.Border,
-
 )
 
 internal val LocalSMColor: ProvidableCompositionLocal<SMColor> = staticCompositionLocalOf {

@@ -126,79 +126,119 @@ fun OptionModalBottomSheet(
         modifier = modifier,
         openBottomSheet = signState.isShowBottomSheet,
     ) {
-        SectionOption(title = "Options") {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                SMIconButton(
-                    imageVector = Icons.Default.CleaningServices,
-                    label = "Clear",
-                    onClick = {
-                        signState.clearSignature()
-                        signState.closeBottomSheet()
-                    },
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = SMTheme.spacing.spacing200)
+        ) {
+            // Header con título
+            SMText(
+                text = "Signature Options",
+                style = SMTheme.material.typography.headlineSmall,
+                color = SMTheme.material.colorScheme.onSurface,
+                modifier = Modifier.padding(
+                    horizontal = SMTheme.spacing.spacing200,
+                    vertical = SMTheme.spacing.spacing150
                 )
+            )
 
-                SMIconButton(
-                    imageVector = Icons.Default.Save,
-                    label = "Save",
-                    onClick = { signState.closeBottomSheet() },
-                )
+            // Opciones principales
+            SectionOption(title = "Actions") {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = SMTheme.spacing.spacing100),
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    SMIconButton(
+                        imageVector = Icons.Default.CleaningServices,
+                        label = "Clear",
+                        color = SMTheme.material.colorScheme.onSurfaceVariant,
+                        onClick = {
+                            signState.clearSignature()
+                            signState.closeBottomSheet()
+                        },
+                    )
 
-                SMIconButton(
-                    imageVector = Icons.Default.Share,
-                    label = "Share",
-                    onClick = { signState.closeBottomSheet() },
-                )
-            }
-        }
+                    SMIconButton(
+                        imageVector = Icons.Default.Save,
+                        label = "Save",
+                        color = SMTheme.material.colorScheme.onSurfaceVariant,
+                        onClick = { signState.closeBottomSheet() },
+                    )
 
-        SectionOption(title = "Stroke color") {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                colorPen.forEach { color ->
-                    SMColorSelector(
-                        color = color,
-                        selected = color == signState.selectedColor,
-                        modifier = Modifier.size(SMTheme.size.size450),
-                        onClick = { signState.updateColor(color) }
+                    SMIconButton(
+                        imageVector = Icons.Default.Share,
+                        label = "Share",
+                        color = SMTheme.material.colorScheme.onSurfaceVariant,
+                        onClick = { signState.closeBottomSheet() },
                     )
                 }
             }
-        }
 
-        SectionOption(title = "Stroke width") {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                RangeSlider(
-                    value = signState.strokeWidthRange,
-                    onValueChange = { newValues ->
-                        signState.updateStrokeWidth(newValues)
-                    },
-                    onValueChangeFinished = {},
-                    valueRange = 1f..10f,
-                    steps = 0
-                )
-                SMText(
-                    text = "Min: ${"%.1f".format(signState.strokeWidthRange.start)}, Max: ${"%.1f".format(signState.strokeWidthRange.endInclusive)}"
-                )
+            // Separador visual
+            Spacer(modifier = Modifier.height(SMTheme.spacing.spacing50))
+
+            // Color del trazo
+            SectionOption(title = "Stroke color") {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = SMTheme.spacing.spacing100),
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    colorPen.forEach { color ->
+                        SMColorSelector(
+                            color = color,
+                            selected = color == signState.selectedColor,
+                            modifier = Modifier.size(SMTheme.size.size500),
+                            onClick = { signState.updateColor(color) }
+                        )
+                    }
+                }
             }
-        }
 
-        SectionOption(title = "Background") {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                imageBackground.forEach { image ->
-                    SMImageSelector(
-                        image = painterResource(id = image),
-                        selected = image == signState.selectedImage,
-                        modifier = Modifier.size(SMTheme.size.size450),
-                        onClick = { signState.updateImage(image) }
+            // Grosor del trazo
+            SectionOption(title = "Stroke width") {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    RangeSlider(
+                        value = signState.strokeWidthRange,
+                        onValueChange = { newValues ->
+                            signState.updateStrokeWidth(newValues)
+                        },
+                        onValueChangeFinished = {},
+                        valueRange = 1f..10f,
+                        steps = 0,
+                        modifier = Modifier.padding(horizontal = SMTheme.spacing.spacing100)
                     )
+                    Spacer(modifier = Modifier.height(SMTheme.spacing.spacing50))
+                    SMText(
+                        text = "Min: ${"%.1f".format(signState.strokeWidthRange.start)} • Max: ${"%.1f".format(signState.strokeWidthRange.endInclusive)}",
+                        style = SMTheme.material.typography.bodyMedium,
+                        color = SMTheme.material.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+
+            // Fondo
+            SectionOption(title = "Background") {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = SMTheme.spacing.spacing100),
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    imageBackground.forEach { image ->
+                        SMImageSelector(
+                            image = painterResource(id = image),
+                            selected = image == signState.selectedImage,
+                            modifier = Modifier.size(SMTheme.size.size500),
+                            onClick = { signState.updateImage(image) }
+                        )
+                    }
                 }
             }
         }
@@ -211,16 +251,28 @@ fun SectionOption(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit
 ) {
-    Column(modifier = modifier.padding(horizontal = SMTheme.spacing.spacing150)) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(
+                horizontal = SMTheme.spacing.spacing200,
+                vertical = SMTheme.spacing.spacing100
+            )
+    ) {
         SMText(
             text = title,
-            style = SMTheme.material.typography.titleSmall
+            style = SMTheme.material.typography.titleMedium,
+            color = SMTheme.material.colorScheme.onSurface
         )
-        Spacer(modifier = Modifier.height(SMTheme.spacing.spacing100))
-        SMLineSeparator(modifier = Modifier.padding(top = SMTheme.spacing.spacing250))
-        Spacer(modifier = Modifier.height(SMTheme.spacing.spacing200))
+        Spacer(modifier = Modifier.height(SMTheme.spacing.spacing150))
         content()
-        Spacer(modifier = Modifier.height(SMTheme.spacing.spacing200))
+        Spacer(modifier = Modifier.height(SMTheme.spacing.spacing100))
+        // Separador sutil
+        SMLineSeparator(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = SMTheme.spacing.spacing150)
+        )
     }
 }
 
