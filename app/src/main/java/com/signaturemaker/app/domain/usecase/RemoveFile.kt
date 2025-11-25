@@ -1,7 +1,7 @@
 package com.signaturemaker.app.domain.usecase
 
 import android.os.Build.VERSION_CODES
-import com.signaturemaker.app.core.extension.Utils
+import com.signaturemaker.app.utils.Utils
 import com.signaturemaker.app.domain.models.ItemFile
 import com.signaturemaker.app.domain.repository.FilesRepository
 import com.signaturemaker.app.domain.usecase.RemoveFile.Params
@@ -10,13 +10,12 @@ import com.tuppersoft.skizo.kotlin.core.domain.baseusecase.FlowGlobalUseCase
 import com.tuppersoft.skizo.kotlin.core.domain.response.Response
 import kotlinx.coroutines.flow.Flow
 import java.io.File
-import javax.inject.Inject
 
 /**
  * Created by Raúl Rodríguez Concepción
  * raulrcs@gmail.com
  */
-class RemoveFile @Inject constructor(private val repository: FilesRepository) :
+class RemoveFile(private val repository: FilesRepository) :
     FlowGlobalUseCase<Boolean, Params>() {
 
     data class Params(

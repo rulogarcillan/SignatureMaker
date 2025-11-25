@@ -14,7 +14,7 @@ import android.provider.MediaStore
 import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
 import com.signaturemaker.app.R
-import com.signaturemaker.app.core.extension.Utils
+import com.signaturemaker.app.utils.Utils
 import com.signaturemaker.app.domain.models.ItemFile
 import com.signaturemaker.app.domain.models.error.FileError.CreateError
 import com.signaturemaker.app.domain.models.error.FileError.EmptyBitmap
@@ -22,7 +22,6 @@ import com.signaturemaker.app.domain.repository.FilesRepository
 import com.tuppersoft.skizo.android.core.extension.logd
 import com.tuppersoft.skizo.kotlin.core.domain.response.Response
 import com.tuppersoft.skizo.kotlin.core.domain.response.Response.onSuccess
-import dagger.hilt.android.qualifiers.ApplicationContext
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -30,13 +29,11 @@ import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import javax.inject.Inject
-import kotlin.text.Typography.dagger
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 
-class FilesRepositoryImp @Inject constructor(@ApplicationContext val appContext: Context) : FilesRepository {
+class FilesRepositoryImp(val appContext: Context) : FilesRepository {
 
     @RequiresApi(VERSION_CODES.Q)
     override suspend fun saveFileBitmapMoreAndroid10(

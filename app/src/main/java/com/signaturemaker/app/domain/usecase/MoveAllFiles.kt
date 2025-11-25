@@ -8,7 +8,6 @@ import com.tuppersoft.skizo.android.core.extension.logd
 import com.tuppersoft.skizo.kotlin.core.customtypealias.OnFailure
 import com.tuppersoft.skizo.kotlin.core.domain.baseusecase.GlobalUseCase
 import java.io.File
-import javax.inject.Inject
 import kotlinx.coroutines.flow.collect
 
 /**
@@ -16,7 +15,7 @@ import kotlinx.coroutines.flow.collect
  * raulrcs@gmail.com
  */
 @Deprecated("Only for migration")
-class MoveAllFiles @Inject constructor(private val repository: FilesRepository) :
+class MoveAllFiles(private val repository: FilesRepository) :
     GlobalUseCase<Boolean, Params>() {
 
     data class Params(

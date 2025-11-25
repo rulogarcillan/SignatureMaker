@@ -10,14 +10,13 @@ import com.tuppersoft.skizo.kotlin.core.domain.response.Response
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Created by Raúl Rodríguez Concepción
  * raulrcs@gmail.com
  */
-class SaveBitmap @Inject constructor(private val repository: FilesRepository) :
+class SaveBitmap(private val repository: FilesRepository) :
     FlowGlobalUseCase<Uri, Params>() {
 
     data class Params(

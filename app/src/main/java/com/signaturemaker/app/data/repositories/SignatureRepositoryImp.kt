@@ -5,11 +5,10 @@ import com.signaturemaker.app.domain.models.SuggestMessage
 import com.signaturemaker.app.domain.repository.SignatureRepository
 import com.tuppersoft.skizo.kotlin.core.domain.exception.Failure
 import com.tuppersoft.skizo.kotlin.core.domain.response.Response
-import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class SignatureRepositoryImp @Inject constructor(
+class SignatureRepositoryImp(
     private val api: SignatureServices
 ) : SignatureRepository {
 

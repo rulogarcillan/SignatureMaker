@@ -1,5 +1,7 @@
 package com.signaturemaker.app.di.app
 
+import com.signaturemaker.app.di.data.dataModule
+import com.signaturemaker.app.di.domain.domainModule
 import com.signaturemaker.app.di.presentation.presentationModule
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
@@ -13,5 +15,9 @@ open class SignatureMakerDiImpl : SignatureMakerDi {
         modules(getModules())
     }
 
-    override fun getModules() = listOf(presentationModule)
+    override fun getModules() = listOf(
+        dataModule,
+        domainModule,
+        presentationModule
+    )
 }
