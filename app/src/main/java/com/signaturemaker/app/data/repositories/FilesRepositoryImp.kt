@@ -10,12 +10,11 @@ import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION_CODES
-
 import android.provider.MediaStore
 import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
 import com.signaturemaker.app.R
-import com.signaturemaker.app.application.core.extensions.Utils
+import com.signaturemaker.app.core.extension.Utils
 import com.signaturemaker.app.domain.models.ItemFile
 import com.signaturemaker.app.domain.models.error.FileError.CreateError
 import com.signaturemaker.app.domain.models.error.FileError.EmptyBitmap

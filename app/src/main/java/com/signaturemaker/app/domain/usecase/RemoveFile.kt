@@ -1,7 +1,7 @@
 package com.signaturemaker.app.domain.usecase
 
 import android.os.Build.VERSION_CODES
-import com.signaturemaker.app.application.core.extensions.Utils
+import com.signaturemaker.app.core.extension.Utils
 import com.signaturemaker.app.domain.models.ItemFile
 import com.signaturemaker.app.domain.repository.FilesRepository
 import com.signaturemaker.app.domain.usecase.RemoveFile.Params
@@ -9,7 +9,6 @@ import com.tuppersoft.skizo.android.core.extension.logd
 import com.tuppersoft.skizo.kotlin.core.domain.baseusecase.FlowGlobalUseCase
 import com.tuppersoft.skizo.kotlin.core.domain.response.Response
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import java.io.File
 import javax.inject.Inject
 
