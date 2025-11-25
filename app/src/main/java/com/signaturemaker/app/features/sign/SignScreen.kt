@@ -17,6 +17,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CleaningServices
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.RangeSlider
 import androidx.compose.runtime.Composable
@@ -31,6 +33,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.viewinterop.AndroidView
 import com.github.gcacace.signaturepad.views.SignaturePad
 import com.signaturemaker.app.R
@@ -61,7 +64,7 @@ fun SignScreen(
         MyXmlTextView(signState)
         OptionModalBottomSheet(signState = signState)
         if (signState.showSignHere) {
-            SMText(text = "Sign here", modifier = Modifier.align(Alignment.Center))
+            SMText(text = stringResource(R.string.title_SingHere), modifier = Modifier.align(Alignment.Center))
         }
         Column(
             modifier = Modifier
@@ -71,7 +74,7 @@ fun SignScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             SMButton(
-                text = "Options",
+                text = stringResource(R.string.title_options),
                 onClick = { signState.showBottomSheet() }
             )
         }
@@ -133,7 +136,7 @@ fun OptionModalBottomSheet(
         ) {
             // Header con título
             SMText(
-                text = "Signature Options",
+                text = stringResource(R.string.title_signature_options),
                 style = SMTheme.material.typography.headlineSmall,
                 color = SMTheme.material.colorScheme.onSurface,
                 modifier = Modifier.padding(
@@ -143,7 +146,7 @@ fun OptionModalBottomSheet(
             )
 
             // Opciones principales
-            SectionOption(title = "Actions") {
+            SectionOption(title = stringResource(R.string.title_actions)) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -152,7 +155,7 @@ fun OptionModalBottomSheet(
                 ) {
                     SMIconButton(
                         imageVector = Icons.Default.CleaningServices,
-                        label = "Clear",
+                        label = stringResource(R.string.tittle_clean),
                         color = SMTheme.material.colorScheme.onSurfaceVariant,
                         onClick = {
                             signState.clearSignature()
@@ -160,19 +163,68 @@ fun OptionModalBottomSheet(
                         },
                     )
 
-                    SMIconButton(
-                        imageVector = Icons.Default.Save,
-                        label = "Save",
-                        color = SMTheme.material.colorScheme.onSurfaceVariant,
-                        onClick = { signState.closeBottomSheet() },
-                    )
+                    Box {
+                        SMIconButton(
+                            imageVector = Icons.Default.Save,
+                            label = stringResource(R.string.title_bSave),
+                            color = SMTheme.material.colorScheme.onSurfaceVariant,
+                            onClick = { signState.showSaveDropdown() },
+                        )
 
-                    SMIconButton(
-                        imageVector = Icons.Default.Share,
-                        label = "Share",
-                        color = SMTheme.material.colorScheme.onSurfaceVariant,
-                        onClick = { signState.closeBottomSheet() },
-                    )
+                        DropdownMenu(
+                            expanded = signState.showSaveDropdown,
+                            onDismissRequest = { signState.closeSaveDropdown() }
+                        ) {
+                            DropdownMenuItem(
+                                text = { SMText(text = stringResource(R.string.title_save_png)) },
+                                onClick = {
+                                    // TODO: Implementar lógica para guardar PNG con fondo transparente
+                                    signState.closeSaveDropdown()
+                                    signState.closeBottomSheet()
+                                }
+                            )
+                            DropdownMenuItem(
+                                text = { SMText(text = stringResource(R.string.title_save_png_wh)) },
+                                onClick = {
+                                    // TODO: Implementar lógica para guardar PNG con fondo blanco
+                                    signState.closeSaveDropdown()
+                                    signState.closeBottomSheet()
+                                }
+                            )
+                        }
+                    }
+
+                    Box {
+                        SMIconButton(
+                            imageVector = Icons.Default.Share,
+                            label = stringResource(R.string.share),
+                            color = SMTheme.material.colorScheme.onSurfaceVariant,
+                            onClick = { signState.showShareDropdown() },
+                        )
+
+                        DropdownMenu(
+                            expanded = signState.showShareDropdown,
+                            onDismissRequest = { signState.closeShareDropdown() }
+                        ) {
+                            DropdownMenuItem(
+                                text = { SMText(text = stringResource(R.string.title_save_png)) },
+                                onClick = {
+                                    // TODO: Implementar lógica para compartir PNG con fondo transparente
+                                    signState.closeShareDropdown()
+                                    signState.closeBottomSheet()
+                                }
+                            )
+                            DropdownMenuItem(
+                                text = { SMText(text = stringResource(R.string.title_save_png_wh)) },
+                                onClick = {
+                                    // TODO: Implementar lógica para compartir PNG con fondo blanco
+                                    signState.closeShareDropdown()
+                                    signState.closeBottomSheet()
+                                }
+                            )
+                        }
+                    }
+
                 }
             }
 
@@ -180,7 +232,7 @@ fun OptionModalBottomSheet(
             Spacer(modifier = Modifier.height(SMTheme.spacing.spacing50))
 
             // Color del trazo
-            SectionOption(title = "Stroke color") {
+            SectionOption(title = stringResource(R.string.title_bColor)) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -199,7 +251,7 @@ fun OptionModalBottomSheet(
             }
 
             // Grosor del trazo
-            SectionOption(title = "Stroke width") {
+            SectionOption(title = stringResource(R.string.title_bStroke)) {
                 Column(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally
@@ -210,21 +262,26 @@ fun OptionModalBottomSheet(
                             signState.updateStrokeWidth(newValues)
                         },
                         onValueChangeFinished = {},
-                        valueRange = 1f..10f,
+                        valueRange = ValueRangeSlider,
                         steps = 0,
                         modifier = Modifier.padding(horizontal = SMTheme.spacing.spacing100)
                     )
                     Spacer(modifier = Modifier.height(SMTheme.spacing.spacing50))
                     SMText(
-                        text = "Min: ${"%.1f".format(signState.strokeWidthRange.start)} • Max: ${"%.1f".format(signState.strokeWidthRange.endInclusive)}",
+                        text = "${stringResource(R.string.min)} ${"%.1f".format(signState.strokeWidthRange.start)} • ${
+                            stringResource(
+                                R.string.max
+                            )
+                        } ${"%.1f".format(signState.strokeWidthRange.endInclusive)}",
                         style = SMTheme.material.typography.bodyMedium,
                         color = SMTheme.material.colorScheme.onSurfaceVariant
                     )
                 }
             }
 
+
             // Fondo
-            SectionOption(title = "Background") {
+            SectionOption(title = stringResource(R.string.title_background)) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -282,3 +339,6 @@ fun tiledBackgroundBrush(@DrawableRes imageRes: Int): Brush {
     val shader = ImageShader(imageBitmap, TileMode.Repeated, TileMode.Repeated)
     return ShaderBrush(shader)
 }
+
+
+private val ValueRangeSlider = 1f..10f

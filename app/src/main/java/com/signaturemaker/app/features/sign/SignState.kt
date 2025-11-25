@@ -37,6 +37,12 @@ class SignState(
     var isShowBottomSheet by mutableStateOf(false)
         private set
 
+    var showSaveDropdown by mutableStateOf(false)
+        private set
+
+    var showShareDropdown by mutableStateOf(false)
+        private set
+
     var selectedColor by mutableStateOf(initialColor)
         private set
 
@@ -66,6 +72,22 @@ class SignState(
                 isShowBottomSheet = false
             }
         }
+    }
+
+    fun showSaveDropdown() {
+        showSaveDropdown = true
+    }
+
+    fun closeSaveDropdown() {
+        showSaveDropdown = false
+    }
+
+    fun showShareDropdown() {
+        showShareDropdown = true
+    }
+
+    fun closeShareDropdown() {
+        showShareDropdown = false
     }
 
     fun updateColor(color: Color) {

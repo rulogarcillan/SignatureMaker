@@ -40,6 +40,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -110,7 +111,7 @@ fun ComposeMainActivity(
                             actionIconContentColor = contentColorFor(SMTheme.material.colorScheme.primary),
                             titleContentColor = contentColorFor(SMTheme.material.colorScheme.primary)
                         ),
-                        title = { SMText(text = "Signature Maker") },
+                        title = { SMText(text = stringResource(R.string.app_title)) },
                         navigationIcon = {
                             SMIconButton(
                                 colors = IconButtonDefaults.iconButtonColors(
@@ -150,7 +151,7 @@ private fun DrawerTopSection(onCloseDrawerClick: () -> Unit) {
     ) {
         SMIconButton(
             imageVector = Icons.Default.Close,
-            contentDescription = "Close menu",
+            contentDescription = stringResource(R.string.close_menu),
             onClick = onCloseDrawerClick
         )
     }
@@ -167,14 +168,14 @@ private fun DrawerTitleSection() {
     ) {
         SMIcon(
             painter = painterResource(id = R.drawable.ic_launcher_foreground),
-            contentDescription = "Logo",
+            contentDescription = stringResource(R.string.logo),
             tint = SMTheme.material.colorScheme.primary,
             modifier = Modifier
-                .size(64.dp)
+                .size(SMTheme.size.size550)
                 .aspectRatio(1f),
         )
-        SMText(text = "Signature Maker")
-        SMText(text = "v4.0.0", style = SMTheme.material.typography.bodySmall)
+        SMText(text = stringResource(R.string.app_title))
+        SMText(text = BuildConfig.VERSION_NAME, style = SMTheme.material.typography.bodySmall)
         SMLineSeparator(modifier = Modifier.padding(top = SMTheme.spacing.spacing250))
     }
 }
@@ -192,7 +193,7 @@ private fun DrawerOptionsSection(
     ) {
         mainActivityUIState.menu.forEach {
             DrawerOptionItem(
-                text = it.title,
+                text = stringResource(it.titleResId),
                 startIcon = it.icon,
                 modifier = Modifier.padding(bottom = SMTheme.spacing.spacing100),
                 onClick = {
