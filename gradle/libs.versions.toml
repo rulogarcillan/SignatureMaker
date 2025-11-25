@@ -57,6 +57,7 @@ compose_foundation = { module = "androidx.compose.foundation:foundation" }
 compose_material3 = { module = "androidx.compose.material3:material3" }
 compose_materialIconsCore = { module = "androidx.compose.material:material-icons-core" }
 compose_materialIconsExtended = { module = "androidx.compose.material:material-icons-extended" }
+compose_runtime_livedata = { module = "androidx.compose.runtime:runtime-livedata" }
 compose_ui = { module = "androidx.compose.ui:ui" }
 compose_ui_util = { module = "androidx.compose.ui:ui-util" }
 compose_ui_graphics = { group = "androidx.compose.ui", name = "ui-graphics" }

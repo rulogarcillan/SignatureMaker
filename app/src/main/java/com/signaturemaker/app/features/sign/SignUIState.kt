@@ -1,5 +1,6 @@
 package com.signaturemaker.app.features.sign
 
+import android.graphics.Bitmap
 import androidx.annotation.DrawableRes
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SheetState
@@ -13,6 +14,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
+import com.github.gcacace.signaturepad.views.SignaturePad
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -54,6 +56,30 @@ class SignState(
 
     // Reference to clear function from SignaturePad
     var clearFunction: (() -> Unit)? = null
+
+    // Reference to SignaturePad for getting bitmap
+    var signaturePadRef: SignaturePad? = null
+
+    /**
+     * Get signature bitmap with transparent background
+     */
+    fun getTransparentSignatureBitmap(): Bitmap? {
+        return signaturePadRef?.getTransparentSignatureBitmap(true)
+    }
+
+    /**
+     * Get signature bitmap with white background
+     */
+    fun getWhiteBackgroundSignatureBitmap(): Bitmap? {
+        return signaturePadRef?.signatureBitmap
+    }
+
+    /**
+     * Check if signature pad is empty
+     */
+    fun isSignatureEmpty(): Boolean {
+        return signaturePadRef?.isEmpty ?: true
+    }
 
     // State mutation functions
     fun updateShowSignHere(show: Boolean) {

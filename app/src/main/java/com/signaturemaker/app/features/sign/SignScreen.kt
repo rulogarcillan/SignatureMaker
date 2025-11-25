@@ -1,6 +1,10 @@
 package com.signaturemaker.app.features.sign
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
+import androidx.activity.compose.LocalActivity
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -22,6 +26,8 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.RangeSlider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -45,16 +51,42 @@ import com.signaturemaker.app.ui.designsystem.components.SMImageSelector
 import com.signaturemaker.app.ui.designsystem.components.SMLineSeparator
 import com.signaturemaker.app.ui.designsystem.components.SMModalBottomSheet
 import com.signaturemaker.app.ui.designsystem.components.SMText
+import com.signaturemaker.app.utils.shareSign
+import org.koin.androidx.compose.koinViewModel
+
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SignScreen(
     modifier: Modifier = Modifier,
+    viewModel: SignBoardViewModel = koinViewModel()
 ) {
     val signState: SignState = rememberSignState(
         initialColor = SMTheme.color.pen1,
         initialImage = R.drawable.mascara3
     )
+
+    // Handler function with state hoisting pattern
+    val onAction: (SignAction) -> Unit = { action ->
+        handleSignAction(action, viewModel)
+    }
+
+    val saveBitmapEvent by viewModel.saveBitmap.observeAsState()
+    val failureEvent by viewModel.failure.observeAsState()
+
+    saveBitmapEvent?.getContentIfNotHandled()?.let { uriResponse ->
+
+        if (uriResponse.share) {
+            LocalActivity.current?.shareSign(uriResponse.uri)
+        } else {
+            println("Mostrar mensaje de guardado para URI: ${uriResponse.uri}")
+        }
+    }
+
+    failureEvent?.getContentIfNotHandled()?.let { failure ->
+        println("Error al guardar la firma: $failure")
+    }
 
     Box(
         modifier = modifier
@@ -62,7 +94,10 @@ fun SignScreen(
             .background(tiledBackgroundBrush(signState.selectedImage))
     ) {
         MyXmlTextView(signState)
-        OptionModalBottomSheet(signState = signState)
+        OptionModalBottomSheet(
+            signState = signState,
+            onAction = onAction
+        )
         if (signState.showSignHere) {
             SMText(text = stringResource(R.string.title_SingHere), modifier = Modifier.align(Alignment.Center))
         }
@@ -87,10 +122,16 @@ fun MyXmlTextView(signState: SignState) {
         LayoutInflater.from(context).inflate(R.layout.signature_pad, null, false)
     }, update = { view ->
         view as SignaturePad
+
+        // Store reference to SignaturePad
+        signState.signaturePadRef = view
+
         view.setPenColor(signState.selectedColor.toArgb())
         view.setMinWidth(signState.strokeWidthRange.start)
         view.setMaxWidth(signState.strokeWidthRange.endInclusive)
         view.setVelocityFilterWeight(0.1f)
+
+
         signState.clearFunction = {
             view.clear()
         }
@@ -114,6 +155,7 @@ fun MyXmlTextView(signState: SignState) {
 @Composable
 fun OptionModalBottomSheet(
     signState: SignState,
+    onAction: (SignAction) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val colorPen = listOf(SMTheme.color.pen1, SMTheme.color.pen2, SMTheme.color.pen3, SMTheme.color.pen4)
@@ -178,7 +220,11 @@ fun OptionModalBottomSheet(
                             DropdownMenuItem(
                                 text = { SMText(text = stringResource(R.string.title_save_png)) },
                                 onClick = {
-                                    // TODO: Implementar lógica para guardar PNG con fondo transparente
+                                    onAction(
+                                        SignAction.SavePngTransparent(
+                                            bitmap = signState.getTransparentSignatureBitmap()
+                                        )
+                                    )
                                     signState.closeSaveDropdown()
                                     signState.closeBottomSheet()
                                 }
@@ -186,7 +232,11 @@ fun OptionModalBottomSheet(
                             DropdownMenuItem(
                                 text = { SMText(text = stringResource(R.string.title_save_png_wh)) },
                                 onClick = {
-                                    // TODO: Implementar lógica para guardar PNG con fondo blanco
+                                    onAction(
+                                        SignAction.SavePngWhiteBackground(
+                                            bitmap = signState.getWhiteBackgroundSignatureBitmap()
+                                        )
+                                    )
                                     signState.closeSaveDropdown()
                                     signState.closeBottomSheet()
                                 }
@@ -209,7 +259,11 @@ fun OptionModalBottomSheet(
                             DropdownMenuItem(
                                 text = { SMText(text = stringResource(R.string.title_save_png)) },
                                 onClick = {
-                                    // TODO: Implementar lógica para compartir PNG con fondo transparente
+                                    onAction(
+                                        SignAction.SharePngTransparent(
+                                            bitmap = signState.getTransparentSignatureBitmap()
+                                        )
+                                    )
                                     signState.closeShareDropdown()
                                     signState.closeBottomSheet()
                                 }
@@ -217,7 +271,11 @@ fun OptionModalBottomSheet(
                             DropdownMenuItem(
                                 text = { SMText(text = stringResource(R.string.title_save_png_wh)) },
                                 onClick = {
-                                    // TODO: Implementar lógica para compartir PNG con fondo blanco
+                                    onAction(
+                                        SignAction.SharePngWhiteBackground(
+                                            bitmap = signState.getWhiteBackgroundSignatureBitmap()
+                                        )
+                                    )
                                     signState.closeShareDropdown()
                                     signState.closeBottomSheet()
                                 }

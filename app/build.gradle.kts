@@ -109,6 +109,7 @@ dependencies {
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)
     implementation(libs.compose.materialIconsExtended)
+    implementation(libs.compose.runtime.livedata)
 
     api(libs.kotlin.collections.immutable)
 
