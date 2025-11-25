@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlinComposeCompiler)
     alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.crashlytics.gradle)
+    id("kotlin-parcelize")
 }
 
 android {
@@ -116,12 +117,11 @@ dependencies {
 
     implementation(libs.signature.pad)
 
-
     //retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.okhttp3:okhttp:4.10.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
-    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+    implementation(libs.retrofit)
+    implementation(libs.okhttp)
+    implementation(libs.loggingInterceptor)
+    implementation(libs.converterMoshi)
 
     implementation(projects.skizoKotlinCore)
     implementation(projects.skizoAndroidCore)
