@@ -1,7 +1,11 @@
 package com.signaturemaker.app.application.features.sign
 
+import android.Manifest
+import android.os.Build
 import android.view.LayoutInflater
 import androidx.activity.compose.LocalActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -30,6 +34,9 @@ import androidx.compose.material3.RangeSlider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -39,6 +46,7 @@ import androidx.compose.ui.graphics.ImageShader
 import androidx.compose.ui.graphics.ShaderBrush
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
@@ -85,10 +93,46 @@ fun SignScreen(
 
     val snackbarController = LocalSnackbarController.current
     val currentActivity = LocalActivity.current
+    val context = LocalContext.current
 
-    // UI event handler with state hoisting pattern
+    // Storage permission - varies by Android version
+    val storagePermission = when {
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> Manifest.permission.READ_MEDIA_IMAGES
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> null // No permission needed for MediaStore on Android 10+
+        else -> Manifest.permission.WRITE_EXTERNAL_STORAGE
+    }
+
+    // Pending action to execute after permission is granted
+    var pendingAction by remember { mutableStateOf<SignUiEvent?>(null) }
+
+    // Permission launcher for storage access (Android 8-9 only)
+    val permissionLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        if (granted) {
+            // Execute pending action
+            pendingAction?.let { event ->
+                handleSignUiEvent(event, viewModel)
+            }
+        } else {
+            snackbarController?.showError(
+                message = context.getString(R.string.message_error_permission_required)
+            )
+        }
+        pendingAction = null
+    }
+
+    // UI event handler with permission check
     val onSignUiEvent: (SignUiEvent) -> Unit = { event ->
-        handleSignUiEvent(event, viewModel)
+        // Check if we need to request permission (only for Android 8-9)
+        if (storagePermission != null && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            // Request permission and store the pending action
+            pendingAction = event
+            permissionLauncher.launch(storagePermission)
+        } else {
+            // No permission needed (Android 10+) or already granted
+            handleSignUiEvent(event, viewModel)
+        }
     }
 
     // Observe ViewModel events
