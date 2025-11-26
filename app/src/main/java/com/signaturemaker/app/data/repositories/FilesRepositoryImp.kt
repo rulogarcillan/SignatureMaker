@@ -119,12 +119,32 @@ class FilesRepositoryImp(val appContext: Context) : FilesRepository {
 
     @RequiresApi(VERSION_CODES.Q)
     override suspend fun deleteFileBitmapMoreAndroid10(uri: Uri): Flow<Response<Boolean>> {
-        appContext.contentResolver?.delete(
-            uri,
-            null,
-            null
-        )
-        return flow { emit(onSuccess(true)) }
+        return flow {
+            try {
+                val deleted = appContext.contentResolver.delete(
+                    uri,
+                    null,
+                    null
+                )
+
+                if (deleted > 0) {
+                    emit(onSuccess(true))
+                } else {
+                    emit(Response.onFailure(CreateError("Failed to delete file")))
+                }
+            } catch (e: Exception) {
+                // Para RecoverableSecurityException, necesitamos propagarlo para manejarlo en la UI
+                when (e) {
+                    is android.app.RecoverableSecurityException -> {
+                        // Propagamos la excepción para que se maneje en la capa de presentación
+                        throw e
+                    }
+                    else -> {
+                        emit(Response.onFailure(CreateError("Error deleting file: ${e.message}")))
+                    }
+                }
+            }
+        }
     }
 
     override suspend fun deleteFileBitmapLessAndroid10(file: File): Flow<Response<Boolean>> {

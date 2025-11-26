@@ -5,7 +5,6 @@ import com.signaturemaker.app.application.core.extensions.Utils
 import com.signaturemaker.app.domain.models.ItemFile
 import com.signaturemaker.app.domain.repository.FilesRepository
 import com.signaturemaker.app.domain.usecase.RemoveFile.Params
-import com.tuppersoft.skizo.android.core.extension.logd
 import com.tuppersoft.skizo.kotlin.core.domain.baseusecase.FlowGlobalUseCase
 import com.tuppersoft.skizo.kotlin.core.domain.response.Response
 import kotlinx.coroutines.flow.Flow
@@ -25,18 +24,10 @@ class RemoveFile(private val repository: FilesRepository) :
 
     override suspend fun run(params: Params): Flow<Response<Boolean>> {
         return if (params.sdkInt >= VERSION_CODES.Q) {
-            val flow = repository.deleteFileBitmapMoreAndroid10(params.item.uri)
-            flow.collect {
-                "${params.item.uri.path} is deleted".logd()
-            }
-            flow
+            repository.deleteFileBitmapMoreAndroid10(params.item.uri)
         } else {
             val file = File(Utils.path + File.separator + params.item.uri.path?.split("/")?.last())
-            val flow = repository.deleteFileBitmapLessAndroid10(file)
-            flow.collect {
-                "${file.path} is deleted".logd()
-            }
-            flow
+            repository.deleteFileBitmapLessAndroid10(file)
         }
     }
 }

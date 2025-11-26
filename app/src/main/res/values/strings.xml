@@ -113,4 +113,11 @@
 
     <string name="suggest">Suggest</string>
 
+    <!-- Files Screen -->
+    <string name="message_no_files">No saved signatures yet</string>
+    <string name="message_no_files_description">Create your first signature and it will appear here</string>
+    <string name="message_error_permission_required">Permission required to access files</string>
+    <string name="message_error_loading_files">Error loading files</string>
+    <string name="message_file_deleted">File deleted</string>
+
 </resources>

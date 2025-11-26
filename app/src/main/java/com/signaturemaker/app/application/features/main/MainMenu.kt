@@ -19,7 +19,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.features.main.MainMenuItem.ChangeLog
 import com.signaturemaker.app.application.features.main.MainMenuItem.EditPrivacyPolicy
-import com.signaturemaker.app.application.features.main.MainMenuItem.Gallery
+import com.signaturemaker.app.application.features.main.MainMenuItem.Files
 import com.signaturemaker.app.application.features.main.MainMenuItem.Licenses
 import com.signaturemaker.app.application.features.main.MainMenuItem.MoreApps
 import com.signaturemaker.app.application.features.main.MainMenuItem.PrivacyPolicy
@@ -41,7 +41,7 @@ data class MainMenuConfig private constructor(
             return MainMenuConfig(
                 menuItems = listOf(
                     Sign,
-                    Gallery,
+                    Files,
                     Settings,
                     SendFeedback,
                     ChangeLog,
@@ -70,7 +70,7 @@ fun rememberMainMenuConfig(): MainMenuConfig {
 @Immutable
 sealed class MainMenuItem(@StringRes val titleResId: Int, val icon: ImageVector) {
     data object Sign : MainMenuItem(R.string.title_create_signature, Icons.Default.ModeEditOutline)
-    data object Gallery : MainMenuItem(R.string.title_gallery, Icons.Default.BrowseGallery)
+    data object Files : MainMenuItem(R.string.title_gallery, Icons.Default.BrowseGallery)
     data object Settings : MainMenuItem(R.string.title_setting, Icons.Default.Settings)
     data object SendFeedback : MainMenuItem(R.string.send_suggestions, Icons.Default.Feedback)
     data object ChangeLog : MainMenuItem(R.string.changelog, Icons.Default.Feed)

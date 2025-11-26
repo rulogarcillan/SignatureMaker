@@ -126,5 +126,6 @@ dependencies {
 
     implementation(projects.skizoKotlinCore)
     implementation(projects.skizoAndroidCore)
+    implementation(libs.coilCompose)
 
 }

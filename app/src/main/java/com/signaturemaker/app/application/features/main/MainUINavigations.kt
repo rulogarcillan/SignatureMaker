@@ -3,7 +3,7 @@ package com.signaturemaker.app.application.features.main
 import androidx.compose.runtime.Stable
 import com.signaturemaker.app.application.features.main.MainScreenAction.NavigateToChangeLog
 import com.signaturemaker.app.application.features.main.MainScreenAction.NavigateToEditPrivacyPolicy
-import com.signaturemaker.app.application.features.main.MainScreenAction.NavigateToGallery
+import com.signaturemaker.app.application.features.main.MainScreenAction.NavigateToFiles
 import com.signaturemaker.app.application.features.main.MainScreenAction.NavigateToLicenses
 import com.signaturemaker.app.application.features.main.MainScreenAction.NavigateToMoreApps
 import com.signaturemaker.app.application.features.main.MainScreenAction.NavigateToPrivacyPolicy
@@ -22,7 +22,7 @@ sealed interface MainScreenAction {
      * Navigation actions
      */
     data object NavigateToSign : MainScreenAction
-    data object NavigateToGallery : MainScreenAction
+    data object NavigateToFiles : MainScreenAction
     data object NavigateToSettings : MainScreenAction
     data object NavigateToSendFeedback : MainScreenAction
     data object NavigateToChangeLog : MainScreenAction
@@ -40,7 +40,7 @@ sealed interface MainScreenAction {
 fun MainMenuItem.toAction(): MainScreenAction {
     return when (this) {
         is MainMenuItem.Sign -> NavigateToSign
-        is MainMenuItem.Gallery -> NavigateToGallery
+        is MainMenuItem.Files -> NavigateToFiles
         is MainMenuItem.Settings -> NavigateToSettings
         is MainMenuItem.SendFeedback -> NavigateToSendFeedback
         is MainMenuItem.ChangeLog -> NavigateToChangeLog

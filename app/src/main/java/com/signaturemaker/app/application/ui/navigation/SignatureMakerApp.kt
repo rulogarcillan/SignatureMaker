@@ -9,11 +9,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.signaturemaker.app.application.features.gallery.GalleryRoute
+import com.signaturemaker.app.application.features.files.FilesRoute
 import com.signaturemaker.app.application.features.main.MainRoute
 import com.signaturemaker.app.application.features.main.MainScreenAction
 import com.signaturemaker.app.application.features.sign.SignRoute
-import com.signaturemaker.app.application.ui.navigation.core.navigateBack
 import com.signaturemaker.app.application.ui.navigation.core.navigateTo
 import com.signaturemaker.app.application.ui.navigation.routes.SignatureMakerRoutes
 
@@ -37,8 +36,8 @@ fun SignatureMakerApp() {
                 navController.navigateTo(SignatureMakerRoutes.Sign)
             }
 
-            is MainScreenAction.NavigateToGallery -> {
-                navController.navigateTo(SignatureMakerRoutes.Gallery)
+            is MainScreenAction.NavigateToFiles -> {
+                navController.navigateTo(SignatureMakerRoutes.Files)
             }
 
             is MainScreenAction.NavigateToSettings -> {
@@ -112,9 +111,9 @@ private fun ContentNavHost(
             SignRoute(modifier = Modifier.fillMaxSize())
         }
 
-        // Gallery screen destination
-        composable(SignatureMakerRoutes.Gallery.route) {
-            GalleryRoute(modifier = Modifier.fillMaxSize())
+        // File screen destination
+        composable(SignatureMakerRoutes.Files.route) {
+            FilesRoute(modifier = Modifier.fillMaxSize())
         }
     }
 }

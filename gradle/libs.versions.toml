@@ -1,5 +1,6 @@
 [versions]
 appcompat = "1.7.1"
+coilCompose = "3.3.0"
 converterMoshi = "3.0.0"
 kotlinStdlib = "2.2.21"
 kotlinStdlibJdk8 = "2.2.0"
@@ -39,6 +40,7 @@ kotlinCollections = "0.4.0"
 [libraries]
 # Kotlin
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+coilCompose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
 converterMoshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "converterMoshi" }
 kotlin_collections_immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinCollections" }
 

@@ -1,9 +1,6 @@
 package com.signaturemaker.app.application.ui.navigation.routes
 
-import androidx.navigation.NavBackStackEntry
-import com.signaturemaker.app.application.ui.navigation.core.ArgumentRoute
 import com.signaturemaker.app.application.ui.navigation.core.SimpleRoute
-import com.signaturemaker.app.application.ui.navigation.core.buildArguments
 
 /**
  * Sealed class containing all navigation routes for the SignatureMaker app.
@@ -26,11 +23,12 @@ sealed class SignatureMakerRoutes {
     }
 
     /**
-     * Gallery screen route
+     * File screen route
      */
-    data object Gallery : SimpleRoute {
-        override val route: String = "galleryscreen"
+    data object Files : SimpleRoute {
+        override val route: String = "filescreen"
     }
+
 
     /**
      * Example of a route with typed arguments.
