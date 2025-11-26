@@ -17,6 +17,6 @@ fun SMLineSeparator(modifier: Modifier = Modifier) {
         modifier = modifier
             .fillMaxWidth()
             .height(SMTheme.size.size10)
-            .background(SMTheme.material.colorScheme.onSurface.copy(alpha = 0.10f))
+            .background(SMTheme.material.colorScheme.outlineVariant)
     )
 }

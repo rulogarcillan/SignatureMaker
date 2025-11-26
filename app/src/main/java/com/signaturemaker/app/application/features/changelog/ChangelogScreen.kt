@@ -99,7 +99,7 @@ private fun EmptyChangelogState(modifier: Modifier = Modifier) {
             imageVector = Icons.Default.Warning,
             contentDescription = null,
             modifier = Modifier.size(64.dp),
-            tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
+            tint = MaterialTheme.colorScheme.onSurfaceVariant
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
@@ -204,11 +204,11 @@ private fun ChangeItem(
     ) {
         // Icon based on type from enum
         Surface(
-            shape = CircleShape,
-            color = change.type.color.copy(alpha = 0.1f),
-            modifier = Modifier.size(SMTheme.size.size350)
+            shape = RoundedCornerShape(SMTheme.radius.radius100),
+            color = SMTheme.material.colorScheme.secondaryContainer,
+            modifier = Modifier.padding(end = SMTheme.spacing.spacing100)
         ) {
-            Icon(
+            com.signaturemaker.app.application.ui.designsystem.components.SMIcon(
                 imageVector = change.type.icon,
                 contentDescription = change.type.displayName,
                 modifier = Modifier
@@ -222,17 +222,17 @@ private fun ChangeItem(
 
         // Change text
         Column(modifier = Modifier.weight(1f)) {
-            Text(
+            com.signaturemaker.app.application.ui.designsystem.components.SMText(
                 text = change.type.displayName.uppercase(Locale.getDefault()),
-                style = MaterialTheme.typography.labelSmall,
+                style = SMTheme.material.typography.labelSmall,
                 fontWeight = FontWeight.Bold,
                 color = change.type.color,
                 modifier = Modifier.padding(bottom = SMTheme.spacing.spacing50)
             )
-            Text(
+            com.signaturemaker.app.application.ui.designsystem.components.SMText(
                 text = change.text,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurface
+                style = SMTheme.material.typography.bodyMedium,
+                color = SMTheme.material.colorScheme.onSurface
             )
         }
     }

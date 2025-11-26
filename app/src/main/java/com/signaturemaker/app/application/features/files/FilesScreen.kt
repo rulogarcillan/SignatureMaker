@@ -243,7 +243,7 @@ private fun EmptyState() {
             imageVector = Icons.Default.Description,
             contentDescription = null,
             modifier = Modifier.size(SMTheme.size.size700),
-            tint = SMTheme.material.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
+            tint = SMTheme.material.colorScheme.onSurfaceVariant
         )
 
         Spacer(modifier = Modifier.height(SMTheme.spacing.spacing200))
@@ -259,7 +259,7 @@ private fun EmptyState() {
         SMText(
             text = stringResource(R.string.message_no_files_description),
             style = SMTheme.material.typography.bodyMedium,
-            color = SMTheme.material.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+            color = SMTheme.material.colorScheme.onSurfaceVariant
         )
     }
 }

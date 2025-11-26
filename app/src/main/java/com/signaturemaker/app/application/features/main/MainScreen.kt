@@ -30,7 +30,6 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.Surface
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
@@ -328,15 +327,15 @@ private fun DrawerOptionItem(
     onClick: () -> Unit = {}
 ) {
     val backgroundColor = if (selected) {
-        SMTheme.material.colorScheme.primary.copy(alpha = 0.6f)
+        SMTheme.material.colorScheme.primaryContainer
     } else {
         SMTheme.material.colorScheme.surface
     }
 
     val contentColor = if (selected) {
-        SMTheme.material.colorScheme.contentColorFor(SMTheme.material.colorScheme.primary)
+        SMTheme.material.colorScheme.onPrimaryContainer
     } else {
-        SMTheme.material.colorScheme.contentColorFor(SMTheme.material.colorScheme.surface)
+        SMTheme.material.colorScheme.onSurface
     }
 
     Surface(

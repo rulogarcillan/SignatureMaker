@@ -41,7 +41,7 @@ fun SMModalBottomSheet(
             dragHandle = dragHandle,
             sheetState = sheetState,
             containerColor = SMTheme.material.colorScheme.surface,
-            scrimColor = SMTheme.material.colorScheme.scrim.copy(alpha = 0.4f),
+            scrimColor = SMTheme.material.colorScheme.scrim.copy(alpha = 0.32f),
             shape = RoundedCornerShape(
                 topStart = SMTheme.radius.radius250,
                 topEnd = SMTheme.radius.radius250
