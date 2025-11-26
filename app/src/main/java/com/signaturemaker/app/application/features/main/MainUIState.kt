@@ -11,20 +11,21 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.navigation.NavHostController
-import com.signaturemaker.app.application.features.main.MainActivityMenu.Sign
+import com.signaturemaker.app.application.features.main.MainMenuItem.Sign
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-/**
- * Main Activity Menu
+/*
+ * State holder for Main Screen following Compose best practices
+ * All state is properly hoisted and observable
  */
 @Stable
-data class MainActivityState(
+data class MainUIState(
     val navController: NavHostController,
-    val menuSelected: MainActivityMenu,
+    val menuSelected: MainMenuItem,
     val drawerState: DrawerState,
     val onDrawerClick: () -> Unit,
-    val changeMenuSelected: (MainActivityMenu) -> Unit
+    val changeMenuSelected: (MainMenuItem) -> Unit
 ) {
     /**
      * Navigate to a destination and clear back stack
@@ -38,18 +39,19 @@ data class MainActivityState(
     }
 }
 
-/**
- * Remember MainActivityState
+/*
+ * Remember MainUIState following Compose best practices
+ * The state holder is remembered and its internal state is properly observable
  */
 @Composable
-fun rememberMainActivityState(
+fun rememberMainState(
     navController: NavHostController,
     drawerState: DrawerState = rememberDrawerState(DrawerValue.Closed),
-    coroutineScope: CoroutineScope = rememberCoroutineScope()
-): MainActivityState {
-    var selectedMenu by remember { mutableStateOf<MainActivityMenu>(Sign) }
+): MainUIState {
+    val coroutineScope: CoroutineScope = rememberCoroutineScope()
+    var selectedMenu by remember { mutableStateOf<MainMenuItem>(Sign) }
 
-    val changeMenuSelected = { it: MainActivityMenu -> selectedMenu = it }
+    val changeMenuSelected = { it: MainMenuItem -> selectedMenu = it }
 
     fun onDrawerClick() {
         coroutineScope.launch {
@@ -61,7 +63,7 @@ fun rememberMainActivityState(
     }
 
     return remember(navController, selectedMenu, drawerState, coroutineScope) {
-        MainActivityState(
+        MainUIState(
             navController = navController,
             menuSelected = selectedMenu,
             drawerState = drawerState,
