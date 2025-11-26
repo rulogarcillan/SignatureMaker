@@ -1,13 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <style name="Theme.SignatureMaker" parent="android:Theme.Material.Light.NoActionBar" />
-
-    <!-- Theme for OssLicensesMenuActivity - must inherit from AppCompat -->
-    <style name="Theme.SignatureMaker.OssLicenses" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/md_theme_primary</item>
-        <item name="colorPrimaryDark">@color/md_theme_primary</item>
-        <item name="colorAccent">@color/md_theme_secondary</item>
-    </style>
-
 </resources>

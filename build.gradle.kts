@@ -5,7 +5,6 @@ plugins {
     alias(libs.plugins.googleKsp) apply false
     alias(libs.plugins.google.services) apply false
     alias(libs.plugins.firebase.crashlytics.gradle) apply false
-    alias(libs.plugins.oss.licenses.plugin) apply false
     alias(libs.plugins.detekt)
 }
 

@@ -17,4 +17,15 @@ abstract class BaseActivity : ComponentActivity() {
         enableEdgeToEdge()
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
     }
+
+    /**
+     * Override to prevent saving large Bitmaps to Bundle which causes
+     * "Could not copy bitmap to parcel blob" crash.
+     * Compose manages its own state restoration through rememberSaveable.
+     */
+    override fun onSaveInstanceState(outState: Bundle) {
+        // Don't call super to avoid automatic state saving that includes large Bitmaps
+        // outState is left empty intentionally
+        // Compose's rememberSaveable will handle necessary state restoration
+    }
 }

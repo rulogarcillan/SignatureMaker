@@ -6,21 +6,22 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
@@ -32,12 +33,17 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.core.view.WindowCompat
 import com.signaturemaker.app.BuildConfig
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.ui.designsystem.SMTheme
@@ -105,7 +111,7 @@ private fun MainScreenContent(
     modifier: Modifier = Modifier
 ) {
     ModalNavigationDrawer(
-        modifier = modifier.safeDrawingPadding(),
+        modifier = modifier,
         drawerState = mainState.drawerState,
         drawerContent = {
             NavigationDrawerContent(
@@ -116,7 +122,6 @@ private fun MainScreenContent(
         },
     ) {
         Scaffold(
-            modifier = Modifier.safeDrawingPadding(),
             snackbarHost = {
                 SnackbarHost(hostState = snackbarController.snackbarHostState)
             },
@@ -135,6 +140,7 @@ private fun MainScreenContent(
 
 /**
  * Main Top Bar - Application top app bar
+ * Ocupa también la status bar con enableEdgeToEdge
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -149,6 +155,7 @@ private fun MainTopBar(
             actionIconContentColor = contentColorFor(SMTheme.material.colorScheme.primary),
             titleContentColor = contentColorFor(SMTheme.material.colorScheme.primary)
         ),
+        windowInsets = WindowInsets.statusBars,
         title = {
             SMText(text = stringResource(R.string.app_title))
         },

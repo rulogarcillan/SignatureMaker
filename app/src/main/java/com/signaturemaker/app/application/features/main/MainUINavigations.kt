@@ -2,9 +2,7 @@ package com.signaturemaker.app.application.features.main
 
 import androidx.compose.runtime.Stable
 import com.signaturemaker.app.application.features.main.MainScreenAction.NavigateToChangeLog
-import com.signaturemaker.app.application.features.main.MainScreenAction.NavigateToEditPrivacyPolicy
 import com.signaturemaker.app.application.features.main.MainScreenAction.NavigateToFiles
-import com.signaturemaker.app.application.features.main.MainScreenAction.NavigateToLicenses
 import com.signaturemaker.app.application.features.main.MainScreenAction.NavigateToPrivacyPolicy
 import com.signaturemaker.app.application.features.main.MainScreenAction.NavigateToRateUs
 import com.signaturemaker.app.application.features.main.MainScreenAction.NavigateToSettings
@@ -44,9 +42,9 @@ fun MainMenuItem.toAction(): MainScreenAction {
         is MainMenuItem.ChangeLog -> NavigateToChangeLog
         is MainMenuItem.RateUs -> NavigateToRateUs
         //is MainMenuItem.MoreApps -> NavigateToMoreApps
-        is MainMenuItem.Licenses -> NavigateToLicenses
+        //is MainMenuItem.Licenses -> NavigateToLicenses
         is MainMenuItem.PrivacyPolicy -> NavigateToPrivacyPolicy
-        is MainMenuItem.EditPrivacyPolicy -> NavigateToEditPrivacyPolicy
+        //is MainMenuItem.EditPrivacyPolicy -> NavigateToEditPrivacyPolicy
     }
 }
 

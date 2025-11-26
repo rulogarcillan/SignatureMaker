@@ -58,6 +58,9 @@ class SignUIState(
     var clearFunction: (() -> Unit)? = null
 
     // Reference to SignaturePad for getting bitmap
+    // Marked as transient to prevent serialization when Activity goes to background
+    // This prevents "Could not copy bitmap to parcel blob" crash
+    @Transient
     var signaturePadRef: SignaturePad? = null
 
     /**

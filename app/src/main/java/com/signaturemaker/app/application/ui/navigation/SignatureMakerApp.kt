@@ -63,12 +63,7 @@ fun SignatureMakerApp() {
             }
 
             is MainScreenAction.NavigateToLicenses -> {
-                // Open OSS Licenses Activity from Google Play Services
-                val intent = android.content.Intent(
-                    context,
-                    com.google.android.gms.oss.licenses.OssLicensesMenuActivity::class.java
-                )
-                context.startActivity(intent)
+                // TODO: Use in-app OSS licenses screen when available
             }
 
             is MainScreenAction.NavigateToPrivacyPolicy -> {
@@ -79,15 +74,7 @@ fun SignatureMakerApp() {
             }
 
             is MainScreenAction.NavigateToEditPrivacyPolicy -> {
-                // Open GDPR/UMP Privacy Options Form
-                if (context is android.app.Activity) {
-                    com.google.android.ump.UserMessagingPlatform.showPrivacyOptionsForm(context) { formError ->
-                        formError?.let {
-                            // Log error if needed
-                            android.util.Log.e("UMP", "Privacy options form error: ${it.message}")
-                        }
-                    }
-                }
+                // TODO: Implement Edit Privacy Policy action
             }
         }
     }

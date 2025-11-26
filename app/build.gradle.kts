@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.kotlinComposeCompiler)
     alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.crashlytics.gradle)
-    alias(libs.plugins.oss.licenses.plugin)
     id("kotlin-parcelize")
 }
 
@@ -101,7 +100,6 @@ dependencies {
     implementation(libs.firebase.analytics)
 
     // Google Play Services
-    implementation(libs.oss.licenses)
     implementation(libs.user.messaging.platform)
 
     implementation(libs.core.ktx)

@@ -2,23 +2,19 @@ package com.signaturemaker.app.application.features.main
 
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Badge
-import androidx.compose.material.icons.filled.BrowseGallery
-import androidx.compose.material.icons.filled.Copyright
-import androidx.compose.material.icons.filled.Feed
-import androidx.compose.material.icons.filled.Fingerprint
-import androidx.compose.material.icons.filled.ModeEditOutline
+import androidx.compose.material.icons.automirrored.filled.Article
+import androidx.compose.material.icons.filled.Create
+import androidx.compose.material.icons.filled.FolderOpen
+import androidx.compose.material.icons.filled.PrivacyTip
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.StarRate
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.features.main.MainMenuItem.ChangeLog
-import com.signaturemaker.app.application.features.main.MainMenuItem.EditPrivacyPolicy
 import com.signaturemaker.app.application.features.main.MainMenuItem.Files
-import com.signaturemaker.app.application.features.main.MainMenuItem.Licenses
 import com.signaturemaker.app.application.features.main.MainMenuItem.PrivacyPolicy
 import com.signaturemaker.app.application.features.main.MainMenuItem.RateUs
 import com.signaturemaker.app.application.features.main.MainMenuItem.Settings
@@ -43,9 +39,9 @@ data class MainMenuConfig private constructor(
                     ChangeLog,
                     RateUs,
                     //MoreApps,
-                    Licenses,
+                    //Licenses,
                     PrivacyPolicy,
-                    EditPrivacyPolicy,
+                    //EditPrivacyPolicy,
                 )
             )
         }
@@ -65,16 +61,16 @@ fun rememberMainMenuConfig(): MainMenuConfig {
  */
 @Immutable
 sealed class MainMenuItem(@StringRes val titleResId: Int, val icon: ImageVector) {
-    data object Sign : MainMenuItem(R.string.title_create_signature, Icons.Default.ModeEditOutline)
-    data object Files : MainMenuItem(R.string.title_gallery, Icons.Default.BrowseGallery)
+    data object Sign : MainMenuItem(R.string.title_create_signature, Icons.Default.Create)
+    data object Files : MainMenuItem(R.string.title_gallery, Icons.Default.FolderOpen)
     data object Settings : MainMenuItem(R.string.title_setting, Icons.Default.Settings)
 
     // data object SendFeedback : MainMenuItem(R.string.send_suggestions, Icons.Default.Feedback)
-    data object ChangeLog : MainMenuItem(R.string.changelog, Icons.Default.Feed)
-    data object RateUs : MainMenuItem(R.string.rate, Icons.Default.Star)
+    data object ChangeLog : MainMenuItem(R.string.changelog, Icons.AutoMirrored.Filled.Article)
+    data object RateUs : MainMenuItem(R.string.rate, Icons.Default.StarRate)
 
     //data object MoreApps : MainMenuItem(R.string.more_app, Icons.Default.Shop)
-    data object Licenses : MainMenuItem(R.string.license, Icons.Default.Copyright)
-    data object PrivacyPolicy : MainMenuItem(R.string.privacy_policy, Icons.Default.Fingerprint)
-    data object EditPrivacyPolicy : MainMenuItem(R.string.title_edit_privacy_policy, Icons.Default.Badge)
+    //data object Licenses : MainMenuItem(R.string.license, Icons.Default.Copyright)
+    data object PrivacyPolicy : MainMenuItem(R.string.privacy_policy, Icons.Default.PrivacyTip)
+    //data object EditPrivacyPolicy : MainMenuItem(R.string.title_edit_privacy_policy, Icons.Default.Badge)
 }

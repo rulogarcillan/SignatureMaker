@@ -94,13 +94,11 @@ object IntentUtils {
         try {
             val uri = Uri.parse("market://search?q=pub:$developerName")
             val intent = Intent(Intent.ACTION_VIEW, uri)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(intent)
         } catch (e: ActivityNotFoundException) {
             // Fallback to web Play Store
             val uri = Uri.parse("https://play.google.com/store/search?q=pub:$developerName")
             val intent = Intent(Intent.ACTION_VIEW, uri)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(intent)
         }
     }
