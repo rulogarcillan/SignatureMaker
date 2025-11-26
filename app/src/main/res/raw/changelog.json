@@ -1,6 +1,97 @@
 {
   "changelog": [
     {
+      "date": "26/11/2025",
+      "versionCode": 400,
+      "versionName": "4.0.0",
+      "change": [
+        {
+          "type": "refactor",
+          "text": "Complete migration from XML layouts to Jetpack Compose"
+        },
+        {
+          "type": "refactor",
+          "text": "Redesigned entire app architecture with modern navigation system"
+        },
+        {
+          "type": "feat",
+          "text": "Implemented Material Design 3 throughout the app"
+        },
+        {
+          "type": "feat",
+          "text": "Added new design system with reusable UI components"
+        },
+        {
+          "type": "refactor",
+          "text": "Migrated dependency injection from Hilt to Koin"
+        },
+        {
+          "type": "feat",
+          "text": "Replaced Gallery with improved Files management feature"
+        },
+        {
+          "type": "feat",
+          "text": "Added centralized SnackbarController for app-wide notifications"
+        },
+        {
+          "type": "feat",
+          "text": "Implemented type-safe navigation with centralized routing system"
+        },
+        {
+          "type": "refactor",
+          "text": "Restructured package organization for better maintainability"
+        },
+        {
+          "type": "feat",
+          "text": "Added Material 3 Floating Action Button for main actions"
+        },
+        {
+          "type": "feat",
+          "text": "Enhanced signature save and share functionality with new UI"
+        },
+        {
+          "type": "feat",
+          "text": "Added storage permission handling for Android 8-13"
+        },
+        {
+          "type": "feat",
+          "text": "Implemented FileProvider support for secure file sharing"
+        },
+        {
+          "type": "feat",
+          "text": "Implemented dark theme with dynamic color support"
+        },
+        {
+          "type": "feat",
+          "text": "Added changelog feature with modern expandable UI"
+        },
+        {
+          "type": "refactor",
+          "text": "Migrated from Groovy to Kotlin DSL for Gradle"
+        },
+        {
+          "type": "refactor",
+          "text": "Updated all dependencies to latest stable versions"
+        },
+        {
+          "type": "chore",
+          "text": "Converted image resources from PNG to WebP format"
+        },
+        {
+          "type": "chore",
+          "text": "Removed deprecated XML layouts and legacy code"
+        },
+        {
+          "type": "del",
+          "text": "Removed legacy fragments and activities"
+        },
+        {
+          "type": "del",
+          "text": "Removed old settings and menu implementations"
+        }
+      ]
+    },
+    {
       "date": "22/12/2023",
       "versionCode": 3400,
       "versionName": "3.4.0",

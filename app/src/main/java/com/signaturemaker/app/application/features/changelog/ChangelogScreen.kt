@@ -43,9 +43,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.signaturemaker.app.application.features.changelog.model.ChangeUI
 import com.signaturemaker.app.application.features.changelog.model.ChangelogUI
+import com.signaturemaker.app.application.ui.designsystem.SMTheme
 import java.text.SimpleDateFormat
 import java.util.Locale
 import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -78,7 +80,9 @@ private fun ChangelogContent(
                 items = changelogs,
                 key = { it.versionCode }
             ) { changelog ->
-                ChangelogVersionCard(changelog = changelog)
+                ChangelogVersionCard(
+                    changelog = changelog.sortChangesByType()
+                )
             }
         }
     }
@@ -202,19 +206,19 @@ private fun ChangeItem(
         Surface(
             shape = CircleShape,
             color = change.type.color.copy(alpha = 0.1f),
-            modifier = Modifier.size(32.dp)
+            modifier = Modifier.size(SMTheme.size.size350)
         ) {
             Icon(
                 imageVector = change.type.icon,
                 contentDescription = change.type.displayName,
                 modifier = Modifier
-                    .padding(6.dp)
-                    .size(20.dp),
+                    .padding(SMTheme.spacing.spacing100)
+                    .size(SMTheme.size.size250),
                 tint = change.type.color
             )
         }
 
-        Spacer(modifier = Modifier.width(12.dp))
+        Spacer(modifier = Modifier.width(SMTheme.spacing.spacing200))
 
         // Change text
         Column(modifier = Modifier.weight(1f)) {
@@ -223,7 +227,7 @@ private fun ChangeItem(
                 style = MaterialTheme.typography.labelSmall,
                 fontWeight = FontWeight.Bold,
                 color = change.type.color,
-                modifier = Modifier.padding(bottom = 2.dp)
+                modifier = Modifier.padding(bottom = SMTheme.spacing.spacing50)
             )
             Text(
                 text = change.text,
@@ -243,6 +247,31 @@ private fun formatDate(dateString: String): String {
         date?.let { outputFormat.format(it) } ?: dateString
     } catch (e: Exception) {
         dateString
+    }
+}
+
+/**
+ * Extension function to sort changes by type priority
+ * Order: FEAT -> REFACTOR -> FIX -> DOCS -> TEST -> CHORE -> DEL
+ */
+private fun ChangelogUI.sortChangesByType(): ChangelogUI {
+    val sortedChanges = changes.sortedBy { it.type.getPriority() }
+    return copy(changes = sortedChanges.toImmutableList())
+}
+
+/**
+ * Get priority order for change types
+ * Lower number = higher priority
+ */
+private fun com.signaturemaker.app.application.features.changelog.model.ChangeType.getPriority(): Int {
+    return when (this) {
+        com.signaturemaker.app.application.features.changelog.model.ChangeType.FEAT -> 1
+        com.signaturemaker.app.application.features.changelog.model.ChangeType.REFACTOR -> 2
+        com.signaturemaker.app.application.features.changelog.model.ChangeType.FIX -> 3
+        com.signaturemaker.app.application.features.changelog.model.ChangeType.DOCS -> 4
+        com.signaturemaker.app.application.features.changelog.model.ChangeType.TEST -> 5
+        com.signaturemaker.app.application.features.changelog.model.ChangeType.CHORE -> 6
+        com.signaturemaker.app.application.features.changelog.model.ChangeType.DEL -> 7
     }
 }
 
