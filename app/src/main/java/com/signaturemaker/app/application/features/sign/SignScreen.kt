@@ -25,11 +25,11 @@ import androidx.compose.material.icons.filled.Save
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Tune
 import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.RangeSlider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -64,6 +64,89 @@ import com.signaturemaker.app.application.ui.designsystem.components.SMModalBott
 import com.signaturemaker.app.application.ui.designsystem.components.SMText
 import com.signaturemaker.app.application.ui.snackbar.LocalSnackbarController
 import org.koin.androidx.compose.koinViewModel
+
+// ============================================
+// BACKGROUND TYPE SYSTEM
+// ============================================
+
+/**
+ * Sealed class representing the background type for signature canvas
+ */
+sealed class BackgroundType {
+    /**
+     * Use theme color as background (adapts to light/dark theme)
+     */
+    data object ThemeColor : BackgroundType()
+
+    /**
+     * Use an image pattern as background
+     */
+    data class Image(@DrawableRes val resourceId: Int) : BackgroundType()
+
+    companion object {
+        // ID para identificar cada tipo
+        const val THEME_COLOR_ID = 0
+        const val MASK_1_ID = 1
+        const val MASK_2_ID = 2
+
+        // Conversión de ID a BackgroundType
+        fun fromId(id: Int): BackgroundType = when (id) {
+            THEME_COLOR_ID -> ThemeColor
+            MASK_1_ID -> Image(R.drawable.mascara1)
+            MASK_2_ID -> Image(R.drawable.mascara2)
+            else -> ThemeColor
+        }
+
+        // Conversión de BackgroundType a ID
+        fun toId(type: BackgroundType): Int = when (type) {
+            is ThemeColor -> THEME_COLOR_ID
+            is Image -> when (type.resourceId) {
+                R.drawable.mascara1 -> MASK_1_ID
+                R.drawable.mascara2 -> MASK_2_ID
+                else -> THEME_COLOR_ID
+            }
+        }
+    }
+}
+
+// ============================================
+// BACKGROUND MANAGER
+// ============================================
+
+/**
+ * Manager for handling background rendering
+ */
+object BackgroundManager {
+
+    /**
+     * Create a Brush based on the background type
+     */
+    @Composable
+    fun createBrush(type: BackgroundType): Brush {
+        return when (type) {
+            is BackgroundType.ThemeColor -> {
+                val color = SMTheme.color.backgroundSheet
+                Brush.linearGradient(listOf(color, color))
+            }
+
+            is BackgroundType.Image -> {
+                // Imagen tileada
+                val imageBitmap = ImageBitmap.imageResource(LocalResources.current, type.resourceId)
+                val shader = ImageShader(imageBitmap, TileMode.Repeated, TileMode.Repeated)
+                ShaderBrush(shader)
+            }
+        }
+    }
+
+    /**
+     * Get available background options as IDs
+     */
+    fun getAvailableOptions(): List<Int> = listOf(
+        BackgroundType.THEME_COLOR_ID,
+        BackgroundType.MASK_1_ID,
+        BackgroundType.MASK_2_ID
+    )
+}
 
 // ============================================
 // MAIN SCREEN
@@ -269,7 +352,8 @@ private fun SignHerePlaceholder(
     if (visible) {
         SMText(
             text = stringResource(R.string.title_SingHere),
-            modifier = modifier
+            modifier = modifier,
+            color = SMTheme.color.backgroundTextSheet
         )
     }
 }
@@ -547,7 +631,7 @@ private fun StrokeWidthSection(signState: SignUIState) {
 }
 
 /**
- * Background Section - Background pattern selection
+ * Background Section - Background pattern selection (color or images)
  */
 @Composable
 private fun BackgroundSection(signState: SignUIState) {
@@ -558,13 +642,30 @@ private fun BackgroundSection(signState: SignUIState) {
                 .padding(horizontal = SMTheme.spacing.spacing100),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            SignScreenDefaults.availableBackgroundImages().forEach { imageRes ->
-                SMImageSelector(
-                    image = painterResource(id = imageRes),
-                    selected = imageRes == signState.selectedImage,
-                    modifier = Modifier.size(SMTheme.size.size500),
-                    onClick = { signState.updateImage(imageRes) }
-                )
+            BackgroundManager.getAvailableOptions().forEach { optionId ->
+                val backgroundType = BackgroundType.fromId(optionId)
+
+                when (backgroundType) {
+                    is BackgroundType.ThemeColor -> {
+                        // Mostrar selector de color para el tema
+                        SMColorSelector(
+                            color = SMTheme.color.backgroundSheet,
+                            selected = optionId == signState.selectedImage,
+                            modifier = Modifier.size(SMTheme.size.size500),
+                            onClick = { signState.updateImage(optionId) }
+                        )
+                    }
+
+                    is BackgroundType.Image -> {
+                        // Mostrar selector de imagen
+                        SMImageSelector(
+                            image = painterResource(id = backgroundType.resourceId),
+                            selected = optionId == signState.selectedImage,
+                            modifier = Modifier.size(SMTheme.size.size500),
+                            onClick = { signState.updateImage(optionId) }
+                        )
+                    }
+                }
             }
         }
     }
@@ -616,13 +717,12 @@ private fun BottomSheetSection(
 // ============================================
 
 /**
- * Create a tiled background brush from an image resource
+ * Create background brush using BackgroundManager
  */
 @Composable
-private fun createTiledBackgroundBrush(@DrawableRes imageRes: Int): Brush {
-    val imageBitmap = ImageBitmap.imageResource(LocalResources.current, imageRes)
-    val shader = ImageShader(imageBitmap, TileMode.Repeated, TileMode.Repeated)
-    return ShaderBrush(shader)
+private fun createTiledBackgroundBrush(@DrawableRes imageId: Int): Brush {
+    val backgroundType = BackgroundType.fromId(imageId)
+    return BackgroundManager.createBrush(backgroundType)
 }
 
 /**
@@ -633,15 +733,14 @@ private fun buildStrokeWidthLabel(min: Float, max: Float): String {
     return "${stringResource(R.string.min)} ${"%.1f".format(min)} • ${stringResource(R.string.max)} ${"%.1f".format(max)}"
 }
 
-
 object SignScreenDefaults {
 
     val defaultPenColor: Color
         @Composable
         get() = SMTheme.color.pen1
 
-    val defaultBackgroundImage: Int
-        get() = R.drawable.mascara3
+    // Por defecto, usar el color del tema
+    const val defaultBackgroundImage: Int = BackgroundType.THEME_COLOR_ID
 
     @Composable
     fun availablePenColors() = listOf(
@@ -649,12 +748,6 @@ object SignScreenDefaults {
         SMTheme.color.pen2,
         SMTheme.color.pen3,
         SMTheme.color.pen4
-    )
-
-    fun availableBackgroundImages() = listOf(
-        R.drawable.mascara3,
-        R.drawable.mascara1,
-        R.drawable.mascara2
     )
 }
 

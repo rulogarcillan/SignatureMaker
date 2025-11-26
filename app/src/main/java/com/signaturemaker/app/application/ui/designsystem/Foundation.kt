@@ -71,19 +71,11 @@ internal object Foundation {
   val spacing64: Dp = 64.dp
   val spacing120: Dp = 120.dp
   val spacing128: Dp = 128.dp
+    
 
-  val purple80: Color = Color(0xFFD0BCFF)
-  val purpleGrey80: Color = Color(0xFFCCC2DC)
-  val pink80: Color = Color(0xFFEFB8C8)
-
-  val purple40: Color = Color(0xFF6650a4)
-  val purpleGrey40: Color = Color(0xFF625b71)
-  val pink40: Color = Color(0xFF7D5260)
-
-  val Blue40: Color = Color(0xFF3F51B5)
-  val Red40: Color = Color(0xFFF44336)
-  val Green40: Color = Color(0xFF4CAF50)
-  val Black40: Color = Color(0xFF000000)
-  val White40: Color = Color(0xFFFFFFFF)
-  val Gray40: Color = Color(0xFF6F6F6F)
+  val Blue: Color = Color(0xFF3F51B5)
+  val Red: Color = Color(0xFFF44336)
+  val Green: Color = Color(0xFF4CAF50)
+  val Black: Color = Color(0xFF000000)
+  val White: Color = Color(0xFFFFFFFF)
 }

@@ -14,14 +14,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
@@ -36,9 +36,9 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
@@ -110,6 +110,24 @@ private fun MainScreenContent(
     content: @Composable (PaddingValues) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    // Ajustar iconos de status bar según estado del drawer
+    val view = LocalView.current
+    val isDrawerOpen = mainState.drawerState.isOpen
+    val surfaceContainerColor = SMTheme.material.colorScheme.surfaceContainer
+    val surfaceColor = SMTheme.material.colorScheme.surface
+
+    SideEffect {
+        val window = (view.context as? android.app.Activity)?.window ?: return@SideEffect
+
+        // TopBar usa surfaceContainer, Drawer usa surface
+        val statusBarColor = if (isDrawerOpen) surfaceColor else surfaceContainerColor
+
+        val luminance = statusBarColor.luminance()
+        val useDarkIcons = luminance > 0.5f
+
+        WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = useDarkIcons
+    }
+
     ModalNavigationDrawer(
         modifier = modifier,
         drawerState = mainState.drawerState,
@@ -149,11 +167,14 @@ private fun MainTopBar(
     modifier: Modifier = Modifier
 ) {
     TopAppBar(
-        modifier = modifier,
+        modifier = modifier.shadow(
+            elevation = SMTheme.spacing.spacing50,
+            shape = RectangleShape
+        ),
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = SMTheme.material.colorScheme.primary,
-            actionIconContentColor = contentColorFor(SMTheme.material.colorScheme.primary),
-            titleContentColor = contentColorFor(SMTheme.material.colorScheme.primary)
+            containerColor = SMTheme.material.colorScheme.surfaceContainer,
+            actionIconContentColor = SMTheme.material.colorScheme.onSurface,
+            titleContentColor = SMTheme.material.colorScheme.onSurface
         ),
         windowInsets = WindowInsets.statusBars,
         title = {
@@ -162,7 +183,7 @@ private fun MainTopBar(
         navigationIcon = {
             SMIconButton(
                 colors = IconButtonDefaults.iconButtonColors(
-                    contentColor = contentColorFor(SMTheme.material.colorScheme.primary)
+                    contentColor = SMTheme.material.colorScheme.onSurface
                 ),
                 onClick = onMenuClick,
                 contentDescription = stringResource(R.string.close_menu),

@@ -2,7 +2,6 @@ package com.signaturemaker.app.application.ui.theming
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
@@ -40,23 +39,6 @@ fun SignatureMakerAppTheme(
     val smColor = when {
         darkTheme -> DarkSmColor
         else -> LightSmColor
-    }
-
-    // Configurar colores de la system UI automáticamente
-    val view = LocalView.current
-    SideEffect {
-        val window = (view.context as? android.app.Activity)?.window ?: return@SideEffect
-
-        // Calcular luminancia para determinar si usar iconos oscuros o claros
-        // Si el color es claro (luminancia > 0.5), usar iconos oscuros para contraste
-
-        val primaryLuminance = materialColorScheme.primary.luminance()
-        val useDarkIcons = primaryLuminance > 0.5f
-
-        WindowCompat.getInsetsController(window, view).apply {
-            isAppearanceLightStatusBars = useDarkIcons
-            isAppearanceLightNavigationBars = useDarkIcons
-        }
     }
 
     SMTheme(

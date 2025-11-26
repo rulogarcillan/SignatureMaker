@@ -31,52 +31,90 @@ fun SMColorSelector(
     modifier: Modifier = Modifier,
     onClick: (Color) -> Unit = {}
 ) {
-    // Animaciones
+    // Animaciones (igual que SMImageSelector para consistencia)
     val scale by animateFloatAsState(
-        targetValue = if (selected) 1.1f else 1f,
+        targetValue = if (selected) 1.08f else 1f,
         animationSpec = spring(
             dampingRatio = 0.6f,
             stiffness = 300f
         ),
-        label = "scale"
+        label = "colorScale"
     )
 
     val elevation by animateDpAsState(
         targetValue = if (selected) SMTheme.size.size50 else SMTheme.size.size00,
         animationSpec = tween(durationMillis = 200),
-        label = "elevation"
+        label = "colorElevation"
     )
 
-    val iconScale by animateFloatAsState(
+    val borderWidth by animateDpAsState(
+        targetValue = if (selected) SMTheme.size.size50 else SMTheme.size.size20,
+        animationSpec = tween(durationMillis = 200),
+        label = "colorBorderWidth"
+    )
+
+    val badgeScale by animateFloatAsState(
         targetValue = if (selected) 1f else 0f,
         animationSpec = spring(
             dampingRatio = 0.5f,
-            stiffness = 400f
+            stiffness = 500f
         ),
-        label = "iconScale"
+        label = "colorBadgeScale"
     )
 
     Box(
-        modifier = modifier
-            .scale(scale)
-            .shadow(
-                elevation = elevation,
-                shape = CircleShape
-            )
-            .clip(CircleShape)
-            .background(color, CircleShape)
-            .clickable(onClick = { onClick(color) }),
+        modifier = modifier.scale(scale),
         contentAlignment = androidx.compose.ui.Alignment.Center
     ) {
-        if (selected) {
-            SMIcon(
-                imageVector = Icons.Default.Check,
-                tint = SMTheme.color.selector,
-                contentDescription = null,
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .shadow(
+                    elevation = elevation,
+                    shape = CircleShape
+                )
+                .clip(CircleShape)
+                .border(
+                    width = borderWidth,
+                    color = if (selected)
+                        SMTheme.material.colorScheme.primary
+                    else
+                        SMTheme.material.colorScheme.outline,
+                    shape = CircleShape
+                )
+                .clickable(onClick = { onClick(color) }),
+            contentAlignment = androidx.compose.ui.Alignment.Center
+        ) {
+            Box(
                 modifier = Modifier
-                    .size(SMTheme.size.size300)
-                    .scale(iconScale)
+                    .fillMaxSize()
+                    .background(color, CircleShape)
             )
+        }
+
+        // Badge con check (igual que SMImageSelector)
+        if (selected) {
+            Box(
+                modifier = Modifier
+                    .size(SMTheme.size.size250)
+                    .scale(badgeScale)
+                    .align(androidx.compose.ui.Alignment.BottomEnd)
+                    .shadow(SMTheme.size.size20, CircleShape)
+                    .background(SMTheme.material.colorScheme.primary, CircleShape)
+                    .border(
+                        width = SMTheme.size.size20,
+                        color = SMTheme.material.colorScheme.surface,
+                        shape = CircleShape
+                    ),
+                contentAlignment = androidx.compose.ui.Alignment.Center
+            ) {
+                SMIcon(
+                    imageVector = Icons.Default.Check,
+                    tint = SMTheme.material.colorScheme.onPrimary,
+                    contentDescription = null,
+                    modifier = Modifier.size(SMTheme.size.size150)
+                )
+            }
         }
     }
 }
@@ -105,7 +143,7 @@ fun SMImageSelector(
     )
 
     val borderWidth by animateDpAsState(
-        targetValue = if (selected) SMTheme.size.size20 else SMTheme.size.size10,
+        targetValue = if (selected) SMTheme.size.size50 else SMTheme.size.size20,
         animationSpec = tween(durationMillis = 200),
         label = "imageBorderWidth"
     )
@@ -136,7 +174,7 @@ fun SMImageSelector(
                     color = if (selected)
                         SMTheme.material.colorScheme.primary
                     else
-                        SMTheme.material.colorScheme.outline.copy(alpha = 0.3f),
+                        SMTheme.material.colorScheme.outline,
                     shape = CircleShape
                 )
                 .clickable(onClick = { onClick(image) }),

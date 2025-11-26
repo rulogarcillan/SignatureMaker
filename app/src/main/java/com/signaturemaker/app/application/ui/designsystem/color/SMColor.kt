@@ -8,12 +8,12 @@ import com.signaturemaker.app.application.ui.designsystem.Foundation
 
 @Immutable
 private object SMColorDefaults {
-  val Pen1: Color = Foundation.Blue40
-  val Pen2: Color = Foundation.Black40
-  val Pen3: Color = Foundation.Red40
-  val Pen4: Color = Foundation.Green40
-  val Selector: Color = Foundation.White40
-  val Selector2: Color = Foundation.Gray40
+  val Pen1: Color = Foundation.Blue
+  val Pen2: Color = Foundation.Black
+  val Pen3: Color = Foundation.Red
+  val Pen4: Color = Foundation.Green
+  val BackgroundSheet : Color = Foundation.White
+  val BackgroundTextSheet : Color = Foundation.Black
 }
 
 /**
@@ -25,8 +25,8 @@ data class SMColor(
     val pen2: Color = SMColorDefaults.Pen2,
     val pen3: Color = SMColorDefaults.Pen3,
     val pen4: Color = SMColorDefaults.Pen4,
-    val selector: Color = SMColorDefaults.Selector,
-    val selector2: Color = SMColorDefaults.Selector2,
+    val backgroundSheet: Color = SMColorDefaults.BackgroundSheet,
+    val backgroundTextSheet: Color = SMColorDefaults.BackgroundTextSheet
 )
 
 internal val LocalSMColor: ProvidableCompositionLocal<SMColor> = staticCompositionLocalOf {
