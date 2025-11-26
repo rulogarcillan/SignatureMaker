@@ -10,6 +10,8 @@ import com.signaturemaker.app.application.ui.designsystem.components.SMText
 
 /**
  * Gallery screen.
+ *
+ * @param modifier Modifier to be applied to the root element
  */
 @Composable
 fun GalleryScreen(

@@ -1,18 +1,19 @@
 package com.signaturemaker.app.application.features.main
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun MainRoute(
     modifier: Modifier = Modifier,
-    navController: NavHostController = rememberNavController()
+    onNavigationAction: (MainScreenAction) -> Unit = {},
+    content: @Composable (PaddingValues) -> Unit
 ) {
     MainScreen(
         modifier = modifier,
-        navController = navController
+        onNavigationAction = onNavigationAction,
+        content = content
     )
 }
 

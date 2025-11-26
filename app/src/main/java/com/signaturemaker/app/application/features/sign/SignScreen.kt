@@ -41,10 +41,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.viewinterop.AndroidView
 import com.github.gcacace.signaturepad.views.SignaturePad
 import com.signaturemaker.app.R
-import com.signaturemaker.app.application.features.sign.SignAction.SavePngTransparent
-import com.signaturemaker.app.application.features.sign.SignAction.SavePngWhiteBackground
-import com.signaturemaker.app.application.features.sign.SignAction.SharePngTransparent
-import com.signaturemaker.app.application.features.sign.SignAction.SharePngWhiteBackground
+import com.signaturemaker.app.application.core.extensions.shareSign
 import com.signaturemaker.app.application.ui.designsystem.SMTheme
 import com.signaturemaker.app.application.ui.designsystem.components.SMButton
 import com.signaturemaker.app.application.ui.designsystem.components.SMColorSelector
@@ -54,7 +51,6 @@ import com.signaturemaker.app.application.ui.designsystem.components.SMLineSepar
 import com.signaturemaker.app.application.ui.designsystem.components.SMModalBottomSheet
 import com.signaturemaker.app.application.ui.designsystem.components.SMText
 import com.signaturemaker.app.application.ui.snackbar.LocalSnackbarController
-import com.signaturemaker.app.application.core.extensions.shareSign
 import org.koin.androidx.compose.koinViewModel
 
 // ============================================
@@ -86,9 +82,9 @@ fun SignScreen(
     val snackbarController = LocalSnackbarController.current
     val currentActivity = LocalActivity.current
 
-    // Action handler with state hoisting pattern
-    val onSignAction: (SignAction) -> Unit = { action ->
-        handleSignAction(action, viewModel)
+    // UI event handler with state hoisting pattern
+    val onSignUiEvent: (SignUiEvent) -> Unit = { event ->
+        handleSignUiEvent(event, viewModel)
     }
 
     // Observe ViewModel events
@@ -115,7 +111,7 @@ fun SignScreen(
 
     SignScreenContent(
         signState = signState,
-        onSignAction = onSignAction,
+        onUiEvent = onSignUiEvent,
         modifier = modifier
     )
 }
@@ -126,7 +122,7 @@ fun SignScreen(
 @Composable
 private fun SignScreenContent(
     signState: SignUIState,
-    onSignAction: (SignAction) -> Unit,
+    onUiEvent: (SignUiEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -140,7 +136,7 @@ private fun SignScreenContent(
         // Options bottom sheet
         SignatureOptionsBottomSheet(
             signState = signState,
-            onAction = onSignAction
+            onUiEvent = onUiEvent
         )
 
         // "Sign here" placeholder
@@ -262,7 +258,7 @@ private fun OptionsButton(
 @Composable
 private fun SignatureOptionsBottomSheet(
     signState: SignUIState,
-    onAction: (SignAction) -> Unit,
+    onUiEvent: (SignUiEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
     SMModalBottomSheet(
@@ -277,7 +273,7 @@ private fun SignatureOptionsBottomSheet(
                 .padding(bottom = SMTheme.spacing.spacing200)
         ) {
             BottomSheetHeader()
-            ActionsSection(signState = signState, onAction = onAction)
+            ActionsSection(signState = signState, onUiEvent = onUiEvent)
             Spacer(modifier = Modifier.height(SMTheme.spacing.spacing50))
             ColorSection(signState = signState)
             StrokeWidthSection(signState = signState)
@@ -308,7 +304,7 @@ private fun BottomSheetHeader() {
 @Composable
 private fun ActionsSection(
     signState: SignUIState,
-    onAction: (SignAction) -> Unit
+    onUiEvent: (SignUiEvent) -> Unit
 ) {
     BottomSheetSection(title = stringResource(R.string.title_actions)) {
         Row(
@@ -318,8 +314,8 @@ private fun ActionsSection(
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             ClearButton(signState = signState)
-            SaveButtonWithDropdown(signState = signState, onAction = onAction)
-            ShareButtonWithDropdown(signState = signState, onAction = onAction)
+            SaveButtonWithDropdown(signState = signState, onUiEvent = onUiEvent)
+            ShareButtonWithDropdown(signState = signState, onUiEvent = onUiEvent)
         }
     }
 }
@@ -346,7 +342,7 @@ private fun ClearButton(signState: SignUIState) {
 @Composable
 private fun SaveButtonWithDropdown(
     signState: SignUIState,
-    onAction: (SignAction) -> Unit
+    onUiEvent: (SignUiEvent) -> Unit
 ) {
     Box {
         SMIconButton(
@@ -363,8 +359,8 @@ private fun SaveButtonWithDropdown(
             DropdownMenuItem(
                 text = { SMText(text = stringResource(R.string.title_save_png)) },
                 onClick = {
-                    onAction(
-                        SavePngTransparent(
+                    onUiEvent(
+                        SignUiEvent.SavePngTransparent(
                             bitmap = signState.getTransparentSignatureBitmap()
                         )
                     )
@@ -375,8 +371,8 @@ private fun SaveButtonWithDropdown(
             DropdownMenuItem(
                 text = { SMText(text = stringResource(R.string.title_save_png_wh)) },
                 onClick = {
-                    onAction(
-                        SavePngWhiteBackground(
+                    onUiEvent(
+                        SignUiEvent.SavePngWhiteBackground(
                             bitmap = signState.getWhiteBackgroundSignatureBitmap()
                         )
                     )
@@ -394,7 +390,7 @@ private fun SaveButtonWithDropdown(
 @Composable
 private fun ShareButtonWithDropdown(
     signState: SignUIState,
-    onAction: (SignAction) -> Unit
+    onUiEvent: (SignUiEvent) -> Unit
 ) {
     Box {
         SMIconButton(
@@ -411,8 +407,8 @@ private fun ShareButtonWithDropdown(
             DropdownMenuItem(
                 text = { SMText(text = stringResource(R.string.title_save_png)) },
                 onClick = {
-                    onAction(
-                        SharePngTransparent(
+                    onUiEvent(
+                        SignUiEvent.SharePngTransparent(
                             bitmap = signState.getTransparentSignatureBitmap()
                         )
                     )
@@ -423,8 +419,8 @@ private fun ShareButtonWithDropdown(
             DropdownMenuItem(
                 text = { SMText(text = stringResource(R.string.title_save_png_wh)) },
                 onClick = {
-                    onAction(
-                        SharePngWhiteBackground(
+                    onUiEvent(
+                        SignUiEvent.SharePngWhiteBackground(
                             bitmap = signState.getWhiteBackgroundSignatureBitmap()
                         )
                     )

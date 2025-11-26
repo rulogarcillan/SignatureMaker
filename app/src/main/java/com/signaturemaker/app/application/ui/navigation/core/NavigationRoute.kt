@@ -1,4 +1,4 @@
-package com.kubit.charts.storybook.ui.navigation.core
+package com.signaturemaker.app.application.ui.navigation.core
 
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
@@ -11,6 +11,7 @@ import androidx.navigation.navArgument
  */
 sealed interface NavigationRoute {
     val route: String
+    @Suppress("unused")
     val arguments: List<NamedNavArgument> get() = emptyList()
 }
 
@@ -31,6 +32,7 @@ interface ArgumentRoute<T> : NavigationRoute {
 /**
  * DSL builder for creating navigation arguments with type safety.
  */
+@Suppress("unused", "MemberVisibilityCanBePrivate")
 class ArgumentBuilder {
     private val _arguments = mutableListOf<NamedNavArgument>()
 
@@ -183,3 +185,4 @@ class ArgumentBuilder {
 fun buildArguments(builder: ArgumentBuilder.() -> Unit): List<NamedNavArgument> {
     return ArgumentBuilder().apply(builder).arguments
 }
+

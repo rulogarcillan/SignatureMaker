@@ -10,7 +10,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.navigation.NavHostController
 import com.signaturemaker.app.application.features.main.MainMenuItem.Sign
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -21,23 +20,11 @@ import kotlinx.coroutines.launch
  */
 @Stable
 data class MainUIState(
-    val navController: NavHostController,
     val menuSelected: MainMenuItem,
     val drawerState: DrawerState,
     val onDrawerClick: () -> Unit,
     val changeMenuSelected: (MainMenuItem) -> Unit
-) {
-    /**
-     * Navigate to a destination and clear back stack
-     */
-    fun navigateTo(destination: String) {
-        navController.navigate(destination) {
-            popUpTo(navController.graph.id) {
-                inclusive = true
-            }
-        }
-    }
-}
+)
 
 /*
  * Remember MainUIState following Compose best practices
@@ -45,7 +32,6 @@ data class MainUIState(
  */
 @Composable
 fun rememberMainState(
-    navController: NavHostController,
     drawerState: DrawerState = rememberDrawerState(DrawerValue.Closed),
 ): MainUIState {
     val coroutineScope: CoroutineScope = rememberCoroutineScope()
@@ -62,9 +48,8 @@ fun rememberMainState(
         }
     }
 
-    return remember(navController, selectedMenu, drawerState, coroutineScope) {
+    return remember(selectedMenu, drawerState, coroutineScope) {
         MainUIState(
-            navController = navController,
             menuSelected = selectedMenu,
             drawerState = drawerState,
             onDrawerClick = ::onDrawerClick,

@@ -2,15 +2,12 @@ package com.signaturemaker.app.application.features.main
 
 import androidx.compose.foundation.focusGroup
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
@@ -40,9 +37,6 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.LayoutDirection.Ltr
-import androidx.compose.ui.unit.LayoutDirection.Rtl
-import androidx.navigation.NavHostController
 import com.signaturemaker.app.BuildConfig
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.ui.designsystem.SMTheme
@@ -50,7 +44,6 @@ import com.signaturemaker.app.application.ui.designsystem.components.SMIcon
 import com.signaturemaker.app.application.ui.designsystem.components.SMIconButton
 import com.signaturemaker.app.application.ui.designsystem.components.SMLineSeparator
 import com.signaturemaker.app.application.ui.designsystem.components.SMText
-import com.signaturemaker.app.application.ui.navigation.SignatureMakerNavigation
 import com.signaturemaker.app.application.ui.snackbar.LocalSnackbarController
 import com.signaturemaker.app.application.ui.snackbar.rememberSnackbarController
 import com.signaturemaker.app.application.ui.theming.SignatureMakerAppTheme
@@ -65,36 +58,33 @@ import com.signaturemaker.app.application.ui.theming.SignatureMakerAppTheme
  * Provides:
  * - Top navigation bar
  * - Navigation drawer with menu options
- * - Main navigation host for app screens
+ * - Scaffold structure for nested navigation content
  * - Global snackbar support
  *
  * @param modifier Modifier to be applied to the root element
- * @param navController Navigation controller for app navigation
+ * @param onNavigationAction Callback for handling drawer navigation actions
+ * @param content Content to be displayed in the main area (navigation destinations)
  */
 @Composable
 fun MainScreen(
     modifier: Modifier = Modifier,
-    navController: NavHostController
+    onNavigationAction: (MainScreenAction) -> Unit = {},
+    content: @Composable (PaddingValues) -> Unit
 ) {
-    val mainState = rememberMainState(navController = navController)
+    val mainState = rememberMainState()
     val menuConfig = rememberMainMenuConfig()
 
     // Create SnackbarController for the entire app
     val snackbarController = rememberSnackbarController()
-
-    // Action handler with state hoisting pattern
-    val onMainAction: (MainAction) -> Unit = { action ->
-        handleMainAction(action, mainState)
-    }
 
     SignatureMakerAppTheme {
         CompositionLocalProvider(LocalSnackbarController provides snackbarController) {
             MainScreenContent(
                 mainState = mainState,
                 menuConfig = menuConfig,
-                onAction = onMainAction,
+                onNavigationAction = onNavigationAction,
                 snackbarController = snackbarController,
-                navController = navController,
+                content = content,
                 modifier = modifier
             )
         }
@@ -104,14 +94,13 @@ fun MainScreen(
 /**
  * Main Screen Content - Layout and structure
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun MainScreenContent(
     mainState: MainUIState,
     menuConfig: MainMenuConfig,
-    onAction: (MainAction) -> Unit,
+    onNavigationAction: (MainScreenAction) -> Unit,
     snackbarController: com.signaturemaker.app.application.ui.snackbar.SnackbarController,
-    navController: NavHostController,
+    content: @Composable (PaddingValues) -> Unit,
     modifier: Modifier = Modifier
 ) {
     ModalNavigationDrawer(
@@ -121,7 +110,7 @@ private fun MainScreenContent(
             NavigationDrawerContent(
                 mainState = mainState,
                 menuConfig = menuConfig,
-                onAction = onAction
+                onAction = onNavigationAction
             )
         },
     ) {
@@ -134,17 +123,7 @@ private fun MainScreenContent(
                 MainTopBar(onMenuClick = { mainState.onDrawerClick() })
             }
         ) { paddingValues ->
-            Box(
-                modifier = Modifier
-                    .padding(
-                        top = paddingValues.calculateTopPadding(),
-                        start = paddingValues.calculateStartPadding(Ltr),
-                        bottom = paddingValues.calculateEndPadding(Rtl)
-                    )
-                    .fillMaxSize()
-            ) {
-                SignatureMakerNavigation(navController = navController)
-            }
+            content(paddingValues)
         }
     }
 }
@@ -196,7 +175,7 @@ private fun MainTopBar(
 private fun NavigationDrawerContent(
     mainState: MainUIState,
     menuConfig: MainMenuConfig,
-    onAction: (MainAction) -> Unit,
+    onAction: (MainScreenAction) -> Unit,
     modifier: Modifier = Modifier
 ) {
     ModalDrawerSheet(
@@ -277,7 +256,7 @@ private fun DrawerTitleSection(
 private fun DrawerOptionsSection(
     menuConfig: MainMenuConfig,
     mainState: MainUIState,
-    onAction: (MainAction) -> Unit,
+    onAction: (MainScreenAction) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val selected = mainState.menuSelected

@@ -1,4 +1,4 @@
-package com.kubit.charts.storybook.ui.navigation.core
+package com.signaturemaker.app.application.ui.navigation.core
 
 import androidx.navigation.NavController
 import androidx.navigation.NavOptionsBuilder
@@ -45,3 +45,4 @@ fun NavController.navigateBackTo(
 ) {
     popBackStack(route.route, inclusive)
 }
+
