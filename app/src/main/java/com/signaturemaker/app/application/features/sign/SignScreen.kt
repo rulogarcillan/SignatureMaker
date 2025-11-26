@@ -14,11 +14,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CleaningServices
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.filled.Tune
 import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.RangeSlider
@@ -43,7 +48,6 @@ import com.github.gcacace.signaturepad.views.SignaturePad
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.shareSign
 import com.signaturemaker.app.application.ui.designsystem.SMTheme
-import com.signaturemaker.app.application.ui.designsystem.components.SMButton
 import com.signaturemaker.app.application.ui.designsystem.components.SMColorSelector
 import com.signaturemaker.app.application.ui.designsystem.components.SMIconButton
 import com.signaturemaker.app.application.ui.designsystem.components.SMImageSelector
@@ -145,10 +149,12 @@ private fun SignScreenContent(
             modifier = Modifier.align(Alignment.Center)
         )
 
-        // Options button
-        OptionsButton(
+        // Floating Action Button for options
+        OptionsFloatingButton(
             onShowOptions = { signState.showBottomSheet() },
-            modifier = Modifier.align(Alignment.BottomCenter)
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(SMTheme.spacing.spacing200)
         )
     }
 }
@@ -225,23 +231,30 @@ private fun SignHerePlaceholder(
 }
 
 /**
- * Options Button - Opens the bottom sheet
+ * Options Floating Action Button
+ * Modern FAB following Material Design 3 guidelines
+ * Located at bottom-right corner for easy thumb access
  */
 @Composable
-private fun OptionsButton(
+private fun OptionsFloatingButton(
     onShowOptions: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(SMTheme.spacing.spacing150),
-        verticalArrangement = Arrangement.Bottom,
-        horizontalAlignment = Alignment.CenterHorizontally
+    FloatingActionButton(
+        onClick = onShowOptions,
+        modifier = modifier,
+        shape = CircleShape,
+        containerColor = SMTheme.material.colorScheme.primaryContainer,
+        contentColor = SMTheme.material.colorScheme.onPrimaryContainer,
+        elevation = FloatingActionButtonDefaults.elevation(
+            defaultElevation = SMTheme.spacing.spacing100,
+            pressedElevation = SMTheme.spacing.spacing150
+        )
     ) {
-        SMButton(
-            text = stringResource(R.string.title_options),
-            onClick = onShowOptions
+        Icon(
+            imageVector = Icons.Default.Tune,
+            contentDescription = stringResource(R.string.title_options),
+            modifier = Modifier.size(SMTheme.size.size300)
         )
     }
 }
