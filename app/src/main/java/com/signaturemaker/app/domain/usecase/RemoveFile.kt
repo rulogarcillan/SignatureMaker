@@ -1,7 +1,7 @@
 package com.signaturemaker.app.domain.usecase
 
 import android.os.Build.VERSION_CODES
-import com.signaturemaker.app.utils.Utils
+import com.signaturemaker.app.application.core.extensions.Utils
 import com.signaturemaker.app.domain.models.ItemFile
 import com.signaturemaker.app.domain.repository.FilesRepository
 import com.signaturemaker.app.domain.usecase.RemoveFile.Params

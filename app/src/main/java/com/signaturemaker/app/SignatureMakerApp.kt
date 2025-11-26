@@ -4,9 +4,9 @@ import android.app.Application
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.os.Environment
-import com.signaturemaker.app.di.app.SignatureMakerDiImpl
-import com.signaturemaker.app.utils.Constants.FOLDER_APP_NAME
-import com.signaturemaker.app.utils.Utils
+import com.signaturemaker.app.application.core.di.app.SignatureMakerDiImpl
+import com.signaturemaker.app.application.utils.Constants.FOLDER_APP_NAME
+import com.signaturemaker.app.application.core.extensions.Utils
 import com.tuppersoft.skizo.android.core.extension.logd
 import java.io.File
 import org.koin.android.ext.koin.androidContext

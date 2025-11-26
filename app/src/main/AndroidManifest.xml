@@ -44,7 +44,7 @@
             android:value="ca-app-pub-9438738341601496~9019909565" />
 
         <activity
-            android:name="com.signaturemaker.app.MainActivity"
+            android:name="com.signaturemaker.app.application.features.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
