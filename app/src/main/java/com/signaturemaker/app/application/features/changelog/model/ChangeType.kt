@@ -1,11 +1,13 @@
 package com.signaturemaker.app.application.features.changelog.model
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Build
-import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.ui.graphics.Color
+import androidx.compose.material.icons.automirrored.filled.Article
+import androidx.compose.material.icons.filled.AutoFixHigh
+import androidx.compose.material.icons.filled.BugReport
+import androidx.compose.material.icons.filled.Construction
+import androidx.compose.material.icons.filled.DeleteForever
+import androidx.compose.material.icons.filled.NewReleases
+import androidx.compose.material.icons.filled.Science
 import androidx.compose.ui.graphics.vector.ImageVector
 
 /**
@@ -13,43 +15,35 @@ import androidx.compose.ui.graphics.vector.ImageVector
  */
 enum class ChangeType(
     val displayName: String,
-    val icon: ImageVector,
-    val color: Color
+    val icon: ImageVector
 ) {
     FIX(
         displayName = "Fix",
-        icon = Icons.Default.Build,
-        color = Color(0xFF2196F3) // Blue
+        icon = Icons.Filled.BugReport
     ),
     FEAT(
         displayName = "Feature",
-        icon = Icons.Default.Add,
-        color = Color(0xFF4CAF50) // Green
+        icon = Icons.Filled.NewReleases
     ),
     REFACTOR(
         displayName = "Refactor",
-        icon = Icons.Default.Settings,
-        color = Color(0xFFFF9800) // Orange
+        icon = Icons.Filled.AutoFixHigh
     ),
     DOCS(
         displayName = "Docs",
-        icon = Icons.Default.CheckCircle,
-        color = Color(0xFF9C27B0) // Purple
+        icon = Icons.AutoMirrored.Filled.Article
     ),
     TEST(
         displayName = "Test",
-        icon = Icons.Default.CheckCircle,
-        color = Color(0xFF00BCD4) // Cyan
+        icon = Icons.Filled.Science
     ),
     CHORE(
         displayName = "Chore",
-        icon = Icons.Default.Settings,
-        color = Color(0xFF607D8B) // Blue Grey
+        icon = Icons.Filled.Construction
     ),
     DEL(
         displayName = "Removed",
-        icon = Icons.Default.CheckCircle,
-        color = Color(0xFFF44336) // Red
+        icon = Icons.Filled.DeleteForever
     );
 
     companion object {
@@ -71,4 +65,3 @@ enum class ChangeType(
         }
     }
 }
-

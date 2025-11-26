@@ -44,11 +44,18 @@ import androidx.compose.ui.unit.dp
 import com.signaturemaker.app.application.features.changelog.model.ChangeUI
 import com.signaturemaker.app.application.features.changelog.model.ChangelogUI
 import com.signaturemaker.app.application.ui.designsystem.SMTheme
+import com.signaturemaker.app.application.ui.designsystem.components.SMIcon
+import com.signaturemaker.app.application.ui.designsystem.components.SMText
 import java.text.SimpleDateFormat
 import java.util.Locale
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import org.koin.androidx.compose.koinViewModel
+
+
+// ============================================
+// MAIN SCREEN
+// ============================================
 
 @Composable
 fun ChangelogScreen(
@@ -208,13 +215,12 @@ private fun ChangeItem(
             color = SMTheme.material.colorScheme.secondaryContainer,
             modifier = Modifier.padding(end = SMTheme.spacing.spacing100)
         ) {
-            com.signaturemaker.app.application.ui.designsystem.components.SMIcon(
+            SMIcon(
                 imageVector = change.type.icon,
                 contentDescription = change.type.displayName,
                 modifier = Modifier
                     .padding(SMTheme.spacing.spacing100)
-                    .size(SMTheme.size.size250),
-                tint = change.type.color
+                    .size(SMTheme.size.size250)
             )
         }
 
@@ -222,14 +228,13 @@ private fun ChangeItem(
 
         // Change text
         Column(modifier = Modifier.weight(1f)) {
-            com.signaturemaker.app.application.ui.designsystem.components.SMText(
+            SMText(
                 text = change.type.displayName.uppercase(Locale.getDefault()),
                 style = SMTheme.material.typography.labelSmall,
                 fontWeight = FontWeight.Bold,
-                color = change.type.color,
                 modifier = Modifier.padding(bottom = SMTheme.spacing.spacing50)
             )
-            com.signaturemaker.app.application.ui.designsystem.components.SMText(
+            SMText(
                 text = change.text,
                 style = SMTheme.material.typography.bodyMedium,
                 color = SMTheme.material.colorScheme.onSurface
