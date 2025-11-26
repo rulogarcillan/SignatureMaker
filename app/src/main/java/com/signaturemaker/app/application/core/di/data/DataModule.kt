@@ -12,6 +12,7 @@ import com.signaturemaker.app.domain.repository.FilesRepository
 import com.signaturemaker.app.domain.repository.SignatureRepository
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -27,7 +28,9 @@ val dataModule = module {
 
     // Moshi
     single {
-        Moshi.Builder().build()
+        Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
     }
 
     // HttpLoggingInterceptor

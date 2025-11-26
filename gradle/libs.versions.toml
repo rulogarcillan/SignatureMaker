@@ -2,6 +2,7 @@
 appcompat = "1.7.1"
 coilCompose = "3.3.0"
 converterMoshi = "3.0.0"
+moshi = "1.15.1"
 kotlinStdlib = "2.2.21"
 kotlinStdlibJdk8 = "2.2.0"
 kotlinxCoroutinesCore = "1.10.2"
@@ -42,6 +43,8 @@ kotlinCollections = "0.4.0"
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 coilCompose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
 converterMoshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "converterMoshi" }
+moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
+moshi_kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshi" }
 kotlin_collections_immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinCollections" }
 
 core_ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }

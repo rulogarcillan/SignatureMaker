@@ -123,6 +123,8 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.loggingInterceptor)
     implementation(libs.converterMoshi)
+    implementation(libs.moshi)
+    implementation(libs.moshi.kotlin)
 
     implementation(projects.skizoKotlinCore)
     implementation(projects.skizoAndroidCore)

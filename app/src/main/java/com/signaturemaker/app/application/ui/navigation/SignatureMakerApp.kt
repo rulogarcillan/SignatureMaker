@@ -9,6 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.signaturemaker.app.application.features.changelog.ChangelogRoute
 import com.signaturemaker.app.application.features.files.FilesRoute
 import com.signaturemaker.app.application.features.main.MainRoute
 import com.signaturemaker.app.application.features.main.MainScreenAction
@@ -49,7 +50,7 @@ fun SignatureMakerApp() {
             }
 
             is MainScreenAction.NavigateToChangeLog -> {
-                // TODO: Implement ChangeLog navigation
+                navController.navigateTo(SignatureMakerRoutes.Changelog)
             }
 
             is MainScreenAction.NavigateToRateUs -> {
@@ -114,6 +115,11 @@ private fun ContentNavHost(
         // File screen destination
         composable(SignatureMakerRoutes.Files.route) {
             FilesRoute(modifier = Modifier.fillMaxSize())
+        }
+
+        // Changelog screen destination
+        composable(SignatureMakerRoutes.Changelog.route) {
+            ChangelogRoute(modifier = Modifier.fillMaxSize())
         }
     }
 }

@@ -12,23 +12,29 @@ sealed class SignatureMakerRoutes {
      * Main screen route - entry point with drawer
      */
     data object Main : SimpleRoute {
-        override val route: String = "main"
+        override val route: String = "mainScreen"
     }
 
     /**
      * Sign screen route - signature creation
      */
     data object Sign : SimpleRoute {
-        override val route: String = "signscreen"
+        override val route: String = "signScreen"
     }
 
     /**
      * File screen route
      */
     data object Files : SimpleRoute {
-        override val route: String = "filescreen"
+        override val route: String = "fileScreen"
     }
 
+    /**
+     * Changelog screen route
+     */
+    data object Changelog : SimpleRoute {
+        override val route: String = "changelogScreen"
+    }
 
     /**
      * Example of a route with typed arguments.

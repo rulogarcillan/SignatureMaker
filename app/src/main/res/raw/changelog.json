@@ -7,7 +7,7 @@
       "change": [
         {
           "type": "feat",
-          "text": "Added new GDPR consent"
+          "text": "Added GDPR consent dialog for privacy compliance"
         }
       ]
     },
@@ -18,7 +18,7 @@
       "change": [
         {
           "type": "feat",
-          "text": "Support for android 14"
+          "text": "Added support for Android 14"
         }
       ]
     },
@@ -29,7 +29,7 @@
       "change": [
         {
           "type": "feat",
-          "text": "Support for android 12L"
+          "text": "Added support for Android 12L"
         }
       ]
     },
@@ -40,63 +40,63 @@
       "change": [
         {
           "type": "feat",
-          "text": "Dark theme"
+          "text": "Added dark theme support"
         },
         {
           "type": "feat",
-          "text": "New menu"
+          "text": "Redesigned navigation menu"
         },
         {
           "type": "feat",
-          "text": "New option to send suggestions"
+          "text": "Added feedback and suggestions feature"
+        },
+        {
+          "type": "refactor",
+          "text": "Improved swipe gesture options"
         },
         {
           "type": "feat",
-          "text": "Redesign swipe options"
+          "text": "Added visual help effects for better user guidance"
         },
         {
           "type": "feat",
-          "text": "Help visual effect is added"
+          "text": "Redesigned image preview screen"
+        },
+        {
+          "type": "refactor",
+          "text": "Converted all resource images to SVG format"
+        },
+        {
+          "type": "chore",
+          "text": "Prepared compatibility for Android 11"
+        },
+        {
+          "type": "refactor",
+          "text": "Updated UI components and styling"
+        },
+        {
+          "type": "refactor",
+          "text": "Redesigned preferences interface"
         },
         {
           "type": "feat",
-          "text": "New preview images screen"
-        },
-        {
-          "type": "feat",
-          "text": "Refactor all resource images to SVG"
-        },
-        {
-          "type": "feat",
-          "text": "Preparing support to android 11"
-        },
-        {
-          "type": "feat",
-          "text": "Small UI changes"
-        },
-        {
-          "type": "feat",
-          "text": "Refactor preferences UI"
-        },
-        {
-          "type": "feat",
-          "text": "Add telegram group eng/es"
+          "text": "Added Telegram community groups (EN/ES)"
         },
         {
           "type": "fix",
-          "text": "Fix some bugs"
+          "text": "Fixed various bugs and crashes"
         },
         {
           "type": "del",
-          "text": "Select custom path"
+          "text": "Removed custom path selection option"
         },
         {
           "type": "del",
-          "text": "Enabled/disabled nomedia"
+          "text": "Removed .nomedia file toggle option"
         },
         {
           "type": "del",
-          "text": "save files as svg (temporal)"
+          "text": "Temporarily removed SVG export feature"
         }
       ]
     },
@@ -107,11 +107,11 @@
       "change": [
         {
           "type": "fix",
-          "text": "Fixed error when saving signature"
+          "text": "Fixed crash when saving signatures"
         },
         {
           "type": "fix",
-          "text": "Fix others bug"
+          "text": "Fixed multiple minor bugs"
         }
       ]
     },
@@ -121,303 +121,266 @@
       "versionName": "3.0.10",
       "change": [
         {
-          "type": "feat",
-          "text": "Migrate code to kotlin"
+          "type": "refactor",
+          "text": "Migrated entire codebase to Kotlin"
         }
       ]
     },
     {
-
       "versionCode": 3004,
       "versionName": "3.0.4",
       "change": [
         {
           "type": "feat",
-          "text": "Support android 10"
+          "text": "Added support for Android 10"
         },
         {
-          "type": "feat",
-          "text": "Update libraries"
+          "type": "chore",
+          "text": "Updated dependencies to latest versions"
         }
       ]
     },
     {
-
       "versionCode": 3003,
       "versionName": "3.0.3",
       "change": [
         {
-          "type": "feat",
-          "text": "Add privacy polity"
+          "type": "docs",
+          "text": "Added privacy policy documentation"
         }
       ]
     },
     {
-
       "versionCode": 3002,
       "versionName": "3.0.2",
       "change": [
         {
-          "type": "feat",
-          "text": "Update libraries"
+          "type": "chore",
+          "text": "Updated dependencies to latest versions"
         }
       ]
     },
     {
-
       "versionCode": 3001,
       "versionName": "3.0.1",
       "change": [
         {
           "type": "fix",
-          "text": "Fix sharing option"
+          "text": "Fixed signature sharing functionality"
         },
         {
           "type": "fix",
-          "text": "Minor bug fix"
+          "text": "Fixed minor bugs and improved stability"
         }
       ]
     },
     {
-
       "versionCode": 3000,
       "versionName": "3.0.0",
       "change": [
         {
-          "type": "feat",
-          "text": "Rewritten all the source code"
+          "type": "refactor",
+          "text": "Complete rewrite of the application architecture"
         },
         {
           "type": "feat",
-          "text": "Compatible with android 9.0 Pie"
+          "text": "Added compatibility with Android 9.0 Pie"
+        },
+        {
+          "type": "chore",
+          "text": "Updated all dependencies to latest stable versions"
         },
         {
           "type": "feat",
-          "text": "Update all libraries to the latest version"
-        },
-        {
-          "type": "feat",
-          "text": "New icons"
+          "text": "Redesigned app icons and graphics"
         }
       ]
     },
     {
-
       "versionCode": 2035,
       "versionName": "2.1.54",
       "change": [
         {
           "type": "fix",
-          "text": "Fix translates"
+          "text": "Fixed translation errors and improved localization"
         }
       ]
     },
     {
-
       "versionCode": 2033,
       "versionName": "2.1.31",
       "change": [
         {
           "type": "fix",
-          "text": "Fix bug when save signature with custom name. (thanks for reports)"
+          "text": "Fixed bug when saving signatures with custom filenames (thanks for the reports!)"
         }
       ]
     },
     {
-
       "versionCode": 2031,
       "versionName": "2.1.16",
       "change": [
         {
           "type": "feat",
-          "text": "Button to sort files by date (ascending / descending)"
+          "text": "Added file sorting by date (ascending/descending)"
         },
         {
           "type": "feat",
-          "text": "New visual backgrounds to the canvas (the signature is always saved with transparent background)"
+          "text": "Added customizable canvas backgrounds (signatures always saved with transparent background)"
         },
         {
-          "type": "feat",
-          "text": "New support email"
-        },
-        {
-          "type": "Fix",
-          "text": "Fix seekbar (crash app)"
+          "type": "chore",
+          "text": "Updated support email address"
         },
         {
           "type": "fix",
-          "text": "fix texts and translations"
+          "text": "Fixed seekbar crash issue"
+        },
+        {
+          "type": "fix",
+          "text": "Fixed text errors and improved translations"
         }
       ]
     },
     {
-
       "versionCode": 2006,
       "versionName": "2.0.24",
       "change": [
         {
           "type": "feat",
-          "text": "Add advertising"
+          "text": "Added advertising support"
         },
         {
           "type": "feat",
-          "text": "Disable/Enable ads from settings"
+          "text": "Added option to disable ads in settings"
         },
         {
           "type": "feat",
-          "text": "Disable ads if it bothers you."
+          "text": "Users can now disable ads if preferred"
         }
       ]
     },
     {
-
       "versionCode": 2005,
       "versionName": "2.0.23",
       "change": [
         {
           "type": "feat",
-          "text": "New icon clean"
+          "text": "Added new clean icon design"
         },
         {
           "type": "fix",
-          "text": "Minor bug fix"
+          "text": "Fixed minor bugs and improved stability"
         }
       ]
     },
     {
-
       "versionCode": 2004,
       "versionName": "2.0.22",
       "change": [
         {
           "type": "feat",
-          "text": "Add some material design to pre-lollipop"
+          "text": "Added Material Design support for Android pre-Lollipop devices"
         },
         {
           "type": "fix",
-          "text": "Fixed bug in save and send"
+          "text": "Fixed bugs in save and share functionality"
         }
       ]
     },
     {
-
       "versionCode": 2003,
       "versionName": "2.0.21",
       "change": [
-
         {
           "type": "fix",
-          "text": "Fixed bug in splash for large screens (sorry for the inconvenience)"
-
+          "text": "Fixed splash screen rendering on large screen devices"
         }
       ]
     },
     {
-
       "versionCode": 2002,
       "versionName": "2.0.2",
       "change": [
-
         {
           "type": "feat",
-          "text": "Option to choose the file name when saving (Enabled / disabled in options)"
-
+          "text": "Added option to customize filename when saving (toggle in settings)"
         },
         {
           "type": "feat",
-          "text": "Add Url project in the initial splash"
-
+          "text": "Added project URL to splash screen"
         }
       ]
     },
     {
-
       "versionCode": 2001,
       "versionName": "2.0.1",
       "change": [
-
         {
           "type": "feat",
-          "text": "Info button on long press"
-
+          "text": "Added file info display on long press"
         }
       ]
     },
     {
-
       "versionCode": 2000,
       "versionName": "2.0.0",
       "change": [
-
         {
           "type": "feat",
-          "text": "New UI"
-
+          "text": "Complete UI redesign with modern interface"
         },
         {
           "type": "feat",
-          "text": "New options"
-
+          "text": "Added new configuration options"
         },
         {
           "type": "feat",
-          "text": "Selectable path files"
-
+          "text": "Added custom save path selection"
         },
         {
           "type": "feat",
-          "text": "Save last stroke"
-
+          "text": "Added persistence for last stroke width"
         },
         {
           "type": "feat",
-          "text": "Save last color"
-
+          "text": "Added persistence for last color selection"
         },
         {
           "type": "feat",
-          "text": "Delete signatrue on exit"
-
+          "text": "Added option to auto-delete signature on exit"
         },
         {
           "type": "feat",
-          "text": "Toggle view signatures in gallery"
-
+          "text": "Added toggle to show/hide signatures in device gallery"
+        },
+        {
+          "type": "refactor",
+          "text": "Improved landscape mode performance and usability"
         },
         {
           "type": "feat",
-          "text": "Mode landscape more efficient"
-
+          "text": "Updated app icon design"
+        },
+        {
+          "type": "refactor",
+          "text": "Enhanced Material Design implementation"
         },
         {
           "type": "feat",
-          "text": "Change icon"
-
+          "text": "Added animated splash screen"
+        },
+        {
+          "type": "docs",
+          "text": "Added open source license information"
         },
         {
           "type": "feat",
-          "text": "More material design"
-
-        },
-        {
-          "type": "feat",
-          "text": "Add initial splash"
-
-        },
-        {
-          "type": "feat",
-          "text": "Add license"
-
-        },
-        {
-          "type": "feat",
-          "text": "Open source and free"
-
+          "text": "Released as open source and free software"
         },
         {
           "type": "fix",
-          "text": "Minor bug fix"
-
+          "text": "Fixed minor bugs and improved stability"
         }
       ]
     },
@@ -425,34 +388,27 @@
       "versionCode": 103,
       "versionName": "1.0.3",
       "change": [
-
         {
           "type": "feat",
-          "text": "New icon"
-
+          "text": "Updated app icon design"
         },
         {
           "type": "feat",
-          "text": "New menu others app"
-
+          "text": "Added menu for discovering other apps"
         }
       ]
     },
     {
-
       "versionCode": 102,
       "versionName": "1.0.2",
       "change": [
-
         {
-          "type": "feat",
-          "text": "Change default file Path"
-
+          "type": "chore",
+          "text": "Changed default file save path"
         },
         {
           "type": "fix",
-          "text": "Minor bug fix"
-
+          "text": "Fixed minor bugs and improved stability"
         }
       ]
     },
@@ -460,22 +416,19 @@
       "versionCode": 101,
       "versionName": "1.0.1",
       "change": [
-
         {
           "type": "fix",
-          "text": "Minor bug fix"
-
+          "text": "Fixed minor bugs and improved stability"
         }
       ]
     },
     {
-      "versionCode": 101,
-      "versionName": "1.0.1",
+      "versionCode": 100,
+      "versionName": "1.0.0",
       "change": [
         {
           "type": "feat",
-          "text": "First release"
-
+          "text": "Initial release of Signature Maker"
         }
       ]
     }
