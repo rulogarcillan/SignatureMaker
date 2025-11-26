@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
@@ -190,9 +191,11 @@ private fun NavigationDrawerContent(
         DrawerOptionsSection(
             menuConfig = menuConfig,
             mainState = mainState,
-            onAction = onAction
+            onAction = onAction,
+            modifier = Modifier.weight(1f)
         )
-        SMLineSeparator(modifier = Modifier.padding(top = SMTheme.spacing.spacing250))
+        SMLineSeparator(modifier = Modifier.padding(vertical = SMTheme.spacing.spacing250))
+        DrawerSocialSection()
     }
 }
 
@@ -339,4 +342,75 @@ private fun DrawerOptionItem(
     }
 }
 
+// ============================================
+// DRAWER SOCIAL SECTION
+// ============================================
 
+/**
+ * Drawer Social Section - Social media icons
+ */
+@Composable
+private fun DrawerSocialSection(
+    modifier: Modifier = Modifier
+) {
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val locale = java.util.Locale.getDefault()
+    val isSpanish = locale.language.lowercase(java.util.Locale.ROOT) == "es"
+
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(SMTheme.spacing.spacing250),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        SMText(
+            text = stringResource(R.string.follow_us),
+            style = SMTheme.material.typography.labelSmall,
+            color = SMTheme.material.colorScheme.onSurfaceVariant
+        )
+
+        Spacer(modifier = Modifier.height(SMTheme.spacing.spacing150))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // LinkedIn
+            SMIconButton(
+                painterResource = painterResource(id = R.drawable.ic_linkedin),
+                contentDescription = "LinkedIn",
+                onClick = {
+                    com.signaturemaker.app.application.core.util.IntentUtils.openLinkedIn(context)
+                }
+            )
+
+            // GitHub
+            SMIconButton(
+                painterResource = painterResource(id = R.drawable.ic_git),
+                contentDescription = "GitHub",
+                onClick = {
+                    com.signaturemaker.app.application.core.util.IntentUtils.openGitHub(context)
+                }
+            )
+
+            // Twitter/X
+            SMIconButton(
+                painterResource = painterResource(id = R.drawable.ic_x),
+                contentDescription = "X",
+                onClick = {
+                    com.signaturemaker.app.application.core.util.IntentUtils.openTwitter(context)
+                }
+            )
+
+            // Telegram
+            SMIconButton(
+                painterResource = painterResource(id = R.drawable.ic_telegram),
+                contentDescription = "Telegram",
+                onClick = {
+                    com.signaturemaker.app.application.core.util.IntentUtils.openTelegram(context, isSpanish)
+                }
+            )
+        }
+    }
+}

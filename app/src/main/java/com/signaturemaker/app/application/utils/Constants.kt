@@ -34,4 +34,5 @@ object Constants {
     private val ROOT = Environment.getExternalStorageDirectory().absolutePath
     val DEFAULT_OLD_PATH = "$ROOT/Signature/"
     const val FOLDER_APP_NAME = "Signature maker"
+    const val URL_RATE = "market://details?id=com.signaturemaker.app"
 }

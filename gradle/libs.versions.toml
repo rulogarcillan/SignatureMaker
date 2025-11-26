@@ -1,5 +1,6 @@
 [versions]
 appcompat = "1.7.1"
+browser = "1.8.0"
 coilCompose = "3.3.0"
 converterMoshi = "3.0.0"
 moshi = "1.15.1"
@@ -24,6 +25,9 @@ compose-bom = "2025.11.01"
 firebase-bom = "34.6.0"
 firebase-crashlytics = "3.0.6"
 google-services = "4.4.4"
+oss-licenses = "17.1.0"
+oss-licenses-plugin = "0.10.6"
+user-messaging-platform = "3.1.0"
 koin = "4.1.1"
 koinCompose = "4.1.1"
 koinCore = "4.1.1"
@@ -41,6 +45,7 @@ kotlinCollections = "0.4.0"
 [libraries]
 # Kotlin
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+browser = { module = "androidx.browser:browser", version.ref = "browser" }
 coilCompose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
 converterMoshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "converterMoshi" }
 moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
@@ -74,6 +79,9 @@ firebase_crashlytics = { group = "com.google.firebase", name = "firebase-crashly
 firebase_analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 firebase_crashlytics_gradle = { group = "com.google.firebase", name = "firebase-crashlytics-gradle" }
 
+oss_licenses = { group = "com.google.android.gms", name = "play-services-oss-licenses", version.ref = "oss-licenses" }
+user_messaging_platform = { group = "com.google.android.ump", name = "user-messaging-platform", version.ref = "user-messaging-platform" }
+
 
 detekt_api = { module = "io.gitlab.arturbosch.detekt:detekt-api", version.ref = "detekt" }
 detekt_formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
@@ -100,6 +108,7 @@ androidApplication = { id = "com.android.application", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
 firebase-crashlytics-gradle = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics" }
+oss-licenses-plugin = { id = "com.google.android.gms.oss-licenses-plugin", version.ref = "oss-licenses-plugin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 googleKsp = { id = "com.google.devtools.ksp", version.ref = "googleKspGradlePlugin" }
 kotlinComposeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

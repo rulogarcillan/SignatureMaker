@@ -5,10 +5,8 @@ import com.signaturemaker.app.application.features.main.MainScreenAction.Navigat
 import com.signaturemaker.app.application.features.main.MainScreenAction.NavigateToEditPrivacyPolicy
 import com.signaturemaker.app.application.features.main.MainScreenAction.NavigateToFiles
 import com.signaturemaker.app.application.features.main.MainScreenAction.NavigateToLicenses
-import com.signaturemaker.app.application.features.main.MainScreenAction.NavigateToMoreApps
 import com.signaturemaker.app.application.features.main.MainScreenAction.NavigateToPrivacyPolicy
 import com.signaturemaker.app.application.features.main.MainScreenAction.NavigateToRateUs
-import com.signaturemaker.app.application.features.main.MainScreenAction.NavigateToSendFeedback
 import com.signaturemaker.app.application.features.main.MainScreenAction.NavigateToSettings
 import com.signaturemaker.app.application.features.main.MainScreenAction.NavigateToSign
 
@@ -42,10 +40,10 @@ fun MainMenuItem.toAction(): MainScreenAction {
         is MainMenuItem.Sign -> NavigateToSign
         is MainMenuItem.Files -> NavigateToFiles
         is MainMenuItem.Settings -> NavigateToSettings
-        is MainMenuItem.SendFeedback -> NavigateToSendFeedback
+        //is MainMenuItem.SendFeedback -> NavigateToSendFeedback
         is MainMenuItem.ChangeLog -> NavigateToChangeLog
         is MainMenuItem.RateUs -> NavigateToRateUs
-        is MainMenuItem.MoreApps -> NavigateToMoreApps
+        //is MainMenuItem.MoreApps -> NavigateToMoreApps
         is MainMenuItem.Licenses -> NavigateToLicenses
         is MainMenuItem.PrivacyPolicy -> NavigateToPrivacyPolicy
         is MainMenuItem.EditPrivacyPolicy -> NavigateToEditPrivacyPolicy

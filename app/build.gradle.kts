@@ -4,8 +4,10 @@ plugins {
     alias(libs.plugins.kotlinComposeCompiler)
     alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.crashlytics.gradle)
+    alias(libs.plugins.oss.licenses.plugin)
     id("kotlin-parcelize")
 }
+
 
 android {
     namespace = libs.versions.namespace.get()
@@ -98,10 +100,15 @@ dependencies {
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.analytics)
 
+    // Google Play Services
+    implementation(libs.oss.licenses)
+    implementation(libs.user.messaging.platform)
+
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.activity.compose)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.browser)
 
     implementation(libs.compose.ui)
     implementation(libs.compose.foundation)

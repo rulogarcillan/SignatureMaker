@@ -17,6 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
@@ -47,6 +48,30 @@ fun SMIconButton(
     ) {
         SMIcon(
             imageVector = imageVector,
+            contentDescription = contentDescription
+        )
+    }
+}
+
+@Composable
+fun SMIconButton(
+    painterResource: Painter,
+    contentDescription: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    colors: IconButtonColors = IconButtonDefaults.iconButtonColors(),
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+) {
+    IconButton(
+        onClick = onClick,
+        modifier = modifier,
+        enabled = enabled,
+        colors = colors,
+        interactionSource = interactionSource
+    ) {
+        SMImage(
+            painter = painterResource,
             contentDescription = contentDescription
         )
     }

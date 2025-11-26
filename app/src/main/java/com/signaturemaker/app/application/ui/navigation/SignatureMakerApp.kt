@@ -29,6 +29,7 @@ import com.signaturemaker.app.application.ui.navigation.routes.SignatureMakerRou
 @Composable
 fun SignatureMakerApp() {
     val navController = rememberNavController()
+    val context = androidx.compose.ui.platform.LocalContext.current
 
     // Navigation action handler for drawer menu actions
     val onMainNavigationAction: (MainScreenAction) -> Unit = { action ->
@@ -46,7 +47,7 @@ fun SignatureMakerApp() {
             }
 
             is MainScreenAction.NavigateToSendFeedback -> {
-                // TODO: Implement Send Feedback action
+                com.signaturemaker.app.application.core.util.IntentUtils.sendFeedbackEmail(context)
             }
 
             is MainScreenAction.NavigateToChangeLog -> {
@@ -54,23 +55,39 @@ fun SignatureMakerApp() {
             }
 
             is MainScreenAction.NavigateToRateUs -> {
-                // TODO: Implement Rate Us action
+                com.signaturemaker.app.application.core.util.IntentUtils.openRateApp(context)
             }
 
             is MainScreenAction.NavigateToMoreApps -> {
-                // TODO: Implement More Apps action
+                com.signaturemaker.app.application.core.util.IntentUtils.openMoreApps(context)
             }
 
             is MainScreenAction.NavigateToLicenses -> {
-                // TODO: Implement Licenses navigation
+                // Open OSS Licenses Activity from Google Play Services
+                val intent = android.content.Intent(
+                    context,
+                    com.google.android.gms.oss.licenses.OssLicensesMenuActivity::class.java
+                )
+                context.startActivity(intent)
             }
 
             is MainScreenAction.NavigateToPrivacyPolicy -> {
-                // TODO: Implement Privacy Policy navigation
+                com.signaturemaker.app.application.core.util.IntentUtils.openUrlInCustomTab(
+                    context = context,
+                    url = com.signaturemaker.app.application.core.util.IntentUtils.URL_PRIVACY
+                )
             }
 
             is MainScreenAction.NavigateToEditPrivacyPolicy -> {
-                // TODO: Implement Edit Privacy Policy navigation
+                // Open GDPR/UMP Privacy Options Form
+                if (context is android.app.Activity) {
+                    com.google.android.ump.UserMessagingPlatform.showPrivacyOptionsForm(context) { formError ->
+                        formError?.let {
+                            // Log error if needed
+                            android.util.Log.e("UMP", "Privacy options form error: ${it.message}")
+                        }
+                    }
+                }
             }
         }
     }
