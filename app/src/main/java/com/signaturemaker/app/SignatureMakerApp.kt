@@ -5,14 +5,14 @@ import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.os.Environment
 import com.signaturemaker.app.application.core.di.app.SignatureMakerDiImpl
-import com.signaturemaker.app.application.utils.Constants.FOLDER_APP_NAME
 import com.signaturemaker.app.application.core.extensions.Utils
+import com.signaturemaker.app.application.utils.Constants.FOLDER_APP_NAME
 import com.tuppersoft.skizo.android.core.extension.logd
 import java.io.File
 import org.koin.android.ext.koin.androidContext
+import org.koin.core.component.KoinComponent
 
-class SignatureMakerApp : Application() {
-
+class SignatureMakerApp : Application(), KoinComponent {
 
     override fun onCreate() {
         super.onCreate()
@@ -35,6 +35,5 @@ class SignatureMakerApp : Application() {
 
         Utils.path.logd()
     }
-
 }
 

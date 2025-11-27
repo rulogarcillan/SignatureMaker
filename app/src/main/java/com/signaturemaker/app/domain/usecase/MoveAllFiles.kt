@@ -8,7 +8,6 @@ import com.tuppersoft.skizo.android.core.extension.logd
 import com.tuppersoft.skizo.kotlin.core.customtypealias.OnFailure
 import com.tuppersoft.skizo.kotlin.core.domain.baseusecase.GlobalUseCase
 import java.io.File
-import kotlinx.coroutines.flow.collect
 
 /**
  * Created by Raúl Rodríguez Concepción

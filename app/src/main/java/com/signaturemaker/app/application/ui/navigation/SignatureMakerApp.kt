@@ -15,7 +15,6 @@ import com.signaturemaker.app.application.features.main.MainRoute
 import com.signaturemaker.app.application.features.main.MainScreenAction
 import com.signaturemaker.app.application.features.settings.SettingsRoute
 import com.signaturemaker.app.application.features.sign.SignRoute
-import com.signaturemaker.app.application.features.sign.SignRoute
 import com.signaturemaker.app.application.ui.navigation.core.navigateTo
 import com.signaturemaker.app.application.ui.navigation.routes.SignatureMakerRoutes
 

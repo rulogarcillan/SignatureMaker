@@ -54,6 +54,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.viewinterop.AndroidView
 import com.github.gcacace.signaturepad.views.SignaturePad
 import com.signaturemaker.app.R
+import com.signaturemaker.app.application.core.extensions.Utils
 import com.signaturemaker.app.application.core.extensions.shareSign
 import com.signaturemaker.app.application.ui.designsystem.SMTheme
 import com.signaturemaker.app.application.ui.designsystem.components.SMColorSelector
@@ -171,7 +172,9 @@ fun SignScreen(
 ) {
     val signState = rememberSignState(
         initialColor = SignScreenDefaults.defaultPenColor,
-        initialImage = SignScreenDefaults.defaultBackgroundImage
+        initialImage = SignScreenDefaults.defaultBackgroundImage,
+        initialMinStrokeWidth = SignScreenDefaults.defaultMinStrokeWidth,
+        initialMaxStrokeWidth = SignScreenDefaults.defaultMaxStrokeWidth
     )
 
     val snackbarController = LocalSnackbarController.current
@@ -735,12 +738,32 @@ private fun buildStrokeWidthLabel(min: Float, max: Float): String {
 
 object SignScreenDefaults {
 
+    /**
+     * Get default pen color from Utils (respects user preferences)
+     * Falls back to theme color if no preference set
+     */
     val defaultPenColor: Color
         @Composable
-        get() = SMTheme.color.pen1
+        get() = Color(Utils.penColor)
 
-    // Por defecto, usar el color del tema
-    const val defaultBackgroundImage: Int = BackgroundType.THEME_COLOR_ID
+    /**
+     * Get default background image from Utils (respects user preferences)
+     * Falls back to theme color if no preference set
+     */
+    val defaultBackgroundImage: Int
+        get() = Utils.wallpaper
+
+    /**
+     * Get default minimum stroke width from Utils (respects user preferences)
+     */
+    val defaultMinStrokeWidth: Float
+        get() = Utils.minStroke.toFloat()
+
+    /**
+     * Get default maximum stroke width from Utils (respects user preferences)
+     */
+    val defaultMaxStrokeWidth: Float
+        get() = Utils.maxStroke.toFloat()
 
     @Composable
     fun availablePenColors() = listOf(

@@ -14,10 +14,7 @@ object Utils {
     var penColor = Constants.DEFAULT_PEN_COLOR
     var wallpaper = Constants.DEFAULT_WALLPAPER
     var path = "" //load from application
-    var disableAds: Boolean = Constants.DEFAULT_DISABLE_ADS
-    var nameSave: Boolean = Constants.DEFAULT_NAME_SAVE
     var deleteExit: Boolean = Constants.DEFAULT_DELETE_EXIT
-    var themeMode = Constants.DEFAULT_THEME_MODE
 
     private fun defaultColor() {
         penColor = Constants.DEFAULT_PEN_COLOR
@@ -33,15 +30,12 @@ object Utils {
     }
 
     fun defaultValues() {
-        nameSave = Constants.DEFAULT_NAME_SAVE
-        disableAds = Constants.DEFAULT_DISABLE_ADS
         sortOrder = Constants.DEFAULT_SORT_ORDER
         maxStroke = Constants.DEFAULT_MAX_STROKE
         minStroke = Constants.DEFAULT_MIN_STROKE
         penColor = Constants.DEFAULT_PEN_COLOR
         wallpaper = Constants.DEFAULT_WALLPAPER
         deleteExit = Constants.DEFAULT_DELETE_EXIT
-        themeMode = Constants.DEFAULT_THEME_MODE
     }
 
     fun loadAllPreferences(mContext: Context?) {
@@ -64,13 +58,8 @@ object Utils {
                 defaultStroke()
             }
 
-            disableAds = mContext.loadSharedPreference(Constants.ID_PREF_ADVERTISING, Constants.DEFAULT_DISABLE_ADS)
-            nameSave = mContext.loadSharedPreference(Constants.ID_PREF_NAME, Constants.DEFAULT_NAME_SAVE)
             deleteExit = mContext.loadSharedPreference(Constants.ID_PREF_DELETE, Constants.DEFAULT_DELETE_EXIT)
-            themeMode = mContext.loadSharedPreference(
-                Constants.ID_THEME_MODE,
-                Constants.DEFAULT_THEME_MODE.toString()
-            ).toInt()
+
         }
     }
 

@@ -21,10 +21,10 @@ class RemoveAllFiles(
     )
 
     override suspend fun run(params: Params, onFailure: OnFailure?): Boolean {
-
-        getAllFiles.invoke(GetAllFiles.Params(params.sdkInt, params.pathOfFiles)).collect {
-            it.forEach { itemFile ->
-                removeFile.invoke(Params(params.sdkInt, itemFile))
+        getAllFiles.invoke(GetAllFiles.Params(params.sdkInt, params.pathOfFiles)).collect { fileListResponse ->
+            fileListResponse.forEach { itemFile ->
+                // Wait for each file to be deleted before continuing
+                removeFile.invoke(Params(params.sdkInt, itemFile)).collect { /* Result handled internally */ }
             }
         }
         return true

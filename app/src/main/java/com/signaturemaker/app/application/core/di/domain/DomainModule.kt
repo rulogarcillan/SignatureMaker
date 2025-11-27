@@ -1,7 +1,6 @@
 package com.signaturemaker.app.application.core.di.domain
 
 import com.signaturemaker.app.domain.usecase.GetAllFiles
-import com.signaturemaker.app.domain.usecase.MoveAllFiles
 import com.signaturemaker.app.domain.usecase.RemoveAllFiles
 import com.signaturemaker.app.domain.usecase.RemoveFile
 import com.signaturemaker.app.domain.usecase.SaveBitmap
@@ -29,10 +28,6 @@ val domainModule = module {
 
     factory {
         RemoveAllFiles(get(), get())
-    }
-
-    factory {
-        MoveAllFiles(get())
     }
 }
 

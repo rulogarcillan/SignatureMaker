@@ -1,5 +1,6 @@
 package com.signaturemaker.app.application.features.sign
 
+import android.content.Context
 import android.graphics.Bitmap
 import androidx.annotation.DrawableRes
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -14,7 +15,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalContext
 import com.github.gcacace.signaturepad.views.SignaturePad
+import com.signaturemaker.app.application.core.extensions.Utils
+import com.tuppersoft.skizo.android.core.extension.loadSharedPreference
+import com.tuppersoft.skizo.android.core.extension.saveSharedPreference
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -27,6 +33,7 @@ import kotlinx.coroutines.launch
 class SignUIState(
     val sheetState: SheetState,
     private val coroutineScope: CoroutineScope,
+    private val appContext: Context,
     initialColor: Color,
     @DrawableRes initialImage: Int,
     initialMinStrokeWidth: Float,
@@ -121,14 +128,34 @@ class SignUIState(
 
     fun updateColor(color: Color) {
         selectedColor = color
+
+        // Si el usuario tiene activada la opción de recordar color, guardarlo
+        if (appContext.loadSharedPreference(com.signaturemaker.app.application.utils.Constants.ID_PREF_COLOR, false)) {
+            Utils.penColor = color.toArgb()
+            appContext.saveSharedPreference(com.signaturemaker.app.application.utils.Constants.PREF_COLOR, Utils.penColor)
+        }
     }
 
     fun updateImage(@DrawableRes image: Int) {
         selectedImage = image
+
+        // Si el usuario tiene activada la opción de recordar wallpaper, guardarlo
+        if (appContext.loadSharedPreference(com.signaturemaker.app.application.utils.Constants.ID_PREF_WALLPAPER, false)) {
+            Utils.wallpaper = image
+            appContext.saveSharedPreference(com.signaturemaker.app.application.utils.Constants.PREF_WALLPAPER, Utils.wallpaper)
+        }
     }
 
     fun updateStrokeWidth(range: ClosedFloatingPointRange<Float>) {
         strokeWidthRange = range
+
+        // Si el usuario tiene activada la opción de recordar stroke, guardarlo
+        if (appContext.loadSharedPreference(com.signaturemaker.app.application.utils.Constants.ID_PREF_STROKE, false)) {
+            Utils.minStroke = range.start.toInt()
+            Utils.maxStroke = range.endInclusive.toInt()
+            appContext.saveSharedPreference(com.signaturemaker.app.application.utils.Constants.PREF_MIN_TROKE, Utils.minStroke)
+            appContext.saveSharedPreference(com.signaturemaker.app.application.utils.Constants.PREF_MAX_TROKE, Utils.maxStroke)
+        }
     }
 
     fun clearSignature() {
@@ -147,16 +174,18 @@ fun rememberSignState(
     @DrawableRes initialImage: Int,
     initialMinStrokeWidth: Float = 2f,
     initialMaxStrokeWidth: Float = 5f,
+    appContext: Context = LocalContext.current,
     sheetState: SheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = true,
         confirmValueChange = { true }
     ),
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
 ): SignUIState {
-    return remember(sheetState, coroutineScope) {
+    return remember(sheetState, coroutineScope, appContext) {
         SignUIState(
             sheetState = sheetState,
             coroutineScope = coroutineScope,
+            appContext = appContext,
             initialColor = initialColor,
             initialImage = initialImage,
             initialMinStrokeWidth = initialMinStrokeWidth,
