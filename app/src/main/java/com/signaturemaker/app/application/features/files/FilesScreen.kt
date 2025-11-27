@@ -8,29 +8,24 @@ import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Description
 import androidx.compose.material.icons.filled.Share
-import androidx.compose.material.icons.outlined.AccessTime
-import androidx.compose.material.icons.outlined.FolderOpen
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
@@ -50,6 +45,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.window.Dialog
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
@@ -235,22 +231,22 @@ private fun EmptyState() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(SMTheme.spacing.spacing300),
+            .padding(SMTheme.spacing.spacing400),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         Icon(
             imageVector = Icons.Default.Description,
             contentDescription = null,
-            modifier = Modifier.size(SMTheme.size.size700),
-            tint = SMTheme.material.colorScheme.onSurfaceVariant
+            modifier = Modifier.size(SMTheme.size.size600),
+            tint = SMTheme.material.colorScheme.outline.copy(alpha = 0.5f)
         )
 
-        Spacer(modifier = Modifier.height(SMTheme.spacing.spacing200))
+        Spacer(modifier = Modifier.height(SMTheme.spacing.spacing250))
 
         SMText(
             text = stringResource(R.string.message_no_files),
-            style = SMTheme.material.typography.titleLarge,
+            style = SMTheme.material.typography.titleMedium,
             color = SMTheme.material.colorScheme.onSurfaceVariant
         )
 
@@ -259,7 +255,7 @@ private fun EmptyState() {
         SMText(
             text = stringResource(R.string.message_no_files_description),
             style = SMTheme.material.typography.bodyMedium,
-            color = SMTheme.material.colorScheme.onSurfaceVariant
+            color = SMTheme.material.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
         )
     }
 }
@@ -276,11 +272,12 @@ private fun FilesList(
     onDeleteClick: (ItemFile) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = SMTheme.size.size1088),
+    LazyColumn(
         modifier = modifier.fillMaxSize(),
-        contentPadding = PaddingValues(SMTheme.spacing.spacing200),
-        horizontalArrangement = Arrangement.spacedBy(SMTheme.spacing.spacing150),
+        contentPadding = PaddingValues(
+            horizontal = SMTheme.spacing.spacing200,
+            vertical = SMTheme.spacing.spacing150
+        ),
         verticalArrangement = Arrangement.spacedBy(SMTheme.spacing.spacing150)
     ) {
         items(
@@ -310,128 +307,116 @@ private fun FileItem(
     onDeleteClick: (ItemFile) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Card(
-        modifier = modifier,
-        onClick = { onFileClick(file) },
-        shape = SMTheme.radius.roundedCornerShape250,
-        colors = CardDefaults.cardColors(
-            containerColor = SMTheme.material.colorScheme.surfaceContainerLow
-        ),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = SMTheme.size.size00,
-            pressedElevation = SMTheme.size.size20
-        )
+    var showImageDialog by remember { mutableStateOf(false) }
+
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(SMTheme.radius.roundedCornerShape150)
+            .background(SMTheme.material.colorScheme.surfaceContainer)
+            .padding(SMTheme.spacing.spacing100),
+        horizontalArrangement = Arrangement.spacedBy(SMTheme.spacing.spacing150),
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Column(
-            modifier = Modifier.fillMaxWidth()
+        // Thumbnail - Compacto y clickable
+        Box(
+            modifier = Modifier
+                .size(SMTheme.size.size550)
+                .clip(SMTheme.radius.roundedCornerShape100)
+                .background(SMTheme.material.colorScheme.surfaceContainerHigh)
+                .clickable { showImageDialog = true }
         ) {
-            // Image preview section
             FileThumbnail(
                 uri = file.uri,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(1f)
+                modifier = Modifier.fillMaxSize()
+            )
+        }
+
+        // Info - Ocupa espacio disponible
+        Column(
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(SMTheme.spacing.spacing50)
+        ) {
+            // Nombre del archivo
+            SMText(
+                text = file.name
+                    .removePrefix("SM_")
+                    .removeSuffix(".png")
+                    .removeSuffix(".jpg")
+                    .removeSuffix(".svg"),
+                style = SMTheme.material.typography.bodyMedium,
+                fontWeight = FontWeight.Medium,
+                color = SMTheme.material.colorScheme.onSurface,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
 
-            // Info section
-            Column(
+            // Metadata en una línea
+            SMText(
+                text = "${file.date} • ${file.size}",
+                style = SMTheme.material.typography.bodySmall,
+                color = SMTheme.material.colorScheme.onSurfaceVariant,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+        }
+
+        // Botón Compartir - Visible siempre
+        FilledTonalIconButton(
+            onClick = { onShareClick(file) },
+            modifier = Modifier.size(SMTheme.size.size375),
+            colors = IconButtonDefaults.filledTonalIconButtonColors(
+                containerColor = SMTheme.material.colorScheme.secondaryContainer,
+                contentColor = SMTheme.material.colorScheme.onSecondaryContainer
+            )
+        ) {
+            Icon(
+                imageVector = Icons.Default.Share,
+                contentDescription = stringResource(R.string.share),
+                modifier = Modifier.size(SMTheme.size.size150)
+            )
+        }
+
+        // Botón Eliminar - Más discreto
+        FilledTonalIconButton(
+            onClick = { onDeleteClick(file) },
+            modifier = Modifier.size(SMTheme.size.size375),
+            colors = IconButtonDefaults.filledTonalIconButtonColors(
+                containerColor = SMTheme.material.colorScheme.errorContainer.copy(alpha = 0.5f),
+                contentColor = SMTheme.material.colorScheme.onErrorContainer
+            )
+        ) {
+            Icon(
+                imageVector = Icons.Default.Delete,
+                contentDescription = stringResource(R.string.delete),
+                modifier = Modifier.size(SMTheme.size.size150)
+            )
+        }
+    }
+
+    // Diálogo de imagen ampliada
+    if (showImageDialog) {
+        Dialog(
+            onDismissRequest = { showImageDialog = false }
+        ) {
+            Box(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(SMTheme.spacing.spacing150)
+                    .fillMaxWidth(0.9f)
+                    .clip(SMTheme.radius.roundedCornerShape200)
+                    .background(SMTheme.material.colorScheme.surface)
+                    .padding(SMTheme.spacing.spacing200)
             ) {
-                // File name
-                SMText(
-                    text = file.name.removePrefix("SM_").removeSuffix(".png").removeSuffix(".jpg").removeSuffix(".svg"),
-                    style = SMTheme.material.typography.titleSmall,
-                    fontWeight = FontWeight.SemiBold,
-                    color = SMTheme.material.colorScheme.onSurface,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
+                AsyncImage(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(file.uri)
+                        .crossfade(true)
+                        .build(),
+                    contentDescription = null,
+                    contentScale = ContentScale.Fit,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(SMTheme.size.size1200)
                 )
-
-                Spacer(modifier = Modifier.height(SMTheme.spacing.spacing100))
-
-                // Metadata
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(SMTheme.spacing.spacing50),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.AccessTime,
-                        contentDescription = null,
-                        modifier = Modifier.size(SMTheme.size.size150),
-                        tint = SMTheme.material.colorScheme.onSurfaceVariant
-                    )
-                    SMText(
-                        text = file.date,
-                        style = SMTheme.material.typography.bodySmall,
-                        color = SMTheme.material.colorScheme.onSurfaceVariant,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(SMTheme.spacing.spacing50))
-
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(SMTheme.spacing.spacing50),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.FolderOpen,
-                        contentDescription = null,
-                        modifier = Modifier.size(SMTheme.size.size150),
-                        tint = SMTheme.material.colorScheme.onSurfaceVariant
-                    )
-                    SMText(
-                        text = file.size,
-                        style = SMTheme.material.typography.bodySmall,
-                        color = SMTheme.material.colorScheme.onSurfaceVariant,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(SMTheme.spacing.spacing150))
-
-                // Action buttons
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(SMTheme.spacing.spacing100)
-                ) {
-                    FilledTonalIconButton(
-                        onClick = { onShareClick(file) },
-                        modifier = Modifier
-                            .weight(1f)
-                            .size(SMTheme.size.size375),
-                        colors = IconButtonDefaults.filledTonalIconButtonColors(
-                            containerColor = SMTheme.material.colorScheme.primaryContainer
-                        )
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Share,
-                            contentDescription = stringResource(R.string.share),
-                            modifier = Modifier.size(SMTheme.size.size200)
-                        )
-                    }
-
-                    FilledTonalIconButton(
-                        onClick = { onDeleteClick(file) },
-                        modifier = Modifier
-                            .weight(1f)
-                            .size(SMTheme.size.size375),
-                        colors = IconButtonDefaults.filledTonalIconButtonColors(
-                            containerColor = SMTheme.material.colorScheme.errorContainer
-                        )
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Delete,
-                            contentDescription = stringResource(R.string.delete),
-                            modifier = Modifier.size(SMTheme.size.size200),
-                            tint = SMTheme.material.colorScheme.onErrorContainer
-                        )
-                    }
-                }
             }
         }
     }
@@ -448,21 +433,14 @@ private fun FileThumbnail(
 ) {
     val context = LocalContext.current
 
-    Box(
+    AsyncImage(
+        model = ImageRequest.Builder(context)
+            .data(uri)
+            .crossfade(true)
+            .build(),
+        contentDescription = null,
+        contentScale = ContentScale.Fit,
         modifier = modifier
-            .clip(SMTheme.radius.roundedCornerShape00)
-            .background(SMTheme.material.colorScheme.surfaceContainerHighest),
-        contentAlignment = Alignment.Center
-    ) {
-        AsyncImage(
-            model = ImageRequest.Builder(context)
-                .data(uri)
-                .crossfade(true)
-                .build(),
-            contentDescription = "Signature preview",
-            contentScale = ContentScale.Fit,
-            modifier = Modifier.fillMaxSize()
-        )
-    }
+    )
 }
 

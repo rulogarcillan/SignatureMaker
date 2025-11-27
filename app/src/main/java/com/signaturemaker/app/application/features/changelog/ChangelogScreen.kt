@@ -28,19 +28,17 @@ import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import com.signaturemaker.app.application.features.changelog.model.ChangeUI
 import com.signaturemaker.app.application.features.changelog.model.ChangelogUI
 import com.signaturemaker.app.application.ui.designsystem.SMTheme
@@ -80,8 +78,11 @@ private fun ChangelogContent(
     } else {
         LazyColumn(
             modifier = modifier,
-            contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            contentPadding = PaddingValues(
+                horizontal = SMTheme.spacing.spacing200,
+                vertical = SMTheme.spacing.spacing150
+            ),
+            verticalArrangement = Arrangement.spacedBy(SMTheme.spacing.spacing150)
         ) {
             items(
                 items = changelogs,
@@ -98,21 +99,31 @@ private fun ChangelogContent(
 @Composable
 private fun EmptyChangelogState(modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier,
+        modifier = modifier.padding(SMTheme.spacing.spacing400),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         Icon(
             imageVector = Icons.Default.Warning,
             contentDescription = null,
-            modifier = Modifier.size(64.dp),
-            tint = MaterialTheme.colorScheme.onSurfaceVariant
+            modifier = Modifier.size(SMTheme.size.size600),
+            tint = SMTheme.material.colorScheme.outline.copy(alpha = 0.5f)
         )
-        Spacer(modifier = Modifier.height(16.dp))
-        Text(
+
+        Spacer(modifier = Modifier.height(SMTheme.spacing.spacing250))
+
+        SMText(
             text = "No changelog available",
-            style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
+            style = SMTheme.material.typography.titleMedium,
+            color = SMTheme.material.colorScheme.onSurfaceVariant
+        )
+
+        Spacer(modifier = Modifier.height(SMTheme.spacing.spacing100))
+
+        SMText(
+            text = "Check back later for updates",
+            style = SMTheme.material.typography.bodyMedium,
+            color = SMTheme.material.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
         )
     }
 }
@@ -122,23 +133,25 @@ private fun ChangelogVersionCard(
     changelog: ChangelogUI,
     modifier: Modifier = Modifier
 ) {
-    var isExpanded by remember { mutableStateOf(false) }
+    var isExpanded by rememberSaveable(key = "changelog_${changelog.versionCode}") {
+        mutableStateOf(false)
+    }
 
     Card(
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(SMTheme.radius.radius150),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainer
+             containerColor = SMTheme.material.colorScheme.surfaceContainer
         ),
         elevation = CardDefaults.cardElevation(
-            defaultElevation = 2.dp
+            defaultElevation = SMTheme.size.size00
         )
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable { isExpanded = !isExpanded }
-                .padding(16.dp)
+                .padding(SMTheme.spacing.spacing150)
         ) {
             // Header
             Row(
@@ -147,32 +160,32 @@ private fun ChangelogVersionCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Column(modifier = Modifier.weight(1f)) {
-                    Text(
+                    SMText(
                         text = "Version ${changelog.versionName}",
-                        style = MaterialTheme.typography.titleMedium,
+                        style = SMTheme.material.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onSurface
+                        color = SMTheme.material.colorScheme.onSurface
                     )
 
                     changelog.date?.let { date ->
-                        Spacer(modifier = Modifier.height(4.dp))
-                        Text(
+                        Spacer(modifier = Modifier.height(SMTheme.spacing.spacing50))
+                        SMText(
                             text = formatDate(date),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                            style = SMTheme.material.typography.bodySmall,
+                            color = SMTheme.material.colorScheme.onSurfaceVariant
                         )
                     }
                 }
 
                 Surface(
                     shape = CircleShape,
-                    color = MaterialTheme.colorScheme.primaryContainer
+                    color = SMTheme.material.colorScheme.secondaryContainer
                 ) {
                     Icon(
                         imageVector = if (isExpanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
                         contentDescription = if (isExpanded) "Collapse" else "Expand",
-                        modifier = Modifier.padding(8.dp),
-                        tint = MaterialTheme.colorScheme.onPrimaryContainer
+                        modifier = Modifier.padding(SMTheme.spacing.spacing100),
+                        tint = SMTheme.material.colorScheme.onSecondaryContainer
                     )
                 }
             }
@@ -186,12 +199,12 @@ private fun ChangelogVersionCard(
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 16.dp)
+                        .padding(top = SMTheme.spacing.spacing150)
                 ) {
                     changelog.changes.forEach { change ->
                         ChangeItem(
                             change = change,
-                            modifier = Modifier.padding(bottom = 8.dp)
+                            modifier = Modifier.padding(bottom = SMTheme.spacing.spacing250)
                         )
                     }
                 }
@@ -220,11 +233,11 @@ private fun ChangeItem(
                 contentDescription = change.type.displayName,
                 modifier = Modifier
                     .padding(SMTheme.spacing.spacing100)
-                    .size(SMTheme.size.size250)
+                    .size(SMTheme.size.size200)
             )
         }
 
-        Spacer(modifier = Modifier.width(SMTheme.spacing.spacing200))
+        Spacer(modifier = Modifier.width(SMTheme.spacing.spacing100))
 
         // Change text
         Column(modifier = Modifier.weight(1f)) {
@@ -232,6 +245,7 @@ private fun ChangeItem(
                 text = change.type.displayName.uppercase(Locale.getDefault()),
                 style = SMTheme.material.typography.labelSmall,
                 fontWeight = FontWeight.Bold,
+                color = SMTheme.material.colorScheme.primary,
                 modifier = Modifier.padding(bottom = SMTheme.spacing.spacing50)
             )
             SMText(

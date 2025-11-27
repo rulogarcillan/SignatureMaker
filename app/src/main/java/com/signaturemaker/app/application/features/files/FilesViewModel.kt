@@ -9,6 +9,9 @@ import com.signaturemaker.app.domain.models.error.FileError
 import com.signaturemaker.app.domain.usecase.GetAllFiles
 import com.signaturemaker.app.domain.usecase.RemoveFile
 import com.tuppersoft.skizo.kotlin.core.domain.exception.Failure
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -45,7 +48,7 @@ class FilesViewModel(
             }.collect { response ->
                 _uiState.update {
                     it.copy(
-                        files = response,
+                        files = response.toImmutableList(),
                         isLoading = false,
                         error = null
                     )
@@ -62,7 +65,7 @@ class FilesViewModel(
 
         // Primero eliminamos optimistamente de la UI
         _uiState.update { state ->
-            state.copy(files = state.files.filter { it.uri != itemFile.uri })
+            state.copy(files = state.files.filter { it.uri != itemFile.uri }.toImmutableList())
         }
 
         // Luego intentamos eliminar del storage
@@ -89,7 +92,7 @@ class FilesViewModel(
                         // Restauramos el archivo en la UI ya que necesitamos permiso
                         _uiState.update { state ->
                             state.copy(
-                                files = state.files + itemFile,
+                                files =(state.files + itemFile).toImmutableList(),
                                 pendingDeleteIntent = recoverableSecurityException.userAction.actionIntent,
                                 pendingDeleteFile = itemFile
                             )
@@ -100,7 +103,7 @@ class FilesViewModel(
                 // Otros errores - restauramos el archivo
                 _uiState.update { state ->
                     state.copy(
-                        files = state.files + itemFile,
+                        files = (state.files + itemFile).toImmutableList(),
                         error = FileError.CreateError(e.message ?: "Error deleting file")
                     )
                 }
@@ -127,7 +130,7 @@ class FilesViewModel(
 
             // Volver a eliminar optimistamente de la UI
             _uiState.update { state ->
-                state.copy(files = state.files.filter { it.uri != fileToDelete.uri })
+                state.copy(files = state.files.filter { it.uri != fileToDelete.uri }.toImmutableList())
             }
 
             // Intentar eliminar del storage (ahora con permiso)
@@ -150,7 +153,7 @@ class FilesViewModel(
                     // Si falla, restaurar el archivo
                     _uiState.update { state ->
                         state.copy(
-                            files = state.files + fileToDelete,
+                            files = (state.files + fileToDelete).toImmutableList(),
                             error = FileError.CreateError(e.message ?: "Error deleting file")
                         )
                     }
@@ -192,7 +195,7 @@ class FilesViewModel(
  * UI State for Files Screen
  */
 data class FilesUiState(
-    val files: List<ItemFile> = emptyList(),
+    val files: ImmutableList<ItemFile> = persistentListOf(),
     val isLoading: Boolean = false,
     val error: Failure? = null,
     val pendingDeleteIntent: PendingIntent? = null,
