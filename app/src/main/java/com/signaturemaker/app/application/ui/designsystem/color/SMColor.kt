@@ -13,7 +13,7 @@ private object SMColorDefaults {
   val Pen3: Color = Foundation.Red
   val Pen4: Color = Foundation.Green
   val BackgroundSheet: Color = Foundation.White
-  val BackgroundTextSheet: Color = Foundation.Black
+  val BackgroundTextSheet: Color = Foundation.surfaceContainerLowDarkHighContrast
 
   // Changelog Type Colors - Using Material3 palette for better contrast
   val ChangelogFix: Color = Foundation.tertiaryLight // Azul suave para arreglos

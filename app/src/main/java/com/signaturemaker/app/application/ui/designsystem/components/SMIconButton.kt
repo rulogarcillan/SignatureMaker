@@ -70,7 +70,7 @@ fun SMIconButton(
         colors = colors,
         interactionSource = interactionSource
     ) {
-        SMImage(
+        SMIcon(
             painter = painterResource,
             contentDescription = contentDescription
         )

@@ -18,7 +18,7 @@ import com.signaturemaker.app.application.ui.theming.color.highContrastLightColo
 @Composable
 fun SignatureMakerAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = false,
+    dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
     val materialColorScheme = when {

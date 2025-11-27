@@ -1,5 +1,9 @@
 package com.signaturemaker.app.application.features.main
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.focusGroup
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,7 +24,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.ModalDrawerSheet
@@ -28,23 +32,27 @@ import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.Surface
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
 import com.signaturemaker.app.BuildConfig
 import com.signaturemaker.app.R
+import com.signaturemaker.app.application.features.main.MainMenuItem.Sign
 import com.signaturemaker.app.application.ui.designsystem.SMTheme
 import com.signaturemaker.app.application.ui.designsystem.components.SMIcon
 import com.signaturemaker.app.application.ui.designsystem.components.SMIconButton
@@ -114,12 +122,16 @@ private fun MainScreenContent(
     val isDrawerOpen = mainState.drawerState.isOpen
     val surfaceContainerColor = SMTheme.material.colorScheme.surfaceContainer
     val surfaceColor = SMTheme.material.colorScheme.surface
+    val SignColor = SMTheme.color.backgroundSheet
 
     SideEffect {
         val window = (view.context as? android.app.Activity)?.window ?: return@SideEffect
 
-        // TopBar usa surfaceContainer, Drawer usa surface
-        val statusBarColor = if (isDrawerOpen) surfaceColor else surfaceContainerColor
+        val statusBarColor = when {
+            isDrawerOpen -> surfaceColor
+            mainState.menuSelected == Sign -> SignColor
+            else -> surfaceContainerColor
+        }
 
         val luminance = statusBarColor.luminance()
         val useDarkIcons = luminance > 0.5f
@@ -143,7 +155,11 @@ private fun MainScreenContent(
                 SnackbarHost(hostState = snackbarController.snackbarHostState)
             },
             topBar = {
-                MainTopBar(onMenuClick = { mainState.onDrawerClick() })
+                MainTopBar(
+                    forceLigth = mainState.menuSelected == Sign,
+                    onMenuClick = { mainState.onDrawerClick() }
+
+                )
             }
         ) { paddingValues ->
             content(paddingValues)
@@ -158,38 +174,84 @@ private fun MainScreenContent(
 /**
  * Main Top Bar - Application top app bar
  * Ocupa también la status bar con enableEdgeToEdge
+ * Los colores cambian de forma animada y suave
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun MainTopBar(
     onMenuClick: () -> Unit,
+    forceLigth: Boolean = false,
     modifier: Modifier = Modifier
 ) {
-    TopAppBar(
-        modifier = modifier.shadow(
-            elevation = SMTheme.spacing.spacing50,
-            shape = RectangleShape
-        ),
-        colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = SMTheme.material.colorScheme.surfaceContainer,
-            actionIconContentColor = SMTheme.material.colorScheme.onSurface,
-            titleContentColor = SMTheme.material.colorScheme.onSurface
-        ),
-        windowInsets = WindowInsets.statusBars,
-        title = {
-            SMText(text = stringResource(R.string.app_title))
-        },
-        navigationIcon = {
-            SMIconButton(
-                colors = IconButtonDefaults.iconButtonColors(
-                    contentColor = SMTheme.material.colorScheme.onSurface
-                ),
-                onClick = onMenuClick,
-                contentDescription = stringResource(R.string.close_menu),
-                imageVector = Icons.Default.Menu
+    // Colores target sin animación
+    val targetContainerColor =
+        if (forceLigth) SMTheme.color.backgroundSheet else SMTheme.material.colorScheme.background
+    val targetContentColor =
+        if (forceLigth) SMTheme.color.backgroundTextSheet else SMTheme.material.colorScheme.onSurface
+
+    // Animación suave de colores con duración de 400ms
+    val animatedContainerColor by animateColorAsState(
+        targetValue = targetContainerColor,
+        animationSpec = tween(durationMillis = 400),
+        label = "containerColorAnimation"
+    )
+
+    val animatedContentColor by animateColorAsState(
+        targetValue = targetContentColor,
+        animationSpec = tween(durationMillis = 400),
+        label = "contentColorAnimation"
+    )
+
+    Column(
+        modifier = modifier
+            .background(animatedContainerColor)
+            .fillMaxWidth()
+            .padding(horizontal = 32.dp)
+
+    ) {
+        CenterAlignedTopAppBar(
+            colors = TopAppBarDefaults.topAppBarColors(
+                containerColor = Color.Transparent,
+                actionIconContentColor = animatedContentColor,
+                titleContentColor = animatedContentColor
+            ),
+            windowInsets = WindowInsets.statusBars,
+            title = {
+                SMText(text = stringResource(R.string.app_title))
+            },
+            navigationIcon = {
+                SMIconButton(
+                    colors = IconButtonDefaults.iconButtonColors(
+                        contentColor = animatedContentColor
+                    ),
+                    onClick = onMenuClick,
+                    contentDescription = stringResource(R.string.close_menu),
+                    painterResource = painterResource(id = R.drawable.ic_burger_menu)
+
+                )
+            }
+        )
+
+        // Línea horizontal discontinua (dashed) con animación de color
+        Canvas(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(1.dp)
+        ) {
+            val pathEffect = PathEffect.dashPathEffect(
+                intervals = floatArrayOf(10f, 10f), // 10px línea, 10px espacio
+                phase = 0f
+            )
+            drawLine(
+                color = animatedContentColor,
+                start = Offset(0f, 0f),
+                end = Offset(size.width, 0f),
+                strokeWidth = 2f,
+                pathEffect = pathEffect
             )
         }
-    )
+        Spacer(modifier = Modifier.height(8.dp))
+    }
 }
 
 // ============================================
