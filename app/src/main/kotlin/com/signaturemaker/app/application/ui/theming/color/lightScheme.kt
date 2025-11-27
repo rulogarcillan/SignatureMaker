@@ -2,7 +2,6 @@ package com.signaturemaker.app.application.ui.theming.color
 
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
-import com.signaturemaker.app.application.ui.designsystem.*
 import com.signaturemaker.app.application.ui.designsystem.Foundation.backgroundDark
 import com.signaturemaker.app.application.ui.designsystem.Foundation.backgroundDarkHighContrast
 import com.signaturemaker.app.application.ui.designsystem.Foundation.backgroundDarkMediumContrast
@@ -252,7 +251,7 @@ import com.signaturemaker.app.application.ui.designsystem.Foundation.tertiaryLig
     surfaceContainerHighest = surfaceContainerHighestLight,
 )
 
-val darkScheme = darkColorScheme(
+ val darkScheme = darkColorScheme(
     primary = primaryDark,
     onPrimary = onPrimaryDark,
     primaryContainer = primaryContainerDark,

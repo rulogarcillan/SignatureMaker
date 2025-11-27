@@ -19,7 +19,7 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-        versionCode = 4000
+        versionCode = 4002
         versionName = "4.0.0"
     }
 
@@ -125,6 +125,7 @@ dependencies {
     implementation (libs.koin.android.compose)
 
     implementation(libs.signature.pad)
+    implementation(libs.uiTextGoogleFonts)
 
     //retrofit
     implementation(libs.retrofit)

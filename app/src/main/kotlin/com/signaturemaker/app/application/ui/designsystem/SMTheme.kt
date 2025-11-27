@@ -14,7 +14,7 @@ import com.signaturemaker.app.application.ui.designsystem.size.LocalSMSize
 import com.signaturemaker.app.application.ui.designsystem.size.SMSize
 import com.signaturemaker.app.application.ui.designsystem.spacing.LocalSMSpacing
 import com.signaturemaker.app.application.ui.designsystem.spacing.SMSpacing
-import com.signaturemaker.app.application.ui.theming.typografy.Typography
+import com.signaturemaker.app.application.ui.theming.typografy.AppTypography
 
 /**
  * SM Design System Theme wrapper
@@ -37,7 +37,7 @@ fun SMTheme(
     ) {
         MaterialTheme(
             colorScheme = colorScheme,
-            typography = Typography,
+            typography = AppTypography,
         ) {
             content()
         }

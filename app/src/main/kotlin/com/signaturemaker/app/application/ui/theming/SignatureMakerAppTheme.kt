@@ -9,8 +9,8 @@ import androidx.compose.ui.platform.LocalContext
 import com.signaturemaker.app.application.ui.designsystem.SMTheme
 import com.signaturemaker.app.application.ui.theming.color.DarkSmColor
 import com.signaturemaker.app.application.ui.theming.color.LightSmColor
-import com.signaturemaker.app.application.ui.theming.color.highContrastDarkColorScheme
-import com.signaturemaker.app.application.ui.theming.color.highContrastLightColorScheme
+import com.signaturemaker.app.application.ui.theming.color.darkScheme
+import com.signaturemaker.app.application.ui.theming.color.lightScheme
 
 /**
  * Application theme wrapper
@@ -18,7 +18,7 @@ import com.signaturemaker.app.application.ui.theming.color.highContrastLightColo
 @Composable
 fun SignatureMakerAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = false,
+    dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
     val materialColorScheme = when {
@@ -27,8 +27,8 @@ fun SignatureMakerAppTheme(
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
 
-        darkTheme -> highContrastDarkColorScheme
-        else -> highContrastLightColorScheme
+        darkTheme -> darkScheme
+        else -> lightScheme
     }
 
     val smColor = when {

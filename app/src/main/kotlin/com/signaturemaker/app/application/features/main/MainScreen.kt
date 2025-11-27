@@ -360,7 +360,7 @@ private fun DrawerTitleSection(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         SMIcon(
-            painter = painterResource(id = R.drawable.ic_launcher_foreground),
+            painter = painterResource(id = R.drawable.ic_signature_maker),
             contentDescription = stringResource(R.string.logo),
             tint = SMTheme.material.colorScheme.primary,
             modifier = Modifier

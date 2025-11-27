@@ -26,6 +26,7 @@ firebase-bom = "34.6.0"
 firebase-crashlytics = "3.0.6"
 google-services = "4.4.4"
 oss-licenses-plugin = "0.10.6"
+uiTextGoogleFonts = "1.9.5"
 user-messaging-platform = "3.1.0"
 koin = "4.1.1"
 koinCompose = "4.1.1"
@@ -79,6 +80,7 @@ firebase_analytics = { group = "com.google.firebase", name = "firebase-analytics
 firebase_crashlytics_gradle = { group = "com.google.firebase", name = "firebase-crashlytics-gradle" }
 
 play_services_ads = { group = "com.google.android.gms", name = "play-services-ads", version.ref = "play-services-ads" }
+uiTextGoogleFonts = { module = "androidx.compose.ui:ui-text-google-fonts", version.ref = "uiTextGoogleFonts" }
 user_messaging_platform = { group = "com.google.android.ump", name = "user-messaging-platform", version.ref = "user-messaging-platform" }
 
 detekt_api = { module = "io.gitlab.arturbosch.detekt:detekt-api", version.ref = "detekt" }
