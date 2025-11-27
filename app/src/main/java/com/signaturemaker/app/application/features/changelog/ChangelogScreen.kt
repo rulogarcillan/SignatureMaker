@@ -33,12 +33,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import com.signaturemaker.app.R
 import com.signaturemaker.app.application.features.changelog.model.ChangeUI
 import com.signaturemaker.app.application.features.changelog.model.ChangelogUI
 import com.signaturemaker.app.application.ui.designsystem.SMTheme
@@ -49,7 +50,6 @@ import java.util.Locale
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import org.koin.androidx.compose.koinViewModel
-
 
 // ============================================
 // MAIN SCREEN
@@ -113,7 +113,7 @@ private fun EmptyChangelogState(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(SMTheme.spacing.spacing250))
 
         SMText(
-            text = "No changelog available",
+            text = stringResource(R.string.message_no_changelog_available),
             style = SMTheme.material.typography.titleMedium,
             color = SMTheme.material.colorScheme.onSurfaceVariant
         )
@@ -121,7 +121,7 @@ private fun EmptyChangelogState(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(SMTheme.spacing.spacing100))
 
         SMText(
-            text = "Check back later for updates",
+            text = stringResource(R.string.message_check_back_later),
             style = SMTheme.material.typography.bodyMedium,
             color = SMTheme.material.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
         )
@@ -161,7 +161,7 @@ private fun ChangelogVersionCard(
             ) {
                 Column(modifier = Modifier.weight(1f)) {
                     SMText(
-                        text = "Version ${changelog.versionName}",
+                        text = stringResource(R.string.changelog_version, changelog.versionName),
                         style = SMTheme.material.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
                         color = SMTheme.material.colorScheme.onSurface
@@ -257,7 +257,6 @@ private fun ChangeItem(
     }
 }
 
-
 private fun formatDate(dateString: String): String {
     return try {
         val inputFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
@@ -293,4 +292,3 @@ private fun com.signaturemaker.app.application.features.changelog.model.ChangeTy
         com.signaturemaker.app.application.features.changelog.model.ChangeType.DEL -> 7
     }
 }
-

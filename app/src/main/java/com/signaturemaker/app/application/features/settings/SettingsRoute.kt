@@ -14,4 +14,3 @@ fun SettingsRoute(
         viewModel = viewModel
     )
 }
-

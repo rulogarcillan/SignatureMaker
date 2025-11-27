@@ -11,6 +11,7 @@ import androidx.navigation.navArgument
  */
 sealed interface NavigationRoute {
     val route: String
+
     @Suppress("unused")
     val arguments: List<NamedNavArgument> get() = emptyList()
 }
@@ -185,4 +186,3 @@ class ArgumentBuilder {
 fun buildArguments(builder: ArgumentBuilder.() -> Unit): List<NamedNavArgument> {
     return ArgumentBuilder().apply(builder).arguments
 }
-

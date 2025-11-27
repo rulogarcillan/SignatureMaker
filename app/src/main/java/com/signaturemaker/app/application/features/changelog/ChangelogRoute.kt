@@ -9,4 +9,3 @@ fun ChangelogRoute(
 ) {
     ChangelogScreen(modifier = modifier)
 }
-

@@ -15,5 +15,3 @@ data class ItemFile(
     val size: String = "",
     val shimmer: Boolean = false
 ) : Parcelable
-
-

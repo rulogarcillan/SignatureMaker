@@ -21,7 +21,6 @@ class GetAllFiles(private val repository: FilesRepository) :
     )
 
     override suspend fun run(params: Params): Flow<Response<List<ItemFile>>> {
-
         return if (params.sdkInt >= VERSION_CODES.Q) {
             repository.loadItemsFilesMoreAndroid10()
         } else {

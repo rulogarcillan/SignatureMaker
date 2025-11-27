@@ -38,13 +38,12 @@ fun MainMenuItem.toAction(): MainScreenAction {
         is MainMenuItem.Sign -> NavigateToSign
         is MainMenuItem.Files -> NavigateToFiles
         is MainMenuItem.Settings -> NavigateToSettings
-        //is MainMenuItem.SendFeedback -> NavigateToSendFeedback
+        // is MainMenuItem.SendFeedback -> NavigateToSendFeedback
         is MainMenuItem.ChangeLog -> NavigateToChangeLog
         is MainMenuItem.RateUs -> NavigateToRateUs
-        //is MainMenuItem.MoreApps -> NavigateToMoreApps
-        //is MainMenuItem.Licenses -> NavigateToLicenses
+        // is MainMenuItem.MoreApps -> NavigateToMoreApps
+        // is MainMenuItem.Licenses -> NavigateToLicenses
         is MainMenuItem.PrivacyPolicy -> NavigateToPrivacyPolicy
-        //is MainMenuItem.EditPrivacyPolicy -> NavigateToEditPrivacyPolicy
+        // is MainMenuItem.EditPrivacyPolicy -> NavigateToEditPrivacyPolicy
     }
 }
-

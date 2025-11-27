@@ -78,7 +78,10 @@ class FilesViewModel(
                     )
                 ).collect {
                     // File removed successfully from storage
-                    android.util.Log.d("FilesViewModel", "File deleted successfully from storage, marking deleteSuccess = true")
+                    android.util.Log.d(
+                        "FilesViewModel",
+                        "File deleted successfully from storage, marking deleteSuccess = true"
+                    )
                     _uiState.update { state ->
                         state.copy(deleteSuccess = true)
                     }
@@ -88,11 +91,14 @@ class FilesViewModel(
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     val recoverableSecurityException = e as? android.app.RecoverableSecurityException
                     if (recoverableSecurityException != null) {
-                        android.util.Log.d("FilesViewModel", "RecoverableSecurityException detected, requesting permission")
+                        android.util.Log.d(
+                            "FilesViewModel",
+                            "RecoverableSecurityException detected, requesting permission"
+                        )
                         // Restauramos el archivo en la UI ya que necesitamos permiso
                         _uiState.update { state ->
                             state.copy(
-                                files =(state.files + itemFile).toImmutableList(),
+                                files = (state.files + itemFile).toImmutableList(),
                                 pendingDeleteIntent = recoverableSecurityException.userAction.actionIntent,
                                 pendingDeleteFile = itemFile
                             )
@@ -143,7 +149,10 @@ class FilesViewModel(
                         )
                     ).collect {
                         // File removed successfully from storage
-                        android.util.Log.d("FilesViewModel", "File deleted successfully after permission, marking deleteSuccess = true")
+                        android.util.Log.d(
+                            "FilesViewModel",
+                            "File deleted successfully after permission, marking deleteSuccess = true"
+                        )
                         _uiState.update { state ->
                             state.copy(deleteSuccess = true)
                         }
@@ -202,4 +211,3 @@ data class FilesUiState(
     val pendingDeleteFile: ItemFile? = null,
     val deleteSuccess: Boolean = false
 )
-

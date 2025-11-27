@@ -14,10 +14,10 @@ object Constants {
     const val PREF_WALLPAPER = "WALLPAPER"
     const val DEFAULT_DELETE_EXIT = false
     const val DEFAULT_SORT_ORDER = -1
-    const val DEFAULT_MAX_STROKE = 4
-    const val DEFAULT_MIN_STROKE = 1
-    const val DEFAULT_WALLPAPER = 0  // THEME_COLOR_ID
-    val DEFAULT_PEN_COLOR = Color.parseColor("#3F51B5")  // pen1 (Foundation.Blue)
+    const val DEFAULT_MAX_STROKE = 4f
+    const val DEFAULT_MIN_STROKE = 1.5f
+    const val DEFAULT_WALLPAPER = 0 // THEME_COLOR_ID
+    val DEFAULT_PEN_COLOR = Color.parseColor("#3F51B5") // pen1 (Foundation.Blue)
     const val FOLDER_APP_NAME = "Signature maker"
     const val URL_RATE = "market://details?id=com.signaturemaker.app"
 }

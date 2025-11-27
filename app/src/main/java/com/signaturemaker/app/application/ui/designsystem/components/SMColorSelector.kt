@@ -76,10 +76,11 @@ fun SMColorSelector(
                 .clip(CircleShape)
                 .border(
                     width = borderWidth,
-                    color = if (selected)
+                    color = if (selected) {
                         SMTheme.material.colorScheme.primary
-                    else
-                        SMTheme.material.colorScheme.outline,
+                    } else {
+                        SMTheme.material.colorScheme.outline
+                    },
                     shape = CircleShape
                 )
                 .clickable(onClick = { onClick(color) }),
@@ -171,10 +172,11 @@ fun SMImageSelector(
                 .clip(CircleShape)
                 .border(
                     width = borderWidth,
-                    color = if (selected)
+                    color = if (selected) {
                         SMTheme.material.colorScheme.primary
-                    else
-                        SMTheme.material.colorScheme.outline,
+                    } else {
+                        SMTheme.material.colorScheme.outline
+                    },
                     shape = CircleShape
                 )
                 .clickable(onClick = { onClick(image) }),

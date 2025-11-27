@@ -108,4 +108,3 @@ private fun readTextFile(inputStream: InputStream): String {
     }
     return outputStream.toString()
 }
-

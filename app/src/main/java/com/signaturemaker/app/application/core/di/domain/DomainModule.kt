@@ -30,4 +30,3 @@ val domainModule = module {
         RemoveAllFiles(get(), get())
     }
 }
-

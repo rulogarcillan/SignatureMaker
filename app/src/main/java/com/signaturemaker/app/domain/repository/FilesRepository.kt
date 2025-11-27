@@ -25,13 +25,6 @@ interface FilesRepository {
 
     suspend fun deleteFileBitmapLessAndroid10(file: File): Flow<Response<Boolean>>
 
-    @Deprecated("Only for migration")
-    suspend fun moveFile(
-        oldPath: String,
-        newPath: String,
-        fileName: String
-    ): Flow<Response<Boolean>>
-
     suspend fun reloadMediaScanner(vararg filePath: String): Flow<Response<Boolean>>
 
     suspend fun loadItemsFilesMoreAndroid10(): Flow<Response<List<ItemFile>>>

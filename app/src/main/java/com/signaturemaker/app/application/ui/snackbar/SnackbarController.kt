@@ -140,4 +140,3 @@ fun rememberSnackbarController(
         SnackbarController(snackbarHostState, coroutineScope)
     }
 }
-

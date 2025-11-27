@@ -72,7 +72,6 @@ internal object Foundation {
   val spacing120: Dp = 120.dp
   val spacing128: Dp = 128.dp
 
-
     val primaryLight = Color(0xFF00696C)
     val onPrimaryLight = Color(0xFFFFFFFF)
     val primaryContainerLight = Color(0xFF9CF1F4)
@@ -288,7 +287,6 @@ internal object Foundation {
     val surfaceContainerDarkHighContrast = Color(0xFF2B3232)
     val surfaceContainerHighDarkHighContrast = Color(0xFF363D3D)
     val surfaceContainerHighestDarkHighContrast = Color(0xFF414848)
-
 
   // Legacy colors (mantener compatibilidad)
   val Blue: Color = Color(0xFF3F51B5)

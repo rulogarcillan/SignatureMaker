@@ -23,7 +23,6 @@ fun Context.getColorFromAttr(
  * Guarda cualquier valor primitivo en el shared preferences
  */
 inline fun <reified T> Context.saveSharedPreference(key: String, value: T) {
-
     val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
     val editor = sharedPreferences.edit()
 

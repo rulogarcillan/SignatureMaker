@@ -207,7 +207,11 @@ class FilesRepositoryImp(val appContext: Context) : FilesRepository {
                             ContentUris.withAppendedId(
                                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                                 id
-                            ), displayName, dateFormat.format(myDate), tam, false
+                            ),
+                                displayName,
+                            dateFormat.format(myDate),
+                            tam,
+                            false
                         )
                     )
                 }
@@ -220,7 +224,6 @@ class FilesRepositoryImp(val appContext: Context) : FilesRepository {
     override suspend fun loadItemsFilesLessAndroid10(filesPath: String): Flow<Response<List<ItemFile>>> {
         val folder = File(filesPath)
         return if (folder.exists()) {
-
             val itemListFiles: MutableList<ItemFile> = mutableListOf()
             val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
             folder.listFiles()?.toMutableList()?.toList()?.forEach { file ->
@@ -229,9 +232,11 @@ class FilesRepositoryImp(val appContext: Context) : FilesRepository {
                 val tam = (file.length() / 1024).toString() + " KB"
                 val name = file.name
 
-                if ((name.contains(".png") || name.contains(".PNG") || name.contains(".svg") || name.contains(
+                if ((
+                    name.contains(".png") || name.contains(".PNG") || name.contains(".svg") || name.contains(
                         ".SVG"
-                    )) && name.startsWith(
+                    )
+                ) && name.startsWith(
                         "SM_"
                     )
                 ) {
@@ -242,33 +247,20 @@ class FilesRepositoryImp(val appContext: Context) : FilesRepository {
                     )
                     itemListFiles.add(ItemFile(photoURI, name, dateFormat.format(myDate), tam))
                 }
-
             }
             Utils.sort(itemListFiles, Utils.sortOrder)
             flow { emit(onSuccess(itemListFiles)) }
         } else {
-            flow { emit(onSuccess(emptyList<ItemFile>())) }
-        }
-    }
-
-    @Deprecated("Only for migration")
-    override suspend fun moveFile(oldPath: String, newPath: String, fileName: String): Flow<Response<Boolean>> {
-        createFolder(newPath)
-        return flow {
-            val oldFile = File(oldPath + File.separator + fileName)
-            val newFile = File(newPath + File.separator + fileName)
-
-            oldFile.renameTo(newFile)
-            reloadMediaScanner(oldFile.path, newFile.path).collect {
-                emit(onSuccess(true))
-            }
+            flow { emit(onSuccess(emptyList())) }
         }
     }
 
     override suspend fun reloadMediaScanner(vararg filePath: String): Flow<Response<Boolean>> {
         return flow {
             MediaScannerConnection.scanFile(
-                appContext, filePath, null
+                appContext,
+                filePath,
+                null
             ) { path, _ ->
                 "Scan complete for: $path".logd()
             }

@@ -13,7 +13,7 @@ object Utils {
     var minStroke = Constants.DEFAULT_MIN_STROKE
     var penColor = Constants.DEFAULT_PEN_COLOR
     var wallpaper = Constants.DEFAULT_WALLPAPER
-    var path = "" //load from application
+    var path = "" // load from application
     var deleteExit: Boolean = Constants.DEFAULT_DELETE_EXIT
 
     private fun defaultColor() {
@@ -39,7 +39,6 @@ object Utils {
     }
 
     fun loadAllPreferences(mContext: Context?) {
-
         mContext?.let {
             if (mContext.loadSharedPreference(Constants.ID_PREF_WALLPAPER, false)) {
                 wallpaper = mContext.loadSharedPreference(Constants.PREF_WALLPAPER, Constants.DEFAULT_WALLPAPER)
@@ -59,7 +58,6 @@ object Utils {
             }
 
             deleteExit = mContext.loadSharedPreference(Constants.ID_PREF_DELETE, Constants.DEFAULT_DELETE_EXIT)
-
         }
     }
 

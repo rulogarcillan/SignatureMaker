@@ -37,7 +37,6 @@ class SignBoardViewModel(
         pathToSave: String,
         displayName: String? = null
     ) {
-
         viewModelScope.launch(Dispatchers.IO) {
             saveBitmapUseCase.invoke(
                 Params(

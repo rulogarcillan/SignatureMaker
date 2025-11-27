@@ -19,4 +19,3 @@ data class ChangeUI(
     val type: ChangeType,
     val text: String
 )
-

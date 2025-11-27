@@ -9,4 +9,3 @@ data class SettingsUIState(
     val rememberStroke: Boolean = false,
     val rememberWallpaper: Boolean = false
 )
-

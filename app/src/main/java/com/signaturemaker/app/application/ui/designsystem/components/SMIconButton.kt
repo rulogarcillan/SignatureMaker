@@ -77,6 +77,30 @@ fun SMIconButton(
     }
 }
 
+@Composable
+fun SMImageButton(
+    painterResource: Painter,
+    contentDescription: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    colors: IconButtonColors = IconButtonDefaults.iconButtonColors(),
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+) {
+    IconButton(
+        onClick = onClick,
+        modifier = modifier,
+        enabled = enabled,
+        colors = colors,
+        interactionSource = interactionSource
+    ) {
+        SMImage(
+            painter = painterResource,
+            contentDescription = contentDescription
+        )
+    }
+}
+
 /**
  * An icon button with a label below the icon.
  */

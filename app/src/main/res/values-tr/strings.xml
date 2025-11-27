@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Turkish translation for Signature Maker -->
+    <!-- Türkçe çeviri -->
+
+    <string name="app_title">Signature Maker</string>
+    <string name="close_menu">Menüyü kapat</string>
+    <string name="logo">Logo</string>
+
+    <!-- NAVIGATION MENU -->
+    <string name="title_create_signature">İmza oluştur</string>
+    <string name="title_gallery">Galeri</string>
+    <string name="title_setting">Ayarlar</string>
+    <string name="title_edit_privacy_policy">Gizlilik politikasını düzenle</string>
+    <string name="title_others">Diğer</string>
+    <string name="title_activity_settings">Ayarlar</string>
+
+    <!-- SIGN SCREEN - Action Buttons -->
+    <string name="title_bSave">Kaydet</string>
+    <string name="title_bList">Liste</string>
+    <string name="title_bSaveSend">Kaydet ve gönder</string>
+    <string name="title_bColor">Renk</string>
+    <string name="title_bStroke">Kalınlık</string>
+    <string name="title_bRubber">Temizle</string>
+    <string name="title_SingHere">Buraya imzala</string>
+
+    <!-- SIGN SCREEN - Bottom Sheet Headers -->
+    <string name="title_options">Seçenekler</string>
+    <string name="title_signature_options">İmza seçenekleri</string>
+    <string name="title_actions">İşlemler</string>
+    <string name="title_background">Arka plan</string>
+
+    <!-- DRAWER MENU - Social & Actions -->
+    <string name="follow_us">Bizi takip edin</string>
+    <string name="send_suggestions">Öneri gönder</string>
+    <string name="changelog">Değişiklik günlüğü</string>
+    <string name="rate">Bizi değerlendirin</string>
+    <string name="more_app">Daha fazla uygulama</string>
+    <string name="license">Lisanslar</string>
+    <string name="privacy_policy">Gizlilik politikası</string>
+    <string name="handle_privacy_policy">Gizliliği yönet</string>
+
+    <!-- NOTIFICATIONS & FEEDBACK MESSAGES -->
+    <string name="title_save_ok">Dosya başarıyla kaydedildi</string>
+    <string name="title_save_ko">Dosya kaydedilirken hata oluştu</string>
+    <string name="message_file_saved_successfully">Dosya başarıyla kaydedildi</string>
+    <string name="message_error_saving_file">Dosya kaydedilirken hata oluştu</string>
+    <string name="action_retry">Tekrar dene</string>
+    <string name="action_view">Görüntüle</string>
+    <string name="title_clean">Temizle</string>
+
+    <!-- FILES SCREEN -->
+    <string name="sort">Tarihe göre sırala</string>
+    <string name="title_no_files">Dosya yok</string>
+    <string name="delete">Sil</string>
+    <string name="title_undo">Geri al</string>
+    <string name="message_no_files">Henüz kaydedilmiş imza yok</string>
+    <string name="message_no_files_description">İlk imzanızı oluşturun ve burada görünecektir</string>
+    <string name="message_error_permission_required">Dosyalara erişmek için izin gerekli</string>
+    <string name="message_error_loading_files">Dosyalar yüklenirken hata oluştu</string>
+    <string name="message_file_deleted">Dosya silindi</string>
+
+    <!-- PERMISSIONS -->
+    <string name="body_permissions">Uygulamanın düzgün çalışması için izinleri kabul etmeniz gerekir</string>
+    <string name="title_request_permision">Okuma ve yazma izinleri talebi</string>
+    <string name="body_request_permision">Uygulamayı doğru şekilde kullanmak için belirli sistem izinlerine erişim gereklidir. İzinleri kabul edin, aksi takdirde uygulama çalışmayacaktır.</string>
+
+    <!-- ONBOARDING SLIDES -->
+    <string name="tittle_slider1">İmzala</string>
+    <string name="tittle_slider2">Aktar</string>
+    <string name="tittle_slider3">Ekle</string>
+    <string name="tittle_slider4">Başla</string>
+    <string name="tittle_body_slider1">Kolay ve basit bir prosedürle imzanızı dijitalleştirin</string>
+    <string name="tittle_body_slider2">İmzanızı istediğiniz yere kaydedin ve gönderin</string>
+    <string name="tittle_body_slider3">İmzanızı belgelerinize ekleyin</string>
+    <string name="tittle_body_slider4">Hazır mısınız?</string>
+
+    <!-- SETTINGS SCREEN -->
+    <string name="title_pref_app">Uygulama</string>
+    <string name="title_pref_advertising">Reklamları devre dışı bırak</string>
+    <string name="title_pref_advertising_sum">Rahatsız ediyorsa reklamları devre dışı bırakın</string>
+    <string name="title_pref_files">Dosyalar</string>
+    <string name="title_pref_path">Dışa aktarılan imzaların yolu</string>
+    <string name="title_pref_delete">İmzaları sil</string>
+    <string name="title_pref_delete_sum">Çıkışta tüm imzaları sil</string>
+    <string name="title_pref_gallery">İmzaları gizle</string>
+    <string name="title_pref_gallery_sum">İmzaları telefon galerisinde gösterme</string>
+    <string name="title_pref_name">Dosya adı</string>
+    <string name="title_pref_name_sum">Kaydederken dosya adını seç</string>
+    <string name="title_pref_siganture">İmza</string>
+    <string name="title_pref_stroke">Varsayılan kalınlık</string>
+    <string name="title_pref_stroke_sum">Son kullanılan kalınlığı varsayılan olarak tut</string>
+    <string name="title_pref_color">Varsayılan renk</string>
+    <string name="title_pref_color_sum">Son kullanılan rengi varsayılan olarak tut</string>
+    <string name="title_pref_reset">Varsayılan değerler</string>
+    <string name="title_pref_reset_sum">Tüm varsayılanları sıfırla</string>
+    <string name="title_pref_wallpaper_sum">Son kullanılan arka planı varsayılan olarak tut</string>
+    <string name="title_pref_wallpaper">Varsayılan arka plan</string>
+    <string name="title_name_of_the_file">Dosya adı</string>
+
+    <!-- FEEDBACK & SUGGESTIONS -->
+    <string name="complete_fields">Tüm alanları doldurun</string>
+    <string name="thanks_comment">Geri bildiriminiz için teşekkürler</string>
+    <string name="problems_comment">Bir sorun oluştu, lütfen daha sonra tekrar deneyin</string>
+    <string name="write_your_suggestion_or_comment">Önerinizi veya yorumunuzu yazın</string>
+    <string name="put_your_email">E-postanızı girin</string>
+    <string name="valid_mail">Geçerli bir e-posta girin</string>
+    <string name="suggest_sort">Yorum çok kısa. Lütfen en az 30 karakter yazın</string>
+    <string name="share">Paylaş</string>
+    <string name="sending_message_please_wait">Mesaj gönderiliyor, lütfen bekleyin</string>
+    <string name="join_channel">Telegram kanalımıza katılmak için buraya tıklayın</string>
+
+    <!-- THEME & APPEARANCE -->
+    <string name="mode_light">Açık modu zorla</string>
+    <string name="mode_dark">Koyu modu zorla</string>
+    <string name="mode_system">Sistem tarafından tanımlanan</string>
+    <string name="mode_battery">Pil tasarrufu modunda koyu</string>
+    <string name="change_theme_note">Değişikliklerin etkili olması için uygulamayı tamamen yeniden başlatmanız gerekir</string>
+    <string name="empty_canvas">Hata, boş tuval</string>
+
+    <!-- MISCELLANEOUS -->
+    <string name="suggest">Öner</string>
+
+    <!-- CHANGELOG SCREEN -->
+    <string name="message_no_changelog_available">Değişiklik günlüğü mevcut değil</string>
+    <string name="message_check_back_later">Güncellemeler için daha sonra tekrar kontrol edin</string>
+    <string name="changelog_version">Sürüm %s</string>
+
+</resources>
+

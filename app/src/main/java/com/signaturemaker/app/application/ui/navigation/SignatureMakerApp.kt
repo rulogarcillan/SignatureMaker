@@ -31,6 +31,7 @@ import com.signaturemaker.app.application.ui.navigation.routes.SignatureMakerRou
 fun SignatureMakerApp() {
     val navController = rememberNavController()
     val context = androidx.compose.ui.platform.LocalContext.current
+    val activity = context as? android.app.Activity
 
     // Navigation action handler for drawer menu actions
     val onMainNavigationAction: (MainScreenAction) -> Unit = { action ->
@@ -80,8 +81,20 @@ fun SignatureMakerApp() {
         }
     }
 
+    // Handle back press: close app if we're on the start destination
+    androidx.activity.compose.BackHandler {
+        if (navController.previousBackStackEntry == null) {
+            // We're at the root, finish the activity
+            activity?.finish()
+        } else {
+            // Navigate back normally
+            navController.popBackStack()
+        }
+    }
+
     // Single MainRoute instance wrapping the content navigation
     MainRoute(
+        navController = navController,
         onNavigationAction = onMainNavigationAction
     ) { paddingValues ->
         // Content navigation inside the scaffold
@@ -133,4 +146,3 @@ private fun ContentNavHost(
         }
     }
 }
-

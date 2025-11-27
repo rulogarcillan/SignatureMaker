@@ -20,6 +20,3 @@ class ChangelogViewModel(
     )
     val uiState: StateFlow<ChangelogUIState> = _uiState.asStateFlow()
 }
-
-
-

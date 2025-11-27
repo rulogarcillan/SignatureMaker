@@ -35,13 +35,13 @@ data class MainMenuConfig private constructor(
                     Sign,
                     Files,
                     Settings,
-                    //SendFeedback,
+                    // SendFeedback,
                     ChangeLog,
                     RateUs,
-                    //MoreApps,
-                    //Licenses,
+                    // MoreApps,
+                    // Licenses,
                     PrivacyPolicy,
-                    //EditPrivacyPolicy,
+                    // EditPrivacyPolicy,
                 )
             )
         }
@@ -69,8 +69,8 @@ sealed class MainMenuItem(@StringRes val titleResId: Int, val icon: ImageVector)
     data object ChangeLog : MainMenuItem(R.string.changelog, Icons.AutoMirrored.Filled.Article)
     data object RateUs : MainMenuItem(R.string.rate, Icons.Default.StarRate)
 
-    //data object MoreApps : MainMenuItem(R.string.more_app, Icons.Default.Shop)
-    //data object Licenses : MainMenuItem(R.string.license, Icons.Default.Copyright)
+    // data object MoreApps : MainMenuItem(R.string.more_app, Icons.Default.Shop)
+    // data object Licenses : MainMenuItem(R.string.license, Icons.Default.Copyright)
     data object PrivacyPolicy : MainMenuItem(R.string.privacy_policy, Icons.Default.PrivacyTip)
-    //data object EditPrivacyPolicy : MainMenuItem(R.string.title_edit_privacy_policy, Icons.Default.Badge)
+    // data object EditPrivacyPolicy : MainMenuItem(R.string.title_edit_privacy_policy, Icons.Default.Badge)
 }

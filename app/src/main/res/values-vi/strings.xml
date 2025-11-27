@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="changelog_version">Phiên bản %s</string>
+    <string name="message_check_back_later">Quay lại sau để cập nhật</string>
+    <string name="message_no_changelog_available">Không có nhật ký thay đổi</string>
+    <!-- CHANGELOG SCREEN -->
+
+    <string name="suggest">Đề xuất</string>
+    <!-- MISCELLANEOUS -->
+
+    <string name="empty_canvas">Lỗi, canvas trống</string>
+    <string name="change_theme_note">Để các thay đổi có hiệu lực, bạn phải khởi động lại ứng dụng hoàn toàn</string>
+    <string name="mode_battery">Tối ở chế độ tiết kiệm pin</string>
+    <string name="mode_system">Được xác định bởi hệ thống</string>
+    <string name="mode_dark">Buộc chế độ tối</string>
+    <string name="mode_light">Buộc chế độ sáng</string>
+    <!-- THEME & APPEARANCE -->
+
+    <string name="join_channel">Nhấp vào đây để tham gia kênh Telegram của chúng tôi</string>
+    <string name="sending_message_please_wait">Đang gửi tin nhắn, vui lòng đợi</string>
+    <string name="share">Chia sẻ</string>
+    <string name="suggest_sort">Nhận xét quá ngắn. Vui lòng viết ít nhất 30 ký tự</string>
+    <string name="valid_mail">Nhập email hợp lệ</string>
+    <string name="put_your_email">Nhập email của bạn</string>
+    <string name="write_your_suggestion_or_comment">Viết đề xuất hoặc nhận xét của bạn</string>
+    <string name="problems_comment">Đã xảy ra sự cố, vui lòng thử lại sau</string>
+    <string name="thanks_comment">Cảm ơn phản hồi của bạn</string>
+    <string name="complete_fields">Điền đầy đủ tất cả các trường</string>
+    <!-- FEEDBACK & SUGGESTIONS -->
+
+    <string name="title_name_of_the_file">Tên tệp</string>
+    <string name="title_pref_wallpaper">Nền mặc định</string>
+    <string name="title_pref_wallpaper_sum">Giữ nền sử dụng cuối cùng làm mặc định</string>
+    <string name="title_pref_reset_sum">Đặt lại tất cả giá trị mặc định</string>
+    <string name="title_pref_reset">Giá trị mặc định</string>
+    <string name="title_pref_color_sum">Giữ màu sử dụng cuối cùng làm mặc định</string>
+    <string name="title_pref_color">Màu mặc định</string>
+    <string name="title_pref_stroke_sum">Giữ độ dày sử dụng cuối cùng làm mặc định</string>
+    <string name="title_pref_stroke">Độ dày mặc định</string>
+    <string name="title_pref_siganture">Chữ ký</string>
+    <string name="title_pref_name_sum">Chọn tên tệp khi lưu</string>
+    <string name="title_pref_name">Tên tệp</string>
+    <string name="title_pref_gallery_sum">Không hiển thị chữ ký trong thư viện điện thoại</string>
+    <string name="title_pref_gallery">Ẩn chữ ký</string>
+    <string name="title_pref_delete_sum">Xóa tất cả chữ ký khi thoát</string>
+    <string name="title_pref_delete">Xóa chữ ký</string>
+    <string name="title_pref_path">Đường dẫn chữ ký đã xuất</string>
+    <string name="title_pref_files">Tệp</string>
+    <string name="title_pref_advertising_sum">Tắt quảng cáo nếu chúng làm phiền bạn</string>
+    <string name="title_pref_advertising">Tắt quảng cáo</string>
+    <string name="title_pref_app">Ứng dụng</string>
+    <!-- SETTINGS SCREEN -->
+
+    <string name="tittle_body_slider4">Bạn đã sẵn sàng chưa?</string>
+    <string name="tittle_body_slider3">Đính kèm chữ ký của bạn vào tài liệu</string>
+    <string name="tittle_body_slider2">Lưu và gửi chữ ký của bạn ở bất cứ đâu</string>
+    <string name="tittle_body_slider1">Số hóa chữ ký của bạn với quy trình đơn giản và dễ dàng</string>
+    <string name="tittle_slider4">Bắt đầu</string>
+    <string name="tittle_slider3">Đính kèm</string>
+    <string name="tittle_slider2">Chuyển</string>
+    <string name="tittle_slider1">Ký tên</string>
+    <!-- ONBOARDING SLIDES -->
+
+    <string name="body_request_permision">Để sử dụng ứng dụng một cách chính xác, cần có quyền truy cập vào một số quyền hệ thống. Chấp nhận quyền hoặc ứng dụng sẽ không hoạt động.</string>
+    <string name="title_request_permision">Yêu cầu quyền đọc và ghi</string>
+    <string name="body_permissions">Bạn cần chấp nhận quyền để ứng dụng hoạt động bình thường</string>
+    <!-- PERMISSIONS -->
+
+    <string name="message_file_deleted">Đã xóa tệp</string>
+    <string name="message_error_loading_files">Lỗi khi tải tệp</string>
+    <string name="message_error_permission_required">Cần quyền truy cập để truy cập tệp</string>
+    <string name="message_no_files_description">Tạo chữ ký đầu tiên của bạn và nó sẽ xuất hiện ở đây</string>
+    <string name="message_no_files">Chưa có chữ ký nào được lưu</string>
+    <string name="title_undo">Hoàn tác</string>
+    <string name="delete">Xóa</string>
+    <string name="title_no_files">Không có tệp</string>
+    <string name="sort">Sắp xếp theo ngày</string>
+    <!-- FILES SCREEN -->
+
+    <string name="title_clean">Xóa</string>
+    <string name="action_view">Xem</string>
+    <string name="action_retry">Thử lại</string>
+    <string name="message_error_saving_file">Lỗi khi lưu tệp</string>
+    <string name="message_file_saved_successfully">Đã lưu tệp thành công</string>
+    <string name="title_save_ko">Lỗi khi lưu tệp</string>
+    <string name="title_save_ok">Đã lưu tệp thành công</string>
+    <!-- NOTIFICATIONS & FEEDBACK MESSAGES -->
+
+    <string name="handle_privacy_policy">Quản lý quyền riêng tư</string>
+    <string name="privacy_policy">Chính sách bảo mật</string>
+    <string name="license">Giấy phép</string>
+    <string name="more_app">Thêm ứng dụng</string>
+    <string name="rate">Đánh giá</string>
+    <string name="changelog">Nhật ký thay đổi</string>
+    <string name="send_suggestions">Gửi đề xuất</string>
+    <string name="follow_us">Theo dõi chúng tôi</string>
+    <!-- DRAWER MENU - Social & Actions -->
+
+    <string name="title_background">Nền</string>
+    <string name="title_actions">Hành động</string>
+    <string name="title_signature_options">Tùy chọn chữ ký</string>
+    <string name="title_options">Tùy chọn</string>
+    <!-- SIGN SCREEN - Bottom Sheet Headers -->
+
+    <string name="title_SingHere">Ký tên ở đây</string>
+    <string name="title_bRubber">Xóa</string>
+    <string name="title_bStroke">Độ dày</string>
+    <string name="title_bColor">Màu</string>
+    <string name="title_bSaveSend">Lưu và gửi</string>
+    <string name="title_bList">Danh sách</string>
+    <string name="title_bSave">Lưu</string>
+    <!-- SIGN SCREEN - Action Buttons -->
+
+    <string name="title_activity_settings">Cài đặt</string>
+    <string name="title_others">Khác</string>
+    <string name="title_edit_privacy_policy">Chỉnh sửa chính sách bảo mật</string>
+    <string name="title_setting">Cài đặt</string>
+    <string name="title_gallery">Thư viện</string>
+    <string name="title_create_signature">Tạo chữ ký</string>
+    <!-- NAVIGATION MENU -->
+
+    <string name="logo">Logo</string>
+    <string name="close_menu">Đóng menu</string>
+    <string name="app_title">Signature Maker</string>
+
+    <!-- Bản dịch tiếng Việt -->
+    <!-- Vietnamese translation for Signature Maker -->
+
+</resources>
+

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Korean translation for Signature Maker -->
+    <!-- 한국어 번역 -->
+
+    <string name="app_title">Signature Maker</string>
+    <string name="close_menu">메뉴 닫기</string>
+    <string name="logo">로고</string>
+
+    <!-- NAVIGATION MENU -->
+    <string name="title_create_signature">서명 만들기</string>
+    <string name="title_gallery">갤러리</string>
+    <string name="title_setting">설정</string>
+    <string name="title_edit_privacy_policy">개인정보 처리방침 편집</string>
+    <string name="title_others">기타</string>
+    <string name="title_activity_settings">설정</string>
+
+    <!-- SIGN SCREEN - Action Buttons -->
+    <string name="title_bSave">저장</string>
+    <string name="title_bList">목록</string>
+    <string name="title_bSaveSend">저장 및 전송</string>
+    <string name="title_bColor">색상</string>
+    <string name="title_bStroke">두께</string>
+    <string name="title_bRubber">지우기</string>
+    <string name="title_SingHere">여기에 서명하세요</string>
+
+    <!-- SIGN SCREEN - Bottom Sheet Headers -->
+    <string name="title_options">옵션</string>
+    <string name="title_signature_options">서명 옵션</string>
+    <string name="title_actions">작업</string>
+    <string name="title_background">배경</string>
+
+    <!-- DRAWER MENU - Social & Actions -->
+    <string name="follow_us">팔로우하기</string>
+    <string name="send_suggestions">제안 보내기</string>
+    <string name="changelog">변경 기록</string>
+    <string name="rate">평가하기</string>
+    <string name="more_app">더 많은 앱</string>
+    <string name="license">라이선스</string>
+    <string name="privacy_policy">개인정보 처리방침</string>
+    <string name="handle_privacy_policy">개인정보 관리</string>
+
+    <!-- NOTIFICATIONS & FEEDBACK MESSAGES -->
+    <string name="title_save_ok">파일이 성공적으로 저장되었습니다</string>
+    <string name="title_save_ko">파일 저장 오류</string>
+    <string name="message_file_saved_successfully">파일이 성공적으로 저장되었습니다</string>
+    <string name="message_error_saving_file">파일 저장 오류</string>
+    <string name="action_retry">다시 시도</string>
+    <string name="action_view">보기</string>
+    <string name="title_clean">지우기</string>
+
+    <!-- FILES SCREEN -->
+    <string name="sort">날짜순 정렬</string>
+    <string name="title_no_files">파일 없음</string>
+    <string name="delete">삭제</string>
+    <string name="title_undo">실행 취소</string>
+    <string name="message_no_files">저장된 서명이 아직 없습니다</string>
+    <string name="message_no_files_description">첫 번째 서명을 만들면 여기에 표시됩니다</string>
+    <string name="message_error_permission_required">파일에 액세스하려면 권한이 필요합니다</string>
+    <string name="message_error_loading_files">파일 로드 오류</string>
+    <string name="message_file_deleted">파일이 삭제되었습니다</string>
+
+    <!-- PERMISSIONS -->
+    <string name="body_permissions">앱이 제대로 작동하려면 권한을 수락해야 합니다</string>
+    <string name="title_request_permision">읽기 및 쓰기 권한 요청</string>
+    <string name="body_request_permision">애플리케이션을 올바르게 사용하려면 특정 시스템 권한에 대한 액세스 권한이 필요합니다. 권한을 수락하지 않으면 애플리케이션이 작동하지 않습니다.</string>
+
+    <!-- ONBOARDING SLIDES -->
+    <string name="tittle_slider1">서명</string>
+    <string name="tittle_slider2">전송</string>
+    <string name="tittle_slider3">첨부</string>
+    <string name="tittle_slider4">시작하기</string>
+    <string name="tittle_body_slider1">쉽고 간단한 절차로 서명을 디지털화하세요</string>
+    <string name="tittle_body_slider2">서명을 원하는 곳에 저장하고 전송하세요</string>
+    <string name="tittle_body_slider3">문서에 서명을 첨부하세요</string>
+    <string name="tittle_body_slider4">준비되셨나요?</string>
+
+    <!-- SETTINGS SCREEN -->
+    <string name="title_pref_app">앱</string>
+    <string name="title_pref_advertising">광고 비활성화</string>
+    <string name="title_pref_advertising_sum">광고가 거슬리면 비활성화하세요</string>
+    <string name="title_pref_files">파일</string>
+    <string name="title_pref_path">내보낸 서명 경로</string>
+    <string name="title_pref_delete">서명 삭제</string>
+    <string name="title_pref_delete_sum">종료 시 모든 서명 삭제</string>
+    <string name="title_pref_gallery">서명 숨기기</string>
+    <string name="title_pref_gallery_sum">휴대폰 갤러리에 서명 표시 안 함</string>
+    <string name="title_pref_name">파일 이름</string>
+    <string name="title_pref_name_sum">저장할 때 파일 이름 선택</string>
+    <string name="title_pref_siganture">서명</string>
+    <string name="title_pref_stroke">기본 두께</string>
+    <string name="title_pref_stroke_sum">마지막으로 사용한 두께를 기본값으로 유지</string>
+    <string name="title_pref_color">기본 색상</string>
+    <string name="title_pref_color_sum">마지막으로 사용한 색상을 기본값으로 유지</string>
+    <string name="title_pref_reset">기본값</string>
+    <string name="title_pref_reset_sum">모든 기본값 재설정</string>
+    <string name="title_pref_wallpaper_sum">마지막으로 사용한 배경을 기본값으로 유지</string>
+    <string name="title_pref_wallpaper">기본 배경</string>
+    <string name="title_name_of_the_file">파일 이름</string>
+
+    <!-- FEEDBACK & SUGGESTIONS -->
+    <string name="complete_fields">모든 필드를 입력하세요</string>
+    <string name="thanks_comment">피드백 감사합니다</string>
+    <string name="problems_comment">문제가 발생했습니다. 나중에 다시 시도해주세요</string>
+    <string name="write_your_suggestion_or_comment">제안 또는 의견을 작성하세요</string>
+    <string name="put_your_email">이메일을 입력하세요</string>
+    <string name="valid_mail">유효한 이메일을 입력하세요</string>
+    <string name="suggest_sort">댓글이 너무 짧습니다. 30자 이상 작성해주세요</string>
+    <string name="share">공유</string>
+    <string name="sending_message_please_wait">메시지를 보내는 중입니다. 잠시 기다려주세요</string>
+    <string name="join_channel">여기를 클릭하여 텔레그램 채널에 가입하세요</string>
+
+    <!-- THEME & APPEARANCE -->
+    <string name="mode_light">라이트 모드 강제</string>
+    <string name="mode_dark">다크 모드 강제</string>
+    <string name="mode_system">시스템 설정 따르기</string>
+    <string name="mode_battery">절전 모드에서 다크</string>
+    <string name="change_theme_note">변경 사항을 적용하려면 애플리케이션을 완전히 다시 시작해야 합니다</string>
+    <string name="empty_canvas">오류, 빈 캔버스</string>
+
+    <!-- MISCELLANEOUS -->
+    <string name="suggest">제안하기</string>
+
+    <!-- CHANGELOG SCREEN -->
+    <string name="message_no_changelog_available">사용 가능한 변경 기록이 없습니다</string>
+    <string name="message_check_back_later">업데이트를 위해 나중에 다시 확인하세요</string>
+    <string name="changelog_version">버전 %s</string>
+
+</resources>
+

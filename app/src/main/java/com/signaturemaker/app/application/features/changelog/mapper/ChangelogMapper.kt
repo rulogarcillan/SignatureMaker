@@ -42,4 +42,3 @@ object ChangelogMapper {
         return this.map { it.toUI() }.toImmutableList()
     }
 }
-

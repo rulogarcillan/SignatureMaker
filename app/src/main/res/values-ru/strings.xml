@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="changelog_version">Версия %s</string>
+    <string name="message_check_back_later">Проверьте обновления позже</string>
+    <string name="message_no_changelog_available">История изменений недоступна</string>
+    <!-- CHANGELOG SCREEN -->
+
+    <string name="suggest">Предложить</string>
+    <!-- MISCELLANEOUS -->
+
+    <string name="empty_canvas">Ошибка, пустой холст</string>
+    <string name="change_theme_note">Чтобы изменения вступили в силу, необходимо полностью перезапустить приложение</string>
+    <string name="mode_battery">Темный в режиме энергосбережения</string>
+    <string name="mode_system">Определяется системой</string>
+    <string name="mode_dark">Принудительно темный режим</string>
+    <string name="mode_light">Принудительно светлый режим</string>
+    <!-- THEME & APPEARANCE -->
+
+    <string name="join_channel">Нажмите здесь, чтобы присоединиться к нашему каналу Telegram</string>
+    <string name="sending_message_please_wait">Отправка сообщения, пожалуйста, подождите</string>
+    <string name="share">Поделиться</string>
+    <string name="suggest_sort">Комментарий слишком короткий. Пожалуйста, напишите не менее 30 символов</string>
+    <string name="valid_mail">Введите действительный email</string>
+    <string name="put_your_email">Введите ваш email</string>
+    <string name="write_your_suggestion_or_comment">Напишите свое предложение или комментарий</string>
+    <string name="problems_comment">Произошла ошибка, пожалуйста, попробуйте позже</string>
+    <string name="thanks_comment">Спасибо за ваш отзыв</string>
+    <string name="complete_fields">Заполните все поля</string>
+    <!-- FEEDBACK & SUGGESTIONS -->
+
+    <string name="title_name_of_the_file">Имя файла</string>
+    <string name="title_pref_wallpaper">Фон по умолчанию</string>
+    <string name="title_pref_wallpaper_sum">Сохранить последний использованный фон по умолчанию</string>
+    <string name="title_pref_reset_sum">Сбросить все значе��ия по умолчанию</string>
+    <string name="title_pref_reset">Значения по умолчанию</string>
+    <string name="title_pref_color_sum">Сохранить последний использованный цвет по умолчанию</string>
+    <string name="title_pref_color">Цвет по умолчанию</string>
+    <string name="title_pref_stroke_sum">Сохранить последнюю использованную толщину по умолчанию</string>
+    <string name="title_pref_stroke">Толщина по умолчанию</string>
+    <string name="title_pref_siganture">Подпись</string>
+    <string name="title_pref_name_sum">Выбрать имя файла при сохранении</string>
+    <string name="title_pref_name">Имя файла</string>
+    <string name="title_pref_gallery_sum">Не показывать подписи в галерее телефона</string>
+    <string name="title_pref_gallery">Скрыть подписи</string>
+    <string name="title_pref_delete_sum">Удалять все подписи при выходе</string>
+    <string name="title_pref_delete">Удалить подписи</string>
+    <string name="title_pref_path">Путь экспортированных подписей</string>
+    <string name="title_pref_files">Файлы</string>
+    <string name="title_pref_advertising_sum">Отключите рекламу, если она вас беспокоит</string>
+    <string name="title_pref_advertising">Отключить рекламу</string>
+    <string name="title_pref_app">Приложение</string>
+    <!-- SETTINGS SCREEN -->
+
+    <string name="tittle_body_slider4">Вы готовы?</string>
+    <string name="tittle_body_slider3">Прикрепите свою подпись к документам</string>
+    <string name="tittle_body_slider2">Сохраните и отправьте свою подпись куда угодно</string>
+    <string name="tittle_body_slider1">Оцифруйте свою подпись с помощью простой процедуры</string>
+    <string name="tittle_slider4">Начать</string>
+    <string name="tittle_slider3">Прикрепить</string>
+    <string name="tittle_slider2">Передать</string>
+    <string name="tittle_slider1">Подписать</string>
+    <!-- ONBOARDING SLIDES -->
+
+    <string name="body_request_permision">Для правильного использования приложения необходим доступ к определенным системным разрешениям. Примите разрешения, иначе приложение не будет работать.</string>
+    <string name="title_request_permision">Запрос разрешений на чтение и запись</string>
+    <string name="body_permissions">Вам необходимо принять разрешения для правильной работы приложения</string>
+    <!-- PERMISSIONS -->
+
+    <string name="message_file_deleted">Файл удален</string>
+    <string name="message_error_loading_files">Ошибка загрузки файлов</string>
+    <string name="message_error_permission_required">Требуется разрешение для доступа к файлам</string>
+    <string name="message_no_files_description">Создайте свою первую подпись, и она появится здесь</string>
+    <string name="message_no_files">Пока нет сохраненных подписей</string>
+    <string name="title_undo">Отменить</string>
+    <string name="delete">Удалить</string>
+    <string name="title_no_files">Нет файлов</string>
+    <string name="sort">Сортировать по дате</string>
+    <!-- FILES SCREEN -->
+
+    <string name="title_clean">Очистить</string>
+    <string name="action_view">Просмотр</string>
+    <string name="action_retry">Повторить</string>
+    <string name="message_error_saving_file">Ошибка сохранения файла</string>
+    <string name="message_file_saved_successfully">Файл успешно сохранен</string>
+    <string name="title_save_ko">Ошибка сохранения файла</string>
+    <string name="title_save_ok">Файл успешно сохранен</string>
+    <!-- NOTIFICATIONS & FEEDBACK MESSAGES -->
+
+    <string name="handle_privacy_policy">Управление конфиденциальностью</string>
+    <string name="privacy_policy">Политика конфиденциальности</string>
+    <string name="license">Лицензии</string>
+    <string name="more_app">Другие приложения</string>
+    <string name="rate">Оцените нас</string>
+    <string name="changelog">История изменений</string>
+    <string name="send_suggestions">Отправить предложения</string>
+    <string name="follow_us">Подписывайтесь на нас</string>
+    <!-- DRAWER MENU - Social & Actions -->
+
+    <string name="title_background">Фон</string>
+    <string name="title_actions">Действия</string>
+    <string name="title_signature_options">Параметры подписи</string>
+    <string name="title_options">Параметры</string>
+    <!-- SIGN SCREEN - Bottom Sheet Headers -->
+
+    <string name="title_SingHere">Подпишите здесь</string>
+    <string name="title_bRubber">Очистить</string>
+    <string name="title_bStroke">Толщина</string>
+    <string name="title_bColor">Цвет</string>
+    <string name="title_bSaveSend">Сохранить и отправить</string>
+    <string name="title_bList">Список</string>
+    <string name="title_bSave">Сохранить</string>
+    <!-- SIGN SCREEN - Action Buttons -->
+
+    <string name="title_activity_settings">Настройки</string>
+    <string name="title_others">Другое</string>
+    <string name="title_edit_privacy_policy">Редактировать политику конфиденциальности</string>
+    <string name="title_setting">Настройки</string>
+    <string name="title_gallery">Галерея</string>
+    <string name="title_create_signature">Создать подпись</string>
+    <!-- NAVIGATION MENU -->
+
+    <string name="logo">Логотип</string>
+    <string name="close_menu">Закрыть меню</string>
+    <string name="app_title">Signature Maker</string>
+
+    <!-- Русский перевод -->
+    <!-- Russian translation for Signature Maker -->
+
+</resources>
+

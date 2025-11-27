@@ -36,4 +36,3 @@ class SignatureMakerApp : Application(), KoinComponent {
         Utils.path.logd()
     }
 }
-

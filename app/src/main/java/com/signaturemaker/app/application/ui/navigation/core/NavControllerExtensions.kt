@@ -45,4 +45,3 @@ fun NavController.navigateBackTo(
 ) {
     popBackStack(route.route, inclusive)
 }
-

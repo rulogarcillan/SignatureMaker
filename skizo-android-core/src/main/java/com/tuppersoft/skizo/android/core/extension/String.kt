@@ -36,4 +36,3 @@ private fun buildTag(): String {
         SkizoLog.TAG
     }
 }
-

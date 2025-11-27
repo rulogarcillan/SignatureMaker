@@ -164,9 +164,6 @@ fun FilesScreen(
 
     FilesScreenContent(
         uiState = uiState,
-        onFileClick = { file ->
-            // TODO: Navigate to detail view
-        },
         onShareClick = { file ->
             currentActivity?.shareSign(file.uri)
         },
@@ -183,7 +180,6 @@ fun FilesScreen(
 @Composable
 private fun FilesScreenContent(
     uiState: FilesUiState,
-    onFileClick: (ItemFile) -> Unit,
     onShareClick: (ItemFile) -> Unit,
     onDeleteClick: (ItemFile) -> Unit,
     modifier: Modifier = Modifier
@@ -198,7 +194,6 @@ private fun FilesScreenContent(
             uiState.files.isEmpty() -> EmptyState()
             else -> FilesList(
                 files = uiState.files,
-                onFileClick = onFileClick,
                 onShareClick = onShareClick,
                 onDeleteClick = onDeleteClick
             )
@@ -267,7 +262,6 @@ private fun EmptyState() {
 @Composable
 private fun FilesList(
     files: List<ItemFile>,
-    onFileClick: (ItemFile) -> Unit,
     onShareClick: (ItemFile) -> Unit,
     onDeleteClick: (ItemFile) -> Unit,
     modifier: Modifier = Modifier
@@ -286,7 +280,6 @@ private fun FilesList(
         ) { file ->
             FileItem(
                 file = file,
-                onFileClick = onFileClick,
                 onShareClick = onShareClick,
                 onDeleteClick = onDeleteClick,
                 modifier = Modifier.animateItem()
@@ -302,7 +295,6 @@ private fun FilesList(
 @Composable
 private fun FileItem(
     file: ItemFile,
-    onFileClick: (ItemFile) -> Unit,
     onShareClick: (ItemFile) -> Unit,
     onDeleteClick: (ItemFile) -> Unit,
     modifier: Modifier = Modifier
@@ -443,4 +435,3 @@ private fun FileThumbnail(
         modifier = modifier
     )
 }
-

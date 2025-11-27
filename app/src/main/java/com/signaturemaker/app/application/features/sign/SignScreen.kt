@@ -471,7 +471,7 @@ private fun ActionsSection(
 private fun ClearButton(signState: SignUIState) {
     SMIconButton(
         imageVector = Icons.Default.CleaningServices,
-        label = stringResource(R.string.tittle_clean),
+        label = stringResource(R.string.title_clean),
         color = SMTheme.material.colorScheme.onSurfaceVariant,
         onClick = {
             signState.clearSignature()
@@ -733,7 +733,9 @@ private fun createTiledBackgroundBrush(@DrawableRes imageId: Int): Brush {
  */
 @Composable
 private fun buildStrokeWidthLabel(min: Float, max: Float): String {
-    return "${stringResource(R.string.min)} ${"%.1f".format(min)} • ${stringResource(R.string.max)} ${"%.1f".format(max)}"
+    return "${stringResource(
+        R.string.min
+    )} ${"%.1f".format(min)} • ${stringResource(R.string.max)} ${"%.1f".format(max)}"
 }
 
 object SignScreenDefaults {
@@ -773,7 +775,6 @@ object SignScreenDefaults {
         SMTheme.color.pen4
     )
 }
-
 
 private val StrokeWidthValueRange = 1f..10f
 private const val StrokeWidthSliderSteps = 0

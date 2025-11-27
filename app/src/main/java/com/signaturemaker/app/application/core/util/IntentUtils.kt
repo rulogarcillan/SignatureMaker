@@ -177,4 +177,3 @@ object IntentUtils {
         }
     }
 }
-

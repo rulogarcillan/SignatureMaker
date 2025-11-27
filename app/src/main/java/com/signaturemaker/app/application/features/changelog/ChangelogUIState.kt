@@ -11,4 +11,3 @@ data class ChangelogUIState(
     val changelogs: ImmutableList<ChangelogUI> = persistentListOf(),
     val isLoading: Boolean = false
 )
-

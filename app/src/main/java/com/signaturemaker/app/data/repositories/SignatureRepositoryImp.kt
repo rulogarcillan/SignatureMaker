@@ -14,7 +14,6 @@ class SignatureRepositoryImp(
 
     override suspend fun sendSuggest(suggestMessage: SuggestMessage): Flow<Response<Boolean>> {
         return flow {
-
             try {
                 val response = api.sendSuggest(suggestMessage)
                 if (response.isSuccessful) {
@@ -25,7 +24,6 @@ class SignatureRepositoryImp(
             } catch (t: Exception) {
                 emit(Response.onFailure(Failure.ServerError))
             }
-
         }
     }
 }

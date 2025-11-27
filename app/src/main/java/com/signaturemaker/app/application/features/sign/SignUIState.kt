@@ -132,7 +132,10 @@ class SignUIState(
         // Si el usuario tiene activada la opción de recordar color, guardarlo
         if (appContext.loadSharedPreference(com.signaturemaker.app.application.utils.Constants.ID_PREF_COLOR, false)) {
             Utils.penColor = color.toArgb()
-            appContext.saveSharedPreference(com.signaturemaker.app.application.utils.Constants.PREF_COLOR, Utils.penColor)
+            appContext.saveSharedPreference(
+                com.signaturemaker.app.application.utils.Constants.PREF_COLOR,
+                Utils.penColor
+            )
         }
     }
 
@@ -140,9 +143,16 @@ class SignUIState(
         selectedImage = image
 
         // Si el usuario tiene activada la opción de recordar wallpaper, guardarlo
-        if (appContext.loadSharedPreference(com.signaturemaker.app.application.utils.Constants.ID_PREF_WALLPAPER, false)) {
+        if (appContext.loadSharedPreference(
+                com.signaturemaker.app.application.utils.Constants.ID_PREF_WALLPAPER,
+                false
+            )
+        ) {
             Utils.wallpaper = image
-            appContext.saveSharedPreference(com.signaturemaker.app.application.utils.Constants.PREF_WALLPAPER, Utils.wallpaper)
+            appContext.saveSharedPreference(
+                com.signaturemaker.app.application.utils.Constants.PREF_WALLPAPER,
+                Utils.wallpaper
+            )
         }
     }
 
@@ -151,10 +161,16 @@ class SignUIState(
 
         // Si el usuario tiene activada la opción de recordar stroke, guardarlo
         if (appContext.loadSharedPreference(com.signaturemaker.app.application.utils.Constants.ID_PREF_STROKE, false)) {
-            Utils.minStroke = range.start.toInt()
-            Utils.maxStroke = range.endInclusive.toInt()
-            appContext.saveSharedPreference(com.signaturemaker.app.application.utils.Constants.PREF_MIN_TROKE, Utils.minStroke)
-            appContext.saveSharedPreference(com.signaturemaker.app.application.utils.Constants.PREF_MAX_TROKE, Utils.maxStroke)
+            Utils.minStroke = range.start
+            Utils.maxStroke = range.endInclusive
+            appContext.saveSharedPreference(
+                com.signaturemaker.app.application.utils.Constants.PREF_MIN_TROKE,
+                Utils.minStroke
+            )
+            appContext.saveSharedPreference(
+                com.signaturemaker.app.application.utils.Constants.PREF_MAX_TROKE,
+                Utils.maxStroke
+            )
         }
     }
 

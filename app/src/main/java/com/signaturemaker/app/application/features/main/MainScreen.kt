@@ -52,10 +52,12 @@ import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
 import com.signaturemaker.app.BuildConfig
 import com.signaturemaker.app.R
+import com.signaturemaker.app.application.core.util.IntentUtils
 import com.signaturemaker.app.application.features.main.MainMenuItem.Sign
 import com.signaturemaker.app.application.ui.designsystem.SMTheme
 import com.signaturemaker.app.application.ui.designsystem.components.SMIcon
 import com.signaturemaker.app.application.ui.designsystem.components.SMIconButton
+import com.signaturemaker.app.application.ui.designsystem.components.SMImageButton
 import com.signaturemaker.app.application.ui.designsystem.components.SMLineSeparator
 import com.signaturemaker.app.application.ui.designsystem.components.SMText
 import com.signaturemaker.app.application.ui.snackbar.LocalSnackbarController
@@ -82,10 +84,10 @@ import com.signaturemaker.app.application.ui.theming.SignatureMakerAppTheme
 @Composable
 fun MainScreen(
     modifier: Modifier = Modifier,
+    mainState: MainUIState = rememberMainState(),
     onNavigationAction: (MainScreenAction) -> Unit = {},
     content: @Composable (PaddingValues) -> Unit
 ) {
-    val mainState = rememberMainState()
     val menuConfig = rememberMainMenuConfig()
 
     // Create SnackbarController for the entire app
@@ -466,38 +468,38 @@ private fun DrawerSocialSection(
             verticalAlignment = Alignment.CenterVertically
         ) {
             // LinkedIn
-            SMIconButton(
+            SMImageButton(
                 painterResource = painterResource(id = R.drawable.ic_linkedin),
                 contentDescription = "LinkedIn",
                 onClick = {
-                    com.signaturemaker.app.application.core.util.IntentUtils.openLinkedIn(context)
+                    IntentUtils.openLinkedIn(context)
                 }
             )
 
             // GitHub
-            SMIconButton(
+            SMImageButton(
                 painterResource = painterResource(id = R.drawable.ic_git),
                 contentDescription = "GitHub",
                 onClick = {
-                    com.signaturemaker.app.application.core.util.IntentUtils.openGitHub(context)
+                    IntentUtils.openGitHub(context)
                 }
             )
 
             // Twitter/X
-            SMIconButton(
+            SMImageButton(
                 painterResource = painterResource(id = R.drawable.ic_x),
                 contentDescription = "X",
                 onClick = {
-                    com.signaturemaker.app.application.core.util.IntentUtils.openTwitter(context)
+                    IntentUtils.openTwitter(context)
                 }
             )
 
             // Telegram
-            SMIconButton(
+            SMImageButton(
                 painterResource = painterResource(id = R.drawable.ic_telegram),
                 contentDescription = "Telegram",
                 onClick = {
-                    com.signaturemaker.app.application.core.util.IntentUtils.openTelegram(context, isSpanish)
+                    IntentUtils.openTelegram(context, isSpanish)
                 }
             )
         }
