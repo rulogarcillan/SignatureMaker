@@ -19,7 +19,7 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-        versionCode = 400
+        versionCode = 4000
         versionName = "4.0.0"
     }
 
