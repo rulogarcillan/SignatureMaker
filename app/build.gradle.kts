@@ -99,6 +99,9 @@ dependencies {
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.analytics)
 
+    // Google Play Services - Ads
+    implementation(libs.play.services.ads)
+
     // Google Play Services
     implementation(libs.user.messaging.platform)
 

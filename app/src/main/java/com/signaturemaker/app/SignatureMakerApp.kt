@@ -20,7 +20,6 @@ class SignatureMakerApp : Application(), KoinComponent {
         SignatureMakerDiImpl().start {
             androidContext(this@SignatureMakerApp)
         }
-
         setPath()
         Utils.loadAllPreferences(this)
     }

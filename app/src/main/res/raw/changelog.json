@@ -1,7 +1,7 @@
 {
   "changelog": [
     {
-      "date": "26/11/2025",
+      "date": "27/11/2025",
       "versionCode": 400,
       "versionName": "4.0.0",
       "change": [
@@ -11,83 +11,139 @@
         },
         {
           "type": "refactor",
-          "text": "Redesigned entire app architecture with modern navigation system"
+          "text": "Redesigned entire app with Material Design 3"
         },
         {
           "type": "feat",
-          "text": "Implemented Material Design 3 throughout the app"
+          "text": "New modern signature screen with improved canvas and controls"
         },
         {
           "type": "feat",
-          "text": "Added new design system with reusable UI components"
+          "text": "Added customizable canvas backgrounds (solid colors and textures)"
+        },
+        {
+          "type": "feat",
+          "text": "New color picker with 15 predefined colors"
+        },
+        {
+          "type": "feat",
+          "text": "Save signatures in PNG format (transparent or white background)"
+        },
+        {
+          "type": "feat",
+          "text": "Share signatures directly from the app"
+        },
+        {
+          "type": "feat",
+          "text": "New Files screen to manage saved signatures"
+        },
+        {
+          "type": "feat",
+          "text": "Quick actions: view, share, and delete signatures"
+        },
+        {
+          "type": "feat",
+          "text": "New Settings screen with improved organization"
+        },
+        {
+          "type": "feat",
+          "text": "Configure stroke width (minimum and maximum)"
+        },
+        {
+          "type": "feat",
+          "text": "Auto-delete signatures on exit option"
+        },
+        {
+          "type": "feat",
+          "text": "New navigation drawer with quick access to all features"
+        },
+        {
+          "type": "feat",
+          "text": "Changelog screen to view version history"
+        },
+        {
+          "type": "feat",
+          "text": "Social media links (GitHub, LinkedIn, Telegram, Twitter)"
+        },
+        {
+          "type": "feat",
+          "text": "Floating Action Button for quick access to signature options"
+        },
+        {
+          "type": "feat",
+          "text": "Modern bottom sheets for actions and configurations"
+        },
+        {
+          "type": "feat",
+          "text": "Improved visual feedback with snackbar notifications"
+        },
+        {
+          "type": "feat",
+          "text": "Support for Android 8 to Android 15"
+        },
+        {
+          "type": "feat",
+          "text": "Optimized storage permissions handling for all Android versions"
+        },
+        {
+          "type": "feat",
+          "text": "Improved app icon with adaptive design"
+        },
+        {
+          "type": "feat",
+          "text": "Multi-language support: English, Spanish, Portuguese, French, German, Italian, Japanese, Korean, Russian, Hindi, Indonesian, Turkish, Vietnamese"
         },
         {
           "type": "refactor",
-          "text": "Migrated dependency injection from Hilt to Koin"
-        },
-        {
-          "type": "feat",
-          "text": "Replaced Gallery with improved Files management feature"
-        },
-        {
-          "type": "feat",
-          "text": "Added centralized SnackbarController for app-wide notifications"
-        },
-        {
-          "type": "feat",
-          "text": "Implemented type-safe navigation with centralized routing system"
+          "text": "Migrated to Kotlin DSL for Gradle configuration"
         },
         {
           "type": "refactor",
-          "text": "Restructured package organization for better maintainability"
-        },
-        {
-          "type": "feat",
-          "text": "Added Material 3 Floating Action Button for main actions"
-        },
-        {
-          "type": "feat",
-          "text": "Enhanced signature save and share functionality with new UI"
-        },
-        {
-          "type": "feat",
-          "text": "Added storage permission handling for Android 8-13"
-        },
-        {
-          "type": "feat",
-          "text": "Implemented FileProvider support for secure file sharing"
-        },
-        {
-          "type": "feat",
-          "text": "Implemented dark theme with dynamic color support"
-        },
-        {
-          "type": "feat",
-          "text": "Added changelog feature with modern expandable UI"
+          "text": "Type-safe navigation system for better stability"
         },
         {
           "type": "refactor",
-          "text": "Migrated from Groovy to Kotlin DSL for Gradle"
+          "text": "Updated dependency injection system (Koin)"
         },
         {
           "type": "refactor",
-          "text": "Updated all dependencies to latest stable versions"
+          "text": "Optimized image loading with Coil library"
         },
         {
           "type": "chore",
-          "text": "Converted image resources from PNG to WebP format"
+          "text": "Converted images to WebP format for reduced app size"
         },
         {
           "type": "chore",
-          "text": "Removed deprecated XML layouts and legacy code"
+          "text": "Updated all dependencies to latest versions"
+        },
+        {
+          "type": "chore",
+          "text": "Added code quality tools (Detekt)"
+        },
+        {
+          "type": "fix",
+          "text": "Fixed crashes when saving signatures"
+        },
+        {
+          "type": "fix",
+          "text": "Fixed file sharing on modern Android versions"
+        },
+        {
+          "type": "fix",
+          "text": "Fixed permissions issues on Android 10+"
         },
         {
           "type": "del",
-          "text": "Removed legacy fragments and activities"
+          "text": "Removed old XML-based UI"
         },
         {
           "type": "del",
-          "text": "Removed old settings and menu implementations"
+          "text": "Removed deprecated fragments and activities"
+        },
+        {
+          "type": "del",
+          "text": "Removed unused animations and resources"
         }
       ]
     },

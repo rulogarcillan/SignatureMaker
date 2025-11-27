@@ -54,6 +54,8 @@ import com.signaturemaker.app.BuildConfig
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.util.IntentUtils
 import com.signaturemaker.app.application.features.main.MainMenuItem.Sign
+import com.signaturemaker.app.application.ui.ads.AdBannerWithLifecycle
+import com.signaturemaker.app.application.ui.ads.rememberGDPRConsent
 import com.signaturemaker.app.application.ui.designsystem.SMTheme
 import com.signaturemaker.app.application.ui.designsystem.components.SMIcon
 import com.signaturemaker.app.application.ui.designsystem.components.SMIconButton
@@ -160,12 +162,43 @@ private fun MainScreenContent(
                 MainTopBar(
                     forceLigth = mainState.menuSelected == Sign,
                     onMenuClick = { mainState.onDrawerClick() }
-
                 )
+            },
+            bottomBar = {
+                // Banner de publicidad en la parte inferior
+                AdBannerSection()
             }
         ) { paddingValues ->
             content(paddingValues)
         }
+    }
+}
+
+/**
+ * Sección del banner de publicidad
+ * Maneja el consentimiento GDPR y muestra el banner siempre
+ * La publicidad está siempre activa (sin opción de desactivar)
+ */
+@Composable
+private fun AdBannerSection() {
+    // Obtener consentimiento GDPR
+    val hasGDPRConsent = rememberGDPRConsent()
+
+    // Obtener el Ad Unit ID desde strings
+    val adUnitId = stringResource(R.string.banner_ad_unit_id)
+
+    // Mostrar banner solo si hay consentimiento GDPR
+    if (hasGDPRConsent) {
+        AdBannerWithLifecycle(
+            adUnitId = adUnitId,
+            modifier = Modifier.fillMaxWidth(),
+            onAdLoaded = {
+                android.util.Log.d("AdBanner", "Banner ad loaded successfully")
+            },
+            onAdFailedToLoad = { error ->
+                android.util.Log.e("AdBanner", "Banner ad failed to load: ${error.message}")
+            }
+        )
     }
 }
 

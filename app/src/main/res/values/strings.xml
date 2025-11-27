@@ -305,6 +305,9 @@
     <!-- Ad unit ID for banner ads (technical, do not translate) -->
     <string name="banner_ad_unit_id" translatable="false">ca-app-pub-9438738341601496/1496642762</string>
 
+    <!-- Ad unit ID for interstitial ads (full screen) - when_save_sign -->
+    <string name="interstitial_ad_unit_id" translatable="false">ca-app-pub-9438738341601496/3453021230</string>
+
     <!-- ============================================ -->
     <!-- FEEDBACK & SUGGESTIONS -->
     <!-- Used in: Feedback/suggestion form -->

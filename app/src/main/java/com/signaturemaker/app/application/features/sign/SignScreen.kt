@@ -36,6 +36,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -56,6 +57,7 @@ import com.github.gcacace.signaturepad.views.SignaturePad
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.core.extensions.Utils
 import com.signaturemaker.app.application.core.extensions.shareSign
+import com.signaturemaker.app.application.ui.ads.rememberInterstitialAd
 import com.signaturemaker.app.application.ui.designsystem.SMTheme
 import com.signaturemaker.app.application.ui.designsystem.components.SMColorSelector
 import com.signaturemaker.app.application.ui.designsystem.components.SMIconButton
@@ -64,6 +66,8 @@ import com.signaturemaker.app.application.ui.designsystem.components.SMLineSepar
 import com.signaturemaker.app.application.ui.designsystem.components.SMModalBottomSheet
 import com.signaturemaker.app.application.ui.designsystem.components.SMText
 import com.signaturemaker.app.application.ui.snackbar.LocalSnackbarController
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 // ============================================
@@ -180,6 +184,13 @@ fun SignScreen(
     val snackbarController = LocalSnackbarController.current
     val currentActivity = LocalActivity.current
     val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
+
+    // Intersticial (full screen ad) - Se muestra después de guardar firma
+    val interstitialManager = rememberInterstitialAd(
+        adUnitId = stringResource(R.string.interstitial_ad_unit_id),
+        preload = true
+    )
 
     // Storage permission - varies by Android version
     val storagePermission = when {
@@ -233,6 +244,17 @@ fun SignScreen(
             snackbarController?.showSuccess(
                 message = stringResource(R.string.message_file_saved_successfully)
             )
+
+            // Mostrar intersticial después de 1 segundo de guardar exitosamente
+            // Solo si NO se comparte (para no interrumpir el flujo de compartir)
+            coroutineScope.launch {
+                delay(1000) // Esperar 1 segundo para que el usuario vea el mensaje de éxito
+                currentActivity?.let { activity ->
+                    interstitialManager.showIfReady(activity) {
+                        // Callback cuando se cierra el anuncio (si quieres hacer algo)
+                    }
+                }
+            }
         }
     }
 
@@ -733,9 +755,11 @@ private fun createTiledBackgroundBrush(@DrawableRes imageId: Int): Brush {
  */
 @Composable
 private fun buildStrokeWidthLabel(min: Float, max: Float): String {
-    return "${stringResource(
-        R.string.min
-    )} ${"%.1f".format(min)} • ${stringResource(R.string.max)} ${"%.1f".format(max)}"
+    return "${
+        stringResource(
+            R.string.min
+        )
+    } ${"%.1f".format(min)} • ${stringResource(R.string.max)} ${"%.1f".format(max)}"
 }
 
 object SignScreenDefaults {
