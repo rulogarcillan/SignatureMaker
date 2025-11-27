@@ -37,6 +37,13 @@ sealed class SignatureMakerRoutes {
     }
 
     /**
+     * Settings screen route
+     */
+    data object Settings : SimpleRoute {
+        override val route: String = "settingsScreen"
+    }
+
+    /**
      * Example of a route with typed arguments.
      * Uncomment and adapt when you need to pass arguments to a screen.
      *

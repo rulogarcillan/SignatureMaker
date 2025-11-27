@@ -13,6 +13,8 @@ import com.signaturemaker.app.application.features.changelog.ChangelogRoute
 import com.signaturemaker.app.application.features.files.FilesRoute
 import com.signaturemaker.app.application.features.main.MainRoute
 import com.signaturemaker.app.application.features.main.MainScreenAction
+import com.signaturemaker.app.application.features.settings.SettingsRoute
+import com.signaturemaker.app.application.features.sign.SignRoute
 import com.signaturemaker.app.application.features.sign.SignRoute
 import com.signaturemaker.app.application.ui.navigation.core.navigateTo
 import com.signaturemaker.app.application.ui.navigation.routes.SignatureMakerRoutes
@@ -43,7 +45,7 @@ fun SignatureMakerApp() {
             }
 
             is MainScreenAction.NavigateToSettings -> {
-                // TODO: Implement Settings navigation
+                navController.navigateTo(SignatureMakerRoutes.Settings)
             }
 
             is MainScreenAction.NavigateToSendFeedback -> {
@@ -124,6 +126,11 @@ private fun ContentNavHost(
         // Changelog screen destination
         composable(SignatureMakerRoutes.Changelog.route) {
             ChangelogRoute(modifier = Modifier.fillMaxSize())
+        }
+
+        // Settings screen destination
+        composable(SignatureMakerRoutes.Settings.route) {
+            SettingsRoute(modifier = Modifier.fillMaxSize())
         }
     }
 }
