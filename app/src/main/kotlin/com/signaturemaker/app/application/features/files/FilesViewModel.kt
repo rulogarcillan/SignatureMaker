@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.signaturemaker.app.domain.models.ItemFile
 import com.signaturemaker.app.domain.models.error.FileError
-import com.signaturemaker.app.domain.usecase.GetAllFiles
-import com.signaturemaker.app.domain.usecase.RemoveFile
+import com.signaturemaker.app.domain.usecase.GetAllFilesUseCase
+import com.signaturemaker.app.domain.usecase.RemoveFileUseCase
 import com.tuppersoft.skizo.android.core.extension.logd
 import com.tuppersoft.skizo.android.core.extension.loge
 import com.tuppersoft.skizo.kotlin.core.domain.exception.Failure
@@ -26,8 +26,8 @@ import kotlinx.coroutines.launch
  * Manages the state of the files list and handles file operations
  */
 class FilesViewModel(
-    private val getAllFiles: GetAllFiles,
-    private val removeFile: RemoveFile
+    private val getAllFiles: GetAllFilesUseCase,
+    private val removeFile: RemoveFileUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(FilesUiState())
@@ -44,7 +44,7 @@ class FilesViewModel(
 
         viewModelScope.launch(Dispatchers.IO) {
             getAllFiles.invoke(
-                GetAllFiles.Params(
+                GetAllFilesUseCase.Params(
                     sdkInt = Build.VERSION.SDK_INT,
                     pathOfFiles = path
                 )
@@ -77,7 +77,7 @@ class FilesViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 removeFile.invoke(
-                    RemoveFile.Params(
+                    RemoveFileUseCase.Params(
                         sdkInt = Build.VERSION.SDK_INT,
                         item = itemFile,
                         path = currentPath
@@ -142,7 +142,7 @@ class FilesViewModel(
             viewModelScope.launch(Dispatchers.IO) {
                 try {
                     removeFile.invoke(
-                        RemoveFile.Params(
+                        RemoveFileUseCase.Params(
                             sdkInt = Build.VERSION.SDK_INT,
                             item = fileToDelete,
                             path = currentPath

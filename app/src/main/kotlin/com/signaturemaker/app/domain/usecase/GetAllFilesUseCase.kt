@@ -3,7 +3,7 @@ package com.signaturemaker.app.domain.usecase
 import android.os.Build.VERSION_CODES
 import com.signaturemaker.app.domain.models.ItemFile
 import com.signaturemaker.app.domain.repository.FilesRepository
-import com.signaturemaker.app.domain.usecase.GetAllFiles.Params
+import com.signaturemaker.app.domain.usecase.GetAllFilesUseCase.Params
 import com.tuppersoft.skizo.kotlin.core.domain.baseusecase.FlowGlobalUseCase
 import com.tuppersoft.skizo.kotlin.core.domain.response.Response
 import kotlinx.coroutines.flow.Flow
@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
  * Created by Raúl Rodríguez Concepción
  * raulrcs@gmail.com
  */
-class GetAllFiles(private val repository: FilesRepository) :
+class GetAllFilesUseCase(private val repository: FilesRepository) :
     FlowGlobalUseCase<List<ItemFile>, Params>() {
 
     data class Params(

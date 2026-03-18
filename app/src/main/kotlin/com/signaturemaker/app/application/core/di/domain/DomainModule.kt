@@ -1,32 +1,32 @@
 package com.signaturemaker.app.application.core.di.domain
 
-import com.signaturemaker.app.domain.usecase.GetAllFiles
-import com.signaturemaker.app.domain.usecase.RemoveAllFiles
-import com.signaturemaker.app.domain.usecase.RemoveFile
-import com.signaturemaker.app.domain.usecase.SaveBitmap
-import com.signaturemaker.app.domain.usecase.SendSuggest
+import com.signaturemaker.app.domain.usecase.GetAllFilesUseCase
+import com.signaturemaker.app.domain.usecase.RemoveAllFilesUseCase
+import com.signaturemaker.app.domain.usecase.RemoveFileUseCase
+import com.signaturemaker.app.domain.usecase.SaveBitmapUseCase
+import com.signaturemaker.app.domain.usecase.SendSuggestUseCase
 import org.koin.dsl.module
 
 val domainModule = module {
 
     // Use Cases
     factory {
-        SaveBitmap(get())
+        SaveBitmapUseCase(get())
     }
 
     factory {
-        SendSuggest(get())
+        SendSuggestUseCase(get())
     }
 
     factory {
-        GetAllFiles(get())
+        GetAllFilesUseCase(get())
     }
 
     factory {
-        RemoveFile(get())
+        RemoveFileUseCase(get())
     }
 
     factory {
-        RemoveAllFiles(get(), get())
+        RemoveAllFilesUseCase(get(), get())
     }
 }

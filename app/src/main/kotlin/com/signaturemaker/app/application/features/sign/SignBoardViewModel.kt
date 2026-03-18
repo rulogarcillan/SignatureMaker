@@ -5,8 +5,8 @@ import android.os.Build.VERSION
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.signaturemaker.app.domain.models.UriResponse
-import com.signaturemaker.app.domain.usecase.SaveBitmap
-import com.signaturemaker.app.domain.usecase.SaveBitmap.Params
+import com.signaturemaker.app.domain.usecase.SaveBitmapUseCase
+import com.signaturemaker.app.domain.usecase.SaveBitmapUseCase.Params
 import com.tuppersoft.skizo.kotlin.core.domain.exception.Failure
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
  * Uses Koin for dependency injection
  */
 class SignBoardViewModel(
-    private val saveBitmapUseCase: SaveBitmap
+    private val saveBitmapUseCase: SaveBitmapUseCase
 ) : ViewModel() {
 
     private val _saveBitmap = Channel<UriResponse>(Channel.BUFFERED)

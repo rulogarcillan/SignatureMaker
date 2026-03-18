@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build.VERSION_CODES
 import com.signaturemaker.app.domain.repository.FilesRepository
-import com.signaturemaker.app.domain.usecase.SaveBitmap.Params
+import com.signaturemaker.app.domain.usecase.SaveBitmapUseCase.Params
 import com.tuppersoft.skizo.kotlin.core.domain.baseusecase.FlowGlobalUseCase
 import com.tuppersoft.skizo.kotlin.core.domain.response.Response
 import java.text.SimpleDateFormat
@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.Flow
  * Created by Raúl Rodríguez Concepción
  * raulrcs@gmail.com
  */
-class SaveBitmap(private val repository: FilesRepository) :
+class SaveBitmapUseCase(private val repository: FilesRepository) :
     FlowGlobalUseCase<Uri, Params>() {
 
     data class Params(
