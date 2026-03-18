@@ -1,0 +1,15 @@
+package com.signaturemaker.app.application.features.sign
+
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+
+@Composable
+fun SignRoute(
+    modifier: Modifier = Modifier,
+    onNavigate: (SignScreenAction) -> Unit = {}
+) {
+    SignScreen(
+        modifier = modifier,
+        onNavigate = onNavigate
+    )
+}

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="changelog_version">Versi %s</string>
+    <string name="message_check_back_later">Periksa kembali nanti untuk pembaruan</string>
+    <string name="message_no_changelog_available">Tidak ada log perubahan tersedia</string>
+    <!-- CHANGELOG SCREEN -->
+
+    <string name="suggest">Sarankan</string>
+    <!-- MISCELLANEOUS -->
+
+    <string name="empty_canvas">Error, kanvas kosong</string>
+    <string name="change_theme_note">Agar perubahan berlaku, Anda harus memulai ulang aplikasi sepenuhnya</string>
+    <string name="mode_battery">Gelap dalam mode hemat baterai</string>
+    <string name="mode_system">Ditentukan oleh sistem</string>
+    <string name="mode_dark">Paksa mode gelap</string>
+    <string name="mode_light">Paksa mode terang</string>
+    <!-- THEME & APPEARANCE -->
+
+    <string name="join_channel">Klik di sini untuk bergabung dengan saluran Telegram kami</string>
+    <string name="sending_message_please_wait">Mengirim pesan, harap tunggu</string>
+    <string name="share">Bagikan</string>
+    <string name="suggest_sort">Komentar terlalu pendek. Silakan tulis setidaknya 30 karakter</string>
+    <string name="valid_mail">Masukkan email yang valid</string>
+    <string name="put_your_email">Masukkan email Anda</string>
+    <string name="write_your_suggestion_or_comment">Tulis saran atau komentar Anda</string>
+    <string name="problems_comment">Terjadi masalah, silakan coba lagi nanti</string>
+    <string name="thanks_comment">Terima kasih atas masukan Anda</string>
+    <string name="complete_fields">Lengkapi semua kolom</string>
+    <!-- FEEDBACK & SUGGESTIONS -->
+
+    <string name="title_name_of_the_file">Nama file</string>
+    <string name="title_pref_wallpaper">Latar belakang</string>
+    <string name="title_pref_wallpaper_sum">Simpan latar belakang terakhir yang digunakan secara default</string>
+    <string name="title_pref_reset_sum">Atur ulang semua pengaturan ke nilai default mereka</string>
+    <string name="message_settings_reset_success">Pengaturan telah diatur ulang ke nilai default</string>
+    <string name="title_pref_reset">Nilai default</string>
+    <string name="title_pref_color_sum">Simpan warna terakhir yang digunakan secara default</string>
+    <string name="title_pref_color">Warna</string>
+    <string name="title_pref_stroke_sum">Simpan ketebalan terakhir yang digunakan secara default</string>
+    <string name="title_pref_stroke">Ketebalan</string>
+    <string name="title_pref_siganture">Tanda tangan</string>
+    <string name="title_pref_name_sum">Pilih nama file saat menyimpan</string>
+    <string name="title_pref_name">Nama file</string>
+    <string name="title_pref_gallery_sum">Jangan tampilkan tanda tangan di galeri ponsel</string>
+    <string name="title_pref_gallery">Sembunyikan tanda tangan</string>
+    <string name="title_pref_delete_sum">Hapus semua tanda tangan saat keluar</string>
+    <string name="title_pref_delete">Hapus tanda tangan</string>
+    <string name="title_pref_path">Jalur tanda tangan yang diekspor</string>
+    <string name="title_pref_files">File</string>
+    <string name="title_pref_advertising_sum">Nonaktifkan iklan jika mengganggu Anda</string>
+    <string name="title_pref_advertising">Nonaktifkan iklan</string>
+    <string name="title_pref_app">Aplikasi</string>
+    <!-- SETTINGS SCREEN -->
+
+    <string name="tittle_body_slider4">Apakah Anda siap?</string>
+    <string name="tittle_body_slider3">Lampirkan tanda tangan Anda ke dokumen Anda</string>
+    <string name="tittle_body_slider2">Simpan dan kirim tanda tangan Anda ke mana pun Anda mau</string>
+    <string name="tittle_body_slider1">Digitalkan tanda tangan Anda dengan prosedur yang mudah dan sederhana</string>
+    <string name="tittle_slider4">Mulai</string>
+    <string name="tittle_slider3">Lampirkan</string>
+    <string name="tittle_slider2">Transfer</string>
+    <string name="tittle_slider1">Tanda tangan</string>
+    <!-- ONBOARDING SLIDES -->
+
+    <string name="body_request_permision">Untuk menggunakan aplikasi dengan benar, diperlukan akses ke izin sistem tertentu. Terima izin atau aplikasi tidak akan berfungsi.</string>
+    <string name="title_request_permision">Permintaan izin baca dan tulis</string>
+    <string name="body_permissions">Anda perlu menerima izin agar aplikasi berfungsi dengan baik</string>
+    <!-- PERMISSIONS -->
+
+    <string name="message_file_deleted">File dihapus</string>
+    <string name="message_error_loading_files">Gagal memuat file</string>
+    <string name="message_error_permission_required">Izin diperlukan untuk mengakses file</string>
+    <string name="message_no_files_description">Buat tanda tangan pertama Anda dan akan muncul di sini</string>
+    <string name="message_no_files">Belum ada tanda tangan yang disimpan</string>
+    <string name="title_undo">Urungkan</string>
+    <string name="delete">Hapus</string>
+    <string name="title_no_files">Tidak ada file</string>
+    <string name="sort">Urutkan berdasarkan tanggal</string>
+    <!-- FILES SCREEN -->
+
+    <string name="title_clean">Bersihkan</string>
+    <string name="action_view">Lihat</string>
+    <string name="action_retry">Coba lagi</string>
+    <string name="action_undo">Urungkan</string>
+    <string name="action_redo">Ulangi</string>
+    <string name="message_error_saving_file">Gagal menyimpan file</string>
+    <string name="message_file_saved_successfully">File berhasil disimpan</string>
+    <string name="title_save_ko">Gagal menyimpan file</string>
+    <string name="title_save_ok">File berhasil disimpan</string>
+    <!-- NOTIFICATIONS & FEEDBACK MESSAGES -->
+
+    <string name="handle_privacy_policy">Kelola privasi</string>
+    <string name="privacy_policy">Kebijakan privasi</string>
+    <string name="license">Lisensi</string>
+    <string name="more_app">Aplikasi lainnya</string>
+    <string name="rate">Beri nilai</string>
+    <string name="changelog">Log perubahan</string>
+    <string name="send_suggestions">Kirim saran</string>
+    <string name="follow_us">Ikuti kami</string>
+    <!-- DRAWER MENU - Social & Actions -->
+
+    <string name="title_background">Latar belakang</string>
+    <string name="title_actions">Aksi</string>
+    <string name="title_signature_options">Opsi tanda tangan</string>
+    <string name="title_options">Opsi</string>
+    <!-- SIGN SCREEN - Bottom Sheet Headers -->
+
+    <string name="title_SingHere">Tanda tangani di sini</string>
+    <string name="title_bRubber">Hapus</string>
+    <string name="title_bStroke">Ketebalan</string>
+    <string name="title_bColor">Warna</string>
+    <string name="title_bSaveSend">Simpan dan kirim</string>
+    <string name="title_bList">Daftar</string>
+    <string name="title_bSave">Simpan</string>
+    <!-- SIGN SCREEN - Action Buttons -->
+
+    <string name="title_activity_settings">Pengaturan</string>
+    <string name="title_others">Lainnya</string>
+    <string name="title_edit_privacy_policy">Edit kebijakan privasi</string>
+    <string name="title_setting">Pengaturan</string>
+    <string name="title_gallery">Galeri</string>
+    <string name="title_create_signature">Buat tanda tangan</string>
+    <!-- NAVIGATION MENU -->
+
+    <string name="logo">Logo</string>
+    <string name="close_menu">Tutup menu</string>
+    <string name="app_title">Signature Maker</string>
+
+    <!-- Terjemahan Bahasa Indonesia -->
+    <!-- Indonesian translation for Signature Maker -->
+
+</resources>
+

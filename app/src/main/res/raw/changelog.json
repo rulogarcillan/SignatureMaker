@@ -1,0 +1,610 @@
+{
+  "changelog": [
+    {
+      "date": "28/11/2025",
+      "versionCode": 4005,
+      "versionName": "4.0.1",
+      "change": [
+        {
+          "type": "fix",
+          "text": "Fixed SharedPreferences type conversion errors for stroke width settings"
+        },
+        {
+          "type": "feat",
+          "text": "Added gallery navigation button in signature actions"
+        },
+        {
+          "type": "refactor",
+          "text": "Improved interstitial ad loading with smart preload and on-demand fallback"
+        },
+        {
+          "type": "fix",
+          "text": "Simplified preference titles in all 13 languages (removed 'Default' prefix)"
+        },
+        {
+          "type": "fix",
+          "text": "Made settings descriptions more generic and scalable for future preferences"
+        }
+      ]
+    },
+    {
+      "date": "27/11/2025",
+      "versionCode": 4003,
+      "versionName": "4.0.0",
+      "change": [
+        {
+          "type": "refactor",
+          "text": "Complete migration from XML layouts to Jetpack Compose"
+        },
+        {
+          "type": "refactor",
+          "text": "Redesigned entire app with Material Design 3"
+        },
+        {
+          "type": "feat",
+          "text": "New modern signature screen with improved canvas and controls"
+        },
+        {
+          "type": "feat",
+          "text": "Added customizable canvas backgrounds (solid colors and textures)"
+        },
+        {
+          "type": "feat",
+          "text": "New color picker with 15 predefined colors"
+        },
+        {
+          "type": "feat",
+          "text": "Save signatures in PNG format (transparent or white background)"
+        },
+        {
+          "type": "feat",
+          "text": "Share signatures directly from the app"
+        },
+        {
+          "type": "feat",
+          "text": "New Files screen to manage saved signatures"
+        },
+        {
+          "type": "feat",
+          "text": "Quick actions: view, share, and delete signatures"
+        },
+        {
+          "type": "feat",
+          "text": "New Settings screen with improved organization"
+        },
+        {
+          "type": "feat",
+          "text": "Configure stroke width (minimum and maximum)"
+        },
+        {
+          "type": "feat",
+          "text": "Auto-delete signatures on exit option"
+        },
+        {
+          "type": "feat",
+          "text": "New navigation drawer with quick access to all features"
+        },
+        {
+          "type": "feat",
+          "text": "Changelog screen to view version history"
+        },
+        {
+          "type": "feat",
+          "text": "Social media links (GitHub, LinkedIn, Telegram, Twitter)"
+        },
+        {
+          "type": "feat",
+          "text": "Floating Action Button for quick access to signature options"
+        },
+        {
+          "type": "feat",
+          "text": "Modern bottom sheets for actions and configurations"
+        },
+        {
+          "type": "feat",
+          "text": "Improved visual feedback with snackbar notifications"
+        },
+        {
+          "type": "feat",
+          "text": "Support for Android 8 to Android 15"
+        },
+        {
+          "type": "feat",
+          "text": "Optimized storage permissions handling for all Android versions"
+        },
+        {
+          "type": "feat",
+          "text": "Improved app icon with adaptive design"
+        },
+        {
+          "type": "feat",
+          "text": "Multi-language support: English, Spanish, Portuguese, French, German, Italian, Japanese, Korean, Russian, Hindi, Indonesian, Turkish, Vietnamese"
+        },
+        {
+          "type": "refactor",
+          "text": "Migrated to Kotlin DSL for Gradle configuration"
+        },
+        {
+          "type": "refactor",
+          "text": "Type-safe navigation system for better stability"
+        },
+        {
+          "type": "refactor",
+          "text": "Updated dependency injection system (Koin)"
+        },
+        {
+          "type": "refactor",
+          "text": "Optimized image loading with Coil library"
+        },
+        {
+          "type": "chore",
+          "text": "Converted images to WebP format for reduced app size"
+        },
+        {
+          "type": "chore",
+          "text": "Updated all dependencies to latest versions"
+        },
+        {
+          "type": "chore",
+          "text": "Added code quality tools (Detekt)"
+        },
+        {
+          "type": "fix",
+          "text": "Fixed crashes when saving signatures"
+        },
+        {
+          "type": "fix",
+          "text": "Fixed file sharing on modern Android versions"
+        },
+        {
+          "type": "fix",
+          "text": "Fixed permissions issues on Android 10+"
+        },
+        {
+          "type": "del",
+          "text": "Removed old XML-based UI"
+        },
+        {
+          "type": "del",
+          "text": "Removed deprecated fragments and activities"
+        },
+        {
+          "type": "del",
+          "text": "Removed unused animations and resources"
+        }
+      ]
+    },
+    {
+      "date": "22/12/2023",
+      "versionCode": 3400,
+      "versionName": "3.4.0",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Added GDPR consent dialog for privacy compliance"
+        }
+      ]
+    },
+    {
+      "date": "19/08/2023",
+      "versionCode": 3300,
+      "versionName": "3.3.0",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Added support for Android 14"
+        }
+      ]
+    },
+    {
+      "date": "07/04/2022",
+      "versionCode": 3200,
+      "versionName": "3.2.0",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Added support for Android 12L"
+        }
+      ]
+    },
+    {
+      "date": "29/09/2020",
+      "versionCode": 3121,
+      "versionName": "3.1.7",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Added dark theme support"
+        },
+        {
+          "type": "feat",
+          "text": "Redesigned navigation menu"
+        },
+        {
+          "type": "feat",
+          "text": "Added feedback and suggestions feature"
+        },
+        {
+          "type": "refactor",
+          "text": "Improved swipe gesture options"
+        },
+        {
+          "type": "feat",
+          "text": "Added visual help effects for better user guidance"
+        },
+        {
+          "type": "feat",
+          "text": "Redesigned image preview screen"
+        },
+        {
+          "type": "refactor",
+          "text": "Converted all resource images to SVG format"
+        },
+        {
+          "type": "chore",
+          "text": "Prepared compatibility for Android 11"
+        },
+        {
+          "type": "refactor",
+          "text": "Updated UI components and styling"
+        },
+        {
+          "type": "refactor",
+          "text": "Redesigned preferences interface"
+        },
+        {
+          "type": "feat",
+          "text": "Added Telegram community groups (EN/ES)"
+        },
+        {
+          "type": "fix",
+          "text": "Fixed various bugs and crashes"
+        },
+        {
+          "type": "del",
+          "text": "Removed custom path selection option"
+        },
+        {
+          "type": "del",
+          "text": "Removed .nomedia file toggle option"
+        },
+        {
+          "type": "del",
+          "text": "Temporarily removed SVG export feature"
+        }
+      ]
+    },
+    {
+      "date": "10/05/2020",
+      "versionCode": 3006,
+      "versionName": "3.0.42",
+      "change": [
+        {
+          "type": "fix",
+          "text": "Fixed crash when saving signatures"
+        },
+        {
+          "type": "fix",
+          "text": "Fixed multiple minor bugs"
+        }
+      ]
+    },
+    {
+      "date": "03/11/2019",
+      "versionCode": 3005,
+      "versionName": "3.0.10",
+      "change": [
+        {
+          "type": "refactor",
+          "text": "Migrated entire codebase to Kotlin"
+        }
+      ]
+    },
+    {
+      "versionCode": 3004,
+      "versionName": "3.0.4",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Added support for Android 10"
+        },
+        {
+          "type": "chore",
+          "text": "Updated dependencies to latest versions"
+        }
+      ]
+    },
+    {
+      "versionCode": 3003,
+      "versionName": "3.0.3",
+      "change": [
+        {
+          "type": "docs",
+          "text": "Added privacy policy documentation"
+        }
+      ]
+    },
+    {
+      "versionCode": 3002,
+      "versionName": "3.0.2",
+      "change": [
+        {
+          "type": "chore",
+          "text": "Updated dependencies to latest versions"
+        }
+      ]
+    },
+    {
+      "versionCode": 3001,
+      "versionName": "3.0.1",
+      "change": [
+        {
+          "type": "fix",
+          "text": "Fixed signature sharing functionality"
+        },
+        {
+          "type": "fix",
+          "text": "Fixed minor bugs and improved stability"
+        }
+      ]
+    },
+    {
+      "versionCode": 3000,
+      "versionName": "3.0.0",
+      "change": [
+        {
+          "type": "refactor",
+          "text": "Complete rewrite of the application architecture"
+        },
+        {
+          "type": "feat",
+          "text": "Added compatibility with Android 9.0 Pie"
+        },
+        {
+          "type": "chore",
+          "text": "Updated all dependencies to latest stable versions"
+        },
+        {
+          "type": "feat",
+          "text": "Redesigned app icons and graphics"
+        }
+      ]
+    },
+    {
+      "versionCode": 2035,
+      "versionName": "2.1.54",
+      "change": [
+        {
+          "type": "fix",
+          "text": "Fixed translation errors and improved localization"
+        }
+      ]
+    },
+    {
+      "versionCode": 2033,
+      "versionName": "2.1.31",
+      "change": [
+        {
+          "type": "fix",
+          "text": "Fixed bug when saving signatures with custom filenames (thanks for the reports!)"
+        }
+      ]
+    },
+    {
+      "versionCode": 2031,
+      "versionName": "2.1.16",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Added file sorting by date (ascending/descending)"
+        },
+        {
+          "type": "feat",
+          "text": "Added customizable canvas backgrounds (signatures always saved with transparent background)"
+        },
+        {
+          "type": "chore",
+          "text": "Updated support email address"
+        },
+        {
+          "type": "fix",
+          "text": "Fixed seekbar crash issue"
+        },
+        {
+          "type": "fix",
+          "text": "Fixed text errors and improved translations"
+        }
+      ]
+    },
+    {
+      "versionCode": 2006,
+      "versionName": "2.0.24",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Added advertising support"
+        },
+        {
+          "type": "feat",
+          "text": "Added option to disable ads in settings"
+        },
+        {
+          "type": "feat",
+          "text": "Users can now disable ads if preferred"
+        }
+      ]
+    },
+    {
+      "versionCode": 2005,
+      "versionName": "2.0.23",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Added new clean icon design"
+        },
+        {
+          "type": "fix",
+          "text": "Fixed minor bugs and improved stability"
+        }
+      ]
+    },
+    {
+      "versionCode": 2004,
+      "versionName": "2.0.22",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Added Material Design support for Android pre-Lollipop devices"
+        },
+        {
+          "type": "fix",
+          "text": "Fixed bugs in save and share functionality"
+        }
+      ]
+    },
+    {
+      "versionCode": 2003,
+      "versionName": "2.0.21",
+      "change": [
+        {
+          "type": "fix",
+          "text": "Fixed splash screen rendering on large screen devices"
+        }
+      ]
+    },
+    {
+      "versionCode": 2002,
+      "versionName": "2.0.2",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Added option to customize filename when saving (toggle in settings)"
+        },
+        {
+          "type": "feat",
+          "text": "Added project URL to splash screen"
+        }
+      ]
+    },
+    {
+      "versionCode": 2001,
+      "versionName": "2.0.1",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Added file info display on long press"
+        }
+      ]
+    },
+    {
+      "versionCode": 2000,
+      "versionName": "2.0.0",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Complete UI redesign with modern interface"
+        },
+        {
+          "type": "feat",
+          "text": "Added new configuration options"
+        },
+        {
+          "type": "feat",
+          "text": "Added custom save path selection"
+        },
+        {
+          "type": "feat",
+          "text": "Added persistence for last stroke width"
+        },
+        {
+          "type": "feat",
+          "text": "Added persistence for last color selection"
+        },
+        {
+          "type": "feat",
+          "text": "Added option to auto-delete signature on exit"
+        },
+        {
+          "type": "feat",
+          "text": "Added toggle to show/hide signatures in device gallery"
+        },
+        {
+          "type": "refactor",
+          "text": "Improved landscape mode performance and usability"
+        },
+        {
+          "type": "feat",
+          "text": "Updated app icon design"
+        },
+        {
+          "type": "refactor",
+          "text": "Enhanced Material Design implementation"
+        },
+        {
+          "type": "feat",
+          "text": "Added animated splash screen"
+        },
+        {
+          "type": "docs",
+          "text": "Added open source license information"
+        },
+        {
+          "type": "feat",
+          "text": "Released as open source and free software"
+        },
+        {
+          "type": "fix",
+          "text": "Fixed minor bugs and improved stability"
+        }
+      ]
+    },
+    {
+      "versionCode": 103,
+      "versionName": "1.0.3",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Updated app icon design"
+        },
+        {
+          "type": "feat",
+          "text": "Added menu for discovering other apps"
+        }
+      ]
+    },
+    {
+      "versionCode": 102,
+      "versionName": "1.0.2",
+      "change": [
+        {
+          "type": "chore",
+          "text": "Changed default file save path"
+        },
+        {
+          "type": "fix",
+          "text": "Fixed minor bugs and improved stability"
+        }
+      ]
+    },
+    {
+      "versionCode": 101,
+      "versionName": "1.0.1",
+      "change": [
+        {
+          "type": "fix",
+          "text": "Fixed minor bugs and improved stability"
+        }
+      ]
+    },
+    {
+      "versionCode": 100,
+      "versionName": "1.0.0",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Initial release of Signature Maker"
+        }
+      ]
+    }
+  ]
+}

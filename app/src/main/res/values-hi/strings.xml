@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Hindi translation for Signature Maker -->
+    <!-- हिंदी अनुवाद -->
+
+    <string name="app_title">Signature Maker</string>
+    <string name="close_menu">मेनू बंद करें</string>
+    <string name="logo">लोगो</string>
+
+    <!-- NAVIGATION MENU -->
+    <string name="title_create_signature">हस्ताक्षर बनाएं</string>
+    <string name="title_gallery">गैलरी</string>
+    <string name="title_setting">सेटिंग्स</string>
+    <string name="title_edit_privacy_policy">गोपनीयता नीति संपादित करें</string>
+    <string name="title_others">अन्य</string>
+    <string name="title_activity_settings">सेटिंग्स</string>
+
+    <!-- SIGN SCREEN - Action Buttons -->
+    <string name="title_bSave">सहेजें</string>
+    <string name="title_bList">सूची</string>
+    <string name="title_bSaveSend">सहेजें और भेजें</string>
+    <string name="title_bColor">रंग</string>
+    <string name="title_bStroke">मोटाई</string>
+    <string name="title_bRubber">साफ़ करें</string>
+    <string name="title_SingHere">यहाँ हस्ताक्षर करें</string>
+
+    <!-- SIGN SCREEN - Bottom Sheet Headers -->
+    <string name="title_options">विकल्प</string>
+    <string name="title_signature_options">हस्ताक्षर विकल्प</string>
+    <string name="title_actions">क्रियाएं</string>
+    <string name="title_background">पृष्ठभूमि</string>
+
+    <!-- DRAWER MENU - Social & Actions -->
+    <string name="follow_us">हमें फॉलो करें</string>
+    <string name="send_suggestions">सुझाव भेजें</string>
+    <string name="changelog">परिवर्तन लॉग</string>
+    <string name="rate">हमें रेट करें</string>
+    <string name="more_app">अधिक ऐप्स</string>
+    <string name="license">लाइसेंस</string>
+    <string name="privacy_policy">गोपनीयता नीति</string>
+    <string name="handle_privacy_policy">गोपनीयता प्रबंधित करें</string>
+
+    <!-- NOTIFICATIONS & FEEDBACK MESSAGES -->
+    <string name="title_save_ok">फ़ाइल सफलतापूर्वक सहेजी गई</string>
+    <string name="title_save_ko">फ़ाइल सहेजने में त्रुटि</string>
+    <string name="message_file_saved_successfully">फ़ाइल सफलतापूर्वक सहेजी गई</string>
+    <string name="message_error_saving_file">फ़ाइल सहेजने में त्रुटि</string>
+    <string name="action_retry">पुनः प्रयास करें</string>
+    <string name="action_undo">पूर्ववत करें</string>
+    <string name="action_redo">फिर से करें</string>
+    <string name="action_view">देखें</string>
+    <string name="title_clean">साफ़ करें</string>
+
+    <!-- FILES SCREEN -->
+    <string name="sort">तारीख के अनुसार क्रमबद्ध करें</string>
+    <string name="title_no_files">कोई फ़ाइल नहीं</string>
+    <string name="delete">हटाएं</string>
+    <string name="title_undo">पूर्ववत करें</string>
+    <string name="message_no_files">अभी तक कोई हस्ताक्षर सहेजे नहीं गए</string>
+    <string name="message_no_files_description">अपना पहला हस्ताक्षर बनाएं और यह यहां दिखाई देगा</string>
+    <string name="message_error_permission_required">फ़ाइलों तक पहुंचने के लिए अनुमति आवश्यक है</string>
+    <string name="message_error_loading_files">फ़ाइलें लोड करने में त्रुटि</string>
+    <string name="message_file_deleted">फ़ाइल हटा दी गई</string>
+
+    <!-- PERMISSIONS -->
+    <string name="body_permissions">ऐप के सही ढंग से काम करने के लिए आपको अनुमतियां स्वीकार करने की आवश्यकता है</string>
+    <string name="title_request_permision">पढ़ने और लिखने की अनुमतियों का अनुरोध</string>
+    <string name="body_request_permision">एप्लिकेशन का सही उपयोग करने के लिए, कुछ सिस्टम अनुमतियों तक पहुंच होना आवश्यक है। अनुमतियां स्वीकार करें या एप्लिकेशन काम नहीं करेगा।</string>
+
+    <!-- ONBOARDING SLIDES -->
+    <string name="tittle_slider1">हस्ताक्षर करें</string>
+    <string name="tittle_slider2">स्थानांतरित करें</string>
+    <string name="tittle_slider3">संलग्न करें</string>
+    <string name="tittle_slider4">शुरू करें</string>
+    <string name="tittle_body_slider1">एक आसान और सरल प्रक्रिया के साथ अपने हस्ताक्षर को डिजिटल बनाएं</string>
+    <string name="tittle_body_slider2">अपने हस्ताक्षर को जहां चाहें सहेजें और भेजें</string>
+    <string name="tittle_body_slider3">अपने दस्तावेज़ों में अपना हस्ताक्षर संलग्न करें</string>
+    <string name="tittle_body_slider4">क्या आप तैयार हैं?</string>
+
+    <!-- SETTINGS SCREEN -->
+    <string name="title_pref_app">ऐप</string>
+    <string name="title_pref_advertising">विज्ञापन अक्षम करें</string>
+    <string name="title_pref_advertising_sum">यदि वे आपको परेशान करते हैं तो विज्ञापन अक्षम करें</string>
+    <string name="title_pref_files">फ़ाइलें</string>
+    <string name="title_pref_path">निर्यात किए गए हस्ताक्षर पथ</string>
+    <string name="title_pref_delete">हस्ताक्षर हटाएं</string>
+    <string name="title_pref_delete_sum">बाहर निकलने पर सभी हस्ताक्षर हटाएं</string>
+    <string name="title_pref_gallery">हस्ताक्षर छिपाएं</string>
+    <string name="title_pref_gallery_sum">फ़ोन गैलरी में हस्ताक्षर प्रदर्शित न करें</string>
+    <string name="title_pref_name">फ़ाइल का नाम</string>
+    <string name="title_pref_name_sum">सहेजते समय फ़ाइल का नाम चुनें</string>
+    <string name="title_pref_siganture">हस्ताक्षर</string>
+    <string name="title_pref_stroke">स्ट्रोक</string>
+    <string name="title_pref_stroke_sum">अंतिम उपयोग किए गए स्ट्रोक को डिफ़ॉल्ट रूप से रखें</string>
+    <string name="title_pref_color">रंग</string>
+    <string name="title_pref_color_sum">अंतिम उपयोग किए गए रंग को डिफ़ॉल्ट रूप से रखें</string>
+    <string name="title_pref_reset">डिफ़ॉल्ट मान</string>
+    <string name="title_pref_reset_sum">सभी सेटिंग्स को उनके डिफ़ॉल्ट मानों पर रीसेट करें</string>
+    <string name="message_settings_reset_success">सेटिंग्स को डिफ़ॉल्ट मानों पर रीसेट कर दिया गया है</string>
+    <string name="title_pref_wallpaper_sum">अंतिम उपयोग किए गए वॉलपेपर को डिफ़ॉल्ट रूप से रखें</string>
+    <string name="title_pref_wallpaper">वॉलपेपर</string>
+    <string name="title_name_of_the_file">फ़ाइल का नाम</string>
+
+    <!-- FEEDBACK & SUGGESTIONS -->
+    <string name="complete_fields">सभी फ़ील्ड भरें</string>
+    <string name="thanks_comment">आपकी प्रतिक्रिया के लिए धन्यवाद</string>
+    <string name="problems_comment">एक समस्या हुई है, कृपया बाद में पुनः प्रयास करें</string>
+    <string name="write_your_suggestion_or_comment">अपना सुझाव या टिप्पणी लिखें</string>
+    <string name="put_your_email">अपना ईमेल दर्ज करें</string>
+    <string name="valid_mail">एक वैध ईमेल दर्ज करें</string>
+    <string name="suggest_sort">टिप्पणी बहुत छोटी है। कृपया कम से कम 30 वर्ण लिखें</string>
+    <string name="share">साझा करें</string>
+    <string name="sending_message_please_wait">संदेश भेज रहे हैं, कृपया प्रतीक्षा करें</string>
+    <string name="join_channel">हमारे टेलीग्राम चैनल से जुड़ने के लिए यहां क्लिक करें</string>
+
+    <!-- THEME & APPEARANCE -->
+    <string name="mode_light">लाइट मोड लागू करें</string>
+    <string name="mode_dark">डार्क मोड लागू करें</string>
+    <string name="mode_system">सिस्टम द्वारा परिभाषित</string>
+    <string name="mode_battery">बैटरी सेवर मोड में डार्क</string>
+    <string name="change_theme_note">परिवर्तनों को प्रभावी करने के लिए, आपको एप्लिकेशन को पूरी तरह से पुनरारंभ करना होगा</string>
+    <string name="empty_canvas">त्रुटि, खाली कैनवास</string>
+
+    <!-- MISCELLANEOUS -->
+    <string name="suggest">सुझाव दें</string>
+
+    <!-- CHANGELOG SCREEN -->
+    <string name="message_no_changelog_available">कोई परिवर्तन लॉग उपलब्ध नहीं है</string>
+    <string name="message_check_back_later">अपडेट के लिए बाद में वापस आएं</string>
+    <string name="changelog_version">संस्करण %s</string>
+
+</resources>
+

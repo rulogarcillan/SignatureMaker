@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ============================================ -->
+    <!-- APP IDENTITY -->
+    <!-- ============================================ -->
+
+    <!-- Main app title - Shown in: TopBar, Drawer header -->
+    <string name="app_title">Signature Maker</string>
+
+    <!-- Content description for accessibility -->
+    <string name="close_menu">Fechar menu</string>
+    <string name="logo">Logo</string>
+
+    <!-- ============================================ -->
+    <!-- NAVIGATION MENU -->
+    <!-- ============================================ -->
+
+    <!-- Menu item: Opens signature creation screen -->
+    <string name="title_create_signature">Criar assinatura</string>
+
+    <!-- Menu item: Opens saved signatures gallery -->
+    <string name="title_gallery">Galeria</string>
+
+    <!-- Menu item: Opens app settings -->
+    <string name="title_setting">Configurações</string>
+
+    <!-- Menu item: Manage privacy consent (GDPR) -->
+    <string name="title_edit_privacy_policy">Editar política de privacidade</string>
+
+    <!-- Section header in menu for miscellaneous options -->
+    <string name="title_others">Outros</string>
+
+    <!-- Activity title (legacy, may not be used) -->
+    <string name="title_activity_settings">Configurações</string>
+
+    <!-- ============================================ -->
+    <!-- SIGN SCREEN - Action Buttons -->
+    <!-- ============================================ -->
+
+    <!-- Button: Save signature to gallery -->
+    <string name="title_bSave">Salvar</string>
+
+    <!-- Button: View list of saved signatures -->
+    <string name="title_bList">Lista</string>
+
+    <!-- Button: Save signature and share it -->
+    <string name="title_bSaveSend">Salvar e enviar</string>
+
+    <!-- Button: Change pen color -->
+    <string name="title_bColor">Cor</string>
+
+    <!-- Button: Change stroke width -->
+    <string name="title_bStroke">Espessura</string>
+
+    <!-- Button: Clear/erase signature canvas -->
+    <string name="title_bRubber">Limpar</string>
+
+    <!-- Placeholder text on empty signature canvas -->
+    <string name="title_SingHere">Assine aqui</string>
+
+    <!-- ============================================ -->
+    <!-- SIGN SCREEN - Bottom Sheet Headers -->
+    <!-- ============================================ -->
+
+    <!-- Generic options header -->
+    <string name="title_options">Opções</string>
+
+    <!-- Header for signature customization panel -->
+    <string name="title_signature_options">Opções de assinatura</string>
+
+    <!-- Header for action buttons section -->
+    <string name="title_actions">Ações</string>
+
+    <!-- Header for background selection section -->
+    <string name="title_background">Fundo</string>
+
+    <!-- ============================================ -->
+    <!-- DRAWER MENU - Social & Actions -->
+    <!-- ============================================ -->
+
+    <!-- Section header for social media links -->
+    <string name="follow_us">Siga-nos</string>
+
+    <!-- Menu action: Open email to send feedback -->
+    <string name="send_suggestions">Enviar sugestões</string>
+
+    <!-- Menu action: View app changelog/release notes -->
+    <string name="changelog">Registro de alterações</string>
+
+    <!-- Menu action: Open Play Store to rate app -->
+    <string name="rate">Avalie-nos</string>
+
+    <!-- Menu action: View developer's other apps -->
+    <string name="more_app">Mais aplicativos</string>
+
+    <!-- Menu action: View open source licenses -->
+    <string name="license">Licenças</string>
+
+    <!-- Menu action: View privacy policy in browser -->
+    <string name="privacy_policy">Política de privacidade</string>
+
+    <!-- Menu action: Manage privacy settings/consent -->
+    <string name="handle_privacy_policy">Gerenciar privacidade</string>
+
+    <!-- ============================================ -->
+    <!-- NOTIFICATIONS & FEEDBACK MESSAGES -->
+    <!-- ============================================ -->
+
+    <!-- Success message when file is saved -->
+    <string name="title_save_ok">Arquivo salvo com sucesso</string>
+
+    <!-- Error message when file save fails -->
+    <string name="title_save_ko">Erro ao salvar arquivo</string>
+
+    <!-- Snackbar: File saved successfully -->
+    <string name="message_file_saved_successfully">Arquivo salvo com sucesso</string>
+
+    <!-- Snackbar: Error occurred while saving -->
+    <string name="message_error_saving_file">Erro ao salvar arquivo</string>
+
+    <!-- Action button: Retry failed operation -->
+    <string name="action_retry">Tentar novamente</string>
+
+    <!-- Action button: Undo last stroke -->
+    <string name="action_undo">Desfazer</string>
+
+    <!-- Action button: Redo undone stroke -->
+    <string name="action_redo">Refazer</string>
+
+    <!-- Action button: View saved file -->
+    <string name="action_view">Ver</string>
+
+    <!-- Action button: Clear/delete content -->
+    <string name="title_clean">Limpar</string>
+
+    <!-- ============================================ -->
+    <!-- FILES SCREEN -->
+    <!-- ============================================ -->
+
+    <!-- Sort option: Order files by date -->
+    <string name="sort">Ordenar por data</string>
+
+    <!-- Empty state: No files found -->
+    <string name="title_no_files">Sem arquivos</string>
+
+    <!-- Action button: Delete selected file -->
+    <string name="delete">Excluir</string>
+
+    <!-- Action button: Undo last action -->
+    <string name="title_undo">Desfazer</string>
+
+    <!-- Empty state message in gallery (primary text) -->
+    <string name="message_no_files">Ainda não há assinaturas salvas</string>
+
+    <!-- Empty state message in gallery (secondary text) -->
+    <string name="message_no_files_description">Crie sua primeira assinatura e ela aparecerá aqui</string>
+
+    <!-- Error: Storage permission denied -->
+    <string name="message_error_permission_required">Permissão necessária para acessar arquivos</string>
+
+    <!-- Error: Failed to load files from storage -->
+    <string name="message_error_loading_files">Erro ao carregar arquivos</string>
+
+    <!-- Confirmation message after deleting a file -->
+    <string name="message_file_deleted">Arquivo excluído</string>
+
+    <!-- ============================================ -->
+    <!-- PERMISSIONS -->
+    <!-- ============================================ -->
+
+    <!-- Message explaining why app needs permissions -->
+    <string name="body_permissions">Você precisa aceitar as permissões para que o aplicativo funcione corretamente</string>
+
+    <!-- Dialog title for permission request -->
+    <string name="title_request_permision">Solicitação de permissões de leitura e gravação</string>
+
+    <!-- Detailed explanation of required permissions -->
+    <string name="body_request_permision">Para usar o aplicativo corretamente, é necessário ter acesso a certas permissões do sistema. Aceite as permissões ou o aplicativo não funcionará.</string>
+
+    <!-- ============================================ -->
+    <!-- ONBOARDING SLIDES -->
+    <!-- ============================================ -->
+
+    <!-- Slide 1: Main feature -->
+    <string name="tittle_slider1">Assinar</string>
+
+    <!-- Slide 2: Save/export feature -->
+    <string name="tittle_slider2">Transferir</string>
+
+    <!-- Slide 3: Integration feature -->
+    <string name="tittle_slider3">Anexar</string>
+
+    <!-- Slide 4: Call to action -->
+    <string name="tittle_slider4">Vamos lá</string>
+
+    <!-- Slide 1: Description -->
+    <string name="tittle_body_slider1">Digitalize sua assinatura com um procedimento fácil e simples</string>
+
+    <!-- Slide 2: Description -->
+    <string name="tittle_body_slider2">Salve e envie sua assinatura para onde quiser</string>
+
+    <!-- Slide 3: Description -->
+    <string name="tittle_body_slider3">Anexe sua assinatura aos seus documentos</string>
+
+    <!-- Slide 4: Description -->
+    <string name="tittle_body_slider4">Você está pronto?</string>
+
+    <!-- ============================================ -->
+    <!-- SETTINGS SCREEN -->
+    <!-- ============================================ -->
+
+    <!-- Category header: General app settings -->
+    <string name="title_pref_app">Aplicativo</string>
+
+    <!-- Setting: Disable advertisement option -->
+    <string name="title_pref_advertising">Desativar anúncios</string>
+    <string name="title_pref_advertising_sum">Desative os anúncios se eles o incomodarem</string>
+
+    <!-- Category header: File management settings -->
+    <string name="title_pref_files">Arquivos</string>
+
+    <!-- Setting: Path where signatures are saved -->
+    <string name="title_pref_path">Caminho das assinaturas exportadas</string>
+
+    <!-- Setting: Delete all signatures when closing app -->
+    <string name="title_pref_delete">Excluir assinaturas</string>
+
+    <!-- Description for delete on exit setting -->
+    <string name="title_pref_delete_sum">Excluir todas as assinaturas ao sair</string>
+
+    <!-- Setting: Hide signatures from phone gallery -->
+    <string name="title_pref_gallery">Ocultar assinaturas</string>
+    <string name="title_pref_gallery_sum">Não exibir assinaturas na galeria do telefone</string>
+
+    <!-- Setting: Choose file name when saving -->
+    <string name="title_pref_name">Nome do arquivo</string>
+    <string name="title_pref_name_sum">Escolher nome do arquivo ao salvar</string>
+
+    <!-- Category header: Signature customization settings -->
+    <string name="title_pref_siganture">Assinatura</string>
+
+    <!-- Setting: Remember last stroke width -->
+    <string name="title_pref_stroke">Espessura</string>
+
+    <!-- Description for remember stroke setting -->
+    <string name="title_pref_stroke_sum">Manter a última espessura usada por padrão</string>
+
+    <!-- Setting: Remember last pen color -->
+    <string name="title_pref_color">Cor</string>
+
+    <!-- Description for remember color setting -->
+    <string name="title_pref_color_sum">Manter a última cor usada por padrão</string>
+
+    <!-- Setting: Reset all preferences to defaults -->
+    <string name="title_pref_reset">Valores padrão</string>
+
+    <!-- Description/confirmation for reset action -->
+    <string name="title_pref_reset_sum">Redefinir todas as configurações para seus valores padrão</string>
+
+    <!-- Confirmation message after resetting settings -->
+    <string name="message_settings_reset_success">As configurações foram redefinidas para os valores padrão</string>
+
+    <!-- Description for remember wallpaper setting -->
+    <string name="title_pref_wallpaper_sum">Manter o último fundo usado por padrão</string>
+
+    <!-- Setting: Remember last background -->
+    <string name="title_pref_wallpaper">Fundo</string>
+
+    <!-- Dialog: Input field label for file name -->
+    <string name="title_name_of_the_file">Nome do arquivo</string>
+
+    <!-- ============================================ -->
+    <!-- FEEDBACK & SUGGESTIONS -->
+    <!-- ============================================ -->
+
+    <!-- Validation: All form fields must be filled -->
+    <string name="complete_fields">Preencha todos os campos</string>
+
+    <!-- Success message: Feedback submitted -->
+    <string name="thanks_comment">Obrigado pelo seu feedback</string>
+
+    <!-- Error message: Submission failed -->
+    <string name="problems_comment">Ocorreu um problema, por favor tente novamente mais tarde</string>
+
+    <!-- Placeholder: Comment textarea -->
+    <string name="write_your_suggestion_or_comment">Escreva sua sugestão ou comentário</string>
+
+    <!-- Placeholder: Email input field -->
+    <string name="put_your_email">Digite seu e-mail</string>
+
+    <!-- Validation: Invalid email format -->
+    <string name="valid_mail">Digite um e-mail válido</string>
+
+    <!-- Validation: Comment too short -->
+    <string name="suggest_sort">O comentário é muito curto. Por favor, escreva pelo menos 30 caracteres</string>
+
+    <!-- Action button: Share signature with others -->
+    <string name="share">Compartilhar</string>
+
+    <!-- Loading message: Submitting feedback -->
+    <string name="sending_message_please_wait">Enviando mensagem, por favor aguarde</string>
+
+    <!-- Call to action: Join Telegram channel -->
+    <string name="join_channel">Clique aqui para entrar no nosso canal do Telegram</string>
+
+    <!-- ============================================ -->
+    <!-- THEME & APPEARANCE -->
+    <!-- ============================================ -->
+
+    <!-- Theme option: Force light mode -->
+    <string name="mode_light">Forçar modo claro</string>
+
+    <!-- Theme option: Force dark mode -->
+    <string name="mode_dark">Forçar modo escuro</string>
+
+    <!-- Theme option: Follow system theme -->
+    <string name="mode_system">Definido pelo sistema</string>
+
+    <!-- Theme option: Dark mode in battery saver -->
+    <string name="mode_battery">Escuro no modo de economia de bateria</string>
+
+    <!-- Note: Theme change requires app restart -->
+    <string name="change_theme_note">Para que as alterações tenham efeito, você deve reiniciar o aplicativo completamente</string>
+
+    <!-- Error: Canvas is empty -->
+    <string name="empty_canvas">Erro, tela vazia</string>
+
+    <!-- ============================================ -->
+    <!-- MISCELLANEOUS -->
+    <!-- ============================================ -->
+
+    <!-- Button/action: Suggest/Send suggestion -->
+    <string name="suggest">Sugerir</string>
+
+    <!-- ============================================ -->
+    <!-- CHANGELOG SCREEN -->
+    <!-- ============================================ -->
+
+    <!-- Empty state: No changelog entries found -->
+    <string name="message_no_changelog_available">Nenhum registro de alterações disponível</string>
+
+    <!-- Empty state: Explanation text -->
+    <string name="message_check_back_later">Volte mais tarde para atualizações</string>
+
+    <!-- Version header with placeholder for version name -->
+    <string name="changelog_version">Versão %s</string>
+
+</resources>
+

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Italian translation for Signature Maker -->
+    <!-- Traduzione italiana -->
+
+    <string name="app_title">Signature Maker</string>
+    <string name="close_menu">Chiudi menu</string>
+    <string name="logo">Logo</string>
+
+    <!-- NAVIGATION MENU -->
+    <string name="title_create_signature">Crea firma</string>
+    <string name="title_gallery">Galleria</string>
+    <string name="title_setting">Impostazioni</string>
+    <string name="title_edit_privacy_policy">Modifica informativa sulla privacy</string>
+    <string name="title_others">Altro</string>
+    <string name="title_activity_settings">Impostazioni</string>
+
+    <!-- SIGN SCREEN - Action Buttons -->
+    <string name="title_bSave">Salva</string>
+    <string name="title_bList">Elenco</string>
+    <string name="title_bSaveSend">Salva e invia</string>
+    <string name="title_bColor">Colore</string>
+    <string name="title_bStroke">Spessore</string>
+    <string name="title_bRubber">Cancella</string>
+    <string name="title_SingHere">Firma qui</string>
+
+    <!-- SIGN SCREEN - Bottom Sheet Headers -->
+    <string name="title_options">Opzioni</string>
+    <string name="title_signature_options">Opzioni firma</string>
+    <string name="title_actions">Azioni</string>
+    <string name="title_background">Sfondo</string>
+
+    <!-- DRAWER MENU - Social & Actions -->
+    <string name="follow_us">Seguici</string>
+    <string name="send_suggestions">Invia suggerimenti</string>
+    <string name="changelog">Registro modifiche</string>
+    <string name="rate">Valutaci</string>
+    <string name="more_app">Altre app</string>
+    <string name="license">Licenze</string>
+    <string name="privacy_policy">Informativa sulla privacy</string>
+    <string name="handle_privacy_policy">Gestisci privacy</string>
+
+    <!-- NOTIFICATIONS & FEEDBACK MESSAGES -->
+    <string name="title_save_ok">File salvato con successo</string>
+    <string name="title_save_ko">Errore nel salvare il file</string>
+    <string name="message_file_saved_successfully">File salvato con successo</string>
+    <string name="message_error_saving_file">Errore nel salvare il file</string>
+    <string name="action_retry">Riprova</string>
+    <string name="action_undo">Annulla</string>
+    <string name="action_redo">Ripristina</string>
+    <string name="action_view">Visualizza</string>
+    <string name="title_clean">Cancella</string>
+
+    <!-- FILES SCREEN -->
+    <string name="sort">Ordina per data</string>
+    <string name="title_no_files">Nessun file</string>
+    <string name="delete">Elimina</string>
+    <string name="title_undo">Annulla</string>
+    <string name="message_no_files">Nessuna firma salvata ancora</string>
+    <string name="message_no_files_description">Crea la tua prima firma e apparirà qui</string>
+    <string name="message_error_permission_required">Permesso richiesto per accedere ai file</string>
+    <string name="message_error_loading_files">Errore nel caricamento dei file</string>
+    <string name="message_file_deleted">File eliminato</string>
+
+    <!-- PERMISSIONS -->
+    <string name="body_permissions">Devi accettare i permessi affinché l\'app funzioni correttamente</string>
+    <string name="title_request_permision">Richiesta permessi di lettura e scrittura</string>
+    <string name="body_request_permision">Per utilizzare correttamente l\'applicazione, è necessario avere accesso a determinati permessi di sistema. Accetta i permessi o l\'applicazione non funzionerà.</string>
+
+    <!-- ONBOARDING SLIDES -->
+    <string name="tittle_slider1">Firma</string>
+    <string name="tittle_slider2">Trasferisci</string>
+    <string name="tittle_slider3">Allega</string>
+    <string name="tittle_slider4">Inizia</string>
+    <string name="tittle_body_slider1">Digitalizza la tua firma con una procedura facile e semplice</string>
+    <string name="tittle_body_slider2">Salva e invia la tua firma ovunque tu voglia</string>
+    <string name="tittle_body_slider3">Allega la tua firma ai tuoi documenti</string>
+    <string name="tittle_body_slider4">Sei pronto?</string>
+
+    <!-- SETTINGS SCREEN -->
+    <string name="title_pref_app">App</string>
+    <string name="title_pref_advertising">Disattiva annunci</string>
+    <string name="title_pref_advertising_sum">Disattiva gli annunci se ti disturbano</string>
+    <string name="title_pref_files">File</string>
+    <string name="title_pref_path">Percorso firme esportate</string>
+    <string name="title_pref_delete">Elimina firme</string>
+    <string name="title_pref_delete_sum">Elimina tutte le firme all\'uscita</string>
+    <string name="title_pref_gallery">Nascondi firme</string>
+    <string name="title_pref_gallery_sum">Non mostrare le firme nella galleria del telefono</string>
+    <string name="title_pref_name">Nome file</string>
+    <string name="title_pref_name_sum">Scegli il nome del file durante il salvataggio</string>
+    <string name="title_pref_siganture">Firma</string>
+    <string name="title_pref_stroke">Spessore</string>
+    <string name="title_pref_stroke_sum">Mantieni l\'ultimo spessore utilizzato come predefinito</string>
+    <string name="title_pref_color">Colore</string>
+    <string name="title_pref_color_sum">Mantieni l\'ultimo colore utilizzato come predefinito</string>
+    <string name="title_pref_reset">Valori predefiniti</string>
+    <string name="title_pref_reset_sum">Ripristina tutte le impostazioni ai loro valori predefiniti</string>
+    <string name="message_settings_reset_success">Le impostazioni sono state ripristinate ai valori predefiniti</string>
+    <string name="title_pref_wallpaper_sum">Mantieni l\'ultimo sfondo utilizzato come predefinito</string>
+    <string name="title_pref_wallpaper">Sfondo</string>
+    <string name="title_name_of_the_file">Nome del file</string>
+
+    <!-- FEEDBACK & SUGGESTIONS -->
+    <string name="complete_fields">Compila tutti i campi</string>
+    <string name="thanks_comment">Grazie per il tuo feedback</string>
+    <string name="problems_comment">Si è verificato un problema, riprova più tardi</string>
+    <string name="write_your_suggestion_or_comment">Scrivi il tuo suggerimento o commento</string>
+    <string name="put_your_email">Inserisci la tua email</string>
+    <string name="valid_mail">Inserisci un\'email valida</string>
+    <string name="suggest_sort">Il commento è troppo breve. Scrivi almeno 30 caratteri</string>
+    <string name="share">Condividi</string>
+    <string name="sending_message_please_wait">Invio del messaggio in corso, attendere</string>
+    <string name="join_channel">Clicca qui per unirti al nostro canale Telegram</string>
+
+    <!-- THEME & APPEARANCE -->
+    <string name="mode_light">Forza modalità chiara</string>
+    <string name="mode_dark">Forza modalità scura</string>
+    <string name="mode_system">Definito dal sistema</string>
+    <string name="mode_battery">Scuro in modalità risparmio batteria</string>
+    <string name="change_theme_note">Per rendere effettive le modifiche, è necessario riavviare completamente l\'applicazione</string>
+    <string name="empty_canvas">Errore, tela vuota</string>
+
+    <!-- MISCELLANEOUS -->
+    <string name="suggest">Suggerisci</string>
+
+    <!-- CHANGELOG SCREEN -->
+    <string name="message_no_changelog_available">Nessun registro modifiche disponibile</string>
+    <string name="message_check_back_later">Torna più tardi per gli aggiornamenti</string>
+    <string name="changelog_version">Versione %s</string>
+
+</resources>
+

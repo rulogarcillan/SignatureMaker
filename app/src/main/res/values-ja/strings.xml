@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="changelog_version">バージョン %s</string>
+    <string name="message_check_back_later">後でアップデートを確認してください</string>
+    <string name="message_no_changelog_available">変更履歴がありません</string>
+    <!-- CHANGELOG SCREEN -->
+
+    <string name="suggest">提案する</string>
+    <!-- MISCELLANEOUS -->
+
+    <string name="empty_canvas">エラー、空のキャンバス</string>
+    <string name="change_theme_note">変更を有効にするには、アプリケーションを完全に再起動する必要があります</string>
+    <string name="mode_battery">バッテリーセーバーモードでダーク</string>
+    <string name="mode_system">システム設定に従う</string>
+    <string name="mode_dark">ダークモードを強制</string>
+    <string name="mode_light">ライトモードを強制</string>
+    <!-- THEME & APPEARANCE -->
+
+    <string name="join_channel">こちらをクリックしてTelegramチャンネルに参加</string>
+    <string name="sending_message_please_wait">メッセージを送信しています。お待ちください</string>
+    <string name="share">共有</string>
+    <string name="suggest_sort">コメントが短すぎます。30文字以上入力してください</string>
+    <string name="valid_mail">有効なメールアドレスを入力してください</string>
+    <string name="put_your_email">メールアドレスを入力してください</string>
+    <string name="write_your_suggestion_or_comment">ご意見やコメントを入力してください</string>
+    <string name="problems_comment">問題が発生しました。後でもう一度お試しください</string>
+    <string name="thanks_comment">フィードバックありがとうございます</string>
+    <string name="complete_fields">すべてのフィールドに入力してください</string>
+    <!-- FEEDBACK & SUGGESTIONS -->
+
+    <string name="title_name_of_the_file">ファイル名</string>
+    <string name="title_pref_wallpaper">背景</string>
+    <string name="title_pref_wallpaper_sum">最後に使用した背景をデフォルトで保持</string>
+    <string name="title_pref_reset_sum">すべての設定をデフォルト値にリセット</string>
+    <string name="message_settings_reset_success">設定がデフォルト値にリセットされました</string>
+    <string name="title_pref_reset">デフォルト値</string>
+    <string name="title_pref_color_sum">最後に使用した色をデフォルトで保持</string>
+    <string name="title_pref_color">色</string>
+    <string name="title_pref_stroke_sum">最後に使用した太さをデフォルトで保持</string>
+    <string name="title_pref_stroke">太さ</string>
+    <string name="title_pref_siganture">署名</string>
+    <string name="title_pref_name_sum">保存時にファイル名を選択</string>
+    <string name="title_pref_name">ファイル名</string>
+    <string name="title_pref_gallery_sum">電話のギャラリーに署名を表示しない</string>
+    <string name="title_pref_gallery">署名を非表示</string>
+    <string name="title_pref_delete_sum">終了時にすべての署名を削除</string>
+    <string name="title_pref_delete">署名を削除</string>
+    <string name="title_pref_path">エクスポートされた署名のパス</string>
+    <string name="title_pref_files">ファイル</string>
+    <string name="title_pref_advertising_sum">広告が気になる場合は無効にする</string>
+    <string name="title_pref_advertising">広告を無効にする</string>
+    <string name="title_pref_app">アプリ</string>
+    <!-- SETTINGS SCREEN -->
+
+    <string name="tittle_body_slider4">準備はできましたか？</string>
+    <string name="tittle_body_slider3">文書に署名を添付</string>
+    <string name="tittle_body_slider2">署名を保存してどこにでも送信</string>
+    <string name="tittle_body_slider1">簡単な手順で署名をデジタル化</string>
+    <string name="tittle_slider4">始める</string>
+    <string name="tittle_slider3">添付</string>
+    <string name="tittle_slider2">転送</string>
+    <string name="tittle_slider1">署名</string>
+    <!-- ONBOARDING SLIDES -->
+
+    <string name="body_request_permision">アプリケーションを正しく使用するには、特定のシステム権限へのアクセスが必要です。権限を許可しないと、アプリケーションは機能しません。</string>
+    <string name="title_request_permision">読み取りと書き込み権限のリクエスト</string>
+    <string name="body_permissions">アプリが正常に機能するには、権限を許可する必要があります</string>
+    <!-- PERMISSIONS -->
+
+    <string name="message_file_deleted">ファイルを削除しました</string>
+    <string name="message_error_loading_files">ファイルの読み込みに失敗しました</string>
+    <string name="message_error_permission_required">ファイルにアクセスするには権限が必要です</string>
+    <string name="message_no_files_description">最初の署名を作成すると、ここに表示されます</string>
+    <string name="message_no_files">まだ署名が保存されていません</string>
+    <string name="title_undo">元に戻す</string>
+    <string name="delete">削除</string>
+    <string name="title_no_files">ファイルがありません</string>
+    <string name="sort">日付順に並べ替え</string>
+    <!-- FILES SCREEN -->
+
+    <string name="title_clean">クリア</string>
+    <string name="action_view">表示</string>
+    <string name="action_retry">再試行</string>
+    <string name="action_undo">元に戻す</string>
+    <string name="action_redo">やり直す</string>
+    <string name="message_error_saving_file">ファイルの保存に失敗しました</string>
+    <string name="message_file_saved_successfully">ファイルを保存しました</string>
+    <string name="title_save_ko">ファイルの保存に失敗しました</string>
+    <string name="title_save_ok">ファイルを保存しました</string>
+    <!-- NOTIFICATIONS & FEEDBACK MESSAGES -->
+
+    <string name="handle_privacy_policy">プライバシー管理</string>
+    <string name="privacy_policy">プライバシーポリシー</string>
+    <string name="license">ライセンス</string>
+    <string name="more_app">その他のアプリ</string>
+    <string name="rate">評価する</string>
+    <string name="changelog">変更履歴</string>
+    <string name="send_suggestions">ご意見を送る</string>
+    <string name="follow_us">フォローする</string>
+    <!-- DRAWER MENU - Social & Actions -->
+
+    <string name="title_background">背景</string>
+    <string name="title_actions">アクション</string>
+    <string name="title_signature_options">署名オプション</string>
+    <string name="title_options">オプション</string>
+    <!-- SIGN SCREEN - Bottom Sheet Headers -->
+
+    <string name="title_SingHere">ここに署名</string>
+    <string name="title_bRubber">クリア</string>
+    <string name="title_bStroke">太さ</string>
+    <string name="title_bColor">色</string>
+    <string name="title_bSaveSend">保存して送信</string>
+    <string name="title_bList">リスト</string>
+    <string name="title_bSave">保存</string>
+    <!-- SIGN SCREEN - Action Buttons -->
+
+    <string name="title_activity_settings">設定</string>
+    <string name="title_others">その他</string>
+    <string name="title_edit_privacy_policy">プライバシーポリシーを編集</string>
+    <string name="title_setting">設定</string>
+    <string name="title_gallery">ギャラリー</string>
+    <string name="title_create_signature">署名を作成</string>
+    <!-- NAVIGATION MENU -->
+
+    <string name="logo">ロゴ</string>
+    <string name="close_menu">メニューを閉じる</string>
+    <string name="app_title">Signature Maker</string>
+
+    <!-- 日本語翻訳 -->
+    <!-- Japanese translation for Signature Maker -->
+
+</resources>
+

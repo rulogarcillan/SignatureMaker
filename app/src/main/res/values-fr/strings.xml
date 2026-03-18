@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- French translation for Signature Maker -->
+    <!-- Traduction française -->
+
+    <string name="app_title">Signature Maker</string>
+    <string name="close_menu">Fermer le menu</string>
+    <string name="logo">Logo</string>
+
+    <!-- NAVIGATION MENU -->
+    <string name="title_create_signature">Créer une signature</string>
+    <string name="title_gallery">Galerie</string>
+    <string name="title_setting">Paramètres</string>
+    <string name="title_edit_privacy_policy">Modifier la politique de confidentialité</string>
+    <string name="title_others">Autres</string>
+    <string name="title_activity_settings">Paramètres</string>
+
+    <!-- SIGN SCREEN - Action Buttons -->
+    <string name="title_bSave">Enregistrer</string>
+    <string name="title_bList">Liste</string>
+    <string name="title_bSaveSend">Enregistrer et envoyer</string>
+    <string name="title_bColor">Couleur</string>
+    <string name="title_bStroke">Épaisseur</string>
+    <string name="title_bRubber">Effacer</string>
+    <string name="title_SingHere">Signez ici</string>
+
+    <!-- SIGN SCREEN - Bottom Sheet Headers -->
+    <string name="title_options">Options</string>
+    <string name="title_signature_options">Options de signature</string>
+    <string name="title_actions">Actions</string>
+    <string name="title_background">Arrière-plan</string>
+
+    <!-- DRAWER MENU - Social & Actions -->
+    <string name="follow_us">Suivez-nous</string>
+    <string name="send_suggestions">Envoyer des suggestions</string>
+    <string name="changelog">Journal des modifications</string>
+    <string name="rate">Évaluez-nous</string>
+    <string name="more_app">Plus d\'applications</string>
+    <string name="license">Licences</string>
+    <string name="privacy_policy">Politique de confidentialité</string>
+    <string name="handle_privacy_policy">Gérer la confidentialité</string>
+
+    <!-- NOTIFICATIONS & FEEDBACK MESSAGES -->
+    <string name="title_save_ok">Fichier enregistré avec succès</string>
+    <string name="title_save_ko">Erreur lors de l\'enregistrement du fichier</string>
+    <string name="message_file_saved_successfully">Fichier enregistré avec succès</string>
+    <string name="message_error_saving_file">Erreur lors de l\'enregistrement du fichier</string>
+    <string name="action_retry">Réessayer</string>
+    <string name="action_undo">Annuler</string>
+    <string name="action_redo">Rétablir</string>
+    <string name="action_view">Voir</string>
+    <string name="title_clean">Effacer</string>
+
+    <!-- FILES SCREEN -->
+    <string name="sort">Trier par date</string>
+    <string name="title_no_files">Aucun fichier</string>
+    <string name="delete">Supprimer</string>
+    <string name="title_undo">Annuler</string>
+    <string name="message_no_files">Aucune signature enregistrée pour le moment</string>
+    <string name="message_no_files_description">Créez votre première signature et elle apparaîtra ici</string>
+    <string name="message_error_permission_required">Permission requise pour accéder aux fichiers</string>
+    <string name="message_error_loading_files">Erreur lors du chargement des fichiers</string>
+    <string name="message_file_deleted">Fichier supprimé</string>
+
+    <!-- PERMISSIONS -->
+    <string name="body_permissions">Vous devez accepter les autorisations pour que l\'application fonctionne correctement</string>
+    <string name="title_request_permision">Demande d\'autorisations de lecture et d\'écriture</string>
+    <string name="body_request_permision">Pour utiliser l\'application correctement, il est nécessaire d\'avoir accès à certaines autorisations système. Acceptez les autorisations ou l\'application ne fonctionnera pas.</string>
+
+    <!-- ONBOARDING SLIDES -->
+    <string name="tittle_slider1">Signer</string>
+    <string name="tittle_slider2">Transférer</string>
+    <string name="tittle_slider3">Joindre</string>
+    <string name="tittle_slider4">Commencer</string>
+    <string name="tittle_body_slider1">Numérisez votre signature avec une procédure simple et facile</string>
+    <string name="tittle_body_slider2">Enregistrez et envoyez votre signature où vous voulez</string>
+    <string name="tittle_body_slider3">Joignez votre signature à vos documents</string>
+    <string name="tittle_body_slider4">Êtes-vous prêt ?</string>
+
+    <!-- SETTINGS SCREEN -->
+    <string name="title_pref_app">Application</string>
+    <string name="title_pref_advertising">Désactiver les publicités</string>
+    <string name="title_pref_advertising_sum">Désactivez les publicités si elles vous dérangent</string>
+    <string name="title_pref_files">Fichiers</string>
+    <string name="title_pref_path">Chemin des signatures exportées</string>
+    <string name="title_pref_delete">Supprimer les signatures</string>
+    <string name="title_pref_delete_sum">Supprimer toutes les signatures à la fermeture</string>
+    <string name="title_pref_gallery">Masquer les signatures</string>
+    <string name="title_pref_gallery_sum">Ne pas afficher les signatures dans la galerie du téléphone</string>
+    <string name="title_pref_name">Nom du fichier</string>
+    <string name="title_pref_name_sum">Choisir le nom du fichier lors de l\'enregistrement</string>
+    <string name="title_pref_siganture">Signature</string>
+    <string name="title_pref_stroke">Épaisseur</string>
+    <string name="title_pref_stroke_sum">Conserver la dernière épaisseur utilisée par défaut</string>
+    <string name="title_pref_color">Couleur</string>
+    <string name="title_pref_color_sum">Conserver la dernière couleur utilisée par défaut</string>
+    <string name="title_pref_reset">Valeurs par défaut</string>
+    <string name="title_pref_reset_sum">Réinitialiser tous les paramètres à leurs valeurs par défaut</string>
+    <string name="message_settings_reset_success">Les paramètres ont été réinitialisés aux valeurs par défaut</string>
+    <string name="title_pref_wallpaper_sum">Conserver le dernier arrière-plan utilisé par défaut</string>
+    <string name="title_pref_wallpaper">Arrière-plan</string>
+    <string name="title_name_of_the_file">Nom du fichier</string>
+
+    <!-- FEEDBACK & SUGGESTIONS -->
+    <string name="complete_fields">Remplissez tous les champs</string>
+    <string name="thanks_comment">Merci pour vos commentaires</string>
+    <string name="problems_comment">Un problème est survenu, veuillez réessayer plus tard</string>
+    <string name="write_your_suggestion_or_comment">Écrivez votre suggestion ou commentaire</string>
+    <string name="put_your_email">Entrez votre email</string>
+    <string name="valid_mail">Entrez un email valide</string>
+    <string name="suggest_sort">Le commentaire est trop court. Veuillez écrire au moins 30 caractères</string>
+    <string name="share">Partager</string>
+    <string name="sending_message_please_wait">Envoi du message, veuillez patienter</string>
+    <string name="join_channel">Cliquez ici pour rejoindre notre chaîne Telegram</string>
+
+    <!-- THEME & APPEARANCE -->
+    <string name="mode_light">Forcer le mode clair</string>
+    <string name="mode_dark">Forcer le mode sombre</string>
+    <string name="mode_system">Défini par le système</string>
+    <string name="mode_battery">Sombre en mode économie de batterie</string>
+    <string name="change_theme_note">Pour que les modifications prennent effet, vous devez redémarrer complètement l\'application</string>
+    <string name="empty_canvas">Erreur, canevas vide</string>
+
+    <!-- MISCELLANEOUS -->
+    <string name="suggest">Suggérer</string>
+
+    <!-- CHANGELOG SCREEN -->
+    <string name="message_no_changelog_available">Aucun journal des modifications disponible</string>
+    <string name="message_check_back_later">Revenez plus tard pour les mises à jour</string>
+    <string name="changelog_version">Version %s</string>
+
+</resources>
+
