@@ -56,7 +56,7 @@ fun rememberGDPRConsent(): Boolean {
         }
 
         val params = ConsentRequestParameters.Builder()
-            .setTagForUnderAgeOfConsent(false)
+            .setTagForUnderAgeOfConsent(true)
             .build()
 
         val consentInformation = UserMessagingPlatform.getConsentInformation(activity)

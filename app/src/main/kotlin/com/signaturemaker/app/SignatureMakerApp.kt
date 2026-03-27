@@ -4,6 +4,8 @@ import android.app.Application
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.os.Environment
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.RequestConfiguration
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.signaturemaker.app.application.core.di.app.SignatureMakerDiImpl
 import com.signaturemaker.app.application.core.extensions.Utils
@@ -27,6 +29,14 @@ class SignatureMakerApp : Application(), KoinComponent {
 
         // Initialize Analytics
         Analytics.init(FirebaseAnalytics.getInstance(this))
+
+        // Configure ads for safe content (G rating only, no APK download ads)
+        val adConfig = MobileAds.getRequestConfiguration().toBuilder()
+            .setMaxAdContentRating(RequestConfiguration.MAX_AD_CONTENT_RATING_G)
+            .setTagForUnderAgeOfConsent(RequestConfiguration.TAG_FOR_UNDER_AGE_OF_CONSENT_TRUE)
+            .build()
+        MobileAds.setRequestConfiguration(adConfig)
+        MobileAds.initialize(this)
 
         setPath()
         Utils.loadAllPreferences(this)
