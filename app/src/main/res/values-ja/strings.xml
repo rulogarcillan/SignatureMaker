@@ -54,6 +54,12 @@
     <!-- SETTINGS SCREEN -->
 
     <string name="tittle_body_slider4">準備はできましたか？</string>
+
+    <!-- Onboarding navigation buttons -->
+    <string name="onboarding_next">次へ</string>
+    <string name="onboarding_skip">スキップ</string>
+    <string name="onboarding_get_started">始める</string>
+
     <string name="tittle_body_slider3">文書に署名を添付</string>
     <string name="tittle_body_slider2">署名を保存してどこにでも送信</string>
     <string name="tittle_body_slider1">簡単な手順で署名をデジタル化</string>

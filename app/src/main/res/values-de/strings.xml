@@ -79,6 +79,11 @@
     <string name="tittle_body_slider3">Fügen Sie Ihre Unterschrift zu Ihren Dokumenten hinzu</string>
     <string name="tittle_body_slider4">Sind Sie bereit?</string>
 
+    <!-- Onboarding navigation buttons -->
+    <string name="onboarding_next">Weiter</string>
+    <string name="onboarding_skip">Überspringen</string>
+    <string name="onboarding_get_started">Los geht\'s</string>
+
     <!-- SETTINGS SCREEN -->
     <string name="title_pref_app">App</string>
     <string name="title_pref_advertising">Werbung deaktivieren</string>

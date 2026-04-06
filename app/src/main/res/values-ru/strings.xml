@@ -54,6 +54,12 @@
     <!-- SETTINGS SCREEN -->
 
     <string name="tittle_body_slider4">Вы готовы?</string>
+
+    <!-- Onboarding navigation buttons -->
+    <string name="onboarding_next">Далее</string>
+    <string name="onboarding_skip">Пропустить</string>
+    <string name="onboarding_get_started">Начать</string>
+
     <string name="tittle_body_slider3">Прикрепите свою подпись к документам</string>
     <string name="tittle_body_slider2">Сохраните и отправьте свою подпись куда угодно</string>
     <string name="tittle_body_slider1">Оцифруйте свою подпись с помощью простой процедуры</string>

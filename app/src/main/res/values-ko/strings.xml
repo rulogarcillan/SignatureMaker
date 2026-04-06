@@ -79,6 +79,11 @@
     <string name="tittle_body_slider3">문서에 서명을 첨부하세요</string>
     <string name="tittle_body_slider4">준비되셨나요?</string>
 
+    <!-- Onboarding navigation buttons -->
+    <string name="onboarding_next">다음</string>
+    <string name="onboarding_skip">건너뛰기</string>
+    <string name="onboarding_get_started">시작하기</string>
+
     <!-- SETTINGS SCREEN -->
     <string name="title_pref_app">앱</string>
     <string name="title_pref_advertising">광고 비활성화</string>

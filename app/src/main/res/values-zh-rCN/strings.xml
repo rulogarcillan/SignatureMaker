@@ -209,6 +209,11 @@
     <!-- Slide 4: Description -->
     <string name="tittle_body_slider4">准备好了吗？</string>
 
+    <!-- Onboarding navigation buttons -->
+    <string name="onboarding_next">下一步</string>
+    <string name="onboarding_skip">跳过</string>
+    <string name="onboarding_get_started">开始使用</string>
+
     <!-- ============================================ -->
     <!-- SETTINGS SCREEN -->
     <!-- ============================================ -->

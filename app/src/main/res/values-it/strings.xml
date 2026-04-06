@@ -79,6 +79,11 @@
     <string name="tittle_body_slider3">Allega la tua firma ai tuoi documenti</string>
     <string name="tittle_body_slider4">Sei pronto?</string>
 
+    <!-- Onboarding navigation buttons -->
+    <string name="onboarding_next">Avanti</string>
+    <string name="onboarding_skip">Salta</string>
+    <string name="onboarding_get_started">Inizia</string>
+
     <!-- SETTINGS SCREEN -->
     <string name="title_pref_app">App</string>
     <string name="title_pref_advertising">Disattiva annunci</string>

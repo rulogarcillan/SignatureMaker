@@ -4,19 +4,26 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.signaturemaker.app.application.core.util.FeatureFlags
 import com.signaturemaker.app.application.features.changelog.ChangelogRoute
 import com.signaturemaker.app.application.features.files.FilesRoute
 import com.signaturemaker.app.application.features.main.MainRoute
 import com.signaturemaker.app.application.features.main.MainScreenAction
+import com.signaturemaker.app.application.features.onboarding.OnboardingScreen
 import com.signaturemaker.app.application.features.settings.SettingsRoute
 import com.signaturemaker.app.application.features.sign.SignRoute
 import com.signaturemaker.app.application.ui.navigation.core.navigateTo
 import com.signaturemaker.app.application.ui.navigation.routes.SignatureMakerRoutes
+import com.signaturemaker.app.application.ui.theming.SignatureMakerAppTheme
 
 /**
  * SignatureMaker App
@@ -29,6 +36,33 @@ import com.signaturemaker.app.application.ui.navigation.routes.SignatureMakerRou
  */
 @Composable
 fun SignatureMakerApp() {
+    val context = androidx.compose.ui.platform.LocalContext.current
+
+    // State-based onboarding: when flipped to false, the whole tree recomposes to main app
+    var isOnboarding by rememberSaveable {
+        mutableStateOf(FeatureFlags.shouldShowOnboarding(context))
+    }
+
+    if (isOnboarding) {
+        SignatureMakerAppTheme {
+            OnboardingScreen(
+                onFinish = {
+                    FeatureFlags.completeOnboarding(context)
+                    isOnboarding = false
+                }
+            )
+        }
+    } else {
+        MainApp()
+    }
+}
+
+/**
+ * Main application flow with scaffold, drawer, and content navigation.
+ * Separated from onboarding so each has its own NavController lifecycle.
+ */
+@Composable
+private fun MainApp() {
     val navController = rememberNavController()
     val context = androidx.compose.ui.platform.LocalContext.current
     val activity = context as? android.app.Activity

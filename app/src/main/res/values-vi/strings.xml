@@ -54,6 +54,12 @@
     <!-- SETTINGS SCREEN -->
 
     <string name="tittle_body_slider4">Bạn đã sẵn sàng chưa?</string>
+
+    <!-- Onboarding navigation buttons -->
+    <string name="onboarding_next">Tiếp theo</string>
+    <string name="onboarding_skip">Bỏ qua</string>
+    <string name="onboarding_get_started">Bắt đầu</string>
+
     <string name="tittle_body_slider3">Đính kèm chữ ký của bạn vào tài liệu</string>
     <string name="tittle_body_slider2">Lưu và gửi chữ ký của bạn ở bất cứ đâu</string>
     <string name="tittle_body_slider1">Số hóa chữ ký của bạn với quy trình đơn giản và dễ dàng</string>

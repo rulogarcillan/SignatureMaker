@@ -84,6 +84,14 @@ object IntentUtils {
             intent.data = Uri.parse(URL_RATE)
             context.startActivity(intent)
         } catch (_: ActivityNotFoundException) {
+            // Fallback: open Play Store in browser if market:// is not available
+            try {
+                val webIntent = Intent(Intent.ACTION_VIEW)
+                webIntent.data = Uri.parse("https://play.google.com/store/apps/details?id=com.signaturemaker.app")
+                context.startActivity(webIntent)
+            } catch (_: ActivityNotFoundException) {
+                // No browser available either
+            }
         }
     }
 

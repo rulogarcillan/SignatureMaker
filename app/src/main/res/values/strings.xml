@@ -231,6 +231,11 @@
     <!-- Slide 4: Description -->
     <string name="tittle_body_slider4">Are you ready?</string>
 
+    <!-- Onboarding navigation buttons -->
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_get_started">Get Started</string>
+
     <!-- ============================================ -->
     <!-- SETTINGS SCREEN -->
     <!-- Used in: Settings/Preferences screen -->

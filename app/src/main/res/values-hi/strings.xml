@@ -79,6 +79,11 @@
     <string name="tittle_body_slider3">अपने दस्तावेज़ों में अपना हस्ताक्षर संलग्न करें</string>
     <string name="tittle_body_slider4">क्या आप तैयार हैं?</string>
 
+    <!-- Onboarding navigation buttons -->
+    <string name="onboarding_next">अगला</string>
+    <string name="onboarding_skip">छोड़ें</string>
+    <string name="onboarding_get_started">शुरू करें</string>
+
     <!-- SETTINGS SCREEN -->
     <string name="title_pref_app">ऐप</string>
     <string name="title_pref_advertising">विज्ञापन अक्षम करें</string>

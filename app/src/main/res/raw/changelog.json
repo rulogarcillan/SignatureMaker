@@ -2,6 +2,37 @@
   "changelog": [
     {
       "date": "06/04/2026",
+      "versionCode": 4010,
+      "versionName": "4.0.4",
+      "change": [
+        {
+          "type": "feat",
+          "text": "Added onboarding screen for new users with guided introduction"
+        },
+        {
+          "type": "fix",
+          "text": "Fixed signature not saving correctly in landscape mode"
+        },
+        {
+          "type": "fix",
+          "text": "Fixed navigation drawer layout being compressed in landscape"
+        },
+        {
+          "type": "fix",
+          "text": "Fixed ads not showing due to GDPR consent flow bug"
+        },
+        {
+          "type": "fix",
+          "text": "Fixed Rate Us button fallback when Play Store app is unavailable"
+        },
+        {
+          "type": "refactor",
+          "text": "Improved In-App Review strategy with Play Store fallback"
+        }
+      ]
+    },
+    {
+      "date": "06/04/2026",
       "versionCode": 4009,
       "versionName": "4.0.3",
       "change": [

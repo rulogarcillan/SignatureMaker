@@ -44,6 +44,13 @@ sealed class SignatureMakerRoutes {
     }
 
     /**
+     * Onboarding screen route - shown on first launch
+     */
+    data object Onboarding : SimpleRoute {
+        override val route: String = "onboardingScreen"
+    }
+
+    /**
      * Example of a route with typed arguments.
      * Uncomment and adapt when you need to pass arguments to a screen.
      *

@@ -79,6 +79,11 @@
     <string name="tittle_body_slider3">İmzanızı belgelerinize ekleyin</string>
     <string name="tittle_body_slider4">Hazır mısınız?</string>
 
+    <!-- Onboarding navigation buttons -->
+    <string name="onboarding_next">İleri</string>
+    <string name="onboarding_skip">Atla</string>
+    <string name="onboarding_get_started">Başla</string>
+
     <!-- SETTINGS SCREEN -->
     <string name="title_pref_app">Uygulama</string>
     <string name="title_pref_advertising">Reklamları devre dışı bırak</string>

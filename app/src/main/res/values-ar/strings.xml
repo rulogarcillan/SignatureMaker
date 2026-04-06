@@ -209,6 +209,11 @@
     <!-- Slide 4: Description -->
     <string name="tittle_body_slider4">هل أنت مستعد؟</string>
 
+    <!-- Onboarding navigation buttons -->
+    <string name="onboarding_next">التالي</string>
+    <string name="onboarding_skip">تخطي</string>
+    <string name="onboarding_get_started">ابدأ الآن</string>
+
     <!-- ============================================ -->
     <!-- SETTINGS SCREEN -->
     <!-- ============================================ -->

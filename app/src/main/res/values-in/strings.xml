@@ -54,6 +54,12 @@
     <!-- SETTINGS SCREEN -->
 
     <string name="tittle_body_slider4">Apakah Anda siap?</string>
+
+    <!-- Onboarding navigation buttons -->
+    <string name="onboarding_next">Berikutnya</string>
+    <string name="onboarding_skip">Lewati</string>
+    <string name="onboarding_get_started">Mulai</string>
+
     <string name="tittle_body_slider3">Lampirkan tanda tangan Anda ke dokumen Anda</string>
     <string name="tittle_body_slider2">Simpan dan kirim tanda tangan Anda ke mana pun Anda mau</string>
     <string name="tittle_body_slider1">Digitalkan tanda tangan Anda dengan prosedur yang mudah dan sederhana</string>

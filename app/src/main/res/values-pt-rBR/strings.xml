@@ -207,6 +207,11 @@
     <!-- Slide 4: Description -->
     <string name="tittle_body_slider4">Você está pronto?</string>
 
+    <!-- Onboarding navigation buttons -->
+    <string name="onboarding_next">Próximo</string>
+    <string name="onboarding_skip">Pular</string>
+    <string name="onboarding_get_started">Começar</string>
+
     <!-- ============================================ -->
     <!-- SETTINGS SCREEN -->
     <!-- ============================================ -->

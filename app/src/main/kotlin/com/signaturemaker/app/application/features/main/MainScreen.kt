@@ -1,5 +1,6 @@
 package com.signaturemaker.app.application.features.main
 
+import android.content.res.Configuration
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
@@ -45,6 +46,7 @@ import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -303,6 +305,9 @@ private fun NavigationDrawerContent(
     onAction: (MainScreenAction) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val configuration = LocalContext.current.resources.configuration
+    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+
     ModalDrawerSheet(
         drawerShape = RectangleShape,
         drawerContainerColor = SMTheme.material.colorScheme.surface,
@@ -311,15 +316,19 @@ private fun NavigationDrawerContent(
             .fillMaxHeight()
     ) {
         DrawerTopSection(onCloseDrawerClick = { mainState.onDrawerClick() })
-        DrawerTitleSection()
+        if (!isLandscape) {
+            DrawerTitleSection()
+        }
         DrawerOptionsSection(
             menuConfig = menuConfig,
             mainState = mainState,
             onAction = onAction,
             modifier = Modifier.weight(1f)
         )
-        SMLineSeparator(modifier = Modifier.padding(vertical = SMTheme.spacing.spacing250))
-        DrawerSocialSection()
+        if (!isLandscape) {
+            SMLineSeparator(modifier = Modifier.padding(vertical = SMTheme.spacing.spacing250))
+            DrawerSocialSection()
+        }
     }
 }
 

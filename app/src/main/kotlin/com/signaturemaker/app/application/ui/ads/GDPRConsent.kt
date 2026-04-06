@@ -87,13 +87,6 @@ fun rememberGDPRConsent(): Boolean {
                 "GDPR: Consent status: ${consentInformation.consentStatus}".logd()
                 "GDPR: Is form available: ${consentInformation.isConsentFormAvailable}".logd()
 
-                // Verificar si podemos mostrar anuncios
-                if (consentInformation.canRequestAds()) {
-                    canShowAds = true
-                    consentStatus = ConsentStatus.OBTAINED
-                    "GDPR: Can request ads = true".logd()
-                }
-
                 // Cargar y mostrar formulario si es necesario
                 if (consentInformation.isConsentFormAvailable) {
                     UserMessagingPlatform.loadAndShowConsentFormIfRequired(activity) { formError ->
@@ -101,45 +94,44 @@ fun rememberGDPRConsent(): Boolean {
                             "GDPR: Error showing consent form: ${formError.message}".loge()
                             consentStatus = ConsentStatus.ERROR
                         } else {
-                            "GDPR: Consent form shown successfully".logd()
-                            // Verificar nuevamente después de mostrar el formulario
-                            if (consentInformation.canRequestAds()) {
-                                canShowAds = true
-                                consentStatus = ConsentStatus.OBTAINED
-                                "GDPR: User gave consent, can show ads".logd()
-                            } else {
-                                canShowAds = false
-                                consentStatus = ConsentStatus.REQUIRED
-                                "GDPR: User did not give consent".logd()
-                            }
+                            "GDPR: Consent form completed".logd()
+                        }
+
+                        // Siempre verificar después del intento de formulario (éxito o error)
+                        if (consentInformation.canRequestAds()) {
+                            canShowAds = true
+                            consentStatus = ConsentStatus.OBTAINED
+                            "GDPR: Can request ads after form attempt".logd()
                         }
                     }
                 } else {
-                    "GDPR: Consent form not available, consent not required".logd()
+                    "GDPR: Consent form not available".logd()
+                }
+
+                // Verificar si podemos mostrar anuncios (fuera de EEA o consent ya obtenido)
+                if (consentInformation.canRequestAds()) {
                     canShowAds = true
                     consentStatus = ConsentStatus.NOT_REQUIRED
+                    "GDPR: Can request ads = true".logd()
                 }
             },
             { error ->
-                // Error
-                "GDPR: Error requesting consent information: ${error.message}".loge()
-                "GDPR: Error code: ${error.errorCode}".loge()
+                // Error de red o configuración - no bloquear ads innecesariamente
+                "GDPR: Error requesting consent info: ${error.message} (code: ${error.errorCode})".loge()
                 consentStatus = ConsentStatus.ERROR
 
-                // En caso de error, permitir anuncios si ya tenemos consentimiento previo
+                // Si ya tenemos consentimiento previo, seguir mostrando ads
                 if (consentInformation.canRequestAds()) {
                     canShowAds = true
                     "GDPR: Error but can request ads from previous consent".logd()
+                } else {
+                    // Fallback: si no hay info de consent, permitir ads con personalización limitada
+                    // Google Ads SDK maneja internamente el nivel de personalización
+                    canShowAds = true
+                    "GDPR: Error and no prior consent, allowing ads with limited personalization".logd()
                 }
             }
         )
-
-        // Verificar estado inicial
-        if (consentInformation.canRequestAds()) {
-            canShowAds = true
-            consentStatus = ConsentStatus.OBTAINED
-            "GDPR: Initial check - can request ads".logd()
-        }
     }
 
     return canShowAds
