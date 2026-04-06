@@ -8,8 +8,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
+import com.google.android.ump.ConsentDebugSettings
 import com.google.android.ump.ConsentRequestParameters
 import com.google.android.ump.UserMessagingPlatform
+import com.signaturemaker.app.BuildConfig
 import com.tuppersoft.skizo.android.core.extension.logd
 import com.tuppersoft.skizo.android.core.extension.loge
 
@@ -56,10 +58,24 @@ fun rememberGDPRConsent(): Boolean {
         }
 
         val params = ConsentRequestParameters.Builder()
-            .setTagForUnderAgeOfConsent(true)
+            .setTagForUnderAgeOfConsent(false)
+            .apply {
+                if (BuildConfig.DEBUG) {
+                    val debugSettings = ConsentDebugSettings.Builder(activity)
+                        .setDebugGeography(ConsentDebugSettings.DebugGeography.DEBUG_GEOGRAPHY_EEA)
+                        .build()
+                    setConsentDebugSettings(debugSettings)
+                }
+            }
             .build()
 
         val consentInformation = UserMessagingPlatform.getConsentInformation(activity)
+
+        // En debug, resetear consent para forzar que el formulario aparezca cada vez
+        if (BuildConfig.DEBUG) {
+            consentInformation.reset()
+            "GDPR: Debug mode - consent reset".logd()
+        }
 
         // Solicitar actualización de información de consentimiento
         consentInformation.requestConsentInfoUpdate(
@@ -100,6 +116,7 @@ fun rememberGDPRConsent(): Boolean {
                     }
                 } else {
                     "GDPR: Consent form not available, consent not required".logd()
+                    canShowAds = true
                     consentStatus = ConsentStatus.NOT_REQUIRED
                 }
             },

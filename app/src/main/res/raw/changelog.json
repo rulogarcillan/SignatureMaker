@@ -1,6 +1,52 @@
 {
   "changelog": [
     {
+      "date": "06/04/2026",
+      "versionCode": 4009,
+      "versionName": "4.0.3",
+      "change": [
+        {
+          "type": "fix",
+          "text": "Fixed ad banners not loading (TAG_FOR_UNDER_AGE_OF_CONSENT misconfiguration)"
+        },
+        {
+          "type": "fix",
+          "text": "Fixed GDPR consent form not showing for EEA users"
+        },
+        {
+          "type": "feat",
+          "text": "Added privacy management option in Settings to change ad consent preferences"
+        },
+        {
+          "type": "feat",
+          "text": "Added In-App Review: rate the app without leaving it"
+        },
+        {
+          "type": "feat",
+          "text": "Added In-App Update: get new versions faster with background downloads"
+        },
+        {
+          "type": "feat",
+          "text": "Shared signatures now include a link to the app"
+        },
+        {
+          "type": "feat",
+          "text": "Added Chinese (Simplified) and Arabic language support"
+        }
+      ]
+    },
+    {
+      "date": "06/04/2026",
+      "versionCode": 4008,
+      "versionName": "4.0.2",
+      "change": [
+        {
+          "type": "fix",
+          "text": "Fixed admob safe content rating"
+        }
+      ]
+    },
+    {
       "date": "28/11/2025",
       "versionCode": 4005,
       "versionName": "4.0.1",

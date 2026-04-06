@@ -1,5 +1,6 @@
 package com.signaturemaker.app.application.features.settings
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,8 +19,10 @@ import androidx.compose.material.icons.filled.Brush
 import androidx.compose.material.icons.filled.ColorLens
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Description
+import androidx.compose.material.icons.filled.PrivacyTip
 import androidx.compose.material.icons.filled.RestartAlt
 import androidx.compose.material.icons.filled.Wallpaper
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Switch
@@ -27,12 +30,14 @@ import androidx.compose.material3.SwitchDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import com.google.android.ump.UserMessagingPlatform
 import com.signaturemaker.app.R
 import com.signaturemaker.app.application.ui.designsystem.SMTheme
 import com.signaturemaker.app.application.ui.designsystem.components.SMButton
@@ -147,6 +152,10 @@ private fun SettingsContent(
                 title = stringResource(R.string.title_others),
                 icon = Icons.Default.RestartAlt
             ) {
+                SettingsPrivacyItem()
+
+                Spacer(modifier = Modifier.height(SMTheme.spacing.spacing150))
+
                 SettingsActionItem(
                     title = stringResource(R.string.title_pref_reset),
                     description = stringResource(R.string.title_pref_reset_sum),
@@ -332,5 +341,87 @@ private fun SettingsActionItem(
             onClick = onClick,
             modifier = Modifier.fillMaxWidth()
         )
+    }
+}
+
+// ============================================
+// PRIVACY ITEM
+// ============================================
+
+/**
+ * Privacy settings item - allows user to change GDPR ad consent preferences
+ * Uses UserMessagingPlatform.showPrivacyOptionsForm to reopen the consent dialog
+ * Only shows if the privacy options form is available (EEA users)
+ */
+@Composable
+private fun SettingsPrivacyItem(
+    modifier: Modifier = Modifier
+) {
+    val context = LocalContext.current
+    val activity = context as? android.app.Activity
+    val consentInformation = remember(activity) {
+        activity?.let { UserMessagingPlatform.getConsentInformation(it) }
+    }
+
+    // Only show if privacy options form is required
+    val isPrivacyOptionsRequired = consentInformation?.privacyOptionsRequirementStatus ==
+        com.google.android.ump.ConsentInformation.PrivacyOptionsRequirementStatus.REQUIRED
+
+    if (isPrivacyOptionsRequired && activity != null) {
+        Column(
+            modifier = modifier.fillMaxWidth()
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = SMTheme.spacing.spacing100),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                SMIcon(
+                    imageVector = Icons.Default.PrivacyTip,
+                    contentDescription = null,
+                    tint = SMTheme.material.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.size(SMTheme.size.size250)
+                )
+
+                Spacer(modifier = Modifier.size(SMTheme.spacing.spacing150))
+
+                Column(
+                    modifier = Modifier.weight(1f)
+                ) {
+                    SMText(
+                        text = stringResource(R.string.handle_privacy_policy),
+                        style = SMTheme.material.typography.bodyLarge,
+                        color = SMTheme.material.colorScheme.onSurface
+                    )
+
+                    Spacer(modifier = Modifier.height(SMTheme.spacing.spacing50))
+
+                    SMText(
+                        text = stringResource(R.string.handle_privacy_policy_sum),
+                        style = SMTheme.material.typography.bodySmall,
+                        color = SMTheme.material.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(SMTheme.spacing.spacing150))
+
+            SMButton(
+                text = stringResource(R.string.handle_privacy_policy),
+                onClick = {
+                    UserMessagingPlatform.showPrivacyOptionsForm(activity) { /* no-op */ }
+                },
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.outlinedButtonColors(
+                    contentColor = SMTheme.material.colorScheme.primary
+                ),
+                border = BorderStroke(
+                    width = SMTheme.size.size10,
+                    color = SMTheme.material.colorScheme.outline
+                ),
+                elevation = null
+            )
+        }
     }
 }

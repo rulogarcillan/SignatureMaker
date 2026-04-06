@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ============================================ -->
+    <!-- APP IDENTITY -->
+    <!-- ============================================ -->
+
+    <!-- Main app title - Shown in: TopBar, Drawer header -->
+    <string name="app_title">Signature Maker</string>
+
+    <!-- Content description for accessibility -->
+    <string name="close_menu">إغلاق القائمة</string>
+    <string name="logo">الشعار</string>
+
+    <!-- ============================================ -->
+    <!-- NAVIGATION MENU -->
+    <!-- ============================================ -->
+
+    <!-- Menu item: Opens signature creation screen -->
+    <string name="title_create_signature">إنشاء توقيع</string>
+
+    <!-- Menu item: Opens saved signatures gallery -->
+    <string name="title_gallery">المعرض</string>
+
+    <!-- Menu item: Opens app settings -->
+    <string name="title_setting">الإعدادات</string>
+
+    <!-- Menu item: Manage privacy consent (GDPR) -->
+    <string name="title_edit_privacy_policy">تعديل سياسة الخصوصية</string>
+
+    <!-- Section header in menu for miscellaneous options -->
+    <string name="title_others">أخرى</string>
+
+    <!-- Activity title (legacy, may not be used) -->
+    <string name="title_activity_settings">الإعدادات</string>
+
+    <!-- ============================================ -->
+    <!-- SIGN SCREEN - Action Buttons -->
+    <!-- ============================================ -->
+
+    <!-- Button: Save signature to gallery -->
+    <string name="title_bSave">حفظ</string>
+
+    <!-- Button: View list of saved signatures -->
+    <string name="title_bList">القائمة</string>
+
+    <!-- Button: Save signature and share it -->
+    <string name="title_bSaveSend">حفظ وإرسال</string>
+
+    <!-- Button: Change pen color -->
+    <string name="title_bColor">اللون</string>
+
+    <!-- Button: Change stroke width -->
+    <string name="title_bStroke">سمك الخط</string>
+
+    <!-- Button: Clear/erase signature canvas -->
+    <string name="title_bRubber">مسح</string>
+
+    <!-- Placeholder text on empty signature canvas -->
+    <string name="title_SingHere">وقّع هنا</string>
+
+    <!-- ============================================ -->
+    <!-- SIGN SCREEN - Bottom Sheet Headers -->
+    <!-- ============================================ -->
+
+    <!-- Generic options header -->
+    <string name="title_options">الخيارات</string>
+
+    <!-- Header for signature customization panel -->
+    <string name="title_signature_options">خيارات التوقيع</string>
+
+    <!-- Header for action buttons section -->
+    <string name="title_actions">الإجراءات</string>
+
+    <!-- Header for background selection section -->
+    <string name="title_background">الخلفية</string>
+
+    <!-- ============================================ -->
+    <!-- DRAWER MENU - Social & Actions -->
+    <!-- ============================================ -->
+
+    <!-- Section header for social media links -->
+    <string name="follow_us">تابعنا</string>
+
+    <!-- Menu action: Open email to send feedback -->
+    <string name="send_suggestions">إرسال اقتراحات</string>
+
+    <!-- Menu action: View app changelog/release notes -->
+    <string name="changelog">سجل التغييرات</string>
+
+    <!-- Menu action: Open Play Store to rate app -->
+    <string name="rate">قيّمنا</string>
+
+    <!-- Menu action: View developer's other apps -->
+    <string name="more_app">المزيد من التطبيقات</string>
+
+    <!-- Menu action: View open source licenses -->
+    <string name="license">التراخيص</string>
+
+    <!-- Menu action: View privacy policy in browser -->
+    <string name="privacy_policy">سياسة الخصوصية</string>
+
+    <!-- Menu action: Manage privacy settings/consent -->
+    <string name="handle_privacy_policy">إدارة الخصوصية</string>
+
+    <!-- Setting: Description for manage ad privacy preferences -->
+    <string name="handle_privacy_policy_sum">تغيير تفضيلات تخصيص الإعلانات والموافقة</string>
+
+    <!-- ============================================ -->
+    <!-- NOTIFICATIONS & FEEDBACK MESSAGES -->
+    <!-- ============================================ -->
+
+    <!-- Success message when file is saved -->
+    <string name="title_save_ok">تم حفظ الملف بنجاح</string>
+
+    <!-- Error message when file save fails -->
+    <string name="title_save_ko">خطأ في حفظ الملف</string>
+
+    <!-- Snackbar: File saved successfully -->
+    <string name="message_file_saved_successfully">تم حفظ الملف بنجاح</string>
+
+    <!-- Snackbar: Error occurred while saving -->
+    <string name="message_error_saving_file">خطأ في حفظ الملف</string>
+
+    <!-- Action button: Retry failed operation -->
+    <string name="action_retry">إعادة المحاولة</string>
+
+    <!-- Action button: Undo last stroke -->
+    <string name="action_undo">تراجع</string>
+
+    <!-- Action button: Redo undone stroke -->
+    <string name="action_redo">إعادة</string>
+
+    <!-- Action button: View saved file -->
+    <string name="action_view">عرض</string>
+
+    <!-- Action button: Clear/delete content -->
+    <string name="title_clean">تنظيف</string>
+
+    <!-- ============================================ -->
+    <!-- FILES SCREEN -->
+    <!-- ============================================ -->
+
+    <!-- Sort option: Order files by date -->
+    <string name="sort">ترتيب حسب التاريخ</string>
+
+    <!-- Empty state: No files found -->
+    <string name="title_no_files">لا توجد ملفات</string>
+
+    <!-- Action button: Delete selected file -->
+    <string name="delete">حذف</string>
+
+    <!-- Action button: Undo last action -->
+    <string name="title_undo">تراجع</string>
+
+    <!-- Empty state message in gallery (primary text) -->
+    <string name="message_no_files">لا توجد توقيعات محفوظة بعد</string>
+
+    <!-- Empty state message in gallery (secondary text) -->
+    <string name="message_no_files_description">أنشئ توقيعك الأول وسيظهر هنا</string>
+
+    <!-- Error: Storage permission denied -->
+    <string name="message_error_permission_required">يلزم إذن للوصول إلى الملفات</string>
+
+    <!-- Error: Failed to load files from storage -->
+    <string name="message_error_loading_files">خطأ في تحميل الملفات</string>
+
+    <!-- Confirmation message after deleting a file -->
+    <string name="message_file_deleted">تم حذف الملف</string>
+
+    <!-- ============================================ -->
+    <!-- PERMISSIONS -->
+    <!-- ============================================ -->
+
+    <!-- Message explaining why app needs permissions -->
+    <string name="body_permissions">يجب قبول الأذونات لكي يعمل التطبيق بشكل صحيح</string>
+
+    <!-- Dialog title for permission request -->
+    <string name="title_request_permision">طلب أذونات القراءة والكتابة</string>
+
+    <!-- Detailed explanation of required permissions -->
+    <string name="body_request_permision">لاستخدام التطبيق بشكل صحيح، يجب الحصول على بعض أذونات النظام. يرجى قبول الأذونات وإلا لن يعمل التطبيق.</string>
+
+    <!-- ============================================ -->
+    <!-- ONBOARDING SLIDES -->
+    <!-- ============================================ -->
+
+    <!-- Slide 1: Main feature -->
+    <string name="tittle_slider1">وقّع</string>
+
+    <!-- Slide 2: Save/export feature -->
+    <string name="tittle_slider2">انقل</string>
+
+    <!-- Slide 3: Integration feature -->
+    <string name="tittle_slider3">أرفق</string>
+
+    <!-- Slide 4: Call to action -->
+    <string name="tittle_slider4">ابدأ</string>
+
+    <!-- Slide 1: Description -->
+    <string name="tittle_body_slider1">حوّل توقيعك إلى رقمي بطريقة سهلة وبسيطة</string>
+
+    <!-- Slide 2: Description -->
+    <string name="tittle_body_slider2">احفظ وأرسل توقيعك إلى أي مكان</string>
+
+    <!-- Slide 3: Description -->
+    <string name="tittle_body_slider3">أرفق توقيعك في مستنداتك</string>
+
+    <!-- Slide 4: Description -->
+    <string name="tittle_body_slider4">هل أنت مستعد؟</string>
+
+    <!-- ============================================ -->
+    <!-- SETTINGS SCREEN -->
+    <!-- ============================================ -->
+
+    <!-- Category header: General app settings -->
+    <string name="title_pref_app">التطبيق</string>
+
+    <!-- Setting: Disable advertisement option -->
+    <string name="title_pref_advertising">إيقاف الإعلانات</string>
+    <string name="title_pref_advertising_sum">أوقف الإعلانات إذا كانت تزعجك</string>
+
+    <!-- Category header: File management settings -->
+    <string name="title_pref_files">الملفات</string>
+
+    <!-- Setting: Path where signatures are saved -->
+    <string name="title_pref_path">مسار التوقيعات المُصدَّرة</string>
+
+    <!-- Setting: Delete all signatures when closing app -->
+    <string name="title_pref_delete">حذف التوقيعات</string>
+
+    <!-- Description for delete on exit setting -->
+    <string name="title_pref_delete_sum">حذف جميع التوقيعات عند الخروج</string>
+
+    <!-- Setting: Hide signatures from phone gallery -->
+    <string name="title_pref_gallery">إخفاء التوقيعات</string>
+    <string name="title_pref_gallery_sum">عدم عرض التوقيعات في معرض الهاتف</string>
+
+    <!-- Setting: Choose file name when saving -->
+    <string name="title_pref_name">اسم الملف</string>
+    <string name="title_pref_name_sum">اختيار اسم الملف عند الحفظ</string>
+
+    <!-- Category header: Signature customization settings -->
+    <string name="title_pref_siganture">التوقيع</string>
+
+    <!-- Setting: Remember last stroke width -->
+    <string name="title_pref_stroke">سمك الخط</string>
+
+    <!-- Description for remember stroke setting -->
+    <string name="title_pref_stroke_sum">الاحتفاظ بآخر سمك خط مستخدم كافتراضي</string>
+
+    <!-- Setting: Remember last pen color -->
+    <string name="title_pref_color">اللون</string>
+
+    <!-- Description for remember color setting -->
+    <string name="title_pref_color_sum">الاحتفاظ بآخر لون مستخدم كافتراضي</string>
+
+    <!-- Setting: Reset all preferences to defaults -->
+    <string name="title_pref_reset">القيم الافتراضية</string>
+
+    <!-- Description/confirmation for reset action -->
+    <string name="title_pref_reset_sum">إعادة تعيين جميع الإعدادات إلى قيمها الافتراضية</string>
+
+    <!-- Confirmation message after resetting settings -->
+    <string name="message_settings_reset_success">تمت إعادة تعيين الإعدادات إلى القيم الافتراضية</string>
+
+    <!-- Description for remember wallpaper setting -->
+    <string name="title_pref_wallpaper_sum">الاحتفاظ بآخر خلفية مستخدمة كافتراضية</string>
+
+    <!-- Setting: Remember last background -->
+    <string name="title_pref_wallpaper">الخلفية</string>
+
+    <!-- Dialog: Input field label for file name -->
+    <string name="title_name_of_the_file">اسم الملف</string>
+
+    <!-- ============================================ -->
+    <!-- FEEDBACK & SUGGESTIONS -->
+    <!-- ============================================ -->
+
+    <!-- Validation: All form fields must be filled -->
+    <string name="complete_fields">أكمل جميع الحقول</string>
+
+    <!-- Success message: Feedback submitted -->
+    <string name="thanks_comment">شكراً لملاحظاتك</string>
+
+    <!-- Error message: Submission failed -->
+    <string name="problems_comment">حدثت مشكلة، يرجى المحاولة مرة أخرى لاحقاً</string>
+
+    <!-- Placeholder: Comment textarea -->
+    <string name="write_your_suggestion_or_comment">اكتب اقتراحك أو تعليقك</string>
+
+    <!-- Placeholder: Email input field -->
+    <string name="put_your_email">أدخل بريدك الإلكتروني</string>
+
+    <!-- Validation: Invalid email format -->
+    <string name="valid_mail">أدخل بريداً إلكترونياً صالحاً</string>
+
+    <!-- Validation: Comment too short -->
+    <string name="suggest_sort">التعليق قصير جداً. يرجى كتابة 30 حرفاً على الأقل</string>
+
+    <!-- Action button: Share signature with others -->
+    <string name="share">مشاركة</string>
+
+    <!-- Loading message: Submitting feedback -->
+    <string name="sending_message_please_wait">جارٍ إرسال الرسالة، يرجى الانتظار</string>
+
+    <!-- Call to action: Join Telegram channel -->
+    <string name="join_channel">انقر هنا للانضمام إلى قناتنا على تيليجرام</string>
+
+    <!-- ============================================ -->
+    <!-- THEME & APPEARANCE -->
+    <!-- ============================================ -->
+
+    <!-- Theme option: Force light mode -->
+    <string name="mode_light">فرض الوضع الفاتح</string>
+
+    <!-- Theme option: Force dark mode -->
+    <string name="mode_dark">فرض الوضع الداكن</string>
+
+    <!-- Theme option: Follow system theme -->
+    <string name="mode_system">حسب إعدادات النظام</string>
+
+    <!-- Theme option: Dark mode in battery saver -->
+    <string name="mode_battery">داكن في وضع توفير البطارية</string>
+
+    <!-- Note: Theme change requires app restart -->
+    <string name="change_theme_note">لتطبيق التغييرات، يجب إعادة تشغيل التطبيق بالكامل</string>
+
+    <!-- Error: Canvas is empty -->
+    <string name="empty_canvas">خطأ، اللوحة فارغة</string>
+
+    <!-- ============================================ -->
+    <!-- MISCELLANEOUS -->
+    <!-- ============================================ -->
+
+    <!-- Button/action: Suggest/Send suggestion -->
+    <string name="suggest">اقتراح</string>
+
+    <!-- ============================================ -->
+    <!-- CHANGELOG SCREEN -->
+    <!-- ============================================ -->
+
+    <!-- Empty state: No changelog entries found -->
+    <string name="message_no_changelog_available">لا يوجد سجل تغييرات متاح</string>
+
+    <!-- Empty state: Explanation text -->
+    <string name="message_check_back_later">عُد لاحقاً لمشاهدة التحديثات</string>
+
+    <!-- Version header with placeholder for version name -->
+    <string name="changelog_version">الإصدار %s</string>
+
+</resources>

@@ -91,6 +91,7 @@
     <!-- NOTIFICATIONS & FEEDBACK MESSAGES -->
 
     <string name="handle_privacy_policy">プライバシー管理</string>
+    <string name="handle_privacy_policy_sum">広告のパーソナライズと同意の設定を変更します</string>
     <string name="privacy_policy">プライバシーポリシー</string>
     <string name="license">ライセンス</string>
     <string name="more_app">その他のアプリ</string>

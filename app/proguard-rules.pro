@@ -19,3 +19,16 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# --- WorkManager (transitive dep from Firebase/AdMob) ---
+# Keep Room-generated WorkDatabase and its constructors
+-keep class androidx.work.impl.WorkDatabase { *; }
+-keep class androidx.work.impl.WorkDatabase_Impl { *; }
+-keep class androidx.work.impl.WorkDatabasePathHelper { *; }
+-keep class * extends androidx.room.RoomDatabase { *; }
+-keep class * extends androidx.room.RoomOpenHelper { *; }
+
+# Keep WorkManager initializer
+-keep class androidx.work.WorkManagerInitializer { *; }
+-keep class androidx.startup.InitializationProvider { *; }
+-keep class * extends androidx.startup.Initializer { *; }

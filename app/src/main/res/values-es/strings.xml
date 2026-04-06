@@ -103,6 +103,9 @@
     <!-- Menu action: Manage privacy settings/consent -->
     <string name="handle_privacy_policy">Administrar privacidad</string>
 
+    <!-- Setting: Description for manage ad privacy preferences -->
+    <string name="handle_privacy_policy_sum">Cambia tus preferencias de personalización de anuncios y consentimiento</string>
+
     <!-- ============================================ -->
     <!-- NOTIFICATIONS & FEEDBACK MESSAGES -->
     <!-- ============================================ -->

@@ -115,6 +115,9 @@
     <!-- Menu action: Manage privacy settings/consent -->
     <string name="handle_privacy_policy">Manage privacy</string>
 
+    <!-- Setting: Description for manage ad privacy preferences -->
+    <string name="handle_privacy_policy_sum">Change your ad personalization and consent preferences</string>
+
     <!-- ============================================ -->
     <!-- NOTIFICATIONS & FEEDBACK MESSAGES -->
     <!-- Used in: Snackbars, toasts, error dialogs -->

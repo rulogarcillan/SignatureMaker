@@ -40,6 +40,7 @@
     <string name="license">Lizenzen</string>
     <string name="privacy_policy">Datenschutzrichtlinie</string>
     <string name="handle_privacy_policy">Datenschutz verwalten</string>
+    <string name="handle_privacy_policy_sum">Ändern Sie Ihre Einstellungen zur Anzeigenpersonalisierung und Einwilligung</string>
 
     <!-- NOTIFICATIONS & FEEDBACK MESSAGES -->
     <string name="title_save_ok">Datei erfolgreich gespeichert</string>

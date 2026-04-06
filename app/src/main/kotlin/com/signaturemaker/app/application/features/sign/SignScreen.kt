@@ -3,6 +3,7 @@ package com.signaturemaker.app.application.features.sign
 import android.Manifest
 import android.os.Build
 import androidx.activity.compose.LocalActivity
+import com.signaturemaker.app.application.core.util.InAppReviewHelper
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.DrawableRes
@@ -161,6 +162,8 @@ fun SignScreen(
                     strokeMax = signState.strokeWidthRange.endInclusive,
                     backgroundType = signState.selectedImage
                 )
+                InAppReviewHelper.trackSignatureSaved(context)
+                currentActivity?.let { InAppReviewHelper.requestReviewIfEligible(it) }
             }
 
             is SignUiEvent.SharePngTransparent,

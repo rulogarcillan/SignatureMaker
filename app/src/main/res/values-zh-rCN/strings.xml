@@ -9,343 +9,344 @@
     <string name="app_title">Signature Maker</string>
 
     <!-- Content description for accessibility -->
-    <string name="close_menu">Fechar menu</string>
-    <string name="logo">Logo</string>
+    <string name="close_menu">关闭菜单</string>
+    <string name="logo">标志</string>
 
     <!-- ============================================ -->
     <!-- NAVIGATION MENU -->
     <!-- ============================================ -->
 
     <!-- Menu item: Opens signature creation screen -->
-    <string name="title_create_signature">Criar assinatura</string>
+    <string name="title_create_signature">创建签名</string>
 
     <!-- Menu item: Opens saved signatures gallery -->
-    <string name="title_gallery">Galeria</string>
+    <string name="title_gallery">图库</string>
 
     <!-- Menu item: Opens app settings -->
-    <string name="title_setting">Configurações</string>
+    <string name="title_setting">设置</string>
 
     <!-- Menu item: Manage privacy consent (GDPR) -->
-    <string name="title_edit_privacy_policy">Editar política de privacidade</string>
+    <string name="title_edit_privacy_policy">编辑隐私政策</string>
 
     <!-- Section header in menu for miscellaneous options -->
-    <string name="title_others">Outros</string>
+    <string name="title_others">其他</string>
 
     <!-- Activity title (legacy, may not be used) -->
-    <string name="title_activity_settings">Configurações</string>
+    <string name="title_activity_settings">设置</string>
 
     <!-- ============================================ -->
     <!-- SIGN SCREEN - Action Buttons -->
     <!-- ============================================ -->
 
     <!-- Button: Save signature to gallery -->
-    <string name="title_bSave">Salvar</string>
+    <string name="title_bSave">保存</string>
 
     <!-- Button: View list of saved signatures -->
-    <string name="title_bList">Lista</string>
+    <string name="title_bList">列表</string>
 
     <!-- Button: Save signature and share it -->
-    <string name="title_bSaveSend">Salvar e enviar</string>
+    <string name="title_bSaveSend">保存并发送</string>
 
     <!-- Button: Change pen color -->
-    <string name="title_bColor">Cor</string>
+    <string name="title_bColor">颜色</string>
 
     <!-- Button: Change stroke width -->
-    <string name="title_bStroke">Espessura</string>
+    <string name="title_bStroke">笔画粗细</string>
 
     <!-- Button: Clear/erase signature canvas -->
-    <string name="title_bRubber">Limpar</string>
+    <string name="title_bRubber">清除</string>
 
     <!-- Placeholder text on empty signature canvas -->
-    <string name="title_SingHere">Assine aqui</string>
+    <string name="title_SingHere">在此签名</string>
 
     <!-- ============================================ -->
     <!-- SIGN SCREEN - Bottom Sheet Headers -->
     <!-- ============================================ -->
 
     <!-- Generic options header -->
-    <string name="title_options">Opções</string>
+    <string name="title_options">选项</string>
 
     <!-- Header for signature customization panel -->
-    <string name="title_signature_options">Opções de assinatura</string>
+    <string name="title_signature_options">签名选项</string>
 
     <!-- Header for action buttons section -->
-    <string name="title_actions">Ações</string>
+    <string name="title_actions">操作</string>
 
     <!-- Header for background selection section -->
-    <string name="title_background">Fundo</string>
+    <string name="title_background">背景</string>
 
     <!-- ============================================ -->
     <!-- DRAWER MENU - Social & Actions -->
     <!-- ============================================ -->
 
     <!-- Section header for social media links -->
-    <string name="follow_us">Siga-nos</string>
+    <string name="follow_us">关注我们</string>
 
     <!-- Menu action: Open email to send feedback -->
-    <string name="send_suggestions">Enviar sugestões</string>
+    <string name="send_suggestions">发送建议</string>
 
     <!-- Menu action: View app changelog/release notes -->
-    <string name="changelog">Registro de alterações</string>
+    <string name="changelog">更新日志</string>
 
     <!-- Menu action: Open Play Store to rate app -->
-    <string name="rate">Avalie-nos</string>
+    <string name="rate">给我们评分</string>
 
     <!-- Menu action: View developer's other apps -->
-    <string name="more_app">Mais aplicativos</string>
+    <string name="more_app">更多应用</string>
 
     <!-- Menu action: View open source licenses -->
-    <string name="license">Licenças</string>
+    <string name="license">许可证</string>
 
     <!-- Menu action: View privacy policy in browser -->
-    <string name="privacy_policy">Política de privacidade</string>
+    <string name="privacy_policy">隐私政策</string>
 
     <!-- Menu action: Manage privacy settings/consent -->
-    <string name="handle_privacy_policy">Gerenciar privacidade</string>
-    <string name="handle_privacy_policy_sum">Altere suas preferências de personalização de anúncios e consentimento</string>
+    <string name="handle_privacy_policy">管理隐私</string>
+
+    <!-- Setting: Description for manage ad privacy preferences -->
+    <string name="handle_privacy_policy_sum">更改您的广告个性化和同意偏好设置</string>
 
     <!-- ============================================ -->
     <!-- NOTIFICATIONS & FEEDBACK MESSAGES -->
     <!-- ============================================ -->
 
     <!-- Success message when file is saved -->
-    <string name="title_save_ok">Arquivo salvo com sucesso</string>
+    <string name="title_save_ok">文件保存成功</string>
 
     <!-- Error message when file save fails -->
-    <string name="title_save_ko">Erro ao salvar arquivo</string>
+    <string name="title_save_ko">保存文件时出错</string>
 
     <!-- Snackbar: File saved successfully -->
-    <string name="message_file_saved_successfully">Arquivo salvo com sucesso</string>
+    <string name="message_file_saved_successfully">文件保存成功</string>
 
     <!-- Snackbar: Error occurred while saving -->
-    <string name="message_error_saving_file">Erro ao salvar arquivo</string>
+    <string name="message_error_saving_file">保存文件时出错</string>
 
     <!-- Action button: Retry failed operation -->
-    <string name="action_retry">Tentar novamente</string>
+    <string name="action_retry">重试</string>
 
     <!-- Action button: Undo last stroke -->
-    <string name="action_undo">Desfazer</string>
+    <string name="action_undo">撤销</string>
 
     <!-- Action button: Redo undone stroke -->
-    <string name="action_redo">Refazer</string>
+    <string name="action_redo">重做</string>
 
     <!-- Action button: View saved file -->
-    <string name="action_view">Ver</string>
+    <string name="action_view">查看</string>
 
     <!-- Action button: Clear/delete content -->
-    <string name="title_clean">Limpar</string>
+    <string name="title_clean">清空</string>
 
     <!-- ============================================ -->
     <!-- FILES SCREEN -->
     <!-- ============================================ -->
 
     <!-- Sort option: Order files by date -->
-    <string name="sort">Ordenar por data</string>
+    <string name="sort">按日期排序</string>
 
     <!-- Empty state: No files found -->
-    <string name="title_no_files">Sem arquivos</string>
+    <string name="title_no_files">无文件</string>
 
     <!-- Action button: Delete selected file -->
-    <string name="delete">Excluir</string>
+    <string name="delete">删除</string>
 
     <!-- Action button: Undo last action -->
-    <string name="title_undo">Desfazer</string>
+    <string name="title_undo">撤销</string>
 
     <!-- Empty state message in gallery (primary text) -->
-    <string name="message_no_files">Ainda não há assinaturas salvas</string>
+    <string name="message_no_files">还没有保存的签名</string>
 
     <!-- Empty state message in gallery (secondary text) -->
-    <string name="message_no_files_description">Crie sua primeira assinatura e ela aparecerá aqui</string>
+    <string name="message_no_files_description">创建您的第一个签名，它会显示在这里</string>
 
     <!-- Error: Storage permission denied -->
-    <string name="message_error_permission_required">Permissão necessária para acessar arquivos</string>
+    <string name="message_error_permission_required">需要权限才能访问文件</string>
 
     <!-- Error: Failed to load files from storage -->
-    <string name="message_error_loading_files">Erro ao carregar arquivos</string>
+    <string name="message_error_loading_files">加载文件时出错</string>
 
     <!-- Confirmation message after deleting a file -->
-    <string name="message_file_deleted">Arquivo excluído</string>
+    <string name="message_file_deleted">文件已删除</string>
 
     <!-- ============================================ -->
     <!-- PERMISSIONS -->
     <!-- ============================================ -->
 
     <!-- Message explaining why app needs permissions -->
-    <string name="body_permissions">Você precisa aceitar as permissões para que o aplicativo funcione corretamente</string>
+    <string name="body_permissions">您必须接受权限才能使应用正常运行</string>
 
     <!-- Dialog title for permission request -->
-    <string name="title_request_permision">Solicitação de permissões de leitura e gravação</string>
+    <string name="title_request_permision">请求读写权限</string>
 
     <!-- Detailed explanation of required permissions -->
-    <string name="body_request_permision">Para usar o aplicativo corretamente, é necessário ter acesso a certas permissões do sistema. Aceite as permissões ou o aplicativo não funcionará.</string>
+    <string name="body_request_permision">为了正常使用应用程序，需要获取某些系统权限。请接受权限，否则应用将无法运行。</string>
 
     <!-- ============================================ -->
     <!-- ONBOARDING SLIDES -->
     <!-- ============================================ -->
 
     <!-- Slide 1: Main feature -->
-    <string name="tittle_slider1">Assinar</string>
+    <string name="tittle_slider1">签名</string>
 
     <!-- Slide 2: Save/export feature -->
-    <string name="tittle_slider2">Transferir</string>
+    <string name="tittle_slider2">传输</string>
 
     <!-- Slide 3: Integration feature -->
-    <string name="tittle_slider3">Anexar</string>
+    <string name="tittle_slider3">附件</string>
 
     <!-- Slide 4: Call to action -->
-    <string name="tittle_slider4">Vamos lá</string>
+    <string name="tittle_slider4">开始</string>
 
     <!-- Slide 1: Description -->
-    <string name="tittle_body_slider1">Digitalize sua assinatura com um procedimento fácil e simples</string>
+    <string name="tittle_body_slider1">通过简单的流程将您的签名数字化</string>
 
     <!-- Slide 2: Description -->
-    <string name="tittle_body_slider2">Salve e envie sua assinatura para onde quiser</string>
+    <string name="tittle_body_slider2">保存并将您的签名发送到任何地方</string>
 
     <!-- Slide 3: Description -->
-    <string name="tittle_body_slider3">Anexe sua assinatura aos seus documentos</string>
+    <string name="tittle_body_slider3">将您的签名附加到文档中</string>
 
     <!-- Slide 4: Description -->
-    <string name="tittle_body_slider4">Você está pronto?</string>
+    <string name="tittle_body_slider4">准备好了吗？</string>
 
     <!-- ============================================ -->
     <!-- SETTINGS SCREEN -->
     <!-- ============================================ -->
 
     <!-- Category header: General app settings -->
-    <string name="title_pref_app">Aplicativo</string>
+    <string name="title_pref_app">应用</string>
 
     <!-- Setting: Disable advertisement option -->
-    <string name="title_pref_advertising">Desativar anúncios</string>
-    <string name="title_pref_advertising_sum">Desative os anúncios se eles o incomodarem</string>
+    <string name="title_pref_advertising">关闭广告</string>
+    <string name="title_pref_advertising_sum">如果广告打扰到您，可以关闭它</string>
 
     <!-- Category header: File management settings -->
-    <string name="title_pref_files">Arquivos</string>
+    <string name="title_pref_files">文件</string>
 
     <!-- Setting: Path where signatures are saved -->
-    <string name="title_pref_path">Caminho das assinaturas exportadas</string>
+    <string name="title_pref_path">签名导出路径</string>
 
     <!-- Setting: Delete all signatures when closing app -->
-    <string name="title_pref_delete">Excluir assinaturas</string>
+    <string name="title_pref_delete">删除签名</string>
 
     <!-- Description for delete on exit setting -->
-    <string name="title_pref_delete_sum">Excluir todas as assinaturas ao sair</string>
+    <string name="title_pref_delete_sum">退出时删除所有签名</string>
 
     <!-- Setting: Hide signatures from phone gallery -->
-    <string name="title_pref_gallery">Ocultar assinaturas</string>
-    <string name="title_pref_gallery_sum">Não exibir assinaturas na galeria do telefone</string>
+    <string name="title_pref_gallery">隐藏签名</string>
+    <string name="title_pref_gallery_sum">不在手机图库中显示签名</string>
 
     <!-- Setting: Choose file name when saving -->
-    <string name="title_pref_name">Nome do arquivo</string>
-    <string name="title_pref_name_sum">Escolher nome do arquivo ao salvar</string>
+    <string name="title_pref_name">文件名</string>
+    <string name="title_pref_name_sum">保存时选择文件名</string>
 
     <!-- Category header: Signature customization settings -->
-    <string name="title_pref_siganture">Assinatura</string>
+    <string name="title_pref_siganture">签名</string>
 
     <!-- Setting: Remember last stroke width -->
-    <string name="title_pref_stroke">Espessura</string>
+    <string name="title_pref_stroke">笔画粗细</string>
 
     <!-- Description for remember stroke setting -->
-    <string name="title_pref_stroke_sum">Manter a última espessura usada por padrão</string>
+    <string name="title_pref_stroke_sum">默认保持上次使用的笔画粗细</string>
 
     <!-- Setting: Remember last pen color -->
-    <string name="title_pref_color">Cor</string>
+    <string name="title_pref_color">颜色</string>
 
     <!-- Description for remember color setting -->
-    <string name="title_pref_color_sum">Manter a última cor usada por padrão</string>
+    <string name="title_pref_color_sum">默认保持上次使用的颜色</string>
 
     <!-- Setting: Reset all preferences to defaults -->
-    <string name="title_pref_reset">Valores padrão</string>
+    <string name="title_pref_reset">恢复默认值</string>
 
     <!-- Description/confirmation for reset action -->
-    <string name="title_pref_reset_sum">Redefinir todas as configurações para seus valores padrão</string>
+    <string name="title_pref_reset_sum">将所有设置恢复为默认值</string>
 
     <!-- Confirmation message after resetting settings -->
-    <string name="message_settings_reset_success">As configurações foram redefinidas para os valores padrão</string>
+    <string name="message_settings_reset_success">设置已恢复为默认值</string>
 
     <!-- Description for remember wallpaper setting -->
-    <string name="title_pref_wallpaper_sum">Manter o último fundo usado por padrão</string>
+    <string name="title_pref_wallpaper_sum">默认保持上次使用的背景</string>
 
     <!-- Setting: Remember last background -->
-    <string name="title_pref_wallpaper">Fundo</string>
+    <string name="title_pref_wallpaper">背景</string>
 
     <!-- Dialog: Input field label for file name -->
-    <string name="title_name_of_the_file">Nome do arquivo</string>
+    <string name="title_name_of_the_file">文件名</string>
 
     <!-- ============================================ -->
     <!-- FEEDBACK & SUGGESTIONS -->
     <!-- ============================================ -->
 
     <!-- Validation: All form fields must be filled -->
-    <string name="complete_fields">Preencha todos os campos</string>
+    <string name="complete_fields">请填写所有字段</string>
 
     <!-- Success message: Feedback submitted -->
-    <string name="thanks_comment">Obrigado pelo seu feedback</string>
+    <string name="thanks_comment">感谢您的反馈</string>
 
     <!-- Error message: Submission failed -->
-    <string name="problems_comment">Ocorreu um problema, por favor tente novamente mais tarde</string>
+    <string name="problems_comment">出现问题，请稍后再试</string>
 
     <!-- Placeholder: Comment textarea -->
-    <string name="write_your_suggestion_or_comment">Escreva sua sugestão ou comentário</string>
+    <string name="write_your_suggestion_or_comment">写下您的建议或评论</string>
 
     <!-- Placeholder: Email input field -->
-    <string name="put_your_email">Digite seu e-mail</string>
+    <string name="put_your_email">输入您的电子邮件</string>
 
     <!-- Validation: Invalid email format -->
-    <string name="valid_mail">Digite um e-mail válido</string>
+    <string name="valid_mail">请输入有效的电子邮件地址</string>
 
     <!-- Validation: Comment too short -->
-    <string name="suggest_sort">O comentário é muito curto. Por favor, escreva pelo menos 30 caracteres</string>
+    <string name="suggest_sort">评论太短，请至少输入30个字符</string>
 
     <!-- Action button: Share signature with others -->
-    <string name="share">Compartilhar</string>
+    <string name="share">分享</string>
 
     <!-- Loading message: Submitting feedback -->
-    <string name="sending_message_please_wait">Enviando mensagem, por favor aguarde</string>
+    <string name="sending_message_please_wait">正在发送消息，请稍候</string>
 
     <!-- Call to action: Join Telegram channel -->
-    <string name="join_channel">Clique aqui para entrar no nosso canal do Telegram</string>
+    <string name="join_channel">点击此处加入我们的Telegram频道</string>
 
     <!-- ============================================ -->
     <!-- THEME & APPEARANCE -->
     <!-- ============================================ -->
 
     <!-- Theme option: Force light mode -->
-    <string name="mode_light">Forçar modo claro</string>
+    <string name="mode_light">强制浅色模式</string>
 
     <!-- Theme option: Force dark mode -->
-    <string name="mode_dark">Forçar modo escuro</string>
+    <string name="mode_dark">强制深色模式</string>
 
     <!-- Theme option: Follow system theme -->
-    <string name="mode_system">Definido pelo sistema</string>
+    <string name="mode_system">跟随系统设置</string>
 
     <!-- Theme option: Dark mode in battery saver -->
-    <string name="mode_battery">Escuro no modo de economia de bateria</string>
+    <string name="mode_battery">省电模式下使用深色</string>
 
     <!-- Note: Theme change requires app restart -->
-    <string name="change_theme_note">Para que as alterações tenham efeito, você deve reiniciar o aplicativo completamente</string>
+    <string name="change_theme_note">要使更改生效，您必须完全重启应用</string>
 
     <!-- Error: Canvas is empty -->
-    <string name="empty_canvas">Erro, tela vazia</string>
+    <string name="empty_canvas">错误，画布为空</string>
 
     <!-- ============================================ -->
     <!-- MISCELLANEOUS -->
     <!-- ============================================ -->
 
     <!-- Button/action: Suggest/Send suggestion -->
-    <string name="suggest">Sugerir</string>
+    <string name="suggest">建议</string>
 
     <!-- ============================================ -->
     <!-- CHANGELOG SCREEN -->
     <!-- ============================================ -->
 
     <!-- Empty state: No changelog entries found -->
-    <string name="message_no_changelog_available">Nenhum registro de alterações disponível</string>
+    <string name="message_no_changelog_available">暂无更新日志</string>
 
     <!-- Empty state: Explanation text -->
-    <string name="message_check_back_later">Volte mais tarde para atualizações</string>
+    <string name="message_check_back_later">请稍后查看更新</string>
 
     <!-- Version header with placeholder for version name -->
-    <string name="changelog_version">Versão %s</string>
+    <string name="changelog_version">版本 %s</string>
 
 </resources>
-

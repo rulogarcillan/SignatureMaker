@@ -18,8 +18,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-        versionCode = 4005
-        versionName = "4.0.1"
+        versionCode = 4009
+        versionName = "4.0.3"
     }
 
 
@@ -101,6 +101,12 @@ dependencies {
 
     // Google Play Services - Ads
     implementation(libs.play.services.ads)
+
+    // Google Play In-App Review
+    implementation(libs.play.review)
+
+    // Google Play In-App Update
+    implementation(libs.play.app.update)
 
     // Google Play Services
     implementation(libs.user.messaging.platform)

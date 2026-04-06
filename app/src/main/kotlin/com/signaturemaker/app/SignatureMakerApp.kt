@@ -33,7 +33,7 @@ class SignatureMakerApp : Application(), KoinComponent {
         // Configure ads for safe content (G rating only, no APK download ads)
         val adConfig = MobileAds.getRequestConfiguration().toBuilder()
             .setMaxAdContentRating(RequestConfiguration.MAX_AD_CONTENT_RATING_G)
-            .setTagForUnderAgeOfConsent(RequestConfiguration.TAG_FOR_UNDER_AGE_OF_CONSENT_TRUE)
+            .setTagForUnderAgeOfConsent(RequestConfiguration.TAG_FOR_UNDER_AGE_OF_CONSENT_FALSE)
             .build()
         MobileAds.setRequestConfiguration(adConfig)
         MobileAds.initialize(this)

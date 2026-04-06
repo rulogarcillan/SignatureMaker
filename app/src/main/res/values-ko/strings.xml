@@ -40,6 +40,7 @@
     <string name="license">라이선스</string>
     <string name="privacy_policy">개인정보 처리방침</string>
     <string name="handle_privacy_policy">개인정보 관리</string>
+    <string name="handle_privacy_policy_sum">광고 개인화 및 동의 설정을 변경합니다</string>
 
     <!-- NOTIFICATIONS & FEEDBACK MESSAGES -->
     <string name="title_save_ok">파일이 성공적으로 저장되었습니다</string>
